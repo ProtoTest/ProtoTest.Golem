@@ -25,11 +25,9 @@ C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\obj\Release\GoogleTests.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\GoogleTests.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\GoogleTests.pdb
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Gallio.dll
-C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\MbUnit.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\WebDriver.Support.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\NHamcrest.dll
-C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.pdb
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Gallio.pdb
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Gallio.xml
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\MbUnit.pdb
@@ -40,3 +38,5 @@ C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\obj\Release\GoogleTests.pdb
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.PageObjects.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.PageObjects.pdb
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\GoogleTests.dll.config
+C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.Framework.dll
+C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.Framework.pdb

@@ -50,7 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Golem\Golem.Framework.csproj">
+    <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
       <Project>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</Project>
       <Name>Golem.Framework</Name>
     </ProjectReference>

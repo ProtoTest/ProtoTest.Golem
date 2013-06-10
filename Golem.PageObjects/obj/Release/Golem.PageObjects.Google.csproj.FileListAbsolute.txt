@@ -1,13 +1,11 @@
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\obj\Release\Golem.PageObjects.Google.csprojResolveAssemblyReference.cache
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.PageObjects.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.PageObjects.pdb
-C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\WebDriver.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\WebDriver.Support.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Gallio.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\MbUnit.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\NHamcrest.dll
-C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.pdb
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\WebDriver.pdb
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\WebDriver.xml
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Gallio.pdb
@@ -18,3 +16,5 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\NHamcrest.pd
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Gallio.XmlSerializers.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\obj\Release\Golem.PageObjects.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\obj\Release\Golem.PageObjects.pdb
+C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.Framework.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.Framework.pdb

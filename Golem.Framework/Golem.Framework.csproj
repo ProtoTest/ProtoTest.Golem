@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5E02EEE8-18B9-4058-95D4-F800FE4D002B}</ProjectGuid>
+    <ProjectGuid>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GoogleTests</RootNamespace>
-    <AssemblyName>GoogleTests</AssemblyName>
+    <RootNamespace>Golem.Framework</RootNamespace>
+    <AssemblyName>Golem.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,34 +39,61 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files\Gallio\bin\MbUnit.dll</HintPath>
     </Reference>
+    <Reference Include="NMock2">
+      <HintPath>..\..\..\..\WebDriver\net40\NMock2.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core">
+      <HintPath>..\..\..\..\WebDriver\net40\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\..\..\..\WebDriver\net40\nunit.core.interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\..\WebDriver\net40\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Selenium.WebDriverBackedSelenium">
+      <HintPath>..\..\..\..\WebDriver\net40\Selenium.WebDriverBackedSelenium.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.Selenium.Core">
+      <HintPath>..\..\..\..\WebDriver\net40\ThoughtWorks.Selenium.Core.dll</HintPath>
+    </Reference>
     <Reference Include="WebDriver">
       <HintPath>..\..\..\..\WebDriver\net40\WebDriver.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver.Common.Tests">
+      <HintPath>..\..\..\..\WebDriver\net40\WebDriver.Common.Tests.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Remote.Tests">
+      <HintPath>..\..\..\..\WebDriver\net40\WebDriver.Remote.Tests.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\..\..\..\WebDriver\net40\WebDriver.Support.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventTest.cs" />
-    <Compile Include="GoogleTest.cs" />
+    <Compile Include="ByExtensions.cs" />
+    <Compile Include="Element.cs" />
+    <Compile Include="ActionList.cs" />
+    <Compile Include="GlobalEvents.cs" />
+    <Compile Include="BasePageObject.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
-      <Project>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</Project>
-      <Name>Golem.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Golem.PageObjects\Golem.PageObjects.Google.csproj">
-      <Project>{7BCAC7A9-3369-441B-9628-99F4C863B64B}</Project>
-      <Name>Golem.PageObjects.Google</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="TestBaseClass.cs" />
+    <Compile Include="TestDataContainer.cs" />
+    <Compile Include="VerificationError.cs" />
+    <Compile Include="WebDriverBrowser.cs" />
+    <Compile Include="WebDriverEvents.cs" />
+    <Compile Include="WebDriverExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
