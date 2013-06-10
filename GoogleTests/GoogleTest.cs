@@ -3,36 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MbUnit.Framework;
-using Golem;
+using Golem.Framework;
 using OpenQA.Selenium;
+using Golem.Framework.PageObjects.Google;
 
-namespace Golem
+namespace Golem.Tests.Google
 {
-    class GoogleTest : TestBaseClass
+    public class GoogleTest : TestBaseClass
     {
-        [FixtureInitializer]
-        public void setup()
-        {
-            beforeTestEvent += new ActionEvent(GoogleTest_beforeTestEvent);
-            pageObjectActionEvent += new ActionEvent(GoogleTest_actionEvent);
-        }
-        
+
         [Test]
-        public void Test()
+        [Category("Google tests")]
+        public static void Test()
         {
-            
-            
-            GoogleHomePage.OpenGoogle().SearchFor("Testing");
+            GoogleHomePage.
+                OpenGoogle().
+                SearchFor("Selenium").
+                VerifyResult("Selenium - Web Browser Automation").
+                GoToResult("Selenium - Web Browser Automation");
         }
 
-        void GoogleTest_actionEvent(string name, EventArgs e)
+        [Test]
+        [Row("Selenium","Selenium - Web Browser Automation")]
+        [Row("ProtoTest", "ProtoTest - IT Staffing and Mobile App Testing Lab")]
+        [Row("Soasta", "SOASTA - Wikipedia, the free encyclopedia")]
+        public void DDT_Test(string searchText, string searchResult)
         {
-            Common.Log("I SEE : " + name);
+            GoogleHomePage.OpenGoogle().SearchFor(searchText).VerifyResult(searchResult);
         }
 
-        void GoogleTest_beforeTestEvent(string name, EventArgs e)
-        {
-            Common.Log("I SEE:  " + name);
-        }
+
+
     }
 }

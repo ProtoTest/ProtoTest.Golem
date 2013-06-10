@@ -5,7 +5,7 @@ using System.Text;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 
-namespace Golem
+namespace Golem.Framework
 {
 
     public class ActionList

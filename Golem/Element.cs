@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Support.UI;
 
-namespace Golem
+namespace Golem.Framework
 {
     public class Element : IWebElement
     {
@@ -19,14 +19,17 @@ namespace Golem
         {
             get
             {
-                this._element = driver.FindElement(by);
-                return this._element;
+      
+                    this._element = this.driver.FindElement(by);
+                    return this._element;
             }
             set
             {
                 this._element = value;
             }
         }
+
+
 
         public Element(string name, By locator)
         {
@@ -141,7 +144,31 @@ namespace Golem
             return driver.WaitForElement(by);
         }
 
+        public void VerifyPresent(int seconds=0)
+        {
+            for (int i = 0; i <= seconds; i++)
+            {
+                if (driver.FindElements(this.by).Count != 0)
+                    return;
+                else
+                    System.Threading.Thread.Sleep(1000);
+            }
+            Golem.Framework.TestBaseClass.testData.VerificationErrors.Add(new VerificationError("Element : " + this.name + " (" + this.by + ") not present after " + seconds + " seconds"));   
+        }
 
-
+        public void VerifyVisible(int seconds=0)
+        {
+            for (int i = 0; i <= seconds; i++)
+            {
+                if (driver.FindElements(this.by).Count != 0)
+                {
+                    if (driver.FindElement(this.by).Displayed)
+                        return;
+                }
+                else
+                    System.Threading.Thread.Sleep(1000);
+            }
+            Golem.Framework.TestBaseClass.testData.VerificationErrors.Add(new VerificationError("Element : " + this.name + " (" + this.by + ") not present after " + seconds + " seconds"));  
+        }
     }
 }

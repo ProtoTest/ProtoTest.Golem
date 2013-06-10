@@ -5,8 +5,11 @@ using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA;
+using System.Drawing;
+using System.Collections.ObjectModel;
 
-namespace Golem
+
+namespace Golem.Framework
 {
     public static class WebDriverExtensions
     {
@@ -27,15 +30,43 @@ namespace Golem
         {
             return driver.WaitForElement(By.XPath("//*[text()='" + text + "']"));
         }
-        public static IWebElement VerifyElement(this IWebDriver driver, By by, int timeout=10)
+        public static void VerifyElementPresent(this IWebDriver driver, By by, bool isPresent=true)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-            return wait.Until<IWebElement>((d) =>
-            {
-                return d.FindElement(by);
-            });
-        } 
+            int count = driver.FindElements(by).Count;
+            if(isPresent&&count==0)
+                Golem.Framework.TestBaseClass.testData.VerificationErrors.Add(new VerificationError("VerifyElementPresent Failed : Element : " + by.ToString() + (isPresent==true ? " found" : " not found")));
+        }
 
+        public static void VerifyElementVisible(this IWebDriver driver, By by, bool isVisible = true)
+        {
+            ReadOnlyCollection<IWebElement> elements = driver.FindElements(by);
+            int count = elements.Count;
+            bool visible = false;
+            if (isVisible && count != 0)
+            {
+                foreach(IWebElement element in elements)
+                {
+                    if (element.Displayed)
+                        visible = true;
+                }
+            }
+            if(isVisible!=visible)
+                Golem.Framework.TestBaseClass.testData.VerificationErrors.Add(new VerificationError("VerifyElementVisible Failed : Element : " + by.ToString() + (isVisible == true ? " visible" : " not visible")));
+        }
+
+        public static void VerifyElementText(this IWebDriver driver, By by, string expectedText)
+        {
+            string actualText = driver.FindElement(by).Text;
+            if (actualText != expectedText)
+                Golem.Framework.TestBaseClass.testData.VerificationErrors.Add(new VerificationError("VerifyElementText Failed : Expected : " + by.ToString() + " Expected text : '" + expectedText + "' + Actual '" + actualText));
+        }
+        
+        public static Image GetScreenshot(this IWebDriver driver)
+        {
+            Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
+            System.IO.MemoryStream ms = new System.IO.MemoryStream(ss.AsByteArray);
+            return System.Drawing.Image.FromStream(ms);
+        }
 
     }
 }

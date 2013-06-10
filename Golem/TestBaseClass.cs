@@ -5,63 +5,101 @@ using System.Text;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using System.Configuration;
+using Gallio.Framework;
+using Gallio.Model;
+using Gallio.Common.Media;
+using Golem.Framework;
 
-namespace Golem
+namespace Golem.Framework
 {
     public class TestBaseClass
     {
-        public static event ActionEvent beforeTestEvent;
-        public static event ActionEvent afterTestEvent;
-        public static event ActionEvent pageObjectActionEvent;
-        public static event ActionEvent beforeCommandEvent;
-        public static event ActionEvent afterCommandEvent;
-        public static event ActionEvent beforeSuiteEvent;
-        public static event ActionEvent afterSuiteEvent;
-        public static event ActionEvent genericEvent;
+        public static IDictionary<string, TestDataContainer> testDataCollection;
 
-
-        public delegate void ActionEvent(string name, EventArgs e);
-
-        public ActionList actions;
-
-        public static void FireEvent(string name)
+        public static TestDataContainer testData
         {
-                EventArgs e = null;
-                genericEvent(name, e);
+            get
+            {
+                if(!testDataCollection.ContainsKey(TestContext.CurrentContext.Test.FullName))
+                {
+                   testDataCollection.Add(TestContext.CurrentContext.Test.FullName,new TestDataContainer());
+                    return testDataCollection[TestContext.CurrentContext.Test.FullName];
+                }
+                    return testDataCollection[TestContext.CurrentContext.Test.FullName];
+            }
         }
 
-        private void WriteActionToLog(string name,EventArgs e)
-        {
-            Common.Log(name + " : " + DateTime.Now.ToString("HH:mm:ss::ffff"));
-            //actions.addAction(name, time);
-        }
-
-        private static IWebDriver _driver;
         public static IWebDriver driver
         {
             get
             {
-                return _driver;
+                return testData.driver;
             }
             set
             {
-                _driver = value;
+                testData.driver = value;
+            }
+        }
+
+        public void AddVerificationError(string errorText)
+        {
+            testData.VerificationErrors.Add(new VerificationError(errorText));
+        }
+
+        private void AssertNoVerificationErrors()
+        {
+            if ((TestContext.CurrentContext.Outcome == Gallio.Model.TestOutcome.Passed) || (testData.VerificationErrors.Count == 0))
+                return;
+            int i = 1;
+            TestLog.BeginMarker(Gallio.Common.Markup.Marker.AssertionFailure);
+            foreach (VerificationError error in testData.VerificationErrors)
+            {
+                TestLog.Failures.BeginSection("Verification Error " + i);
+                TestLog.Failures.WriteLine(error.errorText);
+                TestLog.Failures.EmbedImage(null,error.screenshot);
+                TestLog.Failures.End();
+                TestContext.CurrentContext.IncrementAssertCount();
+                i++;
+            }
+            
+            TestLog.End();
+            Assert.TerminateSilently(Gallio.Model.TestOutcome.Failed);
+        }
+
+        private void LogInfoIfTestFailed()
+        {
+            if (TestContext.CurrentContext.Outcome != Gallio.Model.TestOutcome.Passed)
+            {
+                TestLog.Failures.EmbedImage(null, testData.driver.GetScreenshot());
+                TestLog.Failures.EmbedVideo(null, testData.recorder.Video);
             }
 
         }
 
-        public static System.Diagnostics.Stopwatch stopwatch;
-
-        public class GollemEventArgs : EventArgs
+        private string GetConfigValue(string key, string defaultValue="")
         {
-            public string name;
-            public DateTime time;
+
+            string setting = ConfigurationManager.AppSettings[key];
+            if (setting == null)
+                return defaultValue;
+            else
+                return setting;
+        }
+
+        private void LoadConfigFile()
+        {
+            Config.RuntimeSettings.browser = WebDriverBrowser.getBrowserFromString(GetConfigValue("Browser", "Firefox"));
         }
 
         [SetUp]
         public void SetUp()
         {
-            beforeTestEvent(Gallio.Framework.TestContext.CurrentContext.Test.FullName, null);
+            
+
+            testData.recorder = Capture.StartRecording(new Gallio.Common.Media.CaptureParameters(){Zoom=.25},5);
+            //testData.beforeTestEvent(TestContext.CurrentContext.Test.FullName, null);
+            //
             driver = new WebDriverBrowser().LaunchBrowser();
             //FireEvent("Browser Launched", null);
 
@@ -70,21 +108,21 @@ namespace Golem
         [TearDown]
         public void TearDown()
         {
-            afterTestEvent(Gallio.Framework.TestContext.CurrentContext.Test.FullName,null);
-            driver.Quit();
+            //testData.afterTestEvent(TestContext.CurrentContext.Test.FullName, null);
+            testData.recorder.Stop();
            // FireEvent("Browser Closed");
-            actions.PrintActions();
-
+            LogInfoIfTestFailed();
+            driver.Quit();
+            testData.actions.PrintActions();
+            AssertNoVerificationErrors();
+            
         }
 
         [FixtureInitializer]
         public void Initializer()
         {
-            actions = new ActionList();
-            pageObjectActionEvent += new ActionEvent(WriteActionToLog);
-            beforeTestEvent += new ActionEvent(WriteActionToLog);
-            afterTestEvent += new ActionEvent(WriteActionToLog);
-            genericEvent += new ActionEvent(WriteActionToLog);
+            testDataCollection = new Dictionary<string, TestDataContainer>();
+            LoadConfigFile();
             
         }
 

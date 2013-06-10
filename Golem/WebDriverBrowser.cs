@@ -11,38 +11,42 @@ using OpenQA.Selenium.Safari;
 using OpenQA.Selenium.Support.Events;
 
 
-namespace Golem
+namespace Golem.Framework
 {
     public class WebDriverBrowser
     {
-        public enum Browser { Firefox, Chrome, IE, Safari, Remote }
+        private object browserLock;
+        public enum Browser { Firefox, Chrome, IE, Safari }
         public IWebDriver driver;
         public WebDriverBrowser() { }
+        public static Browser getBrowserFromString(string name)
+        {
+            return (Browser)Enum.Parse(typeof(Browser), name);
+        }
         public IWebDriver LaunchBrowser()
         {
-            var browser = Config.RuntimeSettings.browser;
-            
-            switch (browser)
-            {
-                case Browser.Firefox:
-                    driver = StartFirefoxBrowser();
-                    break;
-                case Browser.IE:
-                    driver = StartIEBrowser();
-                    break;
-                case Browser.Chrome:
-                    driver = StartChromeBrowser();
-                    break;
-                case Browser.Safari:
-                    driver = StartSafariBrowser();
-                    break;
-                case Browser.Remote:
-                    driver = StartRemoteBrowser();
-                    break;
-                default:
-                    driver = LaunchFirefox();
-                    break;
-            }
+         //   lock (browserLock)
+          //  {
+              switch (Config.RuntimeSettings.browser)
+                {
+                    case Browser.Firefox:
+                        driver = StartFirefoxBrowser();
+                        break;
+                    case Browser.IE:
+                        driver = StartIEBrowser();
+                        break;
+                    case Browser.Chrome:
+                        driver = StartChromeBrowser();
+                        break;
+                    case Browser.Safari:
+                        driver = StartSafariBrowser();
+                        break;
+                    default:
+                        driver = StartFirefoxBrowser();
+                        break;
+                }
+                
+           // }
             var eDriver = new EventedWebDriver(driver);
             return eDriver.driver;
 
@@ -67,17 +71,29 @@ namespace Golem
         {
             return new SafariDriver();
         }
-
-        public IWebDriver StartRemoteBrowser()
+        public DesiredCapabilities GetCapabilitiesForBrowser(Browser browser)
         {
-            return new FirefoxDriver();
+            switch (browser)
+            {
+                case Browser.Firefox:
+                    return DesiredCapabilities.Firefox();
+                case Browser.IE:
+                    return DesiredCapabilities.InternetExplorer();
+                case Browser.Chrome:
+                    return DesiredCapabilities.Chrome();
+                case Browser.Safari:
+                    return DesiredCapabilities.Safari();
+                default:
+                    return DesiredCapabilities.Firefox();
+            }
         }
 
-        public IWebDriver LaunchFirefox()
+        public IWebDriver LaunchRemoteBrowser(Browser browser, string host)
         {
-            return new FirefoxDriver();
+            DesiredCapabilities desiredCapabilities = DesiredCapabilities.Firefox();
+            var remoteAddress = new Uri("http://"+ host +":4444/wd/hub");
+            return new RemoteWebDriver(remoteAddress, desiredCapabilities);
         }
-
        
     }
 }

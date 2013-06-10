@@ -5,10 +5,11 @@ using System.Text;
 using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium;
 
-namespace Golem
+namespace Golem.Framework
 {
     public class EventedWebDriver
     {
+
         public EventFiringWebDriver driver;
         public EventedWebDriver(IWebDriver driver)
         {
@@ -29,12 +30,12 @@ namespace Golem
 
         void driver_ElementValueChanged(object sender, WebElementEventArgs e)
         {
-            Common.Log(Common.GetCurrentClassAndMethodName() + ": Typing : " + e.Element.Text);
+            TestBaseClass.testData.FireEvent(Common.GetCurrentClassAndMethodName() + ": Typing : " + e.Element.Text);
         }
 
         void driver_Navigating(object sender, WebDriverNavigationEventArgs e)
         {
-            TestBaseClass.FireEvent("Navigating to url " + e.Url);
+            TestBaseClass.testData.FireEvent("Navigating to url " + e.Url);
         }
 
 
@@ -46,14 +47,12 @@ namespace Golem
 
         void driver_FindingElement(object sender, FindElementEventArgs e)
         {
-            Common.Log(Common.GetCurrentClassAndMethodName() + ": Finding Element : " + e.FindMethod);
+            TestBaseClass.testData.FireEvent(Common.GetCurrentClassAndMethodName() + ": Finding Element : " + e.FindMethod);
         }
-
-
 
         void driver_ElementClicking(object sender, WebElementEventArgs e)
         {
-            Common.Log(Common.GetCurrentClassAndMethodName() + ": Clicking Element");
+            TestBaseClass.testData.FireEvent(Common.GetCurrentClassAndMethodName() + ": Clicking Element");
         }
 
     }

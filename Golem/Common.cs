@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Gallio;
+using Gallio.Framework;
 using System.Diagnostics;
 
-namespace Golem
+namespace Golem.Framework
 {
     public class Common
     {
         public static void Log(string msg)
         {
-            Gallio.Framework.TestLog.WriteLine(msg);
+
+            DiagnosticLog.WriteLine(msg);
+            TestLog.WriteLine(msg);
         }
 
         public static string GetCurrentMethodName()
@@ -32,13 +34,15 @@ namespace Golem
         {
             StackTrace stackTrace = new StackTrace();           // get call stack
             StackFrame[] stackFrames = stackTrace.GetFrames();  // get method calls (frames)
-
+            string trace = "";
             // write call stack method names
             foreach (StackFrame stackFrame in stackFrames)
             {
+                trace += stackFrame.GetMethod().ReflectedType.BaseType.ToString()+"."+stackFrame.GetMethod().Name.ToString() + "\r\n";
                 if (stackFrame.GetMethod().ReflectedType.BaseType == typeof(BasePageObject))
                     return stackFrame.GetMethod().ReflectedType.Name.ToString() + "." + stackFrame.GetMethod().Name.ToString();
             }
+           // Common.Log(trace);
             return "";
 
         }

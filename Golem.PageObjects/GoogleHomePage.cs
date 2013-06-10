@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using OpenQA.Selenium;
+
+namespace Golem.Framework.PageObjects.Google
+{
+    public class GoogleHomePage : BasePageObject
+    {
+
+        Element searchField = new Element("SearchField", By.Name("q"));
+        Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
+        Element searchButton = new Element("SearchButton", By.Name("btnK"));
+        Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
+        Element signInButton = new Element("SignInButon", By.ClassName("gbit"));
+        Element gmailbutton = new Element("GmailButton", By.ClassName("gbts"));
+
+        public GoogleHomePage()
+        {
+            this.driver = TestBaseClass.driver;
+        }
+
+        public static GoogleHomePage OpenGoogle()
+        {
+            TestBaseClass.driver.Navigate().GoToUrl("http://www.google.com/");
+            return new GoogleHomePage();
+        }
+
+        public GmailPage GoToGmail()
+        {
+            gmailbutton.Click();
+            return new GmailPage();
+        }
+
+        public GoogleResultsPage SearchFor(string text)
+        {
+            searchField.Text = text;
+            searchField.Submit();
+            return new GoogleResultsPage();
+        }
+
+        public override void WaitForElements()
+        {
+            searchField.VerifyPresent();
+            googleLogo.VerifyPresent();
+            searchButton.VerifyPresent();
+            feelingLuckyButton.VerifyPresent();
+            signInButton.VerifyPresent();
+        }
+    }
+}

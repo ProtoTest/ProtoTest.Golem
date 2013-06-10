@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
 
-namespace Golem
+namespace Golem.Framework
 {
     public static class ByE
     {
