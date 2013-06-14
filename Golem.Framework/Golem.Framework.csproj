@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByExtensions.cs" />
+    <Compile Include="EggPlantScript.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="ActionList.cs" />
     <Compile Include="GlobalEvents.cs" />

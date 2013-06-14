@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Gallio.Framework;
 using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium;
 
@@ -24,8 +25,13 @@ namespace Golem.Framework
             driver.FindingElement += new EventHandler<FindElementEventArgs>(driver_FindingElement);
             driver.Navigating += new EventHandler<WebDriverNavigationEventArgs>(driver_Navigating);
             driver.ElementValueChanged += new EventHandler<WebElementEventArgs>(driver_ElementValueChanged);
-
+            driver.FindElementCompleted += new EventHandler<FindElementEventArgs>(driver_FindElementCompleted);
             return driver;
+        }
+
+        void driver_FindElementCompleted(object sender, FindElementEventArgs e)
+        {
+            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         void driver_ElementValueChanged(object sender, WebElementEventArgs e)
@@ -35,7 +41,7 @@ namespace Golem.Framework
 
         void driver_Navigating(object sender, WebDriverNavigationEventArgs e)
         {
-            TestBaseClass.testData.FireEvent("Navigating to url " + e.Url);
+            TestBaseClass.testData.FireEvent(Common.GetCurrentClassAndMethodName() + ": Navigating to url " + e.Url);
         }
 
 
@@ -47,7 +53,7 @@ namespace Golem.Framework
 
         void driver_FindingElement(object sender, FindElementEventArgs e)
         {
-            TestBaseClass.testData.FireEvent(Common.GetCurrentClassAndMethodName() + ": Finding Element : " + e.FindMethod);
+            TestBaseClass.testData.FireEvent(Common.GetCurrentClassAndMethodName() + ": Looking for Element : " + e.FindMethod);
         }
 
         void driver_ElementClicking(object sender, WebElementEventArgs e)

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<statistics>
+ <script name="Shelter_Stability_Test_09+08">
+  <LastStatus>Failure</LastStatus>
+  <NumberOfRuns>1</NumberOfRuns>
+  <NumberOfFails>1</NumberOfFails>
+  <FirstRun>2013-06-11 13:08:05 -0600</FirstRun>
+  <LastRun>2013-06-11 13:08:05 -0600</LastRun>
+  <TotalTimeOnSuccess>0.000000</TotalTimeOnSuccess>
+ </script>
+</statistics>

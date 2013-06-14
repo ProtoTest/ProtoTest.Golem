@@ -42,11 +42,11 @@ namespace Golem.Framework.PageObjects.Google
 
         public override void WaitForElements()
         {
-            searchField.VerifyPresent();
-            googleLogo.VerifyPresent();
-            searchButton.VerifyPresent();
-            feelingLuckyButton.VerifyPresent();
-            signInButton.VerifyPresent();
+            searchField.VerifyPresent(10);
+            googleLogo.VerifyPresent(10);
+            searchButton.VerifyPresent(10);
+            feelingLuckyButton.VerifyPresent(10);
+            signInButton.VerifyPresent(10);
         }
     }
 }

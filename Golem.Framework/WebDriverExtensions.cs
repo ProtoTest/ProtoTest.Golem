@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Gallio.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA;
@@ -33,8 +34,21 @@ namespace Golem.Framework
         public static void VerifyElementPresent(this IWebDriver driver, By by, bool isPresent=true)
         {
             int count = driver.FindElements(by).Count;
-            if(isPresent&&count==0)
-                Golem.Framework.TestBaseClass.testData.VerificationErrors.Add(new VerificationError("VerifyElementPresent Failed : Element : " + by.ToString() + (isPresent==true ? " found" : " not found")));
+            Verify(isPresent && count == 0,"VerifyElementPresent Failed : Element : " + by.ToString() +
+                                          (isPresent == true ? " found" : " not found"));
+        }
+
+        public static void Verify(bool condition, string message)
+        {
+            if (!condition)
+            {
+                TestBaseClass.AddVerificationError(message);
+            }
+            else
+            {
+                TestContext.CurrentContext.IncrementAssertCount();
+
+            }
         }
 
         public static void VerifyElementVisible(this IWebDriver driver, By by, bool isVisible = true)
@@ -50,15 +64,18 @@ namespace Golem.Framework
                         visible = true;
                 }
             }
-            if(isVisible!=visible)
-                Golem.Framework.TestBaseClass.testData.VerificationErrors.Add(new VerificationError("VerifyElementVisible Failed : Element : " + by.ToString() + (isVisible == true ? " visible" : " not visible")));
+            Verify(isVisible != visible,
+                   "VerifyElementVisible Failed : Element : " + by.ToString() +
+                   (isVisible == true ? " visible" : " not visible"));
+
         }
 
         public static void VerifyElementText(this IWebDriver driver, By by, string expectedText)
         {
             string actualText = driver.FindElement(by).Text;
-            if (actualText != expectedText)
-                Golem.Framework.TestBaseClass.testData.VerificationErrors.Add(new VerificationError("VerifyElementText Failed : Expected : " + by.ToString() + " Expected text : '" + expectedText + "' + Actual '" + actualText));
+            Verify(actualText != expectedText,
+                   "VerifyElementText Failed : Expected : " + by.ToString() + " Expected text : '" + expectedText +
+                   "' + Actual '" + actualText);
         }
         
         public static Image GetScreenshot(this IWebDriver driver)

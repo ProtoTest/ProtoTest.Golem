@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EggPlantSettings>
+  <RunScript path="C:\Program Files (x86)\eggPlant\runscript.bat"/>
+  <Test timeout=""></Test>
+  <Scripts>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_09+08" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_30+33+35" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_37+39" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_38+40" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_44+45+46" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_47+48+49" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_50+51+52" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_53" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_54+55+56" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_57" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_61+26+24+25+62+63" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_64" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_65+66" repeat="1" host="10.10.1.210" port="5901"></Script>
+    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Test_67" repeat="1" host="10.10.1.210" port="5901"></Script>
+  </Scripts>
+</EggPlantSettings>

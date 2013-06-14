@@ -15,18 +15,24 @@ namespace Golem.Framework
 {
     public class TestBaseClass
     {
+        public static readonly Object padlock = new Object();
         public static IDictionary<string, TestDataContainer> testDataCollection;
-
         public static TestDataContainer testData
         {
             get
             {
-                if(!testDataCollection.ContainsKey(TestContext.CurrentContext.Test.FullName))
-                {
-                   testDataCollection.Add(TestContext.CurrentContext.Test.FullName,new TestDataContainer());
-                    return testDataCollection[TestContext.CurrentContext.Test.FullName];
-                }
-                    return testDataCollection[TestContext.CurrentContext.Test.FullName];
+                
+                    string name = Common.GetCurrentTestName();
+                    if (!testDataCollection.ContainsKey(name))
+                    {
+                        lock (padlock)
+                        {
+                            var container = new TestDataContainer(name);
+                            testDataCollection.Add(name, container);
+                            return container;
+                        }
+                    }
+                    return testDataCollection[name];
             }
         }
 
@@ -42,93 +48,157 @@ namespace Golem.Framework
             }
         }
 
-        public void AddVerificationError(string errorText)
+        public static void AddVerificationError(string errorText)
         {
+            testData.FireEvent("--> VerificationError Found: " + errorText);
             testData.VerificationErrors.Add(new VerificationError(errorText));
         }
 
         private void AssertNoVerificationErrors()
         {
-            if ((TestContext.CurrentContext.Outcome == Gallio.Model.TestOutcome.Passed) || (testData.VerificationErrors.Count == 0))
+            if (testData.VerificationErrors.Count == 0)
                 return;
             int i = 1;
             TestLog.BeginMarker(Gallio.Common.Markup.Marker.AssertionFailure);
+            Assert.Multiple(delegate 
+            { 
             foreach (VerificationError error in testData.VerificationErrors)
             {
                 TestLog.Failures.BeginSection("Verification Error " + i);
                 TestLog.Failures.WriteLine(error.errorText);
                 TestLog.Failures.EmbedImage(null,error.screenshot);
                 TestLog.Failures.End();
-                TestContext.CurrentContext.IncrementAssertCount();
+                //Assert.Fail(error.errorText);
+                //TestLog.Failures.EmbedImage(null,error.screenshot);
+                
                 i++;
             }
-            
+            });
             TestLog.End();
             Assert.TerminateSilently(Gallio.Model.TestOutcome.Failed);
         }
 
-        private void LogInfoIfTestFailed()
+        private void LogScreenshotIfTestFailed()
         {
-            if (TestContext.CurrentContext.Outcome != Gallio.Model.TestOutcome.Passed)
+            if ((Config.Settings.reportSettings.screenshotOnError)&&(TestContext.CurrentContext.Outcome != Gallio.Model.TestOutcome.Passed))
             {
-                TestLog.Failures.EmbedImage(null, testData.driver.GetScreenshot());
-                TestLog.Failures.EmbedVideo(null, testData.recorder.Video);
+                    TestLog.Failures.EmbedImage(null, testData.driver.GetScreenshot());
+
             }
 
         }
 
-        private string GetConfigValue(string key, string defaultValue="")
+        public void LogHtmlIfTestFailed()
         {
-
-            string setting = ConfigurationManager.AppSettings[key];
-            if (setting == null)
-                return defaultValue;
-            else
-                return setting;
+            if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
+            {
+                TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95),driver.PageSource);
+            }
         }
 
-        private void LoadConfigFile()
+        public void LogVideoIfTestFailed()
         {
-            Config.RuntimeSettings.browser = WebDriverBrowser.getBrowserFromString(GetConfigValue("Browser", "Firefox"));
+            if ((Config.Settings.reportSettings.videoRecordingOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
+            {
+                TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
+            }
+                
+                
         }
+
+        public void QuitBrowser()
+        {
+            if (Config.Settings.runTimeSettings.launchBrowser)
+            {
+                if (driver.CurrentWindowHandle != null)
+                {
+                    driver.Quit();
+                    testData.FireEvent(Config.Settings.runTimeSettings.browser.ToString() + " Browser Closed");
+                }
+            }
+                
+        }
+
+        public void LogActions()
+        {
+            if (Config.Settings.reportSettings.actionLogging)
+                testData.actions.PrintActions();
+        }
+
+        public void StartVideoRecording()
+        {
+            if (Config.Settings.reportSettings.videoRecordingOnError)
+                testData.recorder = Capture.StartRecording(new Gallio.Common.Media.CaptureParameters() { Zoom = .25 }, 5);
+        }
+
+        public void StopVideoRecording()
+        {
+            if (Config.Settings.reportSettings.videoRecordingOnError)
+                testData.recorder.Stop();
+        }
+
+
+        private static Object locker = new object();
+        public void LaunchBrowser()
+        {
+            lock (locker)
+            {
+                if (Config.Settings.runTimeSettings.launchBrowser)
+                {
+                    driver = new WebDriverBrowser().LaunchBrowser();
+                    testData.FireEvent(Config.Settings.runTimeSettings.browser.ToString() + " Browser Launched");
+                }
+            }
+        }
+
+        public void SetDegreeOfParallelism()
+        {
+            Gallio.Framework.Pattern.TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.degreeOfParallelism;
+        }
+       
 
         [SetUp]
         public void SetUp()
         {
+            testData.FireEvent(Common.GetCurrentTestName() + " started");
+           // StartVideoRecording();
+            LaunchBrowser();
             
-
-            testData.recorder = Capture.StartRecording(new Gallio.Common.Media.CaptureParameters(){Zoom=.25},5);
-            //testData.beforeTestEvent(TestContext.CurrentContext.Test.FullName, null);
-            //
-            driver = new WebDriverBrowser().LaunchBrowser();
-            //FireEvent("Browser Launched", null);
 
         }
 
         [TearDown]
         public void TearDown()
         {
-            //testData.afterTestEvent(TestContext.CurrentContext.Test.FullName, null);
-            testData.recorder.Stop();
-           // FireEvent("Browser Closed");
-            LogInfoIfTestFailed();
-            driver.Quit();
-            testData.actions.PrintActions();
-            AssertNoVerificationErrors();
-            
+            try
+            {
+                testData.FireEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
+                StopVideoRecording();
+                LogScreenshotIfTestFailed();
+                //LogVideoIfTestFailed();
+                LogHtmlIfTestFailed();
+                LogActions();
+                QuitBrowser();
+                AssertNoVerificationErrors();
+            }
+            catch (Exception)
+            {
+                QuitBrowser();
+            }
+                
         }
 
         [FixtureInitializer]
         public void Initializer()
         {
-            testDataCollection = new Dictionary<string, TestDataContainer>();
-            LoadConfigFile();
-            
+           
         }
 
         [FixtureSetUp]
         public void SuiteSetUp()
         {
+            testDataCollection = new Dictionary<string, TestDataContainer>();
+            //SetDegreeOfParallelism();
             //FireEvent("Suite Started");
         }
 

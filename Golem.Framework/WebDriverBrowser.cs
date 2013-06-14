@@ -15,7 +15,6 @@ namespace Golem.Framework
 {
     public class WebDriverBrowser
     {
-        private object browserLock;
         public enum Browser { Firefox, Chrome, IE, Safari }
         public IWebDriver driver;
         public WebDriverBrowser() { }
@@ -25,9 +24,7 @@ namespace Golem.Framework
         }
         public IWebDriver LaunchBrowser()
         {
-         //   lock (browserLock)
-          //  {
-              switch (Config.RuntimeSettings.browser)
+              switch (Config.Settings.runTimeSettings.browser)
                 {
                     case Browser.Firefox:
                         driver = StartFirefoxBrowser();
@@ -45,8 +42,6 @@ namespace Golem.Framework
                         driver = StartFirefoxBrowser();
                         break;
                 }
-                
-           // }
             var eDriver = new EventedWebDriver(driver);
             return eDriver.driver;
 

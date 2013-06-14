@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<runHistory script="Shelter_Stability_Test_50+51+52">
+ <run>
+  <RunDate>2013-06-12 15:32:33.587 -0600</RunDate>
+  <Status>Failure</Status>
+  <Duration>19.126000</Duration>
+  <Errors>1</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>1</Exceptions>
+  <Successes>0</Successes>
+  <LogFile>20130612_153233.587/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage>Image Not Found -- click Error - No Image Found On Screen: "Device/System/AppsIcon"</ErrorMessage>
+ </run>
+</runHistory>

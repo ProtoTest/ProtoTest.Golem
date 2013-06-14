@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<runHistory script="Shelter_Stability_Test_54+55+56">
+ <run>
+  <RunDate>2013-06-12 15:32:49.605 -0600</RunDate>
+  <Status>Success</Status>
+  <Duration>137.932000</Duration>
+  <Errors>0</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>0</Exceptions>
+  <Successes>1</Successes>
+  <LogFile>20130612_153249.605/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage></ErrorMessage>
+ </run>
+</runHistory>

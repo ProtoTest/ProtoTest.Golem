@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Xml;
 using Gallio.Framework;
 using System.Diagnostics;
+using Gallio.Model;
 
 namespace Golem.Framework
 {
@@ -47,6 +51,45 @@ namespace Golem.Framework
 
         }
 
+        public static bool IsTruthy(string truth)
+        {
+            switch (truth)
+            {
+                case "1":
+                case "true":
+                case "True" :
+                    return true;
+                case "0":
+                case "false":
+                case "False":
+                    return false;
+                default:
+                    return false;
+
+            }
+
+        }
+
+        private static Object locker = new Object();
+        public static string GetCurrentTestName()
+        {
+            lock(locker)
+            {
+                return TestContext.CurrentContext.TestStep.FullName;
+            }
+   
+
+        }
+
+        public static string GetShortTestName(int length)
+        {
+
+            string name = TestContext.CurrentContext.TestStep.FullName;
+            if (name.Length > length)
+                name = name.Substring(name.Length - length, name.Length);
+            return name;
+
+        }
 
         public static string GetCallStack()
         {
@@ -61,5 +104,25 @@ namespace Golem.Framework
             return name;
         }
 
+        public string GetValueFromXmlFile(string filepath, string xpath)
+        {
+            XmlDocument configFile = new XmlDocument();
+            configFile.Load(filepath);
+            return configFile.SelectSingleNode(xpath).Value ?? "";
+        }
+
+        public string GetConfigValue(string fileName, string xpath)
+        {
+            XmlDocument configFile = new XmlDocument();
+            configFile.Load(Directory.GetCurrentDirectory() + fileName);
+            return configFile.SelectSingleNode(xpath).Value ?? ""; 
+        }
+
+        public static TestOutcome GetTestOutcome()
+        {
+            if (TestBaseClass.testData.numVerificationErrors != 0)
+                return TestOutcome.Failed;
+            return TestContext.CurrentContext.Outcome;
+        }
     }
 }

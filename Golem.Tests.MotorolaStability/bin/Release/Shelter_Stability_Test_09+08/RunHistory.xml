@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<runHistory script="Shelter_Stability_Test_09+08">
+ <run>
+  <RunDate>2013-06-12 15:28:58.118 -0600</RunDate>
+  <Status>Failure</Status>
+  <Duration>155.816000</Duration>
+  <Errors>2</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>0</Exceptions>
+  <Successes>0</Successes>
+  <LogFile>20130612_152858.118/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage>Script Error -- Number of Errors logged: 2</ErrorMessage>
+ </run>
+</runHistory>

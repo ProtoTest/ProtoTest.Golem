@@ -32,7 +32,7 @@ namespace Golem.Framework.PageObjects.Google
 
         public GoogleResultsPage VerifyResult(string text)
         {
-            SearchResult(text).VerifyPresent();
+            SearchResult(text).VerifyPresent(10);
             return new GoogleResultsPage();
         }
 
@@ -52,10 +52,10 @@ namespace Golem.Framework.PageObjects.Google
 
         public override void WaitForElements()
         {
-            SearchField.VerifyPresent();
-            GoogleLogo.VerifyPresent();
-            SearchButton.VerifyPresent();
-            SignInButton.VerifyPresent();
+            SearchField.VerifyPresent(10);
+            GoogleLogo.VerifyPresent(10);
+            SearchButton.VerifyPresent(10);
+            SignInButton.VerifyPresent(10);
         }
     }
 }

@@ -15,27 +15,6 @@ namespace Golem.Framework
 {
     public class TestDataContainer
     {
-        public TestDataContainer()
-        {
-            actions = new ActionList();
-            VerificationErrors = new List<VerificationError>();
-            pageObjectActionEvent += new ActionEvent(WriteActionToLog);
-            beforeTestEvent += new ActionEvent(WriteActionToLog);
-            afterTestEvent += new ActionEvent(WriteActionToLog);
-            genericEvent += new ActionEvent(WriteActionToLog);
-        }
-        public VerificationError[] verificationErrors;
-        public ActionList actionList;
-        public int numVerificationErrors
-        {
-            get
-            {
-                return VerificationErrors.Count;
-            }
-        }
-
-        public ScreenRecorder recorder;
-
         #region Events
         public event ActionEvent beforeTestEvent;
         public event ActionEvent afterTestEvent;
@@ -45,7 +24,7 @@ namespace Golem.Framework
         public event ActionEvent beforeSuiteEvent;
         public event ActionEvent afterSuiteEvent;
         public event ActionEvent genericEvent;
-       
+
         public delegate void ActionEvent(string name, EventArgs e);
 
         public void FireEvent(string name)
@@ -61,12 +40,12 @@ namespace Golem.Framework
         }
         #endregion
 
+        public string testName;
+        public VerificationError[] verificationErrors;
+        public ActionList actionList;
+        public ScreenRecorder recorder;
         public List<VerificationError> VerificationErrors;
-
         public ActionList actions;
-
-     
-
         private IWebDriver _driver;
         public IWebDriver driver
         {
@@ -80,8 +59,24 @@ namespace Golem.Framework
             }
 
         }
+        public int numVerificationErrors
+        {
+            get
+            {
+                return VerificationErrors.Count;
+            }
+        }
 
-        public System.Diagnostics.Stopwatch stopwatch;
+        public TestDataContainer(string name)
+        {
+            this.testName = name;
+            actions = new ActionList();
+            VerificationErrors = new List<VerificationError>();
+            pageObjectActionEvent += new ActionEvent(WriteActionToLog);
+            beforeTestEvent += new ActionEvent(WriteActionToLog);
+            afterTestEvent += new ActionEvent(WriteActionToLog);
+            genericEvent += new ActionEvent(WriteActionToLog);
+        }
 
         private void WriteActionToLog(string name, EventArgs e)
         {

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<runHistory script="Shelter_Stability_Test_38+40">
+ <run>
+  <RunDate>2013-06-12 15:32:22.261 -0600</RunDate>
+  <Status>Failure</Status>
+  <Duration>160.974000</Duration>
+  <Errors>3</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>1</Exceptions>
+  <Successes>0</Successes>
+  <LogFile>20130612_153222.261/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage>Image Not Found -- click Error - No Image Found On Screen: "(TEXT:"Set alarm")"</ErrorMessage>
+ </run>
+</runHistory>

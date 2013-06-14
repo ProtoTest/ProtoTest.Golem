@@ -1,0 +1,14 @@
+2013-06-12 15:32:01.210 -0600	START		Running Shelter_Stability_Test_30+33+35.script
+2013-06-12 15:32:10.603 -0600	imagefound		Unable to Find Image Device/System/LockIcon	2	on_unlockdevice	ClassNavigate.script
+2013-06-12 15:32:11.747 -0600	click	Device/System/HomeButton	at (120, 824)	3	on_resetstate	ClassNavigate.script
+2013-06-12 15:32:13.130 -0600	click	Device/System/HomeButton	at (120, 824)	5	on_resetstate	ClassNavigate.script
+2013-06-12 15:32:14.397 -0600	imagefound	Device/System/AppsIcon	found at (240, 755)	2	on_confirmimageonscreen	ClassUtilities.script
+2013-06-12 15:32:16.479 -0600	click	Device/System/AppsIcon	at (240, 755)	2	on_openapp	ClassNavigate.script
+2013-06-12 15:32:22.291 -0600	imagefound	(CaseSensitive:"No", Contrast:"Off", Language:"English", Text:"Downloads", TextPlatform:"Generic OCR")	found at (298, 350)	3	on_openapp	ClassNavigate.script
+2013-06-12 15:32:24.975 -0600	click	(CaseSensitive:"No", Contrast:"Off", Language:"English", Text:"Downloads", TextPlatform:"Generic OCR")	at (298, 350)	6	on_openapp	ClassNavigate.script
+2013-06-12 15:32:27.273 -0600	click	(CaseSensitive:"No", Contrast:"Off", Language:"English", Text:"DroidFish", TextPlatform:"Generic OCR")	at (229, 235)	12	on_shelter_stability_test_30_33_35	Shelter_Stability_Test_30+33+35.script
+2013-06-12 15:32:28.729 -0600	imagefound	(CaseSensitive:"No", Contrast:"Off", Language:"English", Text:"DroidFish", TextPlatform:"Generic OCR")	found at (229, 148)	2	on_confirmtextonscreen	ClassUtilities.script
+2013-06-12 15:32:32.423 -0600	imagefound	(CaseSensitive:"No", Contrast:"Off", Language:"English", Text:"Do you want to install", TextPlatform:"Generic OCR")	found at (166, 192)	2	on_confirmtextonscreen	ClassUtilities.script
+2013-06-12 15:32:38.052 -0600	Exception	(CaseSensitive:"No", Contrast:"Off", Language:"English", SearchRectangle:(10,700,470,800), Text:"Install", TextPlatform:"Generic OCR")	No Image Found On Screen: "(TEXT:"Install")"	15	on_shelter_stability_test_30_33_35	Shelter_Stability_Test_30+33+35.script
+2013-06-12 15:32:38.196 -0600	EndTestCase		(Duration:"36.973", Errors:"1", Exceptions:"1", StartTime:"2013-06-12 15:32:01 -0600", Successes:"0", TestCase:"Shelter_Stability_Test_30+33+35.script", Warnings:"0")
+2013-06-12 15:32:38.548 -0600	FAILURE	Screen_Error.png	Image Not Found click Error - No Image Found On Screen: "(TEXT:"Install")"  Restricted Search Rectangle ((10,700),(470,800))\n\nExecution Time 0:00:37 Shelter_Stability_Test_30+33+35.script
