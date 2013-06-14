@@ -25,3 +25,4 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\NHamcrest.pdb
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\Gallio.XmlSerializers.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\obj\Release\Golem.Framework.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\obj\Release\Golem.Framework.pdb
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\obj\Release\Golem.Framework.csprojResolveAssemblyReference.cache

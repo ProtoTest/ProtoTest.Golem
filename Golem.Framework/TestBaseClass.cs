@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -60,20 +61,14 @@ namespace Golem.Framework
                 return;
             int i = 1;
             TestLog.BeginMarker(Gallio.Common.Markup.Marker.AssertionFailure);
-            Assert.Multiple(delegate 
-            { 
             foreach (VerificationError error in testData.VerificationErrors)
             {
                 TestLog.Failures.BeginSection("Verification Error " + i);
                 TestLog.Failures.WriteLine(error.errorText);
                 TestLog.Failures.EmbedImage(null,error.screenshot);
                 TestLog.Failures.End();
-                //Assert.Fail(error.errorText);
-                //TestLog.Failures.EmbedImage(null,error.screenshot);
-                
                 i++;
             }
-            });
             TestLog.End();
             Assert.TerminateSilently(Gallio.Model.TestOutcome.Failed);
         }
@@ -122,19 +117,27 @@ namespace Golem.Framework
         public void LogActions()
         {
             if (Config.Settings.reportSettings.actionLogging)
-                testData.actions.PrintActions();
+                testData.actions.PrintActionTimings();
         }
 
         public void StartVideoRecording()
         {
             if (Config.Settings.reportSettings.videoRecordingOnError)
-                testData.recorder = Capture.StartRecording(new Gallio.Common.Media.CaptureParameters() { Zoom = .25 }, 5);
+                    testData.recorder = Capture.StartRecording(new Gallio.Common.Media.CaptureParameters() { Zoom = .25 }, 5);          
         }
 
         public void StopVideoRecording()
         {
-            if (Config.Settings.reportSettings.videoRecordingOnError)
-                testData.recorder.Stop();
+            try
+            {
+                if (Config.Settings.reportSettings.videoRecordingOnError)
+                    testData.recorder.Stop();
+            }
+            catch (Exception e)
+            {
+               TestLog.Failures.WriteLine(e.Message);
+            }
+            
         }
 
 
@@ -147,6 +150,7 @@ namespace Golem.Framework
                 {
                     driver = new WebDriverBrowser().LaunchBrowser();
                     testData.FireEvent(Config.Settings.runTimeSettings.browser.ToString() + " Browser Launched");
+                    TestBaseClass.testData.actions.addAction(Config.Settings.runTimeSettings.browser.ToString() + " Browser Launched");
                 }
             }
         }
@@ -161,7 +165,7 @@ namespace Golem.Framework
         public void SetUp()
         {
             testData.FireEvent(Common.GetCurrentTestName() + " started");
-           // StartVideoRecording();
+            StartVideoRecording();
             LaunchBrowser();
             
 
@@ -170,22 +174,14 @@ namespace Golem.Framework
         [TearDown]
         public void TearDown()
         {
-            try
-            {
                 testData.FireEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
                 StopVideoRecording();
                 LogScreenshotIfTestFailed();
-                //LogVideoIfTestFailed();
+                LogVideoIfTestFailed();
                 LogHtmlIfTestFailed();
                 LogActions();
                 QuitBrowser();
-                AssertNoVerificationErrors();
-            }
-            catch (Exception)
-            {
-                QuitBrowser();
-            }
-                
+                AssertNoVerificationErrors();  
         }
 
         [FixtureInitializer]

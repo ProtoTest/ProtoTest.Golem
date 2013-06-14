@@ -14,11 +14,12 @@ namespace Golem.Framework.PageObjects.Google
         Element SearchButton = new Element("SearchButton", By.Name("btnK"));
         Element SignInButton = new Element("SignInButton", By.ClassName("gbit"));
         Element Gmailbutton = new Element("GmailButton", By.PartialLinkText("Gmail"));
+        private Element searchResult;
 
-        public GoogleResultsPage() { }
         public Element SearchResult(string text)
         {
-            return new Element("SearchResultLink", By.PartialLinkText(text));
+            searchResult = new Element("SearchResultLink", By.PartialLinkText(text));
+            return searchResult;
         }
 
         private string searchString;

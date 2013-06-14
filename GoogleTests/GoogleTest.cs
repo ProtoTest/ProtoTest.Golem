@@ -13,7 +13,6 @@ namespace Golem.Tests.Google
     {
 
         [Test]
-        [Category("Google tests")]
         public static void Test()
         {
             GoogleHomePage.
@@ -24,15 +23,13 @@ namespace Golem.Tests.Google
         }
 
         [Test]
-        [Row("Selenium","Selenium - Web Browser Automation")]
+        [Row("Selenium", "Selenium - Web Browser Automation")]
         [Row("ProtoTest", "ProtoTest - IT Staffing and Mobile App Testing Lab")]
         [Row("Soasta", "SOASTA - Wikipedia, the free encyclopedia")]
         public void DDT_Test(string searchText, string searchResult)
         {
             GoogleHomePage.OpenGoogle().SearchFor(searchText).VerifyResult(searchResult);
         }
-
-
-
+        
     }
 }

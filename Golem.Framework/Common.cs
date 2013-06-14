@@ -42,11 +42,15 @@ namespace Golem.Framework
             // write call stack method names
             foreach (StackFrame stackFrame in stackFrames)
             {
-                trace += stackFrame.GetMethod().ReflectedType.BaseType.ToString()+"."+stackFrame.GetMethod().Name.ToString() + "\r\n";
-                if (stackFrame.GetMethod().ReflectedType.BaseType == typeof(BasePageObject))
-                    return stackFrame.GetMethod().ReflectedType.Name.ToString() + "." + stackFrame.GetMethod().Name.ToString();
+                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof(BasePageObject)) && (!stackFrame.GetMethod().IsConstructor))
+                {
+                    
+                     string name = stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
+                    return name;
+                }
+                   
             }
-           // Common.Log(trace);
+            DiagnosticLog.WriteLine(stackTrace.ToString());
             return "";
 
         }

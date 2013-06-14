@@ -42,7 +42,6 @@ namespace Golem.Framework
 
         public string testName;
         public VerificationError[] verificationErrors;
-        public ActionList actionList;
         public ScreenRecorder recorder;
         public List<VerificationError> VerificationErrors;
         public ActionList actions;
@@ -72,7 +71,7 @@ namespace Golem.Framework
             this.testName = name;
             actions = new ActionList();
             VerificationErrors = new List<VerificationError>();
-            pageObjectActionEvent += new ActionEvent(WriteActionToLog);
+            pageObjectActionEvent += new ActionEvent(LogAction);
             beforeTestEvent += new ActionEvent(WriteActionToLog);
             afterTestEvent += new ActionEvent(WriteActionToLog);
             genericEvent += new ActionEvent(WriteActionToLog);
@@ -82,7 +81,10 @@ namespace Golem.Framework
         {
             Common.Log("(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + name);
         }
-
+        private void LogAction(string name, EventArgs e)
+        {
+            actions.addAction(name);
+        }
   
     }
 }

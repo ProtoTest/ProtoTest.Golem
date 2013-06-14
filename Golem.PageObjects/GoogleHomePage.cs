@@ -16,11 +16,6 @@ namespace Golem.Framework.PageObjects.Google
         Element signInButton = new Element("SignInButon", By.ClassName("gbit"));
         Element gmailbutton = new Element("GmailButton", By.ClassName("gbts"));
 
-        public GoogleHomePage()
-        {
-            this.driver = TestBaseClass.driver;
-        }
-
         public static GoogleHomePage OpenGoogle()
         {
             TestBaseClass.driver.Navigate().GoToUrl("http://www.google.com/");

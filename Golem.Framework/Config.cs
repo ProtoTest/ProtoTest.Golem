@@ -51,6 +51,7 @@ namespace Golem.Framework
             public int pageTimeoutSec;
             public string environmentUrl;
             public int degreeOfParallelism;
+            public int commandDelayMs;
 
             public RuntimeSettings()
             {
@@ -61,7 +62,7 @@ namespace Golem.Framework
             pageTimeoutSec = int.Parse(Config.GetConfigValue("PageTimeoutSec","30"));
             environmentUrl = Config.GetConfigValue("EnvironmentUrl","http://www.google.com/");
             degreeOfParallelism = int.Parse(Config.GetConfigValue("NumberOfParallelTests","20"));
-
+            commandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
             }
         }
         public class ReportSettings

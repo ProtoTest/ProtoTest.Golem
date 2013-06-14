@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Gallio.Framework;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 
@@ -43,10 +44,25 @@ namespace Golem.Framework
 
         public void PrintActions()
         {
+            Common.Log("PRINTING ACTIONS");
             foreach (Action a in actions)
             {
                 Common.Log(a.name + " : " + a._time.ToString("HH:mm:ss.ffff"));
             }
+        }
+
+        public void PrintActionTimings()
+        {
+            TestLog.BeginSection("Page Object Action Timings:");
+            for(int i=1;i<actions.Count;i++)
+            {
+                DateTime start = actions[i-1]._time;
+                DateTime end = actions[i]._time;
+                var difference = end.Subtract(start);
+                TestLog.WriteLine(actions[i].name + " : " + difference.ToString());
+            }
+            TestLog.End();
+            ;
         }
     }
 
