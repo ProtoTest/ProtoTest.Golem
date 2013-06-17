@@ -9,6 +9,7 @@ using Golem.Framework.PageObjects.Google;
 
 namespace Golem.Tests.Google
 {
+    [TestFixture]
     public class GoogleTest : TestBaseClass
     {
 
@@ -28,7 +29,11 @@ namespace Golem.Tests.Google
         [Row("Soasta", "SOASTA - Wikipedia, the free encyclopedia")]
         public void DDT_Test(string searchText, string searchResult)
         {
-            GoogleHomePage.OpenGoogle().SearchFor(searchText).VerifyResult(searchResult);
+            GoogleHomePage.
+                OpenGoogle().
+                SearchFor(searchText).
+                VerifyResult(searchResult).
+                GoToResult(searchResult);
         }
         
     }

@@ -33,7 +33,7 @@ namespace Golem.Framework
             driver = TestBaseClass.driver;
             className = this.GetType().Name;
             WaitForElements();
-            TestBaseClass.testData.FireEvent(Common.GetCurrentClassAndMethodName() + " Finished");
+            //TestBaseClass.testData.LogEvent(Common.GetCurrentClassAndMethodName() + " Finished");
             TestBaseClass.testData.actions.addAction(Common.GetCurrentClassAndMethodName());
         }
         public abstract void WaitForElements();

@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SearchResultPage.cs" />
     <Compile Include="GmailPage.cs" />
     <Compile Include="GoogleHomePage.cs" />
     <Compile Include="GoogleHomePage2.cs" />

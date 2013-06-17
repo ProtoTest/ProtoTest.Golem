@@ -13,6 +13,34 @@ namespace Golem.Framework
 {
     public class Common
     {
+
+        public static void ExecuteDosCommand(string command)
+        {
+            DiagnosticLog.WriteLine("Executing DOS Command: " + command);
+            string tempGETCMD = null;
+            Process CMDprocess = new Process();
+            System.Diagnostics.ProcessStartInfo StartInfo = new System.Diagnostics.ProcessStartInfo();
+            StartInfo.FileName = "cmd"; //starts cmd window
+            StartInfo.Arguments = "/c \"" + command + "\"";
+            StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            StartInfo.CreateNoWindow = true;
+            StartInfo.RedirectStandardInput = true;
+            StartInfo.RedirectStandardOutput = true;
+            StartInfo.UseShellExecute = false; //required to redirect
+            CMDprocess.StartInfo = StartInfo;
+            CMDprocess.Start();
+            System.IO.StreamReader SR = CMDprocess.StandardOutput;
+            System.IO.StreamWriter SW = CMDprocess.StandardInput;
+            CMDprocess.Start();
+            //SW.WriteLine(GetCommandScript());
+            string output = SR.ReadToEnd(); //returns results of the command window
+            DiagnosticLog.WriteLine(output);
+            // SW.WriteLine("exit"); //exits command prompt window
+            SW.Close();
+            SR.Close();
+            DiagnosticLog.WriteLine("Finished executing DOS Command");
+        }
+
         public static void Log(string msg)
         {
 
@@ -50,7 +78,7 @@ namespace Golem.Framework
                 }
                    
             }
-            DiagnosticLog.WriteLine(stackTrace.ToString());
+           // DiagnosticLog.WriteLine(stackTrace.ToString());
             return "";
 
         }
@@ -77,20 +105,19 @@ namespace Golem.Framework
         private static Object locker = new Object();
         public static string GetCurrentTestName()
         {
-            lock(locker)
-            {
-                return TestContext.CurrentContext.TestStep.FullName;
-            }
-   
-
+             return TestContext.CurrentContext.TestStep.FullName;
         }
 
         public static string GetShortTestName(int length)
         {
-
-            string name = TestContext.CurrentContext.TestStep.FullName;
+            string name = TestContext.CurrentContext.TestStep.Name; 
+            name = name.Replace("/", "_");
+            name = name.Replace("\\", "_");
+            name = name.Replace("\"", "");
+            name = name.Replace(" ", "");
             if (name.Length > length)
-                name = name.Substring(name.Length - length, name.Length);
+                name = name.Substring((name.Length - length), length);
+
             return name;
 
         }

@@ -12,4 +12,16 @@
   <ReturnValue></ReturnValue>
   <ErrorMessage>Script Error -- Number of Errors logged: 2</ErrorMessage>
  </run>
+ <run>
+  <RunDate>2013-06-17 12:51:11.793 -0600</RunDate>
+  <Status>Failure</Status>
+  <Duration>0.406000</Duration>
+  <Errors>1</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>1</Exceptions>
+  <Successes>0</Successes>
+  <LogFile>20130617_125111.793/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage>No Remote Connection -- imagefound Error - Remote Connection Unavailable</ErrorMessage>
+ </run>
 </runHistory>

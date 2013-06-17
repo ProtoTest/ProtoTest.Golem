@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Gallio.Common.Markup;
+using Gallio.Framework.Pattern;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -36,6 +39,8 @@ namespace Golem.Framework
                     return testDataCollection[name];
             }
         }
+        private static Object locker = new object();
+        public static FiddlerProxy proxy; 
 
         public static IWebDriver driver
         {
@@ -49,9 +54,46 @@ namespace Golem.Framework
             }
         }
 
+        #region Events
+        public static event ActionEvent BeforeTestEvent;
+        public static event ActionEvent AfterTestEvent;
+        public static event ActionEvent PageObjectActionEvent;
+        public static event ActionEvent BeforeCommandEvent;
+        public static event ActionEvent AfterCommandEvent;
+        public static event ActionEvent BeforeSuiteEvent;
+        public static event ActionEvent AfterSuiteEvent;
+        public static event ActionEvent GenericEvent;
+
+        private void WriteActionToLog(string name, EventArgs e)
+        {
+            Common.Log("(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + name);
+        }
+        private void LogAction(string name, EventArgs e)
+        {
+            testData.actions.addAction(name);
+        }
+
+        public delegate void ActionEvent(string name, EventArgs e);
+
+        public static void LogEvent(string name)
+        {
+            GenericEvent(name, null);
+        }
+
+        public class GolemEventArgs : EventArgs
+        {
+            public string name;
+            public DateTime time;
+            public IWebDriver driver;
+            public IWebElement element;
+        }
+
+        #endregion
+
+
         public static void AddVerificationError(string errorText)
         {
-            testData.FireEvent("--> VerificationError Found: " + errorText);
+            LogEvent("--> VerificationError Found: " + errorText);
             testData.VerificationErrors.Add(new VerificationError(errorText));
         }
 
@@ -60,7 +102,7 @@ namespace Golem.Framework
             if (testData.VerificationErrors.Count == 0)
                 return;
             int i = 1;
-            TestLog.BeginMarker(Gallio.Common.Markup.Marker.AssertionFailure);
+            TestLog.BeginMarker(Marker.AssertionFailure);
             foreach (VerificationError error in testData.VerificationErrors)
             {
                 TestLog.Failures.BeginSection("Verification Error " + i);
@@ -70,12 +112,12 @@ namespace Golem.Framework
                 i++;
             }
             TestLog.End();
-            Assert.TerminateSilently(Gallio.Model.TestOutcome.Failed);
+            Assert.TerminateSilently(TestOutcome.Failed);
         }
 
         private void LogScreenshotIfTestFailed()
         {
-            if ((Config.Settings.reportSettings.screenshotOnError)&&(TestContext.CurrentContext.Outcome != Gallio.Model.TestOutcome.Passed))
+            if ((Config.Settings.reportSettings.screenshotOnError)&&(TestContext.CurrentContext.Outcome != TestOutcome.Passed))
             {
                     TestLog.Failures.EmbedImage(null, testData.driver.GetScreenshot());
 
@@ -108,7 +150,8 @@ namespace Golem.Framework
                 if (driver.CurrentWindowHandle != null)
                 {
                     driver.Quit();
-                    testData.FireEvent(Config.Settings.runTimeSettings.browser.ToString() + " Browser Closed");
+                    LogEvent(Common.GetCurrentTestName() + " : " + Config.Settings.runTimeSettings.browser.ToString() + " Browser Closed");
+                    testData.actions.addAction(Common.GetCurrentTestName() + " : " + Config.Settings.runTimeSettings.browser.ToString() + " Browser Closed");
                 }
             }
                 
@@ -123,7 +166,7 @@ namespace Golem.Framework
         public void StartVideoRecording()
         {
             if (Config.Settings.reportSettings.videoRecordingOnError)
-                    testData.recorder = Capture.StartRecording(new Gallio.Common.Media.CaptureParameters() { Zoom = .25 }, 5);          
+                    testData.recorder = Capture.StartRecording(new CaptureParameters() { Zoom = .25 }, 5);          
         }
 
         public void StopVideoRecording()
@@ -140,8 +183,41 @@ namespace Golem.Framework
             
         }
 
+        private void StartProxy()
+        {
+            try
+            {
+                if (Config.Settings.httpProxy.startProxy)
+                {
+                    proxy = new FiddlerProxy();
+                    proxy.StartFiddler();
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
 
-        private static Object locker = new object();
+        private void GetHttpTraffic()
+        {
+            if (Config.Settings.httpProxy.startProxy)
+            {
+                string name = Common.GetShortTestName(80);
+                proxy.SaveSessionsToFile();
+                TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".saz", "application/x-fiddler-session-archive", File.ReadAllBytes(proxy.GetSazFilePath())));
+                proxy.ClearSessionList();
+            }
+        }
+
+        private void QuitProxy()
+        {
+            if (Config.Settings.httpProxy.startProxy)
+            {
+                proxy.QuitFiddler();
+            }
+        }
+
         public void LaunchBrowser()
         {
             lock (locker)
@@ -149,60 +225,62 @@ namespace Golem.Framework
                 if (Config.Settings.runTimeSettings.launchBrowser)
                 {
                     driver = new WebDriverBrowser().LaunchBrowser();
-                    testData.FireEvent(Config.Settings.runTimeSettings.browser.ToString() + " Browser Launched");
-                    TestBaseClass.testData.actions.addAction(Config.Settings.runTimeSettings.browser.ToString() + " Browser Launched");
+                    LogEvent(Config.Settings.runTimeSettings.browser.ToString() + " Browser Launched");
+                    testData.actions.addAction(Common.GetCurrentTestName() + " : " + Config.Settings.runTimeSettings.browser.ToString() + " Browser Launched");
                 }
             }
         }
 
         public void SetDegreeOfParallelism()
         {
-            Gallio.Framework.Pattern.TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.degreeOfParallelism;
+            TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.degreeOfParallelism;
         }
        
-
         [SetUp]
         public void SetUp()
         {
-            testData.FireEvent(Common.GetCurrentTestName() + " started");
+            LogEvent(Common.GetCurrentTestName() + " started");
             StartVideoRecording();
             LaunchBrowser();
-            
-
         }
 
         [TearDown]
         public void TearDown()
         {
-                testData.FireEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
+                LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
                 StopVideoRecording();
                 LogScreenshotIfTestFailed();
                 LogVideoIfTestFailed();
                 LogHtmlIfTestFailed();
-                LogActions();
                 QuitBrowser();
-                AssertNoVerificationErrors();  
-        }
-
-        [FixtureInitializer]
-        public void Initializer()
-        {
-           
+                LogActions();
+                AssertNoVerificationErrors();
+                GetHttpTraffic();
         }
 
         [FixtureSetUp]
         public void SuiteSetUp()
         {
+            SetupEvents();
             testDataCollection = new Dictionary<string, TestDataContainer>();
-            //SetDegreeOfParallelism();
-            //FireEvent("Suite Started");
+            SetDegreeOfParallelism();
+            StartProxy();
+            //LogEvent("Suite Started");
+        }
+
+        private void SetupEvents()
+        {
+            PageObjectActionEvent += new TestBaseClass.ActionEvent(LogAction);
+            BeforeTestEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
+            AfterTestEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
+            GenericEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
         }
 
         [FixtureTearDown]
         public void SuiteTearDown()
         {
-           // FireEvent("Suite Finished");
+            QuitProxy();
+            // LogEvent("Suite Finished");
         }
-
     }
 }

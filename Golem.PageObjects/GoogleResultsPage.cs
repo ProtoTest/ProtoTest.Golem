@@ -37,10 +37,10 @@ namespace Golem.Framework.PageObjects.Google
             return new GoogleResultsPage();
         }
 
-        public void GoToResult(string text)
+        public SearchResultPage GoToResult(string text)
         {
             SearchResult(text).Click();
-            return;
+            return new SearchResultPage();
         }
 
         public GmailPage GoToGmail()

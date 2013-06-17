@@ -61,7 +61,7 @@ namespace Golem.Framework
             elementTimeoutSec =int.Parse(Config.GetConfigValue("ElementTimeoutSec","20"));
             pageTimeoutSec = int.Parse(Config.GetConfigValue("PageTimeoutSec","30"));
             environmentUrl = Config.GetConfigValue("EnvironmentUrl","http://www.google.com/");
-            degreeOfParallelism = int.Parse(Config.GetConfigValue("NumberOfParallelTests","20"));
+            degreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "5"));
             commandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
             }
         }
@@ -87,12 +87,13 @@ namespace Golem.Framework
         }
         public class HttpProxy
         {
+            public bool startProxy;
             public HttpProxy()
             {
-                startProxy = Common.IsTruthy(Config.GetConfigValue("StartFiddlerProxy","True"));
-            
+                startProxy = Common.IsTruthy(Config.GetConfigValue("StartFiddlerProxy", "True"));
+
             }
-            public bool startProxy;
+            
         }
       
     }

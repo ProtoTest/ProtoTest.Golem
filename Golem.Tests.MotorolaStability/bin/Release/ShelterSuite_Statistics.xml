@@ -2,10 +2,10 @@
 <statistics>
  <script name="Shelter_Stability_Test_09+08">
   <LastStatus>Failure</LastStatus>
-  <NumberOfRuns>25</NumberOfRuns>
-  <NumberOfFails>23</NumberOfFails>
+  <NumberOfRuns>26</NumberOfRuns>
+  <NumberOfFails>24</NumberOfFails>
   <FirstRun>2013-06-11 13:08:05 -0600</FirstRun>
-  <LastRun>2013-06-12 15:28:58 -0600</LastRun>
+  <LastRun>2013-06-17 12:51:11 -0600</LastRun>
   <TotalTimeOnSuccess>383.458000</TotalTimeOnSuccess>
  </script>
  <script name="Shelter_Stability_Test_38+40">

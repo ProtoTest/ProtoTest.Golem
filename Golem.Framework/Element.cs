@@ -30,8 +30,6 @@ namespace Golem.Framework
             }
         }
 
-
-
         public Element(string name, By locator)
         {
             this.name = name;
@@ -133,7 +131,10 @@ namespace Golem.Framework
         {
             return element.GetCssValue(text);
         }
-
+        public void Wait()
+        {
+            driver.WaitForElement(this.by);
+        }
         public void VerifyPresent(int seconds=0)
         {
             for (int i = 0; i <= seconds; i++)
