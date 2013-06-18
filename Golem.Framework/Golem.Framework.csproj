@@ -93,14 +93,12 @@
     <Compile Include="EggPlantScript.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="ActionList.cs" />
+    <Compile Include="FiddlerProxy.cs" />
     <Compile Include="GlobalEvents.cs" />
     <Compile Include="BasePageObject.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyController.cs" />
-    <Compile Include="Proxy\FiddlerProxy.cs" />
-    <Compile Include="Proxy\SAZ-DOTNETZIP.cs" />
     <Compile Include="TestBaseClass.cs" />
     <Compile Include="TestDataContainer.cs" />
     <Compile Include="VerificationError.cs" />
