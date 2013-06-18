@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Xml;
+using OpenQA.Selenium;
 
 namespace Golem.Framework
 {
@@ -26,7 +23,6 @@ namespace Golem.Framework
                 return setting;
         }
 
-
     }
 
     public class ConfigSettings
@@ -44,25 +40,49 @@ namespace Golem.Framework
 
         public class RuntimeSettings
         {
-            public WebDriverBrowser.Browser browser;
-            public bool launchBrowser;
-            public int testTimeoutMin;
-            public int elementTimeoutSec;
-            public int pageTimeoutSec;
-            public string environmentUrl;
-            public int degreeOfParallelism;
-            public int commandDelayMs;
+            public List<Browser> Browsers = new List<Browser>(); 
+            public bool LaunchBrowser;
+            public int TestTimeoutMin;
+            public int ElementTimeoutSec;
+            public int PageTimeoutSec;
+            public string EnvironmentUrl;
+            public int DegreeOfParallelism;
+            public int CommandDelayMs;
+            public bool RunOnRemoteHost;
+            public string HostIp;
 
             public RuntimeSettings()
             {
-            browser = WebDriverBrowser.getBrowserFromString(Config.GetConfigValue("Browser","Firefox"));
-            launchBrowser = Common.IsTruthy(Config.GetConfigValue("LaunchBrowser", "True"));
-            testTimeoutMin = int.Parse(Config.GetConfigValue("TestTimeoutMin","5"));
-            elementTimeoutSec =int.Parse(Config.GetConfigValue("ElementTimeoutSec","20"));
-            pageTimeoutSec = int.Parse(Config.GetConfigValue("PageTimeoutSec","30"));
-            environmentUrl = Config.GetConfigValue("EnvironmentUrl","http://www.google.com/");
-            degreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "5"));
-            commandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
+            Browsers = GetBrowserList();
+
+            LaunchBrowser = Common.IsTruthy(Config.GetConfigValue("LaunchBrowser", "True"));
+            TestTimeoutMin = int.Parse(Config.GetConfigValue("TestTimeoutMin","5"));
+            ElementTimeoutSec =int.Parse(Config.GetConfigValue("ElementTimeoutSec","20"));
+            PageTimeoutSec = int.Parse(Config.GetConfigValue("PageTimeoutSec","30"));
+            EnvironmentUrl = Config.GetConfigValue("EnvironmentUrl","");
+            DegreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "5"));
+            CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
+            RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
+            HostIp = Config.GetConfigValue("HostIp", "localhost");
+            }
+
+            
+
+            private List<Browser> GetBrowserList()
+            {
+                List<Browser> browsers = new List<Browser>();
+                string browser = Config.GetConfigValue("Browser", "null");
+                if (browser != "null")
+                    browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
+                for (var i = 1; i < 5; i++)
+                {
+                    browser = Config.GetConfigValue("Browser" + i, "null");
+                    if (browser != "null")
+                        browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
+                }
+                if(browsers.Count==0)
+                    browsers.Add(Browser.Firefox);
+                return browsers;
             }
         }
         public class ReportSettings

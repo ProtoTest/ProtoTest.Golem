@@ -19,17 +19,17 @@ namespace Golem.Tests.MotorolaStability
         [FixtureSetUp]
         public void Setup()
         {
-            
-                XmlDocument configFile = new XmlDocument();
-                configFile.Load(Directory.GetCurrentDirectory() + "\\TestConfig.xml");
-                runscriptPath = configFile.SelectSingleNode("//RunScript/@path").Value;
+
+            XmlDocument configFile = new XmlDocument();
+            configFile.Load(Directory.GetCurrentDirectory() + "\\TestConfig.xml");
+            runscriptPath = configFile.SelectSingleNode("//RunScript/@path").Value;
         }
 
         [Test]
         [MultipleAsserts]
         [Timeout(0)]
-        [Repeat(10)]
-        [XmlData("//Script", FilePath = "TestConfig.xml")]
+        [Repeat(1)]
+    [XmlData("//Script", FilePath = "TestConfig.xml")]
         public void RunShelterStabilityTests(
             [Bind("@suitePath")] string suitePath,
             [Bind("@scriptName")] string scriptName,

@@ -68,7 +68,7 @@ namespace Golem.Framework
         {
             Common.Log("(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + name);
         }
-        private void LogAction(string name, EventArgs e)
+        private void AddAction(string name, EventArgs e)
         {
             testData.actions.addAction(name);
         }
@@ -90,6 +90,19 @@ namespace Golem.Framework
 
         #endregion
 
+        [Factory("GetBrowser")]
+        public Browser browser;
+
+        public static IEnumerable<Browser> GetBrowser
+        {
+            get
+            {
+                foreach (Browser browser in Config.Settings.runTimeSettings.Browsers)
+                {
+                    yield return browser;
+                }
+            }
+        }
 
         public static void AddVerificationError(string errorText)
         {
@@ -145,13 +158,13 @@ namespace Golem.Framework
 
         public void QuitBrowser()
         {
-            if (Config.Settings.runTimeSettings.launchBrowser)
+            if (Config.Settings.runTimeSettings.LaunchBrowser)
             {
                 if (driver.CurrentWindowHandle != null)
                 {
                     driver.Quit();
-                    LogEvent(Common.GetCurrentTestName() + " : " + Config.Settings.runTimeSettings.browser.ToString() + " Browser Closed");
-                    testData.actions.addAction(Common.GetCurrentTestName() + " : " + Config.Settings.runTimeSettings.browser.ToString() + " Browser Closed");
+                    LogEvent(browser.ToString() + " Browser Closed");
+                    //testData.actions.addAction(browser.ToString() + " Browser Closed");
                 }
             }
                 
@@ -222,18 +235,42 @@ namespace Golem.Framework
         {
             lock (locker)
             {
-                if (Config.Settings.runTimeSettings.launchBrowser)
+                if (Config.Settings.runTimeSettings.LaunchBrowser)
                 {
-                    driver = new WebDriverBrowser().LaunchBrowser();
-                    LogEvent(Config.Settings.runTimeSettings.browser.ToString() + " Browser Launched");
-                    testData.actions.addAction(Common.GetCurrentTestName() + " : " + Config.Settings.runTimeSettings.browser.ToString() + " Browser Launched");
+                    if (Config.Settings.runTimeSettings.RunOnRemoteHost)
+                    {
+                        driver = new WebDriverBrowser().LaunchRemoteBrowser(browser,Config.Settings.runTimeSettings.HostIp);
+                    }
+                    else
+                    {
+                        driver = new WebDriverBrowser().LaunchBrowser(browser);
+                    }
+                    
+                    LogEvent(browser.ToString() + " Browser Launched");
+                    testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser.ToString() + " Browser Launched");
                 }
             }
         }
 
         public void SetDegreeOfParallelism()
         {
-            TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.degreeOfParallelism;
+            TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.DegreeOfParallelism;
+        }
+
+        private void SetupEvents()
+        {
+            PageObjectActionEvent += new TestBaseClass.ActionEvent(AddAction);
+            BeforeTestEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
+            AfterTestEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
+            GenericEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
+        }
+
+        private void RemoveEvents()
+        {
+            PageObjectActionEvent -= new TestBaseClass.ActionEvent(AddAction);
+            BeforeTestEvent -= new TestBaseClass.ActionEvent(WriteActionToLog);
+            AfterTestEvent -= new TestBaseClass.ActionEvent(WriteActionToLog);
+            GenericEvent -= new TestBaseClass.ActionEvent(WriteActionToLog);
         }
        
         [SetUp]
@@ -247,15 +284,15 @@ namespace Golem.Framework
         [TearDown]
         public void TearDown()
         {
-                LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
-                StopVideoRecording();
-                LogScreenshotIfTestFailed();
-                LogVideoIfTestFailed();
-                LogHtmlIfTestFailed();
-                QuitBrowser();
-                LogActions();
-                AssertNoVerificationErrors();
-                GetHttpTraffic();
+            LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
+            StopVideoRecording();
+            LogScreenshotIfTestFailed();
+            LogVideoIfTestFailed();
+            LogHtmlIfTestFailed();
+            QuitBrowser();
+            LogActions();
+            AssertNoVerificationErrors();
+            GetHttpTraffic();
         }
 
         [FixtureSetUp]
@@ -268,18 +305,12 @@ namespace Golem.Framework
             //LogEvent("Suite Started");
         }
 
-        private void SetupEvents()
-        {
-            PageObjectActionEvent += new TestBaseClass.ActionEvent(LogAction);
-            BeforeTestEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
-            AfterTestEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
-            GenericEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
-        }
 
         [FixtureTearDown]
         public void SuiteTearDown()
         {
             QuitProxy();
+            RemoveEvents();
             // LogEvent("Suite Finished");
         }
     }

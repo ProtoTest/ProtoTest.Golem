@@ -17,7 +17,6 @@ namespace Golem.Framework
 
         public EggPlantScript(string runScriptPath, string suitePath, string scriptName, string host, string port)
         {
-
             this.runScriptPath = runScriptPath;
             this.suitePath = suitePath;
             this.scriptName = scriptName;

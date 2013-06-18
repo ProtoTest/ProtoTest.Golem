@@ -30,9 +30,14 @@ C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.Framework.dl
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.PageObjects.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\MbUnit.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\FiddlerCore.dll
+C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\WebDriver.Common.Tests.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Ionic.Zip.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\WebDriver.Support.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\NHamcrest.dll
+C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\nunit.core.interfaces.dll
+C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\nunit.core.dll
+C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\NMock2.dll
+C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\nunit.framework.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.Framework.pdb
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.PageObjects.pdb
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Gallio.pdb

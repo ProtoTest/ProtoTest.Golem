@@ -151,7 +151,7 @@ namespace Golem.Framework
 
         public static TestOutcome GetTestOutcome()
         {
-            if (TestBaseClass.testData.numVerificationErrors != 0)
+            if (TestBaseClass.testData.VerificationErrors.Count != 0)
                 return TestOutcome.Failed;
             return TestContext.CurrentContext.Outcome;
         }

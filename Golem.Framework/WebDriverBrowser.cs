@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Android;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.IE;
@@ -15,16 +16,17 @@ namespace Golem.Framework
 {
     public class WebDriverBrowser
     {
-        public enum Browser { Firefox, Chrome, IE, Safari }
+       // private OpenQA.Selenium.Browser browser = OpenQA.Selenium.Browser.Android;
+      //  public enum Browser { Firefox, Chrome, IE, Safari, Android, IPhone }
         public IWebDriver driver;
         public WebDriverBrowser() { }
         public static Browser getBrowserFromString(string name)
         {
             return (Browser)Enum.Parse(typeof(Browser), name);
         }
-        public IWebDriver LaunchBrowser()
+        public IWebDriver LaunchBrowser(Browser browser)
         {
-              switch (Config.Settings.runTimeSettings.browser)
+              switch (browser)
                 {
                     case Browser.Firefox:
                         driver = StartFirefoxBrowser();
@@ -62,6 +64,7 @@ namespace Golem.Framework
             return new InternetExplorerDriver();
         }
 
+
         public IWebDriver StartSafariBrowser()
         {
             return new SafariDriver();
@@ -78,6 +81,8 @@ namespace Golem.Framework
                     return DesiredCapabilities.Chrome();
                 case Browser.Safari:
                     return DesiredCapabilities.Safari();
+                case Browser.Android:
+                    return DesiredCapabilities.Android();
                 default:
                     return DesiredCapabilities.Firefox();
             }

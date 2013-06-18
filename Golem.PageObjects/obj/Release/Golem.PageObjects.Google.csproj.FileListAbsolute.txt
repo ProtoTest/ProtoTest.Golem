@@ -6,9 +6,14 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.Framew
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\WebDriver.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\FiddlerCore.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Gallio.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\WebDriver.Common.Tests.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Ionic.Zip.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\WebDriver.Support.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\MbUnit.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\nunit.core.interfaces.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\nunit.core.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\NMock2.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\nunit.framework.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\NHamcrest.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.Framework.pdb
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\WebDriver.pdb

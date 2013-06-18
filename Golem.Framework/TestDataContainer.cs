@@ -17,7 +17,6 @@ namespace Golem.Framework
     {
 
         public string testName;
-        public VerificationError[] verificationErrors;
         public ScreenRecorder recorder;
         public List<VerificationError> VerificationErrors;
         public ActionList actions;
@@ -33,13 +32,6 @@ namespace Golem.Framework
                 _driver = value;
             }
 
-        }
-        public int numVerificationErrors
-        {
-            get
-            {
-                return VerificationErrors.Count;
-            }
         }
 
         public TestDataContainer(string name)

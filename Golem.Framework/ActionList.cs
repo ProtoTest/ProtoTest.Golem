@@ -53,16 +53,22 @@ namespace Golem.Framework
 
         public void PrintActionTimings()
         {
-            TestLog.BeginSection("Page Object Action Timings:");
+            TestLog.BeginSection("Test Action Timings:");
+            DateTime start;
+            DateTime end;
+            TimeSpan difference;
             for(int i=1;i<actions.Count;i++)
             {
-                DateTime start = actions[i-1]._time;
-                DateTime end = actions[i]._time;
-                var difference = end.Subtract(start);
+                start = actions[i-1]._time;
+                end = actions[i]._time;
+                difference = end.Subtract(start);
                 TestLog.WriteLine(actions[i].name + " : " + difference.ToString());
             }
+            start = actions[0]._time;
+            end = actions[actions.Count-1]._time;
+            difference = end.Subtract(start);
+            TestLog.WriteLine("All Actions : " + difference.ToString());
             TestLog.End();
-            ;
         }
     }
 

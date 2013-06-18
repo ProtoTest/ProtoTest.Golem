@@ -23,3 +23,8 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\obj\Release\Golem.Tests.MotorolaStability.csprojResolveAssemblyReference.cache
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\obj\Release\Golem.Tests.MotorolaStability.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\obj\Release\Golem.Tests.MotorolaStability.pdb
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\WebDriver.Common.Tests.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\nunit.core.interfaces.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\nunit.core.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\NMock2.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\nunit.framework.dll
