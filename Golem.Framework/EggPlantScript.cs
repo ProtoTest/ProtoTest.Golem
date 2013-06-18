@@ -30,10 +30,10 @@ namespace Golem.Framework
         public string globalResultsFolder = Directory.GetCurrentDirectory();
         public string[] parameters;
         public bool commandLineOutput = true;
-        public string host;
+        public string host = "";
         public string colorDepth;
         public string password;
-        public string port;
+        public string port = "";
         public string username;
         public int repeat = 0;
         public string defaultDocDirectory;
@@ -108,10 +108,10 @@ namespace Golem.Framework
         {
             string command = "";
             command += "\"" + runScriptPath + "\" ";
-            command += "\"" + suitePath + "\\Scripts\\" + scriptName + ".script\" ";
+            command += "\"" + suitePath + scriptName + "\" ";
             // command += (repeat != 0 ? "-repeat " + repeat + " " : "");
-            command += (host != null ? "-host " + host + " " : "");
-            command += (port != null ? "-port " + port + " " : "");
+            command += (host != "" ? "-host " + host + " " : "");
+            command += (port != "" ? "-port " + port + " " : "");
             command += (reportFailures == true ? "-ReportFailures YES " : "-ReportFailures NO ");
             command += (username != null ? "-username " + username + " " : "");
             command += (password != null ? "-password " + password + " " : "");

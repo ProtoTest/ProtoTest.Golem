@@ -28,6 +28,7 @@ namespace Golem.Tests.MotorolaStability
         [Test]
         [MultipleAsserts]
         [Timeout(0)]
+        [Repeat(10)]
         [XmlData("//Script", FilePath = "TestConfig.xml")]
         public void RunShelterStabilityTests(
             [Bind("@suitePath")] string suitePath,
@@ -42,28 +43,32 @@ namespace Golem.Tests.MotorolaStability
             {
                 EggPlantScript script = new EggPlantScript(runscriptPath, suitePath, scriptName, host,
                                                            port);
-                //script.ExecuteScript();
-                //script.VerifySuccess();
-                Assert.TerminateSilently(TestOutcome.Failed);
+               // script.ExecuteScript();
+               // script.VerifySuccess();
+                Assert.TerminateSilently(TestOutcome.Passed);
             });
-
-            for (int i = 0; i < 1; i++)
+            TestOutcome outcome = TestOutcome.Inconclusive;
+            bool testFailed = false;
+            for (int i = 0; i < repeat; i++)
             {
                 string name = scriptName + " : Iteration #" + (i + 1).ToString();
-                TestOutcome outcome = TestStep.RunStep(name, executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
+                outcome = TestStep.RunStep(name, executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
 
-                if (outcome!=TestOutcome.Passed)
-                {
-                    for (var j = 0; j < retry; j++)
+
+                for (var j = 0; (j < retry) && (outcome != TestOutcome.Passed); j++)
                     {
-                        name = scriptName + " : Iteration #" + (i + 1).ToString() + " Retry : " + (j + 1).ToString();
-                        TestStep.RunStep(name,executeTest, new TimeSpan(0, 0, timeout, 0), true, null);
+                       name = scriptName + " : Iteration #" + (i + 1).ToString() + " Retry : " + (j + 1).ToString();
+                       outcome= TestStep.RunStep(name,executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
                     }
+      
+                if (outcome != TestOutcome.Passed)
+                {
+                    testFailed = true;
                 }
-
                
             }
-      
+           if (testFailed == true)
+              Assert.TerminateSilently(TestOutcome.Failed);
         }
     }
 }
