@@ -43,9 +43,9 @@ namespace Golem.Tests.MotorolaStability
             {
                 EggPlantScript script = new EggPlantScript(runscriptPath, suitePath, scriptName, host,
                                                            port);
-               // script.ExecuteScript();
-               // script.VerifySuccess();
-                Assert.TerminateSilently(TestOutcome.Passed);
+                script.ExecuteScript();
+                script.VerifySuccess();
+                
             });
             TestOutcome outcome = TestOutcome.Inconclusive;
             bool testFailed = false;
