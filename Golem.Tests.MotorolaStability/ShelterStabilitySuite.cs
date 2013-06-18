@@ -23,8 +23,6 @@ namespace Golem.Tests.MotorolaStability
                 XmlDocument configFile = new XmlDocument();
                 configFile.Load(Directory.GetCurrentDirectory() + "\\TestConfig.xml");
                 runscriptPath = configFile.SelectSingleNode("//RunScript/@path").Value;
-
-
         }
 
         [Test]
@@ -36,25 +34,34 @@ namespace Golem.Tests.MotorolaStability
             [Bind("@scriptName")] string scriptName,
             [Bind("@host")] string host,
             [Bind("@port")] string port,
-            [Bind("@repeat")] int repeat)
+            [Bind("@repeat")] int repeat,
+            [Bind("@retry")] int retry,
+            [Bind("@timeout")] int timeout)
         {
+            Gallio.Common.Action executeTest = new Gallio.Common.Action(delegate
+            {
+                EggPlantScript script = new EggPlantScript(runscriptPath, suitePath, scriptName, host,
+                                                           port);
+                //script.ExecuteScript();
+                //script.VerifySuccess();
+                Assert.TerminateSilently(TestOutcome.Failed);
+            });
+
             for (int i = 0; i < 1; i++)
             {
                 string name = scriptName + " : Iteration #" + (i + 1).ToString();
-                TestOutcome outcome =  TestStep.RunStep(name, delegate
+                TestOutcome outcome = TestStep.RunStep(name, executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
+
+                if (outcome!=TestOutcome.Passed)
+                {
+                    for (var j = 0; j < retry; j++)
                     {
-                        Common.Log("Test Name : " + name);
-                        Assert.Fail("Fail");
-                        //EggPlantScript script = new EggPlantTestBaseClass.EggPlantScript(runscriptPath,suitePath, scriptName, host, port);
-                        //script.ExecuteScript();
-                        //script.VerifySuccess();
-                    }, new TimeSpan(0, 0, 10, 0), true, null).Outcome;
+                        name = scriptName + " : Iteration #" + (i + 1).ToString() + " Retry : " + (j + 1).ToString();
+                        TestStep.RunStep(name,executeTest, new TimeSpan(0, 0, timeout, 0), true, null);
+                    }
+                }
 
-                Assert.TerminateSilently(TestOutcome.Inconclusive);
-               // if(outcome!=TestOutcome.Passed)
-               //     Assert.TerminateSilently(TestOutcome.Failed);
-
-
+               
             }
       
         }
