@@ -99,6 +99,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SAZ-DOTNETZIP.cs" />
     <Compile Include="TestBaseClass.cs" />
     <Compile Include="TestDataContainer.cs" />
     <Compile Include="VerificationError.cs" />
