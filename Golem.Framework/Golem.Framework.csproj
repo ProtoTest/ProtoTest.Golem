@@ -34,6 +34,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CookComputing.XmlRpcV2">
+      <HintPath>..\..\..\xml-rpc-net\bin\CookComputing.XmlRpcV2.dll</HintPath>
+    </Reference>
     <Reference Include="FiddlerCore">
       <HintPath>..\..\..\..\Desktop\FiddlerCoreAPI\FiddlerCore.dll</HintPath>
     </Reference>
@@ -94,6 +97,7 @@
     <Compile Include="BasePageObject.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="IEggPlantDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SAZ-DOTNETZIP.cs" />
     <Compile Include="TestBaseClass.cs" />

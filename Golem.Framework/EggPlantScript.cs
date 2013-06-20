@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using CookComputing.XmlRpc;
 using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
@@ -14,87 +15,74 @@ namespace Golem.Framework
 {
     public class EggPlantScript
     {
+        public string suitePath;
+        public string scriptName;
+        public string host = "";
+        public string port = "";
+        public string description = "";
 
-        public EggPlantScript(string runScriptPath, string suitePath, string scriptName, string host, string port)
+
+        private IEggPlantDriver driver;
+        public EggPlantScript(string suitePath, string scriptName, string host, string port)
         {
-            this.runScriptPath = runScriptPath;
             this.suitePath = suitePath;
             this.scriptName = scriptName;
             this.host = host;
             this.port = port;
+            Init();
         }
 
-        public string suitePath;
-        public string scriptName;
-        public string globalResultsFolder = Directory.GetCurrentDirectory();
-        public string[] parameters;
-        public bool commandLineOutput = true;
-        public string host = "";
-        public string colorDepth;
-        public string password;
-        public string port = "";
-        public string username;
-        public int repeat = 0;
-        public string defaultDocDirectory;
-        public string runScriptPath;
-        public string output;
-        public bool reportFailures = true;
-
-        public void Execute()
+        private void Init()
         {
-            //Create process
-            System.Diagnostics.Process pProcess = new System.Diagnostics.Process();
-
-            //strCommand is path and file name of command to run
-            pProcess.StartInfo.FileName = "cmd.exe";
-
-            //strCommandParameters are parameters to pass to program
-            pProcess.StartInfo.Arguments = GetCommandScript();
-
-            pProcess.StartInfo.UseShellExecute = false;
-
-            //Set output of program to be written to process output stream
-            pProcess.StartInfo.RedirectStandardOutput = true;
-
-            //Start the process
-            pProcess.Start();
-
-            //Get program output
-            output = pProcess.StandardOutput.ReadToEnd();
-
-            //Wait for process to finish
-            pProcess.WaitForExit();
-
-            pProcess.Close();
-
+            driver = (IEggPlantDriver)XmlRpcProxyGen.Create(typeof(IEggPlantDriver));
+            StartSession();
+            Connect(host);
+            this.description = GetScriptDescription();
         }
+
+        private void StartSession()
+        {
+            try
+            {
+                driver.StartSession(suitePath);
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void EndSession()
+        {
+            try
+            {
+                driver.EndSession();
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void Connect(string host)
+        {
+            try
+            {
+                driver.Execute("Connect (name:\"" + host + "\")");
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+        
 
         public void ExecuteScript()
         {
             DiagnosticLog.WriteLine("Executing test : " + this.scriptName);
-            string tempGETCMD = null;
-            Process CMDprocess = new Process();
-            System.Diagnostics.ProcessStartInfo StartInfo = new System.Diagnostics.ProcessStartInfo();
-            StartInfo.FileName = "cmd"; //starts cmd window
-            StartInfo.Arguments = "/c \"" + GetCommandScript() + "\"";
-            StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            StartInfo.CreateNoWindow = true;
-            StartInfo.RedirectStandardInput = true;
-            StartInfo.RedirectStandardOutput = true;
-            StartInfo.UseShellExecute = false; //required to redirect
-            CMDprocess.StartInfo = StartInfo;
-            CMDprocess.Start();
-            System.IO.StreamReader SR = CMDprocess.StandardOutput;
-            System.IO.StreamWriter SW = CMDprocess.StandardInput;
-            CMDprocess.Start();
-            DiagnosticLog.WriteLine("Executing Command : " + GetCommandScript());
-            //SW.WriteLine(GetCommandScript());
-            output = SR.ReadToEnd(); //returns results of the command window
-            DiagnosticLog.WriteLine(output);
-            // SW.WriteLine("exit"); //exits command prompt window
-            SW.Close();
-            SR.Close();
-            DiagnosticLog.WriteLine("Finished test : " + this.scriptName);
+            Common.Log(description);
+            driver.Execute(scriptName);
+
+
         }
 
         public string GetLogFile()
@@ -103,27 +91,11 @@ namespace Golem.Framework
 
         }
 
-        public string GetCommandScript()
-        {
-            string command = "";
-            command += "\"" + runScriptPath + "\" ";
-            command += "\"" + suitePath + scriptName + "\" ";
-            // command += (repeat != 0 ? "-repeat " + repeat + " " : "");
-            command += (host != "" ? "-host " + host + " " : "");
-            command += (port != "" ? "-port " + port + " " : "");
-            command += (reportFailures == true ? "-ReportFailures YES " : "-ReportFailures NO ");
-            command += (username != null ? "-username " + username + " " : "");
-            command += (password != null ? "-password " + password + " " : "");
-            // command += (commandLineOutput == true ? "-CommandLineOutput YES " : "-CommandLineOutput NO ");
-            command += (globalResultsFolder != null ? "-GlobalResultsFolder \"" + globalResultsFolder + "\" " : "");
-            return command;
-        }
-
         private string getResultDirectory()
         {
             string path = "";
-            path += globalResultsFolder;
-            path += "\\" + scriptName + "\\";
+            path += suitePath;
+            path += "\\Results" + scriptName + "\\";
             string[] directories = Directory.GetDirectories(path);
             string biggest = "0";
             foreach (string dir in directories)
@@ -135,6 +107,25 @@ namespace Golem.Framework
                     biggest = folder;
             }
             return path + "\\" + biggest;
+
+        }
+
+        public string GetScriptDescription()
+        {
+            string path = "";
+            path += suitePath + "\\Scripts" + scriptName + ".script";
+            System.IO.StreamReader file = new System.IO.StreamReader(path);
+            string line = "";
+            string result = "";
+            while ((line = file.ReadLine()) != null)
+            {
+                if (line.Contains("--"))
+                {
+                    result += line += "\r\n";
+                }
+                
+            }
+            return result;
 
         }
 
@@ -154,7 +145,7 @@ namespace Golem.Framework
                 TestLog.Failures.WriteLine(GetFailureMessage());
                 if (File.Exists(getResultDirectory() + "\\Screen_Error.png"))
                 {
-                    TestLog.Failures.EmbedImage(null, Image.FromFile(getResultDirectory() + "\\Screen_Error.png"));
+                    TestLog.Failures.EmbedImage(null, ScaleImage(Image.FromFile(getResultDirectory() + "\\Screen_Error.png")));
                 }
                 TestLog.Failures.End();
                 Assert.TerminateSilently(TestOutcome.Failed);

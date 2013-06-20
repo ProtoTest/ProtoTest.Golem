@@ -1,32 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <EggPlantSettings>
   <RunScript path="C:\Program Files (x86)\eggPlant\runscript.bat"/>
-  <Test timeout=""></Test>
-  <Scripts>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_09+08.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_30+33+35.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_37+39.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_38+40.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_44+45+46.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_47+48+49.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_50+51+52.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_53.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_54+55+56.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_57.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_61+26+24+25+62+63.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_64.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_65+66.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Scripts\Shelter_Stability_Test_67.script" repeat="3" host="10.10.1.210" port="5901" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_01" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_02" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_04" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_05" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_10" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_11" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_12" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_13" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_18" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-    <Script suitePath="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite" scriptName ="Shelter_Stability_Schedule_04" repeat="3" host="" port="" retry="3" timeout="5"></Script>
-
-  </Scripts>
+  <Suite path="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite">
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_09_08"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_30_33_35"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_37_39"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_38_40"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_44_45_46"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_47_48_49"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_50_51_52"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_53"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_54_55_56"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_57"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_61_26_24_25_62_63"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_64"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_65_66"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_67"  host="10.10.1.211" port="5901" timeout="5"></Script>
+    </Test>
+  </Suite>
 </EggPlantSettings>

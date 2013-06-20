@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.PageObjects.Emcon.FMX
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emcon.FMXTests", "Emcon.FMXTests\Emcon.FMXTests.csproj", "{2DCE460D-E8C8-4D16-8A32-46F691346C59}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.Tests.MotorolaStability", "Golem.Tests.MotorolaStability\Golem.Tests.MotorolaStability.csproj", "{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,21 @@ Global
 		{2DCE460D-E8C8-4D16-8A32-46F691346C59}.Release-Plus|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2DCE460D-E8C8-4D16-8A32-46F691346C59}.Release-Plus|Mixed Platforms.Build.0 = Release|Any CPU
 		{2DCE460D-E8C8-4D16-8A32-46F691346C59}.Release-Plus|x86.ActiveCfg = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release-Plus|Any CPU.ActiveCfg = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release-Plus|Any CPU.Build.0 = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release-Plus|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release-Plus|Mixed Platforms.Build.0 = Release|Any CPU
+		{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}.Release-Plus|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
