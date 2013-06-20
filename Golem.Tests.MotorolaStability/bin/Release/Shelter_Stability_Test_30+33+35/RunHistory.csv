@@ -1,2 +1,27 @@
 Date Run,Status,Time,# of Errors,# of Warnings,# of Exceptions,Log File,Return Value,Error Message,# of Successes
-2013-06-12 15:32:01.192 -0600,"Failure",0:00:36,1,0,1,"20130612_153201.192/LogFile.txt","","Image Not Found -- click Error - No Image Found On Screen: ""(TEXT:""Install"")""  Restricted Search Rectangle ((10,700),(470,800))\n",0
+2013-06-18 16:43:28.214 -0600,"Failure",0:01:02,1,0,1,"20130618_164328.214/LogFile.txt","","Image Not Found -- click Error - No Image Found On Screen: ""(TEXT:""DroidFish"")""",0
+2013-06-19 08:41:35.643 -0600,"Failure",0:00:00,1,0,1,"20130619_084135.643/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 08:55:01.924 -0600,"Failure",0:00:00,1,0,1,"20130619_085501.924/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 08:55:30.884 -0600,"Failure",0:00:00,1,0,1,"20130619_085530.884/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 09:38:43.482 -0600,"Failure",0:00:00,1,0,1,"20130619_093843.482/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 09:39:12.611 -0600,"Failure",0:00:00,1,0,1,"20130619_093912.611/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 09:40:22.654 -0600,"Failure",0:00:00,1,0,1,"20130619_094022.654/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 09:40:46.222 -0600,"Failure",0:00:00,1,0,1,"20130619_094046.222/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 09:42:50.024 -0600,"Failure",0:00:00,1,0,1,"20130619_094250.024/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:04:28.199 -0600,"Success",0:04:26,0,0,0,"20130619_100428.199/LogFile.txt","","",1
+2013-06-19 10:09:19.164 -0600,"Success",0:04:26,0,0,0,"20130619_100919.164/LogFile.txt","","",1
+2013-06-19 10:14:09.159 -0600,"Success",0:04:13,0,0,0,"20130619_101409.159/LogFile.txt","","",1
+2013-06-19 10:18:45.524 -0600,"Success",0:04:49,0,0,0,"20130619_101845.524/LogFile.txt","","",1
+2013-06-19 10:24:02.840 -0600,"Success",0:04:44,0,0,0,"20130619_102402.840/LogFile.txt","","",1
+2013-06-19 10:29:20.789 -0600,"Failure",0:00:00,1,0,1,"20130619_102920.789/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:29:53.998 -0600,"Failure",0:00:00,1,0,1,"20130619_102953.998/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:30:29.936 -0600,"Failure",0:00:00,1,0,1,"20130619_103029.936/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:31:04.322 -0600,"Failure",0:00:00,1,0,1,"20130619_103104.322/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:31:38.498 -0600,"Failure",0:00:00,1,0,1,"20130619_103138.498/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:32:12.745 -0600,"Failure",0:00:00,1,0,1,"20130619_103212.745/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:32:49.326 -0600,"Failure",0:00:00,1,0,1,"20130619_103249.326/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:33:23.380 -0600,"Failure",0:00:00,1,0,1,"20130619_103323.380/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:33:58.483 -0600,"Failure",0:00:00,1,0,1,"20130619_103358.483/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:34:29.778 -0600,"Failure",0:00:00,1,0,1,"20130619_103429.778/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:34:30.585 -0600,"Failure",0:00:00,1,0,1,"20130619_103430.585/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-19 10:35:17.660 -0600,"Failure",0:00:00,1,0,1,"20130619_103517.660/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0

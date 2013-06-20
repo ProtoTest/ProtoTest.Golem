@@ -1,3 +1,6 @@
 Date Run,Status,Time,# of Errors,# of Warnings,# of Exceptions,Log File,Return Value,Error Message,# of Successes
-2013-06-12 15:28:58.118 -0600,"Failure",0:02:35,2,0,0,"20130612_152858.118/LogFile.txt","","Script Error -- Number of Errors logged: 2",0
-2013-06-17 12:51:11.793 -0600,"Failure",0:00:00,1,0,1,"20130617_125111.793/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-18 15:49:26.674 -0600,"Failure",0:00:00,1,0,1,"20130618_154926.674/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-18 15:49:45.588 -0600,"Failure",0:00:00,1,0,1,"20130618_154945.588/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
+2013-06-18 15:55:41.023 -0600,"Failure",0:01:17,1,0,0,"20130618_155541.023/LogFile.txt","","Script Error -- Number of Errors logged: 1",0
+2013-06-18 16:12:23.761 -0600,"Failure",0:01:52,1,0,0,"20130618_161223.761/LogFile.txt","","Script Error -- Number of Errors logged: 1",0
+2013-06-18 16:14:41.497 -0600,"Failure",0:00:15,1,0,1,"20130618_161441.497/LogFile.txt","","Image Not Found -- click Error - No Image Found On Screen: ""Device/System/AppsIcon""",0

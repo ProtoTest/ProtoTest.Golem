@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using CookComputing.XmlRpc;
+using Gallio.Common.Markup;
 using Gallio.Framework;
 using Gallio.Model;
 using Golem.Framework;
@@ -14,61 +16,91 @@ namespace Golem.Tests.MotorolaStability
 {
     public class ShelterStabilitySuite
     {
-        private string runscriptPath;
+        private string suitePath;
+        private XmlNodeList tests;
 
         [FixtureSetUp]
         public void Setup()
         {
-
+            
             XmlDocument configFile = new XmlDocument();
             configFile.Load(Directory.GetCurrentDirectory() + "\\TestConfig.xml");
-            runscriptPath = configFile.SelectSingleNode("//RunScript/@path").Value;
+            suitePath = configFile.SelectSingleNode("//Suite/@path").Value;
+ 
+            tests = configFile.SelectNodes("//Test");
+            
+            if (Directory.Exists(suitePath + "\\Results"))
+             Directory.Delete(suitePath + "\\Results",true);
         }
+
 
         [Test]
         [MultipleAsserts]
         [Timeout(0)]
-        [Repeat(1)]
-    [XmlData("//Script", FilePath = "TestConfig.xml")]
-        public void RunShelterStabilityTests(
-            [Bind("@suitePath")] string suitePath,
-            [Bind("@scriptName")] string scriptName,
-            [Bind("@host")] string host,
-            [Bind("@port")] string port,
-            [Bind("@repeat")] int repeat,
-            [Bind("@retry")] int retry,
-            [Bind("@timeout")] int timeout)
+        [Repeat(5)]
+        public void RunShelterStabilityTests()
         {
-            Gallio.Common.Action executeTest = new Gallio.Common.Action(delegate
-            {
-                EggPlantScript script = new EggPlantScript(runscriptPath, suitePath, scriptName, host,
-                                                           port);
-                script.ExecuteScript();
-                script.VerifySuccess();
-                
-            });
             TestOutcome outcome = TestOutcome.Inconclusive;
-            bool testFailed = false;
-            for (int i = 0; i < repeat; i++)
+
+            foreach (XmlNode test in tests)
             {
-                string name = scriptName + " : Iteration #" + (i + 1).ToString();
-                outcome = TestStep.RunStep(name, executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
+                int retry = int.Parse(test.SelectSingleNode("@retry").Value);
+                int repeat = int.Parse(test.SelectSingleNode("@repeat").Value);
 
-
-                for (var j = 0; (j < retry) && (outcome != TestOutcome.Passed); j++)
-                    {
-                       name = scriptName + " : Iteration #" + (i + 1).ToString() + " Retry : " + (j + 1).ToString();
-                       outcome= TestStep.RunStep(name,executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
-                    }
-      
-                if (outcome != TestOutcome.Passed)
+                for (var i = 0; i < repeat; i++)
                 {
-                    testFailed = true;
+
+                    XmlNodeList scripts = test.ChildNodes;
+                    foreach (XmlNode script in scripts)
+                    {
+                        string scriptName = script.SelectSingleNode("@scriptName").Value;
+                        string host = script.SelectSingleNode("@host").Value;
+                        string port = script.SelectSingleNode("@port").Value;
+                        int timeout = int.Parse(script.SelectSingleNode("@timeout").Value);
+                        string name = "";
+                        Gallio.Common.Action executeTest = new Gallio.Common.Action(delegate
+                        {
+
+                            EggPlantScript eggplant = new EggPlantScript(suitePath, scriptName, host, port, timeout);
+                            eggplant.ExecuteScript();
+                            eggplant.VerifySuccess();
+                            
+                        });
+                        name = scriptName + " : Iteration #" + (i + 1).ToString();
+
+                        outcome = TestStep.RunStep(name, executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
+
+                    }
+
+                    for (var j = 0; (j < retry) && (outcome != TestOutcome.Passed); j++)
+                    {
+                        foreach (XmlNode script in scripts)
+                        {
+                            string scriptName = script.SelectSingleNode("@scriptName").Value;
+                            string host = script.SelectSingleNode("@host").Value;
+                            string port = script.SelectSingleNode("@port").Value;
+                            int timeout = int.Parse(script.SelectSingleNode("@timeout").Value);
+                            string name = "";
+
+                            //retry test if failed
+                            name = scriptName + " : Iteration #" + (i + 1).ToString() + " Retry : " + (j + 1).ToString();
+                            Gallio.Common.Action executeTest = new Gallio.Common.Action(delegate
+                            {
+
+                                EggPlantScript eggplant = new EggPlantScript(suitePath, scriptName, host, port, timeout);
+                                 eggplant.ExecuteScript();
+                                eggplant.VerifySuccess();
+                            });
+                            outcome =
+                                TestStep.RunStep(name, executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
+                        }
+
+                    }
+
                 }
-               
+                if(outcome!=TestOutcome.Passed)
+                    Assert.TerminateSilently(TestOutcome.Failed);
             }
-           if (testFailed == true)
-              Assert.TerminateSilently(TestOutcome.Failed);
         }
     }
 }

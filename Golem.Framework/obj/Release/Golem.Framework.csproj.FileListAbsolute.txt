@@ -16,6 +16,7 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\chromedriver.e
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\IEDriverServer.exe
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\Golem.Framework.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\Golem.Framework.pdb
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\CookComputing.XmlRpcV2.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\FiddlerCore.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\Gallio.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\Ionic.Zip.dll
@@ -29,5 +30,6 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\MbUnit.pdb
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\MbUnit.xml
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\NHamcrest.pdb
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\Gallio.XmlSerializers.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\obj\Release\Golem.Framework.csprojResolveAssemblyReference.cache
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\obj\Release\Golem.Framework.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\obj\Release\Golem.Framework.pdb

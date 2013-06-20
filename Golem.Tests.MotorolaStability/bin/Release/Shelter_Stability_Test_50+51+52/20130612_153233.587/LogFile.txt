@@ -1,8 +1,0 @@
-2013-06-12 15:32:33.598 -0600	START		Running Shelter_Stability_Test_50+51+52.script
-2013-06-12 15:32:40.951 -0600	imagefound		Unable to Find Image Device/System/LockIcon	2	on_unlockdevice	ClassNavigate.script
-2013-06-12 15:32:42.103 -0600	click	Device/System/HomeButton	at (120, 824)	3	on_resetstate	ClassNavigate.script
-2013-06-12 15:32:43.371 -0600	click	Device/System/HomeButton	at (120, 824)	5	on_resetstate	ClassNavigate.script
-2013-06-12 15:32:44.466 -0600	imagefound	Device/System/AppsIcon	found at (240, 755)	2	on_confirmimageonscreen	ClassUtilities.script
-2013-06-12 15:32:52.671 -0600	Exception	Device/System/AppsIcon	No Image Found On Screen: "Device/System/AppsIcon"	2	on_openapp	ClassNavigate.script
-2013-06-12 15:32:52.718 -0600	EndTestCase		(Duration:"19.112", Errors:"1", Exceptions:"1", StartTime:"2013-06-12 15:32:33 -0600", Successes:"0", TestCase:"Shelter_Stability_Test_50+51+52.script", Warnings:"0")
-2013-06-12 15:32:52.940 -0600	FAILURE	Screen_Error.png	Image Not Found click Error - No Image Found On Screen: "Device/System/AppsIcon"\nExecution Time 0:00:19 Shelter_Stability_Test_50+51+52.script

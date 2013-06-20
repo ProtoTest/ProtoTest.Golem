@@ -1,27 +1,63 @@
 <?xml version="1.0"?>
 <runHistory script="Shelter_Stability_Test_09+08">
  <run>
-  <RunDate>2013-06-12 15:28:58.118 -0600</RunDate>
+  <RunDate>2013-06-18 15:49:26.674 -0600</RunDate>
   <Status>Failure</Status>
-  <Duration>155.816000</Duration>
-  <Errors>2</Errors>
-  <Warnings>0</Warnings>
-  <Exceptions>0</Exceptions>
-  <Successes>0</Successes>
-  <LogFile>20130612_152858.118/LogFile.txt</LogFile>
-  <ReturnValue></ReturnValue>
-  <ErrorMessage>Script Error -- Number of Errors logged: 2</ErrorMessage>
- </run>
- <run>
-  <RunDate>2013-06-17 12:51:11.793 -0600</RunDate>
-  <Status>Failure</Status>
-  <Duration>0.406000</Duration>
+  <Duration>0.254000</Duration>
   <Errors>1</Errors>
   <Warnings>0</Warnings>
   <Exceptions>1</Exceptions>
   <Successes>0</Successes>
-  <LogFile>20130617_125111.793/LogFile.txt</LogFile>
+  <LogFile>20130618_154926.674/LogFile.txt</LogFile>
   <ReturnValue></ReturnValue>
   <ErrorMessage>No Remote Connection -- imagefound Error - Remote Connection Unavailable</ErrorMessage>
+ </run>
+ <run>
+  <RunDate>2013-06-18 15:49:45.588 -0600</RunDate>
+  <Status>Failure</Status>
+  <Duration>0.163000</Duration>
+  <Errors>1</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>1</Exceptions>
+  <Successes>0</Successes>
+  <LogFile>20130618_154945.588/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage>No Remote Connection -- imagefound Error - Remote Connection Unavailable</ErrorMessage>
+ </run>
+ <run>
+  <RunDate>2013-06-18 15:55:41.023 -0600</RunDate>
+  <Status>Failure</Status>
+  <Duration>77.015000</Duration>
+  <Errors>1</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>0</Exceptions>
+  <Successes>0</Successes>
+  <LogFile>20130618_155541.023/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage>Script Error -- Number of Errors logged: 1</ErrorMessage>
+ </run>
+ <run>
+  <RunDate>2013-06-18 16:12:23.761 -0600</RunDate>
+  <Status>Failure</Status>
+  <Duration>112.066000</Duration>
+  <Errors>1</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>0</Exceptions>
+  <Successes>0</Successes>
+  <LogFile>20130618_161223.761/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage>Script Error -- Number of Errors logged: 1</ErrorMessage>
+ </run>
+ <run>
+  <RunDate>2013-06-18 16:14:41.497 -0600</RunDate>
+  <Status>Failure</Status>
+  <Duration>15.273000</Duration>
+  <Errors>1</Errors>
+  <Warnings>0</Warnings>
+  <Exceptions>1</Exceptions>
+  <Successes>0</Successes>
+  <LogFile>20130618_161441.497/LogFile.txt</LogFile>
+  <ReturnValue></ReturnValue>
+  <ErrorMessage>Image Not Found -- click Error - No Image Found On Screen: "Device/System/AppsIcon"</ErrorMessage>
  </run>
 </runHistory>

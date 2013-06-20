@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -154,6 +156,24 @@ namespace Golem.Framework
             if (TestBaseClass.testData.VerificationErrors.Count != 0)
                 return TestOutcome.Failed;
             return TestContext.CurrentContext.Outcome;
+        }
+
+        public static Image ResizeImage(Image imgToResize, float percent)
+        {
+            int sourceWidth = imgToResize.Width;
+            int sourceHeight = imgToResize.Height;
+
+            int destWidth = (int)(sourceWidth * percent);
+            int destHeight = (int)(sourceHeight * percent);
+
+            Bitmap b = new Bitmap(destWidth, destHeight);
+            Graphics g = Graphics.FromImage((Image)b);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
+            g.Dispose();
+
+            return (Image)b;
         }
     }
 }

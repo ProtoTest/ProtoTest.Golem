@@ -29,6 +29,7 @@ C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Gallio.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.Framework.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Golem.PageObjects.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\MbUnit.dll
+C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\CookComputing.XmlRpcV2.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\FiddlerCore.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\WebDriver.Common.Tests.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Ionic.Zip.dll
