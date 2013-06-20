@@ -26,6 +26,9 @@ namespace Golem.Tests.MotorolaStability
 
             suitePath = configFile.SelectSingleNode("//Suite/@path").Value;
             tests  = configFile.SelectNodes("//Test");
+
+            if(Directory.Exists(suitePath + "\\Results"))
+                Directory.Delete(suitePath + "\\Results",true);
         }
 
         [Test]
@@ -41,7 +44,7 @@ namespace Golem.Tests.MotorolaStability
             int repeat;
             int retry;
             bool testFailed = false;
-
+            TestSuite suite = new TestSuite("Suite 1");
             foreach (XmlNode test in tests)
             {
                 XmlNodeList scripts = test.ChildNodes;
@@ -58,7 +61,7 @@ namespace Golem.Tests.MotorolaStability
                             scriptName = script.SelectSingleNode("@scriptName").Value;
                             host = script.SelectSingleNode("@host").Value;
                             port = script.SelectSingleNode("@port").Value;
-                            timeout = int.Parse(script.SelectSingleNode("@timeout").Value);
+                            timeout = int.Parse(script.SelectSingleNode("@timeout").Value);//min 
 
                             Gallio.Common.Action executeTest = new Gallio.Common.Action(delegate
                                 {
@@ -68,8 +71,7 @@ namespace Golem.Tests.MotorolaStability
                                 });
 
                             string name = scriptName + " : Iteration #" + (i + 1).ToString();
-                            outcome =
-                                TestStep.RunStep(name, executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
+                            outcome = TestStep.RunStep(name, executeTest, new TimeSpan(0, 0, timeout, 0), true, null).Outcome;
                             if (outcome != TestOutcome.Passed)
                             {
                                 testFailed = true;

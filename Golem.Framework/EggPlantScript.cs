@@ -19,6 +19,7 @@ namespace Golem.Framework
         public string scriptName;
         public string host = "";
         public string port = "";
+        public int timeout = 600000;
         public string description = "";
 
 
@@ -35,6 +36,7 @@ namespace Golem.Framework
         private void Init()
         {
             driver = (IEggPlantDriver)XmlRpcProxyGen.Create(typeof(IEggPlantDriver));
+            driver.Timeout = timeout;
             StartSession();
             Connect(host);
             this.description = GetScriptDescription();
@@ -79,8 +81,8 @@ namespace Golem.Framework
         public void ExecuteScript()
         {
             DiagnosticLog.WriteLine("Executing test : " + this.scriptName);
-            Common.Log(description);
-            driver.Execute(scriptName);
+            TestLog.WriteLine(description);
+            driver.Execute("RunWithNewResults("+scriptName+")");
 
 
         }
@@ -95,7 +97,7 @@ namespace Golem.Framework
         {
             string path = "";
             path += suitePath;
-            path += "\\Results" + scriptName + "\\";
+            path += "\\Results\\" + scriptName + "\\";
             string[] directories = Directory.GetDirectories(path);
             string biggest = "0";
             foreach (string dir in directories)
@@ -113,7 +115,7 @@ namespace Golem.Framework
         public string GetScriptDescription()
         {
             string path = "";
-            path += suitePath + "\\Scripts" + scriptName + ".script";
+            path += suitePath + "\\Scripts\\" + scriptName + ".script";
             System.IO.StreamReader file = new System.IO.StreamReader(path);
             string line = "";
             string result = "";
