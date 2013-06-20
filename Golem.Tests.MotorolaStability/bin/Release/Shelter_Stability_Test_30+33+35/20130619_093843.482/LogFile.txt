@@ -1,0 +1,4 @@
+2013-06-19 09:38:43.496 -0600	START		Running Shelter_Stability_Test_30+33+35.script
+2013-06-19 09:38:43.661 -0600	Exception		Remote Connection Unavailable	2	on_unlockdevice	ClassNavigate.script
+2013-06-19 09:38:43.716 -0600	EndTestCase		(Duration:"0.209", Errors:"1", Exceptions:"1", StartTime:"2013-06-19 09:38:43 -0600", Successes:"0", TestCase:"Shelter_Stability_Test_30+33+35.script", Warnings:"0")
+2013-06-19 09:38:43.829 -0600	FAILURE		No Remote Connection imagefound Error - Remote Connection Unavailable\nExecution Time 0:00:00 Shelter_Stability_Test_30+33+35.script

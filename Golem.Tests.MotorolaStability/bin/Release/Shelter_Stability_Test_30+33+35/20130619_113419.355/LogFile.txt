@@ -1,0 +1,447 @@
+2013-06-19 11:34:19.371 -0600	START		Running Shelter_Stability_Test_30+33+35.script
+2013-06-19 11:34:27.887 -0600	imagefound		Unable to Find Image Device/System/LockIcon	2	on_unlockdevice	ClassNavigate.script
+2013-06-19 11:34:28.953 -0600	click	Device/System/HomeButton	at (120, 824)	3	on_resetstate	ClassNavigate.script
+2013-06-19 11:34:30.194 -0600	click	Device/System/HomeButton	at (120, 824)	5	on_resetstate	ClassNavigate.script
+2013-06-19 11:34:31.486 -0600	imagefound	Device/System/AppsIcon	found at (240, 755)	2	on_confirmimageonscreen	ClassUtilities.script
+2013-06-19 11:34:33.459 -0600	click	Device/System/AppsIcon	at (240, 755)	2	on_openapp	ClassNavigate.script
+2013-06-19 11:34:45.659 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	3	on_openapp	ClassNavigate.script
+2013-06-19 11:34:45.726 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:34:47.051 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:34:57.315 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:34:57.379 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:34:58.589 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:35:16.075 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:35:16.139 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:35:17.341 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:35:29.156 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:35:29.224 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:35:30.439 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:35:43.941 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:35:44.008 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:35:45.210 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:35:54.977 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:35:55.039 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:35:56.240 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:05.267 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:36:05.332 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:06.535 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:16.363 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:36:16.431 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:17.632 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:29.710 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:36:29.778 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:30.977 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:42.744 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:36:42.810 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:44.013 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:55.441 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:36:55.507 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:36:56.707 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:37:07.092 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:37:07.158 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:37:08.360 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:37:20.004 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:37:20.071 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:37:21.270 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:37:33.580 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:37:33.648 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:37:34.847 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:37:45.930 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:37:45.997 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:37:47.200 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:37:59.090 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:37:59.154 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:38:00.359 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:38:11.109 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:38:11.175 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:38:12.377 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:38:26.051 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:38:26.117 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:38:27.318 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:38:38.731 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:38:38.797 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:38:40.000 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:38:51.484 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:38:51.552 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:38:52.748 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:04.744 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:39:04.809 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:06.009 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:17.699 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:39:17.767 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:19.099 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:30.221 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:39:30.289 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:31.487 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:41.780 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:39:41.845 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:43.047 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:53.930 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:39:54.000 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:39:55.201 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:40:07.268 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:40:07.334 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:40:08.534 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:40:20.652 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:40:20.718 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:40:21.928 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:40:34.924 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:40:34.989 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:40:36.191 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:40:48.898 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:40:48.964 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:40:50.165 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:02.130 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:41:02.196 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:03.391 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:15.479 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:41:15.544 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:16.748 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:28.510 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:41:28.574 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:29.772 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:39.908 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:41:39.974 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:41.175 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:53.420 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:41:53.486 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:41:54.688 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:05.500 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:42:05.566 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:06.766 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:19.106 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:42:19.172 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:20.370 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:31.348 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:42:31.413 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:32.613 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:43.251 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:42:43.317 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:44.515 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:55.098 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:42:55.165 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:42:56.366 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:06.735 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:43:06.800 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:08.001 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:20.539 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:43:20.604 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:21.804 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:32.477 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:43:32.544 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:33.743 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:43.802 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:43:43.869 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:45.070 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:55.754 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:43:55.819 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:43:57.017 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:05.382 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:44:05.448 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:06.648 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:16.788 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:44:16.857 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:18.053 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:28.551 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:44:28.617 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:29.823 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:39.953 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:44:40.019 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:41.217 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:50.439 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:44:50.505 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:44:51.704 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:02.914 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:45:02.979 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:04.174 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:13.779 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:45:13.844 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:15.045 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:25.493 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:45:25.560 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:26.756 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:37.141 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:45:37.207 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:38.404 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:48.632 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:45:48.697 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:49.897 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:45:58.854 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:45:58.920 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:46:00.122 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:46:11.134 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:46:11.200 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:46:12.401 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:46:26.014 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:46:26.080 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:46:27.279 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:46:38.611 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:46:38.677 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:46:39.875 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:46:50.513 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:46:50.578 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:46:51.779 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:02.981 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:47:03.052 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:04.252 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:15.900 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:47:15.966 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:17.161 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:27.463 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:47:27.529 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:28.729 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:39.767 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:47:39.833 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:41.029 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:51.506 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:47:51.573 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:47:52.772 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:02.093 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:48:02.159 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:03.369 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:13.512 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:48:13.578 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:14.774 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:25.020 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:48:25.087 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:26.283 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:38.597 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:48:38.665 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:39.863 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:50.844 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:48:50.909 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:48:52.107 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:03.780 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:49:03.845 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:05.045 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:16.360 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:49:16.426 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:17.623 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:29.176 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:49:29.245 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:30.444 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:40.221 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:49:40.286 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:41.484 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:53.457 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:49:53.523 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:49:54.726 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:05.959 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:50:06.025 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:07.225 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:18.745 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:50:18.812 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:20.010 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:30.872 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:50:30.938 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:32.140 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:43.158 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:50:43.222 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:44.422 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:55.746 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:50:55.815 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:50:57.015 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:07.381 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:51:07.446 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:08.638 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:19.769 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:51:19.835 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:21.035 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:31.263 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:51:31.333 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:32.532 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:43.150 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:51:43.216 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:44.416 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:55.415 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:51:55.481 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:51:56.680 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:07.624 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:52:07.689 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:08.885 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:19.042 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:52:19.109 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:20.309 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:30.233 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:52:30.298 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:31.499 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:40.790 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:52:40.854 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:42.056 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:51.609 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:52:51.677 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:52:52.877 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:03.864 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:53:03.931 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:05.128 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:14.688 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:53:14.754 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:15.952 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:27.069 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:53:27.135 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:28.333 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:37.720 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:53:37.785 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:38.996 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:49.399 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:53:49.469 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:53:50.668 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:01.753 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:54:01.819 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:03.020 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:12.569 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:54:12.635 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:13.830 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:23.532 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:54:23.598 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:24.797 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:35.052 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:54:35.118 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:36.315 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:45.842 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:54:45.906 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:47.103 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:57.333 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:54:57.399 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:54:58.596 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:08.761 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:55:08.826 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:10.025 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:19.754 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:55:19.820 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:21.020 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:30.902 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:55:30.968 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:32.167 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:42.008 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:55:42.074 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:43.271 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:52.191 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:55:52.258 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:55:53.453 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:03.627 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:56:03.693 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:04.893 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:15.320 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:56:15.385 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:16.591 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:27.460 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:56:27.527 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:28.724 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:39.379 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:56:39.444 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:40.640 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:50.825 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:56:50.891 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:56:52.086 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:00.640 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:57:00.707 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:01.901 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:12.368 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:57:12.434 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:13.638 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:23.293 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:57:23.358 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:24.556 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:34.384 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:57:34.450 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:35.642 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:44.703 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:57:44.768 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:45.963 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:56.311 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:57:56.378 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:57:57.575 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:06.271 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:58:06.337 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:07.535 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:16.715 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:58:16.782 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:17.980 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:28.278 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:58:28.342 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:29.541 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:39.607 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:58:39.674 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:40.868 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:51.179 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:58:51.244 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:58:52.445 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:02.606 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:59:02.673 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:03.870 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:13.512 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:59:13.576 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:14.775 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:25.353 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:59:25.416 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:26.619 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:35.938 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:59:36.004 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:37.196 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:47.226 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:59:47.294 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:48.492 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:56.808 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 11:59:56.873 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 11:59:58.076 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:09.054 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:00:09.121 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:10.321 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:20.722 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:00:20.788 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:21.990 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:33.001 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:00:33.065 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:34.262 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:44.524 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:00:44.589 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:45.786 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:55.267 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:00:55.334 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:00:56.529 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:07.448 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:01:07.516 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:08.717 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:18.804 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:01:18.872 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:20.075 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:30.501 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:01:30.566 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:31.766 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:41.517 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:01:41.584 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:42.785 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:52.320 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:01:52.385 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:01:53.586 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:03.833 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:02:03.899 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:05.096 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:15.762 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:02:15.829 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:17.031 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:26.562 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:02:26.627 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:27.827 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:37.578 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:02:37.643 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:38.847 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:49.730 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:02:49.796 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:02:50.997 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:02.438 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:03:02.504 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:03.706 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:14.545 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:03:14.610 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:15.811 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:26.384 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:03:26.450 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:27.731 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:39.530 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:03:39.596 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:40.843 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:49.950 -0600	imagefound		Unable to Find Image (TEXT:"Downloads") within 3.00 seconds	5	on_openapp	ClassNavigate.script
+2013-06-19 12:03:50.017 -0600	drag		at (460, 125)	2	on_swipeleft	ClassNavigate.script
+2013-06-19 12:03:51.217 -0600	drop		at (260, 125)	3	on_swipeleft	ClassNavigate.script
