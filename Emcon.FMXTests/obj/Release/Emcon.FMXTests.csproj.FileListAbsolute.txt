@@ -27,3 +27,33 @@ C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Emc
 C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Emcon.FMXTests\obj\Release\Emcon.FMXTests.csprojResolveAssemblyReference.cache
 C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Emcon.FMXTests\obj\Release\Emcon.FMXTests.dll
 C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Emcon.FMXTests\obj\Release\Emcon.FMXTests.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\chromedriver.exe
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\IEDriverServer.exe
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Emcon.FMXTests.dll.config
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Emcon.FMXTests.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Emcon.FMXTests.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Gallio.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Golem.Framework.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Golem.PageObjects.Emcon.FMX.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\MbUnit.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\FiddlerCore.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Ionic.Zip.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\WebDriver.Support.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\NHamcrest.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Golem.Framework.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Golem.PageObjects.Emcon.FMX.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Gallio.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Gallio.xml
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\MbUnit.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\MbUnit.xml
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\WebDriver.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\WebDriver.xml
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\FiddlerCore.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\FiddlerCore.xml
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\WebDriver.Support.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\WebDriver.Support.xml
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\NHamcrest.pdb
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\bin\Release\Gallio.XmlSerializers.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\obj\Release\Emcon.FMXTests.csprojResolveAssemblyReference.cache
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\obj\Release\Emcon.FMXTests.dll
+C:\Users\SethUrban\Documents\GitHub\Golem\Emcon.FMXTests\obj\Release\Emcon.FMXTests.pdb
