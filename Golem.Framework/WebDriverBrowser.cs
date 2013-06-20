@@ -9,7 +9,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
-using OpenQA.Selenium.Support.Events;
+using OpenQA.Selenium.Support;
 
 
 namespace Golem.Framework
@@ -17,7 +17,7 @@ namespace Golem.Framework
     public class WebDriverBrowser
     {
        // private OpenQA.Selenium.Browser browser = OpenQA.Selenium.Browser.Android;
-      //  public enum Browser { Firefox, Chrome, IE, Safari, Android, IPhone }
+        public enum Browser { Firefox, Chrome, IE, Safari, Android, IPhone }
         public IWebDriver driver;
         public WebDriverBrowser() { }
         public static Browser getBrowserFromString(string name)

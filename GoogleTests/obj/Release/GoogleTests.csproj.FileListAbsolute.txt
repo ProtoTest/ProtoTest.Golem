@@ -51,3 +51,32 @@ C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\bin\Release\Gallio.XmlSerializ
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\obj\Release\GoogleTests.csprojResolveAssemblyReference.cache
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\obj\Release\GoogleTests.dll
 C:\Users\Brian\Documents\GitHub\Golem\GoogleTests\obj\Release\GoogleTests.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\chromedriver.exe
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\IEDriverServer.exe
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\GoogleTests.dll.config
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\GoogleTests.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\GoogleTests.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\Gallio.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\Golem.Framework.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\Golem.PageObjects.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\MbUnit.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\WebDriver.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\FiddlerCore.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\Ionic.Zip.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\WebDriver.Support.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\NHamcrest.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\Golem.Framework.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\Golem.PageObjects.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\Gallio.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\Gallio.xml
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\MbUnit.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\MbUnit.xml
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\WebDriver.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\WebDriver.xml
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\WebDriver.Support.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\WebDriver.Support.xml
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\NHamcrest.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\bin\Release\Gallio.XmlSerializers.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\obj\Release\GoogleTests.csprojResolveAssemblyReference.cache
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\obj\Release\GoogleTests.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\GoogleTests\obj\Release\GoogleTests.pdb

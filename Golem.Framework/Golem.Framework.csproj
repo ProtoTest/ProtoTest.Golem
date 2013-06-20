@@ -75,17 +75,13 @@
     <Reference Include="ThoughtWorks.Selenium.Core">
       <HintPath>..\..\..\..\WebDriver\net40\ThoughtWorks.Selenium.Core.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver">
-      <HintPath>..\..\..\..\WebDriver\net40\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=2.32.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\selenium-dotnet-2.33.0\net40\WebDriver.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Common.Tests">
-      <HintPath>..\..\..\..\WebDriver\net40\WebDriver.Common.Tests.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver.Remote.Tests">
-      <HintPath>..\..\..\..\WebDriver\net40\WebDriver.Remote.Tests.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver.Support">
-      <HintPath>..\..\..\..\WebDriver\net40\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver.Support, Version=2.32.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\selenium-dotnet-2.33.0\net40\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +110,9 @@
     <Content Include="IEDriverServer.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

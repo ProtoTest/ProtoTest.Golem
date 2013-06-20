@@ -91,13 +91,13 @@ namespace Golem.Framework
         #endregion
 
         [Factory("GetBrowser")]
-        public Browser browser;
+        public WebDriverBrowser.Browser browser;
 
-        public static IEnumerable<Browser> GetBrowser
+        public static IEnumerable<WebDriverBrowser.Browser> GetBrowser
         {
             get
             {
-                foreach (Browser browser in Config.Settings.runTimeSettings.Browsers)
+                foreach (WebDriverBrowser.Browser browser in Config.Settings.runTimeSettings.Browsers)
                 {
                     yield return browser;
                 }

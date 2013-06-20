@@ -40,7 +40,7 @@ namespace Golem.Framework
 
         public class RuntimeSettings
         {
-            public List<Browser> Browsers = new List<Browser>(); 
+            public List<WebDriverBrowser.Browser> Browsers = new List<WebDriverBrowser.Browser>(); 
             public bool LaunchBrowser;
             public int TestTimeoutMin;
             public int ElementTimeoutSec;
@@ -68,9 +68,9 @@ namespace Golem.Framework
 
             
 
-            private List<Browser> GetBrowserList()
+            private List<WebDriverBrowser.Browser> GetBrowserList()
             {
-                List<Browser> browsers = new List<Browser>();
+                List<WebDriverBrowser.Browser> browsers = new List<WebDriverBrowser.Browser>();
                 string browser = Config.GetConfigValue("Browser", "null");
                 if (browser != "null")
                     browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
@@ -81,7 +81,7 @@ namespace Golem.Framework
                         browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
                 }
                 if(browsers.Count==0)
-                    browsers.Add(Browser.Firefox);
+                    browsers.Add(WebDriverBrowser.Browser.Firefox);
                 return browsers;
             }
         }
@@ -110,7 +110,7 @@ namespace Golem.Framework
             public bool startProxy;
             public HttpProxy()
             {
-                startProxy = Common.IsTruthy(Config.GetConfigValue("StartFiddlerProxy", "True"));
+                startProxy = Common.IsTruthy(Config.GetConfigValue("StartFiddlerProxy", "False"));
 
             }
             

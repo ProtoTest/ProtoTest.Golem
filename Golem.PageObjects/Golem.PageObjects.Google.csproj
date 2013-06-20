@@ -41,8 +41,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver">
-      <HintPath>..\..\..\WebDriver\net40\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=2.32.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\selenium-dotnet-2.33.0\net40\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +59,9 @@
       <Project>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</Project>
       <Name>Golem.Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

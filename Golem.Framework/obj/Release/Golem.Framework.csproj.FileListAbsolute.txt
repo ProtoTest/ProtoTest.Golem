@@ -31,3 +31,24 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\NHamcrest.pdb
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\bin\Release\Gallio.XmlSerializers.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\obj\Release\Golem.Framework.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Framework\obj\Release\Golem.Framework.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\chromedriver.exe
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\IEDriverServer.exe
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\Golem.Framework.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\Golem.Framework.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\Gallio.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\MbUnit.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\WebDriver.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\WebDriver.Support.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\NHamcrest.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\Gallio.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\Gallio.xml
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\MbUnit.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\MbUnit.xml
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\WebDriver.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\WebDriver.xml
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\WebDriver.Support.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\WebDriver.Support.xml
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\NHamcrest.pdb
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\bin\Release\Gallio.XmlSerializers.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\obj\Release\Golem.Framework.dll
+C:\Users\SethUrban\Documents\Automation Frameworks\Golem-master\Golem-master\Golem.Framework\obj\Release\Golem.Framework.pdb
