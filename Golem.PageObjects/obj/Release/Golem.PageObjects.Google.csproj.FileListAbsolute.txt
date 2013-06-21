@@ -29,7 +29,6 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\IEDriverServ
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.PageObjects.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.PageObjects.pdb
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Golem.Framework.dll
-C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\CookComputing.XmlRpcV2.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\FiddlerCore.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Gallio.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.PageObjects\bin\Release\Ionic.Zip.dll

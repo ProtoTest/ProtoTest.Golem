@@ -14,7 +14,7 @@ namespace Golem.Framework
     public class Common
     {
 
-        public static void ExecuteDosCommand(string command)
+        public static Process ExecuteDosCommand(string command, bool waitToFinish=true)
         {
             DiagnosticLog.WriteLine("Executing DOS Command: " + command);
             string tempGETCMD = null;
@@ -32,13 +32,17 @@ namespace Golem.Framework
             System.IO.StreamReader SR = CMDprocess.StandardOutput;
             System.IO.StreamWriter SW = CMDprocess.StandardInput;
             CMDprocess.Start();
-            //SW.WriteLine(GetCommandScript());
-            string output = SR.ReadToEnd(); //returns results of the command window
-            DiagnosticLog.WriteLine(output);
-            // SW.WriteLine("exit"); //exits command prompt window
+            string line = "";
+            
+            while((line!=null)&&(waitToFinish))
+            {
+                line = SR.ReadLine();
+                DiagnosticLog.WriteLine(line);    
+            }
+            
             SW.Close();
             SR.Close();
-            DiagnosticLog.WriteLine("Finished executing DOS Command");
+            return CMDprocess;
         }
 
         public static void Log(string msg)
@@ -155,5 +159,70 @@ namespace Golem.Framework
                 return TestOutcome.Failed;
             return TestContext.CurrentContext.Outcome;
         }
+
+
+        public static void ExecuteCommandSync(object command)
+        {
+            try
+            {
+                // create the ProcessStartInfo using "cmd" as the program to be run,
+                // and "/c " as the parameters.
+                // Incidentally, /c tells cmd that we want it to execute the command that follows,
+                // and then exit.
+                System.Diagnostics.ProcessStartInfo procStartInfo =
+                    new System.Diagnostics.ProcessStartInfo("cmd", "/c " + command);
+
+                // The following commands are needed to redirect the standard output.
+                // This means that it will be redirected to the Process.StandardOutput StreamReader.
+                procStartInfo.RedirectStandardOutput = true;
+                procStartInfo.UseShellExecute = false;
+                // Do not create the black window.
+                procStartInfo.CreateNoWindow = true;
+                // Now we create a process, assign its ProcessStartInfo and start it
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+                // Get the output into a string
+                string result = proc.StandardOutput.ReadToEnd();
+                // Display the command output.
+                Console.WriteLine(result);
+            }
+            catch (Exception objException)
+            {
+                // Log the exception
+            }
+        }
+
+        public static void ExecuteCommandAsync(string command)
+        {
+            try
+            {
+                
+                //Asynchronously start the Thread to process the Execute command request.
+                var objThread = new Thread(new ParameterizedThreadStart(ExecuteCommandSync))
+                    {
+                        IsBackground = true,
+                        Priority = ThreadPriority.AboveNormal
+                    };
+                
+                //Make the thread as background thread.
+                //Set the Priority of the thread.
+                //Start the thread.
+                objThread.Start(command);
+            }
+            catch (ThreadStartException objException)
+            {
+                // Log the exception
+            }
+            catch (ThreadAbortException objException)
+            {
+                // Log the exception
+            }
+            catch (Exception objException)
+            {
+                // Log the exception
+            }
+        }
+
     }
 }

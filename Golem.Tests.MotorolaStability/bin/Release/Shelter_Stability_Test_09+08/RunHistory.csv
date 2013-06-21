@@ -1,3 +1,0 @@
-Date Run,Status,Time,# of Errors,# of Warnings,# of Exceptions,Log File,Return Value,Error Message,# of Successes
-2013-06-12 15:28:58.118 -0600,"Failure",0:02:35,2,0,0,"20130612_152858.118/LogFile.txt","","Script Error -- Number of Errors logged: 2",0
-2013-06-17 12:51:11.793 -0600,"Failure",0:00:00,1,0,1,"20130617_125111.793/LogFile.txt","","No Remote Connection -- imagefound Error - Remote Connection Unavailable",0
