@@ -42,15 +42,18 @@
     </Reference>
     <Reference Include="WebDriver.Support">
       <HintPath>..\..\..\Automation Frameworks\selenium-dotnet-2.33.0\net40\WebDriver.Support.dll</HintPath>
+      <HintPath>..\Golem.Framework\bin\Release\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FmxJobsPage.cs" />
     <Compile Include="FmxMenuBar.cs" />
     <Compile Include="FmXwelcomePage.cs" />
     <Compile Include="FMX_DashboardPage.cs" />
     <Compile Include="FMX_HomePage.cs" />
     <Compile Include="FMX_JobsTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VendorSearchPopup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
