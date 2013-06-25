@@ -10,10 +10,11 @@ namespace Emcon.FMXTests
 {
     class Dashboard_InvoiceComparisonbyAverageChart : TestBaseClass
     {
+        private string envUrl = Config.GetConfigValue("EnvironmentUrl","http://demo.fmx.bz/");
         [Test]
-        public static void DashboardTestTwo()
+        public void DashboardTestTwo()
         {
-            FmXwelcomePage.OpenFMX(false)
+            FmXwelcomePage.OpenFMX(envUrl)
                           .Login("PROTOTEST", "!TEST1234")
                           .ClickDashboard()
                           .SelectTeam("All Teams")

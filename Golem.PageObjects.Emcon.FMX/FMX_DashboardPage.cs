@@ -26,72 +26,53 @@ namespace Golem.PageObjects.Emcon.FMX
         Element HighChart_MonthJobCountTotal_Item1 = new Element("HighChart_MonthJobCountTotal_Item1", By.XPath("//*[@id='jobCountChart']/*[@class='highcharts-container']/*[name()='svg']/*[name()='g'][position()=12]/*[name()='g']/*[name()='rect']"));
         Element CustomerNameField = new Element("CustomerNameField", By.Id("ctl00_ContentPlaceHolder1_ucJobCountChart_txtJobCountClientLookup"));
         Element JobCountsPageSelector = new Element("JobCountsPageSelector", By.Id("ctl00_ContentPlaceHolder1_ucJobCountChart_gucJobs_ddlPageSize"));
-
-
-        //public bool notWaiting()
-        //{
-        //    while (pleaseWait.GetAttribute("aria-hidden") == "false")
-        //    {
-        //        Thread.Sleep(100);
-        //    }
-        //    return true;
-        //}
+        Element txt_Loading = new Element("ChartLoadingText",ByE.Text("Loading..."));
 
         public FMX_DashboardPage SelectTeam(string dropdownItem)
         {
-            PieChartItem9.Wait();
-            dd_TeamSelector.Wait();
-            if (notWaiting())
-            {
-                dd_TeamSelector.FindElement(ByE.Text(dropdownItem)).Click();
-            }
+            PieChartItem9.WaitUntilPresent();
+            dd_TeamSelector.WaitUntilPresent();
+            pleaseWait.WaitUntilNotPresent();
+            dd_TeamSelector.FindElement(ByE.Text(dropdownItem)).Click();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage SelectJobCounts(string dropdownItem)
         {
-            PieChartItem9.Wait();
-            dd_JobCountFilter.Wait();
-            if (notWaiting())
-            {
-                dd_JobCountFilter.FindElement(ByE.Text(dropdownItem)).Click();
-            }
+            PieChartItem9.WaitUntilPresent();
+            dd_JobCountFilter.WaitUntilPresent();
+            pleaseWait.WaitUntilNotPresent();
+            dd_JobCountFilter.FindElement(ByE.Text(dropdownItem)).Click();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage RefreshChart()
         {
-            PieChartItem9.Wait();
-            btn_RefreshChart.Wait();
-            if (notWaiting())
-            {
-                btn_RefreshChart.Click();
-            }
+            PieChartItem9.WaitUntilPresent();
+            btn_RefreshChart.WaitUntilPresent();
+            pleaseWait.WaitUntilNotPresent();
+            btn_RefreshChart.Click();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage SelectPieChartItem()
         {
             //always selecting the last item --this item is always filled in
-            PieChartItem9.Wait();
+            PieChartItem9.WaitUntilPresent();
             PieChartItem9.VerifyVisible(20);
-            if (notWaiting())
-            {
-                PieChartItem9.Click();
-            }
+            pleaseWait.WaitUntilNotPresent();
+            PieChartItem9.Click();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage SelectHighChartItem()
         {
 
-            PieChartItem9.Wait();
+            PieChartItem9.WaitUntilPresent();
             HighChart_JobCountChart.VerifyVisible(10);
             HighChart_Month9.VerifyVisible(30);
-            if(notWaiting())
-            {
-                HighChart_Month9.Click();
-            }
+            pleaseWait.WaitUntilNotPresent();
+            HighChart_Month9.Click();
             return new FMX_DashboardPage();
         }
 
@@ -104,43 +85,39 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_DashboardPage SpecificCustomerName(string customerName)
         {
-            PieChartItem9.Wait();
-            CustomerNameField.Wait();
-            if (notWaiting())
-            {
-                CustomerNameField.Text = customerName;
-                CustomerNameField.SendKeys(Keys.Return);
-            }
+            PieChartItem9.WaitUntilPresent();
+            CustomerNameField.WaitUntilPresent();
+            pleaseWait.WaitUntilNotPresent();
+            CustomerNameField.Text = customerName;
+            CustomerNameField.SendKeys(Keys.Return);
             return new FMX_DashboardPage();
         }
        
         public FMX_DashboardPage SelectSecondaryChart()
         {
-            PieChartItem9.Wait();
+            PieChartItem9.WaitUntilPresent();
             HighChart_MonthJobCountTotal.VerifyVisible(5);
-            if (notWaiting())
-            {
-                HighChart_MonthJobCountTotal_Item1.Click();
-            }
+            pleaseWait.WaitUntilNotPresent();
+            HighChart_MonthJobCountTotal_Item1.Click();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage VerifyJobCountListDisplayed()
         {
-            PieChartItem9.Wait();
-            if (notWaiting())
-            {
-                JobCountsPageSelector.VerifyVisible(10);
-            }
+            PieChartItem9.WaitUntilPresent();
+            pleaseWait.WaitUntilNotPresent();
+            JobCountsPageSelector.VerifyVisible(10);
             return new FMX_DashboardPage();
         }
 
-        public new void WaitForElements()
+        public override void WaitForElements()
         {
             base.WaitForElements();
+            txt_Loading.WaitUntilNotVisible();
+            pleaseWait.WaitUntilNotPresent();
             Dashboard_Tab1.VerifyVisible(10);
             Piechart_PieChart.VerifyVisible(10);
-            PieChartItem9.VerifyVisible(5);
+            PieChartItem9.VerifyVisible(30);
         }
         
     }

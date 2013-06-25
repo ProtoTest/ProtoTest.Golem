@@ -12,7 +12,7 @@ namespace Golem.PageObjects.Emcon.FMX
         Element MessageBoard = new Element("MessageBoard", By.ClassName("MainInfoCollapsibleHeaderText"));
         
 
-        public new void WaitForElements()
+        public override void WaitForElements()
         {
             base.WaitForElements();
             MessageBoard.VerifyVisible(10);

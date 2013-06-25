@@ -12,10 +12,11 @@ namespace Emcon.FMXTests
 {
     public class WelcomePageTest : TestBaseClass
     {
+        private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
         [Test]
-        public static void LoginTest()
+        public void LoginTest()
         {
-            FmXwelcomePage.OpenFMX(true).Login("PROTOTEST", "!TEST1234").VerifyResult("EmconMessageBoard");
+            FmXwelcomePage.OpenFMX(envUrl).Login("PROTOTEST", "!TEST1234").VerifyResult("EmconMessageBoard");
         }
     }
 }

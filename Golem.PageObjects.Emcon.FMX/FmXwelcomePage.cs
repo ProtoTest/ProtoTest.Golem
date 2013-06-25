@@ -21,9 +21,15 @@ namespace Golem.PageObjects.Emcon.FMX
         //Home tab
         Element tab_Home = new Element("HomeTab", By.Id("ctl00_lnkLogin"));
 
-        public static FmXwelcomePage OpenFMX(bool PROD)
+        //public static FmXwelcomePage OpenFMX(bool PROD)
+        //{
+        //    TestBaseClass.driver.Navigate().GoToUrl(PROD ? "http://www.fmx.bz" : "http://74.63.146.23/");
+        //    return new FmXwelcomePage();
+        //}
+
+        public static FmXwelcomePage OpenFMX(string url)
         {
-            TestBaseClass.driver.Navigate().GoToUrl(PROD ? "http://www.fmx.bz" : "http://74.63.146.23/");
+            TestBaseClass.driver.Navigate().GoToUrl(url);
             return new FmXwelcomePage();
         }
 
@@ -44,12 +50,12 @@ namespace Golem.PageObjects.Emcon.FMX
         
         public override void WaitForElements()
         {
-            div_LoginMenu.VerifyPresent(10);
-            txt_UserName.VerifyPresent(10);
+            div_LoginMenu.VerifyVisible(10);
+            txt_UserName.VerifyVisible(10);
             txt_Password.VerifyPresent(10);
-            btn_Login.VerifyPresent(10);
-            btn_ForgotPassword.VerifyPresent(10);
-            tab_Home.VerifyPresent(10);
+            btn_Login.VerifyVisible(10);
+            btn_ForgotPassword.VerifyVisible(10);
+            tab_Home.VerifyVisible(10);
             
         }
 

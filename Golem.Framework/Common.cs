@@ -70,13 +70,12 @@ namespace Golem.Framework
         {
             StackTrace stackTrace = new StackTrace();           // get call stack
             StackFrame[] stackFrames = stackTrace.GetFrames();  // get method calls (frames)
-            string trace = "";
-            // write call stack method names
+           // string trace = "";
             foreach (StackFrame stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof(BasePageObject)) && (!stackFrame.GetMethod().IsConstructor))
+               // trace += stackFrame.GetMethod().ReflectedType.FullName;
+                if ((stackFrame.GetMethod().ReflectedType.FullName.Contains("PageObject")) && (!stackFrame.GetMethod().IsConstructor))
                 {
-                    
                      string name = stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
                     return name;
                 }

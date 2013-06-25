@@ -12,10 +12,11 @@ namespace Emcon.FMXTests
 {
     class Dashboard_JobsbyStatus : TestBaseClass
     {
+        private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
         [Test]
-        public static void DashboardTest()
+        public void DashboardTest()
         {
-            FmXwelcomePage.OpenFMX(false)
+            FmXwelcomePage.OpenFMX(envUrl)
                           .Login("PROTOTEST", "!TEST1234")
                           .ClickDashboard()
                           .SelectTeam("Blue Team")

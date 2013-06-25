@@ -16,13 +16,27 @@ namespace Golem.Framework
     {
         public static IWebElement WaitForElement(this IWebDriver driver, By by)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
-            return wait.Until<IWebElement>((d) =>
-            {
-                return d.FindElement(by);
-            });
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
+            return wait.Until<IWebElement>((d) => d.FindElement(@by));
         }
 
+        public static void WaitForNotPresent(this IWebDriver driver, By by)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
+            wait.Until(d => d.FindElements(by).Count == 0);
+        }
+
+        public static IWebElement WaitForVisible(this IWebDriver driver, By by)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
+            wait.Until(d => ((d.FindElements(by).Count>0)&&(d.FindElement(by).Displayed == true)));
+            return driver.FindElement(by);
+        }
+        public static void WaitForNotVisible(this IWebDriver driver, By by)
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
+            wait.Until(d=>((d.FindElements(by).Count==0)||(d.FindElement(by).Displayed==false)));
+        }
         public static IWebElement FindElementWithText(this IWebDriver driver, string text)
         {
             return driver.FindElement(By.XPath("//*[text()='" + text + "']"));

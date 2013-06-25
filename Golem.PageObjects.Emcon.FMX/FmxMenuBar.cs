@@ -24,21 +24,13 @@ namespace Golem.PageObjects.Emcon.FMX
         //this overlay is used throughout the site
         public Element pleaseWait = new Element("PleaseWaitOverlay", By.XPath("//*[@id='ctl00_UpdateProg1']"));
 
-        public bool notWaiting()
-        {
-            while (pleaseWait.GetAttribute("aria-hidden") == "false")
-            {
-                Thread.Sleep(100);
-            }
-            return true;
-        }
-
         public override void WaitForElements()
         {
-            tab_Home.VerifyVisible(10);
-            tab_Jobs.VerifyVisible(10);
-            tab_Dashboard.VerifyVisible(10);
-            btn_NewJobRequest.VerifyVisible(10);
+            pleaseWait.WaitUntilNotPresent();
+            tab_Home.VerifyPresent(10);
+            tab_Jobs.VerifyPresent(10);
+            tab_Dashboard.VerifyPresent(10);
+            btn_NewJobRequest.VerifyPresent(10);
         }
         
     }

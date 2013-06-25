@@ -10,10 +10,11 @@ namespace Emcon.FMXTests
 {
     class New_JobRequest : TestBaseClass
     {
+        private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
         [Test]
-        public static void JobRequestSearch()
+        public void JobRequestSearch()
         {
-            FmXwelcomePage.OpenFMX(true)
+            FmXwelcomePage.OpenFMX(envUrl)
                           .Login("PROTOTEST", "!TEST1234")
                           .NewJobRequest()
                           .CustomerSearch("EMCON TEST")
