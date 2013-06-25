@@ -110,7 +110,7 @@ namespace Golem.Framework
             public bool startProxy;
             public HttpProxy()
             {
-                startProxy = Common.IsTruthy(Config.GetConfigValue("StartFiddlerProxy", "False"));
+                startProxy = Common.IsTruthy(Config.GetConfigValue("StartFiddlerProxy", "True"));
 
             }
             

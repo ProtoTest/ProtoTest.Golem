@@ -14,7 +14,7 @@ namespace Golem.Framework
 {
     public static class WebDriverExtensions
     {
-        public static IWebElement WaitForElement(this IWebDriver driver, By by)
+        public static IWebElement WaitForPresent(this IWebDriver driver, By by)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
             return wait.Until<IWebElement>((d) => d.FindElement(@by));
@@ -43,7 +43,7 @@ namespace Golem.Framework
         }
         public static IWebElement WaitForElementWithText(this IWebDriver driver, string text)
         {
-            return driver.WaitForElement(By.XPath("//*[text()='" + text + "']"));
+            return driver.WaitForPresent(By.XPath("//*[text()='" + text + "']"));
         }
         public static void VerifyElementPresent(this IWebDriver driver, By by, bool isPresent=true)
         {

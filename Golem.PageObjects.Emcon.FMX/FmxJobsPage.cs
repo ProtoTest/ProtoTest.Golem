@@ -40,7 +40,7 @@ namespace Golem.PageObjects.Emcon.FMX
         Element txtRequestDesc = new Element("RequestDesc", By.Id("ct100_ContentPlaceHolder1_fvRequest_txtRequestDescription"));
 
         //This function clicks on the top vendor search button, which opens up a new vendor search window
-        public FmxJobsPage OpenTopVendorSearch()
+        public VendorSearchPopup OpenTopVendorSearch()
         {
             btn_VendorSearch.Click();
             return new VendorSearchPopup();

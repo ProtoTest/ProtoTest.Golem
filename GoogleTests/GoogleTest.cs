@@ -16,8 +16,8 @@ namespace Golem.Tests.Google
         [Test]
         public static void Test()
         {
-            GoogleHomePage.
-                OpenGoogle().
+            
+            OpenPage<GoogleHomePage>("http://www.google.com/").
                 SearchFor("Selenium").
                 VerifyResult("Selenium - Web Browser Automation").
                 GoToResult("Selenium - Web Browser Automation");

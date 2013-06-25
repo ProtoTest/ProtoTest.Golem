@@ -39,11 +39,11 @@ namespace Golem.Framework.PageObjects.Google
 
         public override void WaitForElements()
         {
-            driver.WaitForElement(searchField);
-            driver.WaitForElement(searchButton);
-            driver.WaitForElement(googleLogo);
-            driver.WaitForElement(feelingLuckyButton);
-            driver.WaitForElement(signInButton);
+            driver.WaitForPresent(searchField);
+            driver.WaitForPresent(searchButton);
+            driver.WaitForPresent(googleLogo);
+            driver.WaitForPresent(feelingLuckyButton);
+            driver.WaitForPresent(signInButton);
            
         }
     }

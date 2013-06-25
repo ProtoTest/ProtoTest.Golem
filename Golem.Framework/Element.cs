@@ -90,8 +90,9 @@ namespace Golem.Framework
             }
             set
             {
-                element.Clear();
-                element.SendKeys(value);
+                var _element = element;
+                _element.Clear();
+                _element.SendKeys(value);
             }
         }
 
@@ -131,40 +132,44 @@ namespace Golem.Framework
         {
             return element.GetCssValue(text);
         }
-        public IWebElement WaitUntilPresent()
+        public Element WaitUntilPresent()
         {
-            return driver.WaitForElement(this.by);
+            driver.WaitForPresent(this.by);
+            return this;
         }
-        public IWebElement WaitUntilVisible()
+        public Element WaitUntilVisible()
         {
-            return driver.WaitForVisible(this.by);
+            driver.WaitForVisible(this.by);
+            return this;
         }
-        public void WaitUntilNotPresent()
+        public Element WaitUntilNotPresent()
         {
-            driver.WaitForElement(this.by);
+            driver.WaitForPresent(this.by);
+            return this;
         }
-        public void WaitUntilNotVisible()
+        public Element WaitUntilNotVisible()
         {
             driver.WaitForNotVisible(this.by);
+            return this;
         }
-        public void VerifyPresent(int seconds=0)
+        public Element VerifyPresent(int seconds=0)
         {
             for (int i = 0; i <= seconds; i++)
             {
                 if (driver.FindElements(this.by).Count != 0)
                 {
                     TestContext.CurrentContext.IncrementAssertCount();
-                    return;
+                    return this;
                 }
                     
                 else
                     System.Threading.Thread.Sleep(1000);
             }
-            Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") not present after " + seconds + " seconds");   
-
+            Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") not present after " + seconds + " seconds");
+            return this;
         }
 
-        public void VerifyVisible(int seconds=0)
+        public Element VerifyVisible(int seconds=0)
         {
             for (int i = 0; i <= seconds; i++)
             {
@@ -173,32 +178,33 @@ namespace Golem.Framework
                     if (driver.FindElement(this.by).Displayed)
                     {
                         TestContext.CurrentContext.IncrementAssertCount();
-                        return;   
+                        return this;   
                     }
                 }
                 else
                     System.Threading.Thread.Sleep(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") not visible after " + seconds + " seconds");
+            return this;
         }
 
-        public void VerifyNotPresent(int seconds = 0)
+        public Element VerifyNotPresent(int seconds = 0)
         {
             for (int i = 0; i <= seconds; i++)
             {
                 if (driver.FindElements(this.by).Count == 0)
                 {
                     TestContext.CurrentContext.IncrementAssertCount();
-                    return;
+                    return this;
                 }
 
                 else
                     System.Threading.Thread.Sleep(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") still present after " + seconds + " seconds");
-
+            return this;
         }
-        public void VerifyNotVisible(int seconds = 0)
+        public Element VerifyNotVisible(int seconds = 0)
         {
             for (int i = 0; i <= seconds; i++)
             {
@@ -207,13 +213,14 @@ namespace Golem.Framework
                     if (!driver.FindElement(this.by).Displayed)
                     {
                         TestContext.CurrentContext.IncrementAssertCount();
-                        return;
+                        return this;
                     }
                 }
                 else
                     System.Threading.Thread.Sleep(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") still visible after " + seconds + " seconds");
+            return this;
         }
 
     }

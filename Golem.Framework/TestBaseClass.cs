@@ -104,6 +104,12 @@ namespace Golem.Framework
             }
         }
 
+        public static T OpenPage<T>(string url)
+        {
+            driver.Navigate().GoToUrl(url);
+            return (T)Activator.CreateInstance(typeof(T));
+        }
+
         public static void AddVerificationError(string errorText)
         {
             LogEvent("--> VerificationError Found: " + errorText);
