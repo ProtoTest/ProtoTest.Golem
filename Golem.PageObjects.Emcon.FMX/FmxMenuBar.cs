@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Golem.Framework;
 using OpenQA.Selenium;
+using System.Threading;
 
 namespace Golem.PageObjects.Emcon.FMX
 {
@@ -20,6 +21,17 @@ namespace Golem.PageObjects.Emcon.FMX
         public Element tab_Dashboard = new Element("DashboardTab", By.Id("ctl00_ucMainMenu_lnkCharts"));
         public Element btn_NewJobRequest = new Element("NewJobRequestBtn", By.Id("ctl00_lbtnNewRequest"));
         public Element btn_LogoutBtn = new Element("LogoutBtn", By.Id("ctl00_LoginStatus1"));
+        //this overlay is used throughout the site
+        public Element pleaseWait = new Element("PleaseWaitOverlay", By.XPath("//*[@id='ctl00_UpdateProg1']"));
+
+        public bool notWaiting()
+        {
+            while (pleaseWait.GetAttribute("aria-hidden") == "false")
+            {
+                Thread.Sleep(100);
+            }
+            return true;
+        }
 
         public override void WaitForElements()
         {

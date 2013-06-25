@@ -50,6 +50,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dashboard_InvoiceComparisonbyAverageChart.cs" />
+    <Compile Include="Dashboard_JobsbyStatus.cs" />
+    <Compile Include="JobRequestSearch.cs" />
+    <Compile Include="New_JobRequest.cs" />
     <Compile Include="WelcomePageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

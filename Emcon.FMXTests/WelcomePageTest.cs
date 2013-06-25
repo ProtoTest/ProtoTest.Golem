@@ -15,9 +15,7 @@ namespace Emcon.FMXTests
         [Test]
         public static void LoginTest()
         {
-           FmXwelcomePage.OpenFMX(true).Login("PROTOTEST", "!TEST1234").VerifyResult("EmconMessageBoard");
-            
+            FmXwelcomePage.OpenFMX(true).Login("PROTOTEST", "!TEST1234").VerifyResult("EmconMessageBoard");
         }
-
     }
 }

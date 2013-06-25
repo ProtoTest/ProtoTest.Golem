@@ -10,6 +10,7 @@ namespace Golem.PageObjects.Emcon.FMX
     public class FMX_HomePage : FmxMenuBar
     {
         Element MessageBoard = new Element("MessageBoard", By.ClassName("MainInfoCollapsibleHeaderText"));
+        
 
         public new void WaitForElements()
         {
@@ -19,9 +20,27 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_HomePage VerifyResult(string text)
         {
-            var HomePageVerified = new Element("HomePageVerified", By.PartialLinkText(text));
-            HomePageVerified.VerifyPresent();
+            var HomePageVerified = new Element("HomePageVerified", By.XPath("/html/body/form/div[4]/div[3]/div[2]/div[2]/div/div/div[2]/div"));
+            HomePageVerified.VerifyVisible(10);
             return new FMX_HomePage();
+        }
+        
+        //Jobs functions
+        public FMX_JobsTab ClickJobs()
+        {
+            tab_Jobs.Click();
+            return new FMX_JobsTab();
+        }
+        public FMX_JobsTab NewJobRequest()
+        {
+            btn_NewJobRequest.Click();
+            return new FMX_JobsTab();
+        }
+
+        public FMX_DashboardPage ClickDashboard()
+        {
+            tab_Dashboard.Click();
+            return new FMX_DashboardPage();
         }
 
         
