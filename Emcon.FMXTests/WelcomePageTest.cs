@@ -12,6 +12,7 @@ namespace Emcon.FMXTests
 {
     public class WelcomePageTest : TestBaseClass
     {
+        //adding a comment to test github client sync fix - surban 06/25/13
         private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
         [Test]
         public void LoginTest()
