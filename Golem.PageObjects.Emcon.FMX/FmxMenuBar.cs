@@ -22,11 +22,11 @@ namespace Golem.PageObjects.Emcon.FMX
         public Element btn_NewJobRequest = new Element("NewJobRequestBtn", By.Id("ctl00_lbtnNewRequest"));
         public Element btn_LogoutBtn = new Element("LogoutBtn", By.Id("ctl00_LoginStatus1"));
         //this overlay is used throughout the site
-        public Element pleaseWait = new Element("PleaseWaitOverlay", By.XPath("//*[@id='ctl00_UpdateProg1']"));
+        public Element pleaseWait = new Element("PleaseWaitOverlay", By.Id("ctl00_UpdateProg1"));
 
         public override void WaitForElements()
         {
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             tab_Home.VerifyPresent(10);
             tab_Jobs.VerifyPresent(10);
             tab_Dashboard.VerifyPresent(10);

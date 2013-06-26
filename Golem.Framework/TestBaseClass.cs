@@ -55,7 +55,9 @@ namespace Golem.Framework
         }
 
         #region Events
+#pragma warning disable 67
         public static event ActionEvent BeforeTestEvent;
+
         public static event ActionEvent AfterTestEvent;
         public static event ActionEvent PageObjectActionEvent;
         public static event ActionEvent BeforeCommandEvent;
@@ -63,7 +65,7 @@ namespace Golem.Framework
         public static event ActionEvent BeforeSuiteEvent;
         public static event ActionEvent AfterSuiteEvent;
         public static event ActionEvent GenericEvent;
-
+#pragma warning restore 67
         private void WriteActionToLog(string name, EventArgs e)
         {
             Common.Log("(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + name);
@@ -214,7 +216,7 @@ namespace Golem.Framework
             }
             catch (Exception e)
             {
-                throw;
+               
             }
         }
 

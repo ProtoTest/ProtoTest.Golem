@@ -15,8 +15,14 @@ namespace Golem.PageObjects.Emcon.FMX
         //Above Menu Bar Objects
         Element btn_JobSearch = new Element("JobSearchButton", By.Id("ctl00_ContentPlaceHolder2_btnSearch"));
 
-        //job Requests Sub-tab
+        //job sub-tabs
+        Element tab_Job_Closing = new Element("JobClosingTab", By.Id("ctl00_ContentPlaceHolder1_ucJobMenu_lnkClosing"));
+        Element tab_Job_Pricing = new Element("JobPricingTab", By.Id("ctl00_ContentPlaceHolder1_ucJobMenu_lnkPricing"));
+        Element tab_Pending_Jobs = new Element("PendingJobsTab", By.Id("ctl00_ContentPlaceHolder1_ucJobMenu_lnkPending"));
+        Element tab_RTV_Deficiencies = new Element("RTVDeficienciesTab", By.Id("ctl00_ContentPlaceHolder1_ucJobMenu_lnkRTV"));
         Element tab_Job_JobRequests = new Element("JobRequestsTab", By.Id("ctl00_ContentPlaceHolder1_ucJobMenu_lnkJobs"));
+
+        //job Requests Sub-tab
         Element table_JobRequests_CustomerName = new Element("JobRequestsTable", By.XPath("//table[@id='ctl00_ContentPlaceHolder1_fvRequest']/tbody/tr/td/table/tbody/tr[4]/td[2]"));
         Element btn_JobRequests_Request = new Element("RequestButton", By.Id("ctl00_ContentPlaceHolder1_lnkbRequestRequest"));
         Element btn_JobRequests_Location = new Element("LocationButton", By.Id("ctl00_ContentPlaceHolder1_lnkbRequestLocation"));
@@ -62,16 +68,16 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_JobsTab CustomerSearch(string customerName)
         {
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             btn_JobRequests_CustomerSearch.VerifyVisible();
             btn_JobRequests_CustomerSearch.Click();
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             pop_CustomerSearch.VerifyVisible(5);
             txt_CustomerName_CustomerSearch_pop.VerifyVisible(5);
             txt_CustomerName_CustomerSearch_pop.Text = customerName;
             btn_CustomerSearch.VerifyVisible();
             btn_CustomerSearch.Click();
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             table_CustomerSearchResults_grid.Click();
             return new FMX_JobsTab();
         }
@@ -79,12 +85,12 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_JobsTab EnterRequestInfo(string businessType, string businessTeam, string requestSource,
                                             string requesterName, string requesterTitle, string requestDescription)
         {
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             dd_BusinessType.FindElement(ByE.Text(businessType)).Click();
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             //there is a check here to see if team has available business types --this test assumes you know which team's go with which business types
             dd_Team.FindElement(ByE.Text(businessTeam)).Click();
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             dd_RequestSource.FindElement(ByE.Text(requestSource)).Click();
             txt_RequesterName.VerifyVisible(5);
             txt_RequesterName.Text = requesterName;
@@ -96,9 +102,9 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_JobsTab AddNewLocation()
         {
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             btn_AddNewLocation.WaitUntilVisible().Click(); //Default Data is selected for EMCON TEST customer
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             btn_SaveLocation.Click();
             return new FMX_JobsTab();
         }
@@ -118,14 +124,14 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_JobsTab CloseSearchPopUp()
         {
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             btn_PopupClose.Click();
             return new FMX_JobsTab();
         }
 
         public FMX_JobsTab VerifyRequestPresent(string customerName)
         {
-           pleaseWait.WaitUntilNotPresent();
+           pleaseWait.WaitUntilNotVisible();
            table_JobRequests_CustomerName.FindElements(By.LinkText(customerName));
            return new FMX_JobsTab();
         }
@@ -136,12 +142,22 @@ namespace Golem.PageObjects.Emcon.FMX
             return new FMX_JobsTab();
         }
 
+        public FMX_Jobs_JobClosing ClickJobClosingTab()
+        {
+            tab_Job_Closing.Click();
+            return new FMX_Jobs_JobClosing();
+        }
+
+        public FMX_Jobs_JobPricing ClickJobPricingTab()
+        {
+            tab_Job_Pricing.Click();
+            return new FMX_Jobs_JobPricing();
+        }
         
 
         public override void WaitForElements()
         {
             base.WaitForElements();
-            pleaseWait.WaitUntilNotPresent();
             tab_Job_JobRequests.VerifyVisible(5);
         }
 

@@ -88,11 +88,10 @@ namespace Golem.Framework
             {
                 return element.Text;
             }
-            set
-            {
-                var _element = element;
-                _element.Clear();
-                _element.SendKeys(value);
+            set { 
+                IWebElement textField = element;
+                textField.Clear();
+                textField.SendKeys(value);
             }
         }
 
@@ -122,6 +121,7 @@ namespace Golem.Framework
         }
         public void SendKeys(string text)
         {
+
             element.SendKeys(text);
         }
         public string GetAttribute(string attribute)
@@ -144,7 +144,7 @@ namespace Golem.Framework
         }
         public Element WaitUntilNotPresent()
         {
-            driver.WaitForPresent(this.by);
+            driver.WaitForNotPresent(this.by);
             return this;
         }
         public Element WaitUntilNotVisible()

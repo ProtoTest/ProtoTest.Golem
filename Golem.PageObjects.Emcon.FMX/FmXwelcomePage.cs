@@ -21,12 +21,6 @@ namespace Golem.PageObjects.Emcon.FMX
         //Home tab
         Element tab_Home = new Element("HomeTab", By.Id("ctl00_lnkLogin"));
 
-        //public static FmXwelcomePage OpenFMX(bool PROD)
-        //{
-        //    TestBaseClass.driver.Navigate().GoToUrl(PROD ? "http://www.fmx.bz" : "http://74.63.146.23/");
-        //    return new FmXwelcomePage();
-        //}
-
         public static FmXwelcomePage OpenFMX(string url)
         {
             TestBaseClass.driver.Navigate().GoToUrl(url);
@@ -41,6 +35,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_HomePage Login(string UserName, string Password)
         {
+            txt_UserName.Clear();
             txt_UserName.Text = UserName;
             txt_mockPass.Click();
             txt_Password.Text = Password;

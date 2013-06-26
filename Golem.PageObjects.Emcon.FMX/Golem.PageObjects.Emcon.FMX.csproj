@@ -46,12 +46,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FMX_Jobs_JobPricing.cs" />
     <Compile Include="FmxJobsPage.cs" />
     <Compile Include="FmxMenuBar.cs" />
     <Compile Include="FmXwelcomePage.cs" />
     <Compile Include="FMX_DashboardPage.cs" />
     <Compile Include="FMX_HomePage.cs" />
     <Compile Include="FMX_JobsTab.cs" />
+    <Compile Include="FMX_Jobs_JobClosing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VendorSearchPopup.cs" />
   </ItemGroup>
