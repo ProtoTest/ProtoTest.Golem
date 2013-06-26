@@ -8,23 +8,20 @@ using MbUnit.Framework;
 
 namespace Emcon.FMXTests
 {
-    public class Job_Pricing : TestBaseClass
+    class Job_RTV_Issues : TestBaseClass
     {
         private static string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
         [Test]
-        [TestsOn("9 - Job Pricing")]
-        public void Test_Job_Pricing()
+        public void Test_RTV_Issues()
         {
             FmXwelcomePage.OpenFMX(envUrl)
                           .Login("PROTOTEST", "!TEST1234")
                           .ClickJobs()
-                          .ClickJobPricingTab()
-                          .Select_AR_AP_NoPricing()
-                          .ClickSearchButton()
-                          .SelectJobByIndex(1)
-                          .ClickVendorLink();//error on demo
-
-
+                          .JobRequestsSubTab()
+                          .ClickJobWithCompletedStatus()
+                          .ClickRTVIssuesButton()
+                          .
+                          
         }
     }
 }

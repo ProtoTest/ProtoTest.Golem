@@ -55,6 +55,7 @@
     <Compile Include="JobRequestSearch.cs" />
     <Compile Include="Job_Closing.cs" />
     <Compile Include="Job_Pricing.cs" />
+    <Compile Include="Job_RTV_Issues.cs" />
     <Compile Include="New_JobRequest.cs" />
     <Compile Include="WelcomePageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

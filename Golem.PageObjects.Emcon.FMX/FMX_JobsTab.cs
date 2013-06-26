@@ -37,6 +37,9 @@ namespace Golem.PageObjects.Emcon.FMX
         Element txt_RequestDescription = new Element("txt_RequestDescription", By.Id("ctl00_ContentPlaceHolder1_fvRequest_txtRequestDescription"));
         Element btn_SaveJobRequest = new Element("btn_SaveJobRequest", By.Id("ctl00_ContentPlaceHolder1_fvRequest_lbtnInsertRequest1"));
 
+        Element btn_RTVIssues = new Element("btn_RTVIssues", By.Id("ctl00_ContentPlaceHolder2_lbtnRTV"));
+
+
         //New Location
         Element btn_AddNewLocation = new Element("AddNewLocationButton", By.Id("ctl00_ContentPlaceHolder1_fvLocation_lbtnNewLocation"));
         Element btn_SaveLocation = new Element("SaveLocationButton", By.Id("ctl00_ContentPlaceHolder1_fvLocation_lbtnInsertLocation2"));
@@ -153,6 +156,20 @@ namespace Golem.PageObjects.Emcon.FMX
             tab_Job_Pricing.Click();
             return new FMX_Jobs_JobPricing();
         }
+
+
+        public FMX_JobsTab ClickJobWithCompletedStatus()
+        {
+            driver.FindElementWithText("Completed").Click();
+            return new FMX_JobsTab();
+        }
+
+        public FMX_Jobs_RTVIssues ClickRTVIssuesButton()
+        {
+            btn_RTVIssues.Click();
+            return new FMX_Jobs_RTVIssues();
+        }
+
         
 
         public override void WaitForElements()

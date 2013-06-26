@@ -132,6 +132,15 @@ namespace Golem.Framework
         {
             return element.GetCssValue(text);
         }
+
+        public Element SetCheckbox(bool isChecked)
+        {
+            if((element.GetAttribute("checked")=="checked")!=(isChecked))
+            {
+                element.Click();
+            }
+            return this;
+        }
         public Element WaitUntilPresent()
         {
             driver.WaitForPresent(this.by);
