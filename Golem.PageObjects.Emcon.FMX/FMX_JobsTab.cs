@@ -35,7 +35,15 @@ namespace Golem.PageObjects.Emcon.FMX
         Element btn_AddNewLocation = new Element("AddNewLocationButton", By.Id("ctl00_ContentPlaceHolder1_fvLocation_lbtnNewLocation"));
         Element btn_SaveLocation = new Element("SaveLocationButton", By.Id("ctl00_ContentPlaceHolder1_fvLocation_lbtnInsertLocation2"));
 
-        //new
+        //Job-Requests - Job Subtab
+        Element btn_JobRequests_JobSubTab = new Element("JobRequest_NewJobSubTabButton", By.Id("ctl00_ContentPlaceHolder1_lnkbLocationJob"));
+        Element btn_JobRequests_NewJobButton = new Element("JobRequest_NewJob_Button", By.Id("ctl00_ContentPlaceHolder1_fvJob_lbtnNewJob"));
+        Element dd_JobRequests_NewJob_JobType = new Element("NewJobType_Dropdown", By.Id("ctl00_ContentPlaceHolder1_fvJob_ddlJobType"));
+        Element dd_JobRequests_NewJob_JobPriority = new Element("NewJobPriority_dropdown", By.Id("ctl00_ContentPlaceHolder1_fvJob_ddlJobPriority"));
+        Element txt_JobRequests_NewJob_JobPONumber = new Element("NewJob_PONUmber_textfield", By.Id("ctl00_ContentPlaceHolder1_fvJob_txtCustomerPONo"));
+        Element txt_JobRequests_NewJob_Comment = new Element("NewJob_Comment_textfield", By.Id("ctl00_ContentPlaceHolder1_fvJob_txtEmconComment"));
+        Element numtxt_JobRequests_NewJob_CustomerJobCap = new Element("NewJob_CustomerJobCap_numtxt", By.Id("ctl00_ContentPlaceHolder1_fvJob_txtJobCap"));
+        Element btn_JobRequests_NewJob_SaveRequest = new Element("SaveNewJobRequest_button", By.Id("ctl00_ContentPlaceHolder1_fvJob_lbtnInsertJob2"));
 
         //Dynamic Search PopUp
         Element pop_DynamicSearch = new Element("DynamicSearch_JobSearch_Popup", By.Id("ctl00_ContentPlaceHolder1_pnlPopUpSearch"));
@@ -100,6 +108,23 @@ namespace Golem.PageObjects.Emcon.FMX
             btn_AddNewLocation.WaitUntilVisible().Click(); //Default Data is selected for EMCON TEST customer
             pleaseWait.WaitUntilNotPresent();
             btn_SaveLocation.Click();
+            pleaseWait.WaitUntilNotPresent();
+            btn_JobRequests_JobSubTab.WaitUntilVisible().Click();
+            return new FMX_JobsTab();
+        }
+
+        public FMX_JobsTab AddNewJob(string jobType, string jobPriority, string POnumber, string JobComment, int jobCap = 9999)
+        {
+            btn_JobRequests_NewJobButton.WaitUntilVisible().Click();
+            pleaseWait.WaitUntilNotPresent();
+            dd_JobRequests_NewJob_JobType.FindElement(ByE.Text(jobType));
+            pleaseWait.WaitUntilNotPresent();
+            dd_JobRequests_NewJob_JobPriority.FindElement(ByE.Text(jobPriority));
+            txt_JobRequests_NewJob_JobPONumber.Text = POnumber;
+            txt_JobRequests_NewJob_Comment.Text = JobComment;
+            numtxt_JobRequests_NewJob_CustomerJobCap.Text = jobCap.ToString();
+            btn_JobRequests_NewJob_SaveRequest.Click();
+            pleaseWait.WaitUntilNotVisible();
             return new FMX_JobsTab();
         }
 

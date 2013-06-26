@@ -21,7 +21,9 @@ namespace Emcon.FMXTests
                           .EnterRequestInfo("Repair and Maintenance", "Blue Team", "Store", "ProtoTest Automation",
                                             "webDriver",
                                             "Here is a short Description")
-                          .AddNewLocation(); //ERROR IN PRODUCTION HERE
+                          .AddNewLocation()
+                          .AddNewJob("Quoted", "Standard", "PROTOTEST-0001",
+                                     "This is a job created by an automated script");
 
 
         }
