@@ -11,7 +11,6 @@ namespace Golem.PageObjects.Emcon.FMX
 {
     public class FMX_JobsTab : FmxMenuBar
     {
-        public static List<string> requestNumbers = new List<string>();  //using this to store requests created during automation for easy access
         //Above Menu Bar Objects
         Element btn_JobSearch = new Element("JobSearchButton", By.Id("ctl00_ContentPlaceHolder2_btnSearch"));
 
@@ -22,6 +21,7 @@ namespace Golem.PageObjects.Emcon.FMX
         Element tab_RTV_Deficiencies = new Element("RTVDeficienciesTab", By.Id("ctl00_ContentPlaceHolder1_ucJobMenu_lnkRTV"));
         Element tab_Job_JobRequests = new Element("JobRequestsTab", By.Id("ctl00_ContentPlaceHolder1_ucJobMenu_lnkJobs"));
 
+<<<<<<< HEAD
         //job Requests Sub-tab
         Element table_JobRequests_CustomerName = new Element("JobRequestsTable", By.XPath("//table[@id='ctl00_ContentPlaceHolder1_fvRequest']/tbody/tr/td/table/tbody/tr[4]/td[2]"));
         Element btn_JobRequests_Request = new Element("RequestButton", By.Id("ctl00_ContentPlaceHolder1_lnkbRequestRequest"));
@@ -63,86 +63,20 @@ namespace Golem.PageObjects.Emcon.FMX
         private static string CustomerName;
         
         public FMX_JobsTab SearchJobs()
+=======
+        public FMX_Jobs_JobRequests SearchJobs()
+>>>>>>> 735b3e89bc7db84ab131d32d6ac13bdb8b3dcd5d
         {
             btn_JobSearch.VerifyVisible(5);
             btn_JobSearch.Click();
-            return new FMX_JobsTab();
+            return new FMX_Jobs_JobRequests();
         }
-
-        public FMX_JobsTab CustomerSearch(string customerName)
-        {
-            pleaseWait.WaitUntilNotVisible();
-            btn_JobRequests_CustomerSearch.VerifyVisible();
-            btn_JobRequests_CustomerSearch.Click();
-            pleaseWait.WaitUntilNotVisible();
-            pop_CustomerSearch.VerifyVisible(5);
-            txt_CustomerName_CustomerSearch_pop.VerifyVisible(5);
-            txt_CustomerName_CustomerSearch_pop.Text = customerName;
-            btn_CustomerSearch.VerifyVisible();
-            btn_CustomerSearch.Click();
-            pleaseWait.WaitUntilNotVisible();
-            table_CustomerSearchResults_grid.Click();
-            return new FMX_JobsTab();
-        }
-
-        public FMX_JobsTab EnterRequestInfo(string businessType, string businessTeam, string requestSource,
-                                            string requesterName, string requesterTitle, string requestDescription)
-        {
-            pleaseWait.WaitUntilNotVisible();
-            dd_BusinessType.FindElement(ByE.Text(businessType)).Click();
-            pleaseWait.WaitUntilNotVisible();
-            //there is a check here to see if team has available business types --this test assumes you know which team's go with which business types
-            dd_Team.FindElement(ByE.Text(businessTeam)).Click();
-            pleaseWait.WaitUntilNotVisible();
-            dd_RequestSource.FindElement(ByE.Text(requestSource)).Click();
-            txt_RequesterName.VerifyVisible(5);
-            txt_RequesterName.Text = requesterName;
-            txt_RequesterTitle.Text = requesterTitle;
-            txt_RequestDescription.Text = requestDescription;
-            btn_SaveJobRequest.Click();
-            return new FMX_JobsTab();
-        }
-
-        public FMX_JobsTab AddNewLocation()
-        {
-            pleaseWait.WaitUntilNotVisible();
-            btn_AddNewLocation.WaitUntilVisible().Click(); //Default Data is selected for EMCON TEST customer
-            pleaseWait.WaitUntilNotVisible();
-            btn_SaveLocation.Click();
-            return new FMX_JobsTab();
-        }
-
-
-        public FMX_JobsTab SearchCustomer(string customerName)
-        {
-            pop_DynamicSearch.VerifyVisible(5);
-            txt_CustomerName_DynamicSearch_Pop.VerifyVisible(5);
-            txt_CustomerName_DynamicSearch_Pop.Text = customerName;
-            btn_SearchButton.Click();
-            table_SearchResultsTable.VerifyVisible(5);
-            CustomerName = table_SearchResultsTable.Text;
-            table_SearchResultsTable.Click();
-            return new FMX_JobsTab();
-        }
-
-        public FMX_JobsTab CloseSearchPopUp()
-        {
-            pleaseWait.WaitUntilNotVisible();
-            btn_PopupClose.Click();
-            return new FMX_JobsTab();
-        }
-
-        public FMX_JobsTab VerifyRequestPresent(string customerName)
-        {
-           pleaseWait.WaitUntilNotVisible();
-           table_JobRequests_CustomerName.FindElements(By.LinkText(customerName));
-           return new FMX_JobsTab();
-        }
+        
 
         public FMX_JobsTab JobRequestsSubTab()
         {
             tab_Job_JobRequests.Click();
-            return new FMX_JobsTab();
+            return new FMX_Jobs_JobRequests();
         }
 
         public FMX_Jobs_JobClosing ClickJobClosingTab()
@@ -171,7 +105,6 @@ namespace Golem.PageObjects.Emcon.FMX
         }
 
         
-
         public override void WaitForElements()
         {
             base.WaitForElements();

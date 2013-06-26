@@ -8,7 +8,7 @@ using MbUnit.Framework;
 using OpenQA.Selenium;
 namespace Emcon.FMXTests
 {
-    class New_JobRequest : TestBaseClass
+    class Job_NewJobRequest : TestBaseClass
     {
         private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
         [Test]
@@ -21,7 +21,9 @@ namespace Emcon.FMXTests
                           .EnterRequestInfo("Repair and Maintenance", "Blue Team", "Store", "ProtoTest Automation",
                                             "webDriver",
                                             "Here is a short Description")
-                          .AddNewLocation(); //ERROR IN PRODUCTION HERE
+                          .AddNewLocation()
+                          .AddNewJob("Quoted", "Standard", "PROTOTEST-0001",
+                                     "This is a job created by an automated script");
 
 
         }

@@ -31,10 +31,10 @@ namespace Golem.PageObjects.Emcon.FMX
             tab_Jobs.Click();
             return new FMX_JobsTab();
         }
-        public FMX_JobsTab NewJobRequest()
+        public FMX_Jobs_JobRequests NewJobRequest()
         {
             btn_NewJobRequest.Click();
-            return new FMX_JobsTab();
+            return new FMX_Jobs_JobRequests();
         }
 
         public FMX_DashboardPage ClickDashboard()
