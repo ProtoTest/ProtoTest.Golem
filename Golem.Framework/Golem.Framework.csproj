@@ -92,7 +92,6 @@
     <Compile Include="Element.cs" />
     <Compile Include="ActionList.cs" />
     <Compile Include="FiddlerProxy.cs" />
-    <Compile Include="GlobalEvents.cs" />
     <Compile Include="BasePageObject.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Config.cs" />

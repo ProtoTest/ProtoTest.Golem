@@ -14,35 +14,40 @@ namespace Golem.Framework
 {
     public static class WebDriverExtensions
     {
-        public static IWebElement WaitForPresent(this IWebDriver driver, By by)
+        public static IWebElement WaitForPresent(this IWebDriver driver, By by, int timeout=0)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
+            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
             return wait.Until<IWebElement>((d) => d.FindElement(@by));
         }
 
-        public static void WaitForNotPresent(this IWebDriver driver, By by)
+        public static void WaitForNotPresent(this IWebDriver driver, By by, int timeout=0)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
+            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
             wait.Until(d => d.FindElements(by).Count == 0);
         }
 
-        public static IWebElement WaitForVisible(this IWebDriver driver, By by)
+        public static IWebElement WaitForVisible(this IWebDriver driver, By by, int timeout=0)
         {
+            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
             wait.Until(d => ((d.FindElements(by).Count>0)&&(d.FindElement(by).Displayed == true)));
             return driver.FindElement(by);
         }
-        public static void WaitForNotVisible(this IWebDriver driver, By by)
+        public static void WaitForNotVisible(this IWebDriver driver, By by, int timeout=0)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
+            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
             wait.Until(d=>((d.FindElements(by).Count==0)||(d.FindElement(by).Displayed==false)));
         }
         public static IWebElement FindElementWithText(this IWebDriver driver, string text)
         {
             return driver.FindElement(By.XPath("//*[text()='" + text + "']"));
         }
-        public static IWebElement WaitForElementWithText(this IWebDriver driver, string text)
+        public static IWebElement WaitForElementWithText(this IWebDriver driver, string text, int timeout=0)
         {
+            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             return driver.WaitForPresent(By.XPath("//*[text()='" + text + "']"));
         }
         public static void VerifyElementPresent(this IWebDriver driver, By by, bool isPresent=true)
@@ -97,6 +102,17 @@ namespace Golem.Framework
             Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
             System.IO.MemoryStream ms = new System.IO.MemoryStream(ss.AsByteArray);
             return System.Drawing.Image.FromStream(ms);
+        }
+
+        public static void SetText(this IWebElement element, string text)
+        {
+            element.Clear();
+            element.SendKeys(text);
+            if (element.GetAttribute("value") != text)
+            {
+                element.Clear();
+                element.SendKeys(text);
+            }
         }
 
     }
