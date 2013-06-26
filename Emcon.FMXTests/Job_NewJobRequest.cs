@@ -8,7 +8,7 @@ using MbUnit.Framework;
 using OpenQA.Selenium;
 namespace Emcon.FMXTests
 {
-    class New_JobRequest : TestBaseClass
+    class Job_NewJobRequest : TestBaseClass
     {
         private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
         [Test]
