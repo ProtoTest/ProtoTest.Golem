@@ -55,12 +55,28 @@ namespace Golem.PageObjects.Emcon.FMX
         Element numtxt_JobRequests_NewJob_CustomerJobCap = new Element("NewJob_CustomerJobCap_numtxt", By.Id("ctl00_ContentPlaceHolder1_fvJob_txtJobCap"));
         Element btn_JobRequests_NewJob_SaveRequest = new Element("SaveNewJobRequest_button", By.Id("ctl00_ContentPlaceHolder1_fvJob_lbtnInsertJob2"));
 
+<<<<<<< HEAD
         //Job-Requests - Workscope Subtab --Multiple WorkScopes can be added
         Element dd_JobRequests_WorkScope_Trade = new Element("JQ_WorkScope_Trade_DropDown", By.Id("ctl00_ContentPlaceHolder1_gvwWorkScopeTrade_ctl03_ddlTradeNew"));
         Element dd_JobRequests_WorkScope_SubTrade = new Element("JQ_WorkScope_SubTrade_DropDown", By.Id("ctl00_ContentPlaceHolder1_gvwWorkScopeTrade_ctl03_ddlSubTradeNew"));
         Element txt_JobRequests_WorkScope_WSDescription = new Element("JQ_WorkScope_Description_textBox", By.Id("ctl00_ContentPlaceHolder1_gvwWorkScopeTrade_ctl03_txtWorkScopeOptNew"));
         Element btn_JobRequests_WorkScope_Save = new Element("JQ_WorkScope_SaveButton", By.Id("ctl00_ContentPlaceHolder1_gvwWorkScopeTrade_ctl03_ibtnAddBus"));
 
+=======
+        //Dynamic Search PopUp - From Search Job button
+        Element pop_DynamicSearch = new Element("DynamicSearch_JobSearch_Popup", By.Id("ctl00_ContentPlaceHolder1_pnlPopUpSearch"));
+        Element txt_CustomerName_DynamicSearch_Pop = new Element("CustomerNameSearchField", By.Id("ctl00_ContentPlaceHolder1_ucDynamicSearch_rpSearchForm_ctl01_txtTextBoxStr"));
+        Element btn_SearchButton = new Element("DyanicSearchButton", By.Id("ctl00_ContentPlaceHolder1_ucDynamicSearch_btnSearch1"));
+        Element table_SearchResultsTable = new Element("DynamicSearchResultsTable", By.XPath("//table[@id='ctl00_ContentPlaceHolder1_ucDynamicSearch_ucCustomerSearchResultsGrid_gvGrid']/tbody/tr[3]/td[2]"));
+        Element btn_PopupClose = new Element("PopupCloseButton", By.Id("ctl00_ContentPlaceHolder1_LinkButton1"));
+        Element drp_JobStatus = new Element("JobStatusDropdown", By.Id("ctl00_ContentPlaceHolder1_ucDynamicSearch_rpSearchForm_ctl04_pnlVocabListBox"));
+        Element chk_JobStatus = new Element("JobStatusCheckbox", By.Id("ctl00_ContentPlaceHolder1_ucDynamicSearch_rpSearchForm_ctl04_chkIncludeField"));
+        //Customer Search Popup from Job Request tab
+        Element pop_CustomerSearch = new Element("CustomerSearch_Popup", By.Id("ctl00_ContentPlaceHolder1_pnlPopUpCust"));
+        Element txt_CustomerName_CustomerSearch_pop = new Element("txt_CustomerSearchName_Pop", By.Id("ctl00_ContentPlaceHolder1_ucCustomerParentSearch_rpSearchForm_ctl01_txtTextBoxStr"));
+        Element btn_CustomerSearch = new Element("CustomerSearchButton", By.Id("ctl00_ContentPlaceHolder1_ucCustomerParentSearch_btnSearch1"));
+        Element table_CustomerSearchResults_grid = new Element("Table_CustomerSearchResultsgrid", By.XPath("//table[@id='ctl00_ContentPlaceHolder1_ucCustomerParentSearch_ucCustomerSearchResultsGrid_gvGrid']/tbody/tr[2]/td[2]"));
+>>>>>>> 23f8458ba2e4ab08e280d796c0697070d8cf01ce
         #endregion
 
         #region Finished Test Functions
@@ -140,7 +156,23 @@ namespace Golem.PageObjects.Emcon.FMX
             pleaseWait.WaitUntilNotVisible();
             return new FMX_Jobs_JobRequests();
         }
+<<<<<<< HEAD
         
+=======
+
+
+        public FMX_Jobs_JobRequests SearchCustomer(string customerName)
+        {
+            pop_DynamicSearch.VerifyVisible(5);
+            txt_CustomerName_DynamicSearch_Pop.VerifyVisible(5);
+            txt_CustomerName_DynamicSearch_Pop.Text = customerName;
+            btn_SearchButton.Click();
+            //CustomerName = table_SearchResultsTable.Text;  //May need someway of tracking customer name stuff
+            table_SearchResultsTable.WaitUntilPresent().Click();
+            return new FMX_Jobs_JobRequests();
+        }
+
+>>>>>>> 23f8458ba2e4ab08e280d796c0697070d8cf01ce
         public FMX_Jobs_JobRequests CloseSearchPopUp()
         {
             pleaseWait.WaitUntilNotVisible();
@@ -148,6 +180,13 @@ namespace Golem.PageObjects.Emcon.FMX
             return new FMX_Jobs_JobRequests();
         }
 
+        public FMX_Jobs_JobRequests SelectCompletedJob()
+        {
+            driver.WaitForPresent(ByE.PartialText("Job #")).Click();
+            return new FMX_Jobs_JobRequests();
+        }
+
+  
         public FMX_Jobs_JobRequests VerifyRequestPresent(string customerName)
         {
             pleaseWait.WaitUntilNotVisible();
@@ -170,7 +209,14 @@ namespace Golem.PageObjects.Emcon.FMX
         }
 
 
-
-
+        public FMX_Jobs_JobRequests SearchJobStatus(string statusText)
+        {
+            chk_JobStatus.Click();
+            drp_JobStatus.Click();
+            drp_JobStatus.FindElement(By.Id("ddcl-ctl00_ContentPlaceHolder1_ucDynamicSearch_rpSearchForm_ctl04_lbListBox-i4")).Click();
+            btn_SearchButton.Click();
+            table_SearchResultsTable.WaitUntilPresent().Click();
+            return new FMX_Jobs_JobRequests();
+        }
     }
 }

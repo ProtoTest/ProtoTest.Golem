@@ -55,6 +55,7 @@
     <Compile Include="FMX_JobsTab.cs" />
     <Compile Include="FMX_Jobs_JobClosing.cs" />
     <Compile Include="FMX_Jobs_JobRequests.cs" />
+    <Compile Include="FMX_Jobs_RTVIssues.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VendorSearchPopup.cs" />
   </ItemGroup>

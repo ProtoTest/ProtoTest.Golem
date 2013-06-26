@@ -22,7 +22,7 @@ namespace Emcon.FMXTests
                           .Select_AR_AP_NoPricing()
                           .ClickSearchButton()
                           .SelectJobByIndex(1)
-                          .ClickVendorLink();
+                          .ClickVendorLink();//error on demo
 
 
         }

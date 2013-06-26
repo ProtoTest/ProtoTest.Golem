@@ -70,6 +70,16 @@ namespace Golem.Framework
             }
         }
 
+        public static IWebElement FindVisibleElement(this IWebDriver driver, By by)
+        {
+            var elements = driver.FindElements(by);
+            foreach (IWebElement ele in elements.Where(ele => ele.Displayed))
+            {
+                return ele;
+            }
+            throw new ElementNotVisibleException("No element visible for : " + by.ToString());
+        }
+
         public static void VerifyElementVisible(this IWebDriver driver, By by, bool isVisible = true)
         {
             ReadOnlyCollection<IWebElement> elements = driver.FindElements(by);

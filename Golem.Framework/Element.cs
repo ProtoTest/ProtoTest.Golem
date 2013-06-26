@@ -101,6 +101,8 @@ namespace Golem.Framework
             return element.FindElement(by);
         }
 
+
+
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             return element.FindElements(by);
@@ -131,6 +133,15 @@ namespace Golem.Framework
         public string GetCssValue(string text)
         {
             return element.GetCssValue(text);
+        }
+
+        public Element SetCheckbox(bool isChecked)
+        {
+            if((element.GetAttribute("checked")=="checked")!=(isChecked))
+            {
+                element.Click();
+            }
+            return this;
         }
         public Element WaitUntilPresent()
         {
@@ -173,9 +184,10 @@ namespace Golem.Framework
         {
             for (int i = 0; i <= seconds; i++)
             {
-                if (driver.FindElements(this.by).Count != 0)
+                var eles = driver.FindElements(this.by);
+                if (eles.Count != 0)
                 {
-                    if (driver.FindElement(this.by).Displayed)
+                    if (eles[0].Displayed)
                     {
                         TestContext.CurrentContext.IncrementAssertCount();
                         return this;   
