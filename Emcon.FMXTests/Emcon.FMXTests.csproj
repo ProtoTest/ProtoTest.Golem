@@ -56,7 +56,6 @@
     <Compile Include="Job_Closing.cs" />
     <Compile Include="Job_Pricing.cs" />
     <Compile Include="Job_RTV_Issues.cs" />
-    <Compile Include="New_JobRequest.cs" />
     <Compile Include="Job_NewJobRequest.cs" />
     <Compile Include="WelcomePageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +73,9 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="sampledoc.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

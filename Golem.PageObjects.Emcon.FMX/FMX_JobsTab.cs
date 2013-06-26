@@ -21,7 +21,6 @@ namespace Golem.PageObjects.Emcon.FMX
         Element tab_RTV_Deficiencies = new Element("RTVDeficienciesTab", By.Id("ctl00_ContentPlaceHolder1_ucJobMenu_lnkRTV"));
         Element tab_Job_JobRequests = new Element("JobRequestsTab", By.Id("ctl00_ContentPlaceHolder1_ucJobMenu_lnkJobs"));
 
-<<<<<<< HEAD
         //job Requests Sub-tab
         Element table_JobRequests_CustomerName = new Element("JobRequestsTable", By.XPath("//table[@id='ctl00_ContentPlaceHolder1_fvRequest']/tbody/tr/td/table/tbody/tr[4]/td[2]"));
         Element btn_JobRequests_Request = new Element("RequestButton", By.Id("ctl00_ContentPlaceHolder1_lnkbRequestRequest"));
@@ -62,13 +61,9 @@ namespace Golem.PageObjects.Emcon.FMX
         //this should be set by the search field
         private static string CustomerName;
         
-        public FMX_JobsTab SearchJobs()
-=======
         public FMX_Jobs_JobRequests SearchJobs()
->>>>>>> 735b3e89bc7db84ab131d32d6ac13bdb8b3dcd5d
         {
-            btn_JobSearch.VerifyVisible(5);
-            btn_JobSearch.Click();
+            btn_JobSearch.WaitUntilPresent().Click();
             return new FMX_Jobs_JobRequests();
         }
         
@@ -94,7 +89,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_JobsTab ClickJobWithCompletedStatus()
         {
-            driver.FindElementWithText("Completed").Click();
+            driver.WaitForElementWithText("Completed").Click();
             return new FMX_JobsTab();
         }
 

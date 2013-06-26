@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -223,5 +224,14 @@ namespace Golem.Framework
             }
         }
 
+        private static Image ScaleImage(Image image, double scale = .5)
+        {
+            var newWidth = (int)(image.Width * scale);
+            var newHeight = (int)(image.Height * scale);
+
+            var newImage = new Bitmap(newWidth, newHeight);
+            Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
+            return newImage;
+        }
     }
 }

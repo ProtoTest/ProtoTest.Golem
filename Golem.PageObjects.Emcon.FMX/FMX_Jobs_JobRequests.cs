@@ -47,7 +47,8 @@ namespace Golem.PageObjects.Emcon.FMX
         Element btn_SearchButton = new Element("DyanicSearchButton", By.Id("ctl00_ContentPlaceHolder1_ucDynamicSearch_btnSearch1"));
         Element table_SearchResultsTable = new Element("DynamicSearchResultsTable", By.XPath("//table[@id='ctl00_ContentPlaceHolder1_ucDynamicSearch_ucCustomerSearchResultsGrid_gvGrid']/tbody/tr[3]/td[2]"));
         Element btn_PopupClose = new Element("PopupCloseButton", By.Id("ctl00_ContentPlaceHolder1_LinkButton1"));
-
+        Element drp_JobStatus = new Element("JobStatusDropdown", By.Id("ctl00_ContentPlaceHolder1_ucDynamicSearch_rpSearchForm_ctl04_pnlVocabListBox"));
+        Element chk_JobStatus = new Element("JobStatusCheckbox", By.Id("ctl00_ContentPlaceHolder1_ucDynamicSearch_rpSearchForm_ctl04_chkIncludeField"));
         //Customer Search Popup from Job Request tab
         Element pop_CustomerSearch = new Element("CustomerSearch_Popup", By.Id("ctl00_ContentPlaceHolder1_pnlPopUpCust"));
         Element txt_CustomerName_CustomerSearch_pop = new Element("txt_CustomerSearchName_Pop", By.Id("ctl00_ContentPlaceHolder1_ucCustomerParentSearch_rpSearchForm_ctl01_txtTextBoxStr"));
@@ -123,9 +124,8 @@ namespace Golem.PageObjects.Emcon.FMX
             txt_CustomerName_DynamicSearch_Pop.VerifyVisible(5);
             txt_CustomerName_DynamicSearch_Pop.Text = customerName;
             btn_SearchButton.Click();
-            table_SearchResultsTable.VerifyVisible(5);
             //CustomerName = table_SearchResultsTable.Text;  //May need someway of tracking customer name stuff
-            table_SearchResultsTable.Click();
+            table_SearchResultsTable.WaitUntilPresent().Click();
             return new FMX_Jobs_JobRequests();
         }
 
@@ -136,6 +136,13 @@ namespace Golem.PageObjects.Emcon.FMX
             return new FMX_Jobs_JobRequests();
         }
 
+        public FMX_Jobs_JobRequests SelectCompletedJob()
+        {
+            driver.WaitForPresent(ByE.PartialText("Job #")).Click();
+            return new FMX_Jobs_JobRequests();
+        }
+
+  
         public FMX_Jobs_JobRequests VerifyRequestPresent(string customerName)
         {
             pleaseWait.WaitUntilNotVisible();
@@ -144,7 +151,14 @@ namespace Golem.PageObjects.Emcon.FMX
         }
 
 
-
-
+        public FMX_Jobs_JobRequests SearchJobStatus(string statusText)
+        {
+            chk_JobStatus.Click();
+            drp_JobStatus.Click();
+            drp_JobStatus.FindElement(By.Id("ddcl-ctl00_ContentPlaceHolder1_ucDynamicSearch_rpSearchForm_ctl04_lbListBox-i4")).Click();
+            btn_SearchButton.Click();
+            table_SearchResultsTable.WaitUntilPresent().Click();
+            return new FMX_Jobs_JobRequests();
+        }
     }
 }
