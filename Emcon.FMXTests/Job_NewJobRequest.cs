@@ -12,13 +12,14 @@ namespace Emcon.FMXTests
     {
         private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
         [Test]
+        [TestsOn("5 - Job Requests")]
         public void JobRequestSearch()
         {
             FmXwelcomePage.OpenFMX(envUrl)
                           .Login("PROTOTEST", "!TEST1234")
                           .NewJobRequest()
                           .CustomerSearch("EMCON TEST")
-                          .EnterRequestInfo("Repair and Maintenance", "Blue Team", "Store", "ProtoTest Automation",
+                          .EnterJobRequestInfo("Repair and Maintenance", "Blue Team", "Store", "ProtoTest Automation",
                                             "webDriver",
                                             "Here is a short Description")
                           .AddNewLocation()

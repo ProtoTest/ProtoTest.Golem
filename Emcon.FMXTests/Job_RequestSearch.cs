@@ -20,7 +20,7 @@ namespace Emcon.FMXTests
                           .Login("PROTOTEST", "!TEST1234")
                           .ClickJobs()
                           .SearchJobs()
-                          .SearchCustomer("Emcon")
+                          .DynamicSearch("Emcon")
                           .CloseSearchPopUp()
                           .VerifyRequestPresent("Emcon");
         }
