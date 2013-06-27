@@ -185,7 +185,7 @@ namespace Golem.PageObjects.Emcon.FMX
             dd_JobRequests_WorkScope_SubTrade.VerifyVisible();
             dd_JobRequests_WorkScope_SubTrade.FindElement(ByE.Text(subTrade)).Click(); //Sub-Trade is dependant on options selected from Trade
             txt_JobRequests_WorkScope_WSDescription.Text += description;
-            
+            btn_JobRequests_WorkScope_Save.Click();
             return new FMX_Jobs_JobRequests();
         }
 

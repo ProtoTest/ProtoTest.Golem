@@ -20,11 +20,12 @@ namespace Emcon.FMXTests
                           .NewJobRequest()
                           .CustomerSearch("EMCON TEST")
                           .EnterJobRequestInfo("Repair and Maintenance", "Blue Team", "Store", "ProtoTest Automation",
-                                            "webDriver",
-                                            "Here is a short Description")
+                                               "webDriver",
+                                               "Here is a short Description")
                           .AddNewLocation()
                           .AddNewJob("Quoted", "Standard", "PROTOTEST-0001",
-                                     "This is a job created by an automated script");
+                                     "This is a job created by an automated script")
+                          .AddWorkScopes("Doors", "Doors-Metal", "Here's a work scope Description");
 
 
         }
