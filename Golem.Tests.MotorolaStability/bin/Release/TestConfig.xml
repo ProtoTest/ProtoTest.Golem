@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <EggPlantSettings>
   <RunScript path="C:\Program Files (x86)\eggPlant\runscript.bat"/>
-  <Suite path="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite">
+  <Suite repeat="1" path="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite">
     <Test repeat="3" retry="3" >
       <Script scriptName ="Shelter_Stability_Test_09_08"  host="10.10.1.211" port="5901" timeout="10"></Script>
     </Test>
