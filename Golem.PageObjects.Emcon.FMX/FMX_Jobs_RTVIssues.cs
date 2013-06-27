@@ -38,7 +38,7 @@ namespace Golem.PageObjects.Emcon.FMX
             chk_SignoffReceived.SetCheckbox(signoffReceived);
             txt_SignoffUpload_MarkedUp.SendKeys(pathToMarkedUpForSignoff);
             chk_PaperworkApproved.SetCheckbox(paperworkApproved);
-            driver.WaitForVisible(By.Id("ctl00_ContentPlaceHolder1_ucRTV_fvRTV_lnkSave")).Click();
+            driver.WaitForVisible(By.Id("ctl00_ContentPlaceHolder1_ucRTV_fvRTV_lnkSaveAndUpload")).Click();
             return new FMX_Jobs_RTVIssues();
         }
 
