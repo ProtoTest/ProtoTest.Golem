@@ -15,7 +15,7 @@ namespace Golem.PageObjects.Emcon.FMX
         public Element txt_SignoffUpload_MarkedUp = new Element("InvoiceUploadMasterTextField", By.Id("ctl00_ContentPlaceHolder1_ucRTV_fvRTV_fuSignoffMU"));
         public Element chk_SignoffReceived = new Element("SignoffReceivedCheckbox", By.Id("ctl00_ContentPlaceHolder1_ucRTV_fvRTV_chkSignoffReceivedFromStore"));
         public Element chk_PaperworkApproved = new Element("PaperworkApprovedCheckbox", By.Id("ctl00_ContentPlaceHolder1_ucRTV_fvRTV_chkApproved"));
-        public Element btn_Save = new Element("SaveButton", By.Id("ctl00_ContentPlaceHolder1_ucRTV_fvRTV_lnkSave"));
+        public Element btn_Save = new Element("SaveButton", By.XPath("//div[@id='ctl00_ContentPlaceHolder1_pnlPopUpRTVContent']//a[@id='ctl00_ContentPlaceHolder1_ucRTV_fvRTV_lnkSave']"));
         public Element btn_Cancel = new Element("SaveButton", By.Id("ctl00_ContentPlaceHolder1_ucRTV_fvRTV_lnkCancel"));
         public Element tbl_Results = new Element("ResultsTable", By.Id("ctl00_ContentPlaceHolder1_ucRTV_gvWorkOrderHistory_gvGrid"));
 
@@ -38,7 +38,7 @@ namespace Golem.PageObjects.Emcon.FMX
             chk_SignoffReceived.SetCheckbox(signoffReceived);
             txt_SignoffUpload_MarkedUp.SendKeys(pathToMarkedUpForSignoff);
             chk_PaperworkApproved.SetCheckbox(paperworkApproved);
-            btn_Save.Click();
+            driver.WaitForVisible(By.Id("ctl00_ContentPlaceHolder1_ucRTV_fvRTV_lnkSave")).Click();
             return new FMX_Jobs_RTVIssues();
         }
 

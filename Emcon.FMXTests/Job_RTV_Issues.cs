@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Gallio.Framework;
 using Golem.Framework;
 using Golem.PageObjects.Emcon.FMX;
 using MbUnit.Framework;
