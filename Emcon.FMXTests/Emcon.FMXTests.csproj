@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Dashboard_InvoiceComparisonbyAverageChart.cs" />
     <Compile Include="Dashboard_JobsbyStatus.cs" />
+    <Compile Include="Job_Documents.cs" />
     <Compile Include="Job_RequestSearch.cs" />
     <Compile Include="Job_Closing.cs" />
     <Compile Include="Job_Pricing.cs" />

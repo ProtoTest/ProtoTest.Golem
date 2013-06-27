@@ -135,9 +135,15 @@ namespace Golem.Framework
             return element.GetCssValue(text);
         }
 
+        public Element SetOption(string option)
+        {
+            driver.FindElement(this.by).SelectOption(option);
+            return this;
+        }
+
         public Element SetCheckbox(bool isChecked)
         {
-            if((element.GetAttribute("checked")=="checked")!=(isChecked))
+            if(element.Selected!=isChecked)
             {
                 element.Click();
             }

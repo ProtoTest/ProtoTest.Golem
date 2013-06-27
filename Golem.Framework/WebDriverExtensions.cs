@@ -70,6 +70,12 @@ namespace Golem.Framework
             }
         }
 
+        public static IWebElement SelectOption(this IWebElement element, string option)
+        {
+            element.FindElement(By.XPath("//option[contains(text(),'"+option+"')]")).Click();
+            return element;
+        }
+
         public static IWebElement FindVisibleElement(this IWebDriver driver, By by)
         {
             var elements = driver.FindElements(by);
