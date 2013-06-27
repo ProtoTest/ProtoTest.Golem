@@ -131,5 +131,11 @@ namespace Golem.Framework
             }
         }
 
+        public static void ExecuteJavaScript(this IWebDriver driver, string script)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("return " + script);
+        }
+
     }
 }
