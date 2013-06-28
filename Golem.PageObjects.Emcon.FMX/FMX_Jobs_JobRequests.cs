@@ -153,7 +153,7 @@ namespace Golem.PageObjects.Emcon.FMX
             btn_AddNewLocation.WaitUntilVisible().Click(); //Default Data is selected for EMCON TEST customer
             pleaseWait.WaitUntilNotVisible();
             btn_SaveLocation.Click();
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             btn_JobRequests_JobSubTab.WaitUntilVisible().Click();
             return new FMX_Jobs_JobRequests();
         }
@@ -161,10 +161,10 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_Jobs_JobRequests AddNewJob(string jobType, string jobPriority, string POnumber, string JobComment, int jobCap = 9999)
         {
             btn_JobRequests_NewJobButton.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             dd_JobRequests_NewJob_JobType.WaitUntilVisible();
             dd_JobRequests_NewJob_JobType.FindElement(ByE.Text(jobType)).Click();
-            pleaseWait.WaitUntilNotPresent();
+            pleaseWait.WaitUntilNotVisible();
             dd_JobRequests_NewJob_JobPriority.WaitUntilVisible();
             dd_JobRequests_NewJob_JobPriority.FindElement(ByE.Text(jobPriority)).Click();
             pleaseWait.WaitUntilNotVisible();
@@ -209,7 +209,7 @@ namespace Golem.PageObjects.Emcon.FMX
         }
         #endregion
 
-        public FMX_Jobs_JobRequests AddWorkScopes(string trade, string subTrade, string description)
+        public FMX_Jobs_JobRequest_Vendors AddWorkScopes(string trade, string subTrade, string description)
         {
             pleaseWait.WaitUntilNotVisible();
             dd_JobRequests_WorkScope_Trade.VerifyVisible();
@@ -219,7 +219,7 @@ namespace Golem.PageObjects.Emcon.FMX
             dd_JobRequests_WorkScope_SubTrade.FindElement(ByE.Text(subTrade)).Click(); //Sub-Trade is dependant on options selected from Trade
             txt_JobRequests_WorkScope_WSDescription.Text += description;
             btn_JobRequests_WorkScope_Save.Click();
-            return new FMX_Jobs_JobRequests();
+            return new FMX_Jobs_JobRequest_Vendors();
         }
 
 

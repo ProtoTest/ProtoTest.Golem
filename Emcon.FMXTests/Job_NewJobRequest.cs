@@ -26,11 +26,17 @@ namespace Emcon.FMXTests
                           .AddNewJob("Quoted", "Standard", "PROTOTEST-0001",
                                      "This is a job created by an automated script")
                           .AddWorkScopes("Doors", "Doors-Metal", "Here's a work scope Description")
-                          .AddVendors("Doors")
-                          .AddBidRequest()
-                          .EditBidRequests("10", "13.99")
-                //.NewProposal("Items"); --Cannot FINISH PROPOSAL as of 06/27/13
-                          .NewWorkOrder("07/04/2013", "Proto", "Test");
+                          .AddVendor("Doors")
+                          .ClickBidRequests()
+                          .CreateNewBidRequest("10", "13.99")
+                          .ClickProposalTab()
+                          .CreateNewProposal("surban@prototest.com");
+
+            //          .AddVendors("Doors")
+            //          .AddBidRequest()
+            //          .EditBidRequests("10", "13.99")
+            ////.NewProposal("Items"); --Cannot FINISH PROPOSAL as of 06/27/13
+            //          .NewWorkOrder("07/04/2013", "Proto", "Test");
 
 
 
