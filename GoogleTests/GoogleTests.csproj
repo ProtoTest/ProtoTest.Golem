@@ -66,8 +66,8 @@
       <Project>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</Project>
       <Name>Golem.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Golem.PageObjects\Golem.PageObjects.Google.csproj">
-      <Project>{7BCAC7A9-3369-441B-9628-99F4C863B64B}</Project>
+    <ProjectReference Include="..\Golem.PageObjects.Google\Golem.PageObjects.Google.csproj">
+      <Project>{7bcac7a9-3369-441b-9628-99f4c863b64b}</Project>
       <Name>Golem.PageObjects.Google</Name>
     </ProjectReference>
   </ItemGroup>

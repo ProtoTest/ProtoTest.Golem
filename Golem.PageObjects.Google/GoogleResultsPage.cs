@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Golem.Framework;
 using OpenQA.Selenium;
 
-namespace Golem.Framework.PageObjects.Google
+namespace Golem.PageObjects.Google
 {
     public class GoogleResultsPage : BasePageObject
     {
