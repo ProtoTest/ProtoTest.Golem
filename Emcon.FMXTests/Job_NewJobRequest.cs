@@ -37,6 +37,12 @@ namespace Emcon.FMXTests
             //          .EditBidRequests("10", "13.99")
             ////.NewProposal("Items"); --Cannot FINISH PROPOSAL as of 06/27/13
             //          .NewWorkOrder("07/04/2013", "Proto", "Test");
+             //             .AddWorkScopes("Doors", "Doors-Metal", "Here's a work scope Description");
+            //  .AddVendors("Doors")
+            //  .AddBidRequest()
+            //   .EditBidRequests("10", "13.99")
+            //.NewProposal("Items"); --Cannot FINISH PROPOSAL as of 06/27/13
+            //   .NewWorkOrder("07/04/2013", "Proto", "Test");
 
 
 

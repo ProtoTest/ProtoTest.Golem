@@ -5,7 +5,7 @@ using System.Text;
 using MbUnit.Framework;
 using Golem.Framework;
 using OpenQA.Selenium;
-using Golem.Framework.PageObjects.Google;
+using Golem.PageObjects.Google;
 
 namespace Golem.Framework
 {

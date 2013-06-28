@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5E02EEE8-18B9-4058-95D4-F800FE4D002B}</ProjectGuid>
+    <ProjectGuid>{7BCAC7A9-3369-441B-9628-99F4C863B64B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GoogleTests</RootNamespace>
-    <AssemblyName>GoogleTests</AssemblyName>
+    <RootNamespace>Golem.PageObjects.Google</RootNamespace>
+    <AssemblyName>Golem.PageObjects.Google</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -34,18 +34,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gallio, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Gallio\bin\Gallio.dll</HintPath>
-    </Reference>
-    <Reference Include="MbUnit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Gallio\bin\MbUnit.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,8 +47,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventTest.cs" />
-    <Compile Include="GoogleTest.cs" />
+    <Compile Include="SearchResultPage.cs" />
+    <Compile Include="GmailPage.cs" />
+    <Compile Include="GoogleHomePage.cs" />
+    <Compile Include="GoogleHomePage2.cs" />
+    <Compile Include="GoogleResultsPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,15 +59,9 @@
       <Project>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</Project>
       <Name>Golem.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Golem.PageObjects.Google\Golem.PageObjects.Google.csproj">
-      <Project>{7bcac7a9-3369-441b-9628-99f4c863b64b}</Project>
-      <Name>Golem.PageObjects.Google</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
