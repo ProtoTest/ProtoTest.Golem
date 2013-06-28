@@ -32,11 +32,11 @@
   <ItemGroup>
     <Reference Include="Gallio, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Gallio\bin\Gallio.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Gallio\bin\Gallio.dll</HintPath>
     </Reference>
     <Reference Include="MbUnit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Gallio\bin\MbUnit.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Gallio\bin\MbUnit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,8 +45,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver">
-      <HintPath>..\..\..\selenium-dotnet-2.33.0\net40\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=2.33.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\WebDriver\net40\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
-      <Project>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</Project>
+      <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
       <Name>Golem.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Golem.PageObjects.Emcon.FMX\Golem.PageObjects.Emcon.FMX.csproj">

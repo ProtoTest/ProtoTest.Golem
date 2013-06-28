@@ -24,3 +24,7 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\obj\Release\Golem.TestRunners.EggPlant.csprojResolveAssemblyReference.cache
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\obj\Release\Golem.TestRunners.EggPlant.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\obj\Release\Golem.TestRunners.EggPlant.pdb
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\WebDriver.pdb
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\WebDriver.xml
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\WebDriver.Support.pdb
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\WebDriver.Support.xml

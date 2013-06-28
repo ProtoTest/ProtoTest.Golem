@@ -154,7 +154,6 @@ namespace Golem.TestRunners.EggPlant
                 retry = int.Parse(test.SelectSingleNode("@retry").Value);
                 TestOutcome outcome = TestOutcome.Inconclusive;
 
-                //repeat x times
                 for (int i = 0; i < repeat; i++)
                 {
                         foreach (XmlNode script in scripts)
