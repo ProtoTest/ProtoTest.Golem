@@ -19,7 +19,8 @@ namespace Emcon.FMXTests
                           .Login("PROTOTEST", "!TEST1234")
                           .ClickJobs()
                           .ClickJobClosingTab()
-                          .SelectJobByIndex(1)
+                          //should add a check for if the record is locked before clicking it
+                          .SelectJobByIndex(3) //TheFirst Job may already be set to closed changed to 3
                           .CloseNotesPopup()
                           .SelectJobOutcome("Job Done")
                           .SelectIfSatisfactory(true)
