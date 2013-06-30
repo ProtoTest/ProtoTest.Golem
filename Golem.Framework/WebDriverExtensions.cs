@@ -130,12 +130,20 @@ namespace Golem.Framework
                 element.SendKeys(text);
             }
         }
-
+        //SU - 06/28/13 - added these java script functions
         public static void ExecuteJavaScript(this IWebDriver driver, string script)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("return " + script);
         }
+
+        public static void JavaWindowScroll(this IWebDriver driver, int xCord, int yCord)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("window.scrollBy(" + xCord + "," + yCord + ");");
+
+        }
+       
 
     }
 }

@@ -29,23 +29,11 @@ namespace Emcon.FMXTests
                           .AddVendor("Doors")
                           .ClickBidRequests()
                           .CreateNewBidRequest("10", "13.99")
-                          .ClickProposalTab()
-                          .CreateNewProposal("surban@prototest.com");
-
-            //          .AddVendors("Doors")
-            //          .AddBidRequest()
-            //          .EditBidRequests("10", "13.99")
-            ////.NewProposal("Items"); --Cannot FINISH PROPOSAL as of 06/27/13
-            //          .NewWorkOrder("07/04/2013", "Proto", "Test");
-             //             .AddWorkScopes("Doors", "Doors-Metal", "Here's a work scope Description");
-            //  .AddVendors("Doors")
-            //  .AddBidRequest()
-            //   .EditBidRequests("10", "13.99")
-            //.NewProposal("Items"); --Cannot FINISH PROPOSAL as of 06/27/13
-            //   .NewWorkOrder("07/04/2013", "Proto", "Test");
-
-
-
+                          .ClickProposalsTab()
+                          .CreateNewProposal("surban@prototest.com", "ApprovedBy Name")
+                          .ClickWorkOrdersTab()
+                          .AddNewWorkOrder("surban@prototest.com", "BoSSFName", "BoSSLName",
+                                           "This was created automatically by Prototest");
         }
     }
 }
