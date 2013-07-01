@@ -108,11 +108,11 @@ namespace Golem.Framework
         public class HttpProxy
         {
             public bool startProxy;
-            public string proxyPort;
+            public int proxyPort;
             public HttpProxy()
             {
                 startProxy = Common.IsTruthy(Config.GetConfigValue("StartFiddlerProxy", "True"));
-                proxyPort = Config.GetConfigValue("ProxyPort", "8876");
+                proxyPort = int.Parse(Config.GetConfigValue("ProxyPort", "8876"));
 
             }
             

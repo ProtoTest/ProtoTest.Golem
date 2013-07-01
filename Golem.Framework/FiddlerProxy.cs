@@ -57,11 +57,11 @@ namespace Golem.Framework
         public void QuitFiddler()
         {
 
-            WriteCommandResponse("Shutting down...");
+            
             if (null != oSecureEndpoint) oSecureEndpoint.Dispose();
             while (FiddlerApplication.IsStarted())
             {
-                Common.Log("Stopping Fiddler");
+                TestBaseClass.LogEvent("Stopping Fiddler Proxy on port " + this.proxyPort);
                 Fiddler.FiddlerApplication.Shutdown();
                 Thread.Sleep(500);
             }
@@ -247,7 +247,7 @@ namespace Golem.Framework
 
         public void StartFiddler()
         {
-
+            TestBaseClass.LogEvent("Starting Fiddler Proxy on port " + this.proxyPort);
             string sSAZInfo = "NoSAZ";
 
             if (!FiddlerApplication.oTranscoders.ImportTranscoders(Assembly.GetExecutingAssembly()))

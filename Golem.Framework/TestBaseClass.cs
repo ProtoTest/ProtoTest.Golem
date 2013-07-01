@@ -204,28 +204,11 @@ namespace Golem.Framework
             
         }
 
-        private void StartProxy()
-        {
-            try
-            {
-                if (Config.Settings.httpProxy.startProxy)
-                {
-                    testData.proxy = new FiddlerProxy(GetUniqueProxyPort(),true);
-                    testData.proxy.StartFiddler();
-                }
-            }
-            catch (Exception e)
-            {
-               
-            }
-        }
 
-        private int GetUniqueProxyPort()
+        private int GetNewProxyPort()
         {
-            int portNum = int.Parse(Config.Settings.httpProxy.proxyPort);
-            portNum++;
-            Config.Settings.httpProxy.proxyPort = portNum.ToString();
-            return portNum;
+            Config.Settings.httpProxy.proxyPort++;
+            return Config.Settings.httpProxy.proxyPort;
         }
 
         private void GetHttpTraffic()
@@ -236,6 +219,23 @@ namespace Golem.Framework
                 testData.proxy.SaveSessionsToFile();
                 TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".saz", "application/x-fiddler-session-archive", File.ReadAllBytes(testData.proxy.GetSazFilePath())));
                 testData.proxy.ClearSessionList();
+            }
+        }
+
+        private void StartProxy()
+        {
+            try
+            {
+                if (Config.Settings.httpProxy.startProxy)
+                {
+                    
+                    testData.proxy = new FiddlerProxy(Config.Settings.httpProxy.proxyPort, true);
+                    testData.proxy.StartFiddler();
+                }
+            }
+            catch (Exception e)
+            {
+
             }
         }
 
@@ -272,7 +272,7 @@ namespace Golem.Framework
         {
             TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.DegreeOfParallelism;
             TestAssemblyExecutionParameters.DefaultTestCaseTimeout =
-                TimeSpan.FromSeconds(Config.Settings.runTimeSettings.TestTimeoutMin);
+                TimeSpan.FromMinutes(Config.Settings.runTimeSettings.TestTimeoutMin);
         }
 
         private void SetupEvents()
