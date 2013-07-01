@@ -48,6 +48,7 @@
     <Compile Include="FMNow_HomePage.cs" />
     <Compile Include="FMNow_Home_Finance.cs" />
     <Compile Include="FMNow_Request.cs" />
+    <Compile Include="FMNow_Search.cs" />
     <Compile Include="FMNow_WelcomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -16,8 +16,11 @@ namespace GolemPageObjects.Emcon.FMNow
 
         //Under Home_MainTab
         Element RepairsTab = new Element("RepairsTab", By.CssSelector("span.SubNavTabLink"));
-        Element FinanceTab = new Element("FinanceTab", By.ClassName("#lnkFinance > span.SubNavTabLink"));
+        Element FinanceTab = new Element("FinanceTab", By.CssSelector("#lnkFinance > span.SubNavTabLink"));
         Element VolumeTab = new Element("VolumeTab", By.CssSelector("#lnkVolume > span.SubNavTabLink"));
+
+        //PleaseWait
+        public Element pleaseWait = new Element("PleaseWait", By.XPath("//*[@id='loadingDiv']"));
 
         public FMNow_HomePage ClickHomeMainTab()
         {
@@ -55,4 +58,4 @@ namespace GolemPageObjects.Emcon.FMNow
 
 
 
-}
+

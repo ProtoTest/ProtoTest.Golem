@@ -10,10 +10,10 @@ namespace GolemPageObjects.Emcon.FMNow
     public class FMNow_WelcomePage : BasePageObject
 
     {
-        Element txt_UserName = new Element("UserName", By.Id("logincontent_Login1_UserName"));
-        Element txt_Password = new Element("Password", By.Id("logincontent_Login1_Password"));
+        static Element txt_UserName = new Element("UserName", By.Id("logincontent_Login1_UserName"));
+        static Element txt_Password = new Element("Password", By.Id("logincontent_Login1_Password"));
         Element chk_RememberMe = new Element("RememberMe", By.Id("logincontent_Login1_RememberMe"));
-        Element btn_Login = new Element("LoginButton", By.Id("logincontent_Login1_LoginButton"));
+        static Element btn_Login = new Element("LoginButton", By.Id("logincontent_Login1_LoginButton"));
 
         public static FMNow_WelcomePage OpenFMNow(string url)
         {
@@ -21,7 +21,7 @@ namespace GolemPageObjects.Emcon.FMNow
             return new FMNow_WelcomePage();
         }
 
-        public static FMNow_HomePage Login(string user, string pass)
+        public FMNow_HomePage Login(string user, string pass)
         {
             txt_UserName.Text = user;
             txt_Password.Text = pass;
