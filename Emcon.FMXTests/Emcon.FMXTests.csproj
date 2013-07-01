@@ -30,13 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gallio, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Gallio\bin\Gallio.dll</HintPath>
+    <Reference Include="Gallio">
+      <HintPath>..\Libraries\Gallio\3.4\Gallio.dll</HintPath>
     </Reference>
-    <Reference Include="MbUnit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Gallio\bin\MbUnit.dll</HintPath>
+    <Reference Include="MbUnit">
+      <HintPath>..\Libraries\Gallio\3.4\MbUnit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

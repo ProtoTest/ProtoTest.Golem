@@ -40,7 +40,6 @@ namespace Golem.Framework
             }
         }
         private static Object locker = new object();
-        public static FiddlerProxy proxy; 
 
         public static IWebDriver driver
         {
@@ -159,6 +158,7 @@ namespace Golem.Framework
             if ((Config.Settings.reportSettings.videoRecordingOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
             {
                 TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
+                testData.recorder.Dispose();
             }
                 
                 
@@ -210,8 +210,8 @@ namespace Golem.Framework
             {
                 if (Config.Settings.httpProxy.startProxy)
                 {
-                    proxy = new FiddlerProxy();
-                    proxy.StartFiddler();
+                    testData.proxy = new FiddlerProxy(GetUniqueProxyPort(),true);
+                    testData.proxy.StartFiddler();
                 }
             }
             catch (Exception e)
@@ -220,14 +220,22 @@ namespace Golem.Framework
             }
         }
 
+        private int GetUniqueProxyPort()
+        {
+            int portNum = int.Parse(Config.Settings.httpProxy.proxyPort);
+            portNum++;
+            Config.Settings.httpProxy.proxyPort = portNum.ToString();
+            return portNum;
+        }
+
         private void GetHttpTraffic()
         {
             if (Config.Settings.httpProxy.startProxy)
             {
                 string name = Common.GetShortTestName(80);
-                proxy.SaveSessionsToFile();
-                TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".saz", "application/x-fiddler-session-archive", File.ReadAllBytes(proxy.GetSazFilePath())));
-                proxy.ClearSessionList();
+                testData.proxy.SaveSessionsToFile();
+                TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".saz", "application/x-fiddler-session-archive", File.ReadAllBytes(testData.proxy.GetSazFilePath())));
+                testData.proxy.ClearSessionList();
             }
         }
 
@@ -235,7 +243,7 @@ namespace Golem.Framework
         {
             if (Config.Settings.httpProxy.startProxy)
             {
-                proxy.QuitFiddler();
+                testData.proxy.QuitFiddler();
             }
         }
 
@@ -260,9 +268,11 @@ namespace Golem.Framework
             }
         }
 
-        public void SetDegreeOfParallelism()
+        public void SetTestExecutionSettings()
         {
             TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.DegreeOfParallelism;
+            TestAssemblyExecutionParameters.DefaultTestCaseTimeout =
+                TimeSpan.FromSeconds(Config.Settings.runTimeSettings.TestTimeoutMin);
         }
 
         private void SetupEvents()
@@ -286,6 +296,7 @@ namespace Golem.Framework
         {
             LogEvent(Common.GetCurrentTestName() + " started");
             StartVideoRecording();
+            StartProxy();
             LaunchBrowser();
         }
 
@@ -298,18 +309,31 @@ namespace Golem.Framework
             LogVideoIfTestFailed();
             LogHtmlIfTestFailed();
             QuitBrowser();
+            QuitProxy();
             LogActions();
             AssertNoVerificationErrors();
             GetHttpTraffic();
+            DeleteTestData();
+
+
+        }
+
+        private void DeleteTestData()
+        {
+            string testName = Common.GetCurrentTestName();
+            if (!testDataCollection.ContainsKey(testName))
+            {
+                testDataCollection.Remove(testName);
+            }
         }
 
         [FixtureSetUp]
         public void SuiteSetUp()
         {
+            
             SetupEvents();
             testDataCollection = new Dictionary<string, TestDataContainer>();
-            SetDegreeOfParallelism();
-            StartProxy();
+            SetTestExecutionSettings();
             //LogEvent("Suite Started");
         }
 
@@ -317,7 +341,6 @@ namespace Golem.Framework
         [FixtureTearDown]
         public void SuiteTearDown()
         {
-            QuitProxy();
             RemoveEvents();
             // LogEvent("Suite Finished");
         }

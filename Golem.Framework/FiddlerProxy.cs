@@ -27,6 +27,9 @@ namespace Golem.Framework
         private static Fiddler.Proxy oSecureEndpoint;
         private static string sSecureEndpointHostname = "localhost";
         private static int iSecureEndpointPort = 7777;
+        private int proxyPort;
+        private bool systemProxy;
+        private bool decryptSSL;
 
         private List<Fiddler.Session> oAllSessions;
 
@@ -34,6 +37,16 @@ namespace Golem.Framework
         {
             oAllSessions = new List<Fiddler.Session>();
             AttachEventListeners();
+            this.proxyPort = 8877;
+        }
+
+        public FiddlerProxy(int port, bool systemProxy=false)
+        {
+            oAllSessions = new List<Fiddler.Session>();
+            AttachEventListeners();
+            this.proxyPort = port;
+            this.systemProxy = systemProxy;
+            this.decryptSSL = true;
         }
 
         public static void WriteCommandResponse(string s)
@@ -46,8 +59,12 @@ namespace Golem.Framework
 
             WriteCommandResponse("Shutting down...");
             if (null != oSecureEndpoint) oSecureEndpoint.Dispose();
-            Fiddler.FiddlerApplication.Shutdown();
-            Thread.Sleep(500);
+            while (FiddlerApplication.IsStarted())
+            {
+                Common.Log("Stopping Fiddler");
+                Fiddler.FiddlerApplication.Shutdown();
+                Thread.Sleep(500);
+            }
         }
 
         private string Ellipsize(string s, int iLen)
@@ -247,8 +264,7 @@ namespace Golem.Framework
          
             FiddlerCoreStartupFlags oFCSF = FiddlerCoreStartupFlags.Default;
 
-         
-            Fiddler.FiddlerApplication.Startup(8877, oFCSF);
+            Fiddler.FiddlerApplication.Startup(proxyPort,systemProxy,decryptSSL);
 
             oSecureEndpoint = FiddlerApplication.CreateProxyEndpoint(iSecureEndpointPort, true, sSecureEndpointHostname);
             if (null != oSecureEndpoint)
