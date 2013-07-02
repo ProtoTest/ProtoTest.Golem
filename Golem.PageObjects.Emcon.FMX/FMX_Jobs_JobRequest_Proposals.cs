@@ -23,8 +23,23 @@ namespace Golem.PageObjects.Emcon.FMX
         Element SendEmail = new Element("SendEmail", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_ucDocumentSend_clstNewEmail_0"));
         Element SendUSPS = new Element("SendUSPS", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_ucDocumentSend_chkPrint"));
         Element SendDocument = new Element("SendDocument", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_ucDocumentSend_btnSendDocument"));
+        
+        Element SetCustomerSelections = new Element("SetCustomerSelctions", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_lbtnSelectOptions"));
+        Element WorkScopeCustomerSelection = new Element("WorkScopeCustomerSelection", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_dlSelections_ctl00_chkOption"));
+        Element WorkScropCustomerSelectionSave = new Element("WOrkScropSaveButton", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_lbtnSaveSelections"));
+        Element EditProposalAgain = new Element("EditProposalTwoButton", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_fvProposal_lbtnEditRequest2"));
 
-        public FMX_Jobs_JobRequest_Proposals CreateNewProposal(string emailToSend)
+        Element ApprovedBy = new Element("ApprovedBy", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_fvProposal_txtApprovedBy"));
+        Element ApprovedByCalendar = new Element("ApprovedByCalendar", By.XPath("//*[@id='ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_fvProposal']/tbody/tr/td/table/tbody/tr[8]/td/img"));
+        Element ApprovedByCalendarNextMonth = new Element("ApprovedNextMonth", By.XPath("//*[@id='ui-datepicker-div']/div/a[2]/span"));
+        Element ApprovedbyCalendarFirstDay = new Element("FirstDayWeek2", By.XPath("//*[@id='ui-datepicker-div']/table/tbody/tr[2]/td[2]/a"));
+
+        Element EditProposalSave = new Element("EditProposalSave", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_fvProposal_lbtnUpdateRequest2"));
+        Element JobCapButton = new Element("JobCapPopUp", By.Id("ctl00_ContentPlaceHolder1_JobTabs_TabProposals_ucProposalEditor_btnOkJobCapUpdate"));
+
+        Element WorkOrderTab = new Element("WorkOrdersTab", By.XPath("//*[@id='ctl00_ContentPlaceHolder1_upnlLowerTabs']/div/div/span[4]/span/span/span"));
+
+        public FMX_Jobs_JobRequest_Proposals CreateNewProposal(string emailToSend, string approvedByName)
         {
             NewProposal.WaitUntilVisible().Click();
             pleaseWait.WaitUntilNotVisible();
@@ -46,8 +61,35 @@ namespace Golem.PageObjects.Emcon.FMX
             SendDocument.WaitUntilVisible().Click();
             pleaseWait.WaitUntilNotVisible();
             SendSavePrintPopup.WaitUntilNotVisible();
-
+            SetCustomerSelections.WaitUntilVisible().Click();
+            pleaseWait.WaitUntilNotVisible();
+            WorkScopeCustomerSelection.WaitUntilVisible().Click();
+            WorkScropCustomerSelectionSave.WaitUntilVisible().Click();
+            pleaseWait.WaitUntilNotVisible();
+            EditProposalAgain.WaitUntilVisible().Click();
+            pleaseWait.WaitUntilNotVisible();
+            ApprovedBy.WaitUntilVisible().Text = approvedByName;
+            ApprovedByCalendar.WaitUntilVisible();
+            int y = ApprovedByCalendar.Location.Y;
+            driver.JavaWindowScroll(0, y-HeaderBarHeight);
+            ApprovedByCalendar.Click();
+            ApprovedByCalendarNextMonth.WaitUntilVisible().Click();
+            ApprovedbyCalendarFirstDay.WaitUntilVisible().Click();
+            EditProposalSave.WaitUntilVisible().Click();
+            pleaseWait.WaitUntilNotVisible();
+            JobCapButton.WaitUntilPresent().Click();
+            pleaseWait.WaitUntilNotVisible();
             return new FMX_Jobs_JobRequest_Proposals();
+        }
+
+        public FMX_Jobs_JobRequest_WorkOrders ClickWorkOrdersTab()
+        {
+            WorkOrderTab.WaitUntilVisible();
+            int y = WorkOrderTab.Location.Y;
+            driver.JavaWindowScroll(0, y-HeaderBarHeight);
+            WorkOrderTab.Click();
+            pleaseWait.WaitUntilNotVisible();
+            return new FMX_Jobs_JobRequest_WorkOrders();
         }
 
     }

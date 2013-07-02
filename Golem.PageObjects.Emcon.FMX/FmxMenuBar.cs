@@ -10,6 +10,7 @@ namespace Golem.PageObjects.Emcon.FMX
 {
     public class FmxMenuBar : BasePageObject
     {
+        public int HeaderBarHeight = 60;
         public Element tab_Home = new Element("HomeTab", By.Id("ctl00_ucMainMenu_lnkHome"));
         public Element tab_Customers = new Element("CutomersTab", By.Id("ctl00_ucMainMenu_lnkCustomer"));
         public Element tab_Locations = new Element("LocationsTab", By.Id("ctl00_ucMainMenu_lnkLocation"));
