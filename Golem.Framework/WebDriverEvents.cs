@@ -37,7 +37,15 @@ namespace Golem.Framework
 
         void driver_ElementValueChanged(object sender, WebElementEventArgs e)
         {
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Typing : " + e.Element.GetAttribute("value"));
+            try
+            {
+                TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Typing : " + e.Element.GetAttribute("value"));
+            }
+            catch (Exception)
+            {
+     
+            }
+            
         }
 
         void driver_Navigating(object sender, WebDriverNavigationEventArgs e)

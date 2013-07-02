@@ -163,7 +163,7 @@ namespace Golem.TestRunners.EggPlant
                             port = script.SelectSingleNode("@port").Value;
                             timeout = int.Parse(script.SelectSingleNode("@timeout").Value);//min 
                             string name = scriptName + " : Iteration #" + (i + 1).ToString();
-                            EggPlantScript eScript = new EggPlantScript(driver,suitePath,scriptName,host,port);
+                            EggPlantScript eScript = new EggPlantScript(driver,suitePath,scriptName,host,port, timeout);
                             outcome = eScript.ExecuteTest(name);
                             if (outcome != TestOutcome.Passed)
                             {
@@ -183,7 +183,7 @@ namespace Golem.TestRunners.EggPlant
                                 timeout = int.Parse(script.SelectSingleNode("@timeout").Value);
 
                                 string name = scriptName + " : Iteration #" + (i + 1).ToString() + " : Retry : " + (j+1).ToString();
-                                EggPlantScript eScript = new EggPlantScript(driver, suitePath, scriptName, host, port);
+                                EggPlantScript eScript = new EggPlantScript(driver, suitePath, scriptName, host, port, timeout);
                                 outcome = eScript.ExecuteTest(name);
                                 if (outcome != TestOutcome.Passed)
                                 {

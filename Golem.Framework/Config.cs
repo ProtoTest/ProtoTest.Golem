@@ -30,12 +30,14 @@ namespace Golem.Framework
         public RuntimeSettings runTimeSettings;
         public ReportSettings reportSettings;
         public HttpProxy httpProxy;
+        public AppiumSettings appiumSettings;
 
         public ConfigSettings()
         {
             runTimeSettings = new RuntimeSettings();
             reportSettings = new ReportSettings();
             httpProxy = new HttpProxy();
+            appiumSettings = new AppiumSettings();
         }
 
         public class RuntimeSettings
@@ -116,6 +118,23 @@ namespace Golem.Framework
 
             }
             
+        }
+
+        public class AppiumSettings
+        {
+            public bool launchApp = false;
+            public string appPath;
+            public string package;
+            public string activity;
+            public string appOs;
+            public AppiumSettings()
+            {
+                launchApp = Common.IsTruthy(Config.GetConfigValue("LaunchApp", "False"));
+                appPath = Config.GetConfigValue("AppPath", "");
+                package = Config.GetConfigValue("AppPackage", "");
+                activity = Config.GetConfigValue("AppActivity", "");
+                appOs = Config.GetConfigValue("AppOs", "Android");
+            }
         }
       
     }

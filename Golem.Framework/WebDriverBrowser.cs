@@ -125,7 +125,20 @@ namespace Golem.Framework
         {
             DesiredCapabilities desiredCapabilities = GetCapabilitiesForBrowser(browser);
             var remoteAddress = new Uri("http://"+ host +":4444/wd/hub");
-            return new RemoteWebDriver(remoteAddress, desiredCapabilities);
+            return new EventedWebDriver(new RemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
+        }
+
+        public IWebDriver LaunchAppDriver(string appPath, string package, string activity)
+        {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.SetCapability(CapabilityType.BrowserName, "");
+            capabilities.SetCapability("device", "Android");
+            capabilities.SetCapability("app", appPath);
+            capabilities.SetCapability("app-package", package);
+            capabilities.SetCapability("app-activity", activity);
+
+            var eDriver = new EventedWebDriver(driver);
+            return eDriver.driver;
         }
        
     }

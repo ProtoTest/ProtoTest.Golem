@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6F571494-C91F-4955-B3F9-40BCB60F3A6A}</ProjectGuid>
+    <ProjectGuid>{6525FF11-72B4-486A-93E7-D44FDBE3F5BC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Emcon.FMNowTests</RootNamespace>
-    <AssemblyName>Emcon.FMNowTests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>AppiumTests</RootNamespace>
+    <AssemblyName>AppiumTests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -50,27 +50,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvancedSearch.cs" />
-    <Compile Include="Charts.cs" />
-    <Compile Include="Login.cs" />
+    <Compile Include="AppiumTest.cs" />
+    <Compile Include="PageObjects\AddBook.cs" />
+    <Compile Include="PageObjects\SearchForBook.cs" />
+    <Compile Include="PageObjects\MenuPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Request.cs" />
-    <Compile Include="SimpleSearch.cs" />
+    <Compile Include="PageObjects\SplashPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
       <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
       <Name>Golem.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GolemPageObjects.Emcon.FMNow\GolemPageObjects.Emcon.FMNow.csproj">
-      <Project>{a2ec33d6-32e9-49b7-9434-c42b99ef7890}</Project>
-      <Name>GolemPageObjects.Emcon.FMNow</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

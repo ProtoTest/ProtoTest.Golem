@@ -142,8 +142,7 @@ namespace Golem.Framework
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("window.scrollBy(" + xCord + "," + yCord + ");");
 
-        }
-       
+        }     
 
     }
 }
