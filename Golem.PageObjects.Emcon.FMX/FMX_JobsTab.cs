@@ -36,19 +36,19 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobClosing ClickJobClosingTab()
         {
-            tab_Job_Closing.Click();
+            tab_Job_Closing.WaitUntilVisible().Click();
             return new FMX_Jobs_JobClosing();
         }
 
         public FMX_Jobs_JobPricing ClickJobPricingTab()
         {
-            tab_Job_Pricing.Click();
+            tab_Job_Pricing.WaitUntilVisible().Click();
             return new FMX_Jobs_JobPricing();
         }
 
         public FMX_Jobs_RTVIssues ClickRTVIssuesButton()
         {
-            btn_RTVIssues.Click();
+            btn_RTVIssues.WaitUntilVisible().Click();
             return new FMX_Jobs_RTVIssues();
         }
 

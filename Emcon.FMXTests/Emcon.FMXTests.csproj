@@ -48,15 +48,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dashboard_InvoiceComparisonbyAverageChart.cs" />
-    <Compile Include="Dashboard_JobsbyStatus.cs" />
-    <Compile Include="Job_Documents.cs" />
-    <Compile Include="Job_RequestSearch.cs" />
-    <Compile Include="Job_Closing.cs" />
-    <Compile Include="Job_Pricing.cs" />
-    <Compile Include="Job_RTV_Issues.cs" />
-    <Compile Include="Job_NewJobRequest.cs" />
-    <Compile Include="WelcomePageTest.cs" />
+    <Compile Include="02_Dashboard_InvoiceComparisonbyAverageChart.cs" />
+    <Compile Include="03_Dashboard_JobsbyStatus.cs" />
+    <Compile Include="06_Job_Documents.cs" />
+    <Compile Include="04_Job_RequestSearch.cs" />
+    <Compile Include="08_Job_Closing.cs" />
+    <Compile Include="09_Job_Pricing.cs" />
+    <Compile Include="07_Job_RTV_Issues.cs" />
+    <Compile Include="05_Job_NewJobRequest.cs" />
+    <Compile Include="01_WelcomePageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

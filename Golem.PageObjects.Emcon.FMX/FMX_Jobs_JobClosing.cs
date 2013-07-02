@@ -58,11 +58,11 @@ namespace Golem.PageObjects.Emcon.FMX
         {
             if (satisfactory)
             {
-                chk_SatisfactoryOutcome.Click();
+                chk_SatisfactoryOutcome.WaitUntilVisible().Click();
             }
             else
             {
-                chk_UnSatisfactoryOutcome.Click();
+                chk_UnSatisfactoryOutcome.WaitUntilVisible().Click();
             }
             return new FMX_Jobs_JobClosing();
         }

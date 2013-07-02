@@ -25,7 +25,7 @@ namespace Golem.Framework
         {
             get
             {
-                
+
                     string name = Common.GetCurrentTestName();
                     if (!testDataCollection.ContainsKey(name))
                     {

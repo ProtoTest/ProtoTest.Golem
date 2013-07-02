@@ -13,7 +13,8 @@ namespace Emcon.FMXTests
     class Job_RequestSearch : TestBaseClass
     {
         private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
-        [Test]
+        [Test(Order = 4)]
+        [TestsOn("4 - Charts")]
         public void JobSearch()
         {
             FmXwelcomePage.OpenFMX(envUrl)

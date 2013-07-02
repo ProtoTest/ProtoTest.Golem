@@ -1,32 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using Golem.Framework;
 using Golem.PageObjects.Emcon.FMX;
 using MbUnit.Framework;
 
 namespace Emcon.FMXTests
 {
-    class Job_RTV_Issues : TestBaseClass
+    internal class Job_DocumentsTab : TestBaseClass
     {
         private string pathToFile = Directory.GetCurrentDirectory() + "\\sampledoc.docx";
         private static string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
-        [Test]
-        public void Test_RTV_Issues()
+
+        [Test(Order = 6)]
+        [TestsOn("6 - Documents")]
+        public void Test_Job_Documents_Tab()
         {
             FmXwelcomePage.OpenFMX(envUrl)
                           .Login("PROTOTEST", "!TEST1234")
                           .ClickJobs()
                           .SearchJobs()
-                          .DynamicSearch("emcon","Completed","Blue Team")
+                          .DynamicSearch("Emcon","Completed","Blue Team")
                           .CloseSearchPopUp()
                           .SelectCompletedJob()
-                          .ClickRTVIssuesButton()
-                          .SelectWorkOrder()
-                          .ClickNewRTVIssueButton()
-                          .SubmitIssueInfo(true, pathToFile, true, pathToFile, true);
+                          .ClickDocumentsTab()
+                          .ClickUploadDocument()
+                          .UploadDocument("Client Submitted", "Viewable By All", "This is a sample document", pathToFile);
+
 
         }
     }

@@ -11,7 +11,8 @@ namespace Emcon.FMXTests
     class Dashboard_InvoiceComparisonbyAverageChart : TestBaseClass
     {
         private string envUrl = Config.GetConfigValue("EnvironmentUrl","http://demo.fmx.bz/");
-        [Test]
+        [Test(Order = 2)]
+        [TestsOn("2 - Charts")]
         public void DashboardTestTwo()
         {
             FmXwelcomePage.OpenFMX(envUrl)

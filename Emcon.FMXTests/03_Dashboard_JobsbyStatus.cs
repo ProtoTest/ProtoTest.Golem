@@ -13,7 +13,8 @@ namespace Emcon.FMXTests
     class Dashboard_JobsbyStatus : TestBaseClass
     {
         private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
-        [Test]
+        [Test(Order = 3)]
+        [TestsOn("2 - Charts")]
         public void DashboardTest()
         {
             FmXwelcomePage.OpenFMX(envUrl)

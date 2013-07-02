@@ -14,7 +14,8 @@ namespace Emcon.FMXTests
     {
         //adding a comment to test github client sync fix - surban 06/25/13
         private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
-        [Test]
+        [Test(Order = 1)]
+        [TestsOn("1 - Login")]
         public void LoginTest()
         {
             FmXwelcomePage.OpenFMX(envUrl).Login("PROTOTEST", "!TEST1234").VerifyResult("EmconMessageBoard");

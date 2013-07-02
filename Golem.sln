@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.TestRunners.EggPlant"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.PageObjects.Google", "Golem.PageObjects.Google\Golem.PageObjects.Google.csproj", "{7BCAC7A9-3369-441B-9628-99F4C863B64B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GolemPageObjects.Emcon.FMNow", "GolemPageObjects.Emcon.FMNow\GolemPageObjects.Emcon.FMNow.csproj", "{A2EC33D6-32E9-49B7-9434-C42B99EF7890}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.PageObjects.Emcon.FMNow", "GolemPageObjects.Emcon.FMNow\Golem.PageObjects.Emcon.FMNow.csproj", "{A2EC33D6-32E9-49B7-9434-C42B99EF7890}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emcon.FMNowTests", "Emcon.FMNowTests\Emcon.FMNowTests.csproj", "{6F571494-C91F-4955-B3F9-40BCB60F3A6A}"
 EndProject

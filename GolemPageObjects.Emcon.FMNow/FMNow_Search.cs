@@ -23,7 +23,6 @@ namespace GolemPageObjects.Emcon.FMNow
         private static List<string> ValuesWithSecondDD;
             
         //advanced Serach
-        Element AdvancedSearchTab = new Element("AdvancedSearchTab", By.Id("__tab_ContentPlaceHolder1_tabsSearch_tabAdvanced"));
         Element dd_JobType = new Element("Jobtype", By.Id("ContentPlaceHolder1_tabsSearch_tabAdvanced_UcSearchForWorkOrders1_ddlJobType"));
         Element btn_SearchLocations = new Element("SearchLocations", By.Id("ContentPlaceHolder1_tabsSearch_tabAdvanced_UcSearchForWorkOrders1_cmdLocationSearch"));
         Element txt_LocationNumber = new Element("LocationNum", By.Id("ContentPlaceHolder1_tabsSearch_tabAdvanced_UcSearchForWorkOrders1_txtStoreNumber"));
@@ -88,7 +87,7 @@ namespace GolemPageObjects.Emcon.FMNow
 
         public FMNow_Search doAdvancedSearch(string jobType, string Location, string jobStatus, string callpriority, string typeofWOrk, string subtypeofwork)
         {
-            AdvancedSearchTab.WaitUntilVisible().Click();
+            AdvancedSearch.WaitUntilVisible().Click();
             pleaseWait.WaitUntilNotVisible();
             dd_JobType.WaitUntilVisible().SelectOption(jobType);
             txt_LocationNumber.WaitUntilVisible().Text = Location;

@@ -11,7 +11,7 @@ namespace Emcon.FMXTests
     public class Job_Closing : TestBaseClass
     {
         private static string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
-        [Test]
+        [Test(Order = 8)]
         [TestsOn("8 - Job Closing")]
         public void CloseJob()
         {

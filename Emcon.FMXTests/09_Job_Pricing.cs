@@ -11,7 +11,7 @@ namespace Emcon.FMXTests
     public class Job_Pricing : TestBaseClass
     {
         private static string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
-        [Test(Order = 2)]
+        [Test(Order = 9)]
         [TestsOn("9 - Job Pricing")]
         public void Test_Job_Pricing()
         {

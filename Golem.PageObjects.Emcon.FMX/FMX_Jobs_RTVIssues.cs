@@ -27,7 +27,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_RTVIssues ClickNewRTVIssueButton()
         {
-            btn_CreateRTVIssue.Click();
+            btn_CreateRTVIssue.WaitUntilVisible().Click();
             return new FMX_Jobs_RTVIssues();
         }
 

@@ -235,13 +235,13 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequests ClickDocumentsTab()
         {
-            tab_Documents.Click();
+            tab_Documents.WaitUntilVisible().Click();
             return new FMX_Jobs_JobRequests();
         }
 
         public FMX_Jobs_JobRequests ClickUploadDocument()
         {
-            btn_UploadNewDocument.Click();
+            btn_UploadNewDocument.WaitUntilVisible().Click();
             return new FMX_Jobs_JobRequests();
         }
 

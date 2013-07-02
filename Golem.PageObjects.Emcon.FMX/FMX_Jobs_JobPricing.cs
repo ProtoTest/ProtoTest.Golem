@@ -35,7 +35,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobPricing ClickSearchButton()
         {
-            btn_Search.Click();
+            btn_Search.WaitUntilVisible().Click();
             return new FMX_Jobs_JobPricing();
         }
 
@@ -66,7 +66,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobPricing ClickSetAccountsReceivable()
         {
-            btn_SetAccountsReceived.Click();
+            btn_SetAccountsReceived.WaitUntilVisible().Click();
             return  new FMX_Jobs_JobPricing();
         }
     }

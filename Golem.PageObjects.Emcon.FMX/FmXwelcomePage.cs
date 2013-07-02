@@ -35,6 +35,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_HomePage Login(string UserName, string Password)
         {
+            //Common.GetCurrentClassAndMethodName();
             txt_UserName.SendKeys(UserName); 
             txt_mockPass.Click();
             txt_Password.Text = Password;

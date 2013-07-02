@@ -39,7 +39,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_DashboardPage ClickDashboard()
         {
-            tab_Dashboard.Click();
+            tab_Dashboard.WaitUntilVisible().Click();
             return new FMX_DashboardPage();
         }
 

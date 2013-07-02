@@ -11,7 +11,7 @@ namespace Emcon.FMXTests
     class Job_NewJobRequest : TestBaseClass
     {
         private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
-        [Test]
+        [Test(Order = 5)]
         [TestsOn("5 - Job Requests")]
         public void JobRequestSearch()
         {
