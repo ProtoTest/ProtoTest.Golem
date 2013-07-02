@@ -55,12 +55,12 @@ namespace GolemPageObjects.Emcon.FMNow
             {
                 rd_ByTrade.WaitUntilVisible().Click();
             }
-            new SelectElement (dd_StartFiscalMonth).SelectByText(FiscalYearMonth);
+            dd_StartFiscalMonth.SelectOption(FiscalYearMonth);
             //dd_StartFiscalMonth.WaitUntilVisible().FindElement(ByE.Text(FiscalYearMonth)).Click();
-            dd_StartQuarter.FindElement(ByE.Text(StartQuarter)).Click();
-            dd_EndQuarter.FindElement(ByE.Text(endQuarter)).Click();
-            dd_StartYear.FindElement(ByE.Text(startYear)).Click();
-            dd_EndYear.FindElement(ByE.Text(endYear)).Click();
+            dd_StartQuarter.SelectOption(StartQuarter);
+            dd_EndQuarter.SelectOption(endQuarter);
+            dd_StartYear.SelectOption(startYear);
+            dd_EndYear.SelectOption(endYear);
             btn_RefreshChart.WaitUntilVisible().Click();
             //Going to need to do something with the chart here
             return new FMNow_Home_Finance();

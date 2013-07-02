@@ -44,6 +44,12 @@ namespace GolemPageObjects.Emcon.FMNow
             return new FMNow_Request();
         }
 
+        public FMNow_Search ClickSearchMainTab()
+        {
+            Search_MainTab.WaitUntilVisible().Click();
+            return new FMNow_Search();
+        }
+
         
 
         public override void WaitForElements()
