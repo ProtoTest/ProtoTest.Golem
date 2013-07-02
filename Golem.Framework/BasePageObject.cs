@@ -35,6 +35,7 @@ namespace Golem.Framework
             WaitForElements();
             //TestBaseClass.testData.LogEvent(Common.GetCurrentClassAndMethodName() + " Finished");
             TestBaseClass.testData.actions.addAction(Common.GetCurrentClassAndMethodName());
+            
         }
         public abstract void WaitForElements();
      

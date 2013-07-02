@@ -20,20 +20,29 @@ namespace Golem.Framework
         public string scriptName;
         public string host = "";
         public string port = "";
-        public int timeout = 600000;
+        public int timeoutMin;
         public string description = "";
+        public string scriptPath = "";
 
 
         private IEggPlantDriver driver;
-        public EggPlantScript(IEggPlantDriver driver, string suitePath, string scriptName, string host, string port)
+        public EggPlantScript(IEggPlantDriver driver, string suitePath, string scriptName, string host, string port, int timeoutMin)
         {
             this.driver = driver;
             this.suitePath = suitePath;
             this.scriptName = scriptName;
             this.host = host;
             this.port = port;
+            this.timeoutMin = timeoutMin;
             this.description = GetScriptDescription();
+            this.scriptPath += suitePath + "\\Scripts\\" + scriptName + ".script";
+            VerifyScriptExists();
             Connect(host);
+        }
+
+        private void VerifyScriptExists()
+        {
+            Assert.IsTrue(File.Exists(scriptPath),"Test halted, could not find file : " + scriptPath);
         }
 
         private void Connect(string host)
@@ -69,7 +78,7 @@ namespace Golem.Framework
             });
 
 
-            return TestStep.RunStep(testName, executeTest, new TimeSpan(0, 0, 10, 0), true, null).Outcome;
+            return TestStep.RunStep(testName, executeTest, new TimeSpan(0, 0, timeoutMin, 0), true, null).Outcome;
         }
 
         private void AttachTestFiles()
@@ -110,8 +119,7 @@ namespace Golem.Framework
 
         private string GetScriptDescription()
         {
-            string path = "";
-            path += suitePath + "\\Scripts\\" + scriptName + ".script";
+            string path = scriptPath;
             System.IO.StreamReader file = new System.IO.StreamReader(path);
             string line = "";
             string result = "";

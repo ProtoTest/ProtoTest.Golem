@@ -60,7 +60,7 @@ namespace Golem.PageObjects.Emcon.FMX
         {
             txt_InvoiceNumber.Text = invoiceNumber;
             txt_subtotalCrossCheck.Text = subtotalCrossCheck;
-            drp_setVendorPricing.SetOption("Pay Vendor");
+            drp_setVendorPricing.SelectOption("Pay Vendor");
             return new FMX_Jobs_JobPricing();
         }
 

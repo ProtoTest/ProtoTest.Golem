@@ -14,6 +14,8 @@ using Gallio.Framework;
 using Gallio.Model;
 using Gallio.Common.Media;
 using Golem.Framework;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support.Events;
 
 namespace Golem.Framework
 {
@@ -55,7 +57,7 @@ namespace Golem.Framework
 
         #region Events
 #pragma warning disable 67
-        public static event ActionEvent BeforeTestEvent;
+        public static event ActionEvent  BeforeTestEvent;
 
         public static event ActionEvent AfterTestEvent;
         public static event ActionEvent PageObjectActionEvent;
@@ -262,8 +264,20 @@ namespace Golem.Framework
                         driver = new WebDriverBrowser().LaunchBrowser(browser);
                     }
                     
-                    LogEvent(browser.ToString() + " Browser Launched");
-                    testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser.ToString() + " Browser Launched");
+                    LogEvent(browser + " Browser Launched");
+                    testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser + " Browser Launched");
+                }
+                if (Config.Settings.appiumSettings.launchApp)
+                {
+                    DesiredCapabilities capabilities = new DesiredCapabilities();
+                    capabilities.SetCapability(CapabilityType.BrowserName, "");
+                    capabilities.SetCapability("device", Config.Settings.appiumSettings.appOs);
+                    capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);
+                    capabilities.SetCapability("app-package", Config.Settings.appiumSettings.package);
+                    capabilities.SetCapability("app-activity", Config.Settings.appiumSettings.activity);
+
+                    var tempDriver = new RemoteWebDriver(new Uri("http://127.0.0.1:4723/wd/hub"), capabilities);
+                    driver = new EventedWebDriver(tempDriver).driver;
                 }
             }
         }
@@ -294,6 +308,7 @@ namespace Golem.Framework
         [SetUp]
         public void SetUp()
         {
+            BeforeTestEvent("Before Test", null);
             LogEvent(Common.GetCurrentTestName() + " started");
             StartVideoRecording();
             StartProxy();

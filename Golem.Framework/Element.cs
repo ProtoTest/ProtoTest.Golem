@@ -20,7 +20,6 @@ namespace Golem.Framework
         {
             get
             {
-      
                     this._element = this.driver.FindElement(by);
                     return this._element;
             }
@@ -115,6 +114,7 @@ namespace Golem.Framework
 
         public void Click()
         {
+            WaitUntilVisible();
             element.Click();
         }
         public void Submit()
@@ -123,22 +123,24 @@ namespace Golem.Framework
         }
         public void SendKeys(string text)
         {
-
+            WaitUntilVisible();
             element.SendKeys(text);
         }
         public string GetAttribute(string attribute)
         {
-            return element.GetAttribute(attribute);
+            try
+            {
+                return element.GetAttribute(attribute);
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+            
         }
         public string GetCssValue(string text)
         {
             return element.GetCssValue(text);
-        }
-
-        public Element SetOption(string option)
-        {
-            driver.FindElement(this.by).SelectOption(option);
-            return this;
         }
 
         public Element SetCheckbox(bool isChecked)

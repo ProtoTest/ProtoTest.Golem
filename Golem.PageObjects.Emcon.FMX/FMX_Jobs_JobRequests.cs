@@ -248,8 +248,8 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_Jobs_JobRequests UploadDocument(string docType, string viewable, string description,
                                                    string pathToFile)
         {
-            new SelectElement(drp_DocumentType).SelectByText(docType);
-            new SelectElement(drp_ViewableOnWebsite).SelectByText(viewable);
+            //drp_DocumentType.SelectOption(docType);
+            //new SelectElement(drp_ViewableOnWebsite).SelectByText(viewable);
             txt_Description.Text = description;
             txt_UploadDocument.SendKeys(pathToFile);
             btn_Save.Click();
