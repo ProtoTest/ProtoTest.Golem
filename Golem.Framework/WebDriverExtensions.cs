@@ -72,7 +72,7 @@ namespace Golem.Framework
 
         public static IWebElement SelectOption(this IWebElement element, string option)
         {
-            element.FindElement(By.XPath("//option[contains(text(),'"+option+"')]")).Click();
+            new SelectElement(element).SelectByText(option);
             return element;
         }
 
