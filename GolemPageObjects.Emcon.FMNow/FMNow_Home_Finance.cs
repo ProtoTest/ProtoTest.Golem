@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Golem.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 
 namespace GolemPageObjects.Emcon.FMNow
@@ -54,7 +55,8 @@ namespace GolemPageObjects.Emcon.FMNow
             {
                 rd_ByTrade.WaitUntilVisible().Click();
             }
-            dd_StartFiscalMonth.FindElement(ByE.Text(FiscalYearMonth)).Click();
+            new SelectElement (dd_StartFiscalMonth).SelectByText(FiscalYearMonth);
+            //dd_StartFiscalMonth.WaitUntilVisible().FindElement(ByE.Text(FiscalYearMonth)).Click();
             dd_StartQuarter.FindElement(ByE.Text(StartQuarter)).Click();
             dd_EndQuarter.FindElement(ByE.Text(endQuarter)).Click();
             dd_StartYear.FindElement(ByE.Text(startYear)).Click();
