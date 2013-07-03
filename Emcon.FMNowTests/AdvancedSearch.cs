@@ -18,8 +18,8 @@ namespace Emcon.FMNowTests
             FMNow_WelcomePage.OpenFMNow(envURL)
                              .Login("bkitchener@prototest.com", "!Test1234")
                              .ClickSearchMainTab()
-                             .doAdvancedSearch("Bid Requests", "NJ", "On-Hold", "Standard", "Drywall",
-                                               "Drywall Installation"); //BLOCKED Searchs do not return results
+                             .doAdvancedSearch("Bid Request", "NJ", "On-Hold", "Standard", "Drywall",
+                                               "Drywall Installation"); 
         }
     }
 }

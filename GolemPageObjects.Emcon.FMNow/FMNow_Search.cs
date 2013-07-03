@@ -19,6 +19,7 @@ namespace GolemPageObjects.Emcon.FMNow
         Element dd_SearchTermsOne_Simple = new Element("SearchTermsDDOne_Simple", By.Id("ContentPlaceHolder1_tabsSearch_tabSimple_UcSimpleSearchForWorkOrders1_ddlSearchValue"));
         Element dd_SearchTermsTwo_Simple = new Element("SearchTermsDDTwo_Simple", By.Id("ContentPlaceHolder1_tabsSearch_tabSimple_UcSimpleSearchForWorkOrders1_ddlSearchValue2"));
         Element dd_SearchState_Simple = new Element("SearchTermsState", By.ClassName("ui-dropdownchecklist"));
+        Element table_ResultsGrid = new Element("ResultsGrid", By.Id("ContentPlaceHolder3_ucGrid_trExport"));
 
         private static List<string> ValuesWithSecondDD;
             
@@ -55,17 +56,20 @@ namespace GolemPageObjects.Emcon.FMNow
         public FMNow_Search doSimpleSearch(string option, string searchTerms, string secondSearchTerm = "[Not Sure]")
         {
             InitValuesWithSecondDD();
+            bool SimpleSimpleSearch = true;
             if (ValuesWithSecondDD.Contains(option))
             {
                 dd_Findrequest_Simple.WaitUntilVisible().SelectOption(option);
                 pleaseWait.WaitUntilNotVisible();
                 dd_SearchTermsOne_Simple.WaitUntilVisible().SelectOption(searchTerms);
+                SimpleSimpleSearch = false;
             }
             if (option == "State")
             {
                 dd_Findrequest_Simple.WaitUntilVisible().SelectOption(option);
                 pleaseWait.WaitUntilNotVisible();
                 dd_SearchState_Simple.WaitUntilVisible().FindElement(ByE.Text(searchTerms)).Click();
+                SimpleSimpleSearch = false;
             }
             if (option == "Type of Work")
             {
@@ -74,14 +78,18 @@ namespace GolemPageObjects.Emcon.FMNow
                 dd_SearchTermsOne_Simple.WaitUntilVisible().SelectOption(searchTerms);
                 pleaseWait.WaitUntilNotVisible();
                 dd_SearchTermsTwo_Simple.WaitUntilVisible().SelectOption(secondSearchTerm);
+                SimpleSimpleSearch = false;
             }
-            else
+            if(SimpleSimpleSearch)
             {
                 dd_Findrequest_Simple.WaitUntilVisible().SelectOption(option);
                 txt_SearchTerms_Simple.WaitUntilVisible().Text = searchTerms;
             }
             pleaseWait.WaitUntilNotVisible();
             btn_InitSearch_Simple.WaitUntilVisible().Click();
+            pleaseWait.WaitUntilNotVisible();
+            table_ResultsGrid.WaitUntilVisible();
+
             return new FMNow_Search();
         }
 

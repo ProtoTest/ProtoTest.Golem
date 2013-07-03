@@ -18,7 +18,7 @@ namespace Emcon.FMNowTests
             FMNow_WelcomePage.OpenFMNow(envURL)
                              .Login("bkitchener@prototest.com", "!Test1234")
                              .ClickSearchMainTab()
-                             .doSimpleSearch("Job Status", "On Hold"); //BLOCKED - no search results ever display
+                             .doSimpleSearch("Job Status", "On-Hold"); 
 
 
         }
