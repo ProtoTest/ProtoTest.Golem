@@ -69,7 +69,8 @@ namespace Golem.Framework
 #pragma warning restore 67
         private void WriteActionToLog(string name, EventArgs e)
         {
-            Common.Log("(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + name);
+            if(Config.Settings.reportSettings.commandLogging)
+                Common.Log("(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + name);
         }
         private void AddAction(string name, EventArgs e)
         {
@@ -168,14 +169,11 @@ namespace Golem.Framework
 
         public void QuitBrowser()
         {
+
             if (Config.Settings.runTimeSettings.LaunchBrowser)
             {
-                if (driver.CurrentWindowHandle != null)
-                {
                     driver.Quit();
                     LogEvent(browser.ToString() + " Browser Closed");
-                    //testData.actions.addAction(browser.ToString() + " Browser Closed");
-                }
             }
                 
         }
@@ -206,6 +204,21 @@ namespace Golem.Framework
             
         }
 
+        private void LogHttpTrafficMetrics()
+        {
+
+            if (Config.Settings.httpProxy.startProxy)
+            {
+                testData.proxy.GetSessionMetrics();
+                TestLog.BeginSection("HTTP Metrics");
+                TestLog.WriteLine("Number of Requests : " + testData.proxy.numSessions);
+                TestLog.WriteLine("Min Response Time : " + testData.proxy.minResponseTime);
+                TestLog.WriteLine("Max Response Time : " + testData.proxy.maxResponseTime);
+                TestLog.WriteLine("Avg Response Time : " + testData.proxy.avgResponseTime);
+                TestLog.End();
+            }
+        }
+
 
         private int GetNewProxyPort()
         {
@@ -213,13 +226,16 @@ namespace Golem.Framework
             return Config.Settings.httpProxy.proxyPort;
         }
 
-        private void GetHttpTraffic()
+        private void GetHTTPTrafficInfo()
         {
             if (Config.Settings.httpProxy.startProxy)
             {
                 string name = Common.GetShortTestName(80);
                 testData.proxy.SaveSessionsToFile();
                 TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".saz", "application/x-fiddler-session-archive", File.ReadAllBytes(testData.proxy.GetSazFilePath())));
+
+                LogHttpTrafficMetrics();
+                
                 testData.proxy.ClearSessionList();
             }
         }
@@ -231,7 +247,7 @@ namespace Golem.Framework
                 if (Config.Settings.httpProxy.startProxy)
                 {
                     
-                    testData.proxy = new FiddlerProxy(Config.Settings.httpProxy.proxyPort, true);
+                    testData.proxy = new FiddlerProxy();
                     testData.proxy.StartFiddler();
                 }
             }
@@ -327,7 +343,7 @@ namespace Golem.Framework
             QuitProxy();
             LogActions();
             AssertNoVerificationErrors();
-            GetHttpTraffic();
+            GetHTTPTrafficInfo();
             DeleteTestData();
 
 

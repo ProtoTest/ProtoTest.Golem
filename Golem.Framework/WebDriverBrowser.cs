@@ -42,9 +42,11 @@ namespace Golem.Framework
                     default:
                         driver = StartFirefoxBrowser();
                         break;
-                }
-            var eDriver = new EventedWebDriver(driver);
-            return eDriver.driver;
+              }
+            driver.Manage().Cookies.DeleteAllCookies();
+          //  var eDriver = new EventedWebDriver(driver);
+         //   return eDriver.driver;
+            return driver;
 
         }
 
@@ -54,7 +56,9 @@ namespace Golem.Framework
             if (Config.Settings.httpProxy.startProxy)
             {
                 Proxy proxy = new Proxy();
+                proxy.SslProxy = "localhost:" + Config.Settings.httpProxy.sslProxyPort;
                 proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
+                capabilities.SetCapability("proxy", proxy);
                 capabilities.SetCapability("proxy", proxy);
             }
             
@@ -68,6 +72,7 @@ namespace Golem.Framework
             if (Config.Settings.httpProxy.startProxy)
             {
                 Proxy proxy = new Proxy();
+                proxy.SslProxy = "localhost:" + Config.Settings.httpProxy.sslProxyPort;
                 proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
                 options.AddAdditionalCapability("proxy",proxy);
             } 
@@ -82,6 +87,7 @@ namespace Golem.Framework
             if (Config.Settings.httpProxy.startProxy)
             {
             Proxy proxy = new Proxy();
+            proxy.SslProxy = "localhost:" + Config.Settings.httpProxy.sslProxyPort;
             proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
             options.AddAdditionalCapability("proxy",proxy);    
             }
@@ -97,6 +103,7 @@ namespace Golem.Framework
             if (Config.Settings.httpProxy.startProxy)
             {
                 Proxy proxy = new Proxy();
+                proxy.SslProxy = @"localhost:" + Config.Settings.httpProxy.sslProxyPort;
                 proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
                 options.AddAdditionalCapability("proxy",proxy);
             } 

@@ -26,10 +26,16 @@ namespace Golem.Framework
         private static bool bUpdateTitle = true;
         private static Fiddler.Proxy oSecureEndpoint;
         private static string sSecureEndpointHostname = "localhost";
-        private static int iSecureEndpointPort = 7777;
+        private int iSecureEndpointPort;
         private int proxyPort;
         private bool systemProxy;
         private bool decryptSSL;
+        public int numSessions = 0;
+        public TimeSpan minResponseTime = TimeSpan.FromSeconds(30);
+        public TimeSpan maxResponseTime = TimeSpan.FromSeconds(0);
+        public TimeSpan avgResponseTime = TimeSpan.FromSeconds(0);
+        public TimeSpan currentSum = TimeSpan.FromSeconds(0);
+        public TimeSpan fiveToNinetyFire = TimeSpan.FromSeconds(0);
 
         private List<Fiddler.Session> oAllSessions;
 
@@ -37,18 +43,9 @@ namespace Golem.Framework
         {
             oAllSessions = new List<Fiddler.Session>();
             AttachEventListeners();
-            this.proxyPort = 8877;
+            this.iSecureEndpointPort = Config.Settings.httpProxy.sslProxyPort;
+            this.proxyPort = Config.Settings.httpProxy.proxyPort;
         }
-
-        public FiddlerProxy(int port, bool systemProxy=false)
-        {
-            oAllSessions = new List<Fiddler.Session>();
-            AttachEventListeners();
-            this.proxyPort = port;
-            this.systemProxy = systemProxy;
-            this.decryptSSL = true;
-        }
-
         public static void WriteCommandResponse(string s)
         {
            // Common.Log(s);
@@ -73,9 +70,28 @@ namespace Golem.Framework
             return s.Substring(0, iLen - 3) + "...";
         }
 
+        public void GetSessionMetrics()
+        {
+            Monitor.Enter(oAllSessions);
+            numSessions = oAllSessions.Count;
+            foreach (var oS in oAllSessions)
+            {
+                var duration = oS.Timers.ClientDoneResponse.Subtract(oS.Timers.ClientConnected);
+                currentSum += duration;
+                if (duration < minResponseTime)
+                    minResponseTime = duration;
+                if (duration > maxResponseTime)
+                    maxResponseTime = duration;
+            }
+            avgResponseTime = TimeSpan.FromMilliseconds(currentSum.TotalMilliseconds/(double) numSessions);
+            Monitor.Exit(oAllSessions); 
+
+
+        }
+
         private void AttachEventListeners()
         {
-
+ 
             Fiddler.FiddlerApplication.OnNotification +=
                 delegate(object sender, NotificationEventArgs oNEA)
                     { WriteCommandResponse("** NotifyUser: " + oNEA.NotifyString); };
@@ -85,16 +101,17 @@ namespace Golem.Framework
 
             Fiddler.FiddlerApplication.BeforeRequest += delegate(Fiddler.Session oS)
                 {
-                    oS.bBufferResponse = false;
+
+                    oS.bBufferResponse = true;
                     Monitor.Enter(oAllSessions);
                     oAllSessions.Add(oS);
                     Monitor.Exit(oAllSessions);
                     oS["X-AutoAuth"] = "(default)";
 
-                    //if it's a https request
                     if ((oS.oRequest.pipeClient.LocalPort == iSecureEndpointPort) &&
                         (oS.hostname == sSecureEndpointHostname))
                     {
+                        oS.bBufferResponse = true;
                         oS.utilCreateResponseAndBypassServer();
                         oS.oResponse.headers.HTTPResponseStatus = "200 Ok";
                         oS.oResponse["Content-Type"] = "text/html; charset=UTF-8";
@@ -104,10 +121,11 @@ namespace Golem.Framework
                                                " received. Your request was:<br /><plaintext>" +
                                                oS.oRequest.headers.ToString());
                     }
-                };
+            };
 
         }
-        public void ReadSessions()
+
+ public void ReadSessions()
         {
             TranscoderTuple oImporter = FiddlerApplication.oTranscoders.GetImporter("SAZ");
             if (null != oImporter)
@@ -247,7 +265,8 @@ namespace Golem.Framework
 
         public void StartFiddler()
         {
-            TestBaseClass.LogEvent("Starting Fiddler Proxy on port " + this.proxyPort);
+            
+            Common.Log("Starting Fiddler Proxy on port " + this.proxyPort);
             string sSAZInfo = "NoSAZ";
 
             if (!FiddlerApplication.oTranscoders.ImportTranscoders(Assembly.GetExecutingAssembly()))
@@ -261,20 +280,17 @@ namespace Golem.Framework
             Fiddler.CONFIG.IgnoreServerCertErrors = true;
             FiddlerApplication.Prefs.SetBoolPref("fiddler.network.streaming.abortifclientaborts", true);
 
-         
-            FiddlerCoreStartupFlags oFCSF = FiddlerCoreStartupFlags.Default;
 
-            Fiddler.FiddlerApplication.Startup(proxyPort,systemProxy,decryptSSL);
+            FiddlerCoreStartupFlags oFCSF =(FiddlerCoreStartupFlags.AllowRemoteClients |
+                    FiddlerCoreStartupFlags.DecryptSSL |
+                    FiddlerCoreStartupFlags.MonitorAllConnections |
+        //            FiddlerCoreStartupFlags.RegisterAsSystemProxy |
+                    FiddlerCoreStartupFlags.ChainToUpstreamGateway |
+                    FiddlerCoreStartupFlags.CaptureLocalhostTraffic);
 
+
+            Fiddler.FiddlerApplication.Startup(proxyPort, false,true,true);
             oSecureEndpoint = FiddlerApplication.CreateProxyEndpoint(iSecureEndpointPort, true, sSecureEndpointHostname);
-            if (null != oSecureEndpoint)
-            {
-                FiddlerApplication.Log.LogFormat(
-                    "Created secure end point listening on port {0}, using a HTTPS certificate for '{1}'",
-                    iSecureEndpointPort, sSecureEndpointHostname);
-            }
-
-
         }
     }
 }

@@ -104,6 +104,7 @@ namespace Golem.Framework
                 commandLogging = Common.IsTruthy(Config.GetConfigValue("CommandLogging","True"));
                 actionLogging= Common.IsTruthy(Config.GetConfigValue("ActionLogging","True"));
 
+
             }
             
         }
@@ -111,14 +112,15 @@ namespace Golem.Framework
         {
             public bool startProxy;
             public int proxyPort;
+            public int sslProxyPort;
             public HttpProxy()
             {
                 startProxy = Common.IsTruthy(Config.GetConfigValue("StartFiddlerProxy", "True"));
                 proxyPort = int.Parse(Config.GetConfigValue("ProxyPort", "8876"));
-
+                sslProxyPort = int.Parse(Config.GetConfigValue("SslProxyPort", "7777"));
             }
-            
-        }
+
+          }
 
         public class AppiumSettings
         {

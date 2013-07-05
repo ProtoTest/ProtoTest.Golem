@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Gallio.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -31,15 +32,32 @@ namespace Golem.Framework
         public static IWebElement WaitForVisible(this IWebDriver driver, By by, int timeout=0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
-            wait.Until(d => ((d.FindElements(by).Count>0)&&(d.FindElement(by).Displayed == true)));
-            return driver.FindElement(by);
+            for (var i = 0; i < timeout; i++)
+            {
+                if (driver.FindElements(by).Count != 0)
+                {
+                    var element = driver.FindElement(by);
+                    if (element.Displayed == true)
+                        return element;
+                }     
+                Thread.Sleep(1000);  
+            }
+            throw new ElementNotVisibleException("Element " + by.ToString() + " not visible after " + timeout + " seconds.");
+                
         }
         public static void WaitForNotVisible(this IWebDriver driver, By by, int timeout=0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d=>((d.FindElements(by).Count==0)||(d.FindElement(by).Displayed==false)));
+            for (var i = 0; i < timeout; i++)
+            {
+                if (driver.FindElements(by).Count == 0)
+                    return;
+                if (driver.FindElement(by).Displayed == false)
+                    return;
+                Thread.Sleep(1000);
+            }
+            throw new InvalidElementStateException("Element " + by.ToString() + " still visible after " + timeout + " seconds.");
         }
         public static IWebElement FindElementWithText(this IWebDriver driver, string text)
         {
@@ -130,7 +148,7 @@ namespace Golem.Framework
                 element.SendKeys(text);
             }
         }
-        //SU - 06/28/13 - added these java script functions
+
         public static void ExecuteJavaScript(this IWebDriver driver, string script)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
@@ -143,6 +161,25 @@ namespace Golem.Framework
             js.ExecuteScript("window.scrollBy(" + xCord + "," + yCord + ");");
 
         }     
+
+        public static void SelectNewWindow(this IWebDriver driver)
+        {
+            try
+            {
+                var currentHanlde = driver.CurrentWindowHandle;
+                foreach (var handle in (driver.WindowHandles))
+                {
+                    if (handle != currentHanlde)
+                        driver.SwitchTo().Window(handle);
+                }
+            }
+            catch (Exception)
+            {
+            }
+            
+        }
+
+
 
     }
 }
