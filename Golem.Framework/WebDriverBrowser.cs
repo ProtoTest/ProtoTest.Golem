@@ -44,8 +44,8 @@ namespace Golem.Framework
                         break;
               }
             driver.Manage().Cookies.DeleteAllCookies();
-          //  var eDriver = new EventedWebDriver(driver);
-         //   return eDriver.driver;
+            var eDriver = new EventedWebDriver(driver);
+            return eDriver.driver;
             return driver;
 
         }
@@ -58,7 +58,6 @@ namespace Golem.Framework
                 Proxy proxy = new Proxy();
                 proxy.SslProxy = "localhost:" + Config.Settings.httpProxy.sslProxyPort;
                 proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
-                capabilities.SetCapability("proxy", proxy);
                 capabilities.SetCapability("proxy", proxy);
             }
             
