@@ -342,11 +342,9 @@ namespace Golem.Framework
             QuitBrowser();
             QuitProxy();
             LogActions();
-            AssertNoVerificationErrors();
             GetHTTPTrafficInfo();
+            AssertNoVerificationErrors();
             DeleteTestData();
-
-
         }
 
         private void DeleteTestData()
