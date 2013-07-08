@@ -18,7 +18,8 @@ namespace Emcon.FMNowTests
             FMNow_WelcomePage.OpenFMNow(envURL)
                              .Login("bkitchener@prototest.com", "!Test1234")
                              .ClickRequestMainTab()
-                             .SearchLocation("NJ"); //BLOCKED at this point no search returns data
+                             .SearchLocation("NJ")
+                             .SelectFirstResult("Request.cs", "001", "Doors", "Doors-Metal");
         }
 
     }
