@@ -14,7 +14,7 @@ namespace Emcon.FMXTests
     {
         private string envUrl = Config.GetConfigValue("EnvironmentUrl", "http://demo.fmx.bz/");
         [Test(Order = 3)]
-        [TestsOn("2 - Charts")]
+        [TestsOn("3- Quick Search")]
         public void DashboardTest()
         {
             FmXwelcomePage.OpenFMX(envUrl)
