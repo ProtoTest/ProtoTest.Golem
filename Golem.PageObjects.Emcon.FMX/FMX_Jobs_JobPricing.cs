@@ -26,10 +26,10 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobPricing Select_AR_AP_NoPricing()
         {
-            
-            drpOpt_APStatus_NoPricing.Click();
-            drp_ARStatus.Click();
-            drpOpt_ArStatus_NoPricing.Click();
+            drp_APStatus.WaitUntilVisible().Click();
+            drpOpt_APStatus_NoPricing.WaitUntilVisible().Click();
+            drp_ARStatus.WaitUntilVisible().Click();
+            drpOpt_ArStatus_NoPricing.WaitUntilVisible().Click();
             return new FMX_Jobs_JobPricing();
         }
 

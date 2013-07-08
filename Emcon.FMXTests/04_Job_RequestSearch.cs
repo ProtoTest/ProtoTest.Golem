@@ -21,7 +21,7 @@ namespace Emcon.FMXTests
                           .Login("PROTOTEST", "!TEST1234")
                           .ClickJobs()
                           .SearchJobs()
-                          .DynamicSearch("Emcon")
+                          .DynamicSearch("Emcon Test")
                           .CloseSearchPopUp()
                           .VerifyRequestPresent("Emcon");
         }

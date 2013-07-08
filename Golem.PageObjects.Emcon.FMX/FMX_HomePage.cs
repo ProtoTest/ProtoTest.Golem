@@ -28,7 +28,7 @@ namespace Golem.PageObjects.Emcon.FMX
         //Jobs functions
         public FMX_JobsTab ClickJobs()
         {
-            tab_Jobs.Click();
+            tab_Jobs.WaitUntilPresent().Click();
             return new FMX_JobsTab();
         }
         public FMX_Jobs_JobRequests NewJobRequest()

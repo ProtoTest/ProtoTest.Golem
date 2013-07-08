@@ -36,10 +36,12 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_HomePage Login(string UserName, string Password)
         {
             //Common.GetCurrentClassAndMethodName();
-            txt_UserName.SendKeys(UserName); 
-            txt_mockPass.Click();
-            txt_Password.Text = Password;
-            btn_Login.Click();
+            txt_UserName.WaitUntilPresent();
+            txt_UserName.WaitUntilVisible().Text = UserName;
+            txt_mockPass.WaitUntilPresent();
+            txt_mockPass.WaitUntilVisible().Click();
+            txt_Password.WaitUntilVisible().Text = Password;
+            btn_Login.WaitUntilVisible().Click();
             return new FMX_HomePage();
         }
         

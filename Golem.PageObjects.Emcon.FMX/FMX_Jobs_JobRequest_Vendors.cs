@@ -21,13 +21,14 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequest_Vendors AddVendor(string vendorType)
         {
-            Trade.WaitUntilVisible().FindElement(ByE.PartialText(vendorType)).Click();
+            Trade.WaitUntilVisible().FindElement(ByE.PartialText(vendorType));
             pleaseWait.WaitUntilNotVisible();
             VendorSearch.WaitUntilVisible().Click();
             pleaseWait.WaitUntilNotVisible();
             PopUpVendorSearch.WaitUntilVisible();
             FirstVendor.WaitUntilVisible().Click();
             pleaseWait.WaitUntilNotVisible();
+            //Thread.Sleep(1000);
             AcceptVendor.WaitUntilVisible().Click();
             pleaseWait.WaitUntilNotVisible();
             PopUpVendorSearch.WaitUntilNotVisible();

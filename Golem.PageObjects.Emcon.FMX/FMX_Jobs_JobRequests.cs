@@ -133,16 +133,16 @@ namespace Golem.PageObjects.Emcon.FMX
                                             string requesterName, string requesterTitle, string requestDescription)
         {
             pleaseWait.WaitUntilNotVisible();
-            dd_BusinessType.FindElement(ByE.Text(businessType)).Click();
+            dd_BusinessType.WaitUntilVisible().SelectOption(businessType).Click();
             pleaseWait.WaitUntilNotVisible();
             //there is a check here to see if team has available business types --this test assumes you know which team's go with which business types
-            dd_Team.FindElement(ByE.Text(businessTeam)).Click();
+            dd_Team.WaitUntilVisible().SelectOption(businessTeam).Click();
             pleaseWait.WaitUntilNotVisible();
-            dd_RequestSource.FindElement(ByE.Text(requestSource)).Click();
-            txt_RequesterName.VerifyVisible(5);
-            txt_RequesterName.Text = requesterName;
-            txt_RequesterTitle.Text = requesterTitle;
-            txt_RequestDescription.Text = requestDescription;
+            dd_RequestSource.WaitUntilVisible().SelectOption(requestSource).Click();
+            //dd_RequestSource.FindElement(ByE.Text(requestSource)).Click();
+            txt_RequesterName.WaitUntilVisible().Text = requesterName;
+            txt_RequesterTitle.WaitUntilVisible().Text = requesterTitle;
+            txt_RequestDescription.WaitUntilVisible().Text = requestDescription;
             btn_SaveJobRequest.Click();
             return new FMX_Jobs_JobRequests();
         }
@@ -212,13 +212,13 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_Jobs_JobRequest_Vendors AddWorkScopes(string trade, string subTrade, string description)
         {
             pleaseWait.WaitUntilNotVisible();
-            dd_JobRequests_WorkScope_Trade.VerifyVisible();
-            dd_JobRequests_WorkScope_Trade.FindElement(ByE.Text(trade)).Click();
+            
+            dd_JobRequests_WorkScope_Trade.WaitUntilVisible().SelectOption(trade).Click();
             pleaseWait.WaitUntilNotVisible();
-            dd_JobRequests_WorkScope_SubTrade.VerifyVisible();
-            dd_JobRequests_WorkScope_SubTrade.FindElement(ByE.Text(subTrade)).Click(); //Sub-Trade is dependant on options selected from Trade
-            txt_JobRequests_WorkScope_WSDescription.Text += description;
-            btn_JobRequests_WorkScope_Save.Click();
+            
+            dd_JobRequests_WorkScope_SubTrade.WaitUntilVisible().SelectOption(subTrade).Click(); //Sub-Trade is dependant on options selected from Trade
+            txt_JobRequests_WorkScope_WSDescription.WaitUntilVisible().Text += description;
+            btn_JobRequests_WorkScope_Save.WaitUntilVisible().Click();
             return new FMX_Jobs_JobRequest_Vendors();
         }
 
