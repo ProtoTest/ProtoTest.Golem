@@ -18,6 +18,7 @@ namespace Emcon.FMXTests
         [TestsOn("1 - Login")]
         public void LoginTest()
         {
+            var delay = Config.Settings.runTimeSettings.CommandDelayMs;
             FmXwelcomePage.OpenFMX(envUrl).Login("PROTOTEST", "!TEST1234").VerifyResult("EmconMessageBoard");
         }
     }

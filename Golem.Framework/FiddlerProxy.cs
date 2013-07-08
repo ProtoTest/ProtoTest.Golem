@@ -266,7 +266,7 @@ namespace Golem.Framework
         public void StartFiddler()
         {
             
-            Common.Log("Starting Fiddler Proxy on port " + this.proxyPort);
+            //Common.Log("Starting Fiddler Proxy on port " + this.proxyPort);
             string sSAZInfo = "NoSAZ";
 
             if (!FiddlerApplication.oTranscoders.ImportTranscoders(Assembly.GetExecutingAssembly()))
