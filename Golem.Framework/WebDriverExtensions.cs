@@ -32,32 +32,15 @@ namespace Golem.Framework
         public static IWebElement WaitForVisible(this IWebDriver driver, By by, int timeout=0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            for (var i = 0; i < timeout; i++)
-            {
-                if (driver.FindElements(by).Count != 0)
-                {
-                    var element = driver.FindElement(by);
-                    if (element.Displayed == true)
-                        return element;
-                }     
-                Thread.Sleep(1000);  
-            }
-            throw new ElementNotVisibleException("Element " + by.ToString() + " not visible after " + timeout + " seconds.");
-                
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
+            wait.Until(d => ((d.FindElements(by).Count > 0) && (d.FindElement(by).Displayed == true)));
+            return driver.FindElement(by);
         }
         public static void WaitForNotVisible(this IWebDriver driver, By by, int timeout=0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-            for (var i = 0; i < timeout; i++)
-            {
-                if (driver.FindElements(by).Count == 0)
-                    return;
-                if (driver.FindElement(by).Displayed == false)
-                    return;
-                Thread.Sleep(1000);
-            }
-            throw new InvalidElementStateException("Element " + by.ToString() + " still visible after " + timeout + " seconds.");
+            wait.Until(d => ((d.FindElements(by).Count == 0) || (d.FindElement(by).Displayed == false)));
         }
         public static IWebElement FindElementWithText(this IWebDriver driver, string text)
         {
