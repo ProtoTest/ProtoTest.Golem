@@ -193,7 +193,7 @@ namespace Golem.Framework
             }
         }
 
-        public static void ExecuteCommandAsync(string command)
+        public static Thread ExecuteCommandAsync(string command)
         {
             try
             {
@@ -209,6 +209,7 @@ namespace Golem.Framework
                 //Set the Priority of the thread.
                 //Start the thread.
                 objThread.Start(command);
+                return objThread;
             }
             catch (ThreadStartException objException)
             {
@@ -222,6 +223,7 @@ namespace Golem.Framework
             {
                 // Log the exception
             }
+            return null;
         }
 
         private static Image ScaleImage(Image image, double scale = .5)

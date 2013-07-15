@@ -34,8 +34,8 @@ namespace Golem.Framework
             this.host = host;
             this.port = port;
             this.timeoutMin = timeoutMin;
-            this.description = GetScriptDescription();
             this.scriptPath += suitePath + "\\Scripts\\" + scriptName + ".script";
+            this.description = GetScriptDescription();
             VerifyScriptExists();
             Connect(host);
         }
@@ -54,7 +54,7 @@ namespace Golem.Framework
             }
             catch (Exception e)
             {
-                DiagnosticLog.WriteLine("Error caught connecting to host : " + e.Message);
+                throw new SilentTestException(TestOutcome.Canceled,"Error caught connecting to device " + this.host + " : " + e.Message);
             }
         }
         
@@ -71,7 +71,6 @@ namespace Golem.Framework
 
             Gallio.Common.Action executeTest = new Gallio.Common.Action(delegate
             {
-
                 ExecuteScript();
                 VerifySuccess();
                 AttachTestFiles();
@@ -119,6 +118,8 @@ namespace Golem.Framework
 
         private string GetScriptDescription()
         {
+            if(!File.Exists(scriptPath))
+                throw new FileNotFoundException("Could not find script file at path : " + scriptPath);
             string path = scriptPath;
             System.IO.StreamReader file = new System.IO.StreamReader(path);
             string line = "";

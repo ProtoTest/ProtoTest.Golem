@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<EggPlantSettings>
+<EggPlantSettings drivePort="5400">
   <RunScript path="C:\Program Files (x86)\eggPlant\runscript.bat"/>
   <Suite repeat="1" path="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite">
     <Test repeat="3" retry="3" >
@@ -9,6 +9,11 @@
       <Script scriptName ="Shelter_Stability_Test_30_33_35"  host="10.10.1.211" port="5901" timeout="10"></Script>
     </Test>
     <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_01A1"  host="10.10.1.210" port="5901" timeout="10"></Script>
+      <Script scriptName ="Shelter_Stability_Test_01B1_07"  host="10.10.1.211" port="5901" timeout="10"></Script>
+      <Script scriptName ="Shelter_Stability_Test_01A2"  host="10.10.1.210" port="5901" timeout="10"></Script>
+    </Test>
+    <!--<Test repeat="3" retry="3" >
       <Script scriptName ="Shelter_Stability_Test_37_39"  host="10.10.1.211" port="5901" timeout="10"></Script>
     </Test>
     <Test repeat="3" retry="3" >
@@ -43,6 +48,6 @@
     </Test>
     <Test repeat="3" retry="3" >
       <Script scriptName ="Shelter_Stability_Test_67"  host="10.10.1.211" port="5901" timeout="10"></Script>
-    </Test>
+    </Test>-->
   </Suite>
 </EggPlantSettings>

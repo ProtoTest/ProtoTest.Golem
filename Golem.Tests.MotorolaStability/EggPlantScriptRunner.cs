@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using CookComputing.XmlRpc;
@@ -16,7 +17,8 @@ namespace Golem.TestRunners.EggPlant
 {
     public class EggPlantScriptRunner
     {
-        private static Process cmdProcess;
+        private static string configFilePath = Directory.GetCurrentDirectory() + "\\TestConfig.xml";
+        private static Thread cmdProcess;
         private string runScriptPath;
         private string suitePath;
         private XmlNodeList tests;
@@ -44,7 +46,7 @@ namespace Golem.TestRunners.EggPlant
             driver = (IEggPlantDriver)XmlRpcProxyGen.Create(typeof(IEggPlantDriver));
             driver.Timeout = 600000;
             GetConfigFileSettings();
-          //  StartEggPlantDrive();
+            StartEggPlantDrive();
             StartEggPlantSession();
             DeleteResultsDirectory();
         }
@@ -55,31 +57,66 @@ namespace Golem.TestRunners.EggPlant
         public void Teardown()
         {
             EndEggPlantSession();
-           // StopEggPlantDrive();
+            StopEggPlantDrive();
             DiagnosticLog.WriteLine("Test Finished, exiting!");
+        }
+
+        private string GetValueFromConfigFile(string xpath)
+        {
+           XmlDocument configFile = new XmlDocument();
+            if (!File.Exists(configFilePath))
+            {
+                throw new FileNotFoundException("Could not find xml file at : " + configFilePath);
+            }
+            configFile.Load(configFilePath);
+            if(configFile.SelectNodes(xpath).Count==0)
+                throw new KeyNotFoundException("Could not find an element matching xpath : " + xpath + " in file " + configFilePath);
+            return configFile.SelectSingleNode(xpath).Value;
+           
+        }
+
+        private XmlNodeList GetNodesFromConfigFile(string xpath)
+        {
+            XmlDocument configFile = new XmlDocument();
+            if (!File.Exists(configFilePath))
+            {
+                throw new FileNotFoundException("Could not find xml file at : " + configFilePath);
+            }
+            configFile.Load(configFilePath);
+            if (configFile.SelectNodes(xpath).Count == 0)
+                throw new KeyNotFoundException("Could not find an element matching xpath : " + xpath + " in file " + configFilePath);
+            return configFile.SelectNodes(xpath);
+
+        }
+
+        private string GetValueFromNode(string value, XmlNode node)
+        {
+            if (node.SelectNodes(value).Count == 0)
+            {
+                throw new KeyNotFoundException("Could not find an element matching xpath : " + value + " in file " + configFilePath);
+            }
+            return node.SelectSingleNode(value).Value;
         }
 
         private void GetConfigFileSettings()
         {
             XmlDocument configFile = new XmlDocument();
-            configFile.Load(Directory.GetCurrentDirectory() + "\\TestConfig.xml");
-            suitePath = configFile.SelectSingleNode("//Suite/@path").Value;
-            tests = configFile.SelectNodes("//Test");
-            runScriptPath = configFile.SelectSingleNode("//RunScript/@path").Value;
-            drivePort = configFile.SelectSingleNode("//EggPlantSettings/@drivePort").Value;
+            suitePath = GetValueFromConfigFile("//Suite/@path");
+            tests = GetNodesFromConfigFile("//Test");
+            runScriptPath = GetValueFromConfigFile("//RunScript/@path");
+            drivePort = GetValueFromConfigFile("//EggPlantSettings/@drivePort");
 
             if (!Directory.Exists(suitePath))
-                Assert.Fail("Could not find suite. Check your TestConfig.xml suite path");
+                throw new SilentTestException(TestOutcome.Canceled,"Could not find suite. Check your TestConfig.xml suite path");
             if (!File.Exists(runScriptPath))
-                Assert.Fail("Could not find runScript. Check your TestConfig.xml runscript path");
+                throw new SilentTestException(TestOutcome.Canceled,"Could not find runScript. Check your TestConfig.xml runscript path");
         }
 
         private void StopEggPlantDrive()
         {
             try
             {
-                cmdProcess.Close();
-                cmdProcess.Kill();
+                cmdProcess.Abort();
             }
             catch (Exception)
             {
@@ -105,9 +142,9 @@ namespace Golem.TestRunners.EggPlant
             {
                 driver.StartSession(suitePath);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                
+                throw new SilentTestException(TestOutcome.Canceled, "Exception Caught Starting EggPLant Session for suite : " + suitePath + " Check the log to see if drive started correctly : " + e.Message);
             }
             
         }
@@ -125,11 +162,11 @@ namespace Golem.TestRunners.EggPlant
             {
                 string command = "";
                 command += String.Format("\"{0}\" -driveport {1}", runScriptPath, drivePort);
-                cmdProcess = Common.ExecuteDosCommand(command,false);
+                cmdProcess = Common.ExecuteCommandAsync(command);
             }
             catch (Exception e)
             {
-                DiagnosticLog.WriteLine("Exception Caught Starting EggPLant Drive: " + e.Message);
+               throw new SilentTestException(TestOutcome.Canceled,"Exception Caught Starting EggPLant Drive: " + e.Message);
             }
         }
 
@@ -150,8 +187,8 @@ namespace Golem.TestRunners.EggPlant
             {
                 XmlNodeList scripts = test.ChildNodes;
                 testFailed = false;
-                repeat = int.Parse(test.SelectSingleNode("@repeat").Value);
-                retry = int.Parse(test.SelectSingleNode("@retry").Value);
+                repeat = int.Parse(GetValueFromNode("@repeat",test));
+                retry = int.Parse(GetValueFromNode("@retry",test));
                 TestOutcome outcome = TestOutcome.Inconclusive;
 
                 for (int i = 0; i < repeat; i++)
@@ -159,9 +196,9 @@ namespace Golem.TestRunners.EggPlant
                         foreach (XmlNode script in scripts)
                         {
                             scriptName = script.SelectSingleNode("@scriptName").Value;
-                            host = script.SelectSingleNode("@host").Value;
-                            port = script.SelectSingleNode("@port").Value;
-                            timeout = int.Parse(script.SelectSingleNode("@timeout").Value);//min 
+                            host = GetValueFromNode("@host",script);
+                            port = GetValueFromNode("@port", script);
+                            timeout = int.Parse(GetValueFromNode("@timeout",script));//min 
                             string name = scriptName + " : Iteration #" + (i + 1).ToString();
                             EggPlantScript eScript = new EggPlantScript(driver,suitePath,scriptName,host,port, timeout);
                             outcome = eScript.ExecuteTest(name);
@@ -177,10 +214,10 @@ namespace Golem.TestRunners.EggPlant
                         {
                             foreach (XmlNode script in scripts)
                             {
-                                scriptName = script.SelectSingleNode("@scriptName").Value;
-                                host = script.SelectSingleNode("@host").Value;
-                                port = script.SelectSingleNode("@port").Value;
-                                timeout = int.Parse(script.SelectSingleNode("@timeout").Value);
+                                scriptName = GetValueFromNode("@scriptName", script);
+                                host = GetValueFromNode("@host",script);
+                                port = GetValueFromNode("@port", script);
+                                timeout = int.Parse(GetValueFromNode("@timeout",script));
 
                                 string name = scriptName + " : Iteration #" + (i + 1).ToString() + " : Retry : " + (j+1).ToString();
                                 EggPlantScript eScript = new EggPlantScript(driver, suitePath, scriptName, host, port, timeout);
@@ -202,6 +239,8 @@ namespace Golem.TestRunners.EggPlant
 
             if(testFailed==true)
                 Assert.TerminateSilently(TestOutcome.Failed);
+            StopEggPlantDrive();
+            StartEggPlantDrive();
         }
     }
 }
