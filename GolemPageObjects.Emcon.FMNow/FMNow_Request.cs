@@ -41,7 +41,7 @@ namespace GolemPageObjects.Emcon.FMNow
             pleaseWait.WaitUntilNotVisible();
             txt_SearchFor.WaitUntilVisible().Text = searchTerms;
             btn_StartSearchLocation.WaitUntilVisible().Click();
-            //BLOCKED at this point 
+             
             return new FMNow_Request();
         }
 
