@@ -28,6 +28,7 @@ namespace Golem.Framework
         private IEggPlantDriver driver;
         public EggPlantScript(IEggPlantDriver driver, string suitePath, string scriptName, string host, string port, int timeoutMin)
         {
+
             this.driver = driver;
             this.suitePath = suitePath;
             this.scriptName = scriptName;
@@ -49,6 +50,7 @@ namespace Golem.Framework
         {
             try
             {
+                Common.Log("Trying to connect to host : " + host);
                 driver.Execute("Connect (name:\"" + host + "\")");
 
             }
@@ -61,14 +63,13 @@ namespace Golem.Framework
 
         private void ExecuteScript()
         {
-            DiagnosticLog.WriteLine("Executing test : " + this.scriptName);
+            Common.Log("Executing test : " + this.scriptName);
             TestLog.WriteLine(description);
             driver.Execute("RunWithNewResults("+scriptName+")");
         }
 
         public TestOutcome ExecuteTest(string testName)
         {
-
             Gallio.Common.Action executeTest = new Gallio.Common.Action(delegate
             {
                 ExecuteScript();
@@ -138,15 +139,15 @@ namespace Golem.Framework
 
         private void VerifySuccess()
         {
-            DiagnosticLog.WriteLine("Verifying Test : " + this.scriptName);
+            Common.Log("Verifying Test : " + this.scriptName);
             XmlDocument resultsFile = new XmlDocument();
             string file = getResultDirectory() + "\\LogFile.xml";
-            DiagnosticLog.WriteLine("Checking results file : " + file);
+            Common.Log("Checking results file : " + file);
             resultsFile.Load(file);
             var result = resultsFile.SelectSingleNode("//property[@name='Status']/@value").Value;
             if (result != "Success")
             {
-                DiagnosticLog.WriteLine("Test Failure Detected : " + this.scriptName);
+                Common.Log("Test Failure Detected : " + this.scriptName);
                 TestContext.CurrentContext.IncrementAssertCount();
                 TestLog.Failures.BeginSection("EggPlant Error");
                 TestLog.Failures.WriteLine(GetFailureMessage());
