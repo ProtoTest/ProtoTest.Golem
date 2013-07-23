@@ -122,6 +122,7 @@ namespace Golem.TestRunners.EggPlant
             driver = (IEggPlantDriver)XmlRpcProxyGen.Create(typeof(IEggPlantDriver));
             driver.Timeout = 600000;
             GetConfigFileSettings();
+            StopEggPlantDrive();
             StartEggPlantDrive();
             StartEggPlantSession();
             DeleteResultsDirectory();
@@ -192,6 +193,7 @@ namespace Golem.TestRunners.EggPlant
         {
             try
             {
+                
                 Common.KillProcess("Eggplant");
             }
             catch (Exception e)
@@ -217,6 +219,7 @@ namespace Golem.TestRunners.EggPlant
         {
             try
             {
+                Common.Log("Starting eggplant session for suite : " + suitePath);
                 driver.StartSession(suitePath);
             }
             catch (Exception e)
@@ -228,19 +231,23 @@ namespace Golem.TestRunners.EggPlant
 
         private void DeleteResultsDirectory()
         {
-
             if (Directory.Exists(suitePath + "\\Results"))
+            {
+                Common.Log("Old results found, deleting Eggplant results directory");
                 Directory.Delete(suitePath + "\\Results", true);
+            }
         }
 
         public void StartEggPlantDrive()
         {
             try
             {
+                Common.Log("Starting Eggplant Drive");
                 // string command = "";
                 // command += String.Format("\"{0}\" -driveport {1}", runScriptPath, drivePort);
-                cmdProcess = Common.ExecuteBatchFile(@"C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite\RunDrive.bat");
-                Thread.Sleep(10000);
+                
+                cmdProcess = Common.ExecuteBatchFile(suitePath + "\\RunDrive.bat");
+                Thread.Sleep(15000);
             }
             catch (Exception e)
             {

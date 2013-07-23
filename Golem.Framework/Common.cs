@@ -19,13 +19,18 @@ namespace Golem.Framework
             Process[] runningProcesses = Process.GetProcesses();
             foreach (Process process in runningProcesses)
             {
-                if(process.ProcessName==name)
-                        process.Kill();
+                if (process.ProcessName == name)
+                {
+                    Common.Log("Killing Process : "+ name);
+                    process.Kill();
+                }
             }
         }
 
         public static Process ExecuteBatchFile(string filePath)
         {
+            if(!File.Exists(filePath))
+                    throw new SilentTestException(TestOutcome.Failed,"Could not find batch file : " + filePath);
             return System.Diagnostics.Process.Start(filePath);
         }
         public static Process ExecuteDosCommand(string command, bool waitToFinish=true)
