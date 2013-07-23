@@ -195,10 +195,11 @@ namespace Golem.TestRunners.EggPlant
             {
                 
                 Common.KillProcess("Eggplant");
+                Thread.Sleep(5000);
             }
             catch (Exception e)
             {
-
+                TestLog.Warnings.WriteLine("Exception caught stopping eggplant drive " + e.Message);
             }
 
         }
@@ -211,7 +212,7 @@ namespace Golem.TestRunners.EggPlant
             }
             catch (Exception e)
             {
-                //throw new SilentTestException(TestOutcome.Failed, "Exception Caught Ending EggPLant Session for suite : " + suitePath + e.Message);
+                TestLog.Warnings.WriteLine("Exception Caught Ending EggPLant Session for suite : " + suitePath + e.Message);
             }
         }
 
@@ -219,12 +220,12 @@ namespace Golem.TestRunners.EggPlant
         {
             try
             {
-               // Common.Log("Starting eggplant session for suite : " + suitePath);
+                Common.Log("Starting eggplant session for suite : " + suitePath);
                 driver.StartSession(suitePath);
             }
             catch (Exception e)
             {
-               // throw new SilentTestException(TestOutcome.Failed, "Exception Caught Starting EggPLant Session for suite : " + suitePath + " Check the log to see if drive started correctly : " + e.Message);
+               TestLog.Warnings.WriteLine("Exception Caught Starting EggPLant Session for suite : " + suitePath + " Check the log to see if drive started correctly : " + e.Message);
             }
 
         }
@@ -247,11 +248,11 @@ namespace Golem.TestRunners.EggPlant
                 // command += String.Format("\"{0}\" -driveport {1}", runScriptPath, drivePort);
                 
                 cmdProcess = Common.ExecuteBatchFile(suitePath + "\\RunDrive.bat");
-                Thread.Sleep(15000);
+                Thread.Sleep(20000);
             }
             catch (Exception e)
             {
-                throw new SilentTestException(TestOutcome.Failed, "Exception Caught Starting EggPLant Drive: " + e.Message);
+                TestLog.Warnings.WriteLine("Exception Caught Starting EggPLant Drive: " + e.Message);
             }
         }
     }
