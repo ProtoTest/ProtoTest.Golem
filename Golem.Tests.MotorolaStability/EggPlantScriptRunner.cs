@@ -211,7 +211,7 @@ namespace Golem.TestRunners.EggPlant
             }
             catch (Exception e)
             {
-                throw new SilentTestException(TestOutcome.Failed, "Exception Caught Ending EggPLant Session for suite : " + suitePath + e.Message);
+                //throw new SilentTestException(TestOutcome.Failed, "Exception Caught Ending EggPLant Session for suite : " + suitePath + e.Message);
             }
         }
 
@@ -219,12 +219,12 @@ namespace Golem.TestRunners.EggPlant
         {
             try
             {
-                Common.Log("Starting eggplant session for suite : " + suitePath);
+               // Common.Log("Starting eggplant session for suite : " + suitePath);
                 driver.StartSession(suitePath);
             }
             catch (Exception e)
             {
-                throw new SilentTestException(TestOutcome.Failed, "Exception Caught Starting EggPLant Session for suite : " + suitePath + " Check the log to see if drive started correctly : " + e.Message);
+               // throw new SilentTestException(TestOutcome.Failed, "Exception Caught Starting EggPLant Session for suite : " + suitePath + " Check the log to see if drive started correctly : " + e.Message);
             }
 
         }
