@@ -18,14 +18,15 @@ namespace Golem.TestRunners.EggPlant
     public class EggPlantScriptRunner
     {
         private static string configFilePath = Directory.GetCurrentDirectory() + "\\TestConfig.xml";
-        private static Thread cmdProcess;
+        private static Process cmdProcess;
         private string runScriptPath;
         private string suitePath;
         private XmlNodeList tests;
         private string drivePort;
         private IEggPlantDriver driver;
 
-        [Factory("GetNumRepetitions")] public int repetition;
+        [Factory("GetNumRepetitions")]
+        public int repetition;
 
         public static IEnumerable<int> GetNumRepetitions()
         {
@@ -40,136 +41,7 @@ namespace Golem.TestRunners.EggPlant
 
         }
 
-        [FixtureSetUp]
-        public void Setup()
-        {
-            driver = (IEggPlantDriver)XmlRpcProxyGen.Create(typeof(IEggPlantDriver));
-            driver.Timeout = 600000;
-            GetConfigFileSettings();
-            StartEggPlantDrive();
-            StartEggPlantSession();
-            DeleteResultsDirectory();
-        }
-
-
-
-        [FixtureTearDown]
-        public void Teardown()
-        {
-            EndEggPlantSession();
-            StopEggPlantDrive();
-            DiagnosticLog.WriteLine("Test Finished, exiting!");
-        }
-
-        private string GetValueFromConfigFile(string xpath)
-        {
-           XmlDocument configFile = new XmlDocument();
-            if (!File.Exists(configFilePath))
-            {
-                throw new FileNotFoundException("Could not find xml file at : " + configFilePath);
-            }
-            configFile.Load(configFilePath);
-            if(configFile.SelectNodes(xpath).Count==0)
-                throw new KeyNotFoundException("Could not find an element matching xpath : " + xpath + " in file " + configFilePath);
-            return configFile.SelectSingleNode(xpath).Value;
-           
-        }
-
-        private XmlNodeList GetNodesFromConfigFile(string xpath)
-        {
-            XmlDocument configFile = new XmlDocument();
-            if (!File.Exists(configFilePath))
-            {
-                throw new FileNotFoundException("Could not find xml file at : " + configFilePath);
-            }
-            configFile.Load(configFilePath);
-            if (configFile.SelectNodes(xpath).Count == 0)
-                throw new KeyNotFoundException("Could not find an element matching xpath : " + xpath + " in file " + configFilePath);
-            return configFile.SelectNodes(xpath);
-
-        }
-
-        private string GetValueFromNode(string value, XmlNode node)
-        {
-            if (node.SelectNodes(value).Count == 0)
-            {
-                throw new KeyNotFoundException("Could not find an element matching xpath : " + value + " in file " + configFilePath);
-            }
-            return node.SelectSingleNode(value).Value;
-        }
-
-        private void GetConfigFileSettings()
-        {
-            XmlDocument configFile = new XmlDocument();
-            suitePath = GetValueFromConfigFile("//Suite/@path");
-            tests = GetNodesFromConfigFile("//Test");
-            runScriptPath = GetValueFromConfigFile("//RunScript/@path");
-            drivePort = GetValueFromConfigFile("//EggPlantSettings/@drivePort");
-
-            if (!Directory.Exists(suitePath))
-                throw new SilentTestException(TestOutcome.Canceled,"Could not find suite. Check your TestConfig.xml suite path");
-            if (!File.Exists(runScriptPath))
-                throw new SilentTestException(TestOutcome.Canceled,"Could not find runScript. Check your TestConfig.xml runscript path");
-        }
-
-        private void StopEggPlantDrive()
-        {
-            try
-            {
-                cmdProcess.Abort();
-            }
-            catch (Exception)
-            {
-
-            }
-            
-        }
-
-        private void EndEggPlantSession()
-        {
-            try
-            {
-                driver.EndSession();
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void StartEggPlantSession()
-        {
-            try
-            {
-                driver.StartSession(suitePath);
-            }
-            catch (Exception e)
-            {
-                throw new SilentTestException(TestOutcome.Canceled, "Exception Caught Starting EggPLant Session for suite : " + suitePath + " Check the log to see if drive started correctly : " + e.Message);
-            }
-            
-        }
-
-        private void DeleteResultsDirectory()
-        {
-
-            if (Directory.Exists(suitePath + "\\Results"))
-                Directory.Delete(suitePath + "\\Results", true);
-        }
-
-        public void StartEggPlantDrive()
-        {
-            try
-            {
-                string command = "";
-                command += String.Format("\"{0}\" -driveport {1}", runScriptPath, drivePort);
-                cmdProcess = Common.ExecuteCommandAsync(command);
-            }
-            catch (Exception e)
-            {
-               throw new SilentTestException(TestOutcome.Canceled,"Exception Caught Starting EggPLant Drive: " + e.Message);
-            }
-        }
-
+        
         [Test]
         [MultipleAsserts]
         [Timeout(0)]
@@ -182,7 +54,6 @@ namespace Golem.TestRunners.EggPlant
             int repeat;
             int retry;
             bool testFailed = false;
-            TestSuite suite = new TestSuite("Suite 1");
             foreach (XmlNode test in tests)
             {
                 XmlNodeList scripts = test.ChildNodes;
@@ -233,7 +104,8 @@ namespace Golem.TestRunners.EggPlant
 
 
                 }
-
+                StopEggPlantDrive();
+                StartEggPlantDrive();
 
             }
 
@@ -241,6 +113,139 @@ namespace Golem.TestRunners.EggPlant
                 Assert.TerminateSilently(TestOutcome.Failed);
             StopEggPlantDrive();
             StartEggPlantDrive();
+        }
+    
+
+        [FixtureSetUp]
+        public void Setup()
+        {
+            driver = (IEggPlantDriver)XmlRpcProxyGen.Create(typeof(IEggPlantDriver));
+            driver.Timeout = 600000;
+            GetConfigFileSettings();
+            StartEggPlantDrive();
+            StartEggPlantSession();
+            DeleteResultsDirectory();
+        }
+
+
+
+        [FixtureTearDown]
+        public void Teardown()
+        {
+            EndEggPlantSession();
+            StopEggPlantDrive();
+            DiagnosticLog.WriteLine("Test Finished, exiting!");
+        }
+
+        private string GetValueFromConfigFile(string xpath)
+        {
+            XmlDocument configFile = new XmlDocument();
+            if (!File.Exists(configFilePath))
+            {
+                throw new FileNotFoundException("Could not find xml file at : " + configFilePath);
+            }
+            configFile.Load(configFilePath);
+            if (configFile.SelectNodes(xpath).Count == 0)
+                throw new KeyNotFoundException("Could not find an element matching xpath : " + xpath + " in file " + configFilePath);
+            return configFile.SelectSingleNode(xpath).Value;
+
+        }
+
+        private XmlNodeList GetNodesFromConfigFile(string xpath)
+        {
+            XmlDocument configFile = new XmlDocument();
+            if (!File.Exists(configFilePath))
+            {
+                throw new FileNotFoundException("Could not find xml file at : " + configFilePath);
+            }
+            configFile.Load(configFilePath);
+            if (configFile.SelectNodes(xpath).Count == 0)
+                throw new KeyNotFoundException("Could not find an element matching xpath : " + xpath + " in file " + configFilePath);
+            return configFile.SelectNodes(xpath);
+
+        }
+
+        private string GetValueFromNode(string value, XmlNode node)
+        {
+            if (node.SelectNodes(value).Count == 0)
+            {
+                throw new KeyNotFoundException("Could not find an element matching xpath : " + value + " in file " + configFilePath);
+            }
+            return node.SelectSingleNode(value).Value;
+        }
+
+        private void GetConfigFileSettings()
+        {
+            XmlDocument configFile = new XmlDocument();
+            suitePath = GetValueFromConfigFile("//Suite/@path");
+            tests = GetNodesFromConfigFile("//Test");
+            runScriptPath = GetValueFromConfigFile("//RunScript/@path");
+            drivePort = GetValueFromConfigFile("//EggPlantSettings/@drivePort");
+
+            if (!Directory.Exists(suitePath))
+                throw new SilentTestException(TestOutcome.Failed, "Could not find suite. Check your TestConfig.xml suite path");
+            if (!File.Exists(runScriptPath))
+                throw new SilentTestException(TestOutcome.Failed, "Could not find runScript. Check your TestConfig.xml runscript path");
+        }
+
+        private void StopEggPlantDrive()
+        {
+            try
+            {
+                Common.KillProcess("Eggplant");
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
+
+        private void EndEggPlantSession()
+        {
+            try
+            {
+                driver.EndSession();
+            }
+            catch (Exception e)
+            {
+                throw new SilentTestException(TestOutcome.Failed, "Exception Caught Ending EggPLant Session for suite : " + suitePath + e.Message);
+            }
+        }
+
+        private void StartEggPlantSession()
+        {
+            try
+            {
+                driver.StartSession(suitePath);
+            }
+            catch (Exception e)
+            {
+                throw new SilentTestException(TestOutcome.Failed, "Exception Caught Starting EggPLant Session for suite : " + suitePath + " Check the log to see if drive started correctly : " + e.Message);
+            }
+
+        }
+
+        private void DeleteResultsDirectory()
+        {
+
+            if (Directory.Exists(suitePath + "\\Results"))
+                Directory.Delete(suitePath + "\\Results", true);
+        }
+
+        public void StartEggPlantDrive()
+        {
+            try
+            {
+                // string command = "";
+                // command += String.Format("\"{0}\" -driveport {1}", runScriptPath, drivePort);
+                cmdProcess = Common.ExecuteBatchFile(@"C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite\RunDrive.bat");
+                Thread.Sleep(10000);
+            }
+            catch (Exception e)
+            {
+                throw new SilentTestException(TestOutcome.Failed, "Exception Caught Starting EggPLant Drive: " + e.Message);
+            }
         }
     }
 }

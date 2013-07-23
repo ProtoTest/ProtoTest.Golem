@@ -14,7 +14,20 @@ namespace Golem.Framework
 {
     public class Common
     {
+        public static void KillProcess(string name)
+        {
+            Process[] runningProcesses = Process.GetProcesses();
+            foreach (Process process in runningProcesses)
+            {
+                if(process.ProcessName==name)
+                        process.Kill();
+            }
+        }
 
+        public static Process ExecuteBatchFile(string filePath)
+        {
+            return System.Diagnostics.Process.Start(filePath);
+        }
         public static Process ExecuteDosCommand(string command, bool waitToFinish=true)
         {
             DiagnosticLog.WriteLine("Executing DOS Command: " + command);
@@ -165,27 +178,27 @@ namespace Golem.Framework
         {
             try
             {
-                // create the ProcessStartInfo using "cmd" as the program to be run,
-                // and "/c " as the parameters.
-                // Incidentally, /c tells cmd that we want it to execute the command that follows,
-                // and then exit.
-                System.Diagnostics.ProcessStartInfo procStartInfo =
-                    new System.Diagnostics.ProcessStartInfo("cmd", "/c " + command);
+                //// create the ProcessStartInfo using "cmd" as the program to be run,
+                //// and "/c " as the parameters.
+                //// Incidentally, /c tells cmd that we want it to execute the command that follows,
+                //// and then exit.
+                //System.Diagnostics.ProcessStartInfo procStartInfo =
+                //    new System.Diagnostics.ProcessStartInfo("cmd", "/c " + command);
 
-                // The following commands are needed to redirect the standard output.
-                // This means that it will be redirected to the Process.StandardOutput StreamReader.
-                procStartInfo.RedirectStandardOutput = true;
-                procStartInfo.UseShellExecute = false;
-                // Do not create the black window.
-                procStartInfo.CreateNoWindow = true;
-                // Now we create a process, assign its ProcessStartInfo and start it
-                System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                proc.StartInfo = procStartInfo;
-                proc.Start();
-                // Get the output into a string
-                string result = proc.StandardOutput.ReadToEnd();
-                // Display the command output.
-                Console.WriteLine(result);
+                //// The following commands are needed to redirect the standard output.
+                //// This means that it will be redirected to the Process.StandardOutput StreamReader.
+                //procStartInfo.RedirectStandardOutput = true;
+                //procStartInfo.UseShellExecute = false;
+                //// Do not create the black window.
+                //procStartInfo.CreateNoWindow = true;
+                //// Now we create a process, assign its ProcessStartInfo and start it
+                //System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                //proc.StartInfo = procStartInfo;
+                //proc.Start();
+                //// Get the output into a string
+                //string result = proc.StandardOutput.ReadToEnd();
+                //// Display the command output.
+                //Console.WriteLine(result);
             }
             catch (Exception objException)
             {

@@ -3,16 +3,16 @@
   <RunScript path="C:\Program Files (x86)\eggPlant\runscript.bat"/>
   <Suite repeat="1" path="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite">
     <Test repeat="3" retry="3" >
-      <Script scriptName ="Shelter_Stability_Test_09_08"  host="10.10.1.211" port="5901" timeout="10"></Script>
+      <Script scriptName ="Shelter_Stability_Test_09_08"  host="10.10.1.88" port="5901" timeout="10"></Script>
     </Test>
-    <Test repeat="3" retry="3" >
+    <!--<Test repeat="3" retry="3" >
       <Script scriptName ="Shelter_Stability_Test_30_33_35"  host="10.10.1.211" port="5901" timeout="10"></Script>
     </Test>
     <Test repeat="3" retry="3" >
       <Script scriptName ="Shelter_Stability_Test_01A1"  host="10.10.1.210" port="5901" timeout="10"></Script>
       <Script scriptName ="Shelter_Stability_Test_01B1_07"  host="10.10.1.211" port="5901" timeout="10"></Script>
       <Script scriptName ="Shelter_Stability_Test_01A2"  host="10.10.1.210" port="5901" timeout="10"></Script>
-    </Test>
+    </Test>-->
     <!--<Test repeat="3" retry="3" >
       <Script scriptName ="Shelter_Stability_Test_37_39"  host="10.10.1.211" port="5901" timeout="10"></Script>
     </Test>

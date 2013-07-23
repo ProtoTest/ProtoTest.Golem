@@ -54,7 +54,7 @@ namespace Golem.Framework
             }
             catch (Exception e)
             {
-                throw new SilentTestException(TestOutcome.Canceled,"Error caught connecting to device " + this.host + " : " + e.Message);
+                throw new SilentTestException(TestOutcome.Failed,"Error caught connecting to device " + this.host + " : " + e.Message);
             }
         }
         
