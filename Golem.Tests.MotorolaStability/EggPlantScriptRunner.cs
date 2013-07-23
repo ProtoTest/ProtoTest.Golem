@@ -104,8 +104,10 @@ namespace Golem.TestRunners.EggPlant
 
 
                 }
+                EndEggPlantSession();
                 StopEggPlantDrive();
                 StartEggPlantDrive();
+                StartEggPlantSession();
 
             }
 
@@ -208,6 +210,7 @@ namespace Golem.TestRunners.EggPlant
         {
             try
             {
+                Common.Log("Ending Eggplant Session");
                 driver.EndSession();
             }
             catch (Exception e)
