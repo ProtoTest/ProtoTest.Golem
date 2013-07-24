@@ -47,6 +47,14 @@ namespace Golem.TestRunners.EggPlant
         [Timeout(0)]
         public void RunScriptsFromConfigFile()
         {
+            driver = (IEggPlantDriver)XmlRpcProxyGen.Create(typeof(IEggPlantDriver));
+            driver.Timeout = 600000;
+            GetConfigFileSettings();
+            StopEggPlantDrive();
+            StartEggPlantDrive();
+            StartEggPlantSession();
+            DeleteResultsDirectory();
+
             string scriptName;
             string host;
             string port;
@@ -110,35 +118,14 @@ namespace Golem.TestRunners.EggPlant
                 StartEggPlantSession();
 
             }
-
-            if(testFailed==true)
-                Assert.TerminateSilently(TestOutcome.Failed);
-            StopEggPlantDrive();
-            StartEggPlantDrive();
-        }
-    
-
-        [FixtureSetUp]
-        public void Setup()
-        {
-            driver = (IEggPlantDriver)XmlRpcProxyGen.Create(typeof(IEggPlantDriver));
-            driver.Timeout = 600000;
-            GetConfigFileSettings();
-            StopEggPlantDrive();
-            StartEggPlantDrive();
-            StartEggPlantSession();
-            DeleteResultsDirectory();
-        }
-
-
-
-        [FixtureTearDown]
-        public void Teardown()
-        {
             EndEggPlantSession();
             StopEggPlantDrive();
-            DiagnosticLog.WriteLine("Test Finished, exiting!");
+            
+            if(testFailed==true)
+                Assert.TerminateSilently(TestOutcome.Failed);
+
         }
+   
 
         private string GetValueFromConfigFile(string xpath)
         {
