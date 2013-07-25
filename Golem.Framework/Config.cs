@@ -30,6 +30,7 @@ namespace Golem.Framework
         public RuntimeSettings runTimeSettings;
         public ReportSettings reportSettings;
         public HttpProxy httpProxy;
+        public LocalProxy localProxy;  //added to use local proxy testing for ebags
         public AppiumSettings appiumSettings;
 
         public ConfigSettings()
@@ -37,6 +38,7 @@ namespace Golem.Framework
             runTimeSettings = new RuntimeSettings();
             reportSettings = new ReportSettings();
             httpProxy = new HttpProxy();
+            localProxy = new LocalProxy(); //added by seth
             appiumSettings = new AppiumSettings();
         }
 
@@ -122,6 +124,18 @@ namespace Golem.Framework
 
           }
 
+        public class LocalProxy
+        {
+            public bool localProxy;
+            public int localPort;
+            public string localHost;
+            public LocalProxy()
+            {
+                localProxy = Common.IsTruthy(Config.GetConfigValue("UseLocalProxy", "False"));
+                localPort = int.Parse(Config.GetConfigValue("ProxyPort", "8888"));
+                localHost = Config.GetConfigValue("HostIP", "localhost");
+            }
+        }
         public class AppiumSettings
         {
             public bool launchApp = false;

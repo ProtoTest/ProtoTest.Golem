@@ -52,14 +52,21 @@ namespace Golem.Framework
 
         public static IWebDriver StartFirefoxBrowser()
         {
+            
             DesiredCapabilities capabilities = new DesiredCapabilities();
+            Proxy proxy = new Proxy();
             if (Config.Settings.httpProxy.startProxy)
-            {
-                Proxy proxy = new Proxy();
+            {                
                 proxy.SslProxy = "localhost:" + Config.Settings.httpProxy.sslProxyPort;
                 proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
                 capabilities.SetCapability("proxy", proxy);
             }
+            if (Config.Settings.localProxy.localProxy)
+            {
+                proxy.HttpProxy = Config.Settings.localProxy.localHost + ":" + Config.Settings.localProxy.localPort;
+                capabilities.SetCapability("proxy", proxy);                
+            }
+
             
             return new FirefoxDriver(capabilities);
         }
