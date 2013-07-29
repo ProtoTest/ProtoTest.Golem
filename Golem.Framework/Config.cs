@@ -88,6 +88,11 @@ namespace Golem.Framework
                     browsers.Add(WebDriverBrowser.Browser.Firefox);
                 return browsers;
             }
+
+            public int GetTimeoutSettings()
+            {
+                return ElementTimeoutSec;
+            }   
         }
         public class ReportSettings
         {
@@ -152,6 +157,8 @@ namespace Golem.Framework
                 appOs = Config.GetConfigValue("AppOs", "Android");
             }
         }
+
+        
       
     }
 }
