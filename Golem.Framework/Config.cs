@@ -54,6 +54,7 @@ namespace Golem.Framework
             public int CommandDelayMs;
             public bool RunOnRemoteHost;
             public string HostIp;
+            public string HomeDirectory;
 
             public RuntimeSettings()
             {
@@ -68,6 +69,7 @@ namespace Golem.Framework
             CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
             RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
             HostIp = Config.GetConfigValue("HostIp", "localhost");
+            HomeDirectory = Config.GetConfigValue("HomeDirectory", "C:\\"); //added for Nhunspell
             }
 
             
@@ -92,7 +94,11 @@ namespace Golem.Framework
             public int GetTimeoutSettings()
             {
                 return ElementTimeoutSec;
-            }   
+            }
+            public string GetHomeDirectory()
+            {
+                return HomeDirectory;
+            }
         }
         public class ReportSettings
         {
