@@ -30,6 +30,7 @@ namespace Golem.Framework
         public RuntimeSettings runTimeSettings;
         public ReportSettings reportSettings;
         public HttpProxy httpProxy;
+        public LocalProxy localProxy;  //added to use local proxy testing for ebags
         public AppiumSettings appiumSettings;
 
         public ConfigSettings()
@@ -37,6 +38,7 @@ namespace Golem.Framework
             runTimeSettings = new RuntimeSettings();
             reportSettings = new ReportSettings();
             httpProxy = new HttpProxy();
+            localProxy = new LocalProxy(); //added by seth
             appiumSettings = new AppiumSettings();
         }
 
@@ -52,6 +54,7 @@ namespace Golem.Framework
             public int CommandDelayMs;
             public bool RunOnRemoteHost;
             public string HostIp;
+            public string HomeDirectory;
 
             public RuntimeSettings()
             {
@@ -66,6 +69,7 @@ namespace Golem.Framework
             CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
             RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
             HostIp = Config.GetConfigValue("HostIp", "localhost");
+            HomeDirectory = Config.GetConfigValue("HomeDirectory", "C:\\"); //added for Nhunspell
             }
 
             
@@ -85,6 +89,15 @@ namespace Golem.Framework
                 if(browsers.Count==0)
                     browsers.Add(WebDriverBrowser.Browser.Firefox);
                 return browsers;
+            }
+
+            public int GetTimeoutSettings()
+            {
+                return ElementTimeoutSec;
+            }
+            public string GetHomeDirectory()
+            {
+                return HomeDirectory;
             }
         }
         public class ReportSettings
@@ -122,6 +135,18 @@ namespace Golem.Framework
 
           }
 
+        public class LocalProxy
+        {
+            public bool localProxy;
+            public int localPort;
+            public string localHost;
+            public LocalProxy()
+            {
+                localProxy = Common.IsTruthy(Config.GetConfigValue("UseLocalProxy", "False"));
+                localPort = int.Parse(Config.GetConfigValue("ProxyPort", "8888"));
+                localHost = Config.GetConfigValue("HostIP", "localhost");
+            }
+        }
         public class AppiumSettings
         {
             public bool launchApp = false;
@@ -138,6 +163,8 @@ namespace Golem.Framework
                 appOs = Config.GetConfigValue("AppOs", "Android");
             }
         }
+
+        
       
     }
 }

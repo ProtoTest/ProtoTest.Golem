@@ -135,7 +135,7 @@ namespace Golem.Framework
             catch (Exception e)
             {
                 return "";
-            }
+            }            
             
         }
         public string GetCssValue(string text)
