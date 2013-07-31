@@ -54,7 +54,7 @@ namespace Golem.Framework
             public int CommandDelayMs;
             public bool RunOnRemoteHost;
             public string HostIp;
-            public string HomeDirectory;
+            
 
             public RuntimeSettings()
             {
@@ -69,7 +69,7 @@ namespace Golem.Framework
             CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
             RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
             HostIp = Config.GetConfigValue("HostIp", "localhost");
-            HomeDirectory = Config.GetConfigValue("HomeDirectory", "C:\\"); //added for Nhunspell
+            
             }
 
             
@@ -108,6 +108,7 @@ namespace Golem.Framework
             public bool videoRecordingOnError;
             public bool commandLogging;
             public bool actionLogging;
+            public bool spellChecking;
 
             public ReportSettings()
             {
@@ -116,8 +117,7 @@ namespace Golem.Framework
                 videoRecordingOnError = Common.IsTruthy(Config.GetConfigValue("VideoRecordingOnError", "True"));
                 commandLogging = Common.IsTruthy(Config.GetConfigValue("CommandLogging","True"));
                 actionLogging= Common.IsTruthy(Config.GetConfigValue("ActionLogging","True"));
-
-
+                spellChecking = Common.IsTruthy(Config.GetConfigValue("SpellChecking", "True"));
             }
             
         }
