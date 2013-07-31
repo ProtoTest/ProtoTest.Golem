@@ -7,8 +7,8 @@
     <ProjectGuid>{C1907A03-6C4A-4C73-BD3D-C689347B5A7C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Golem.TestRunners.EggPlant</RootNamespace>
-    <AssemblyName>Golem.TestRunners.EggPlant</AssemblyName>
+    <RootNamespace>ProtoTest.TestRunner.Eggplant</RootNamespace>
+    <AssemblyName>ProtoTest.TestRunner.Eggplant</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -51,22 +51,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver, Version=2.33.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\WebDriver\2.33.0\net40\WebDriver.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EggPlantScript.cs" />
-    <Compile Include="IEggPlantDriver.cs" />
-    <Compile Include="EggPlantScriptRunner.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="EggplantDriver.cs" />
+    <Compile Include="EggplantTest.cs" />
+    <Compile Include="IEggplantDriveService.cs" />
+    <Compile Include="EggPlantTestRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
-      <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
-      <Name>Golem.Framework</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestConfig.xml">

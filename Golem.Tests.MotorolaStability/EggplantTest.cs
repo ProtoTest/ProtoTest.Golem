@@ -11,9 +11,9 @@ using Gallio.Model;
 using MbUnit.Framework;
 using System.Threading;
 
-namespace Golem.Framework
+namespace ProtoTest.TestRunner.Eggplant
 {
-    public class EggPlantScript
+    public class EggplantTest
     {
         private Process cmdProcess;
         public string suitePath;
@@ -25,8 +25,8 @@ namespace Golem.Framework
         public string scriptPath = "";
 
 
-        private IEggPlantDriver driver;
-        public EggPlantScript(IEggPlantDriver driver, string suitePath, string scriptName, string host, string port, int timeoutMin)
+        private EggplantDriver driver;
+        public EggplantTest(EggplantDriver driver, string suitePath, string scriptName, string host, string port, int timeoutMin)
         {
 
             this.driver = driver;
@@ -36,43 +36,22 @@ namespace Golem.Framework
             this.port = port;
             this.timeoutMin = timeoutMin;
             this.scriptPath += suitePath + "\\Scripts\\" + scriptName + ".script";
-            this.description = GetScriptDescription();
+            this.description = GetCommentsFromScript();
             VerifyScriptExists();
-            Connect(host);
+            driver.Connect(host);
         }
 
         private void VerifyScriptExists()
         {
-            Assert.IsTrue(File.Exists(scriptPath),"Test halted, could not find file : " + scriptPath);
+            Assert.IsTrue(File.Exists(scriptPath),"Test aborted, could not find file : " + scriptPath);
         }
 
-        private void Connect(string host)
-        {
-            try
-            {
-                Common.Log("Trying to connect to host : " + host);
-                driver.Execute("Connect (name:\"" + host + "\")");
-
-            }
-            catch (Exception e)
-            {
-                throw new SilentTestException(TestOutcome.Failed,"Error caught connecting to device " + this.host + " : " + e.Message);
-            }
-        }
-        
-
-        private void ExecuteScript()
-        {
-            Common.Log("Executing test : " + this.scriptName);
-            TestLog.WriteLine(description);
-            driver.Execute("RunWithNewResults("+scriptName+")");
-        }
 
         public TestOutcome ExecuteTest(string testName)
         {
             Gallio.Common.Action executeTest = new Gallio.Common.Action(delegate
             {
-                ExecuteScript();
+                driver.ExecuteScript(scriptPath,description);
                 VerifySuccess();
                 AttachTestFiles();
             });
@@ -117,7 +96,7 @@ namespace Golem.Framework
 
         }
 
-        private string GetScriptDescription()
+        private string GetCommentsFromScript()
         {
             if(!File.Exists(scriptPath))
                 throw new FileNotFoundException("Could not find script file at path : " + scriptPath);
@@ -139,21 +118,21 @@ namespace Golem.Framework
 
         private void VerifySuccess()
         {
-            Common.Log("Verifying Test : " + this.scriptName);
+            DiagnosticLog.WriteLine("Verifying Test : " + this.scriptName);
             XmlDocument resultsFile = new XmlDocument();
             string file = getResultDirectory() + "\\LogFile.xml";
-            Common.Log("Checking results file : " + file);
+            DiagnosticLog.WriteLine("Checking results file : " + file);
             resultsFile.Load(file);
             var result = resultsFile.SelectSingleNode("//property[@name='Status']/@value").Value;
             if (result != "Success")
             {
-                Common.Log("Test Failure Detected : " + this.scriptName);
+                DiagnosticLog.WriteLine("Test Failure Detected : " + this.scriptName);
                 TestContext.CurrentContext.IncrementAssertCount();
                 TestLog.Failures.BeginSection("EggPlant Error");
                 TestLog.Failures.WriteLine(GetFailureMessage());
                 if (File.Exists(getResultDirectory() + "\\Screen_Error.png"))
                 {
-                    TestLog.Failures.EmbedImage(null, ScaleImage(Image.FromFile(getResultDirectory() + "\\Screen_Error.png")));
+                    TestLog.Failures.EmbedImage(null, Common.ScaleImage(Image.FromFile(getResultDirectory() + "\\Screen_Error.png")));
                 }
                 TestLog.Failures.End();
                 Assert.TerminateSilently(TestOutcome.Failed);
@@ -194,15 +173,7 @@ namespace Golem.Framework
         }
 
 
-        private static Image ScaleImage(Image image, double scale = .5)
-        {
-            var newWidth = (int)(image.Width * scale);
-            var newHeight = (int)(image.Height * scale);
-
-            var newImage = new Bitmap(newWidth, newHeight);
-            Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
-            return newImage;
-        }
+       
 
 
   
