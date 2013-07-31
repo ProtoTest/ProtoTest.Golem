@@ -42,14 +42,14 @@ namespace Golem.Framework
             //TestBaseClass.testData.LogEvent(Common.GetCurrentClassAndMethodName() + " Finished");
             TestBaseClass.testData.actions.addAction(Common.GetCurrentClassAndMethodName());
             AllText = new Element("AllText", By.XPath("//html"));
-            try
-            {
-                Hunspell.NativeDllPath = Config.Settings.runTimeSettings.GetHomeDirectory() + "Golem\\Libraries\\Nhunspell\\";
-            }
-            catch (Exception ex)
-            {
-                //This will catch some exception that sometimes happens when trying to load the Native.DLLs
-            }
+            //try
+            //{
+            //    Hunspell.NativeDllPath = Config.Settings.runTimeSettings.GetHomeDirectory() + "Golem\\Libraries\\Nhunspell\\";
+            //}
+            //catch (Exception ex)
+            //{
+            //    //This will catch some exception that sometimes happens when trying to load the Native.DLLs
+            //}
             
             Misspellings = MispelledWords(AllText.Text);            
         }
