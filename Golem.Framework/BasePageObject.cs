@@ -46,7 +46,7 @@ namespace Golem.Framework
             if (Config.Settings.reportSettings.spellChecking)
             {
                 AllText = new Element("AllText", By.XPath("//html"));
-                InitSpellChecker()
+                InitSpellChecker();
                 Misspellings = MispelledWords(AllText.Text);
             }
         }

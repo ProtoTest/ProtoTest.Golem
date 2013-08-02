@@ -95,10 +95,6 @@ namespace Golem.Framework
             {
                 return ElementTimeoutSec;
             }
-            public string GetHomeDirectory()
-            {
-                return HomeDirectory;
-            }
         }
         public class ReportSettings
         {
