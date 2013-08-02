@@ -41,24 +41,40 @@ namespace Golem.Framework
             WaitForElements();
             //TestBaseClass.testData.LogEvent(Common.GetCurrentClassAndMethodName() + " Finished");
             TestBaseClass.testData.actions.addAction(Common.GetCurrentClassAndMethodName());
-            AllText = new Element("AllText", By.XPath("//html"));
-            //try
-            //{
-            //    Hunspell.NativeDllPath = Config.Settings.runTimeSettings.GetHomeDirectory() + "Golem\\Libraries\\Nhunspell\\";
-            //}
-            //catch (Exception ex)
-            //{
-            //    //This will catch some exception that sometimes happens when trying to load the Native.DLLs
-            //}
             
-            Misspellings = MispelledWords(AllText.Text);            
+            //Check for misspellings feature
+            if (Config.Settings.reportSettings.spellChecking)
+            {
+                AllText = new Element("AllText", By.XPath("//html"));
+                InitSpellChecker()
+                Misspellings = MispelledWords(AllText.Text);
+            }
+        }
+
+        public void InitSpellChecker()
+        {
+            if (SpellChecker == null)
+            {
+                SpellChecker = new Hunspell(Golem.Framework.Properties.Resources.en_US_aff, Golem.Framework.Properties.Resources.en_US);
+            }
+        }
+
+        public void AddCustomWords(string word)
+        {
+            InitSpellChecker();
+            SpellChecker.Add(word);
+        }
+        public void AddCustomWords(List<string> words)
+        {
+            InitSpellChecker();
+            for (int i = 0; i < words.Count; i++)
+            {
+                SpellChecker.Add(words[i]);
+            }
         }
 
         public List<string> MispelledWords(string unscrubbedText)
         {
-            SpellChecker = new Hunspell(Golem.Framework.Properties.Resources.en_US_aff, Golem.Framework.Properties.Resources.en_US);
-            
-            
             List<string> mispelledWords = new List<string>();
 
             string[] ScrubbedText = unscrubbedText.Split(new string[] { "\n", "\r\n", "\\", " ", ",", ".", "!", "?" }, StringSplitOptions.RemoveEmptyEntries);
@@ -68,7 +84,10 @@ namespace Golem.Framework
                 {
                     if (!SpellChecker.Spell(ScrubbedText[i]))
                     {
-                        mispelledWords.Add(ScrubbedText[i]);
+                        if (ScrubbedText[i].Length > 1)
+                        {
+                            mispelledWords.Add(ScrubbedText[i]);
+                        }
                     }
                 }
             }
