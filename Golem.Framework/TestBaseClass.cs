@@ -57,20 +57,34 @@ namespace Golem.Framework
 
         #region Events
 #pragma warning disable 67
-        public static event ActionEvent  BeforeTestEvent;
+        public static event GolemEvent GenericEvent;
+        public static event GolemEvent AfterBrowserLaunchedEvent;
+        public static event GolemEvent AfterBrowserClosedEvent;
+        public static event GolemEvent BeforeTestEvent;
+        public static event GolemEvent AfterTestEvent;
+        public static event GolemEvent PageObjectCreatedEvent;
+        public static event GolemEvent PageObjectFinishedLoadingEvent;
+        public static event GolemEvent PageObjectMethodEvent;
+        public static event GolemEvent BeforeCommandEvent;
+        public static event GolemEvent AfterCommandEvent;
+        public static event GolemEvent BeforeSuiteEvent;
+        public static event GolemEvent AfterSuiteEvent;
 
-        public static event ActionEvent AfterTestEvent;
-        public static event ActionEvent PageObjectActionEvent;
-        public static event ActionEvent BeforeCommandEvent;
-        public static event ActionEvent AfterCommandEvent;
-        public static event ActionEvent BeforeSuiteEvent;
-        public static event ActionEvent AfterSuiteEvent;
-        public static event ActionEvent GenericEvent;
+        public static event GolemEvent OnTestPassedEvent;
+        public static event GolemEvent OnTestFailedEvent;
+        public static event GolemEvent OnTestSkippedEvent;
+
+
 #pragma warning restore 67
         private void WriteActionToLog(string name, EventArgs e)
         {
             if(Config.Settings.reportSettings.commandLogging)
                 Common.Log("(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + name);
+        }
+        private void WriteActionToLog(GolemEventArgs e)
+        {
+            if (Config.Settings.reportSettings.commandLogging)
+                Common.Log(e.GetEventInfo());
         }
         private void AddAction(string name, EventArgs e)
         {
@@ -78,22 +92,93 @@ namespace Golem.Framework
         }
 
         public delegate void ActionEvent(string name, EventArgs e);
+        public delegate void GolemEvent(GolemEventArgs e);
 
         public static void LogEvent(string name)
         {
-            GenericEvent(name, null);
+            GenericEvent(new GolemEventArgs(name));
         }
 
         public class GolemEventArgs : EventArgs
         {
-            public string name;
-            public DateTime time;
+            public string eventName;
+            public string testName;
+            public string suiteName;
+            public string fullName;
+            public string pageObjectName;
+            public string pageObjectActionName;
+            public DateTime timeStamp;
             public IWebDriver driver;
-            public IWebElement element;
+            public GolemEventArgs(string eventName="")
+            {
+                this.eventName = eventName;
+                if (TestBaseClass.driver != null)
+                    this.driver = TestBaseClass.driver;
+                this.testName = Common.GetCurrentTestFunctionName();
+                this.suiteName = Common.GetCurrentSuiteName();
+                this.fullName = Common.GetCurrentTestName();
+                this.pageObjectName = Common.GetCurrentClassName();
+                this.pageObjectActionName = Common.GetCurrentMethodName();
+                this.timeStamp = Common.GetCurrentTimeStamp();
+            }
+
+            public GolemEventArgs(string eventName, string objectName, string actionName)
+            {
+                this.eventName = eventName;
+                if (TestBaseClass.driver != null)
+                    this.driver = TestBaseClass.driver;
+                this.testName = Common.GetCurrentTestFunctionName();
+                this.suiteName = Common.GetCurrentSuiteName();
+                this.fullName = Common.GetCurrentTestName();
+                this.pageObjectName = objectName;
+                this.pageObjectActionName = actionName;
+                this.timeStamp = Common.GetCurrentTimeStamp();
+            }
+
+            public string GetEventInfo()
+            {
+                string message = "";
+                message += timeStamp + " : " + fullName + " : ";
+                if (pageObjectName != "")
+                {
+                    if (pageObjectActionName != "")
+                    {
+                        message += pageObjectName + "." + pageObjectActionName + " : ";
+                    }
+                    else
+                    {
+                        message += pageObjectName + " : ";
+                    }
+                }
+
+                message += eventName;
+                return message;
+            }
         }
 
         #endregion
 
+        public static void FireBeforeCommandEvent(GolemEventArgs e)
+        {
+            BeforeCommandEvent(e);
+        }
+        public static void FireAfterCommandEvent(GolemEventArgs e)
+        {
+            AfterCommandEvent(e);
+        }
+        public static void FirePageObjectActionEvent(GolemEventArgs e)
+        {
+            PageObjectMethodEvent(e);
+        }
+        public static void FirePageObjectCreatedEvent(GolemEventArgs e)
+        {
+            PageObjectCreatedEvent(e);
+        }
+        public static void FirePageObjectFinishedLoadingEvent(GolemEventArgs e)
+        {
+            PageObjectFinishedLoadingEvent(e);
+        }
+        
         [Factory("GetBrowser")]
         public WebDriverBrowser.Browser browser;
 
@@ -120,7 +205,7 @@ namespace Golem.Framework
             testData.VerificationErrors.Add(new VerificationError(errorText));
         }
 
-        private void AssertNoVerificationErrors()
+        private void AfterTestEvent_AssertNoVerificationErrors(GolemEventArgs e)
         {
             if (testData.VerificationErrors.Count == 0)
                 return;
@@ -138,9 +223,9 @@ namespace Golem.Framework
             Assert.TerminateSilently(TestOutcome.Failed);
         }
 
-        private void LogScreenshotIfTestFailed()
+        private void OnTestFailed_LogScreenshot(GolemEventArgs e)
         {
-            if ((Config.Settings.reportSettings.screenshotOnError)&&(TestContext.CurrentContext.Outcome != TestOutcome.Passed))
+            if (Config.Settings.reportSettings.screenshotOnError)
             {
                     TestLog.Failures.EmbedImage(null, testData.driver.GetScreenshot());
 
@@ -148,7 +233,7 @@ namespace Golem.Framework
 
         }
 
-        public void LogHtmlIfTestFailed()
+        public void OnTestFailed_LogHtml(GolemEventArgs e)
         {
             if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
             {
@@ -156,9 +241,9 @@ namespace Golem.Framework
             }
         }
 
-        public void LogVideoIfTestFailed()
+        public void OnTestFailed_LogVideo(GolemEventArgs e)
         {
-            if ((Config.Settings.reportSettings.videoRecordingOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
+            if (Config.Settings.reportSettings.videoRecordingOnError)
             {
                 TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
                 testData.recorder.Dispose();
@@ -167,39 +252,57 @@ namespace Golem.Framework
                 
         }
 
-        public void QuitBrowser()
+        public void AfterTestEvent_QuitBrowser(GolemEventArgs e)
         {
 
             if (Config.Settings.runTimeSettings.LaunchBrowser)
             {
                     driver.Quit();
-                    LogEvent(browser.ToString() + " Browser Closed");
+                    AfterBrowserClosedEvent(new GolemEventArgs(browser.ToString() + " Browser Closed"));
             }
                 
         }
 
-        public void LogActions()
+        public void FireTestStatusEvent()
+        {
+
+            if(TestContext.CurrentContext.Outcome== TestOutcome.Passed)
+            {
+                    OnTestPassedEvent(new GolemEventArgs("Test Passed"));
+            }
+            else if(TestContext.CurrentContext.Outcome==  TestOutcome.Failed)
+            {
+                    OnTestFailedEvent(new GolemEventArgs("Test Failed"));
+            }
+            else 
+            {
+            OnTestSkippedEvent(new GolemEventArgs("Test Unknown"));
+            }
+
+        }
+
+        public void AfterTestEvent_LogActions(GolemEventArgs e)
         {
             if (Config.Settings.reportSettings.actionLogging)
                 testData.actions.PrintActionTimings();
         }
 
-        public void StartVideoRecording()
+        public void BeforeTestEvent_StartVideoRecording(GolemEventArgs e)
         {
             if (Config.Settings.reportSettings.videoRecordingOnError)
                     testData.recorder = Capture.StartRecording(new CaptureParameters() { Zoom = .25 }, 5);          
         }
 
-        public void StopVideoRecording()
+        public void AfterTestEvent_StopVideoRecording(GolemEventArgs e)
         {
             try
             {
                 if (Config.Settings.reportSettings.videoRecordingOnError)
                     testData.recorder.Stop();
             }
-            catch (Exception e)
+            catch (Exception err)
             {
-               TestLog.Failures.WriteLine(e.Message);
+               TestLog.Failures.WriteLine(err.Message);
             }
             
         }
@@ -226,7 +329,7 @@ namespace Golem.Framework
             return Config.Settings.httpProxy.proxyPort;
         }
 
-        private void GetHTTPTrafficInfo()
+        private void AfterTestEvent_GetHTTPTrafficInfo(GolemEventArgs e)
         {
             if (Config.Settings.httpProxy.startProxy)
             {
@@ -240,7 +343,7 @@ namespace Golem.Framework
             }
         }
 
-        private void StartProxy()
+        private void BeforeTestEvent_StartProxy(GolemEventArgs e)
         {
             try
             {
@@ -251,13 +354,12 @@ namespace Golem.Framework
                     testData.proxy.StartFiddler();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
             }
         }
 
-        private void QuitProxy()
+        private void AfterTestEvent_QuitProxy(GolemEventArgs e)
         {
             if (Config.Settings.httpProxy.startProxy)
             {
@@ -265,7 +367,9 @@ namespace Golem.Framework
             }
         }
 
-        public void LaunchBrowser()
+
+
+        public void BeforeTestEvent_LaunchBrowser(GolemEventArgs e)
         {
             lock (locker)
             {
@@ -279,8 +383,8 @@ namespace Golem.Framework
                     {
                         driver = new WebDriverBrowser().LaunchBrowser(browser);
                     }
-                    
-                    LogEvent(browser + " Browser Launched");
+                    AfterBrowserLaunchedEvent(new GolemEventArgs(browser + " Browser Launched"));
+                    //LogEvent(browser + " Browser Launched");
                     testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser + " Browser Launched");
                 }
                 if (Config.Settings.appiumSettings.launchApp)
@@ -298,6 +402,7 @@ namespace Golem.Framework
             }
         }
 
+
         public void SetTestExecutionSettings()
         {
             TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.DegreeOfParallelism;
@@ -307,43 +412,57 @@ namespace Golem.Framework
 
         private void SetupEvents()
         {
-            PageObjectActionEvent += new TestBaseClass.ActionEvent(AddAction);
-            BeforeTestEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
-            AfterTestEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
-            GenericEvent += new TestBaseClass.ActionEvent(WriteActionToLog);
+            GenericEvent += new GolemEvent(WriteActionToLog);
+            AfterBrowserLaunchedEvent += new GolemEvent(WriteActionToLog);
+            AfterBrowserClosedEvent += new GolemEvent(WriteActionToLog);
+            BeforeSuiteEvent += new GolemEvent(WriteActionToLog);
+            AfterSuiteEvent += new GolemEvent(WriteActionToLog);
+            BeforeTestEvent += new GolemEvent(WriteActionToLog);
+            AfterTestEvent += new GolemEvent(WriteActionToLog);
+            BeforeCommandEvent += new GolemEvent(WriteActionToLog);
+            AfterCommandEvent += new GolemEvent(WriteActionToLog);
+            PageObjectCreatedEvent += new GolemEvent(WriteActionToLog);
+            PageObjectMethodEvent += new GolemEvent(WriteActionToLog);
+            PageObjectFinishedLoadingEvent += new GolemEvent(WriteActionToLog);
+            OnTestPassedEvent += new GolemEvent(WriteActionToLog);
+            OnTestFailedEvent += new GolemEvent(WriteActionToLog);
+            OnTestSkippedEvent += new GolemEvent(WriteActionToLog);
+
         }
 
         private void RemoveEvents()
         {
-            PageObjectActionEvent -= new TestBaseClass.ActionEvent(AddAction);
-            BeforeTestEvent -= new TestBaseClass.ActionEvent(WriteActionToLog);
-            AfterTestEvent -= new TestBaseClass.ActionEvent(WriteActionToLog);
-            GenericEvent -= new TestBaseClass.ActionEvent(WriteActionToLog);
+            GenericEvent -= new GolemEvent(WriteActionToLog);
+            AfterBrowserLaunchedEvent -= new GolemEvent(WriteActionToLog);
+            AfterBrowserClosedEvent -= new GolemEvent(WriteActionToLog);
+            BeforeSuiteEvent -= new GolemEvent(WriteActionToLog);
+            AfterSuiteEvent -= new GolemEvent(WriteActionToLog);
+            BeforeTestEvent -= new GolemEvent(WriteActionToLog);
+            AfterTestEvent -= new GolemEvent(WriteActionToLog);
+            BeforeCommandEvent -= new GolemEvent(WriteActionToLog);
+            AfterCommandEvent -= new GolemEvent(WriteActionToLog);
+            PageObjectCreatedEvent -= new GolemEvent(WriteActionToLog);
+            PageObjectMethodEvent -= new GolemEvent(WriteActionToLog);
+            PageObjectFinishedLoadingEvent -= new GolemEvent(WriteActionToLog);
+            OnTestPassedEvent -= new GolemEvent(WriteActionToLog);
+            OnTestFailedEvent -= new GolemEvent(WriteActionToLog);
+            OnTestSkippedEvent -= new GolemEvent(WriteActionToLog);
+
         }
        
         [SetUp]
         public void SetUp()
         {
-            BeforeTestEvent("Before Test", null);
-            LogEvent(Common.GetCurrentTestName() + " started");
-            StartVideoRecording();
-            StartProxy();
-            LaunchBrowser();
+            BeforeTestEvent(new GolemEventArgs("Test Starting"));  
+            
         }
 
         [TearDown]
         public void TearDown()
         {
-            LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
-            StopVideoRecording();
-            LogScreenshotIfTestFailed();
-            LogVideoIfTestFailed();
-            LogHtmlIfTestFailed();
-            QuitBrowser();
-            QuitProxy();
-            LogActions();
-            GetHTTPTrafficInfo();
-            AssertNoVerificationErrors();
+
+           // AfterTestEvent(new GolemEventArgs("Test Finished"));
+            FireTestStatusEvent();
             DeleteTestData();
         }
 
@@ -356,22 +475,46 @@ namespace Golem.Framework
             }
         }
 
+        [FixtureInitializer]
+        public void Initialize()
+        {
+
+            testDataCollection = new Dictionary<string, TestDataContainer>();
+            
+            SetTestExecutionSettings();
+            BeforeTestEvent += BeforeTestEvent_LaunchBrowser;
+            BeforeTestEvent += BeforeTestEvent_StartVideoRecording;
+            BeforeTestEvent += BeforeTestEvent_StartProxy;
+            AfterTestEvent +=  AfterTestEvent_StopVideoRecording;
+            OnTestFailedEvent += OnTestFailed_LogScreenshot;
+            OnTestFailedEvent += OnTestFailed_LogVideo;
+            OnTestFailedEvent += OnTestFailed_LogHtml;
+            AfterTestEvent += AfterTestEvent_QuitBrowser;
+            AfterTestEvent += AfterTestEvent_QuitProxy;
+            AfterTestEvent += AfterTestEvent_LogActions;
+            AfterTestEvent += AfterTestEvent_GetHTTPTrafficInfo;
+            AfterTestEvent += AfterTestEvent_AssertNoVerificationErrors;
+    
+        }
+
+
+        
         [FixtureSetUp]
         public void SuiteSetUp()
         {
-            
             SetupEvents();
-            testDataCollection = new Dictionary<string, TestDataContainer>();
-            SetTestExecutionSettings();
-            //LogEvent("Suite Started");
+            BeforeSuiteEvent(new GolemEventArgs("Suite Started"));
+            
         }
 
 
         [FixtureTearDown]
         public void SuiteTearDown()
         {
+            AfterSuiteEvent(new GolemEventArgs("Suite Finished"));
             RemoveEvents();
-            // LogEvent("Suite Finished");
+            
         }
     }
 }
+

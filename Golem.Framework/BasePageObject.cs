@@ -37,8 +37,11 @@ namespace Golem.Framework
         public BasePageObject()
         {
             driver = TestBaseClass.driver;
+            
             className = this.GetType().Name;
+            TestBaseClass.FirePageObjectCreatedEvent(new TestBaseClass.GolemEventArgs("PageObjectCreated",className,Common.GetCurrentMethodName()));
             WaitForElements();
+            TestBaseClass.FirePageObjectFinishedLoadingEvent(new TestBaseClass.GolemEventArgs("PageObjectFinishedLoading",className,""));
             //TestBaseClass.testData.LogEvent(Common.GetCurrentClassAndMethodName() + " Finished");
             TestBaseClass.testData.actions.addAction(Common.GetCurrentClassAndMethodName());
             
@@ -49,6 +52,9 @@ namespace Golem.Framework
                 InitSpellChecker();
                 Misspellings = MispelledWords(AllText.Text);
             }
+
+            //this should always be the last line
+            TestBaseClass.FirePageObjectActionEvent(new TestBaseClass.GolemEventArgs("PageObjectAction"));
         }
 
         public void InitSpellChecker()

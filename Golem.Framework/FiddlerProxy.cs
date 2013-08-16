@@ -73,18 +73,27 @@ namespace Golem.Framework
         public void GetSessionMetrics()
         {
             Monitor.Enter(oAllSessions);
-            numSessions = oAllSessions.Count;
-            foreach (var oS in oAllSessions)
+            try
             {
-                var duration = oS.Timers.ClientDoneResponse.Subtract(oS.Timers.ClientConnected);
-                currentSum += duration;
-                if (duration < minResponseTime)
-                    minResponseTime = duration;
-                if (duration > maxResponseTime)
-                    maxResponseTime = duration;
+                numSessions = oAllSessions.Count;
+                foreach (var oS in oAllSessions)
+                {
+                    var duration = oS.Timers.ClientDoneResponse.Subtract(oS.Timers.ClientConnected);
+                    currentSum += duration;
+                    if (duration < minResponseTime)
+                        minResponseTime = duration;
+                    if (duration > maxResponseTime)
+                        maxResponseTime = duration;
+                }
+            
+
+                avgResponseTime = TimeSpan.FromMilliseconds(currentSum.TotalMilliseconds / (double)numSessions);
             }
-            avgResponseTime = TimeSpan.FromMilliseconds(currentSum.TotalMilliseconds/(double) numSessions);
-            Monitor.Exit(oAllSessions); 
+            catch (Exception e)
+            {
+                avgResponseTime = TimeSpan.FromSeconds(0);
+            }
+                Monitor.Exit(oAllSessions); 
 
 
         }
@@ -265,8 +274,7 @@ namespace Golem.Framework
 
         public void StartFiddler()
         {
-            
-            //Common.Log("Starting Fiddler Proxy on port " + this.proxyPort);
+            TestBaseClass.LogEvent("Stopping Fiddler Proxy on port " + this.proxyPort);
             string sSAZInfo = "NoSAZ";
 
             if (!FiddlerApplication.oTranscoders.ImportTranscoders(Assembly.GetExecutingAssembly()))

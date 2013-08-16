@@ -10,11 +10,11 @@ using Golem.PageObjects.Google;
 namespace Golem.Tests.Google
 {
     [TestFixture]
-    public class GoogleTest : TestBaseClass
+    public class GoogleExampleTests : TestBaseClass
     {
 
         [Test]
-        public static void Test()
+        public static void GoogleSmokeTest()
         {
             
             OpenPage<GoogleHomePage>("http://www.google.com/").

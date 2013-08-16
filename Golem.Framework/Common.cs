@@ -71,6 +71,16 @@ namespace Golem.Framework
             TestLog.WriteLine(msg);
         }
 
+        public static string GetCurrentTimeStampString()
+        {
+            return GetCurrentTimeStamp().ToString("HH:mm:ss::ffff");
+        }
+
+        public static DateTime GetCurrentTimeStamp()
+        {
+            return DateTime.Now;
+        }
+
         public static string GetCurrentMethodName()
         {
             StackTrace stackTrace = new StackTrace();           // get call stack
@@ -79,12 +89,31 @@ namespace Golem.Framework
             // write call stack method names
             foreach (StackFrame stackFrame in stackFrames)
             {
-                if (stackFrame.GetMethod().ReflectedType.BaseType==typeof(BasePageObject))
+                if ((stackFrame.GetMethod().ReflectedType.FullName.Contains("PageObject")) && (!stackFrame.GetMethod().IsConstructor))
                     return stackFrame.GetMethod().Name.ToString();
             }
             return "";
          
         }
+        public static string GetCurrentClassName()
+        {
+            StackTrace stackTrace = new StackTrace();           // get call stack
+            StackFrame[] stackFrames = stackTrace.GetFrames();  // get method calls (frames)
+            // string trace = "";
+            foreach (StackFrame stackFrame in stackFrames)
+            {
+                // trace += stackFrame.GetMethod().ReflectedType.FullName;
+                if ((stackFrame.GetMethod().ReflectedType.FullName.Contains("PageObject")) && (!stackFrame.GetMethod().IsConstructor))
+                {
+                    return stackFrame.GetMethod().ReflectedType.Name;
+                }
+
+            }
+            // DiagnosticLog.WriteLine(stackTrace.ToString());
+            return "";
+
+        }
+
         public static string GetCurrentClassAndMethodName()
         {
             StackTrace stackTrace = new StackTrace();           // get call stack
@@ -130,6 +159,16 @@ namespace Golem.Framework
              return TestContext.CurrentContext.TestStep.FullName;
         }
 
+        public static string GetCurrentTestFunctionName()
+        {
+            
+            return TestContext.CurrentContext.TestStep.Name;
+        }
+
+        public static string GetCurrentSuiteName()
+        {
+            return TestContext.CurrentContext.TestStep.Parent.Name;
+        }
         public static string GetShortTestName(int length)
         {
             string name = TestContext.CurrentContext.TestStep.Name; 

@@ -39,7 +39,8 @@ namespace Golem.Framework
         {
             try
             {
-                TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Typing : " + e.Element.GetAttribute("value"));
+                TestBaseClass.FireAfterCommandEvent(new TestBaseClass.GolemEventArgs("Typed : " + e.Element.GetAttribute("value")));
+               // TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Typing : " + e.Element.GetAttribute("value"));
             }
             catch (Exception)
             {
@@ -50,8 +51,9 @@ namespace Golem.Framework
 
         void driver_Navigating(object sender, WebDriverNavigationEventArgs e)
         {
+            TestBaseClass.FireBeforeCommandEvent(new TestBaseClass.GolemEventArgs("Navigating to url " + e.Url));
             Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Navigating to url " + e.Url);
+            //TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Navigating to url " + e.Url);
         }
 
 
@@ -63,14 +65,16 @@ namespace Golem.Framework
 
         void driver_FindingElement(object sender, FindElementEventArgs e)
         {
+            TestBaseClass.FireBeforeCommandEvent(new TestBaseClass.GolemEventArgs("Finding Element : " + e.FindMethod));
             Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Looking for Element : " + e.FindMethod);
+            //TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Looking for Element : " + e.FindMethod);
         }
 
         void driver_ElementClicking(object sender, WebElementEventArgs e)
         {
+            TestBaseClass.FireBeforeCommandEvent(new TestBaseClass.GolemEventArgs("Clicking Element"));
             Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Clicking Element");
+            //TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Clicking Element");
         }
 
     }
