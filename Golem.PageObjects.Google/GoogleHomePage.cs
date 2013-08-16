@@ -11,9 +11,9 @@ namespace Golem.PageObjects.Google
     public class GoogleHomePage : BasePageObject
     {
 
-        Element searchField = new Element("SearchField", By.Name("q"));
+        Element searchField = new Element("SearchField", By.Name("qz"));
         Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
-        Element searchButton = new Element("SearchButton", By.Name("btnK"));
+        Element searchButton = new Element("SearchButton", By.Name("btnzK"));
         Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
         Element signInButton = new Element("SignInButon", By.ClassName("gbit"));
         Element gmailbutton = new Element("GmailButton", By.ClassName("gbts"));
