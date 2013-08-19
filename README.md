@@ -3,28 +3,28 @@ Golem
 
 ###Event driven WebDriver C# Framework
 
-####Golem is an event-driven framework written in C# for Selenium-WebDriver and Gallio/MbUnit.  It sits on top of webdriver to help make automating easier, as an incredible amount of additional information is included automatically in the report.  It was designed for tests written using the page object design pattern.  Without something like Golem it’s difficult to build and maintain a large-scale (enterprise) suite of selenium tests.  Most companies will build something similar, as without it there will be an incredibly large amount of duplicate code.   
+Golem is an event-driven framework written in C# for Selenium-WebDriver and Gallio/MbUnit.  It sits on top of webdriver to help make automating easier, as an incredible amount of additional information is included automatically in the report.  It was designed for tests written using the page object design pattern.  Without something like Golem it’s difficult to build and maintain a large-scale (enterprise) suite of selenium tests.  Most companies will build something similar, as without it there will be an incredibly large amount of duplicate code.   
 
 Its primary purpose is threefold: 
-1)	Simplify/reduce coding by providing an enhanced Webdriver API and shared common functions 
-2)	Define and enforce an organizational structure that standardizes how tests are written and helps with code readability and re-use
-3)	Provide “features” that can enhance webdriver functionality, such as diagnostic information (screenshots, HTTP requests).
+-	Simplify/reduce coding by providing an enhanced Webdriver API and shared common functions 
+-	Define and enforce an organizational structure that standardizes how tests are written and helps with code readability and re-use
+-	Provide “features” that can enhance webdriver functionality, such as diagnostic information (screenshots, HTTP requests).
 
 ####Included Features:
-1)	Standard app.config file can be used to turn on/off or configure all features.  
-2)	Page Object design pattern makes tests a BDD style function chain : GoToWebPage().LogInWithUser(“GSmith”,”Password”).GoToProfilePage().EditName(“George Smith”).LogOut();
-3)	Parallel test execution – Can execute up to 5 instances of a browser on each machine
-4)	Can run tests locally or on a remote machine
-5)	Multiple Browser support – Define multiple browsers and each test will run once per browser.
-6)	Logging of all WebDriver commands 
-7)	Screenshots on test failure
-8)	Video Recording on test failure
-9)	HTTP Traffic recording, metrics, and validations
-10)	Automatic spell check each page 
-11)	Log/Track all UI actions (like logging in) including AJAX waiting
-12)	Appium Support (mobile app automation)
-13)	Automatically validate pages loaded by defining a list of elements to check for  
-14)	Event-driven architecture makes customizations easy
+-	Standard app.config file can be used to turn on/off or configure all features.  
+-	Page Object design pattern makes tests a BDD style function chain : GoToWebPage().LogInWithUser(“GSmith”,”Password”).GoToProfilePage().EditName(“George Smith”).LogOut();
+-	Parallel test execution – Can execute up to 5 instances of a browser on each machine
+-	Can run tests locally or on a remote machine
+-	Multiple Browser support – Define multiple browsers and each test will run once per browser.
+-	Logging of all WebDriver commands 
+-	Screenshots on test failure
+-	Video Recording on test failure
+-	HTTP Traffic recording, metrics, and validations
+-	Automatic spell check each page 
+-	Log/Track all UI actions (like logging in) including AJAX waiting
+-	Appium Support (mobile app automation)
+-	Automatically validate pages loaded by defining a list of elements to check for  
+-	Event-driven architecture makes customizations easy
 
 ###Overview:
 - Golem Tests follow the unit testing pattern.  You will have a .cs file that contains a class (suite of tests).  
