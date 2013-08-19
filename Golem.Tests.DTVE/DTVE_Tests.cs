@@ -13,14 +13,18 @@ namespace Golem.Tests.DTVE
 {
     public class DTVE_Tests : TestBaseClass
     {
+        
+
         [Test]
         public void Test()
         {
-
             OpenPage<LandingPage>("http://int-dtve.directv.com/browse").
                 ShowAllFilters().
-                HideAllFilters();
+                SelectFilter("Comedy").
+                VerifyNumberOfResult("1,984 Results");
             
         }
+
+
     }
 }

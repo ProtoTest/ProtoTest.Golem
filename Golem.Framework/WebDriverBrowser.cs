@@ -39,6 +39,9 @@ namespace Golem.Framework
                     case Browser.Safari:
                         driver = StartSafariBrowser();
                         break;
+                    case Browser.Android:
+                        driver = StartAndroidBrowser();
+                        break;
                     default:
                         driver = StartFirefoxBrowser();
                         break;
@@ -46,6 +49,7 @@ namespace Golem.Framework
             driver.Manage().Cookies.DeleteAllCookies();
             var eDriver = new EventedWebDriver(driver);
             return eDriver.driver;
+            driver.Manage().Window.Maximize();
             return driver;
 
         }
@@ -115,6 +119,12 @@ namespace Golem.Framework
             } 
             return new SafariDriver(options);
         }
+
+        public IWebDriver StartAndroidBrowser()
+        {
+            
+            return new AndroidDriver();
+        }
         public DesiredCapabilities GetCapabilitiesForBrowser(Browser browser)
         {
             switch (browser)
@@ -137,7 +147,7 @@ namespace Golem.Framework
         public IWebDriver LaunchRemoteBrowser(Browser browser, string host)
         {
             DesiredCapabilities desiredCapabilities = GetCapabilitiesForBrowser(browser);
-            var remoteAddress = new Uri("http://"+ host +":4444/wd/hub");
+            var remoteAddress = new Uri("http://"+ host +":8080/wd/hub");
             return new EventedWebDriver(new RemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
         }
 

@@ -18,6 +18,21 @@ namespace Golem.PageObjects.DTVE
             
         }
 
+        public LandingPage SelectFilter(string name)
+        {
+            string elementPath = @"//li[@data-filter='" + name + "']";
+            driver.FindElement(By.XPath(elementPath)).Click();
+            return new LandingPage();
+        }
+
+        public LandingPage VerifyNumberOfResult(string number)
+        {
+
+            Element textElement = new Element("Results Element", By.Id("browseResultsCount"));
+            driver.WaitForElementWithText(number);
+            return new LandingPage();
+        }
+
         public LandingPage ShowAllFilters()
         {
             ShowFilterDropdown.Click();

@@ -122,7 +122,7 @@ namespace Golem.Framework
             if (Config.Settings.reportSettings.videoRecordingOnError)
             {
                 TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
-                testData.recorder.Dispose();
+                //testData.recorder.Dispose();
             }
                 
                 

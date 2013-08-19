@@ -109,9 +109,9 @@ namespace Golem.Framework
         public static void VerifyElementText(this IWebDriver driver, By by, string expectedText)
         {
             string actualText = driver.FindElement(by).Text;
-            Verify(actualText != expectedText,
+            Verify(actualText == expectedText,
                    "VerifyElementText Failed : Expected : " + by.ToString() + " Expected text : '" + expectedText +
-                   "' + Actual '" + actualText);
+                   "' + Actual '" + actualText +"'");
         }
         
         public static Image GetScreenshot(this IWebDriver driver)

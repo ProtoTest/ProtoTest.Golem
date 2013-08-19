@@ -3,7 +3,7 @@ Golem
 
 ###Event driven WebDriver C# Framework
 
-####Golem is an event-driven framework written in C# for Selenium-WebDriver.  It sits on top of webdriver to help make automating easier.  It was designed for tests written using the page object design pattern.  Without something like Golem it’s difficult to build and maintain a large-scale (enterprise) suite of selenium tests.  Most companies will build something similar, as without it there will be an incredibly large amount of duplicate code.   
+####Golem is an event-driven framework written in C# for Selenium-WebDriver and Gallio/MbUnit.  It sits on top of webdriver to help make automating easier, as an incredible amount of additional information is included automatically in the report.  It was designed for tests written using the page object design pattern.  Without something like Golem it’s difficult to build and maintain a large-scale (enterprise) suite of selenium tests.  Most companies will build something similar, as without it there will be an incredibly large amount of duplicate code.   
 
 Its primary purpose is threefold: 
 1)	Simplify/reduce coding by providing an enhanced Webdriver API and shared common functions 

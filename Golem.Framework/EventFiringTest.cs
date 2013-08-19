@@ -95,6 +95,25 @@ namespace Golem.Framework
         public static event GolemEvent OnTestFailedEvent;
         public static event GolemEvent OnTestSkippedEvent;
 
+        public EventFiringTest()
+        {
+            GenericEvent += new GolemEvent(WriteActionToLog);
+            AfterProgramLaunchedEvent += new GolemEvent(WriteActionToLog);
+            AFterProgramClosedEvent += new GolemEvent(WriteActionToLog);
+            BeforeSuiteEvent += new GolemEvent(WriteActionToLog);
+            AfterSuiteEvent += new GolemEvent(WriteActionToLog);
+            BeforeTestEvent += new GolemEvent(WriteActionToLog);
+            AfterTestEvent += new GolemEvent(WriteActionToLog);
+            BeforeCommandEvent += new GolemEvent(WriteActionToLog);
+            AfterCommandEvent += new GolemEvent(WriteActionToLog);
+            PageObjectCreatedEvent += new GolemEvent(WriteActionToLog);
+            PageObjectMethodEvent += new GolemEvent(WriteActionToLog);
+            PageObjectFinishedLoadingEvent += new GolemEvent(WriteActionToLog);
+            OnTestPassedEvent += new GolemEvent(WriteActionToLog);
+            OnTestFailedEvent += new GolemEvent(WriteActionToLog);
+            OnTestSkippedEvent += new GolemEvent(WriteActionToLog);
+        }
+
         [SetUp]
         public void SetUp()
         {
@@ -114,7 +133,7 @@ namespace Golem.Framework
         [FixtureSetUp]
         public void SuiteSetUp()
         {
-            SetupEvents();
+           // SetupEvents();
             BeforeSuiteEvent(new GolemEventArgs("Suite Started"));
 
         }
@@ -124,7 +143,7 @@ namespace Golem.Framework
         public void SuiteTearDown()
         {
             AfterSuiteEvent(new GolemEventArgs("Suite Finished"));
-            RemoveEvents();
+          //  RemoveEvents();
 
         }
 
@@ -191,45 +210,7 @@ namespace Golem.Framework
         
         
         
-        private void SetupEvents()
-        {
-            GenericEvent += new GolemEvent(WriteActionToLog);
-            AfterProgramLaunchedEvent += new GolemEvent(WriteActionToLog);
-            AFterProgramClosedEvent += new GolemEvent(WriteActionToLog);
-            BeforeSuiteEvent += new GolemEvent(WriteActionToLog);
-            AfterSuiteEvent += new GolemEvent(WriteActionToLog);
-            BeforeTestEvent += new GolemEvent(WriteActionToLog);
-            AfterTestEvent += new GolemEvent(WriteActionToLog);
-            BeforeCommandEvent += new GolemEvent(WriteActionToLog);
-            AfterCommandEvent += new GolemEvent(WriteActionToLog);
-            PageObjectCreatedEvent += new GolemEvent(WriteActionToLog);
-            PageObjectMethodEvent += new GolemEvent(WriteActionToLog);
-            PageObjectFinishedLoadingEvent += new GolemEvent(WriteActionToLog);
-            OnTestPassedEvent += new GolemEvent(WriteActionToLog);
-            OnTestFailedEvent += new GolemEvent(WriteActionToLog);
-            OnTestSkippedEvent += new GolemEvent(WriteActionToLog);
 
-        }
-
-        private void RemoveEvents()
-        {
-            GenericEvent -= new GolemEvent(WriteActionToLog);
-            AfterProgramLaunchedEvent -= new GolemEvent(WriteActionToLog);
-            AFterProgramClosedEvent -= new GolemEvent(WriteActionToLog);
-            BeforeSuiteEvent -= new GolemEvent(WriteActionToLog);
-            AfterSuiteEvent -= new GolemEvent(WriteActionToLog);
-            BeforeTestEvent -= new GolemEvent(WriteActionToLog);
-            AfterTestEvent -= new GolemEvent(WriteActionToLog);
-            BeforeCommandEvent -= new GolemEvent(WriteActionToLog);
-            AfterCommandEvent -= new GolemEvent(WriteActionToLog);
-            PageObjectCreatedEvent -= new GolemEvent(WriteActionToLog);
-            PageObjectMethodEvent -= new GolemEvent(WriteActionToLog);
-            PageObjectFinishedLoadingEvent -= new GolemEvent(WriteActionToLog);
-            OnTestPassedEvent -= new GolemEvent(WriteActionToLog);
-            OnTestFailedEvent -= new GolemEvent(WriteActionToLog);
-            OnTestSkippedEvent -= new GolemEvent(WriteActionToLog);
-
-        }
        
     }
 }

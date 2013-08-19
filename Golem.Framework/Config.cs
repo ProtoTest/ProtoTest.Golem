@@ -65,7 +65,7 @@ namespace Golem.Framework
             ElementTimeoutSec =int.Parse(Config.GetConfigValue("ElementTimeoutSec","20"));
             PageTimeoutSec = int.Parse(Config.GetConfigValue("PageTimeoutSec","30"));
             EnvironmentUrl = Config.GetConfigValue("EnvironmentUrl","");
-            DegreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "5"));
+            DegreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "1"));
             CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
             RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
             HostIp = Config.GetConfigValue("HostIp", "localhost");
