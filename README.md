@@ -1,11 +1,32 @@
 Golem
 =====
 
-Event driven WebDriver C# Framework
+###Event driven WebDriver C# Framework
 
-Golem is an event driven framework for C#.  It was originally built for webdriver, but has become more tool agnostic.  It is built upon MbUnit and Gallio.  
+####Golem is an event-driven framework written in C# for Selenium-WebDriver.  It sits on top of webdriver to help make automating easier.  It was designed for tests written using the page object design pattern.  Without something like Golem it’s difficult to build and maintain a large-scale (enterprise) suite of selenium tests.  Most companies will build something similar, as without it there will be an incredibly large amount of duplicate code.   
 
-Overview:
+Its primary purpose is threefold: 
+1)	Simplify/reduce coding by providing an enhanced Webdriver API and shared common functions 
+2)	Define and enforce an organizational structure that standardizes how tests are written and helps with code readability and re-use
+3)	Provide “features” that can enhance webdriver functionality, such as diagnostic information (screenshots, HTTP requests).
+
+####Included Features:
+1)	Standard app.config file can be used to turn on/off or configure all features.  
+2)	Page Object design pattern makes tests a BDD style function chain : GoToWebPage().LogInWithUser(“GSmith”,”Password”).GoToProfilePage().EditName(“George Smith”).LogOut();
+3)	Parallel test execution – Can execute up to 5 instances of a browser on each machine
+4)	Can run tests locally or on a remote machine
+5)	Multiple Browser support – Define multiple browsers and each test will run once per browser.
+6)	Logging of all WebDriver commands 
+7)	Screenshots on test failure
+8)	Video Recording on test failure
+9)	HTTP Traffic recording, metrics, and validations
+10)	Automatic spell check each page 
+11)	Log/Track all UI actions (like logging in) including AJAX waiting
+12)	Appium Support (mobile app automation)
+13)	Automatically validate pages loaded by defining a list of elements to check for  
+14)	Event-driven architecture makes customizations easy
+
+###Overview:
 - Golem Tests follow the unit testing pattern.  You will have a .cs file that contains a class (suite of tests).  
 - The class will contain one or more methods marked with the [Test] attribute.  
 - Each Test becomes executable separately in Gallio Icarus.  
@@ -14,7 +35,7 @@ Overview:
 - Golem includes a variety of "features" that get started automatically.  For example, having each webdriver command written to the test log.  
 - Golem is event-driven, and has a variety of events that get triggered automatically.  In your test class you can define methods that are called when these events are fired.  
 
-Things to know : 
+###Things to know : 
 - C# and .Net 4.0
 - Built upon Gallio and MbUnit. (gallio.org)  Build the project into a dll, open dll in Gallio Icarus to execute.  
 - Multi-threaded support (Parallel test execution)
@@ -32,7 +53,7 @@ Things to know :
 - Created a variety of Verifications in the WebDriver API.  These will not stop the test if they fail.  '
 - Supports data driven testing through MbUnit attributes.  
 
-Configurable Features : 
+####Configurable Features : 
 - Multi Threaded Execution.  Mark test with [Parallelizable] attribute. Set number of threads with "DegreeOfParallelism", "1"
 - Automatically Launch Browser - LaunchBrowser", "True"
 - Specify up to five browsers - "Browser1" value="Firefox"
