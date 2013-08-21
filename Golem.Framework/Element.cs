@@ -6,6 +6,8 @@ using Gallio.Framework;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Support;
 
 namespace Golem.Framework
 {
@@ -29,12 +31,23 @@ namespace Golem.Framework
             }
         }
 
+        public string GetHtml()
+        {
+            return (string)((IJavaScriptExecutor)driver).ExecuteScript("var f = document.createElement('div').appendChild(arguments[0].cloneNode(true)); return f.parentNode.innerHTML", element);
+        }
+
+        public IWebElement GetParent()
+        {
+            return (IWebElement)((IJavaScriptExecutor)driver).ExecuteScript(@"return arguments[0].parentNode;", element);
+        }
+
         public Element(string name, By locator)
         {
-            this.name = name;
             this.driver = TestBaseClass.driver;
+            this.name = name;
             this.by = locator;
         }
+
 
         public bool Displayed
         {
