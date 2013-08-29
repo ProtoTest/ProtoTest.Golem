@@ -9,12 +9,57 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA;
 using System.Drawing;
 using System.Collections.ObjectModel;
+using OpenQA.Selenium.Interactions;
 
 
 namespace Golem.Framework
 {
     public static class WebDriverExtensions
     {
+        public static IWebElement Hide(this IWebElement element)
+        {
+            return (IWebElement)((IJavaScriptExecutor)TestBaseClass.driver).ExecuteScript("arguments[0].style.visibility='hidden';return;",element);
+        }
+        public static IWebElement Show(this IWebElement element)
+        {
+            return (IWebElement)((IJavaScriptExecutor)TestBaseClass.driver).ExecuteScript("arguments[0].style.visibility='visible';return;", element);
+        }
+        public static IWebElement FindInSiblings(this IWebElement element, By by)
+        {
+            return element.GetParent().FindElement(by);
+        }
+        public static IWebElement GetParent(this IWebElement element)
+        {
+            IWebDriver driver = TestBaseClass.driver;
+                return (IWebElement)((IJavaScriptExecutor)driver).ExecuteScript(@"return arguments[0].parentNode;", element);
+        }
+        public static string GetHtml(this IWebElement element)
+        {
+            IWebDriver driver = TestBaseClass.driver;
+                string html = (string)((IJavaScriptExecutor)driver).ExecuteScript("var f = document.createElement('div').appendChild(arguments[0].cloneNode(true)); return f.parentNode.innerHTML", element);
+                return html;
+        }
+
+        public static void Highlight(this IWebElement element)
+        {
+             
+            var jsDriver = ((IJavaScriptExecutor)TestBaseClass.driver);
+            string originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
+            jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'", element);
+            System.Threading.Thread.Sleep(500);
+            jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'", element);
+            jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'", element);
+            System.Threading.Thread.Sleep(500);
+            jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'", element);
+        }
+
+        public static void MouseOver(this IWebElement element)
+        {
+            IWebDriver driver = TestBaseClass.driver;
+           Actions action = new Actions(driver);
+            action.MoveToElement(element).Build().Perform();
+        }
+
         public static IWebElement WaitForPresent(this IWebDriver driver, By by, int timeout=0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
@@ -136,6 +181,12 @@ namespace Golem.Framework
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("return " + script);
+        }
+
+        public static void ExecuteJavaScript(this IWebDriver driver, string script, Object obj)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("return " + script, obj);
         }
 
         public static void JavaWindowScroll(this IWebDriver driver, int xCord, int yCord)
