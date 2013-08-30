@@ -18,11 +18,11 @@ namespace Golem.Framework
     {
         public static IWebElement Hide(this IWebElement element)
         {
-            return (IWebElement)((IJavaScriptExecutor)TestBaseClass.driver).ExecuteScript("arguments[0].style.visibility='hidden';return;",element);
+            return (IWebElement)TestBaseClass.driver.ExecuteJavaScript("arguments[0].style.visibility='hidden';return;", element);
         }
         public static IWebElement Show(this IWebElement element)
         {
-            return (IWebElement)((IJavaScriptExecutor)TestBaseClass.driver).ExecuteScript("arguments[0].style.visibility='visible';return;", element);
+            return (IWebElement)TestBaseClass.driver.ExecuteJavaScript("arguments[0].style.visibility='visible';return;", element);
         }
         public static IWebElement FindInSiblings(this IWebElement element, By by)
         {
@@ -31,12 +31,12 @@ namespace Golem.Framework
         public static IWebElement GetParent(this IWebElement element)
         {
             IWebDriver driver = TestBaseClass.driver;
-                return (IWebElement)((IJavaScriptExecutor)driver).ExecuteScript(@"return arguments[0].parentNode;", element);
+            return (IWebElement)driver.ExecuteJavaScript(@"return arguments[0].parentNode;", element);
         }
         public static string GetHtml(this IWebElement element)
         {
             IWebDriver driver = TestBaseClass.driver;
-                string html = (string)((IJavaScriptExecutor)driver).ExecuteScript("var f = document.createElement('div').appendChild(arguments[0].cloneNode(true)); return f.parentNode.innerHTML", element);
+            string html = (string)driver.ExecuteJavaScript("var f = document.createElement('div').appendChild(arguments[0].cloneNode(true)); return f.parentNode.innerHTML", element);
                 return html;
         }
 
@@ -177,16 +177,16 @@ namespace Golem.Framework
             }
         }
 
-        public static void ExecuteJavaScript(this IWebDriver driver, string script)
+        public static object ExecuteJavaScript(this IWebDriver driver, string script)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript("return " + script);
+            return js.ExecuteScript("return " + script);
         }
 
-        public static void ExecuteJavaScript(this IWebDriver driver, string script, Object obj)
+        public static object ExecuteJavaScript(this IWebDriver driver, string script, params object[] args)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript("return " + script, obj);
+            return js.ExecuteScript("return " + script, args);
         }
 
         public static void JavaWindowScroll(this IWebDriver driver, int xCord, int yCord)
