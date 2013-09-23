@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using Gallio.Common.Markup;
 using Gallio.Framework.Pattern;
 using MbUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using System.Configuration;
 using Gallio.Framework;
 using Gallio.Model;
 using Gallio.Common.Media;
-using Golem.Framework;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support.Events;
 
 namespace Golem.Framework
 {
@@ -324,7 +317,6 @@ namespace Golem.Framework
         [SetUp]
         public void SetUp()
         {
-            BeforeTestEvent("Before Test", null);
             LogEvent(Common.GetCurrentTestName() + " started");
             StartVideoRecording();
             StartProxy();

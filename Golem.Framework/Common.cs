@@ -14,6 +14,11 @@ namespace Golem.Framework
 {
     public class Common
     {
+        public static string GetRandomString()
+        {
+            return DateTime.Now.ToString("ddHHmmss");
+        }
+
         public static void KillProcess(string name)
         {
             Process[] runningProcesses = Process.GetProcesses();

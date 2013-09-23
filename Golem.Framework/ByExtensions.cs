@@ -16,5 +16,10 @@ namespace Golem.Framework
         {
             return By.XPath("//*[contains(text(),'"+text+"')]");
         }
+
+        public static By PartialAttribute(string tag, string attribute, string value)
+        {
+            return By.XPath(string.Format("//{0}[contains({1},'{2}')]", tag, attribute, value));
+        }
     }
 }

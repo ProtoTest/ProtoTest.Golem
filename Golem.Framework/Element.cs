@@ -195,14 +195,17 @@ namespace Golem.Framework
                 var eles = driver.FindElements(this.by);
                 if (eles.Count != 0)
                 {
-                    if (eles[0].Displayed)
+                    foreach (var ele in eles)
                     {
-                        TestContext.CurrentContext.IncrementAssertCount();
-                        return this;   
+                        if (ele.Displayed)
+                        {
+                            TestContext.CurrentContext.IncrementAssertCount();
+                            return this;
+                        }  
                     }
+                    
                 }
-                else
-                    System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") not visible after " + seconds + " seconds");
             return this;
@@ -243,5 +246,23 @@ namespace Golem.Framework
             return this;
         }
 
+        public Element VerifyText(string text, int seconds=0)
+        {
+            for (int i = 0; i <= seconds; i++)
+            {
+                if (driver.FindElements(this.by).Count != 0)
+                {
+                    if (driver.FindElement(this.by).Text.Contains(text))
+                    {
+                        TestContext.CurrentContext.IncrementAssertCount();
+                        return this;
+                    }
+                }
+                else
+                    System.Threading.Thread.Sleep(1000);
+            }
+            Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") did not have text : " + text + " after " + seconds + " seconds");
+            return this;
+        }
     }
 }

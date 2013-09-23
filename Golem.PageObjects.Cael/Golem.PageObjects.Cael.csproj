@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6525FF11-72B4-486A-93E7-D44FDBE3F5BC}</ProjectGuid>
+    <ProjectGuid>{5FA7C065-266B-486B-9ED2-9FDD1953C0FA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppiumTests</RootNamespace>
-    <AssemblyName>AppiumTests</AssemblyName>
+    <RootNamespace>Golem.PageObjects.Cael</RootNamespace>
+    <AssemblyName>Golem.PageObjects.Cael</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,19 +48,24 @@
     <Reference Include="WebDriver">
       <HintPath>..\Libraries\WebDriver\2.33.0\net40\WebDriver.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\Libraries\WebDriver\2.33.0\net40\WebDriver.Support.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppiumTest.cs" />
-    <Compile Include="PageObjects\AddBook.cs" />
-    <Compile Include="PageObjects\SearchForBook.cs" />
-    <Compile Include="PageObjects\MenuPage.cs" />
+    <Compile Include="MyAccount\ContactInfoPage.cs" />
+    <Compile Include="MyAccount\MyAccountPage.cs" />
+    <Compile Include="MyAccount\PasswordPage.cs" />
+    <Compile Include="MyAccount\ProfilePage.cs" />
+    <Compile Include="Portfolio\PaymentPage.cs" />
+    <Compile Include="Portfolio\ConfirmDIYPage.cs" />
+    <Compile Include="CreateUserPage.cs" />
+    <Compile Include="DashboardPage.cs" />
+    <Compile Include="HeaderComponent.cs" />
+    <Compile Include="HomePage.cs" />
+    <Compile Include="LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PageObjects\SplashPage.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <Compile Include="Portfolio\SelectCaelCoursePage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
