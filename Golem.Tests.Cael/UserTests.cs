@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Gallio.Runtime.Formatting;
 using Golem.Framework;
 using Golem.PageObjects.Cael;
+using Golem.PageObjects.Mailinator;
 using MbUnit.Framework;
 
 namespace Golem.Tests.Cael
@@ -31,7 +32,7 @@ namespace Golem.Tests.Cael
         public void CreateNewUser()
         {
             
-            OpenPage<HomePage>("http://lcdev.bluemodus.com/").
+            OpenPage<PageObjects.Cael.HomePage>("http://lcdev.bluemodus.com/").
                 GoToCreateUserPage().
                 CreateUser(email,password,firstName,lastName,address1,address2,city,state,zip,phone,DOB_Month,DOB_Day,DOB_Year);
 
@@ -54,14 +55,14 @@ namespace Golem.Tests.Cael
         public void ChangePassword()
         {
             string newPassword = @"Changeme1234!!";
-            OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
+            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, password)
                 .header.GoToMyAccountPage()
                 .GoToPasswordPage().
                 UpdateInfo(email, newPassword).header.SignOut();
 
-            OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
+            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, newPassword)
                 .header.GoToMyAccountPage()
@@ -73,7 +74,7 @@ namespace Golem.Tests.Cael
         public void EditPassword()
         {
             string newPassword = @"Changeme1234!!";
-            OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
+            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, password)
                 .header.GoToMyAccountPage()
