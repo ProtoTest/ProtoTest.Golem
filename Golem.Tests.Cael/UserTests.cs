@@ -57,14 +57,14 @@ namespace Golem.Tests.Cael
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, password)
-                .header.GoToMyAccount()
+                .header.GoToMyAccountPage()
                 .GoToPasswordPage().
                 UpdateInfo(email, newPassword).header.SignOut();
 
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, newPassword)
-                .header.GoToMyAccount()
+                .header.GoToMyAccountPage()
                 .GoToPasswordPage().
                 UpdateInfo(email, password).header.SignOut();
         }
@@ -76,7 +76,7 @@ namespace Golem.Tests.Cael
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, password)
-                .header.GoToMyAccount()
+                .header.GoToMyAccountPage()
                 .GoToPasswordPage().
                 UpdateInfo(email, newPassword).header.SignOut();
 
