@@ -28,6 +28,30 @@ namespace Golem.Tests.Cael
         public static string DOB_Day = "1";
         public static string DOB_Year = "1960";
 
+
+        /* Profile inputs */
+        string education = "Less than HS Diploma";
+        string areaOfStudy = "Engineering and Engineering Technology";
+        string nameOfCollege = "American Sentinel University";
+        bool collegeCreditInvestigated = true;
+        string collegeCreditsEarned = "0-10";
+        string collegeCreditsNeeded = "91-120";
+        bool onlineLearning = true;
+        bool financialAid = true;
+        string topicOfInterest = "Choosing a Degree or Program of Study";
+        string gender = "Male";
+        string race = "Asian/Pacific";
+        string militaryExp = "No Military Experience";
+        string employmentStatus = "Not Currently Employed";
+        string employerName = "Prototest";
+        bool tuitionAssistance = true;
+        string annualIncome = "$20-29,000";
+        bool laborUnion = false;
+        bool receivedTraining = true;
+        string typeOfTraining = "All of it";
+        string howHear = "Other";
+
+
         [Test]
         public void CreateNewUser()
         {
@@ -71,6 +95,18 @@ namespace Golem.Tests.Cael
         }
 
         [Test, DependsOn("ActivateUser")]
+        public void VerifyContactInfo()
+        {
+            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+               GoToLoginPage().
+               Login(email, password)
+               .header.GoToMyAccountPage()
+               .GoToContactInfoPage()
+               .VerifyContactInfo(firstName, lastName, DOB_Month, DOB_Day, DOB_Year, address1, address2, city, state, zip, phone)
+               .header.SignOut();
+        }
+
+        [Test, DependsOn("ActivateUser")]
         public void EditPassword()
         {
             string newPassword = @"Changeme1234!!";
@@ -80,6 +116,89 @@ namespace Golem.Tests.Cael
                 .header.GoToMyAccountPage()
                 .GoToPasswordPage().
                 UpdateInfo(email, newPassword).header.SignOut();
+
+        }
+
+        [Test, DependsOn("ActivateUser")]
+        public void EditProfile()
+        {
+            string education = "Less than HS Diploma";
+            string areaOfStudy = "Engineering and Engineering Technology";
+            string nameOfCollege = "American Sentinel University";
+            bool collegeCreditInvestigated = true;
+            string collegeCreditsEarned = "0-10";
+            string collegeCreditsNeeded = "91-120";
+            bool onlineLearning = true;
+            bool financialAid = true;
+            string topicOfInterest = "Choosing a Degree or Program of Study";
+            string gender = "Male";
+            string race = "Asian/Pacific";
+            string militaryExp = "No Military Experience";
+            string employmentStatus = "Not Currently Employed";
+            string employerName = "Prototest";
+            bool tuitionAssistance = true;
+            string annualIncome = "$20-29,000";
+            bool laborUnion = false;
+            bool receivedTraining = true;
+            string typeOfTraining = "All of it";
+            string howHear = "Other";
+
+
+            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+                GoToLoginPage().
+                Login(email, password)
+                .header.GoToMyAccountPage()
+                .GoToProfilePage().EnterProfileInfo(education,
+                                                    areaOfStudy,
+                                                    nameOfCollege,
+                                                    collegeCreditInvestigated,
+                                                    collegeCreditsEarned,
+                                                    collegeCreditsNeeded,
+                                                    onlineLearning,
+                                                    financialAid,
+                                                    topicOfInterest,
+                                                    gender,
+                                                    race,
+                                                    militaryExp,
+                                                    employmentStatus,
+                                                    employerName,
+                                                    tuitionAssistance,
+                                                    annualIncome,
+                                                    laborUnion,
+                                                    receivedTraining,
+                                                    typeOfTraining,
+                                                    howHear).header.SignOut();
+
+        }
+
+        [Test, DependsOn("EditProfile")]
+        public void VerifyProfile()
+        {
+           
+            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+                GoToLoginPage().
+                Login(email, password)
+                .header.GoToMyAccountPage()
+                .GoToProfilePage().VerifyProfileInfo(education,
+                                                    areaOfStudy,
+                                                    nameOfCollege,
+                                                    collegeCreditInvestigated,
+                                                    collegeCreditsEarned,
+                                                    collegeCreditsNeeded,
+                                                    onlineLearning,
+                                                    financialAid,
+                                                    topicOfInterest,
+                                                    gender,
+                                                    race,
+                                                    militaryExp,
+                                                    employmentStatus,
+                                                    employerName,
+                                                    tuitionAssistance,
+                                                    annualIncome,
+                                                    laborUnion,
+                                                    receivedTraining,
+                                                    typeOfTraining,
+                                                    howHear).header.SignOut();
 
         }
     }
