@@ -12,13 +12,13 @@ namespace Golem.PageObjects.Cael.MyAccount
     {
         public Element EducationAchieved_Drp = new Element("Education Achieved Dropdowqn", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_educationAchievedDDList"));
         public Element AreaOfStudy_Drp = new Element("Area of Study", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_areaOfStudyDDList"));
-        public Element NameOfCollege_Field = new Element("Name of College", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_nameOfCollegeTextBox"));
-        public Element CollegeCredit_Radio = new Element("College Credit Interest Radio", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_investigationRButton"));
+        public Element NameOfCollege_Drp = new Element("Name of College", By.Id("schoolDDList"));
+        public Element CollegeCredit_Radio = new Element("College Credit Interest Radio", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_investigationRButton_0"));
         public Element CollegeCreditsEarned_Drp = new Element("College Credits Earned Dropdown", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_creditsEarnedDDList"));
         public Element CollegeCreditsNeed_Drp = new Element("College Credits Needed Dropdown", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_creditsRemainingDDList"));
         public Element InterestedOnline_Radio = new Element("InterestedOnline_Radio", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_onlineRButton_0"));
-        public Element FinancialAid_Radio = new Element("FinancialAid_Radio", By.Id(""));
-        public Element TopicOfInterest_Drp = new Element("", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_aidRButton_0"));
+        public Element FinancialAid_Radio = new Element("FinancialAid_Radio", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_aidRButton_0"));
+        public Element TopicOfInterest_Drp = new Element("Topic of Interest", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_topicOfInterestDDList"));
         public Element Gender_Radio = new Element("Gender_Radio", By.Id("genderRButton_0"));
         public Element Race_Drp = new Element("Race_Drp", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_EthnicityDDList"));
         public Element MilitaryExperience_Drp = new Element("MilitaryExperience_Drp", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_militaryDDList"));
@@ -43,7 +43,7 @@ namespace Golem.PageObjects.Cael.MyAccount
         {
             EducationAchieved_Drp.SelectOption(education);
             AreaOfStudy_Drp.SelectOption(areaOfStudy);
-            NameOfCollege_Field.Text = nameOfCollege;
+            NameOfCollege_Drp.SelectOption(nameOfCollege);
             CollegeCredit_Radio.Click();
             CollegeCreditsEarned_Drp.SelectOption(collegeCreditsEarned);
             CollegeCreditsNeed_Drp.SelectOption(collegeCreditsNeeded);
@@ -75,25 +75,24 @@ namespace Golem.PageObjects.Cael.MyAccount
         {
             EducationAchieved_Drp.VerifyText(education);
             AreaOfStudy_Drp.VerifyText(areaOfStudy);
-            NameOfCollege_Field.VerifyText(nameOfCollege);
-            //CollegeCredit_Radio.Click();
+            NameOfCollege_Drp.VerifyText(nameOfCollege);
+            CollegeCredit_Radio.VerifySelected();
             CollegeCreditsEarned_Drp.VerifyText(collegeCreditsEarned);
             CollegeCreditsNeed_Drp.VerifyText(collegeCreditsNeeded);
-            //InterestedOnline_Radio.Click();
-          //  FinancialAid_Radio.Click();
+            InterestedOnline_Radio.VerifySelected();
+            FinancialAid_Radio.VerifySelected();
             TopicOfInterest_Drp.VerifyText(topicOfInterest);
-            //Gender_Radio.Click();
+            Gender_Radio.VerifySelected();
             Race_Drp.VerifyText(race);
             MilitaryExperience_Drp.VerifyText(militaryExperience);
             EmploymentStatus_Drp.VerifyText(employmentStatus);
-            Employer_Field.VerifyText(nameOfEmployer);
-            //TuitionAssistance_Radio.Click();
+            Employer_Field.VerifyValue(nameOfEmployer);
+            TuitionAssistance_Radio.VerifySelected();
             AnnualIncome_Drp.VerifyText(annualIncome);
-           // LaborUnion_Radio.Click();
-           // ReceivedTraining_Radio.Click();
+            LaborUnion_Radio.VerifySelected();
+            ReceivedTraining_Radio.VerifySelected();
             NameOrTypeOfTrainnig_Field.VerifyText(typeOfTraining);
             HowDidYouHear_Drp.VerifyText(howHear);
-           // SaveChanges_Btn.Click();
 
             return this;
 

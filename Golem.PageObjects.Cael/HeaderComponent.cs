@@ -30,7 +30,7 @@ namespace Golem.PageObjects.Cael
 
         public ContactInfoPage GoToMyAccountPage()
         {
-            SignOut_Link.Click();
+            MyAccount_Link.Click();
             return new ContactInfoPage();
         }
 

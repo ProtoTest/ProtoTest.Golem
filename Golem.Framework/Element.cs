@@ -264,5 +264,49 @@ namespace Golem.Framework
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") did not have text : " + text + " after " + seconds + " seconds");
             return this;
         }
+
+        public Element VerifyValue(string text, int seconds = 0)
+        {
+            for (int i = 0; i <= seconds; i++)
+            {
+                if (driver.FindElements(this.by).Count != 0)
+                {
+                    string value;
+
+                    if ((value = driver.FindElement(this.by).GetAttribute("value")) != null)
+                    {
+                        if(value.Equals(text))
+                        {
+                            TestContext.CurrentContext.IncrementAssertCount();
+                            return this;
+                        }
+                    }
+                }
+                else
+                    System.Threading.Thread.Sleep(1000);
+            }
+            Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") did not have attribute value : " + text + " after " + seconds + " seconds");
+            return this;
+        }
+
+        public Element VerifySelected(int seconds = 0)
+        {
+            for (int i = 0; i <= seconds; i++)
+            {
+                if (driver.FindElements(this.by).Count != 0)
+                {
+                    if (driver.FindElement(this.by).Selected)
+                    {
+                        TestContext.CurrentContext.IncrementAssertCount();
+                        return this;
+                    }
+                }
+                else
+                    System.Threading.Thread.Sleep(1000);
+            }
+            Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") was not selected after " + seconds + " seconds");
+            return this;
+        }
+
     }
 }

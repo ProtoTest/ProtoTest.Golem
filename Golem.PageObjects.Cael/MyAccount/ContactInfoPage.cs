@@ -19,7 +19,7 @@ namespace Golem.PageObjects.Cael.MyAccount
         public Element Address2Field = new Element("Address 2 Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_addressTextBox2"));
         public Element CityField = new Element("City FIeld", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_cityTextBox"));
         public Element StateDropdown = new Element("State Dropdown", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_stateDDList"));
-        public Element ZipField = new Element("Zip Field", By.Id(""));
+        public Element ZipField = new Element("Zip Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_zipTextBox"));
         public Element PhoneField = new Element("Phone Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_phoneTextBox"));
         public Element SaveButton = new Element("", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_saveContactButton"));
 
@@ -44,17 +44,17 @@ namespace Golem.PageObjects.Cael.MyAccount
         public ContactInfoPage VerifyContactInfo(string fName, string lName, string DOB_Month, string DOB_Day,
             string DOB_Year, string addr1, string addr2, string city, string state, string zip, string phone)
         {
-            FirstNameFIeld.VerifyText(fName);
-            LastNameField.VerifyText(lName);
+            FirstNameFIeld.VerifyValue(fName);
+            LastNameField.VerifyValue(lName);
             DOB_Month_Dropdown.VerifyText(DOB_Month);
             DOB_Day_Dropdown.VerifyText(DOB_Day);
             DOB_Year_Dropdown.VerifyText(DOB_Year);
-            Address1Field.VerifyText(addr1);
-            Address2Field.VerifyText(addr2);
-            CityField.VerifyText(city);
+            Address1Field.VerifyValue(addr1);
+            Address2Field.VerifyValue(addr2);
+            CityField.VerifyValue(city);
             StateDropdown.VerifyText(state);
-            ZipField.VerifyText(zip);
-            PhoneField.VerifyText(phone);
+            ZipField.VerifyValue(zip);
+            PhoneField.VerifyValue(phone);
             return this;
         }
 
