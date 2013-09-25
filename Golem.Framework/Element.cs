@@ -114,7 +114,7 @@ namespace Golem.Framework
 
         public void Click()
         {
-            WaitUntilVisible();
+            WaitUntilPresent();
             element.Click();
         }
         public void Submit()
