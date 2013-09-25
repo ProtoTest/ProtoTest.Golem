@@ -86,7 +86,7 @@ namespace Golem.PageObjects.Cael.MyAccount
             Race_Drp.VerifyText(race);
             MilitaryExperience_Drp.VerifyText(militaryExperience);
             EmploymentStatus_Drp.VerifyText(employmentStatus);
-            Employer_Field.VerifyText(nameOfEmployer);
+            Employer_Field.VerifyValue(nameOfEmployer);
             TuitionAssistance_Radio.VerifySelected();
             AnnualIncome_Drp.VerifyText(annualIncome);
             LaborUnion_Radio.VerifySelected();
