@@ -82,26 +82,17 @@ namespace Golem.Tests.Cael
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, password)
-<<<<<<< HEAD
                 .Header.GoToMyAccountPage()
-=======
-                .header.GoToMyAccountPage()
->>>>>>> 16984a47ced0de421c16da5654a2a70eca3ea012
                 .GoToPasswordPage().
                 UpdateInfo(email, newPassword).header.SignOut();
 
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, newPassword)
-<<<<<<< HEAD
                 .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
                 UpdateInfo(email, password).
                 header.SignOut();
-=======
-                .header.GoToMyAccountPage()
-                .GoToPasswordPage().
-                UpdateInfo(email, password).header.SignOut();
         }
 
         [Test, DependsOn("ActivateUser")]
@@ -110,7 +101,7 @@ namespace Golem.Tests.Cael
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                GoToLoginPage().
                Login(email, password)
-               .header.GoToMyAccountPage()
+               .Header.GoToMyAccountPage()
                .GoToContactInfoPage()
                .VerifyContactInfo(firstName, lastName, DOB_Month, DOB_Day, DOB_Year, address1, address2, city, state, zip, phone)
                .header.SignOut();
@@ -123,11 +114,9 @@ namespace Golem.Tests.Cael
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, password)
-                .header.GoToMyAccountPage()
+                .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
                 UpdateInfo(email, newPassword).header.SignOut();
-
->>>>>>> 16984a47ced0de421c16da5654a2a70eca3ea012
         }
 
         [Test, DependsOn("ActivateUser")]
@@ -158,7 +147,7 @@ namespace Golem.Tests.Cael
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, password)
-                .header.GoToMyAccountPage()
+                .Header.GoToMyAccountPage()
                 .GoToProfilePage().EnterProfileInfo(education,
                                                     areaOfStudy,
                                                     nameOfCollege,
@@ -189,7 +178,7 @@ namespace Golem.Tests.Cael
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, password)
-                .header.GoToMyAccountPage()
+                .Header.GoToMyAccountPage()
                 .GoToProfilePage().VerifyProfileInfo(education,
                                                     areaOfStudy,
                                                     nameOfCollege,

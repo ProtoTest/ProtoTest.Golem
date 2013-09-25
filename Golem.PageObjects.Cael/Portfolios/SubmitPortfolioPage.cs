@@ -15,7 +15,7 @@ namespace Golem.PageObjects.Cael
         public Element EditPortfolioLink = new Element("Edit portfolio Link",By.LinkText("edit your portfolio"));
         public Element SubmitPortfolio_Button = new Element("Submit portfolio button", By.Id("submitPortfolioButton"));
 
-        public SubmitPortfolioSuccessPage VerifyAndSubmit()
+        public SubmitPortfolioSuccessPage ConfirmAndSubmit()
         {
             var eles = driver.FindElements(By.XPath("//input[@type='checkbox']"));
             foreach (var ele in eles)
