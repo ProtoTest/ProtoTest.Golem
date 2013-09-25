@@ -10,13 +10,14 @@ namespace Golem.PageObjects.Cael
 {
     public class PaymentPage : BasePageObject
     {
-        public Element ContinueButton = new Element("Continue Button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_DIYWithPortfolio_1_continueButton"));
-        public Element CancelLink = new Element("Cancel Link", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_DIYWithPortfolio_1_cancelHyperLink"));
+        public Element ContinueButton = new Element("Continue Button",
+            ByE.PartialAttribute("input", "@id", "continueButton"));
+        public Element CancelLink = new Element("Cancel Link",By.LinkText("Cancel"));
 
-        public void EnterPayment()
+        public PurchaseConfirmationPage EnterPayment()
         {
             ContinueButton.Click();
-
+            return new PurchaseConfirmationPage();
         }
 
         public override void WaitForElements()
@@ -24,5 +25,10 @@ namespace Golem.PageObjects.Cael
             ContinueButton.VerifyVisible(30);
             CancelLink.VerifyVisible(30);
         }
+    }
+
+    public class PortfolioPaymentPage : PaymentPage
+    {
+        
     }
 }

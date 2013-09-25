@@ -57,15 +57,22 @@
     <Compile Include="MyAccount\MyAccountPage.cs" />
     <Compile Include="MyAccount\PasswordPage.cs" />
     <Compile Include="MyAccount\ProfilePage.cs" />
-    <Compile Include="Portfolio\PaymentPage.cs" />
-    <Compile Include="Portfolio\ConfirmDIYPage.cs" />
+    <Compile Include="Portfolios\PortfoliosPage.cs" />
+    <Compile Include="Portfolios\PreviewPortfolioPage.cs" />
+    <Compile Include="Portfolios\SubmitPortfolioSuccessPage.cs" />
+    <Compile Include="PurchaseConfirmationPage.cs" />
+    <Compile Include="Portfolios\EditPortfolioPage.cs" />
+    <Compile Include="PaymentPage.cs" />
+    <Compile Include="Portfolios\ConfirmDIYPage.cs" />
     <Compile Include="CreateUserPage.cs" />
     <Compile Include="DashboardPage.cs" />
     <Compile Include="HeaderComponent.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Portfolio\SelectCaelCoursePage.cs" />
+    <Compile Include="Portfolios\SelectCaelCoursePage.cs" />
+    <Compile Include="Portfolios\SetupPortfolioPage.cs" />
+    <Compile Include="Portfolios\SubmitPortfolioPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">

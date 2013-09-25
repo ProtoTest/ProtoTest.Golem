@@ -46,9 +46,10 @@ namespace Golem.PageObjects.Cael
             return new DashboardPage();
         }
 
-        public void GoToPortfoliosPage()
+        public PortfoliosPage GoToPortfoliosPage()
         {
             Portfolios_Link.Click();
+            return new PortfoliosPage();
         }
 
         public void GoToAdvisingPage()

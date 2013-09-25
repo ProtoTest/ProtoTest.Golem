@@ -57,29 +57,17 @@ namespace Golem.Tests.Cael
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, password)
-                .header.GoToMyAccount()
+                .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
                 UpdateInfo(email, newPassword).header.SignOut();
 
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(email, newPassword)
-                .header.GoToMyAccount()
+                .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(email, password).header.SignOut();
-        }
-
-        [Test, DependsOn("ActivateUser")]
-        public void EditPassword()
-        {
-            string newPassword = @"Changeme1234!!";
-            OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
-                GoToLoginPage().
-                Login(email, password)
-                .header.GoToMyAccount()
-                .GoToPasswordPage().
-                UpdateInfo(email, newPassword).header.SignOut();
-
+                UpdateInfo(email, password).
+                header.SignOut();
         }
     }
 }

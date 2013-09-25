@@ -11,12 +11,11 @@ namespace Golem.Framework
 {
     public class Element : IWebElement
     {
-        private By by;
-        private IWebDriver driver;
+        protected By by;
+        protected IWebDriver driver;
         public string name;
-
-        private IWebElement _element;
-        private IWebElement element
+        protected IWebElement _element;
+        protected IWebElement element
         {
             get
             {
@@ -28,6 +27,8 @@ namespace Golem.Framework
                 this._element = value;
             }
         }
+
+        public Element(){}
 
         public Element(string name, By locator)
         {
@@ -100,8 +101,7 @@ namespace Golem.Framework
             return element.FindElement(by);
         }
 
-
-
+        
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             return element.FindElements(by);
@@ -114,7 +114,7 @@ namespace Golem.Framework
 
         public void Click()
         {
-            WaitUntilVisible();
+            WaitUntilPresent();
             element.Click();
         }
         public void Submit()
@@ -123,7 +123,7 @@ namespace Golem.Framework
         }
         public void SendKeys(string text)
         {
-            WaitUntilVisible();
+            WaitUntilPresent();
             element.SendKeys(text);
         }
         public string GetAttribute(string attribute)

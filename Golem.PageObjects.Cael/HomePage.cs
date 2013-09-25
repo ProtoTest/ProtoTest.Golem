@@ -10,11 +10,6 @@ namespace Golem.PageObjects.Cael
 {
     public class HomePage : BasePageObject
     {
-        public HomePage()
-        {
-
-            WaitForElements();
-        }
         public Element LoginButton = new Element("Login Link",By.Id("p_lt_ctl00_SignOutButton_btnSignOutLink"));
         public Element CreateUserLink = new Element("Create User Link",By.LinkText("Create Account"));
         public Element ContentContainer = new Element("Content Container",By.Id("container_content_inner"));

@@ -64,13 +64,13 @@ namespace Golem.Framework
         void driver_FindingElement(object sender, FindElementEventArgs e)
         {
             Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Looking for Element : " + e.FindMethod);
+            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Looking for Element " + e.FindMethod);
         }
 
         void driver_ElementClicking(object sender, WebElementEventArgs e)
         {
             Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Clicking Element");
+            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Clicking Element ");
         }
 
     }

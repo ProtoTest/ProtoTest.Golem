@@ -113,7 +113,7 @@ namespace Golem.Framework
                 videoRecordingOnError = Common.IsTruthy(Config.GetConfigValue("VideoRecordingOnError", "True"));
                 commandLogging = Common.IsTruthy(Config.GetConfigValue("CommandLogging","True"));
                 actionLogging= Common.IsTruthy(Config.GetConfigValue("ActionLogging","True"));
-                spellChecking = Common.IsTruthy(Config.GetConfigValue("SpellChecking", "True"));
+                spellChecking = Common.IsTruthy(Config.GetConfigValue("SpellChecking", "False"));
             }
             
         }
