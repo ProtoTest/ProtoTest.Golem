@@ -13,22 +13,6 @@ namespace Golem.Tests.Cael
 {
     public class MyAccountTests : TestBaseClass
     {
-        //string email = "ProtoTestUser"+ Common.GetRandomString()+"@mailinator.com";
-        public static string email = "prototestuser23103539@mailinator.com";
-        public static string password = "prototest123!!";
-        public static string firstName = "ProtoTest";
-        public static string lastName = "Tester";
-        public static string address1 = "1999 Broadway";
-        public static string address2 = "#1410";
-        public static string city = "Denver";
-        public static string state = "Colorado";
-        public static string zip = "80202";
-        public static string phone = "3035551234";
-        public static string DOB_Month = "January";
-        public static string DOB_Day = "1";
-        public static string DOB_Year = "1960";
-
-
         /* Profile inputs */
         string education = "Less than HS Diploma";
         string areaOfStudy = "Engineering and Engineering Technology";
@@ -58,17 +42,17 @@ namespace Golem.Tests.Cael
             string newPassword = @"Changeme1234!!";
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
-                Login(email, password)
+                Login(UserTests.email, UserTests.password)
                 .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(email, newPassword).header.SignOut();
+                UpdateInfo(UserTests.email, newPassword).header.SignOut();
 
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
-                Login(email, newPassword)
+                Login(UserTests.email, newPassword)
                 .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(email, password).
+                UpdateInfo(UserTests.email, UserTests.password).
                 header.SignOut();
         }
 
@@ -77,10 +61,13 @@ namespace Golem.Tests.Cael
         {
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                GoToLoginPage().
-               Login(email, password)
+               Login(UserTests.email, UserTests.password)
                .Header.GoToMyAccountPage()
                .GoToContactInfoPage()
-               .VerifyContactInfo(firstName, lastName, DOB_Month, DOB_Day, DOB_Year, address1, address2, city, state, zip, phone)
+               .VerifyContactInfo(UserTests.firstName, UserTests.lastName, 
+                                  UserTests.DOB_Month, UserTests.DOB_Day, UserTests.DOB_Year,
+                                  UserTests.address1, UserTests.address2, UserTests.city, UserTests.state, UserTests.zip,
+                                  UserTests.phone)
                .header.SignOut();
         }
 
@@ -90,10 +77,50 @@ namespace Golem.Tests.Cael
             string newPassword = @"Changeme1234!!";
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
-                Login(email, password)
+                Login(UserTests.email, UserTests.password)
                 .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(email, newPassword).header.SignOut();
+                UpdateInfo(UserTests.email, newPassword).header.SignOut();
+        }
+
+        [Test]
+        public void VerifyProfileFormValidations()
+        {
+            string defaultOptionStr = "please select";
+            string txtBoxValidationStr = "* This field is required";
+            string optionValidationStr = "* Please select an option";
+
+            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+                GoToLoginPage().
+                Login(UserTests.email, UserTests.password)
+                .Header.GoToMyAccountPage()
+                .GoToProfilePage().EnterProfileInfo(defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    collegeCreditInvestigated,
+                                                    defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    onlineLearning,
+                                                    financialAid,
+                                                    defaultOptionStr,
+                                                    gender,
+                                                    defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    "",
+                                                    tuitionAssistance,
+                                                    defaultOptionStr,
+                                                    laborUnion,
+                                                    receivedTraining,
+                                                    "",
+                                                    howHear).VerifyProfileFormValidations(txtBoxValidationStr,
+                                                                                          txtBoxValidationStr,
+                                                                                          optionValidationStr,
+                                                                                          txtBoxValidationStr,
+                                                                                          txtBoxValidationStr,
+                                                                                          txtBoxValidationStr,
+                                                                                          txtBoxValidationStr).header.SignOut();
+
         }
 
         [Test]
@@ -101,7 +128,7 @@ namespace Golem.Tests.Cael
         {
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
-                Login(email, password)
+                Login(UserTests.email, UserTests.password)
                 .Header.GoToMyAccountPage()
                 .GoToProfilePage().EnterProfileInfo(education,
                                                     areaOfStudy,
@@ -132,7 +159,7 @@ namespace Golem.Tests.Cael
 
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
-                Login(email, password)
+                Login(UserTests.email, UserTests.password)
                 .Header.GoToMyAccountPage()
                 .GoToProfilePage().VerifyProfileInfo(education,
                                                     areaOfStudy,
