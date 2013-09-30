@@ -33,6 +33,8 @@ namespace Golem.Framework
         void driver_FindElementCompleted(object sender, FindElementEventArgs e)
         {
             TestContext.CurrentContext.IncrementAssertCount();
+
+
         }
 
         void driver_ElementValueChanged(object sender, WebElementEventArgs e)

@@ -13,7 +13,7 @@ namespace Golem.PageObjects.Cael
     
     public abstract class MyAccountPage : BasePageObject
     {
-        public HeaderComponent header = new HeaderComponent();
+        public LoggedInHeader LoggedInHeader = new LoggedInHeader();
 
         public Element ContantInfoButton = new Element("Contant Info Button", By.XPath("//span[text()='Contact Information']"));
         public Element ProfileButton = new Element("Profile Button", By.XPath("//span[@id='p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_LocalizedLabel1']"));

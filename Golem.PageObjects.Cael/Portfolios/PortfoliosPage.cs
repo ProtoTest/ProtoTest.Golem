@@ -11,8 +11,12 @@ namespace Golem.PageObjects.Cael
 {
     public class PortfoliosPage : BasePageObject
     {
+        public LoggedInHeader Header = new LoggedInHeader();
+        public Footer Footer = new Footer();
+
         public Element GetStarted_Link = new Element("Get Started Link",ByE.Text("Get Started"));
         public Element StartAnotherPortfolio_Button = new Element("Start Another portfolio button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_Portfolios_portfolioHyperLink"));
+        public Element ConfirmButton = new Element("Confirm button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_Portfolio_enterPaymentButton"));
 
         public PortfoliosPage VerifyPortfolioSubmitted(string courseName)
         {
@@ -38,6 +42,7 @@ namespace Golem.PageObjects.Cael
         public PaymentPage StartAnotherPortfolio()
         {
             StartAnotherPortfolio_Button.Click();
+            ConfirmButton.Click();
             return new PaymentPage();
         }
 

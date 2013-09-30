@@ -18,7 +18,7 @@ namespace Golem.Tests.Cael
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password).
-                Header.GoToPortfoliosPage().
+                LoggedInHeader.GoToPortfoliosPage().
                 StartAnotherPortfolio().
                 EnterPayment().
                 ReturnToDashboardPage();
@@ -30,7 +30,7 @@ namespace Golem.Tests.Cael
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password).
-                Header.GoToPortfoliosPage().
+                LoggedInHeader.GoToPortfoliosPage().
                 GetStarted().
                 CreatePortfolio("Test Course", "12340", "4", "Course Description", @"http://school.url/description",
                     "University of New England", "http://school.com", "New England Association of Schools and Colleges",
@@ -44,7 +44,7 @@ namespace Golem.Tests.Cael
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password).
-                Header.GoToPortfoliosPage().
+                LoggedInHeader.GoToPortfoliosPage().
                 EditPortfolio("Test Course")
                 .EditOutcomesText("text of learning outcomes")
                 .ChooseNarrativeFile(@"C:\Users\Brian\Documents\sampledoc.docx")
@@ -59,7 +59,7 @@ namespace Golem.Tests.Cael
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password).
-                Header.GoToPortfoliosPage().
+                LoggedInHeader.GoToPortfoliosPage().
                 EditPortfolio("Test Course").
                 SubmitPortfolio().
                 ConfirmAndSubmit().
@@ -72,7 +72,7 @@ namespace Golem.Tests.Cael
             OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password).
-                Header.GoToPortfoliosPage().
+                LoggedInHeader.GoToPortfoliosPage().
                 PreviewPortfolio("Test Course");
         }
 

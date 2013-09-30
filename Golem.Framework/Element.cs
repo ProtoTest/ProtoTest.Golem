@@ -19,13 +19,43 @@ namespace Golem.Framework
         {
             get
             {
-                    this._element = this.driver.FindElement(by);
+                try
+                {
+                    if (this._element != null)
+                        return _element;
+                    this._element = GetElement();
+                    if ((_element != null) && (Config.Settings.runTimeSettings.HighlightOnFind))
+                    {
+                        this._element.Highlight();
+                    }
                     return this._element;
+                }
+                catch (Exception)
+                {
+                    this._element = GetElement();
+                    return this._element;
+                }
+                
             }
             set
             {
                 this._element = value;
             }
+        }
+
+        private IWebElement GetElement()
+        {
+            var elements = driver.FindElements(this.by);
+            if (elements.Count == 0) return null;
+            if (elements.Count > 1)
+            {
+                foreach (var ele in elements)
+                {
+                    if (ele.Displayed && ele.Enabled)
+                        return ele;
+                }
+            }
+            return elements[0];
         }
 
         public Element(){}
@@ -98,6 +128,7 @@ namespace Golem.Framework
 
         public IWebElement FindElement(By by)
         {
+            element = GetElement();
             return element.FindElement(by);
         }
 
@@ -164,6 +195,7 @@ namespace Golem.Framework
         public Element WaitUntilNotPresent()
         {
             driver.WaitForNotPresent(this.by);
+            element = null;
             return this;
         }
         public Element WaitUntilNotVisible()
@@ -175,7 +207,7 @@ namespace Golem.Framework
         {
             for (int i = 0; i <= seconds; i++)
             {
-                if (driver.FindElements(this.by).Count != 0)
+                if (element!=null)
                 {
                     TestContext.CurrentContext.IncrementAssertCount();
                     return this;
@@ -192,17 +224,13 @@ namespace Golem.Framework
         {
             for (int i = 0; i <= seconds; i++)
             {
-                var eles = driver.FindElements(this.by);
-                if (eles.Count != 0)
+                if (element!=null)
                 {
-                    foreach (var ele in eles)
-                    {
-                        if (ele.Displayed)
+                        if (this.Displayed)
                         {
                             TestContext.CurrentContext.IncrementAssertCount();
                             return this;
                         }  
-                    }
                     
                 }
                 System.Threading.Thread.Sleep(1000);
@@ -215,7 +243,7 @@ namespace Golem.Framework
         {
             for (int i = 0; i <= seconds; i++)
             {
-                if (driver.FindElements(this.by).Count == 0)
+                if (element==null)
                 {
                     TestContext.CurrentContext.IncrementAssertCount();
                     return this;
@@ -231,14 +259,12 @@ namespace Golem.Framework
         {
             for (int i = 0; i <= seconds; i++)
             {
-                if (driver.FindElements(this.by).Count != 0)
-                {
-                    if (!driver.FindElement(this.by).Displayed)
+                    if (!element.Displayed)
                     {
                         TestContext.CurrentContext.IncrementAssertCount();
                         return this;
                     }
-                }
+
                 else
                     System.Threading.Thread.Sleep(1000);
             }
@@ -250,9 +276,9 @@ namespace Golem.Framework
         {
             for (int i = 0; i <= seconds; i++)
             {
-                if (driver.FindElements(this.by).Count != 0)
+                if (element!=null)
                 {
-                    if (driver.FindElement(this.by).Text.Contains(text))
+                    if (element.Text.Contains(text))
                     {
                         TestContext.CurrentContext.IncrementAssertCount();
                         return this;
@@ -269,11 +295,11 @@ namespace Golem.Framework
         {
             for (int i = 0; i <= seconds; i++)
             {
-                if (driver.FindElements(this.by).Count != 0)
+                if (element!=null)
                 {
                     string value;
 
-                    if ((value = driver.FindElement(this.by).GetAttribute("value")) != null)
+                    if ((value = element.GetAttribute("value")) != null)
                     {
                         if(value.Equals(text))
                         {
@@ -293,9 +319,9 @@ namespace Golem.Framework
         {
             for (int i = 0; i <= seconds; i++)
             {
-                if (driver.FindElements(this.by).Count != 0)
+                if (element!=null)
                 {
-                    if (driver.FindElement(this.by).Selected)
+                    if (element.Selected)
                     {
                         TestContext.CurrentContext.IncrementAssertCount();
                         return this;

@@ -14,7 +14,7 @@ namespace Golem.Tests.Cael
     public class UserTests : TestBaseClass
     {
         //string email = "ProtoTestUser"+ Common.GetRandomString()+"@mailinator.com";
-        public static string email = "prototestuser23103539@mailinator.com";
+        public static string email = "prototestuser30113228@mailinator.com";
         public static string password = "prototest123!!";
         public static string firstName = "ProtoTest";
         public static string lastName = "Tester";

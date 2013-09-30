@@ -73,7 +73,7 @@ namespace Golem.PageObjects.Cael.Setup_Portfolio
             LearningNarrative_FileChooser.VerifyPresent(30);
             LearningOutcomes_Field.VerifyPresent(30);
             SaveChanges_Button.VerifyPresent(30);
-            SubmitPortfolio_Button.VerifyPresent(30);
+            //SubmitPortfolio_Button.VerifyPresent(30);
         }
     }
 }
