@@ -46,10 +46,7 @@ namespace Golem.Framework
             var jsDriver = ((IJavaScriptExecutor)TestBaseClass.driver);
             string originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
             jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'", element);
-            System.Threading.Thread.Sleep(500);
-            jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'", element);
-            jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'", element);
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(50);
             jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'", element);
         }
 
@@ -64,7 +61,7 @@ namespace Golem.Framework
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             WebDriverWait wait = new WebDriverWait(TestBaseClass.driver, TimeSpan.FromSeconds(timeout));
-            return wait.Until<IWebElement>((d) => element.FindElement(@by));
+            return wait.Until<IWebElement>(d => element.FindElement(@by));
         }
 
         public static IWebElement WaitForPresent(this IWebDriver driver, By by, int timeout=0)
@@ -140,7 +137,7 @@ namespace Golem.Framework
         public static IWebElement FindVisibleElement(this IWebDriver driver, By by)
         {
             var elements = driver.FindElements(by);
-            foreach (IWebElement ele in elements.Where(ele => ele.Displayed))
+            foreach (IWebElement ele in elements.Where(ele => (ele.Displayed)&&(ele.Enabled)))
             {
                 return ele;
             }
