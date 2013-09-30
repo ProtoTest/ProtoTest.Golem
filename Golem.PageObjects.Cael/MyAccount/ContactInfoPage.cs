@@ -10,17 +10,38 @@ namespace Golem.PageObjects.Cael.MyAccount
 {
     public class ContactInfoPage : MyAccountPage
     {
-        public Element FirstNameFIeld = new Element("First Name Field", By.Id("fnameTextBox"));
-        public Element LastNameField = new Element("Last Name Field", By.Id("lnameTextBox"));
-        public Element DOB_Month_Dropdown = new Element("DOB_Month Dropdown", By.Id("uniform-monthDDList"));
-        public Element DOB_Day_Dropdown = new Element("DOB_Day_Dropdown", By.Id("dayDDList"));
-        public Element DOB_Year_Dropdown = new Element("DOB_Year dropdown", By.Id("yearDDList"));
-        public Element Address1Field = new Element("Address1 Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_addressTextBox1"));
-        public Element Address2Field = new Element("Address 2 Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_addressTextBox2"));
-        public Element CityField = new Element("City FIeld", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_cityTextBox"));
-        public Element StateDropdown = new Element("State Dropdown", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_stateDDList"));
-        public Element ZipField = new Element("Zip Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_zipTextBox"));
-        public Element PhoneField = new Element("Phone Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_phoneTextBox"));
+        public ValidationElement FirstNameFIeld = new ValidationElement("First Name Field",
+                                                              By.Id("fnameTextBox"),
+                                                              By.XPath("//*[@class='fnameTextBoxformError parentFormform formError']/div"));
+        public ValidationElement LastNameField = new ValidationElement("Last Name Field",
+                                                                       By.Id("lnameTextBox"),
+                                                                       By.XPath("//*[@class='lnameTextBoxformError parentFormform formError']/div"));
+        public ValidationElement DOB_Month_Dropdown = new ValidationElement("DOB_Month Dropdown",
+                                                                            By.Id("monthDDList"),
+                                                                            By.XPath("//*[@class='monthDDListformError parentFormform formError']/div"));
+        public ValidationElement DOB_Day_Dropdown = new ValidationElement("DOB_Day_Dropdown",
+                                                                          By.Id("dayDDList"),
+                                                                          By.XPath("//*[@class='dayDDListformError parentFormform formError']/div"));
+        public ValidationElement DOB_Year_Dropdown = new ValidationElement("DOB_Year dropdown",
+                                                                           By.Id("yearDDList"),
+                                                                           By.XPath("//*[@class='yearDDListformError parentFormform formError']/div"));
+        public ValidationElement Address1Field = new ValidationElement("Address1 Field",
+                                                                       By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_addressTextBox1"),
+                                                                       By.XPath("//*[@class='p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_addressTextBox1formError parentFormform formError']/div"));
+        public Element Address2Field = new Element("Address 2 Field",
+                                                   By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_addressTextBox2"));
+        public ValidationElement CityField = new ValidationElement("City FIeld",
+                                                                   By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_cityTextBox"),
+                                                                   By.XPath("//*[@class='p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_cityTextBoxformError parentFormform formError']/div"));
+        public ValidationElement StateDropdown = new ValidationElement("State Dropdown",
+                                                                       By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_stateDDList"),
+                                                                       By.XPath("//*[@class='p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_stateDDListformError parentFormform formError']/div"));
+        public ValidationElement ZipField = new ValidationElement("Zip Field",
+                                                                  By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_zipTextBox"),
+                                                                  By.XPath("//*[@class='yearDDListformError parentFormform formError']/div"));
+        public ValidationElement PhoneField = new ValidationElement("Phone Field",
+                                                                    By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_phoneTextBox"),
+                                                                    By.XPath("//*[@class='p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_zipTextBoxformError parentFormform formError']/div"));
         public Element SaveButton = new Element("", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_saveContactButton"));
 
         public ContactInfoPage EnterContactInfo(string fName, string lName, string DOB_Month, string DOB_Day,
@@ -58,6 +79,23 @@ namespace Golem.PageObjects.Cael.MyAccount
             return this;
         }
 
+        public ContactInfoPage VerifyContactInfoFormValidations(string fNameError, string lNameError,
+            string DOB_MonthError, string DOB_DayError, string DOB_YearError, string addr1Error,
+            string cityError, string stateError, string zipError, string phoneError)
+        {
+            FirstNameFIeld.VerifyTextValidation(fNameError);
+            LastNameField.VerifyTextValidation(lNameError);
+            DOB_Month_Dropdown.VerifyTextValidation(DOB_MonthError);
+            DOB_Day_Dropdown.VerifyTextValidation(DOB_DayError);
+            DOB_Year_Dropdown.VerifyTextValidation(DOB_YearError);
+            Address1Field.VerifyTextValidation(addr1Error);
+            CityField.VerifyTextValidation(cityError);
+            StateDropdown.VerifyTextValidation(stateError);
+            ZipField.VerifyTextValidation(zipError);
+            PhoneField.VerifyTextValidation(phoneError);
+
+            return this;
+        }
         public override void WaitForElements()
         {
             SaveButton.VerifyVisible(30);

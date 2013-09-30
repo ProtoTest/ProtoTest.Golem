@@ -111,6 +111,17 @@ namespace Golem.PageObjects.Cael.MyAccount
 
         }
 
+        /// <summary>
+        ///     Verifies the form error text for each element on the form
+        /// </summary>
+        /// <param name="education">Education element error text</param>
+        /// <param name="nameOfCollege">College element error text</param>
+        /// <param name="gender">Gener element error text</param>
+        /// <param name="race">Race element error text</param>
+        /// <param name="militaryExperience">Military element error text</param>
+        /// <param name="employmentStatus">Employment element error text</param>
+        /// <param name="annualIncome">Annual Income element error text</param>
+        /// <returns></returns>
         public ProfilePage VerifyProfileFormValidations(string education, string nameOfCollege, string gender,
             string race, string militaryExperience, string employmentStatus, string annualIncome)
         {

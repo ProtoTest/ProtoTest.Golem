@@ -72,6 +72,25 @@ namespace Golem.Tests.Cael
         }
 
         [Test]
+        public void VerifyContactInfoFormValidations()
+        {
+            string defaultOptionStr = "please select";
+            string txtBoxValidationStr = "* This field is required";
+
+            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+               GoToLoginPage().
+               Login(UserTests.email, UserTests.password)
+               .Header.GoToMyAccountPage()
+               .GoToContactInfoPage()
+               .EnterContactInfo("", "", "", "", "", "", "", "", defaultOptionStr, "", "")
+               .VerifyContactInfoFormValidations(txtBoxValidationStr, txtBoxValidationStr, txtBoxValidationStr,
+                                                 txtBoxValidationStr, txtBoxValidationStr, txtBoxValidationStr,
+                                                 txtBoxValidationStr, txtBoxValidationStr, txtBoxValidationStr,
+                                                 txtBoxValidationStr)
+               .header.SignOut();
+        }
+
+        [Test]
         public void EditPassword()
         {
             string newPassword = @"Changeme1234!!";
