@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael
 {
-    public class HeaderComponent : BasePageObject
+    public class LoggedInHeader : BasePageObject
     {
         public Element Welcome_Link = new Element("Welcome Link", ByE.PartialText("Welcome,"));
         public Element SignOut_Link = new Element("Sign Out Link", By.Id("p_lt_ctl00_SignOutButton_btnSignOutLink"));
@@ -62,6 +62,10 @@ namespace Golem.PageObjects.Cael
         {
             Welcome_Link.VerifyVisible(30);
             SignOut_Link.VerifyVisible(30);
+            Dashboard_Link.VerifyVisible(30);
+            Portfolios_Link.VerifyVisible(30);
+            MyAccount_Link.VerifyVisible(30);
+            Advising_Link.VerifyVisible(30);
         }
     }
 }

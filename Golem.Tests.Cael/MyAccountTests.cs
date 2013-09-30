@@ -39,21 +39,22 @@ namespace Golem.Tests.Cael
         [Test]
         public void ChangePassword()
         {
+            Config.Settings.runTimeSettings.HighlightOnFind = false;
             string newPassword = @"Changeme1234!!";
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password)
-                .Header.GoToMyAccountPage()
+                .LoggedInHeader.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(UserTests.email, newPassword).header.SignOut();
+                UpdateInfo(UserTests.email, newPassword).LoggedInHeader.SignOut();
 
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, newPassword)
-                .Header.GoToMyAccountPage()
+                .LoggedInHeader.GoToMyAccountPage()
                 .GoToPasswordPage().
                 UpdateInfo(UserTests.email, UserTests.password).
-                header.SignOut();
+                LoggedInHeader.SignOut();
         }
 
         [Test]
@@ -62,25 +63,13 @@ namespace Golem.Tests.Cael
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                GoToLoginPage().
                Login(UserTests.email, UserTests.password)
-               .Header.GoToMyAccountPage()
+               .LoggedInHeader.GoToMyAccountPage()
                .GoToContactInfoPage()
                .VerifyContactInfo(UserTests.firstName, UserTests.lastName, 
                                   UserTests.DOB_Month, UserTests.DOB_Day, UserTests.DOB_Year,
                                   UserTests.address1, UserTests.address2, UserTests.city, UserTests.state, UserTests.zip,
                                   UserTests.phone)
-               .header.SignOut();
-        }
-
-        [Test]
-        public void EditPassword()
-        {
-            string newPassword = @"Changeme1234!!";
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
-                GoToLoginPage().
-                Login(UserTests.email, UserTests.password)
-                .Header.GoToMyAccountPage()
-                .GoToPasswordPage().
-                UpdateInfo(UserTests.email, newPassword).header.SignOut();
+               .LoggedInHeader.SignOut();
         }
 
         [Test]
@@ -93,7 +82,7 @@ namespace Golem.Tests.Cael
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password)
-                .Header.GoToMyAccountPage()
+                .LoggedInHeader.GoToMyAccountPage()
                 .GoToProfilePage().EnterProfileInfo(defaultOptionStr,
                                                     defaultOptionStr,
                                                     defaultOptionStr,
@@ -119,7 +108,7 @@ namespace Golem.Tests.Cael
                                                                                           txtBoxValidationStr,
                                                                                           txtBoxValidationStr,
                                                                                           txtBoxValidationStr,
-                                                                                          txtBoxValidationStr).header.SignOut();
+                                                                                          txtBoxValidationStr).LoggedInHeader.SignOut();
 
         }
 
@@ -129,7 +118,7 @@ namespace Golem.Tests.Cael
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password)
-                .Header.GoToMyAccountPage()
+                .LoggedInHeader.GoToMyAccountPage()
                 .GoToProfilePage().EnterProfileInfo(education,
                                                     areaOfStudy,
                                                     nameOfCollege,
@@ -149,7 +138,7 @@ namespace Golem.Tests.Cael
                                                     laborUnion,
                                                     receivedTraining,
                                                     typeOfTraining,
-                                                    howHear).header.SignOut();
+                                                    howHear).LoggedInHeader.SignOut();
 
         }
 
@@ -160,7 +149,7 @@ namespace Golem.Tests.Cael
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password)
-                .Header.GoToMyAccountPage()
+                .LoggedInHeader.GoToMyAccountPage()
                 .GoToProfilePage().VerifyProfileInfo(education,
                                                     areaOfStudy,
                                                     nameOfCollege,
@@ -180,7 +169,7 @@ namespace Golem.Tests.Cael
                                                     laborUnion,
                                                     receivedTraining,
                                                     typeOfTraining,
-                                                    howHear).header.SignOut();
+                                                    howHear).LoggedInHeader.SignOut();
 
         }
     }

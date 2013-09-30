@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Footer.cs" />
+    <Compile Include="LoggedOutHeader.cs" />
     <Compile Include="MyAccount\ContactInfoPage.cs" />
     <Compile Include="MyAccount\MyAccountPage.cs" />
     <Compile Include="MyAccount\PasswordPage.cs" />
@@ -66,7 +68,7 @@
     <Compile Include="Portfolios\ConfirmDIYPage.cs" />
     <Compile Include="CreateUserPage.cs" />
     <Compile Include="DashboardPage.cs" />
-    <Compile Include="HeaderComponent.cs" />
+    <Compile Include="LoggedInHeader.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="LoginPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

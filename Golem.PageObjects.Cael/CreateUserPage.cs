@@ -12,6 +12,7 @@ namespace Golem.PageObjects.Cael
 {
     public class CreateUserPage : BasePageObject
     {
+        public LoggedOutHeader Header = new LoggedOutHeader();
         public Element EmailField = new Element("Email Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_CreateAccount_emailTextBox"));
         public Element PasswordField = new Element("Password Field", By.Id("passStrength"));
         public Element VerifyPasswordField = new Element("Verify Password Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_CreateAccount_confirmPasswordTextBox"));

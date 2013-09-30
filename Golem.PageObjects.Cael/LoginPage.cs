@@ -14,6 +14,8 @@ namespace Golem.PageObjects.Cael
         public Element PasswordField = new Element("PasswordField", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_Password"));
         public Element SignInButton = new Element("SignInButton", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_LoginButton"));
         public Element RememberMeButton = new Element("RememberMeCheckbox", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_rememberMeCheckBox"));
+        public LoggedOutHeader Header = new LoggedOutHeader();
+        public Footer Footer = new Footer();
 
         public DashboardPage Login(string email, string password, bool rememberMe=false)
         {
