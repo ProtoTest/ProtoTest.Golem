@@ -89,6 +89,7 @@
     <Compile Include="SAZ-DOTNETZIP.cs" />
     <Compile Include="TestBaseClass.cs" />
     <Compile Include="TestDataContainer.cs" />
+    <Compile Include="ValidationElement.cs" />
     <Compile Include="VerificationError.cs" />
     <Compile Include="WebDriverBrowser.cs" />
     <Compile Include="WebDriverEvents.cs" />
