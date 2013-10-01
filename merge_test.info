@@ -1,0 +1,12 @@
+Here is some text
+Will the mergetool setup work correctly.
+I was git was simpler.
+blah, blah, blah
+#include <stdio.h>
+#include <string.h>
+
+int main(int argc, char *argv[])
+{
+  printf("Oh my!");
+  return 0;
+}
