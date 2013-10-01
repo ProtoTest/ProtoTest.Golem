@@ -1,3 +1,8 @@
+char* getMyString()
+{
+	return MY_STRING;
+}
+
 Here is some text
 Will the mergetool setup work correctly.
 I was git was simpler.
@@ -5,8 +10,13 @@ blah, blah, blah
 #include <stdio.h>
 #include <string.h>
 
-int main(int argc, char *argv[])
+#define MY_STRING = "Here is a string macro"
+
+
+
+int main()
 {
   printf("Oh my!");
+  snprintf("%s:%s:%d", __FUNCTION__, "I am the walrus", 55);
   return 0;
 }
