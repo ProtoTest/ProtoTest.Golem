@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Golem.Framework;
 using OpenQA.Selenium;
 
+
 namespace Golem.PageObjects.Cael.MyAccount
 {
     public class ProfilePage : MyAccountPage
@@ -48,42 +49,42 @@ namespace Golem.PageObjects.Cael.MyAccount
         public Element SaveChanges_Btn = new Element("SaveChanges_Btn", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_saveProfileButton"));
 
 
-        public ProfilePage EnterProfileInfo(string education, string areaOfStudy, string nameOfCollege, bool collegeCreditInvestigated,
-            string collegeCreditsEarned, string collegeCreditsNeeded, bool onlineLearning, bool financialAid,
+        public ProfilePage EnterProfileInfo(string education, string areaOfStudy, string nameOfCollege, string collegeCreditInvestigated,
+            string collegeCreditsEarned, string collegeCreditsNeeded, string onlineLearning, string financialAid,
             string topicOfInterest, string gender, string race, string militaryExperience, string employmentStatus,
-            string nameOfEmployer, bool tuitionAssitance, string annualIncome, bool laborUnion, bool receviedTraining,
+            string nameOfEmployer, string tuitionAssitance, string annualIncome, string laborUnion, string receviedTraining,
             string typeOfTraining, string howHear)
         {
-            EducationAchieved_Drp.SelectOption(education);
-            AreaOfStudy_Drp.SelectOption(areaOfStudy);
-            NameOfCollege_Drp.SelectOption(nameOfCollege);
-            CollegeCredit_Radio.Click();
-            CollegeCreditsEarned_Drp.SelectOption(collegeCreditsEarned);
-            CollegeCreditsNeed_Drp.SelectOption(collegeCreditsNeeded);
-            InterestedOnline_Radio.Click();
-            FinancialAid_Radio.Click();
-            TopicOfInterest_Drp.SelectOption(topicOfInterest);
-            Gender_Radio.Click();
-            Race_Drp.SelectOption(race);
-            MilitaryExperience_Drp.SelectOption(militaryExperience);
-            EmploymentStatus_Drp.SelectOption(employmentStatus);
-            Employer_Field.Text = nameOfEmployer;
-            TuitionAssistance_Radio.Click();
-            AnnualIncome_Drp.SelectOption(annualIncome);
-            LaborUnion_Radio.Click();
-            ReceivedTraining_Radio.Click();
-            NameOrTypeOfTrainnig_Field.Text = typeOfTraining;
-            HowDidYouHear_Drp.SelectOption(howHear);
+            if(education != null) EducationAchieved_Drp.SelectOption(education);
+            if (areaOfStudy != null) AreaOfStudy_Drp.SelectOption(areaOfStudy);
+            if (nameOfCollege != null) NameOfCollege_Drp.SelectOption(nameOfCollege);
+            if (collegeCreditInvestigated != null) CollegeCredit_Radio.Click();
+            if (collegeCreditsEarned != null) CollegeCreditsEarned_Drp.SelectOption(collegeCreditsEarned);
+            if (collegeCreditsNeeded != null) CollegeCreditsNeed_Drp.SelectOption(collegeCreditsNeeded);
+            if (onlineLearning != null) InterestedOnline_Radio.Click();
+            if (financialAid != null) FinancialAid_Radio.Click();
+            if (topicOfInterest != null) TopicOfInterest_Drp.SelectOption(topicOfInterest);
+            if (gender != null) Gender_Radio.Click();
+            if (race != null) Race_Drp.SelectOption(race);
+            if (militaryExperience != null) MilitaryExperience_Drp.SelectOption(militaryExperience);
+            if (employmentStatus != null) EmploymentStatus_Drp.SelectOption(employmentStatus);
+            if (nameOfEmployer != null) Employer_Field.Text = nameOfEmployer;
+            if (tuitionAssitance != null) TuitionAssistance_Radio.Click();
+            if (annualIncome != null) AnnualIncome_Drp.SelectOption(annualIncome);
+            if (laborUnion != null) LaborUnion_Radio.Click();
+            if (receviedTraining != null) ReceivedTraining_Radio.Click();
+            if (typeOfTraining != null) NameOrTypeOfTrainnig_Field.Text = typeOfTraining;
+            if (howHear != null) HowDidYouHear_Drp.SelectOption(howHear);
             SaveChanges_Btn.Click();
 
             return new ProfilePage();
 
         }
 
-        public ProfilePage VerifyProfileInfo(string education, string areaOfStudy, string nameOfCollege, bool collegeCreditInvestigated,
-            string collegeCreditsEarned, string collegeCreditsNeeded, bool onlineLearning, bool financialAid,
+        public ProfilePage VerifyProfileInfo(string education, string areaOfStudy, string nameOfCollege, string collegeCreditInvestigated,
+            string collegeCreditsEarned, string collegeCreditsNeeded, string onlineLearning, string financialAid,
             string topicOfInterest, string gender, string race, string militaryExperience, string employmentStatus,
-            string nameOfEmployer, bool tuitionAssitance, string annualIncome, bool laborUnion, bool receviedTraining,
+            string nameOfEmployer, string tuitionAssitance, string annualIncome, string laborUnion, string receviedTraining,
             string typeOfTraining, string howHear)
         {
             EducationAchieved_Drp.VerifyText(education);
@@ -127,8 +128,7 @@ namespace Golem.PageObjects.Cael.MyAccount
         {
             EducationAchieved_Drp.VerifyTextValidation(education);
             NameOfCollege_Drp.VerifyTextValidation(nameOfCollege);
-            Golem.Framework.Common.Log("ATTEMPTING TO CLEAR GENDER RADIO!!!!!");
-            Gender_Radio.VerifyTextValidation(gender); // NOT FINDING THIS ELEMENT? Also how can we uncheck the radio?
+            Gender_Radio.VerifyTextValidation(gender);
             Race_Drp.VerifyTextValidation(race);
             MilitaryExperience_Drp.VerifyTextValidation(militaryExperience);
             EmploymentStatus_Drp.VerifyTextValidation(employmentStatus);

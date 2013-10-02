@@ -50,6 +50,16 @@ namespace Golem.Framework
             jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'", element);
         }
 
+        /// <summary>
+        ///     Clear a checked element (radio or checkbox)
+        /// </summary>
+        /// <param name="element"></param>
+        public static void ClearChecked(this IWebElement element)
+        {
+            var jsDriver = ((IJavaScriptExecutor)TestBaseClass.driver);
+            jsDriver.ExecuteScript("arguments[0].checked=false;", element);
+        }
+
         public static void MouseOver(this IWebElement element)
         {
             IWebDriver driver = TestBaseClass.driver;

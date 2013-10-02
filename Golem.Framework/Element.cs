@@ -143,6 +143,19 @@ namespace Golem.Framework
             element.Clear();
         }
 
+        /// <summary>
+        ///     Clear a checked element (radio or checkbox)
+        /// </summary>
+        public void ClearChecked()
+        {
+            element.ClearChecked();
+        }
+
+        public void Highlight()
+        {
+            element.Highlight();
+        }
+
         public void Click()
         {
             WaitUntilPresent();
