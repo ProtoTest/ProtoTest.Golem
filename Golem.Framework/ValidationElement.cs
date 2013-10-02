@@ -53,7 +53,7 @@ namespace Golem.Framework
                 }
             }
 
-            Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") not present after " + seconds + " seconds");
+            Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.locatorValidation + ") not present after " + seconds + " seconds");
             return this;
         }
     }
