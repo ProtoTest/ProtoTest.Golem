@@ -17,21 +17,21 @@ namespace Golem.Tests.Cael
         string education = "Less than HS Diploma";
         string areaOfStudy = "Engineering and Engineering Technology";
         string nameOfCollege = "American Sentinel University";
-        bool collegeCreditInvestigated = true;
+        string collegeCreditInvestigated = "";
         string collegeCreditsEarned = "0-10";
         string collegeCreditsNeeded = "91-120";
-        bool onlineLearning = true;
-        bool financialAid = true;
+        string onlineLearning = "";
+        string financialAid = "";
         string topicOfInterest = "Choosing a Degree or Program of Study";
         string gender = "Male";
         string race = "Asian/Pacific";
         string militaryExp = "No Military Experience";
         string employmentStatus = "Not Currently Employed";
         string employerName = "Prototest";
-        bool tuitionAssistance = true;
+        string tuitionAssistance = "";
         string annualIncome = "$20-29,000";
-        bool laborUnion = false;
-        bool receivedTraining = true;
+        string laborUnion = "";
+        string receivedTraining = "";
         string typeOfTraining = "All of it";
         string howHear = "Other";
 
@@ -73,19 +73,46 @@ namespace Golem.Tests.Cael
         }
 
         [Test]
-        public void EditPassword()
+        public void VerifyProfileFormValidations()
         {
-            string newPassword = @"Changeme1234!!";
+            string defaultOptionStr = "please select";
+            string txtBoxValidationStr = "* This field is required";
+            string optionValidationStr = "* Please select an option";
+
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().
                 Login(UserTests.email, UserTests.password)
                 .LoggedInHeader.GoToMyAccountPage()
-                .GoToPasswordPage().
-                UpdateInfo(UserTests.email, newPassword)
-               .LoggedInHeader.SignOut();
+                .GoToProfilePage().EnterProfileInfo(defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    null,
+                                                    defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    null,
+                                                    null,
+                                                    defaultOptionStr,
+                                                    null,
+                                                    defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    defaultOptionStr,
+                                                    "",
+                                                    null,
+                                                    defaultOptionStr,
+                                                    null,
+                                                    null,
+                                                    "",
+                                                    howHear).VerifyProfileFormValidations(txtBoxValidationStr,
+                                                                                          txtBoxValidationStr,
+                                                                                          optionValidationStr,
+                                                                                          txtBoxValidationStr,
+                                                                                          txtBoxValidationStr,
+                                                                                          txtBoxValidationStr,
+                                                                                          txtBoxValidationStr).LoggedInHeader.SignOut();
+
         }
 
-        [Test]
+        [Test, DependsOn("VerifyProfileFormValidations")]
         public void EditProfile()
         {
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
@@ -147,46 +174,6 @@ namespace Golem.Tests.Cael
         }
 
         [Test]
-        public void VerifyProfileFormValidations()
-        {
-            string defaultOptionStr = "please select";
-            string txtBoxValidationStr = "* This field is required";
-            string optionValidationStr = "* Please select an option";
-
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
-                GoToLoginPage().
-                Login(UserTests.email, UserTests.password)
-                .LoggedInHeader.GoToMyAccountPage()
-                .GoToProfilePage().EnterProfileInfo(defaultOptionStr,
-                                                    defaultOptionStr,
-                                                    defaultOptionStr,
-                                                    collegeCreditInvestigated,
-                                                    defaultOptionStr,
-                                                    defaultOptionStr,
-                                                    onlineLearning,
-                                                    financialAid,
-                                                    defaultOptionStr,
-                                                    gender,
-                                                    defaultOptionStr,
-                                                    defaultOptionStr,
-                                                    defaultOptionStr,
-                                                    "",
-                                                    tuitionAssistance,
-                                                    defaultOptionStr,
-                                                    laborUnion,
-                                                    receivedTraining,
-                                                    "",
-                                                    howHear).VerifyProfileFormValidations(txtBoxValidationStr,
-                                                                                          txtBoxValidationStr,
-                                                                                          optionValidationStr,
-                                                                                          txtBoxValidationStr,
-                                                                                          txtBoxValidationStr,
-                                                                                          txtBoxValidationStr,
-                                                                                          txtBoxValidationStr).LoggedInHeader.SignOut();
-
-        }
-
-        [Test]
         public void VerifyContactInfoFormValidations()
         {
             string defaultOptionStr = "please select";
@@ -204,5 +191,6 @@ namespace Golem.Tests.Cael
                                                  txtBoxValidationStr)
                .LoggedInHeader.SignOut();
         }
+
     }
 }
