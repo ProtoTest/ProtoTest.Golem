@@ -52,7 +52,7 @@ namespace Golem.Framework
 
         void driver_Navigating(object sender, WebDriverNavigationEventArgs e)
         {
-            Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
+            Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
             TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Navigating to url " + e.Url);
         }
 
@@ -65,13 +65,13 @@ namespace Golem.Framework
 
         void driver_FindingElement(object sender, FindElementEventArgs e)
         {
-            Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
+            Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
             TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Looking for Element " + e.FindMethod);
         }
 
         void driver_ElementClicking(object sender, WebElementEventArgs e)
         {
-            Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
+            Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
             TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Clicking Element ");
         }
 

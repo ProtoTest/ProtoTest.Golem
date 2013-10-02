@@ -49,7 +49,7 @@ namespace Golem.Framework
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(1000);
+                    Common.Delay(1000);
                 }
             }
 

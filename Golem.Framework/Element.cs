@@ -214,7 +214,7 @@ namespace Golem.Framework
                 }
                     
                 else
-                    System.Threading.Thread.Sleep(1000);
+                    Common.Delay(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") not present after " + seconds + " seconds");
             return this;
@@ -233,7 +233,7 @@ namespace Golem.Framework
                         }  
                     
                 }
-                System.Threading.Thread.Sleep(1000);
+                Common.Delay(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") not visible after " + seconds + " seconds");
             return this;
@@ -250,7 +250,7 @@ namespace Golem.Framework
                 }
 
                 else
-                    System.Threading.Thread.Sleep(1000);
+                    Common.Delay(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") still present after " + seconds + " seconds");
             return this;
@@ -266,7 +266,7 @@ namespace Golem.Framework
                     }
 
                 else
-                    System.Threading.Thread.Sleep(1000);
+                    Common.Delay(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") still visible after " + seconds + " seconds");
             return this;
@@ -285,7 +285,7 @@ namespace Golem.Framework
                     }
                 }
                 else
-                    System.Threading.Thread.Sleep(1000);
+                    Common.Delay(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") did not have text : " + text + " after " + seconds + " seconds");
             return this;
@@ -309,7 +309,7 @@ namespace Golem.Framework
                     }
                 }
                 else
-                    System.Threading.Thread.Sleep(1000);
+                    Common.Delay(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") did not have attribute value : " + text + " after " + seconds + " seconds");
             return this;
@@ -328,7 +328,7 @@ namespace Golem.Framework
                     }
                 }
                 else
-                    System.Threading.Thread.Sleep(1000);
+                    Common.Delay(1000);
             }
             Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") was not selected after " + seconds + " seconds");
             return this;

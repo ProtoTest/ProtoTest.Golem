@@ -18,6 +18,11 @@ namespace Golem.PageObjects.Mailinator
             return new EmailPage();
         }
 
+        public InboxPage WaitForEmail(string text, int timeoutMin)
+        {
+            driver.WaitForPresent(ByE.PartialText(text), timeoutMin*60);
+            return this;
+        }
 
         public override void WaitForElements()
         {

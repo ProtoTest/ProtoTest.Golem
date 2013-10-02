@@ -21,7 +21,7 @@ namespace Golem.PageObjects.Cael
 
         public static HomePage OpenHomePage()
         {
-            TestBaseClass.driver.Navigate().GoToUrl(@"http://lcdev.bluemodus.com/");
+            TestBaseClass.driver.Navigate().GoToUrl(Config.GetConfigValue("EnvUrl", "http://lcdev.bluemodus.com/"));
             return new HomePage();
         }
         public LoginPage GoToLoginPage()

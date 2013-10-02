@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -258,5 +259,32 @@ namespace Golem.Framework
             Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
             return newImage;
         }
+
+        public static void Delay(int delayMs)
+        {
+            if (delayMs > 0)
+            {
+                TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Delay : " + delayMs);
+                Thread.Sleep(delayMs); 
+            }
+            
+        }
+
+        public static void UpdateConfigFile(string key, string value)
+        {
+            XmlDocument doc = new XmlDocument();
+            string path = System.Reflection.Assembly.GetCallingAssembly().Location + ".config";
+            doc.Load(path);
+            doc.SelectSingleNode("//add[@key='"+key+"']").Attributes["value"].Value = value;
+            doc.Save(path);
+
+            path = Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
+                   "\\App.config";
+            doc.Load(path);
+            doc.SelectSingleNode("//add[@key='" + key + "']").Attributes["value"].Value = value;
+            doc.Save(path);
+
+        }
+
     }
 }

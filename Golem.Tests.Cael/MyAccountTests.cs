@@ -8,6 +8,7 @@ using Golem.Framework;
 using Golem.PageObjects.Cael;
 using Golem.PageObjects.Mailinator;
 using MbUnit.Framework;
+using HomePage = Golem.PageObjects.Cael.HomePage;
 
 namespace Golem.Tests.Cael
 {
@@ -41,29 +42,29 @@ namespace Golem.Tests.Cael
         {
             Config.Settings.runTimeSettings.HighlightOnFind = false;
             string newPassword = @"Changeme1234!!";
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, UserTests.password)
-                .LoggedInHeader.GoToMyAccountPage()
+                Login(UserTests.email1, UserTests.password)
+                .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(UserTests.email, newPassword).LoggedInHeader.SignOut();
+                UpdateInfo(UserTests.email1, newPassword).LoggedInHeader.SignOut();
 
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, newPassword)
-                .LoggedInHeader.GoToMyAccountPage()
+                Login(UserTests.email1, newPassword)
+                .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(UserTests.email, UserTests.password).
+                UpdateInfo(UserTests.email1, UserTests.password).
                 LoggedInHeader.SignOut();
         }
 
         [Test]
         public void VerifyContactInfo()
         {
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                GoToLoginPage().
-               Login(UserTests.email, UserTests.password)
-               .LoggedInHeader.GoToMyAccountPage()
+               Login(UserTests.email1, UserTests.password)
+               .Header.GoToMyAccountPage()
                .GoToContactInfoPage()
                .VerifyContactInfo(UserTests.firstName, UserTests.lastName, 
                                   UserTests.DOB_Month, UserTests.DOB_Day, UserTests.DOB_Year,
@@ -76,22 +77,22 @@ namespace Golem.Tests.Cael
         public void EditPassword()
         {
             string newPassword = @"Changeme1234!!";
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, UserTests.password)
-                .LoggedInHeader.GoToMyAccountPage()
+                Login(UserTests.email1, UserTests.password)
+                .Header.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(UserTests.email, newPassword)
+                UpdateInfo(UserTests.email1, newPassword)
                .LoggedInHeader.SignOut();
         }
 
         [Test]
         public void EditProfile()
         {
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, UserTests.password)
-                .LoggedInHeader.GoToMyAccountPage()
+                Login(UserTests.email1, UserTests.password)
+                .Header.GoToMyAccountPage()
                 .GoToProfilePage().EnterProfileInfo(education,
                                                     areaOfStudy,
                                                     nameOfCollege,
@@ -119,10 +120,10 @@ namespace Golem.Tests.Cael
         public void VerifyProfile()
         {
 
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, UserTests.password)
-                .LoggedInHeader.GoToMyAccountPage()
+                Login(UserTests.email1, UserTests.password)
+                .Header.GoToMyAccountPage()
                 .GoToProfilePage().VerifyProfileInfo(education,
                                                     areaOfStudy,
                                                     nameOfCollege,
@@ -153,10 +154,10 @@ namespace Golem.Tests.Cael
             string txtBoxValidationStr = "* This field is required";
             string optionValidationStr = "* Please select an option";
 
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, UserTests.password)
-                .LoggedInHeader.GoToMyAccountPage()
+                Login(UserTests.email1, UserTests.password)
+                .Header.GoToMyAccountPage()
                 .GoToProfilePage().EnterProfileInfo(defaultOptionStr,
                                                     defaultOptionStr,
                                                     defaultOptionStr,
@@ -192,10 +193,10 @@ namespace Golem.Tests.Cael
             string defaultOptionStr = "please select";
             string txtBoxValidationStr = "* This field is required";
 
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                GoToLoginPage().
-               Login(UserTests.email, UserTests.password)
-               .LoggedInHeader.GoToMyAccountPage()
+               Login(UserTests.email1, UserTests.password)
+               .Header.GoToMyAccountPage()
                .GoToContactInfoPage()
                .EnterContactInfo("", "", "", "", "", "", "", "", defaultOptionStr, "", "")
                .VerifyContactInfoFormValidations(txtBoxValidationStr, txtBoxValidationStr, txtBoxValidationStr,

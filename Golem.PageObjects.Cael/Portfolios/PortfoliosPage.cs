@@ -17,6 +17,7 @@ namespace Golem.PageObjects.Cael
         public Element GetStarted_Link = new Element("Get Started Link",ByE.Text("Get Started"));
         public Element StartAnotherPortfolio_Button = new Element("Start Another portfolio button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_Portfolios_portfolioHyperLink"));
         public Element ConfirmButton = new Element("Confirm button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_Portfolio_enterPaymentButton"));
+        public Element PortfolioTitle_Text = new Element("portfolio title", By.ClassName("top-page-title"));
 
         public PortfoliosPage VerifyPortfolioSubmitted(string courseName)
         {
@@ -54,7 +55,7 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            GetStarted_Link.VerifyVisible(30);
+            PortfolioTitle_Text.VerifyVisible(30);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Golem.Framework
             var jsDriver = ((IJavaScriptExecutor)TestBaseClass.driver);
             string originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
             jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'", element);
-            System.Threading.Thread.Sleep(50);
+            Thread.Sleep(50);
             jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'", element);
         }
 
@@ -224,6 +224,8 @@ namespace Golem.Framework
             }
             
         }
+
+        
 
 
 

@@ -60,7 +60,7 @@ namespace Golem.Framework
             {
                 TestBaseClass.LogEvent("Stopping Fiddler Proxy on port " + this.proxyPort);
                 Fiddler.FiddlerApplication.Shutdown();
-                Thread.Sleep(500);
+                Common.Delay(500);
             }
         }
 

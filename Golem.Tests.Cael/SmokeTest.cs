@@ -12,9 +12,9 @@ namespace Golem.Tests.Cael
     {
        public void SmokeTest()
        {
-           OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
+           HomePage.OpenHomePage().
                GoToLoginPage().
-               Login(UserTests.email, UserTests.password);
+               Login(UserTests.email1,UserTests.password);
        }
     }
 }

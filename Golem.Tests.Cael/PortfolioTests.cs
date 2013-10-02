@@ -10,41 +10,44 @@ using MbUnit.Framework;
 
 namespace Golem.Tests.Cael
 {
+    [TestFixture,DependsOn("DashboardTests")]
     public class PortfolioTests : TestBaseClass
     {
         [Test]
-        public void CreateNewPortfolio()
-        {
-            OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
-                GoToLoginPage().
-                Login(UserTests.email, UserTests.password).
-                LoggedInHeader.GoToPortfoliosPage().
-                StartAnotherPortfolio().
-                EnterPayment().
-                ReturnToDashboardPage();
-        }
-
-        [Test,DependsOn("CreateNewPortfolio")]
         public void SetupPortfolio()
         {
-            OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, UserTests.password).
-                LoggedInHeader.GoToPortfoliosPage().
+                Login(UserTests.email1, UserTests.password).
+                Header.GoToPortfoliosPage().
                 GetStarted().
                 CreatePortfolio("Test Course", "12340", "4", "Course Description", @"http://school.url/description",
                     "University of New England", "http://school.com", "New England Association of Schools and Colleges",
                     "English", "Literary Theory");
         }
 
+        [Test, DependsOn("SetupPortfolio")]
+        public void StartAnotherPortfolio()
+        {
+            HomePage.OpenHomePage().
+                GoToLoginPage().
+                Login(UserTests.email1, UserTests.password).
+                Header.GoToPortfoliosPage().
+                StartAnotherPortfolio().
+                EnterPayment().
+                ReturnToDashboardPage();
+        }
+
+        
+
 
         [Test, DependsOn("SetupPortfolio")]
         public void EditPortfolio()
         {
-            OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, UserTests.password).
-                LoggedInHeader.GoToPortfoliosPage().
+                Login(UserTests.email1, UserTests.password).
+                Header.GoToPortfoliosPage().
                 EditPortfolio("Test Course")
                 .EditOutcomesText("text of learning outcomes")
                 .ChooseNarrativeFile(@"C:\Users\Brian\Documents\sampledoc.docx")
@@ -56,23 +59,22 @@ namespace Golem.Tests.Cael
         [Test, DependsOn("EditPortfolio")]
         public void SubmitPortfolio()
         {
-            OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, UserTests.password).
-                LoggedInHeader.GoToPortfoliosPage().
+                Login(UserTests.email1, UserTests.password).
+                Header.GoToPortfoliosPage().
                 EditPortfolio("Test Course").
                 SubmitPortfolio().
                 ConfirmAndSubmit().
                 ReturnToDashboard();
         }
-
         [Test, DependsOn("SubmitPortfolio")]
         public void PreviewPortfolio()
         {
-            OpenPage<HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email, UserTests.password).
-                LoggedInHeader.GoToPortfoliosPage().
+                Login(UserTests.email1, UserTests.password).
+                Header.GoToPortfoliosPage().
                 PreviewPortfolio("Test Course");
         }
 

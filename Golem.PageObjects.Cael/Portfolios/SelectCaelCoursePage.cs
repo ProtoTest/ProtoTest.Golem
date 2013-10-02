@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
 using Golem.Framework;
@@ -31,7 +32,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            throw new NotImplementedException();
+            CourseDropdown.VerifyPresent(30);
+            EnterPaymentButton.VerifyVisible(30);
         }
     }
 }

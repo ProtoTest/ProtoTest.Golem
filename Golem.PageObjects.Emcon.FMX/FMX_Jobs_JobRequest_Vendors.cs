@@ -28,7 +28,7 @@ namespace Golem.PageObjects.Emcon.FMX
             PopUpVendorSearch.WaitUntilVisible();
             FirstVendor.WaitUntilVisible().Click();
             pleaseWait.WaitUntilNotVisible();
-            //Thread.Sleep(1000);
+            //Common.Delay(1000);
             AcceptVendor.WaitUntilVisible().Click();
             pleaseWait.WaitUntilNotVisible();
             PopUpVendorSearch.WaitUntilNotVisible();

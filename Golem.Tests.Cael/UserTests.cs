@@ -8,13 +8,14 @@ using Golem.Framework;
 using Golem.PageObjects.Cael;
 using Golem.PageObjects.Mailinator;
 using MbUnit.Framework;
+using HomePage = Golem.PageObjects.Cael.HomePage;
 
 namespace Golem.Tests.Cael
 {
     public class UserTests : TestBaseClass
     {
-        //string email = "ProtoTestUser"+ Common.GetRandomString()+"@mailinator.com";
-        public static string email = "prototestuser30113228@mailinator.com";
+        public static string email1 = Config.GetConfigValue("UserEmail1", "prototestuser02141502@mailinator.com");
+        public static string email2 = Config.GetConfigValue("UserEmail2", "prototestuser02141502@mailinator.com");
         public static string password = "prototest123!!";
         public static string firstName = "ProtoTest";
         public static string lastName = "Tester";
@@ -30,26 +31,41 @@ namespace Golem.Tests.Cael
 
 
         [Test]
-        public void CreateNewUser()
+        public void CreateNewUsers()
         {
-            
-            OpenPage<PageObjects.Cael.HomePage>("http://lcdev.bluemodus.com/").
+            string newEmail = "ProtoTestUser"+ Common.GetRandomString()+"@mailinator.com";
+            HomePage.OpenHomePage().
                 GoToCreateUserPage().
-                CreateUser(email,password,firstName,lastName,address1,address2,city,state,zip,phone,DOB_Month,DOB_Day,DOB_Year);
+                CreateUser(newEmail,password,firstName,lastName,address1,address2,city,state,zip,phone,DOB_Month,DOB_Day,DOB_Year);
+            Common.UpdateConfigFile("UserEmail1",newEmail);
 
+            newEmail = "ProtoTestUser" + Common.GetRandomString() + "@mailinator.com";
+            HomePage.OpenHomePage().
+                GoToCreateUserPage().
+                CreateUser(newEmail, password, firstName, lastName, address1, address2, city, state, zip, phone, DOB_Month, DOB_Day, DOB_Year);
+            Common.UpdateConfigFile("UserEmail2", newEmail);
 
         }
-
-        [Test,DependsOn("CreateNewUser")]
+        [Timeout(0)]
+        [Test,DependsOn("CreateNewUsers")]
         public void ActivateUser()
         {
             OpenPage<PageObjects.Mailinator.HomePage>(@"http://mailinator.com/").
-                Login(email).
+                Login(email1).
+                WaitForEmail("LearningCounts.org",20).
                 OpenEmailWithText("LearningCounts.org").
                 ClickTextInBody("sign-in");
 
             LoginPage loginPage = new LoginPage();
-            loginPage.Login(email,password);
+            loginPage.Login(email1,password);
+
+            OpenPage<PageObjects.Mailinator.HomePage>(@"http://mailinator.com/").
+            Login(email2).
+            WaitForEmail("LearningCounts.org", 20).
+            OpenEmailWithText("LearningCounts.org").
+            ClickTextInBody("sign-in");
+
+            loginPage.Login(email2,password);
         }
     }
 }
