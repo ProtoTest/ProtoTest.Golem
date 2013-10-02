@@ -31,10 +31,11 @@ namespace Golem.Tests.Cael
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password)
                 .Header.GoToDashboardPage().
-                SelectInstructorLedCourse().
-                SelectCourse("December 1").
+                SelectDIYCourse().
+                GoToPaymentPage().
                 EnterPayment().
                 ReturnToDashboardPage();
+
         }
     }
 }
