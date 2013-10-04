@@ -46,6 +46,12 @@ namespace Golem.PageObjects.Cael
             return new DashboardPage();
         }
 
+        public DashBoardAssessmentPage GoToDashboardPageForAssessor()
+        {
+            Dashboard_Link.Click();
+            return new DashBoardAssessmentPage();
+        }
+
         public PortfoliosPage GoToPortfoliosPage()
         {
             Portfolios_Link.Click();
