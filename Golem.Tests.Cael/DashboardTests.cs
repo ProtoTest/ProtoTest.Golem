@@ -16,7 +16,7 @@ namespace Golem.Tests.Cael
         {
             HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email1, UserTests.password)
+                Login(UserTests.email2, UserTests.password)
                 .Header.GoToDashboardPage().
                 SelectInstructorLedCourse().
                 SelectCourse("December 1").

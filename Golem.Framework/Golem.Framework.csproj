@@ -73,6 +73,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByExtensions.cs" />
+    <Compile Include="CustomElements\Button.cs" />
+    <Compile Include="CustomElements\Checkbox.cs" />
+    <Compile Include="CustomElements\Dropdown.cs" />
+    <Compile Include="CustomElements\Field.cs" />
+    <Compile Include="CustomElements\Link.cs" />
+    <Compile Include="CustomElements\Panel.cs" />
+    <Compile Include="CustomElements\Radio.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="ActionList.cs" />
     <Compile Include="FiddlerProxy.cs" />

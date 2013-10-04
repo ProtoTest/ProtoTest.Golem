@@ -19,23 +19,12 @@ namespace Golem.Framework
         {
             get
             {
-                try
+                this._element = GetElement();
+                if ((_element != null) && (Config.Settings.runTimeSettings.HighlightOnFind))
                 {
-                    if (this._element != null)
-                        return _element;
-                    this._element = GetElement();
-                    if ((_element != null) && (Config.Settings.runTimeSettings.HighlightOnFind))
-                    {
-                        this._element.Highlight();
-                    }
-                    return this._element;
+                    this._element.Highlight();
                 }
-                catch (Exception)
-                {
-                    this._element = GetElement();
-                    return this._element;
-                }
-                
+                return this._element;
             }
             set
             {
@@ -43,10 +32,18 @@ namespace Golem.Framework
             }
         }
 
+
+
         private IWebElement GetElement()
         {
+            //if the element isn't stale, we can use our old reference
+            if(!this._element.IsStale())
+                return this._element;
+            //if its stale, lets find all the elements that match
             var elements = driver.FindElements(this.by);
+            //if we can't find any elements return null
             if (elements.Count == 0) return null;
+            //if there are more than one element lets find the best one
             if (elements.Count > 1)
             {
                 foreach (var ele in elements)
@@ -55,7 +52,9 @@ namespace Golem.Framework
                         return ele;
                 }
             }
+            // return something at least
             return elements[0];
+
         }
 
         public Element(){}
