@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByExtensions.cs" />
+    <Compile Include="Component.cs" />
     <Compile Include="CustomElements\Button.cs" />
     <Compile Include="CustomElements\Checkbox.cs" />
     <Compile Include="CustomElements\Dropdown.cs" />
@@ -117,7 +118,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <EmbeddedResource Include="Resources\en_US" />
     <None Include="Resources\en_US.aff" />
   </ItemGroup>
