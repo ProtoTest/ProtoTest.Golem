@@ -12,7 +12,11 @@ namespace Golem.Framework
     public class Element : IWebElement
     {
         protected By by;
-        protected IWebDriver driver;
+        protected IWebDriver driver
+        {
+            get { return TestBaseClass.driver; }
+            set { TestBaseClass.driver = value; }
+        }
         public string name;
         protected IWebElement _element;
         protected IWebElement element
@@ -62,7 +66,6 @@ namespace Golem.Framework
         public Element(string name, By locator)
         {
             this.name = name;
-            this.driver = TestBaseClass.driver;
             this.by = locator;
         }
 

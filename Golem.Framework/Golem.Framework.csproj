@@ -73,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByExtensions.cs" />
-    <Compile Include="Component.cs" />
     <Compile Include="CustomElements\Button.cs" />
     <Compile Include="CustomElements\Checkbox.cs" />
     <Compile Include="CustomElements\Dropdown.cs" />
