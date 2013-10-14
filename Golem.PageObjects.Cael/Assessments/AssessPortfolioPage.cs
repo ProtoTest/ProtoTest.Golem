@@ -32,10 +32,33 @@ namespace Golem.PageObjects.Cael
         Element Communication_Slider = new Element("Communication Slider", By.XPath("//div[@id='slider6']/a"));
         Element SupportingDocs_Slider = new Element("Supporting Documentation Slider", By.XPath("//div[@id='slider7']/a"));
 
-        public void ReviewAssessment()
+        public ReviewAssessmentConfirmModal ReviewAssessmentNoCredit()
         {
             ReviewAssessment_Button.Click();
-            // return new ReviewAssessmentConfirmPopup();
+            return new ReviewAssessmentConfirmModal();
+        }
+
+        public ReviewAssessmentConfirmPage ReviewAssessmentCredit()
+        {
+            ReviewAssessment_Button.Click();
+            return new ReviewAssessmentConfirmPage();
+        }
+
+        /// <summary>
+        ///     Set the 7 slider values
+        /// </summary>
+        /// <param name="values">7 item integer array of values (Range: 0-4)</param>
+        public AssessPortfolioPage SetSliderValues(int[] values)
+        {
+            SetCourseOutcomesSlider(values[0]);
+            SetLearningFromExpSlider(values[1]);
+            SetUnderstandingTPSlider(values[2]);
+            SetReflectionSlider(values[3]);
+            SetLearningApplicationSlider(values[4]);
+            SetCommunication_SliderSlider(values[5]);
+            SetSupportingDocsSlider(values[6]);
+            
+            return this;
         }
 
         /* 
@@ -140,22 +163,60 @@ namespace Golem.PageObjects.Cael
         public override void WaitForElements()
         {
             Page_Title.VerifyVisible(30).VerifyText("Assess Portfolio");
+            SaveChanges_Button.VerifyVisible(30).VerifyValue("Save Changes");
+            ReviewAssessment_Button.VerifyVisible(30).VerifyValue("Review Assessment");
         }
 
- 
+
+        /// Setting slider apis
+        public void SetCourseOutcomesSlider(int value)
+        {
+            SetSlider(CourseOutcomes_Slider, value);
+        }
+
+        public void SetLearningFromExpSlider(int value)
+        {
+            SetSlider(LearningFromExp_Slider, value);
+        }
+
+        public void SetUnderstandingTPSlider(int value)
+        {
+            SetSlider(UnderstandingTP_Slider, value);
+        }
+
+        public void SetReflectionSlider(int value)
+        {
+            SetSlider(Reflection_Slider, value);
+        }
+
+        public void SetLearningApplicationSlider(int value)
+        {
+            SetSlider(LearningApplication_Slider, value);
+        }
+
+        public void SetCommunication_SliderSlider(int value)
+        {
+            SetSlider(Communication_Slider, value);
+        }
+
+        public void SetSupportingDocsSlider(int value)
+        {
+            SetSlider(SupportingDocs_Slider, value);
+        }
+
         /// <summary>
         ///     Sets the slider on the page to requested value.
         ///     NOTE: Assumes the slider is in the default position of 0
         /// </summary>
         /// <param name="slider">Slider Element</param>
         /// <param name="newPosition">Value to set</param>
-        private void setSlider(Element slider, int newPosition)
+        private void SetSlider(Element slider, int newPosition)
         {
             int i = 0;
             int sliderPositionByStylePercentage = 0;
             int curSliderPosition = -1;
             string key = Keys.ArrowUp;
-            
+
             // The style attribute to set the slider position is a percentage
             // i.e. "style="left: 100%;"
             // Match the pecentage to determine the position
@@ -200,42 +261,6 @@ namespace Golem.PageObjects.Cael
             {
                 slider.SendKeys(key);
             }
-        }
-
-        /// Setting slider apis
-        public void SetCourseOutcomesSlider(int value)
-        {
-            setSlider(CourseOutcomes_Slider, value);
-        }
-
-        private void SetLearningFromExpSlider(int value)
-        {
-            setSlider(LearningFromExp_Slider, value);
-        }
-
-        private void SetUnderstandingTPSlider(int value)
-        {
-            setSlider(UnderstandingTP_Slider, value);
-        }
-
-        private void SetReflectionSlider(int value)
-        {
-            setSlider(Reflection_Slider, value);
-        }
-
-        private void SetLearningApplicationSlider(int value)
-        {
-            setSlider(LearningApplication_Slider, value);
-        }
-
-        private void SetCommunication_SliderSlider(int value)
-        {
-            setSlider(Communication_Slider, value);
-        }
-
-        private void SetSupportingDocsSlider(int value)
-        {
-            setSlider(SupportingDocs_Slider, value);
         }
     }
 }
