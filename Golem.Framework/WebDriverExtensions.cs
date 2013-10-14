@@ -40,6 +40,19 @@ namespace Golem.Framework
                 return html;
         }
 
+        public static bool IsStale(this IWebElement element)
+        {
+            try
+            {
+                var TagName = element.TagName;
+                return false;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+        }
+
         public static void Highlight(this IWebElement element)
         {
              

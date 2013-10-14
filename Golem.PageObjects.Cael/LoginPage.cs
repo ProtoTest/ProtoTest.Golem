@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Golem.Framework;
+using Golem.Framework.CustomElements;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael
 {
     public class LoginPage : BasePageObject
     {
-        public Element EmailField = new Element("Email Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_UserName"));
-        public Element PasswordField = new Element("PasswordField", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_Password"));
-        public Element SignInButton = new Element("SignInButton", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_LoginButton"));
-        public Element RememberMeButton = new Element("RememberMeCheckbox", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_rememberMeCheckBox"));
+        public Field EmailField = new Field("Email Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_UserName"));
+        public Field PasswordField = new Field("PasswordField", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_Password"));
+        public Button SignInButton = new Button("SignInButton", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_LoginButton"));
+        public Checkbox RememberMeButton = new Checkbox("RememberMeCheckbox", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_SignIn_login_rememberMeCheckBox"));
         public LoggedOutHeader Header = new LoggedOutHeader();
         public Footer Footer = new Footer();
 
