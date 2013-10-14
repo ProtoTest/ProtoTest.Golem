@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Golem.Framework;
 using OpenQA.Selenium;
 
-namespace Golem.PageObjects.Cael.Assessments
+namespace Golem.PageObjects.Cael
 {
     class DeclineAssessmentPopup : BasePageObject
     {
