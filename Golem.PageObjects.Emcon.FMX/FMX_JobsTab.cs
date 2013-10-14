@@ -23,7 +23,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequests SearchJobs()
         {
-            btn_JobSearch.WaitUntilPresent().Click();
+            btn_JobSearch.WaitUntil.Present().Click();
             return new FMX_Jobs_JobRequests();
         }
         
@@ -36,19 +36,19 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobClosing ClickJobClosingTab()
         {
-            tab_Job_Closing.WaitUntilVisible().Click();
+            tab_Job_Closing.WaitUntil.Visible().Click();
             return new FMX_Jobs_JobClosing();
         }
 
         public FMX_Jobs_JobPricing ClickJobPricingTab()
         {
-            tab_Job_Pricing.WaitUntilVisible().Click();
+            tab_Job_Pricing.WaitUntil.Visible().Click();
             return new FMX_Jobs_JobPricing();
         }
 
         public FMX_Jobs_RTVIssues ClickRTVIssuesButton()
         {
-            btn_RTVIssues.WaitUntilVisible().Click();
+            btn_RTVIssues.WaitUntil.Visible().Click();
             return new FMX_Jobs_RTVIssues();
         }
 
@@ -56,7 +56,7 @@ namespace Golem.PageObjects.Emcon.FMX
         public override void WaitForElements()
         {
             base.WaitForElements();
-            tab_Job_JobRequests.VerifyVisible(5);
+            tab_Job_JobRequests.Verify.Visible();
         }
 
        

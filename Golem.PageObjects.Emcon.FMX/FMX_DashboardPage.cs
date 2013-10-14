@@ -30,27 +30,27 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_DashboardPage SelectTeam(string dropdownItem)
         {
-            PieChartItem9.WaitUntilPresent();
-            dd_TeamSelector.WaitUntilPresent();
-            pleaseWait.WaitUntilNotVisible();
+            PieChartItem9.WaitUntil.Present();
+            dd_TeamSelector.WaitUntil.Present();
+            pleaseWait.WaitUntil.NotVisible();
             dd_TeamSelector.FindElement(ByE.Text(dropdownItem)).Click();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage SelectJobCounts(string dropdownItem)
         {
-            PieChartItem9.WaitUntilPresent();
-            dd_JobCountFilter.WaitUntilPresent();
-            pleaseWait.WaitUntilNotVisible();
+            PieChartItem9.WaitUntil.Present();
+            dd_JobCountFilter.WaitUntil.Present();
+            pleaseWait.WaitUntil.NotVisible();
             dd_JobCountFilter.FindElement(ByE.Text(dropdownItem)).Click();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage RefreshChart()
         {
-            PieChartItem9.WaitUntilPresent();
-            btn_RefreshChart.WaitUntilPresent();
-            pleaseWait.WaitUntilNotVisible();
+            PieChartItem9.WaitUntil.Present();
+            btn_RefreshChart.WaitUntil.Present();
+            pleaseWait.WaitUntil.NotVisible();
             btn_RefreshChart.Click();
             return new FMX_DashboardPage();
         }
@@ -58,9 +58,9 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_DashboardPage SelectPieChartItem()
         {
             //always selecting the last item --this item is always filled in
-            PieChartItem9.WaitUntilPresent();
-            PieChartItem9.VerifyVisible(20);
-            pleaseWait.WaitUntilNotVisible();
+            PieChartItem9.WaitUntil.Present();
+            PieChartItem9.Verify.Visible();
+            pleaseWait.WaitUntil.NotVisible();
             PieChartItem9.Click();
             return new FMX_DashboardPage();
         }
@@ -68,26 +68,26 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_DashboardPage SelectHighChartItem()
         {
 
-            PieChartItem9.WaitUntilPresent();
-            HighChart_JobCountChart.VerifyVisible(10);
-            HighChart_Month9.VerifyVisible(30);
-            pleaseWait.WaitUntilNotVisible();
+            PieChartItem9.WaitUntil.Present();
+            HighChart_JobCountChart.Verify.Visible();
+            HighChart_Month9.Verify.Visible();
+            pleaseWait.WaitUntil.NotVisible();
             HighChart_Month9.Click();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage VerifyHighChartDisplayed()
         {
-            HighChart_JobCountChart.VerifyVisible(10);
-            HighChart_MonthJobCountTotal.VerifyVisible(10);
+            HighChart_JobCountChart.Verify.Visible();
+            HighChart_MonthJobCountTotal.Verify.Visible();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage SpecificCustomerName(string customerName)
         {
-            PieChartItem9.WaitUntilPresent();
-            CustomerNameField.WaitUntilPresent();
-            pleaseWait.WaitUntilNotVisible();
+            PieChartItem9.WaitUntil.Present();
+            CustomerNameField.WaitUntil.Present();
+            pleaseWait.WaitUntil.NotVisible();
             CustomerNameField.Text = customerName;
             CustomerNameField.SendKeys(Keys.Return);
             return new FMX_DashboardPage();
@@ -95,29 +95,29 @@ namespace Golem.PageObjects.Emcon.FMX
        
         public FMX_DashboardPage SelectSecondaryChart()
         {
-            PieChartItem9.WaitUntilPresent();
-            HighChart_MonthJobCountTotal.VerifyVisible(5);
-            pleaseWait.WaitUntilNotVisible();
+            PieChartItem9.WaitUntil.Present();
+            HighChart_MonthJobCountTotal.Verify.Visible();
+            pleaseWait.WaitUntil.NotVisible();
             HighChart_MonthJobCountTotal_Item1.Click();
             return new FMX_DashboardPage();
         }
 
         public FMX_DashboardPage VerifyJobCountListDisplayed()
         {
-            PieChartItem9.WaitUntilPresent();
-            pleaseWait.WaitUntilNotVisible();
-            JobCountsPageSelector.VerifyVisible(10);
+            PieChartItem9.WaitUntil.Present();
+            pleaseWait.WaitUntil.NotVisible();
+            JobCountsPageSelector.Verify.Visible();
             return new FMX_DashboardPage();
         }
 
         public override void WaitForElements()
         {
             base.WaitForElements();
-            txt_Loading.WaitUntilNotVisible();
-            pleaseWait.WaitUntilNotVisible();
-            Dashboard_Tab1.VerifyVisible(10);
-            Piechart_PieChart.VerifyVisible(10);
-            PieChartItem9.VerifyVisible(30);
+            txt_Loading.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.NotVisible();
+            Dashboard_Tab1.Verify.Visible();
+            Piechart_PieChart.Verify.Visible();
+            PieChartItem9.Verify.Visible();
         }
         
     }

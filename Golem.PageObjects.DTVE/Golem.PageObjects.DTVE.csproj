@@ -42,7 +42,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CelebrityDetails.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Footer.cs" />
+    <Compile Include="Header.cs" />
     <Compile Include="LandingPage.cs" />
+    <Compile Include="MovieDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -55,8 +55,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            EmailField.VerifyVisible(30);
-            CreateAccountButton.VerifyVisible(30);
+            EmailField.Verify.Visible();
+            CreateAccountButton.Verify.Visible();
         }
     }
 }

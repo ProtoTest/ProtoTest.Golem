@@ -70,10 +70,10 @@ namespace Golem.PageObjects.Cael.Setup_Portfolio
 
         public override void WaitForElements()
         {
-            LearningNarrative_FileChooser.VerifyPresent(30);
-            LearningOutcomes_Field.VerifyPresent(30);
-            SaveChanges_Button.VerifyPresent(30);
-            //SubmitPortfolio_Button.VerifyPresent(30);
+            LearningNarrative_FileChooser.Verify.Present();
+            LearningOutcomes_Field.Verify.Present();
+            SaveChanges_Button.Verify.Present();
+            //SubmitPortfolio_Button.Verify.Present();
         }
     }
 }

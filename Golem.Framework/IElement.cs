@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Golem.Framework
 {
-    class Example
+    public interface IElement 
     {
     }
 }

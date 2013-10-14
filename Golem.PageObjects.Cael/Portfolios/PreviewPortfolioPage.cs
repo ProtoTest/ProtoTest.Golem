@@ -18,11 +18,11 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            CourseTitle_Link.VerifyVisible(30);
-            CourseSchool_Link.VerifyVisible(30);
-            LearningOutcomes_Link.VerifyVisible(30);
-            LearningOutcomes_Text.VerifyVisible(30);
-            Credits_Text.VerifyVisible(30);
+            CourseTitle_Link.Verify.Visible();
+            CourseSchool_Link.Verify.Visible();
+            LearningOutcomes_Link.Verify.Visible();
+            LearningOutcomes_Text.Verify.Visible();
+            Credits_Text.Verify.Visible();
         }
     }
 }

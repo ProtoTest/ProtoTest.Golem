@@ -34,12 +34,12 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            CreateAccount_Link.VerifyVisible(30);
-            SignIn_Link.VerifyVisible(30);
-            HowItWorks_Link.VerifyVisible(30);
-            TimeAndCost_Link.VerifyVisible(30);
-            AffiliatedUniversities_Link.VerifyVisible(30);
-            ContactLearningCounts_Link.VerifyVisible(30);
+            CreateAccount_Link.Verify.Visible();
+            SignIn_Link.Verify.Visible();
+            HowItWorks_Link.Verify.Visible();
+            TimeAndCost_Link.Verify.Visible();
+            AffiliatedUniversities_Link.Verify.Visible();
+            ContactLearningCounts_Link.Verify.Visible();
         }
     }
 }

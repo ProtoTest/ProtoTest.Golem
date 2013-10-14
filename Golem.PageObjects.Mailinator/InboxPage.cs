@@ -26,7 +26,7 @@ namespace Golem.PageObjects.Mailinator
 
         public override void WaitForElements()
         {
-            InboxHeader.VerifyVisible(30);
+            InboxHeader.Verify.Visible();
         }
     }
 }

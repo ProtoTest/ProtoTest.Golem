@@ -12,7 +12,7 @@ namespace Golem.PageObjects.Cael.MyAccount
     {
         public Element EmailField = new Element("Email Field", By.Id("passEmailTextBox"));
         public Element PasswordField = new Element("Password Field", By.Id("passTextBox"));
-        public Element VerifyField = new Element("Verify Field", By.Id("verifyTextBox"));
+        public Element VerifyField = new Element("Verify Field", By.Id("Verify.TextBox"));
         public Element SaveChangesButton = new Element("Save Changes Button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_savePasswordButton"));
 
         public PasswordPage UpdateInfo(string email, string password)
@@ -26,14 +26,14 @@ namespace Golem.PageObjects.Cael.MyAccount
 
         public PasswordPage VerifyEmail(string email)
         {
-            EmailField.VerifyText(email);
+            EmailField.Verify.Text(email);
             return this;
         }
 
         public override void WaitForElements()
         {
-            EmailField.VerifyVisible(30);
-            SaveChangesButton.VerifyVisible(30);
+            EmailField.Verify.Visible();
+            SaveChangesButton.Verify.Visible();
         }
 
 

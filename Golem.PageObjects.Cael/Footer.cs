@@ -18,11 +18,11 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            HowItWorks_link.VerifyVisible(30);
-            CaelLogo_Link.VerifyVisible(30);
-            EmailAddress_Link.VerifyVisible(30);
-            SignIn_Link.VerifyVisible(30);
-            Facebook_Link.VerifyVisible(30);
+            HowItWorks_link.Verify.Visible();
+            CaelLogo_Link.Verify.Visible();
+            EmailAddress_Link.Verify.Visible();
+            SignIn_Link.Verify.Visible();
+            Facebook_Link.Verify.Visible();
         }
     }
 }

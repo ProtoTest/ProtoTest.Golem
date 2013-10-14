@@ -32,8 +32,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            CourseDropdown.VerifyPresent(30);
-            EnterPaymentButton.VerifyVisible(30);
+            CourseDropdown.Verify.Present();
+            EnterPaymentButton.Verify.Visible();
         }
     }
 }

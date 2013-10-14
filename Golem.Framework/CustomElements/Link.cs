@@ -13,5 +13,10 @@ namespace Golem.Framework.CustomElements
             this.name = name;
             this.by = bylocator;
         }
+        public Link(By bylocator)
+        {
+            this.name = "";
+            this.by = bylocator;
+        }
     }
 }

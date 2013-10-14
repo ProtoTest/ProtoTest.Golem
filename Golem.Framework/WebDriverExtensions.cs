@@ -55,12 +55,18 @@ namespace Golem.Framework
 
         public static void Highlight(this IWebElement element)
         {
-             
-            var jsDriver = ((IJavaScriptExecutor)TestBaseClass.driver);
-            string originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
-            jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'", element);
-            Thread.Sleep(50);
-            jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'", element);
+            try
+            {
+                var jsDriver = ((IJavaScriptExecutor)TestBaseClass.driver);
+                string originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
+                jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
+                Thread.Sleep(50);
+                jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", element);
+            }
+            catch (Exception)
+            {
+            }
+            
         }
 
         /// <summary>
@@ -229,7 +235,15 @@ namespace Golem.Framework
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("window.scrollBy(" + xCord + "," + yCord + ");");
 
-        }     
+        }
+
+        public static IWebElement ScrollIntoView(this IWebElement element)
+        {
+
+            IJavaScriptExecutor js = (IJavaScriptExecutor)TestBaseClass.driver;
+            js.ExecuteScript("arguments[0].scrollIntoView(); return;");
+            return element;
+        }
 
         public static void SelectNewWindow(this IWebDriver driver)
         {
@@ -247,10 +261,6 @@ namespace Golem.Framework
             }
             
         }
-
-        
-
-
 
     }
 }

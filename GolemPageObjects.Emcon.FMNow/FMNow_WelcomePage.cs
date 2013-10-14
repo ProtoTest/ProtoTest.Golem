@@ -25,15 +25,15 @@ namespace GolemPageObjects.Emcon.FMNow
         {
             txt_UserName.Text = user;
             txt_Password.Text = pass;
-            btn_Login.WaitUntilVisible().Click();
+            btn_Login.WaitUntil.Visible().Click();
             return new FMNow_HomePage();
         }
 
         public override void WaitForElements()
         {
-            txt_UserName.WaitUntilVisible();
-            txt_Password.WaitUntilVisible();
-            btn_Login.WaitUntilVisible();
+            txt_UserName.WaitUntil.Visible();
+            txt_Password.WaitUntil.Visible();
+            btn_Login.WaitUntil.Visible();
         }
 
        

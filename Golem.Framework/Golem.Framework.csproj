@@ -34,6 +34,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.1\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="FiddlerCore, Version=2.4.4.6, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\FiddlerCore\FiddlerCore.dll</HintPath>
@@ -62,6 +65,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TestStack.White">
+      <HintPath>..\..\..\TestStack-White-9b17915\src\TestStack.White.WebBrowser\bin\Debug\TestStack.White.dll</HintPath>
+    </Reference>
+    <Reference Include="TestStack.White.WebBrowser">
+      <HintPath>..\..\..\TestStack-White-9b17915\src\TestStack.White.WebBrowser\bin\Debug\TestStack.White.WebBrowser.dll</HintPath>
+    </Reference>
     <Reference Include="WebDriver, Version=2.33.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\WebDriver\2.33.0\net40\WebDriver.dll</HintPath>
@@ -73,9 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByExtensions.cs" />
-    <Compile Include="Component.cs" />
     <Compile Include="CustomElements\Button.cs" />
     <Compile Include="CustomElements\Checkbox.cs" />
+    <Compile Include="CustomElements\Text.cs" />
+    <Compile Include="CustomElements\Image.cs" />
     <Compile Include="CustomElements\Dropdown.cs" />
     <Compile Include="CustomElements\Field.cs" />
     <Compile Include="CustomElements\Link.cs" />
@@ -95,9 +105,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SAZ-DOTNETZIP.cs" />
+    <Compile Include="Silverlight.cs" />
     <Compile Include="TestBaseClass.cs" />
     <Compile Include="TestDataContainer.cs" />
     <Compile Include="ValidationElement.cs" />
+    <Compile Include="Verification.cs" />
     <Compile Include="VerificationError.cs" />
     <Compile Include="WebDriverBrowser.cs" />
     <Compile Include="WebDriverEvents.cs" />
@@ -119,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\en_US" />
+    <None Include="packages.config" />
     <None Include="Resources\en_US.aff" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +139,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

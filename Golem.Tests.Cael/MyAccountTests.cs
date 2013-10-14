@@ -39,7 +39,7 @@ namespace Golem.Tests.Cael
         [Test]
         public void ChangePassword()
         {
-            Config.Settings.runTimeSettings.HighlightOnFind = false;
+            Config.Settings.runTimeSettings.HighlightOnVerify = false;
             string newPassword = @"Changeme1234!!";
             OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
                 GoToLoginPage().

@@ -65,17 +65,17 @@ namespace Golem.PageObjects.Cael.MyAccount
         public ContactInfoPage VerifyContactInfo(string fName, string lName, string DOB_Month, string DOB_Day,
             string DOB_Year, string addr1, string addr2, string city, string state, string zip, string phone)
         {
-            FirstNameFIeld.VerifyValue(fName);
-            LastNameField.VerifyValue(lName);
-            DOB_Month_Dropdown.VerifyText(DOB_Month);
-            DOB_Day_Dropdown.VerifyText(DOB_Day);
-            DOB_Year_Dropdown.VerifyText(DOB_Year);
-            Address1Field.VerifyValue(addr1);
-            Address2Field.VerifyValue(addr2);
-            CityField.VerifyValue(city);
-            StateDropdown.VerifyText(state);
-            ZipField.VerifyValue(zip);
-            PhoneField.VerifyValue(phone);
+            FirstNameFIeld.Verify.Value(fName);
+            LastNameField.Verify.Value(lName);
+            DOB_Month_Dropdown.Verify.Text(DOB_Month);
+            DOB_Day_Dropdown.Verify.Text(DOB_Day);
+            DOB_Year_Dropdown.Verify.Text(DOB_Year);
+            Address1Field.Verify.Value(addr1);
+            Address2Field.Verify.Value(addr2);
+            CityField.Verify.Value(city);
+            StateDropdown.Verify.Text(state);
+            ZipField.Verify.Value(zip);
+            PhoneField.Verify.Value(phone);
             return this;
         }
 
@@ -98,8 +98,8 @@ namespace Golem.PageObjects.Cael.MyAccount
         }
         public override void WaitForElements()
         {
-            SaveButton.VerifyVisible(30);
-            FirstNameFIeld.VerifyVisible(30);
+            SaveButton.Verify.Visible();
+            FirstNameFIeld.Verify.Visible();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Golem.PageObjects.Mailinator
 
         public override void WaitForElements()
         {
-            EmailBodyTextField.VerifyVisible(30);
+            EmailBodyTextField.Verify.Visible();
         }
     }
 }

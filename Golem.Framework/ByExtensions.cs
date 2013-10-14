@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace Golem.Framework
 {
-    public static class ByE
+    public class ByE
     {
         public static By Text(string text)
         {
@@ -21,5 +21,6 @@ namespace Golem.Framework
         {
             return By.XPath(string.Format("//{0}[contains({1},'{2}')]", tag, attribute, value));
         }
+
     }
 }

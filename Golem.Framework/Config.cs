@@ -54,7 +54,7 @@ namespace Golem.Framework
             public int CommandDelayMs;
             public bool RunOnRemoteHost;
             public string HostIp;
-            public bool HighlightOnFind;
+            public bool HighlightOnVerify;
             
 
             public RuntimeSettings()
@@ -70,7 +70,7 @@ namespace Golem.Framework
             CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
             RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
             HostIp = Config.GetConfigValue("HostIp", "localhost");
-            HighlightOnFind = Common.IsTruthy(Config.GetConfigValue("HighlightOnFind", "False"));
+            HighlightOnVerify = Common.IsTruthy(Config.GetConfigValue("HighlightOnVerify", "False"));
             }
 
             

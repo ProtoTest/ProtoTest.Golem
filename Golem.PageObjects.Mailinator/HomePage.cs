@@ -30,7 +30,7 @@ namespace Golem.PageObjects.Mailinator
 
         public override void WaitForElements()
         {
-            EmailField.VerifyPresent(30);
+            EmailField.Verify.Present();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace AppiumTests.PageObjects
 
         public override void WaitForElements()
         {
-            txt_SearchField.VerifyPresent(10);
+            txt_SearchField.Verify.Present();
         }
 
         public SearchForBook SearchFor(string title)

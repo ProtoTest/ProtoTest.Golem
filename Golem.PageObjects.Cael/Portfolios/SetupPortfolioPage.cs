@@ -44,8 +44,8 @@ namespace Golem.PageObjects.Cael.Setup_Portfolio
 
         public override void WaitForElements()
         {
-            CourseTitle_Field.VerifyVisible(30);
-            CreatePortfolio_Button.VerifyVisible(30);
+            CourseTitle_Field.Verify.Visible();
+            CreatePortfolio_Button.Verify.Visible();
         }
     }
 }

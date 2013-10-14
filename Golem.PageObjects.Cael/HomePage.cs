@@ -38,10 +38,10 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            ContentContainer.VerifyVisible(60);
-            LoginButton.VerifyVisible(30);
-            CreateUserLink.VerifyVisible(30);
-            ScrollingContent.VerifyVisible(30);
+            ContentContainer.Verify.Visible();
+            LoginButton.Verify.Visible();
+            CreateUserLink.Verify.Visible();
+            ScrollingContent.Verify.Visible();
         }
     }
 }

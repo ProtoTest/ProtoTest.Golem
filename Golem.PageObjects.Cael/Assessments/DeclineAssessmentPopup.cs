@@ -33,8 +33,8 @@ namespace Golem.PageObjects.Cael.Assessments
 
         public override void WaitForElements()
         {
-            Close_Button.VerifyVisible(30);
-            TakeIt_Button.VerifyVisible(30);
+            Close_Button.Verify.Visible();
+            TakeIt_Button.Verify.Visible();
         }
     }
 }

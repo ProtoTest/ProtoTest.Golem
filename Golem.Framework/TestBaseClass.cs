@@ -104,6 +104,7 @@ namespace Golem.Framework
         public static T OpenPage<T>(string url)
         {
             driver.Navigate().GoToUrl(url);
+            driver.Manage().Window.Maximize();
             return (T)Activator.CreateInstance(typeof(T));
         }
 

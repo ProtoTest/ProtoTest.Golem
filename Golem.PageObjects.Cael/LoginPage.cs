@@ -29,8 +29,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            EmailField.VerifyVisible(30);
-            SignInButton.VerifyVisible(30);
+            EmailField.Verify.Visible();
+            SignInButton.Verify.Visible();
         }
     }
 }

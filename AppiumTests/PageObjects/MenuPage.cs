@@ -21,7 +21,7 @@ namespace Golem.PageObjects.Appium.Bookworm
 
         public override void WaitForElements()
         {
-            btn_Search.VerifyPresent(10);
+            btn_Search.Verify.Present();
         }
     }
 }
