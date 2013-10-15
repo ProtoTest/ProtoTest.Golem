@@ -27,6 +27,7 @@ namespace Golem.Framework
                 TestBaseClass.driver = value;
             }
         }
+
         protected IWebElement _element;
         protected IWebElement element
         {

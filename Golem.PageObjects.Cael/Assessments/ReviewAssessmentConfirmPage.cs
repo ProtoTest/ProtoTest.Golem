@@ -33,6 +33,7 @@ namespace Golem.PageObjects.Cael
 
         public ReviewAssessmentConfirmPage VerifyCreditRecommendation(string score_str, Boolean credit_recommended)
         {
+<<<<<<< HEAD
             TotalScore_Label.Verify.Text(score_str);
             if (credit_recommended)
             {
@@ -42,13 +43,30 @@ namespace Golem.PageObjects.Cael
             {
                 CreditRecommendation_Label.Verify.Text(noCreditText);
             }
+=======
+            TotalScore_Label.VerifyText(score_str);
+            if (credit_recommended)
+            {
+                CreditRecommendation_Label.VerifyText(creditRecommendedText.Trim());
+            }
+            else
+            {
+                CreditRecommendation_Label.VerifyText(noCreditText);
+            }
+
+>>>>>>> 54c86437ed8255b757791d01fb51000e224fe010
             return this;
         }
 
         public override void WaitForElements()
         {
+<<<<<<< HEAD
             Page_Title.Verify.Visible().Verify.Text("Review Assessment");
             Submit_Button.Verify.Visible().Verify.Value("Submit This Assessment");
+=======
+            Page_Title.VerifyVisible(30).VerifyText("Review Assessment");
+            Submit_Button.VerifyVisible(30).VerifyValue("Submit This Assessment");
+>>>>>>> 54c86437ed8255b757791d01fb51000e224fe010
         }
     }
 }
