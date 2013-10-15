@@ -42,7 +42,6 @@ namespace Golem.PageObjects.Cael
             {
                 CreditRecommendation_Label.Verify.Text(noCreditText);
             }
-
             return this;
         }
 
