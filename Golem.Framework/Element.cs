@@ -13,6 +13,7 @@ namespace Golem.Framework
     public class Element : IWebElement, IWrapsDriver, IWrapsElement 
     {
         public By by;
+        public string name = "Element";
         public Verification Verify;
         public Verification WaitUntil;
         protected IWebDriver driver
@@ -26,7 +27,6 @@ namespace Golem.Framework
                 TestBaseClass.driver = value;
             }
         }
-        public string name = "Element";
         protected IWebElement _element;
         protected IWebElement element
         {
@@ -76,6 +76,8 @@ namespace Golem.Framework
         public Element(By locator)
         {
             this.by = locator;
+            Verify = new Verification(this, Config.Settings.runTimeSettings.ElementTimeoutSec, false);
+            WaitUntil = new Verification(this, Config.Settings.runTimeSettings.ElementTimeoutSec, true);
         }
 
         public bool Displayed
