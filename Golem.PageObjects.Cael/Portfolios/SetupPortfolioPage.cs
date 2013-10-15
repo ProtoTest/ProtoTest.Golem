@@ -46,7 +46,6 @@ namespace Golem.PageObjects.Cael.Setup_Portfolio
         {
             CourseTitle_Field.Verify.Visible();
             CreatePortfolio_Button.Verify.Visible().Verify.Text("CREATE PORTFOLIO");
-
         }
     }
 }

@@ -44,7 +44,6 @@ namespace Golem.PageObjects.Cael
         public override void WaitForElements()
         {
             ContinueReviewAssessment_Button.Verify.Visible().Verify.Text("CONTINUE TO REVIEW ASSESSMENT");
-
         }
     }
 }
