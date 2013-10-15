@@ -80,16 +80,16 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_Jobs_JobRequests CustomerSearch(string customerName)
         {
             //This search uses the specific customer search pop up
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             btn_JobRequests_CustomerSearch.Verify.Visible();
             btn_JobRequests_CustomerSearch.Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             pop_CustomerSearch.Verify.Visible();
             txt_CustomerName_CustomerSearch_pop.Verify.Visible();
             txt_CustomerName_CustomerSearch_pop.Text = customerName;
             btn_CustomerSearch.Verify.Visible();
             btn_CustomerSearch.Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             table_CustomerSearchResults_grid.Click();
             return new FMX_Jobs_JobRequests();
         }
@@ -132,12 +132,12 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_Jobs_JobRequests EnterJobRequestInfo(string businessType, string businessTeam, string requestSource,
                                             string requesterName, string requesterTitle, string requestDescription)
         {
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_BusinessType.WaitUntil.Visible().SelectOption(businessType).Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             //there is a check here to see if team has available business types --this test assumes you know which team's go with which business types
             dd_Team.WaitUntil.Visible().SelectOption(businessTeam).Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_RequestSource.WaitUntil.Visible().SelectOption(requestSource).Click();
             //dd_RequestSource.FindElement(ByE.Text(requestSource)).Click();
             txt_RequesterName.WaitUntil.Visible().Text = requesterName;
@@ -149,11 +149,11 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequests AddNewLocation()
         {
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             btn_AddNewLocation.WaitUntil.Visible().Click(); //Default Data is selected for EMCON TEST customer
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             btn_SaveLocation.Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             btn_JobRequests_JobSubTab.WaitUntil.Visible().Click();
             return new FMX_Jobs_JobRequests();
         }
@@ -161,18 +161,18 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_Jobs_JobRequests AddNewJob(string jobType, string jobPriority, string POnumber, string JobComment, int jobCap = 9999)
         {
             btn_JobRequests_NewJobButton.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_JobRequests_NewJob_JobType.WaitUntil.Visible();
             dd_JobRequests_NewJob_JobType.FindElement(ByE.Text(jobType)).Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_JobRequests_NewJob_JobPriority.WaitUntil.Visible();
             dd_JobRequests_NewJob_JobPriority.FindElement(ByE.Text(jobPriority)).Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             txt_JobRequests_NewJob_JobPONumber.Text = POnumber;
             txt_JobRequests_NewJob_Comment.Text = JobComment;
             numtxt_JobRequests_NewJob_CustomerJobCap.Text = jobCap.ToString();
             btn_JobRequests_NewJob_SaveRequest.Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             return new FMX_Jobs_JobRequests();
         }
         
@@ -189,7 +189,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequests CloseSearchPopUp()
         {
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             btn_PopupClose.Click();
             return new FMX_Jobs_JobRequests();
         }
@@ -203,7 +203,7 @@ namespace Golem.PageObjects.Emcon.FMX
   
         public FMX_Jobs_JobRequests VerifyRequestPresent(string customerName)
         {
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             table_JobRequests_CustomerName.FindElements(By.LinkText(customerName));
             return new FMX_Jobs_JobRequests();
         }
@@ -211,10 +211,10 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequest_Vendors AddWorkScopes(string trade, string subTrade, string description)
         {
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             
             dd_JobRequests_WorkScope_Trade.WaitUntil.Visible().SelectOption(trade).Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             
             dd_JobRequests_WorkScope_SubTrade.WaitUntil.Visible().SelectOption(subTrade).Click(); //Sub-Trade is dependant on options selected from Trade
             txt_JobRequests_WorkScope_WSDescription.WaitUntil.Visible().Text += description;

@@ -38,7 +38,7 @@ namespace GolemPageObjects.Emcon.FMNow
         public FMNow_Request SearchLocation(string searchTerms)
         {
             btn_SearchLocation.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             txt_SearchFor.WaitUntil.Visible().Text = searchTerms;
             btn_StartSearchLocation.WaitUntil.Visible().Click();
              
@@ -48,16 +48,16 @@ namespace GolemPageObjects.Emcon.FMNow
         public FMNow_Request SelectFirstResult(string description, string clientRefNumber, string typeOfwork, string subTypeOfwork = "[Not Sure]")
         {
             table_FirstResult.Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_TypeOfWork.SelectOption(typeOfwork);
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_SubTypeOfWork.SelectOption(subTypeOfwork);
             txt_ClientRefNum.Text = "PROTOTEST-" + clientRefNumber;
             txt_DescriptionOfService.Text = "This was created by a PROTOTEST automated script " + description;
             btn_Next.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             btn_SubmitRequest.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             txt_RequestReferanceNumber.WaitUntil.Visible();
             RequestIDCreated.Add(txt_RequestReferanceNumber.Text);
             return new FMNow_Request();

@@ -32,7 +32,7 @@ namespace Golem.PageObjects.Emcon.FMX
         {
             PieChartItem9.WaitUntil.Present();
             dd_TeamSelector.WaitUntil.Present();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_TeamSelector.FindElement(ByE.Text(dropdownItem)).Click();
             return new FMX_DashboardPage();
         }
@@ -41,7 +41,7 @@ namespace Golem.PageObjects.Emcon.FMX
         {
             PieChartItem9.WaitUntil.Present();
             dd_JobCountFilter.WaitUntil.Present();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_JobCountFilter.FindElement(ByE.Text(dropdownItem)).Click();
             return new FMX_DashboardPage();
         }
@@ -50,7 +50,7 @@ namespace Golem.PageObjects.Emcon.FMX
         {
             PieChartItem9.WaitUntil.Present();
             btn_RefreshChart.WaitUntil.Present();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             btn_RefreshChart.Click();
             return new FMX_DashboardPage();
         }
@@ -60,7 +60,7 @@ namespace Golem.PageObjects.Emcon.FMX
             //always selecting the last item --this item is always filled in
             PieChartItem9.WaitUntil.Present();
             PieChartItem9.Verify.Visible();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             PieChartItem9.Click();
             return new FMX_DashboardPage();
         }
@@ -71,7 +71,7 @@ namespace Golem.PageObjects.Emcon.FMX
             PieChartItem9.WaitUntil.Present();
             HighChart_JobCountChart.Verify.Visible();
             HighChart_Month9.Verify.Visible();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             HighChart_Month9.Click();
             return new FMX_DashboardPage();
         }
@@ -87,7 +87,7 @@ namespace Golem.PageObjects.Emcon.FMX
         {
             PieChartItem9.WaitUntil.Present();
             CustomerNameField.WaitUntil.Present();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             CustomerNameField.Text = customerName;
             CustomerNameField.SendKeys(Keys.Return);
             return new FMX_DashboardPage();
@@ -97,7 +97,7 @@ namespace Golem.PageObjects.Emcon.FMX
         {
             PieChartItem9.WaitUntil.Present();
             HighChart_MonthJobCountTotal.Verify.Visible();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             HighChart_MonthJobCountTotal_Item1.Click();
             return new FMX_DashboardPage();
         }
@@ -105,7 +105,7 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_DashboardPage VerifyJobCountListDisplayed()
         {
             PieChartItem9.WaitUntil.Present();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             JobCountsPageSelector.Verify.Visible();
             return new FMX_DashboardPage();
         }
@@ -113,8 +113,8 @@ namespace Golem.PageObjects.Emcon.FMX
         public override void WaitForElements()
         {
             base.WaitForElements();
-            txt_Loading.WaitUntil.NotVisible();
-            pleaseWait.WaitUntil.NotVisible();
+            txt_Loading.WaitUntil.Not.Visible();
+            pleaseWait.WaitUntil.Not.Visible();
             Dashboard_Tab1.Verify.Visible();
             Piechart_PieChart.Verify.Visible();
             PieChartItem9.Verify.Visible();

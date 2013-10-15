@@ -15,7 +15,6 @@ namespace Golem.Framework
 {
     public class Common
     {
-        public static string previousLog = "";
         public static string GetRandomString()
         {
             return DateTime.Now.ToString("ddHHmmss");
@@ -73,17 +72,8 @@ namespace Golem.Framework
 
         public static void Log(string msg)
         {
-            if (previousLog == msg)
-            {
-              TestLog.Write(".");
-              TestLog.ConsoleOutput.Write(".");
-            }
-            else
-            {
-                DiagnosticLog.WriteLine(msg);
-                TestLog.WriteLine(msg);
-            }
-            
+            DiagnosticLog.WriteLine(msg);
+            TestLog.WriteLine(msg);        
         }
 
         public static string GetCurrentMethodName()

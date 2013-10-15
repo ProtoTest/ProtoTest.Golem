@@ -9,15 +9,11 @@ namespace Golem.Framework.CustomElements
     public class Radio : Element
     {
 
-        public Radio(By bylocator)
+        public Radio(By bylocator) : base(bylocator)
         {
-            this.name = "";
-            this.by = bylocator;
         }
-        public Radio(string name, By bylocator)
+        public Radio(string name, By bylocator) : base(name,bylocator)
         {
-            this.name = name;
-            this.by = bylocator;
         }
 
         public Radio SetValue(string value)

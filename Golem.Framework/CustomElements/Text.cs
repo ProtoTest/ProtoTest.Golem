@@ -8,15 +8,11 @@ namespace Golem.Framework.CustomElements
 {
     public class Text : Element
     {
-        public Text(By bylocator)
+        public Text(By bylocator) : base(bylocator)
         {
-            this.name = "";
-            this.by = bylocator;
         }
-        public Text(string name, By bylocator)
+        public Text(string name, By bylocator) :base(name,bylocator)
         {
-            this.name = name;
-            this.by = bylocator;
         }
 
     }

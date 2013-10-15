@@ -8,15 +8,11 @@ namespace Golem.Framework.CustomElements
 {
     public class Button : Element
     {
-        public Button(By bylocator)
+        public Button(By bylocator) : base(bylocator)
         {
-            this.name = "";
-            this.by = bylocator;
         }
-        public Button(string name, By bylocator)
+        public Button(string name, By bylocator) : base(name,bylocator)
         {
-            this.name = name;
-            this.by = bylocator;
         }
 
     }

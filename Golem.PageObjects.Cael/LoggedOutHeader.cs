@@ -34,8 +34,11 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            CreateAccount_Link.Verify.Visible();
+            CreateAccount_Link.Verify.Present();
             SignIn_Link.Verify.Visible();
+
+
+
             HowItWorks_Link.Verify.Visible();
             TimeAndCost_Link.Verify.Visible();
             AffiliatedUniversities_Link.Verify.Visible();

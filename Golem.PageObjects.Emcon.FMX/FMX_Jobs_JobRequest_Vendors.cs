@@ -22,16 +22,16 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_Jobs_JobRequest_Vendors AddVendor(string vendorType)
         {
             Trade.WaitUntil.Visible().FindElement(ByE.PartialText(vendorType));
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             VendorSearch.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             PopUpVendorSearch.WaitUntil.Visible();
             FirstVendor.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             //Common.Delay(1000);
             AcceptVendor.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
-            PopUpVendorSearch.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
+            PopUpVendorSearch.WaitUntil.Not.Visible();
             return new FMX_Jobs_JobRequest_Vendors();
         }
 
@@ -39,7 +39,7 @@ namespace Golem.PageObjects.Emcon.FMX
         {
 
             BidRequestsSubTab.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             return new FMX_Jobs_JobRequest_BidRequests();
         }
 

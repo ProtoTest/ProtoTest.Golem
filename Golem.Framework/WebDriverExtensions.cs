@@ -16,6 +16,14 @@ namespace Golem.Framework
 {
     public static class WebDriverExtensions
     {
+        public static Verification Verify(this IWebElement element)
+        {
+            return new Verification(new Element(element),Config.Settings.runTimeSettings.ElementTimeoutSec,false);
+        }
+        public static Verification WaitUntil(this IWebElement element)
+        {
+            return new Verification(new Element(element), Config.Settings.runTimeSettings.ElementTimeoutSec, true);
+        }
         public static IWebElement Hide(this IWebElement element)
         {
             return (IWebElement)TestBaseClass.driver.ExecuteJavaScript("arguments[0].style.visibility='hidden';return;", element);
@@ -44,7 +52,7 @@ namespace Golem.Framework
         {
             try
             {
-                var TagName = element.TagName;
+                bool enabled = element.Enabled;
                 return false;
             }
             catch (Exception)
@@ -60,7 +68,6 @@ namespace Golem.Framework
                 var jsDriver = ((IJavaScriptExecutor)TestBaseClass.driver);
                 string originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
                 jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
-                Thread.Sleep(50);
                 jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", element);
             }
             catch (Exception)
@@ -115,13 +122,13 @@ namespace Golem.Framework
             return driver.FindElement(by);
         }
 
-        public static IWebElement WaitForVisible(this IWebElement element, By by, int timeout = 0)
-        {
-            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            WebDriverWait wait = new WebDriverWait(TestBaseClass.driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
-            wait.Until(d => ((d.FindElements(by).Count > 0) && (d.FindElement(by).Displayed == true)));
-            return element.FindElement(by);
-        }
+        //public static IWebElement WaitForVisible(this IWebElement element, By by, int timeout = 0)
+        //{
+        //    if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+        //    WebDriverWait wait = new WebDriverWait(TestBaseClass.driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
+        //    wait.Until(d => ((d.FindElements(by).Count > 0) && (d.FindElement(by).Displayed == true)));
+        //    return element.FindElement(by);
+        //}
         public static void WaitForNotVisible(this IWebDriver driver, By by, int timeout=0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;

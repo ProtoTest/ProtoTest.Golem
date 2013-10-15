@@ -9,15 +9,11 @@ namespace Golem.Framework.CustomElements
 {
     public class Dropdown : Element
     {
-        public Dropdown(By bylocator)
+        public Dropdown(By bylocator) : base(bylocator)
         {
-            this.name = "";
-            this.by = bylocator;
         }
-        public Dropdown(string name, By bylocator)
+        public Dropdown(string name, By bylocator) : base(name,bylocator)
         {
-            this.name = name;
-            this.by = bylocator;
         }
 
         public Dropdown SelectOption(string option)

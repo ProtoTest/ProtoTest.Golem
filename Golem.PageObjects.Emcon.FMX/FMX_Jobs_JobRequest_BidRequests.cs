@@ -43,37 +43,37 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_Jobs_JobRequest_BidRequests CreateNewBidRequest(string numUnits, string numPrice)
         {
             NewBidRequest.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             bidRequestPop.WaitUntil.Visible();
             //select bid duedate
             CalendarButton.WaitUntil.Visible().Click();
             NextMonth.WaitUntil.Visible().Click();
             firstDay.WaitUntil.Visible().Click();
             GenerateBid.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
-            bidRequestPop.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
+            bidRequestPop.WaitUntil.Not.Visible();
 
             EditPricing.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             UnitValue.Text = numUnits;
             UnitPrice.Text = numPrice;
             SaveEditPricing.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
 
             //Send the bid
             ViewprintSend.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             selectBidDocs.WaitUntil.Visible();
             SendPrintButton.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             SendEmail.WaitUntil.Visible().Click();
             //SendUSPS.WaitUntil.Visible().Click();
             SendDocuments.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
-            selectBidDocs.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
+            selectBidDocs.WaitUntil.Not.Visible();
 
             EditBidRequests.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             EditBid_Calendar.WaitUntil.Visible();
             int y = EditBid_Calendar.Location.Y;
             driver.JavaWindowScroll(0, y-HeaderBarHeight);
@@ -81,7 +81,7 @@ namespace Golem.PageObjects.Emcon.FMX
             //EditBid_Cal_NextMonth.WaitUntil.Visible().Click();
             EditBid_Cal_Today.WaitUntil.Visible().Click();
             SaveEdit.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
 
 
             return new FMX_Jobs_JobRequest_BidRequests();
@@ -93,14 +93,14 @@ namespace Golem.PageObjects.Emcon.FMX
             int y = ProposalsTab.Location.Y;
             driver.JavaWindowScroll(0, y-HeaderBarHeight);
             ProposalsTab.Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             return new FMX_Jobs_JobRequest_Proposals();
         }
 
         //public FMX_Jobs_JobRequest_WorkOrders ClickWorkOrdersTab()
         //{
         //    WorkOrdersTab.WaitUntil.Visible().Click();
-        //    pleaseWait.WaitUntil.NotVisible();
+        //    pleaseWait.WaitUntil.Not.Visible();
         //    return new FMX_Jobs_JobRequest_WorkOrders();
         //}
 

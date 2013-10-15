@@ -8,15 +8,11 @@ namespace Golem.Framework.CustomElements
 {
     public class Link : Element
     {
-        public Link(string name, By bylocator)
+        public Link(string name, By bylocator) : base(name,bylocator)
         {
-            this.name = name;
-            this.by = bylocator;
         }
-        public Link(By bylocator)
+        public Link(By bylocator): base(bylocator)
         {
-            this.name = "";
-            this.by = bylocator;
         }
     }
 }

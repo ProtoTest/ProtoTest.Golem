@@ -15,7 +15,6 @@ namespace Golem.Framework
         public By by;
         public Verification Verify;
         public Verification WaitUntil;
-
         protected IWebDriver driver
         {
             get
@@ -27,8 +26,7 @@ namespace Golem.Framework
                 TestBaseClass.driver = value;
             }
         }
-
-        public string name;
+        public string name = "Element";
         protected IWebElement _element;
         protected IWebElement element
         {
@@ -43,32 +41,28 @@ namespace Golem.Framework
             }
         }
 
-
-
         private IWebElement GetElement()
         {
-            //if the element isn't stale, we can use our old reference
-            if(!this._element.IsStale())
-                return this._element;
-            //if its stale, lets find all the elements that match
-            var elements = driver.FindElements(this.by);
-            //if we can't find any elements return null
-            if (elements.Count == 0) return null;
-            //if there are more than one element lets find the best one
-            if (elements.Count > 1)
+            try
             {
-                foreach (var ele in elements)
-                {
-                    if (ele.Displayed && ele.Enabled)
-                        return ele;
-                }
+                TestBaseClass.testData.lastElement = this;
+                if(this._element.IsStale())
+                    this._element = driver.FindElement(this.by);
+                return this._element;
             }
-            // return something at least
-            return elements[0];
-
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         public Element(){}
+
+        public Element(IWebElement element)
+        {
+            this.element = element;
+        }
 
         public Element(string name, By locator)
         {
@@ -76,11 +70,11 @@ namespace Golem.Framework
             this.by = locator;
             Verify = new Verification(this,Config.Settings.runTimeSettings.ElementTimeoutSec,false);
             WaitUntil = new Verification(this,Config.Settings.runTimeSettings.ElementTimeoutSec,true);
+            
         }
 
         public Element(By locator)
         {
-            this.name = "";
             this.by = locator;
         }
 
@@ -88,6 +82,7 @@ namespace Golem.Framework
         {
             get
             {
+                if (element == null) return false;
                 return element.Displayed;
             }
         }
@@ -96,6 +91,7 @@ namespace Golem.Framework
         {
             get
             {
+                if (element == null) return false;
                 return element.Enabled;
             }
         }
@@ -111,6 +107,7 @@ namespace Golem.Framework
         {
             get
             {
+                if (element == null) return false;
                 return element.Selected;
             }
         }
@@ -134,22 +131,20 @@ namespace Golem.Framework
             get
             {
                 if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                    Highlight();
+                    element.Highlight();
                 return element.Text;
             }
             set { 
-                IWebElement textField = element;
-                textField.Clear();
-                textField.SendKeys(value);
+                element.Clear();
+                element.SendKeys(value);
                 if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                    Highlight();
+                    element.Highlight();
             }
         }
 
 
         public IWebElement FindElement(By by)
         {
-            element = GetElement();
             return element.FindElement(by);
         }
 
@@ -162,7 +157,7 @@ namespace Golem.Framework
         public void Clear()
         {
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                Highlight();
+                element.Highlight();
             element.Clear();
         }
 
@@ -172,7 +167,7 @@ namespace Golem.Framework
         public void ClearChecked()
         {
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                Highlight();
+                element.Highlight();
             element.ClearChecked();
         }
 
@@ -184,19 +179,19 @@ namespace Golem.Framework
         public void Click()
         {
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                Highlight();
+                element.Highlight();
             element.Click();
         }
         public void Submit()
         {
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                Highlight();
+                element.Highlight();
             element.Submit();
         }
         public void SendKeys(string text)
         {
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                Highlight();
+                element.Highlight();
             element.SendKeys(text);
         }
         public string GetAttribute(string attribute)
@@ -251,7 +246,7 @@ namespace Golem.Framework
 
         public Element ScrollIntoView()
         {
-            _element.ScrollIntoView();
+            element.ScrollIntoView();
             return this;
         }
        

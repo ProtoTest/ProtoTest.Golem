@@ -27,7 +27,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public override void WaitForElements()
         {
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             tab_Home.Verify.Present();
             tab_Jobs.Verify.Present();
             tab_Dashboard.Verify.Present();

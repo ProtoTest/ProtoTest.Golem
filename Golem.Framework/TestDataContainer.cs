@@ -20,6 +20,7 @@ namespace Golem.Framework
         public ScreenRecorder recorder;
         public List<VerificationError> VerificationErrors;
         public ActionList actions;
+        public Element lastElement;
 
         public FiddlerProxy proxy;
 

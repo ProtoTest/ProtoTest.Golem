@@ -42,32 +42,32 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_Jobs_JobRequest_Proposals CreateNewProposal(string emailToSend, string approvedByName)
         {
             NewProposal.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             SaveProposal.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             EditProposal.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             SelectWorkScope.WaitUntil.Visible().Click();
             AddWorkScope.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             SaveEditProposal.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             SendSavePrintProposal.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             SendSavePrintPopup.WaitUntil.Visible();
             EmailAddress.WaitUntil.Visible().Text = emailToSend;
             SendEmail.WaitUntil.Visible().Click();
             SendUSPS.WaitUntil.Visible().Click();
             SendDocument.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
-            SendSavePrintPopup.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
+            SendSavePrintPopup.WaitUntil.Not.Visible();
             SetCustomerSelections.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             WorkScopeCustomerSelection.WaitUntil.Visible().Click();
             WorkScropCustomerSelectionSave.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             EditProposalAgain.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             ApprovedBy.WaitUntil.Visible().Text = approvedByName;
             ApprovedByCalendar.WaitUntil.Visible();
             int y = ApprovedByCalendar.Location.Y;
@@ -76,9 +76,9 @@ namespace Golem.PageObjects.Emcon.FMX
             ApprovedByCalendarNextMonth.WaitUntil.Visible().Click();
             ApprovedbyCalendarFirstDay.WaitUntil.Visible().Click();
             EditProposalSave.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             JobCapButton.WaitUntil.Present().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             return new FMX_Jobs_JobRequest_Proposals();
         }
 
@@ -88,7 +88,7 @@ namespace Golem.PageObjects.Emcon.FMX
             int y = WorkOrderTab.Location.Y;
             driver.JavaWindowScroll(0, y-HeaderBarHeight);
             WorkOrderTab.Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             return new FMX_Jobs_JobRequest_WorkOrders();
         }
 

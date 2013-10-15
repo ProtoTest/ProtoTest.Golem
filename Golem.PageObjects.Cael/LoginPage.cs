@@ -20,10 +20,11 @@ namespace Golem.PageObjects.Cael
 
         public DashboardPage Login(string email, string password, bool rememberMe=false)
         {
-            EmailField.Text = email;
+
+            EmailField.WaitUntil.Visible().Text = email;
             PasswordField.Text = password;
             RememberMeButton.SetCheckbox(rememberMe);
-            SignInButton.Click();
+            SignInButton.WaitUntil.Present().Click();
             return new DashboardPage();
         }
 

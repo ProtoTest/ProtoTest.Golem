@@ -36,7 +36,7 @@ namespace Golem.PageObjects.DTVE
 
         public LandingPage VerifyFiltersHidden()
         {
-             FiltersMenu.Verify.NotVisible();
+             FiltersMenu.Verify.Not.Visible();
             return this;
         }
 

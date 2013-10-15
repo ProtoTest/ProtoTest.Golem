@@ -21,6 +21,7 @@ namespace Golem.Tests.Google
                 SearchFor("Selenium").
                 VerifyResult("Selenium - Web Browser Automation").
                 GoToResult("Selenium - Web Browser Automation");
+
         }
 
         [Test]

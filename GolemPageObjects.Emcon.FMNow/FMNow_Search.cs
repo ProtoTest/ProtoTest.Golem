@@ -60,23 +60,23 @@ namespace GolemPageObjects.Emcon.FMNow
             if (ValuesWithSecondDD.Contains(option))
             {
                 dd_Findrequest_Simple.WaitUntil.Visible().SelectOption(option);
-                pleaseWait.WaitUntil.NotVisible();
+                pleaseWait.WaitUntil.Not.Visible();
                 dd_SearchTermsOne_Simple.WaitUntil.Visible().SelectOption(searchTerms);
                 SimpleSimpleSearch = false;
             }
             if (option == "State")
             {
                 dd_Findrequest_Simple.WaitUntil.Visible().SelectOption(option);
-                pleaseWait.WaitUntil.NotVisible();
+                pleaseWait.WaitUntil.Not.Visible();
                 dd_SearchState_Simple.WaitUntil.Visible().FindElement(ByE.Text(searchTerms)).Click();
                 SimpleSimpleSearch = false;
             }
             if (option == "Type of Work")
             {
                 dd_Findrequest_Simple.WaitUntil.Visible().SelectOption(option);
-                pleaseWait.WaitUntil.NotVisible();
+                pleaseWait.WaitUntil.Not.Visible();
                 dd_SearchTermsOne_Simple.WaitUntil.Visible().SelectOption(searchTerms);
-                pleaseWait.WaitUntil.NotVisible();
+                pleaseWait.WaitUntil.Not.Visible();
                 dd_SearchTermsTwo_Simple.WaitUntil.Visible().SelectOption(secondSearchTerm);
                 SimpleSimpleSearch = false;
             }
@@ -85,9 +85,9 @@ namespace GolemPageObjects.Emcon.FMNow
                 dd_Findrequest_Simple.WaitUntil.Visible().SelectOption(option);
                 txt_SearchTerms_Simple.WaitUntil.Visible().Text = searchTerms;
             }
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             btn_InitSearch_Simple.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             table_ResultsGrid.WaitUntil.Visible();
 
             return new FMNow_Search();
@@ -96,7 +96,7 @@ namespace GolemPageObjects.Emcon.FMNow
         public FMNow_Search doAdvancedSearch(string jobType, string Location, string jobStatus, string callpriority, string typeofWOrk, string subtypeofwork)
         {
             AdvancedSearch.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_JobType.WaitUntil.Visible().SelectOption(jobType);
             txt_LocationNumber.WaitUntil.Visible().Text = Location;
             //txt_ClientRefNum.WaitUntil.Visible().Text = ClientRefNumber;
@@ -105,7 +105,7 @@ namespace GolemPageObjects.Emcon.FMNow
             dd_TypeofWork.WaitUntil.Visible().SelectOption(typeofWOrk);
             dd_SubTypeofWOrk.WaitUntil.Visible().SelectOption(subtypeofwork);
             btn_InitSearch_adv.WaitUntil.Visible().Click();
-            pleaseWait.WaitUntil.NotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
 
             return new FMNow_Search();
         }

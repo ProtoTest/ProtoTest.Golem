@@ -8,15 +8,11 @@ namespace Golem.Framework.CustomElements
 {
     public class Image : Element
     {
-        public Image(By bylocator)
+        public Image(By bylocator) : base(bylocator)
         {
-            this.name = "";
-            this.by = bylocator;
         }
-        public Image(string name, By bylocator)
+        public Image(string name, By bylocator): base(name,bylocator)
         {
-            this.name = name;
-            this.by = bylocator;
         }
 
     }
