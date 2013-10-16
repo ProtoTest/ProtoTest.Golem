@@ -283,7 +283,26 @@ namespace Golem.Framework
             doc.Load(path);
             doc.SelectSingleNode("//add[@key='" + key + "']").Attributes["value"].Value = value;
             doc.Save(path);
+        }
 
+        /// <summary>
+        ///     Create a dummy file with some ASCII
+        /// </summary>
+        /// <param name="filepath">File path and name to create</param>
+        public static void CreateDummyFile(string filepath)
+        {
+            if (!System.IO.File.Exists(filepath))
+            {
+                using (System.IO.FileStream fs = System.IO.File.Create(filepath))
+                {
+                    for (byte i = 0; i < 100; i++)
+                    {
+                        fs.WriteByte(i);
+                    }
+
+                    fs.Close();
+                }
+            }
         }
 
     }
