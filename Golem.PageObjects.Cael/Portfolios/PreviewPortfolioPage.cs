@@ -15,6 +15,13 @@ namespace Golem.PageObjects.Cael
         public Element LearningOutcomes_Text = new Element("Learning Outcomes Text", By.ClassName("credits-padding"));
         public Element LearningOutcomes_Link = new Element("Learning Outcomes Link", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_PreviewPortfolio_learningNarrativeHyperLink"));
         public Element Credits_Text = new Element("Credits Text", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_PreviewPortfolio_creditsLabel"));
+        public Element Submit_Btn = new Element("Submit Portfolio Button", By.Id("btnSubmit"));
+
+        public SubmitPortfolioPage SubmitPortfolio()
+        {
+            Submit_Btn.Click();
+            return new SubmitPortfolioPage();
+        }
 
         public override void WaitForElements()
         {
@@ -23,6 +30,7 @@ namespace Golem.PageObjects.Cael
             LearningOutcomes_Link.VerifyVisible(30);
             LearningOutcomes_Text.VerifyVisible(30);
             Credits_Text.VerifyVisible(30);
+            Submit_Btn.VerifyVisible(30).VerifyValue("Submit Portfolio For Assessment");
         }
     }
 }
