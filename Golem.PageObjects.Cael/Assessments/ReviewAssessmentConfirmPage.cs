@@ -26,9 +26,10 @@ namespace Golem.PageObjects.Cael
             return new AssessPortfolioPage();
         }
 
-        public void SubmitAssessment()
+        public DashBoardAssessmentPage SubmitAssessment()
         {
             Submit_Button.Click();
+            return new DashBoardAssessmentPage();
         }
 
         public ReviewAssessmentConfirmPage VerifyCreditRecommendation(string score_str, Boolean credit_recommended)
