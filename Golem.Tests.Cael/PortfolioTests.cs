@@ -38,19 +38,21 @@ namespace Golem.Tests.Cael
                 ReturnToDashboardPage();
         }
 
-        
-
-
         [Test, DependsOn("SetupPortfolio")]
         public void EditPortfolio()
-        {
+        { 
+            string tmpDir = Environment.GetEnvironmentVariable("temp");
+            string narrativeFilePath = tmpDir + @"\sampledoc.docx";
+
+            Common.CreateDummyFile(narrativeFilePath);
+
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password).
                 Header.GoToPortfoliosPage().
                 EditPortfolio("Test Course")
                 .EditOutcomesText("text of learning outcomes")
-                .ChooseNarrativeFile(@"C:\Users\Brian\Documents\sampledoc.docx")
+                .ChooseNarrativeFile(narrativeFilePath)
                 .AddSupportDocument()
                 .EnterSupportDocument("http://www.google.com/", "Caption Text", "Description")
                 .SaveChanges();
@@ -68,6 +70,7 @@ namespace Golem.Tests.Cael
                 ConfirmAndSubmit().
                 ReturnToDashboard();
         }
+
         [Test, DependsOn("SubmitPortfolio")]
         public void PreviewPortfolio()
         {
@@ -77,6 +80,5 @@ namespace Golem.Tests.Cael
                 Header.GoToPortfoliosPage().
                 PreviewPortfolio("Test Course");
         }
-
     }
 }
