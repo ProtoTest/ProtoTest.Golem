@@ -8,10 +8,11 @@ namespace Golem.Framework.CustomElements
 {
     public class Field : Element
     {
-        public Field(string name, By bylocator)
+        public Field(By bylocator): base(bylocator)
         {
-            this.name = name;
-            this.by = bylocator;
+        }
+        public Field(string name, By bylocator): base(name,bylocator)
+        {
         }
     }
 }

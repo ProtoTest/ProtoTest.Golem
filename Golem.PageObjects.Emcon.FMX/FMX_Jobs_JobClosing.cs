@@ -45,7 +45,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobClosing CloseNotesPopup()
         {
-            btn_Close_NotesPopup.WaitUntilPresent().Click();
+            btn_Close_NotesPopup.WaitUntil.Present().Click();
             return new FMX_Jobs_JobClosing();
         }
 
@@ -58,17 +58,17 @@ namespace Golem.PageObjects.Emcon.FMX
         {
             if (satisfactory)
             {
-                chk_SatisfactoryOutcome.WaitUntilVisible().Click();
+                chk_SatisfactoryOutcome.WaitUntil.Visible().Click();
             }
             else
             {
-                chk_UnSatisfactoryOutcome.WaitUntilVisible().Click();
+                chk_UnSatisfactoryOutcome.WaitUntil.Visible().Click();
             }
             return new FMX_Jobs_JobClosing();
         }
         public FMX_Jobs_JobClosing EnterOutcomeInfo(string managerFirst, string managerLast, string notes)
         {
-            txt_ManagerFirst.WaitUntilPresent().Text = managerFirst;
+            txt_ManagerFirst.WaitUntil.Present().Text = managerFirst;
             txt_ManagerLast.Text = managerLast;
             txt_Notes.Text = notes;
             btn_OpenCalendar.Click();
@@ -92,7 +92,7 @@ namespace Golem.PageObjects.Emcon.FMX
         public override void WaitForElements()
         {
             base.WaitForElements();
-            JobsTable.VerifyPresent(10);
+            JobsTable.Verify.Present();
         }
     }
 }

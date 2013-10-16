@@ -19,7 +19,7 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            ReturnToDashboard_Link.VerifyVisible(30);
+            ReturnToDashboard_Link.Verify.Visible();
         }
     }
 }

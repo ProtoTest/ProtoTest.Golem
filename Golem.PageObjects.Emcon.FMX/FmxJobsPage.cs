@@ -70,11 +70,11 @@ namespace Golem.PageObjects.Emcon.FMX
         //This is verifying that the sub-tab elements are present on the page
         public override void WaitForElements()
         {
-            div_JobRequest.VerifyPresent(10);
-            div_PendingJobs.VerifyPresent(10);
-            div_JobClosing.VerifyPresent(10);
-            div_JobPricing.VerifyPresent(10);
-            div_RtvDeficiencies.VerifyPresent(10);
+            div_JobRequest.Verify.Present();
+            div_PendingJobs.Verify.Present();
+            div_JobClosing.Verify.Present();
+            div_JobPricing.Verify.Present();
+            div_RtvDeficiencies.Verify.Present();
         }
     }
 }

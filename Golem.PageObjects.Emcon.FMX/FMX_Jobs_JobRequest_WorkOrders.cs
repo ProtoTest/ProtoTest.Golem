@@ -48,53 +48,53 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequest_WorkOrders AddNewWorkOrder(string emailAddy, string bossFName, string bossLName, string someNotes)
         {
-            CreateNewWorkOrder.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            CreateNewWOPop.WaitUntilVisible();
-            CreateNewWOCalendar.WaitUntilVisible().Click();
-            CreateNewWO_NextMonth.WaitUntilVisible().Click();
-            CreateNewWO_FirstDay.WaitUntilVisible().Click();
-            GenerateWO.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            CreateNewWOPop.WaitUntilNotVisible();
-            SendPrintWO.WaitUntilVisible();
+            CreateNewWorkOrder.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            CreateNewWOPop.WaitUntil.Visible();
+            CreateNewWOCalendar.WaitUntil.Visible().Click();
+            CreateNewWO_NextMonth.WaitUntil.Visible().Click();
+            CreateNewWO_FirstDay.WaitUntil.Visible().Click();
+            GenerateWO.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            CreateNewWOPop.WaitUntil.Not.Visible();
+            SendPrintWO.WaitUntil.Visible();
             int y = SendPrintWO.Location.Y;
             driver.JavaWindowScroll(0, y-HeaderBarHeight);
             SendPrintWO.Click();
 
-            pleaseWait.WaitUntilNotVisible();
-            SendWOPop.WaitUntilVisible();
-            SendPrintWOPopButton.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            SendWORequestPOP.WaitUntilVisible();
-            EmailAddress.WaitUntilVisible().Text = emailAddy;
-            SelectEmailAddress.WaitUntilVisible().Click();  //this will select the third email address field or always the new email address field
-            PrintWORequest.WaitUntilVisible().Click();
-            SendDocument.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            SendWORequestPOP.WaitUntilNotVisible();
-            EditWODetail.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            WorkStartDateCalendar.WaitUntilVisible().Click();
-            WorkStartDate.WaitUntilVisible().Click();
-            EditWOSave.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            EditWOHeader.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
+            SendWOPop.WaitUntil.Visible();
+            SendPrintWOPopButton.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            SendWORequestPOP.WaitUntil.Visible();
+            EmailAddress.WaitUntil.Visible().Text = emailAddy;
+            SelectEmailAddress.WaitUntil.Visible().Click();  //this will select the third email address field or always the new email address field
+            PrintWORequest.WaitUntil.Visible().Click();
+            SendDocument.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            SendWORequestPOP.WaitUntil.Not.Visible();
+            EditWODetail.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            WorkStartDateCalendar.WaitUntil.Visible().Click();
+            WorkStartDate.WaitUntil.Visible().Click();
+            EditWOSave.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            EditWOHeader.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
             driver.ExecuteJavaScript("__doPostBack('ctl00$ContentPlaceHolder1$JobTabs$TabWO$UcJobWorkOrder$fvWorkOrder$lbtnCloseJob', '')"); //ClickCloseJobLink
             //after here is a hidden frame -- but it's really not
-            CallOutCome.WaitUntilPresent().FindElement(ByE.Text("Job Done")).Click();
-            pleaseWait.WaitUntilNotVisible();
-            JobSatisfactory.WaitUntilPresent().Click();
-            pleaseWait.WaitUntilNotVisible();
-            ManagerFirstName.WaitUntilPresent().Text = bossFName;
-            ManagerLastName.WaitUntilPresent().Text = bossLName;
-            Notes.WaitUntilPresent().Text = someNotes;
-            CompletedCalendar.WaitUntilPresent().Click();
-            WorkStartDate.WaitUntilPresent().Click();  //resused today element
-            SaveWorkOrder.WaitUntilPresent().Click();
+            CallOutCome.WaitUntil.Present().FindElement(ByE.Text("Job Done")).Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            JobSatisfactory.WaitUntil.Present().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            ManagerFirstName.WaitUntil.Present().Text = bossFName;
+            ManagerLastName.WaitUntil.Present().Text = bossLName;
+            Notes.WaitUntil.Present().Text = someNotes;
+            CompletedCalendar.WaitUntil.Present().Click();
+            WorkStartDate.WaitUntil.Present().Click();  //resused today element
+            SaveWorkOrder.WaitUntil.Present().Click();
             driver.SwitchTo().Alert().Accept();
-            pleaseWait.WaitUntilNotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             
 
             return new FMX_Jobs_JobRequest_WorkOrders();
@@ -102,8 +102,8 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequest_Proposals ClickProposals()
         {
-            proposalsTab.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
+            proposalsTab.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
             return new FMX_Jobs_JobRequest_Proposals();
         }
         

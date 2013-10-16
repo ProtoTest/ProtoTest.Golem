@@ -26,16 +26,16 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobPricing Select_AR_AP_NoPricing()
         {
-            drp_APStatus.WaitUntilVisible().Click();
-            drpOpt_APStatus_NoPricing.WaitUntilVisible().Click();
-            drp_ARStatus.WaitUntilVisible().Click();
-            drpOpt_ArStatus_NoPricing.WaitUntilVisible().Click();
+            drp_APStatus.WaitUntil.Visible().Click();
+            drpOpt_APStatus_NoPricing.WaitUntil.Visible().Click();
+            drp_ARStatus.WaitUntil.Visible().Click();
+            drpOpt_ArStatus_NoPricing.WaitUntil.Visible().Click();
             return new FMX_Jobs_JobPricing();
         }
 
         public FMX_Jobs_JobPricing ClickSearchButton()
         {
-            btn_Search.WaitUntilVisible().Click();
+            btn_Search.WaitUntil.Visible().Click();
             return new FMX_Jobs_JobPricing();
         }
 
@@ -47,7 +47,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobPricing ClickVendorLink()
         {
-            lnk_Vendor_Name.WaitUntilVisible().Click();
+            lnk_Vendor_Name.WaitUntil.Visible().Click();
             return new FMX_Jobs_JobPricing();
         }
 
@@ -66,7 +66,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobPricing ClickSetAccountsReceivable()
         {
-            btn_SetAccountsReceived.WaitUntilVisible().Click();
+            btn_SetAccountsReceived.WaitUntil.Visible().Click();
             return  new FMX_Jobs_JobPricing();
         }
     }

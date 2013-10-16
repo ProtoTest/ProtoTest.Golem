@@ -25,13 +25,13 @@ namespace GolemPageObjects.Emcon.FMNow
         public FMNow_HomePage ClickHomeMainTab()
         {
             //Also brings up the Home_Repairs subtab
-            Home_MainTab.WaitUntilVisible().Click();
+            Home_MainTab.WaitUntil.Visible().Click();
             return new FMNow_HomePage();
         }
 
         public FMNow_Home_Finance ClickFinanceTab()
         {
-            FinanceTab.WaitUntilVisible().Click();
+            FinanceTab.WaitUntil.Visible().Click();
             return new FMNow_Home_Finance();
         }
 
@@ -40,13 +40,13 @@ namespace GolemPageObjects.Emcon.FMNow
 
         public FMNow_Request ClickRequestMainTab()
         {
-            Request_MainTab.WaitUntilVisible().Click();
+            Request_MainTab.WaitUntil.Visible().Click();
             return new FMNow_Request();
         }
 
         public FMNow_Search ClickSearchMainTab()
         {
-            Search_MainTab.WaitUntilVisible().Click();
+            Search_MainTab.WaitUntil.Visible().Click();
             return new FMNow_Search();
         }
 
@@ -54,9 +54,9 @@ namespace GolemPageObjects.Emcon.FMNow
 
         public override void WaitForElements()
         {
-            Request_MainTab.WaitUntilVisible();
-            Search_MainTab.WaitUntilVisible();
-            Preferances_MainTab.WaitUntilVisible();
+            Request_MainTab.WaitUntil.Visible();
+            Search_MainTab.WaitUntil.Visible();
+            Preferances_MainTab.WaitUntil.Visible();
 
         }
     }

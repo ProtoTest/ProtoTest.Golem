@@ -31,16 +31,16 @@ namespace GolemPageObjects.Emcon.FMNow
         public FMNow_Request SelectRequestType(int type)
         {
             Element RequestType = new Element("RequestType", By.XPath("//*[@id='ContentPlaceHolder1_CreateServiceRequestStep1_rblJobTypes']/tbody/tr[" +type.ToString()+"]/td/input"));
-            RequestType.WaitUntilVisible().Click();
+            RequestType.WaitUntil.Visible().Click();
             return new FMNow_Request();
         }
 
         public FMNow_Request SearchLocation(string searchTerms)
         {
-            btn_SearchLocation.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            txt_SearchFor.WaitUntilVisible().Text = searchTerms;
-            btn_StartSearchLocation.WaitUntilVisible().Click();
+            btn_SearchLocation.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            txt_SearchFor.WaitUntil.Visible().Text = searchTerms;
+            btn_StartSearchLocation.WaitUntil.Visible().Click();
              
             return new FMNow_Request();
         }
@@ -48,17 +48,17 @@ namespace GolemPageObjects.Emcon.FMNow
         public FMNow_Request SelectFirstResult(string description, string clientRefNumber, string typeOfwork, string subTypeOfwork = "[Not Sure]")
         {
             table_FirstResult.Click();
-            pleaseWait.WaitUntilNotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_TypeOfWork.SelectOption(typeOfwork);
-            pleaseWait.WaitUntilNotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             dd_SubTypeOfWork.SelectOption(subTypeOfwork);
             txt_ClientRefNum.Text = "PROTOTEST-" + clientRefNumber;
             txt_DescriptionOfService.Text = "This was created by a PROTOTEST automated script " + description;
-            btn_Next.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            btn_SubmitRequest.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            txt_RequestReferanceNumber.WaitUntilVisible();
+            btn_Next.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            btn_SubmitRequest.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            txt_RequestReferanceNumber.WaitUntil.Visible();
             RequestIDCreated.Add(txt_RequestReferanceNumber.Text);
             return new FMNow_Request();
         }

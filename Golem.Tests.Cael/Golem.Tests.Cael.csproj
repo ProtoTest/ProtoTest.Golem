@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AssessmentTests.cs" />
     <Compile Include="DashboardTests.cs" />
+    <Compile Include="Kentico.cs" />
     <Compile Include="MyAccountTests.cs" />
     <Compile Include="PortfolioTests.cs" />
     <Compile Include="SmokeTest.cs" />

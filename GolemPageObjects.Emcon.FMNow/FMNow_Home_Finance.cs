@@ -41,27 +41,27 @@ namespace GolemPageObjects.Emcon.FMNow
         {
             if (TandM)
             {
-                rd_TandM.WaitUntilVisible().Click();
+                rd_TandM.WaitUntil.Visible().Click();
             }
             else
             {
-                rd_Quoted.WaitUntilVisible().Click();
+                rd_Quoted.WaitUntil.Visible().Click();
             }
             if (AllInvoices)
             {
-                rd_AllInvoices.WaitUntilVisible().Click();
+                rd_AllInvoices.WaitUntil.Visible().Click();
             }
             else
             {
-                rd_ByTrade.WaitUntilVisible().Click();
+                rd_ByTrade.WaitUntil.Visible().Click();
             }
             dd_StartFiscalMonth.SelectOption(FiscalYearMonth);
-            //dd_StartFiscalMonth.WaitUntilVisible().FindElement(ByE.Text(FiscalYearMonth)).Click();
+            //dd_StartFiscalMonth.WaitUntil.Visible().FindElement(ByE.Text(FiscalYearMonth)).Click();
             dd_StartQuarter.SelectOption(StartQuarter);
             dd_EndQuarter.SelectOption(endQuarter);
             dd_StartYear.SelectOption(startYear);
             dd_EndYear.SelectOption(endYear);
-            btn_RefreshChart.WaitUntilVisible().Click();
+            btn_RefreshChart.WaitUntil.Visible().Click();
             //Going to need to do something with the chart here
             return new FMNow_Home_Finance();
         }
@@ -69,11 +69,11 @@ namespace GolemPageObjects.Emcon.FMNow
         public override void WaitForElements()
         {
  	        base.WaitForElements();
-            wait_dd_SpendbyLocation_ByVisits.WaitUntilVisible();
-            wait_txt_CallAvoided_Days.WaitUntilVisible();
-            wait_txt_InvoicedJobs.WaitUntilVisible();
-            wait_chk_All.WaitUntilVisible();
-            wait_chk_all.WaitUntilVisible();
+            wait_dd_SpendbyLocation_ByVisits.WaitUntil.Visible();
+            wait_txt_CallAvoided_Days.WaitUntil.Visible();
+            wait_txt_InvoicedJobs.WaitUntil.Visible();
+            wait_chk_All.WaitUntil.Visible();
+            wait_chk_all.WaitUntil.Visible();
         }
 
 

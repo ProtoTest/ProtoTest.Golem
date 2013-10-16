@@ -36,23 +36,23 @@ namespace Golem.PageObjects.Emcon.FMX
         public FMX_HomePage Login(string UserName, string Password)
         {
             //Common.GetCurrentClassAndMethodName();
-            txt_UserName.WaitUntilPresent();
-            txt_UserName.WaitUntilVisible().Text = UserName;
-            txt_mockPass.WaitUntilPresent();
-            txt_mockPass.WaitUntilVisible().Click();
-            txt_Password.WaitUntilVisible().Text = Password;
-            btn_Login.WaitUntilVisible().Click();
+            txt_UserName.WaitUntil.Present();
+            txt_UserName.WaitUntil.Visible().Text = UserName;
+            txt_mockPass.WaitUntil.Present();
+            txt_mockPass.WaitUntil.Visible().Click();
+            txt_Password.WaitUntil.Visible().Text = Password;
+            btn_Login.WaitUntil.Visible().Click();
             return new FMX_HomePage();
         }
         
         public override void WaitForElements()
         {
-            div_LoginMenu.VerifyVisible(10);
-            txt_UserName.VerifyVisible(10);
-            txt_Password.VerifyPresent(10);
-            btn_Login.VerifyVisible(10);
-            btn_ForgotPassword.VerifyVisible(10);
-            tab_Home.VerifyVisible(10);
+            div_LoginMenu.Verify.Visible();
+            txt_UserName.Verify.Visible();
+            txt_Password.Verify.Present();
+            btn_Login.Verify.Visible();
+            btn_ForgotPassword.Verify.Visible();
+            tab_Home.Verify.Visible();
             
         }
 

@@ -8,10 +8,22 @@ namespace Golem.Framework.CustomElements
 {
     public class Checkbox : Element
     {
-        public Checkbox(string name, By bylocator)
+        public Checkbox(By bylocator) : base(bylocator)
         {
-            this.name = name;
             this.by = bylocator;
         }
+        public Checkbox(string name, By bylocator) : base(name,bylocator)
+        {
+        }
+
+        public Checkbox SetCheckbox(bool isChecked)
+        {
+            if (element.Selected != isChecked)
+            {
+                element.Click();
+            }
+            return this;
+        }
+
     }
 }

@@ -59,53 +59,53 @@ namespace GolemPageObjects.Emcon.FMNow
             bool SimpleSimpleSearch = true;
             if (ValuesWithSecondDD.Contains(option))
             {
-                dd_Findrequest_Simple.WaitUntilVisible().SelectOption(option);
-                pleaseWait.WaitUntilNotVisible();
-                dd_SearchTermsOne_Simple.WaitUntilVisible().SelectOption(searchTerms);
+                dd_Findrequest_Simple.WaitUntil.Visible().SelectOption(option);
+                pleaseWait.WaitUntil.Not.Visible();
+                dd_SearchTermsOne_Simple.WaitUntil.Visible().SelectOption(searchTerms);
                 SimpleSimpleSearch = false;
             }
             if (option == "State")
             {
-                dd_Findrequest_Simple.WaitUntilVisible().SelectOption(option);
-                pleaseWait.WaitUntilNotVisible();
-                dd_SearchState_Simple.WaitUntilVisible().FindElement(ByE.Text(searchTerms)).Click();
+                dd_Findrequest_Simple.WaitUntil.Visible().SelectOption(option);
+                pleaseWait.WaitUntil.Not.Visible();
+                dd_SearchState_Simple.WaitUntil.Visible().FindElement(ByE.Text(searchTerms)).Click();
                 SimpleSimpleSearch = false;
             }
             if (option == "Type of Work")
             {
-                dd_Findrequest_Simple.WaitUntilVisible().SelectOption(option);
-                pleaseWait.WaitUntilNotVisible();
-                dd_SearchTermsOne_Simple.WaitUntilVisible().SelectOption(searchTerms);
-                pleaseWait.WaitUntilNotVisible();
-                dd_SearchTermsTwo_Simple.WaitUntilVisible().SelectOption(secondSearchTerm);
+                dd_Findrequest_Simple.WaitUntil.Visible().SelectOption(option);
+                pleaseWait.WaitUntil.Not.Visible();
+                dd_SearchTermsOne_Simple.WaitUntil.Visible().SelectOption(searchTerms);
+                pleaseWait.WaitUntil.Not.Visible();
+                dd_SearchTermsTwo_Simple.WaitUntil.Visible().SelectOption(secondSearchTerm);
                 SimpleSimpleSearch = false;
             }
             if(SimpleSimpleSearch)
             {
-                dd_Findrequest_Simple.WaitUntilVisible().SelectOption(option);
-                txt_SearchTerms_Simple.WaitUntilVisible().Text = searchTerms;
+                dd_Findrequest_Simple.WaitUntil.Visible().SelectOption(option);
+                txt_SearchTerms_Simple.WaitUntil.Visible().Text = searchTerms;
             }
-            pleaseWait.WaitUntilNotVisible();
-            btn_InitSearch_Simple.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            table_ResultsGrid.WaitUntilVisible();
+            pleaseWait.WaitUntil.Not.Visible();
+            btn_InitSearch_Simple.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            table_ResultsGrid.WaitUntil.Visible();
 
             return new FMNow_Search();
         }
 
         public FMNow_Search doAdvancedSearch(string jobType, string Location, string jobStatus, string callpriority, string typeofWOrk, string subtypeofwork)
         {
-            AdvancedSearch.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            dd_JobType.WaitUntilVisible().SelectOption(jobType);
-            txt_LocationNumber.WaitUntilVisible().Text = Location;
-            //txt_ClientRefNum.WaitUntilVisible().Text = ClientRefNumber;
-            dd_JobStatus.WaitUntilVisible().SelectOption(jobStatus);
-            dd_CallPriority.WaitUntilVisible().SelectOption(callpriority);
-            dd_TypeofWork.WaitUntilVisible().SelectOption(typeofWOrk);
-            dd_SubTypeofWOrk.WaitUntilVisible().SelectOption(subtypeofwork);
-            btn_InitSearch_adv.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
+            AdvancedSearch.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            dd_JobType.WaitUntil.Visible().SelectOption(jobType);
+            txt_LocationNumber.WaitUntil.Visible().Text = Location;
+            //txt_ClientRefNum.WaitUntil.Visible().Text = ClientRefNumber;
+            dd_JobStatus.WaitUntil.Visible().SelectOption(jobStatus);
+            dd_CallPriority.WaitUntil.Visible().SelectOption(callpriority);
+            dd_TypeofWork.WaitUntil.Visible().SelectOption(typeofWOrk);
+            dd_SubTypeofWOrk.WaitUntil.Visible().SelectOption(subtypeofwork);
+            btn_InitSearch_adv.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
 
             return new FMNow_Search();
         }

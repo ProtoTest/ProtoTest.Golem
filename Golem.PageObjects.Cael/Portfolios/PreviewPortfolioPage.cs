@@ -25,12 +25,12 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            CourseTitle_Link.VerifyVisible(30);
-            CourseSchool_Link.VerifyVisible(30);
-            LearningOutcomes_Link.VerifyVisible(30);
-            LearningOutcomes_Text.VerifyVisible(30);
-            Credits_Text.VerifyVisible(30);
-            Submit_Btn.VerifyVisible(30).VerifyValue("Submit Portfolio For Assessment");
+            CourseTitle_Link.Verify.Visible();
+            CourseSchool_Link.Verify.Visible();
+            LearningOutcomes_Link.Verify.Visible();
+            LearningOutcomes_Text.Verify.Visible();
+            Credits_Text.Verify.Visible();
+            Submit_Btn.Verify.Visible().Verify.Value("Submit Portfolio For Assessment");
         }
     }
 }

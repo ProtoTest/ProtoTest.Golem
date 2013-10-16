@@ -27,11 +27,11 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public override void WaitForElements()
         {
-            pleaseWait.WaitUntilNotVisible();
-            tab_Home.VerifyPresent(10);
-            tab_Jobs.VerifyPresent(10);
-            tab_Dashboard.VerifyPresent(10);
-            btn_NewJobRequest.VerifyPresent(10);
+            pleaseWait.WaitUntil.Not.Visible();
+            tab_Home.Verify.Present();
+            tab_Jobs.Verify.Present();
+            tab_Dashboard.Verify.Present();
+            btn_NewJobRequest.Verify.Present();
         }
         
     }

@@ -66,12 +66,12 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            Welcome_Link.VerifyVisible(30);
-            SignOut_Link.VerifyVisible(30);
-            Dashboard_Link.VerifyVisible(30);
-            Portfolios_Link.VerifyVisible(30);
-            MyAccount_Link.VerifyVisible(30);
-            Advising_Link.VerifyVisible(30);
+            Welcome_Link.Verify.Visible();
+            SignOut_Link.Verify.Visible();
+            Dashboard_Link.Verify.Visible();
+            Portfolios_Link.Verify.Visible();
+            MyAccount_Link.Verify.Visible();
+            Advising_Link.Verify.Visible();
         }
     }
 }

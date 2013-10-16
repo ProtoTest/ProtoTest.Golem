@@ -72,9 +72,8 @@ namespace Golem.Framework
 
         public static void Log(string msg)
         {
-
             DiagnosticLog.WriteLine(msg);
-            TestLog.WriteLine(msg);
+            TestLog.WriteLine(msg);        
         }
 
         public static string GetCurrentMethodName()
@@ -264,7 +263,7 @@ namespace Golem.Framework
         {
             if (delayMs > 0)
             {
-                TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Delay : " + delayMs);
+                //TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Delay : " + delayMs);
                 Thread.Sleep(delayMs); 
             }
             

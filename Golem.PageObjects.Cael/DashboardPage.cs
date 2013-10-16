@@ -57,8 +57,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            //LeftColumn_Container.VerifyVisible(30);
-         //   RightColumn_Container.VerifyVisible(30);
+            //LeftColumn_Container.Verify.Visible();
+         //   RightColumn_Container.Verify.Visible();
         }
     }
 }

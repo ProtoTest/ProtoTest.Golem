@@ -28,8 +28,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            SubmitPortfolio_Button.VerifyVisible(30);
-            Generic_chk.VerifyPresent(30);
+            SubmitPortfolio_Button.Verify.Visible();
+            Generic_chk.Verify.Present();
         }
     }
 }

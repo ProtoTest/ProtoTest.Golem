@@ -4,30 +4,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Golem.Framework;
+using Golem.Framework.CustomElements;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.DTVE
 {
     public class LandingPage : BasePageObject
     {
-        public Element ShowFilterDropdown = new Element("ShowFiltersDropdown", ByE.Text("Show Filters"));
-        public Element HideFilterDropdown = new Element("HideFiltersDropdown", ByE.Text("Hide Filters"));
+        public Panel FiltersMenu = new Panel("Filters Menu", By.ClassName("filters-menu"));
+        public Button ToggleFilterButton = new Button("ToggleFilter", ByE.PartialAttribute("button", "@data-test-id", "button_toggle_filters"));
+        public Header Header = new Header();
+        public Footer Footer = new Footer();
 
         public override void WaitForElements()
         {
-            
+            ToggleFilterButton.Verify.Visible();
         }
 
-        public LandingPage ShowAllFilters()
+        public LandingPage ToggleFilter()
         {
-            ShowFilterDropdown.Click();
+            ToggleFilterButton.Click();
             return new LandingPage();
         }
 
-        public LandingPage HideAllFilters()
+        public LandingPage VerifyFiltersShown()
         {
-            HideFilterDropdown.Click();
-            return new LandingPage();
+
+            FiltersMenu.Verify.Visible();
+            return this;
         }
+
+        public LandingPage VerifyFiltersHidden()
+        {
+             FiltersMenu.Verify.Not.Visible();
+            return this;
+        }
+
+        public MovieDetails ClickMoviePoster(string id)
+        {
+            Image movie = new Image("Movie",ByE.PartialAttribute("div","@id",id));
+            movie.WaitUntil.Visible().ScrollIntoView().Click();
+            return new MovieDetails(id);
+        }
+
     }
 }

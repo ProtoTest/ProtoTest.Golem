@@ -8,10 +8,18 @@ namespace Golem.Framework.CustomElements
 {
     public class Radio : Element
     {
-        public Radio(string name, By bylocator)
+
+        public Radio(By bylocator) : base(bylocator)
         {
-            this.name = name;
-            this.by = bylocator;
+        }
+        public Radio(string name, By bylocator) : base(name,bylocator)
+        {
+        }
+
+        public Radio SetValue(string value)
+        {
+            element.FindElement(By.XPath("//*[@value='" + value + "']")).Click();
+            return this;
         }
     }
 }

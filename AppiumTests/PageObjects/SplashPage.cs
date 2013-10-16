@@ -22,7 +22,7 @@ namespace Golem.PageObjects.Appium.Bookworm
 
         public override void WaitForElements()
         {
-            lnk_TapToBegin.VerifyPresent(10);
+            lnk_TapToBegin.Verify.Present();
         }
         public MenuPage ClickTapToBeginLink()
         {

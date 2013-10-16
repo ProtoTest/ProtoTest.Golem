@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Golem.Framework;
 using Golem.PageObjects.Cael;
 using MbUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Golem.Tests.Cael
 {

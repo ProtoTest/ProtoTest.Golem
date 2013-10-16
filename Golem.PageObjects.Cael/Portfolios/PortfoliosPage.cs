@@ -21,7 +21,7 @@ namespace Golem.PageObjects.Cael
         public PortfoliosPage VerifyPortfolioSubmitted(string courseName)
         {
             Element submittedIcon = new Element("Submitted Icon", By.XPath("//div[@class='portfolio-snipet-boxed clearfix' and .//a[text()='" + courseName + "']]//div[@class='dark-box' and contains(.,'Submitted')]"));
-            submittedIcon.VerifyVisible(10);
+            submittedIcon.Verify.Visible();
             return this;
         }
 
@@ -53,7 +53,7 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            PortfolioTitle_Text.VerifyVisible(30);
+            PortfolioTitle_Text.Verify.Visible();
         }
     }
 }

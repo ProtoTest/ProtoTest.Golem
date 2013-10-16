@@ -15,20 +15,20 @@ namespace Golem.PageObjects.Emcon.FMX
         public override void WaitForElements()
         {
             base.WaitForElements();
-            MessageBoard.VerifyVisible(10);
+            MessageBoard.Verify.Visible();
         }
 
         public FMX_HomePage VerifyResult(string text)
         {
             var HomePageVerified = new Element("HomePageVerified", By.XPath("/html/body/form/div[4]/div[3]/div[2]/div[2]/div/div/div[2]/div"));
-            HomePageVerified.VerifyVisible(10);
+            HomePageVerified.Verify.Visible();
             return new FMX_HomePage();
         }
         
         //Jobs functions
         public FMX_JobsTab ClickJobs()
         {
-            tab_Jobs.WaitUntilPresent().Click();
+            tab_Jobs.WaitUntil.Present().Click();
             return new FMX_JobsTab();
         }
         public FMX_Jobs_JobRequests NewJobRequest()
@@ -39,7 +39,7 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_DashboardPage ClickDashboard()
         {
-            tab_Dashboard.WaitUntilVisible().Click();
+            tab_Dashboard.WaitUntil.Visible().Click();
             return new FMX_DashboardPage();
         }
 

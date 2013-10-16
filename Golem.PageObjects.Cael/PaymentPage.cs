@@ -22,8 +22,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            ContinueButton.VerifyVisible(30);
-            CancelLink.VerifyVisible(30);
+            ContinueButton.Verify.Visible();
+            CancelLink.Verify.Visible();
         }
     }
 

@@ -12,7 +12,7 @@ namespace Golem.PageObjects.Cael
     {
         public Element LoginButton = new Element("Login Link",By.Id("p_lt_ctl00_SignOutButton_btnSignOutLink"));
         public Element CreateUserLink = new Element("Create User Link",By.LinkText("Create Account"));
-        public Element ContentContainer = new Element("Content Container",By.Id("container_content_inner"));
+        public Element ContentContainer = new Element("Content Container", By.Id("container_content_inner"));
         public Element ScrollingContent = new Element("Scrolling content box", By.Id("myScroll"));
         public Element ContactUs_Button = new Element("Contact Us Button", By.LinkText("CONTACT US"));
         public Element FindOutNow_Button = new Element("Find out now Button", By.LinkText("FIND OUT NOW"));
@@ -29,7 +29,6 @@ namespace Golem.PageObjects.Cael
             LoginButton.Click();
             return new LoginPage();
         }
-
         public CreateUserPage GoToCreateUserPage()
         {
             CreateUserLink.Click();
@@ -38,10 +37,10 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            ContentContainer.VerifyVisible(60);
-            LoginButton.VerifyVisible(30);
-            CreateUserLink.VerifyVisible(30);
-            ScrollingContent.VerifyVisible(30);
+            ContentContainer.Verify.Visible();
+            LoginButton.Verify.Visible();
+            CreateUserLink.Verify.Visible();
+            ScrollingContent.Verify.Visible();
         }
     }
 }

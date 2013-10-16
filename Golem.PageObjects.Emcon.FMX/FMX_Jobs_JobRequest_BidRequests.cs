@@ -42,46 +42,46 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequest_BidRequests CreateNewBidRequest(string numUnits, string numPrice)
         {
-            NewBidRequest.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            bidRequestPop.WaitUntilVisible();
+            NewBidRequest.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            bidRequestPop.WaitUntil.Visible();
             //select bid duedate
-            CalendarButton.WaitUntilVisible().Click();
-            NextMonth.WaitUntilVisible().Click();
-            firstDay.WaitUntilVisible().Click();
-            GenerateBid.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            bidRequestPop.WaitUntilNotVisible();
+            CalendarButton.WaitUntil.Visible().Click();
+            NextMonth.WaitUntil.Visible().Click();
+            firstDay.WaitUntil.Visible().Click();
+            GenerateBid.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            bidRequestPop.WaitUntil.Not.Visible();
 
-            EditPricing.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
+            EditPricing.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
             UnitValue.Text = numUnits;
             UnitPrice.Text = numPrice;
-            SaveEditPricing.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
+            SaveEditPricing.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
 
             //Send the bid
-            ViewprintSend.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            selectBidDocs.WaitUntilVisible();
-            SendPrintButton.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            SendEmail.WaitUntilVisible().Click();
-            //SendUSPS.WaitUntilVisible().Click();
-            SendDocuments.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            selectBidDocs.WaitUntilNotVisible();
+            ViewprintSend.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            selectBidDocs.WaitUntil.Visible();
+            SendPrintButton.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            SendEmail.WaitUntil.Visible().Click();
+            //SendUSPS.WaitUntil.Visible().Click();
+            SendDocuments.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            selectBidDocs.WaitUntil.Not.Visible();
 
-            EditBidRequests.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
-            EditBid_Calendar.WaitUntilVisible();
+            EditBidRequests.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
+            EditBid_Calendar.WaitUntil.Visible();
             int y = EditBid_Calendar.Location.Y;
             driver.JavaWindowScroll(0, y-HeaderBarHeight);
-            EditBid_Calendar.WaitUntilVisible().Click();
-            //EditBid_Cal_NextMonth.WaitUntilVisible().Click();
-            EditBid_Cal_Today.WaitUntilVisible().Click();
-            SaveEdit.WaitUntilVisible().Click();
-            pleaseWait.WaitUntilNotVisible();
+            EditBid_Calendar.WaitUntil.Visible().Click();
+            //EditBid_Cal_NextMonth.WaitUntil.Visible().Click();
+            EditBid_Cal_Today.WaitUntil.Visible().Click();
+            SaveEdit.WaitUntil.Visible().Click();
+            pleaseWait.WaitUntil.Not.Visible();
 
 
             return new FMX_Jobs_JobRequest_BidRequests();
@@ -89,18 +89,18 @@ namespace Golem.PageObjects.Emcon.FMX
 
         public FMX_Jobs_JobRequest_Proposals ClickProposalsTab()
         {
-            ProposalsTab.WaitUntilVisible();
+            ProposalsTab.WaitUntil.Visible();
             int y = ProposalsTab.Location.Y;
             driver.JavaWindowScroll(0, y-HeaderBarHeight);
             ProposalsTab.Click();
-            pleaseWait.WaitUntilNotVisible();
+            pleaseWait.WaitUntil.Not.Visible();
             return new FMX_Jobs_JobRequest_Proposals();
         }
 
         //public FMX_Jobs_JobRequest_WorkOrders ClickWorkOrdersTab()
         //{
-        //    WorkOrdersTab.WaitUntilVisible().Click();
-        //    pleaseWait.WaitUntilNotVisible();
+        //    WorkOrdersTab.WaitUntil.Visible().Click();
+        //    pleaseWait.WaitUntil.Not.Visible();
         //    return new FMX_Jobs_JobRequest_WorkOrders();
         //}
 
