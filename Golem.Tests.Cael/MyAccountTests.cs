@@ -11,6 +11,7 @@ using MbUnit.Framework;
 
 namespace Golem.Tests.Cael
 {
+    [TestFixture, DependsOn(typeof(UserTests))]
     public class MyAccountTests : TestBaseClass
     {
         /* Profile inputs */
