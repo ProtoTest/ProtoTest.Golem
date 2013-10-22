@@ -11,7 +11,7 @@ namespace Golem.PageObjects.Cael
 {
     public class DeclineAssessmentPopup : BasePageObject
     {
-        public Element Close_Button = new Element("Decline Assessment Popup - CLOSE Button", By.XPath("//div[@id='diaglogDA']/div")); 
+        public Element Close_Button = new Element("Decline Assessment Popup - CLOSE Button", By.ClassName("close-text")); 
         public Element TakeIt_Button = new Element("Decline Assessment Popup - I'LL TAKE IT Button", By.Id("btnNevermind"));
         public Element Decline_Button = new Element("Decline Assessment Popup - DECLINE button", By.Id("btnDecline"));
         public Element Decline_ReasonDrop = new Element("Decline Assessment Popup - Reason Dropdown", By.Id("ddDeclineReason"));
