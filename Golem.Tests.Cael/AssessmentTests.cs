@@ -17,6 +17,7 @@ namespace Golem.Tests.Cael
         //string email = "prototestassessor@mailinator.com";
         //string password = "prototest123!!";
 
+
         [Test]
         void Decline_Assessment()
         {
@@ -24,10 +25,10 @@ namespace Golem.Tests.Cael
                 .GoToLoginPage()
                 .Login(UserTests.email2, UserTests.password).Header
                 .GoToDashboardPageForAssessor()
-                .DeclineAssessment()
+                .DeclineAssessment("History")
                 .ClosePopup()
-                .DeclineAssessment()
-                .ConfirmDeclineWithReason("Not my area of expertise");
+                .DeclineAssessment("History")
+                .ConfirmDeclineWithReason("This isn't my area of expertise");
         }
 
         [Test]
@@ -37,7 +38,7 @@ namespace Golem.Tests.Cael
                 .GoToLoginPage()
                 .Login(UserTests.email2, UserTests.password).Header
                 .GoToDashboardPageForAssessor()
-                .AcceptAssessment();
+                .AcceptAssessment("English");
         }
 
         [Test, DependsOn("Accept_Assessment")]
