@@ -9,6 +9,7 @@ using MbUnit.Framework;
 
 namespace Golem.Tests.Cael
 {
+    [TestFixture, DependsOn(typeof(UserTests))]
     class DashboardTests : TestBaseClass
     {
         [Test]
