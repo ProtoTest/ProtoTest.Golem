@@ -18,6 +18,29 @@ namespace Golem.Tests.Cael
         //string password = "prototest123!!";
 
         [Test]
+        void Decline_Assessment()
+        {
+            HomePage.OpenHomePage()
+                .GoToLoginPage()
+                .Login(UserTests.email2, UserTests.password).Header
+                .GoToDashboardPageForAssessor()
+                .DeclineAssessment()
+                .ClosePopup()
+                .DeclineAssessment()
+                .ConfirmDeclineWithReason("Not my area of expertise");
+        }
+
+        [Test]
+        public void Accept_Assessment()
+        {
+            HomePage.OpenHomePage()
+                .GoToLoginPage()
+                .Login(UserTests.email2, UserTests.password).Header
+                .GoToDashboardPageForAssessor()
+                .AcceptAssessment();
+        }
+
+        [Test, DependsOn("Accept_Assessment")]
         public void Verify_Slider_Value_Recommendations()
         {
             // UserTests.email2 is the assessor
@@ -42,7 +65,7 @@ namespace Golem.Tests.Cael
 
             // Login to Student and have them resubmit the portfolio so Assess_Portfolio_And_Submit can run
             PortfolioTests ptest = new PortfolioTests();
-            ptest.SubmitPortfolio();
+            ptest.SubmitPortfolio("Test Course");
         }   
 
         [Test,DependsOn("Assess_Portfolio_Fail_Allow_Resubmit")]
