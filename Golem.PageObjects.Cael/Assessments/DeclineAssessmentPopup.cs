@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael
 {
-    class DeclineAssessmentPopup : BasePageObject
+    public class DeclineAssessmentPopup : BasePageObject
     {
         public Element Close_Button = new Element("Decline Assessment Popup - CLOSE Button", By.XPath("//div[@id='diaglogDA']/div")); 
         public Element TakeIt_Button = new Element("Decline Assessment Popup - I'LL TAKE IT Button", By.Id("btnNevermind"));
