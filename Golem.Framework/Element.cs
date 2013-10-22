@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using Gallio.Framework;
@@ -10,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Golem.Framework
 {
-    public class Element : IWebElement, IWrapsDriver, IWrapsElement 
+    public class Element : IWebElement, IWrapsDriver, IWrapsElement
     {
         public By by;
         public string name = "Element";
@@ -252,6 +253,27 @@ namespace Golem.Framework
             element.ScrollIntoView();
             return this;
         }
+
+        public Image GetImage()
+        {
+            Size size = new Size(element.Size.Width,element.Size.Height);
+            Rectangle cropRect = new Rectangle(element.Location,size);
+            return cropImage(driver.GetScreenshot(), cropRect);
+
+        }
+
+        private static Image cropImage(Image img, Rectangle cropArea)
+        {
+            Bitmap bmpImage = new Bitmap(img);
+            Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+            return (Image)(bmpCrop);
+        }
+
+        public void AttachImage()
+        {
+            TestLog.AttachImage(this.name, GetImage());
+        }
+       
        
    }
 }
