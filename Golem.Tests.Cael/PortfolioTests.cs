@@ -13,20 +13,22 @@ namespace Golem.Tests.Cael
     [TestFixture,DependsOn(typeof(DashboardTests))]
     public class PortfolioTests : TestBaseClass
     {
-        [Test]
-        public void SetupPortfolio()
+        [Test, DependsOn("StartAnotherPortfolio")]
+        [Row("Test Course", "English", "Literary Theory")]
+        [Row("Decline Course", "History", "American History")]
+        public void SetupPortfolio(string courseName, string courseCategory, string courseSubCategory )
         {
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password).
                 Header.GoToPortfoliosPage().
                 GetStarted().
-                CreatePortfolio("Test Course", "12340", "4", "Course Description", @"http://school.url/description",
+                CreatePortfolio(courseName, "12340", "4", "Course Description", @"http://school.url/description",
                     "University of New England", "http://school.com", "New England Association of Schools and Colleges",
-                    "English", "Literary Theory");
+                    courseCategory, courseSubCategory);
         }
 
-        [Test, DependsOn("SetupPortfolio")]
+        [Test]
         public void StartAnotherPortfolio()
         {
             HomePage.OpenHomePage().
@@ -39,7 +41,8 @@ namespace Golem.Tests.Cael
         }
 
         [Test, DependsOn("SetupPortfolio")]
-        public void EditPortfolio()
+        [Row("Test Course")]
+        public void EditPortfolio(string portfolioName)
         { 
             string tmpDir = Environment.GetEnvironmentVariable("temp");
             string narrativeFilePath = tmpDir + @"\sampledoc.docx";
@@ -50,7 +53,7 @@ namespace Golem.Tests.Cael
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password).
                 Header.GoToPortfoliosPage().
-                EditPortfolio("Test Course")
+                EditPortfolio(portfolioName)
                 .EditOutcomesText("text of learning outcomes")
                 .ChooseNarrativeFile(narrativeFilePath)
                 .AddSupportDocument()
@@ -59,13 +62,15 @@ namespace Golem.Tests.Cael
         }
 
         [Test, DependsOn("EditPortfolio")]
-        public void SubmitPortfolio()
+        [Row("Test Course")]
+        [Row("Decline Course")]
+        public void SubmitPortfolio(string portfolioName)
         {
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password).
                 Header.GoToPortfoliosPage().
-                EditPortfolio("Test Course").
+                EditPortfolio(portfolioName).
                 SubmitPortfolio().
                 ConfirmAndSubmit().
                 ReturnToDashboard();
