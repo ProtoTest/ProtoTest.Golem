@@ -26,10 +26,10 @@ namespace Golem.PageObjects.Cael
             return new DashBoardAssessmentPage();
         }
 
-        public DashBoardAssessmentPage DeclineAssessment()
+        public DeclineAssessmentPopup DeclineAssessment()
         {
             Decline_Link.Click();
-            return new DashBoardAssessmentPage();
+            return new DeclineAssessmentPopup();
 
             // need to verify there are no assessments in the screen!
         }
