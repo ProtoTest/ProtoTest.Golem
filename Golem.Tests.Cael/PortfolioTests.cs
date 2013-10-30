@@ -42,6 +42,7 @@ namespace Golem.Tests.Cael
 
         [Test, DependsOn("SetupPortfolio")]
         [Row("Test Course")]
+        [Row("Decline Course")]
         public void EditPortfolio(string portfolioName)
         { 
             string tmpDir = Environment.GetEnvironmentVariable("temp");

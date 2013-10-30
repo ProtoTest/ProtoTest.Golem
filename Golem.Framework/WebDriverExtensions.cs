@@ -234,7 +234,7 @@ namespace Golem.Framework
         public static object ExecuteJavaScript(this IWebDriver driver, string script, params object[] args)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            return js.ExecuteScript("return " + script, args);
+            return js.ExecuteScript(script, args);
         }
 
         public static void JavaWindowScroll(this IWebDriver driver, int xCord, int yCord)

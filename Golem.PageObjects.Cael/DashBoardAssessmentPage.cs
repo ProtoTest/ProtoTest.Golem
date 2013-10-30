@@ -13,27 +13,39 @@ namespace Golem.PageObjects.Cael
     public class DashBoardAssessmentPage : BasePageObject
     {
         public LoggedInHeader Header = new LoggedInHeader();
-
-        public Element ACCEPT_Button = new Element("Accept Assessment Button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_AssessorDashboard_rptOpportunities_ctl00_btnAcceptOpportunity"));
-        public Element Decline_Link = new Element("Decline Assessment Link", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_AssessorDashboard_rptOpportunities_ctl00_lbCancelOpportunity"));
+        
         public Element LeftColumn_Container = new Element("Left column container", By.Id("left_col"));
         public Element RightColumn_Container = new Element("Right column container", By.Id("right_col"));
         public Element Assessment_Link = new Element("Assessment Link", By.LinkText("English"));
 
-        public DashBoardAssessmentPage AcceptAssessment()
+
+        /// <summary>
+        ///     Accept an assessment based on the course category string (i.e. History, English)
+        /// </summary>
+        /// <param name="courseCategory">Course category string</param>
+        /// <returns></returns>
+        public DashBoardAssessmentPage AcceptAssessment(string courseCategory)
         {
-            ACCEPT_Button.Click();
+            driver.FindElementWithText(courseCategory).FindInSiblings(By.XPath("//input[@type='submit']")).Click();
             return new DashBoardAssessmentPage();
         }
 
-        public DeclineAssessmentPopup DeclineAssessment()
+        /// <summary>
+        ///     Decline an assessment based on the course category string (i.e. History, English)
+        /// </summary>
+        /// <param name="courseCategory">Course category string</param>
+        /// <returns></returns>
+        public DeclineAssessmentPopup DeclineAssessment(string courseCategory)
         {
-            Decline_Link.Click();
+            driver.FindElementWithText(courseCategory).GetParent().FindInSiblings(By.PartialLinkText("Decline")).Click();
+            
             return new DeclineAssessmentPopup();
-
-            // need to verify there are no assessments in the screen!
         }
 
+        /// <summary>
+        ///     Selects the "English" pending assessment
+        /// </summary>
+        /// <returns></returns>
         public AssessPortfolioPage SelectPendingAssessment()
         {
             Assessment_Link.Click();
