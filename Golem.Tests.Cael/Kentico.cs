@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Golem.Framework;
+using Golem.PageObjects.Cael;
 using MbUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Golem.Tests.Cael
 {
-    public class Kentico
+    public class Kentico : TestBaseClass
     {
         [Test]
         public void AssignPortfolioToAssessor()

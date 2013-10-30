@@ -10,6 +10,8 @@ using Golem.PageObjects.Mailinator;
 using MbUnit.Framework;
 using HomePage = Golem.PageObjects.Cael.HomePage;
 
+
+
 namespace Golem.Tests.Cael
 {
     public class UserTests : TestBaseClass
@@ -38,14 +40,17 @@ namespace Golem.Tests.Cael
                 GoToCreateUserPage().
                 CreateUser(newEmail,password,firstName,lastName,address1,address2,city,state,zip,phone,DOB_Month,DOB_Day,DOB_Year);
             Common.UpdateConfigFile("UserEmail1",newEmail);
+            
+            newEmail = "prototestassessor" + Common.GetRandomString() + "@mailinator.com";
+            string department = "English";
+            string[] subjects = {"Literature (Classics, World, English, etc.)", "Literary Theory"};
+            
+            Golem.PageObjects.Cael.Kentico.Login("bkitchener@prototest.com", "Qubit123!").CreateAssessor(newEmail, password, department, subjects);
 
-            newEmail = "ProtoTestUser" + Common.GetRandomString() + "@mailinator.com";
-            HomePage.OpenHomePage().
-                GoToCreateUserPage().
-                CreateUser(newEmail, password, firstName, lastName, address1, address2, city, state, zip, phone, DOB_Month, DOB_Day, DOB_Year);
             Common.UpdateConfigFile("UserEmail2", newEmail);
 
         }
+        
         [Timeout(0)]
         [Test,DependsOn("CreateNewUsers")]
         public void ActivateUser()
@@ -60,11 +65,11 @@ namespace Golem.Tests.Cael
             loginPage.Login(email1,password);
 
             OpenPage<PageObjects.Mailinator.HomePage>(@"http://mailinator.com/").
-            Login(email2).
-            WaitForEmail("LearningCounts.org", 20).
-            OpenEmailWithText("LearningCounts.org").
-            ClickTextInBody("sign-in");
-
+                Login(email2).
+                WaitForEmail("LearningCounts.org", 20).
+                OpenEmailWithText("LearningCounts.org").
+                ClickTextInBody("sign-in");
+            
             loginPage.Login(email2,password);
         }
     }
