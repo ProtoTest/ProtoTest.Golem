@@ -15,7 +15,7 @@ namespace Golem.Tests.Cael
     {
         [Test, DependsOn("StartAnotherPortfolio")]
         [Row("Test Course", "English", "Literary Theory")]
-        [Row("Decline Course", "History", "American History")]
+        [Row("Decline Course", "English", "Literature (Classics, World, English, etc.)")]
         public void SetupPortfolio(string courseName, string courseCategory, string courseSubCategory )
         {
             HomePage.OpenHomePage().

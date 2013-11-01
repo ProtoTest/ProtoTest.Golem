@@ -11,7 +11,7 @@ using Golem.PageObjects.Cael.Portfolios;
 
 namespace Golem.Tests.Cael
 {
-    [TestFixture, DependsOn(typeof(PortfolioTests))]
+    [TestFixture, DependsOn(typeof(Kentico))]
     class AssessmentTests : TestBaseClass
     {
         //string email = "prototestassessor@mailinator.com";
