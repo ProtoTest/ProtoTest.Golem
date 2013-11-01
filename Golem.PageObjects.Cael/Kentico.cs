@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Golem.Framework;
 using Golem.Framework.CustomElements;
 using OpenQA.Selenium;
+using Golem.PageObjects.Cael;
 
 namespace Golem.PageObjects.Cael
 {
@@ -20,9 +21,15 @@ namespace Golem.PageObjects.Cael
 
         public Link LearningCounts_Link = new Link("Learning Counts Tab link", By.Id("TabItem_6"));
         
-        public static Button EditRowButtonByText(string text)
+        /// <summary>
+        ///     Clicks the edit row for the requested string text
+        /// </summary>
+        /// <param name="text">The ID of the database column we are searching for</param>
+        /// <param name="title">The title of the button to find (i.e. 'Edit', 'Find Assessor') </param>
+        /// <returns></returns>
+        public static void ClickEditRowButtonByText(string text)
         {
-            return new Button("EditRowButton",By.XPath("//tr[//td[text()='"+text+"']]//input[@title='Edit']"));
+            TestBaseClass.driver.FindElementWithText(text).FindInSiblings(By.Id("m_c_grdListPortfolio_v_ctl18_aedit")).Click();
         }
 
         public static Kentico Login(string username, string password)
@@ -66,43 +73,27 @@ namespace Golem.PageObjects.Cael
             return new Kentico();
         }
 
-        public Kentico AssignPortfolioToAssessor(string portfolioId, string assessorId)
+        public Kentico AssignPortfolioToAssessor(string portfolioId, string assessor_email)
         {
-            //these fields show up on the Edit Item Page 
-            Field StudentIdField = new Field("STudentIDField",
-By.Id("m_c_customTableForm_customTableForm_ctl00_StudentID_textbox"));
+            LearningCounts_Link.Verify.Visible().Click();
 
-            Field AssesorIdField = new Field("AssessorId",
-            By.Id("m_c_customTableForm_customTableForm_ctl00_AssessorID_textbox"));
+            // This link is within an iframe, and then another frame
+            TestBaseClass.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("toolscontent").FindElement(ByE.PartialText("Assign Portfolios")).Click();
+            ClickEditRowButtonByText(portfolioId);
 
-            Field AssignedByField = new Field("AssignedByField", By.Id("m_c_customTableForm_customTableForm_ctl00_AssignedBy_textbox"));
-            Link DateAssignedNow = new Link("DateAssignedNowLink", By.Id("m_c_customTableForm_customTableForm_ctl00_DateAssigned_timePicker_btnNow"));
-            Field StatusId = new Field("AssessmentStatusID", By.Id("m_c_customTableForm_customTableForm_ctl00_AssessmentStatusID_textbox"));
-            //first we update the portfolio table
-            SiteManager.Click();
-            Development.Click();
-            CustomTables.Click();
-            EditRowButtonByText("Portfolio").Click();
-            Data.Click();
-            EditRowButtonByText(portfolioId).Click();
+            Element Assessor_Dropdown = new Element("Assign Assessor to Portfolio: Assessor Dropdown", By.Id("m_c_ddlAssessors"));
+            Field AssignDate_Field = new Field("Assign Assessor to Portfolio: Assigning Date Text Field", By.Id("m_c_dtPickup_txtDateTime"));
+            Field DueDate_Field = new Field("Assign Assessor to Portfolio: Due Date Text Field", By.Id("m_c_dtDueDate_txtDateTime"));
+            Button Assign_Btn = new Button("Assign Assessor to Portfolio: Assign Button", By.Id("m_c_Button1"));
 
+            Assessor_Dropdown.Verify.Visible().SelectOptionByPartialText(assessor_email);
 
-            string studentId = StudentIdField.GetAttribute("value");
-            AssesorIdField.Text = assessorId;
-            AssignedByField.Text = studentId;
-            DateAssignedNow.Click();
-            Save.Click();
+            DateTime dateTimeNow = DateTime.Now;
+            AssignDate_Field.SetText(dateTimeNow.ToString());
+            DueDate_Field.SetText(dateTimeNow.AddDays(5).ToString());
 
-            //now update assessment table
-            CustomTables.Click();
-            EditRowButtonByText("Assessment").Click();
-            Data.Click();
-            EditRowButtonByText(portfolioId).Click();
-            AssesorIdField.Text = assessorId;
-            DateAssignedNow.Click();
-            
-            StatusId.Text = "6";
-            Save.Click();
+            Assign_Btn.Click();
+
             return new Kentico();
         }
 
