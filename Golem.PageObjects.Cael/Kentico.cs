@@ -56,7 +56,11 @@ namespace Golem.PageObjects.Cael
             password_TextField.Text = password;
             password_confirm_TextField.Text = password;
             department_DropDown.SelectOption(department);
-            subjects_MultiSelect.SelectOption(subjects[1]);
+            for (int i = 0; i < subjects.Count(); i++)
+            {
+                subjects_MultiSelect.SelectOption(subjects[i]);
+            }
+
             save_Button.Click();
 
             return new Kentico();
