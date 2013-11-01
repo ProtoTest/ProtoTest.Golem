@@ -170,6 +170,19 @@ namespace Golem.Framework
             return element;
         }
 
+        public static IWebElement SelectOptionByPartialText(this IWebElement element, string text)
+        {
+            SelectElement s_element = new SelectElement(element);
+
+            foreach (var option in s_element.Options.Where(option => option.Text.Contains(text)))
+            {
+                option.Click();
+                break;
+            }
+
+            return element;
+        }
+
         public static IWebElement FindVisibleElement(this IWebDriver driver, By by)
         {
             var elements = driver.FindElements(by);
