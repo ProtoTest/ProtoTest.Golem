@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
-using Golem.Framework.CustomElements;
+using ProtoTest.Golem.WebDriver;
+using ProtoTest.Golem.WebDriver.Elements.Types;
 using OpenQA.Selenium;
+using ProtoTest.Golem.WebDriver.Elements.Types;
 
 namespace Golem.PageObjects.Cael
 {
@@ -21,17 +22,17 @@ namespace Golem.PageObjects.Cael
         public DashboardPage Login(string email, string password, bool rememberMe=false)
         {
 
-            EmailField.WaitUntil.Visible().Text = email;
+            EmailField.WaitUntil().Visible().Text = email;
             PasswordField.Text = password;
             RememberMeButton.SetCheckbox(rememberMe);
-            SignInButton.WaitUntil.Present().Click();
+            SignInButton.WaitUntil().Present().Click();
             return new DashboardPage();
         }
 
         public override void WaitForElements()
         {
-            EmailField.Verify.Visible();
-            SignInButton.Verify.Visible();
+            EmailField.Verify().Visible();
+            SignInButton.Verify().Visible();
         }
     }
 }

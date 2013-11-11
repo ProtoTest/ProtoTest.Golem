@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gallio.Runtime.Formatting;
-using Golem.Framework;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael;
 using Golem.PageObjects.Mailinator;
 using MbUnit.Framework;
@@ -14,7 +15,7 @@ using HomePage = Golem.PageObjects.Cael.HomePage;
 
 namespace Golem.Tests.Cael
 {
-    public class UserTests : TestBaseClass
+    public class UserTests : WebDriverTestBase
     {
         public static string email1 = Config.GetConfigValue("UserEmail1", "prototestuser02141502@mailinator.com");
         public static string email2 = Config.GetConfigValue("UserEmail2", "prototestuser02141502@mailinator.com");

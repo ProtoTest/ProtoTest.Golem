@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
+using ProtoTest.Golem.WebDriver.Elements;
 
 namespace Golem.PageObjects.Cael.Portfolios
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael

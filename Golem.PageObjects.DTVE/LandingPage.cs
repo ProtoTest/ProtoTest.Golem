@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
-using Golem.Framework.CustomElements;
+using ProtoTest.Golem.WebDriver;
+using ProtoTest.Golem.WebDriver.Elements.Types;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.DTVE
@@ -18,7 +18,7 @@ namespace Golem.PageObjects.DTVE
 
         public override void WaitForElements()
         {
-            ToggleFilterButton.Verify.Visible();
+            ToggleFilterButton.Verify().Visible();
         }
 
         public LandingPage ToggleFilter()
@@ -30,20 +30,20 @@ namespace Golem.PageObjects.DTVE
         public LandingPage VerifyFiltersShown()
         {
 
-            FiltersMenu.Verify.Visible();
+            FiltersMenu.Verify().Visible();
             return this;
         }
 
         public LandingPage VerifyFiltersHidden()
         {
-             FiltersMenu.Verify.Not.Visible();
+             FiltersMenu.Verify().Not().Visible();
             return this;
         }
 
         public MovieDetails ClickMoviePoster(string id)
         {
             Image movie = new Image("Movie",ByE.PartialAttribute("div","@id",id));
-            movie.WaitUntil.Visible().ScrollIntoView().Click();
+            movie.WaitUntil().Visible().ScrollIntoView().Click();
             return new MovieDetails(id);
         }
 

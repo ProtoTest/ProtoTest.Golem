@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using MbUnit.Framework;
 using Gallio.Framework;
 using OpenQA.Selenium;
@@ -11,7 +12,7 @@ using Golem.PageObjects.DTVE;
 
 namespace Golem.Tests.DTVE
 {
-    public class DTVE_Tests : TestBaseClass
+    public class DTVE_Tests : WebDriverTestBase
     {
         [Test]
         public void TestFilters()

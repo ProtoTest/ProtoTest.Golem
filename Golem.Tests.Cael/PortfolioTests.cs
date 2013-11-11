@@ -4,14 +4,15 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael;
 using MbUnit.Framework;
 
 namespace Golem.Tests.Cael
 {
     [TestFixture,DependsOn(typeof(DashboardTests))]
-    public class PortfolioTests : TestBaseClass
+    public class PortfolioTests : WebDriverTestBase
     {
         [Test, DependsOn("StartAnotherPortfolio")]
         [Row("Test Course", "English", "Literary Theory", 0)]

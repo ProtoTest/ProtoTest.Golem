@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
+using ProtoTest.Golem.WebDriver.Elements;
 
 namespace Golem.PageObjects.Cael
 {
@@ -21,7 +23,7 @@ namespace Golem.PageObjects.Cael
 
         public static HomePage OpenHomePage()
         {
-            TestBaseClass.driver.Navigate().GoToUrl(Config.GetConfigValue("EnvUrl", "http://lcdev.bluemodus.com/"));
+            WebDriverTestBase.driver.Navigate().GoToUrl(Config.GetConfigValue("EnvUrl", "http://lcdev.bluemodus.com/"));
             return new HomePage();
         }
         public LoginPage GoToLoginPage()
@@ -37,10 +39,10 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            ContentContainer.Verify.Visible();
-            LoginButton.Verify.Visible();
-            CreateUserLink.Verify.Visible();
-            ScrollingContent.Verify.Visible();
+            ContentContainer.Verify().Visible();
+            LoginButton.Verify().Visible();
+            CreateUserLink.Verify().Visible();
+            ScrollingContent.Verify().Visible();
         }
     }
 }

@@ -55,13 +55,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
-      <Project>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</Project>
-      <Name>Golem.Framework</Name>
-    </ProjectReference>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <ProjectReference Include="..\Golem\Golem.csproj">
+      <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
+      <Name>Golem</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

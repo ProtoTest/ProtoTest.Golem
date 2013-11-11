@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael.Setup_Portfolio;
 using OpenQA.Selenium;
 using System.Text.RegularExpressions;
@@ -22,7 +22,7 @@ namespace Golem.PageObjects.Cael
         public PortfoliosPage VerifyPortfolioSubmitted(string courseName)
         {
             Element submittedIcon = new Element("Submitted Icon", By.XPath("//div[@class='portfolio-snipet-boxed clearfix' and .//a[text()='" + courseName + "']]//div[@class='dark-box' and contains(.,'Submitted')]"));
-            submittedIcon.Verify.Visible();
+            submittedIcon.Verify().Visible();
             return this;
         }
 
@@ -68,7 +68,7 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            PortfolioTitle_Text.Verify.Visible();
+            PortfolioTitle_Text.Verify().Visible();
         }
     }
 }

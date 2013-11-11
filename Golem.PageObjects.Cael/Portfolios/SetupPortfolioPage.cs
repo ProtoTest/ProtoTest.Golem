@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael.Setup_Portfolio
@@ -44,8 +44,8 @@ namespace Golem.PageObjects.Cael.Setup_Portfolio
 
         public override void WaitForElements()
         {
-            CourseTitle_Field.Verify.Visible();
-            CreatePortfolio_Button.Verify.Visible().Verify.Text("CREATE PORTFOLIO");
+            CourseTitle_Field.Verify().Visible();
+            CreatePortfolio_Button.Verify().Visible().Verify().Text("CREATE PORTFOLIO");
         }
     }
 }

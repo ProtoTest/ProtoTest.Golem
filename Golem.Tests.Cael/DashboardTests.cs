@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael;
 using MbUnit.Framework;
 
 namespace Golem.Tests.Cael
 {
-    [TestFixture, DependsOn(typeof(UserTests))]
-    class DashboardTests : TestBaseClass
+    [TestFixture]
+    class DashboardTests : WebDriverTestBase
     {
         [Test]
         public void SetupCaelCourse()

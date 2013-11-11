@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael.Setup_Portfolio
@@ -71,10 +71,10 @@ namespace Golem.PageObjects.Cael.Setup_Portfolio
 
         public override void WaitForElements()
         {
-            LearningNarrative_FileChooser.Verify.Present();
-            LearningOutcomes_Field.Verify.Present();
-            SaveChanges_Button.Verify.Present();
-            //SubmitPortfolio_Button.Verify.Present();
+            LearningNarrative_FileChooser.Verify().Present();
+            LearningOutcomes_Field.Verify().Present();
+            SaveChanges_Button.Verify().Present();
+            //SubmitPortfolio_Button.Verify().Present();
         }
     }
 }

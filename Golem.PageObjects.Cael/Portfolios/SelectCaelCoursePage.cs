@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Services;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael
@@ -32,8 +32,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            CourseDropdown.Verify.Present();
-            EnterPaymentButton.Verify.Visible();
+            CourseDropdown.Verify().Present();
+            EnterPaymentButton.Verify().Visible();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Mailinator
@@ -19,7 +19,7 @@ namespace Golem.PageObjects.Mailinator
 
         public override void WaitForElements()
         {
-            EmailBodyTextField.Verify.Visible();
+            EmailBodyTextField.Verify().Visible();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 
@@ -55,8 +55,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            EmailField.Verify.Visible();
-            CreateAccountButton.Verify.Visible();
+            EmailField.Verify().Visible();
+            CreateAccountButton.Verify().Visible();
         }
     }
 }

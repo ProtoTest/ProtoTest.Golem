@@ -83,12 +83,11 @@
     <Compile Include="Portfolios\SubmitPortfolioPage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
+    <ProjectReference Include="..\Golem\Golem.csproj">
       <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
-      <Name>Golem.Framework</Name>
+      <Name>Golem</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
-using Golem.Framework.CustomElements;
+using ProtoTest.Golem.WebDriver;
+using ProtoTest.Golem.WebDriver.Elements.Types;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.DTVE
@@ -47,15 +47,15 @@ namespace Golem.PageObjects.DTVE
 
         public override void WaitForElements()
         {
-            Poster.Verify.Visible();
-            Share.Verify.Visible();
-            Playlist.Verify.Visible();
-            Trailer.Verify.Visible();
-            Watch.Verify.Visible();
-            Record.Verify.Visible();
-            Title.Verify.Visible();
-            Descripton.Verify.Visible();
-            Actor.Verify.Visible();
+            Poster.Verify().Visible();
+            Share.Verify().Visible();
+            Playlist.Verify().Visible();
+            Trailer.Verify().Visible();
+            Watch.Verify().Visible();
+            Record.Verify().Visible();
+            Title.Verify().Visible();
+            Descripton.Verify().Visible();
+            Actor.Verify().Visible();
 
         }
 

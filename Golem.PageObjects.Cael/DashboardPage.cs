@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael.Setup_Portfolio;
 using OpenQA.Selenium;
 
@@ -57,8 +57,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            //LeftColumn_Container.Verify.Visible();
-         //   RightColumn_Container.Verify.Visible();
+            //LeftColumn_Container.Verify().Visible();
+         //   RightColumn_Container.Verify().Visible();
         }
     }
 }

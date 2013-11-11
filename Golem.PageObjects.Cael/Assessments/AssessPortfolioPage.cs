@@ -4,7 +4,8 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 using System.Text.RegularExpressions;
 
@@ -82,8 +83,8 @@ namespace Golem.PageObjects.Cael
             SetSupportingDocsSlider(0);
 
             // verify text with slider updates
-            PointsRewarded_Label.Verify.Text("19/28 Points");
-            CreditRecommded_Label.Verify.Text(noCreditText);
+            PointsRewarded_Label.Verify().Text("19/28 Points");
+            CreditRecommded_Label.Verify().Text(noCreditText);
 
             // Set the totals to 20
             SetCourseOutcomesSlider(0);
@@ -95,8 +96,8 @@ namespace Golem.PageObjects.Cael
             SetSupportingDocsSlider(4);
 
             // verify text with slider updates
-            PointsRewarded_Label.Verify.Text("20/28 Points");
-            CreditRecommded_Label.Verify.Text(creditRecommendedText);
+            PointsRewarded_Label.Verify().Text("20/28 Points");
+            CreditRecommded_Label.Verify().Text(creditRecommendedText);
         }
 
         private void VerifySliderMaxValue()
@@ -111,8 +112,8 @@ namespace Golem.PageObjects.Cael
             SetSupportingDocsSlider(4);
 
             // verify text with slider updates
-            PointsRewarded_Label.Verify.Text("28/28 Points");
-            CreditRecommded_Label.Verify.Text(creditRecommendedText);
+            PointsRewarded_Label.Verify().Text("28/28 Points");
+            CreditRecommded_Label.Verify().Text(creditRecommendedText);
 
             // Try to set the sliders beyond the max value
             SetCourseOutcomesSlider(5);
@@ -124,8 +125,8 @@ namespace Golem.PageObjects.Cael
             SetSupportingDocsSlider(5);
 
             // verify text with slider updates
-            PointsRewarded_Label.Verify.Text("28/28 Points");
-            CreditRecommded_Label.Verify.Text(creditRecommendedText);
+            PointsRewarded_Label.Verify().Text("28/28 Points");
+            CreditRecommded_Label.Verify().Text(creditRecommendedText);
         }
 
         private void VerifySliderMinValue()
@@ -140,8 +141,8 @@ namespace Golem.PageObjects.Cael
             SetSupportingDocsSlider(0);
 
             // Verify labels
-            PointsRewarded_Label.Verify.Text("0/28 Points");
-            CreditRecommded_Label.Verify.Text(noCreditText);
+            PointsRewarded_Label.Verify().Text("0/28 Points");
+            CreditRecommded_Label.Verify().Text(noCreditText);
 
             // Try to move the sliders beyond min value
             SetCourseOutcomesSlider(-1);
@@ -153,8 +154,8 @@ namespace Golem.PageObjects.Cael
             SetSupportingDocsSlider(-1);
 
             // Verify labels
-            PointsRewarded_Label.Verify.Text("0/28 Points");
-            CreditRecommded_Label.Verify.Text(noCreditText);
+            PointsRewarded_Label.Verify().Text("0/28 Points");
+            CreditRecommded_Label.Verify().Text(noCreditText);
         }
 
 
@@ -162,9 +163,9 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            Page_Title.Verify.Visible().Verify.Text("Assess Portfolio");
-            SaveChanges_Button.Verify.Visible().Verify.Value("Save Changes");
-            ReviewAssessment_Button.Verify.Visible().Verify.Value("Review Assessment");
+            Page_Title.Verify().Visible().Verify().Text("Assess Portfolio");
+            SaveChanges_Button.Verify().Visible().Verify().Value("Save Changes");
+            ReviewAssessment_Button.Verify().Visible().Verify().Value("Review Assessment");
         }
 
 

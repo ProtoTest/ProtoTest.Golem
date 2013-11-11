@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael
@@ -25,12 +25,12 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            CourseTitle_Link.Verify.Visible();
-            CourseSchool_Link.Verify.Visible();
-            LearningOutcomes_Link.Verify.Visible();
-            LearningOutcomes_Text.Verify.Visible();
-            Credits_Text.Verify.Visible();
-            Submit_Btn.Verify.Visible().Verify.Value("Submit Portfolio For Assessment");
+            CourseTitle_Link.Verify().Visible();
+            CourseSchool_Link.Verify().Visible();
+            LearningOutcomes_Link.Verify().Visible();
+            LearningOutcomes_Text.Verify().Visible();
+            Credits_Text.Verify().Visible();
+            Submit_Btn.Verify().Visible().Verify().Value("Submit Portfolio For Assessment");
         }
     }
 }

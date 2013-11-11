@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Golem.Framework;
+﻿
 using Golem.PageObjects.Cael.Portfolios;
 using OpenQA.Selenium;
+using ProtoTest.Golem.WebDriver;
+using ProtoTest.Golem.WebDriver.Elements;
 
 namespace Golem.PageObjects.Cael
 {
@@ -28,8 +25,8 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            SubmitPortfolio_Button.Verify.Visible();
-            Generic_chk.Verify.Present();
+            SubmitPortfolio_Button.Verify().Visible();
+            Generic_chk.Verify().Present();
         }
     }
 }

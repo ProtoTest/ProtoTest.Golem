@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gallio.Runtime.Formatting;
-using Golem.Framework;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael;
 using Golem.PageObjects.Mailinator;
 using MbUnit.Framework;
@@ -12,7 +13,7 @@ using MbUnit.Framework;
 namespace Golem.Tests.Cael
 {
     [TestFixture, DependsOn(typeof(UserTests))]
-    public class MyAccountTests : TestBaseClass
+    public class MyAccountTests : WebDriverTestBase
     {
         /* Profile inputs */
         string education = "Less than HS Diploma";

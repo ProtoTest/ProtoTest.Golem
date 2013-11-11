@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 
 namespace Golem.Tests.Cael
 {
-   public class SmokeTests : TestBaseClass
+    public class SmokeTests : WebDriverTestBase
     {
        [Test]
        public void SmokeTest()

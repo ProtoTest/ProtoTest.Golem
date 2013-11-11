@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Google
@@ -34,7 +34,7 @@ namespace Golem.PageObjects.Google
 
         public GoogleResultsPage VerifyResult(string text)
         {
-            SearchResult(text).Verify.Present();
+            SearchResult(text).Verify().Present();
             return new GoogleResultsPage();
         }
 
@@ -54,10 +54,10 @@ namespace Golem.PageObjects.Google
 
         public override void WaitForElements()
         {
-            SearchField.Verify.Present();
-            GoogleLogo.Verify.Present();
-            SearchButton.Verify.Present();
-            SignInButton.Verify.Present();
+            SearchField.Verify().Present();
+            GoogleLogo.Verify().Present();
+            SearchButton.Verify().Present();
+            SignInButton.Verify().Present();
         }
     }
 }

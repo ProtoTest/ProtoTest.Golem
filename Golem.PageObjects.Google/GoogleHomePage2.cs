@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 using Golem.PageObjects.Google;
 
@@ -19,7 +19,7 @@ namespace Golem.PageObjects.Google
 
         public static GoogleHomePage2 OpenGoogle()
         {
-            TestBaseClass.driver.Navigate().GoToUrl("http://www.google.com/");
+            WebDriverTestBase.driver.Navigate().GoToUrl("http://www.google.com/");
             return new GoogleHomePage2();
         }
 

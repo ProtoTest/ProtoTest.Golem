@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Google;
 using OpenQA.Selenium;
 
@@ -21,7 +21,7 @@ namespace Golem.PageObjects.Google
         public static GoogleHomePage OpenGoogle()
         {
             
-            TestBaseClass.driver.Navigate().GoToUrl("http://www.google.com/");
+            WebDriverTestBase.driver.Navigate().GoToUrl("http://www.google.com/");
             return new GoogleHomePage();
         }
 
@@ -40,11 +40,11 @@ namespace Golem.PageObjects.Google
 
         public override void WaitForElements()
         {
-            searchField.Verify.Present();
-            googleLogo.Verify.Present();
-            searchButton.Verify.Present();
-            feelingLuckyButton.Verify.Present();
-            signInButton.Verify.Present();
+            searchField.Verify().Present();
+            googleLogo.Verify().Present();
+            searchButton.Verify().Present();
+            feelingLuckyButton.Verify().Present();
+            signInButton.Verify().Present();
         }
     }
 }

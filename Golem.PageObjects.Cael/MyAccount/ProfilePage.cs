@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
+using ProtoTest.Golem.WebDriver.Elements.Validation;
 
 
 namespace Golem.PageObjects.Cael.MyAccount
@@ -87,26 +88,26 @@ namespace Golem.PageObjects.Cael.MyAccount
             string nameOfEmployer, string tuitionAssitance, string annualIncome, string laborUnion, string receviedTraining,
             string typeOfTraining, string howHear)
         {
-            EducationAchieved_Drp.Verify.Text(education);
-            AreaOfStudy_Drp.Verify.Text(areaOfStudy);
-            NameOfCollege_Drp.Verify.Text(nameOfCollege);
-            CollegeCredit_Radio.Verify.Selected();
-            CollegeCreditsEarned_Drp.Verify.Text(collegeCreditsEarned);
-            CollegeCreditsNeed_Drp.Verify.Text(collegeCreditsNeeded);
-            InterestedOnline_Radio.Verify.Selected();
-            FinancialAid_Radio.Verify.Selected();
-            TopicOfInterest_Drp.Verify.Text(topicOfInterest);
-            Gender_Radio.Verify.Selected();
-            Race_Drp.Verify.Text(race);
-            MilitaryExperience_Drp.Verify.Text(militaryExperience);
-            EmploymentStatus_Drp.Verify.Text(employmentStatus);
-            Employer_Field.Verify.Value(nameOfEmployer);
-            TuitionAssistance_Radio.Verify.Selected();
-            AnnualIncome_Drp.Verify.Text(annualIncome);
-            LaborUnion_Radio.Verify.Selected();
-            ReceivedTraining_Radio.Verify.Selected();
-            NameOrTypeOfTrainnig_Field.Verify.Text(typeOfTraining);
-            HowDidYouHear_Drp.Verify.Text(howHear);
+            EducationAchieved_Drp.Verify().Text(education);
+            AreaOfStudy_Drp.Verify().Text(areaOfStudy);
+            NameOfCollege_Drp.Verify().Text(nameOfCollege);
+            CollegeCredit_Radio.Verify().Selected();
+            CollegeCreditsEarned_Drp.Verify().Text(collegeCreditsEarned);
+            CollegeCreditsNeed_Drp.Verify().Text(collegeCreditsNeeded);
+            InterestedOnline_Radio.Verify().Selected();
+            FinancialAid_Radio.Verify().Selected();
+            TopicOfInterest_Drp.Verify().Text(topicOfInterest);
+            Gender_Radio.Verify().Selected();
+            Race_Drp.Verify().Text(race);
+            MilitaryExperience_Drp.Verify().Text(militaryExperience);
+            EmploymentStatus_Drp.Verify().Text(employmentStatus);
+            Employer_Field.Verify().Value(nameOfEmployer);
+            TuitionAssistance_Radio.Verify().Selected();
+            AnnualIncome_Drp.Verify().Text(annualIncome);
+            LaborUnion_Radio.Verify().Selected();
+            ReceivedTraining_Radio.Verify().Selected();
+            NameOrTypeOfTrainnig_Field.Verify().Text(typeOfTraining);
+            HowDidYouHear_Drp.Verify().Text(howHear);
 
             return this;
 
@@ -139,8 +140,8 @@ namespace Golem.PageObjects.Cael.MyAccount
 
         public override void WaitForElements()
         {
-            SaveChanges_Btn.Verify.Visible();
-            AnnualIncome_Drp.Verify.Present();
+            SaveChanges_Btn.Verify().Visible();
+            AnnualIncome_Drp.Verify().Present();
         }
     }
 }

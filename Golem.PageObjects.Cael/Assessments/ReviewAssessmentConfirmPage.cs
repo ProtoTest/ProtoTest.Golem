@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael
@@ -34,14 +34,14 @@ namespace Golem.PageObjects.Cael
 
         public ReviewAssessmentConfirmPage VerifyCreditRecommendation(string score_str, Boolean credit_recommended)
         {
-            TotalScore_Label.Verify.Text(score_str);
+            TotalScore_Label.Verify().Text(score_str);
             if (credit_recommended)
             {
-                CreditRecommendation_Label.Verify.Text(creditRecommendedText.Trim());
+                CreditRecommendation_Label.Verify().Text(creditRecommendedText.Trim());
             }
             else
             {
-                CreditRecommendation_Label.Verify.Text(noCreditText);
+                CreditRecommendation_Label.Verify().Text(noCreditText);
             }
 
             return this;
@@ -50,8 +50,8 @@ namespace Golem.PageObjects.Cael
         public override void WaitForElements()
         {
 
-            Page_Title.Verify.Visible().Verify.Text("Review Assessment");
-            Submit_Button.Verify.Visible().Verify.Value("Submit This Assessment");
+            Page_Title.Verify().Visible().Verify().Text("Review Assessment");
+            Submit_Button.Verify().Visible().Verify().Value("Submit This Assessment");
         }
     }
 }

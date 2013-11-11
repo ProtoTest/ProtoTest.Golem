@@ -4,15 +4,15 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael;
 using MbUnit.Framework;
 using Golem.PageObjects.Cael.Portfolios;
 
 namespace Golem.Tests.Cael
 {
-    [TestFixture, DependsOn(typeof(Kentico))]
-    class AssessmentTests : TestBaseClass
+    class AssessmentTests : WebDriverTestBase
     {
 
         [Test]

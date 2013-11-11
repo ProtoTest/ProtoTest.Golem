@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael
@@ -44,7 +44,7 @@ namespace Golem.PageObjects.Cael
         public override void WaitForElements()
         {
 
-            ContinueReviewAssessment_Button.Verify.Visible().Verify.Text("CONTINUE TO REVIEW ASSESSMENT");
+            ContinueReviewAssessment_Button.Verify().Visible().Verify().Text("CONTINUE TO REVIEW ASSESSMENT");
         }
     }
 }

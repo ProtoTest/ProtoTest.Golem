@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
-using Golem.Framework.CustomElements;
+using ProtoTest.Golem.WebDriver;
+using ProtoTest.Golem.WebDriver.Elements.Types;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.DTVE

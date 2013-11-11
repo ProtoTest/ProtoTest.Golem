@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
-using Golem.Framework.CustomElements;
 using OpenQA.Selenium;
 using Golem.PageObjects.Cael;
+using ProtoTest.Golem.WebDriver;
+using ProtoTest.Golem.WebDriver.Elements.Types;
 
 namespace Golem.PageObjects.Cael
 {
@@ -29,24 +29,24 @@ namespace Golem.PageObjects.Cael
         /// <returns></returns>
         public static void ClickEditRowButtonByText(string text)
         {
-            TestBaseClass.driver.FindElementWithText(text).FindInSiblings(By.Id("m_c_grdListPortfolio_v_ctl18_aedit")).Click();
+            WebDriverTestBase.driver.FindElementWithText(text).FindInSiblings(By.Id("m_c_grdListPortfolio_v_ctl18_aedit")).Click();
         }
 
         public static Kentico Login(string username, string password)
         {
-            TestBaseClass.driver.Navigate().GoToUrl(@"http://lcdev.bluemodus.com/CMSPages/logon.aspx?ReturnUrl=%2fcmsdesk");
-            TestBaseClass.driver.FindElement(By.Id("Login1_UserName")).SendKeys(username);
-            TestBaseClass.driver.FindElement(By.Id("Login1_Password")).SendKeys(password);
-            TestBaseClass.driver.FindElement(By.Id("Login1_LoginButton")).Click();
+            WebDriverTestBase.driver.Navigate().GoToUrl(@"http://lcdev.bluemodus.com/CMSPages/logon.aspx?ReturnUrl=%2fcmsdesk");
+            WebDriverTestBase.driver.FindElement(By.Id("Login1_UserName")).SendKeys(username);
+            WebDriverTestBase.driver.FindElement(By.Id("Login1_Password")).SendKeys(password);
+            WebDriverTestBase.driver.FindElement(By.Id("Login1_LoginButton")).Click();
             return new Kentico();
         }
 
         public Kentico CreateAssessor(string username, string password, string department, string[] subjects)
         {
-            LearningCounts_Link.Verify.Visible().Click();
+            LearningCounts_Link.Verify().Visible().Click();
 
             // This link is within an iframe, and then another frame
-            TestBaseClass.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("toolscontent").FindElement(ByE.PartialText("new Assessor")).Click();
+            WebDriverTestBase.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("toolscontent").FindElement(ByE.PartialText("new Assessor")).Click();
 
             Element username_TextField = new Element("New Assessor User Name text field", By.Id("m_c_ucUserName_txtUserName"));
             Element fullname_TextField = new Element("New Assessor Full Name text field", By.Id("m_c_TextBoxFullName"));
@@ -75,10 +75,10 @@ namespace Golem.PageObjects.Cael
 
         public Kentico AssignPortfolioToAssessor(string portfolioId, string assessor_email)
         {
-            LearningCounts_Link.Verify.Visible().Click();
+            LearningCounts_Link.Verify().Visible().Click();
 
             // This link is within an iframe, and then another frame
-            TestBaseClass.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("toolscontent").FindElement(ByE.PartialText("Assign Portfolios")).Click();
+            WebDriverTestBase.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("toolscontent").FindElement(ByE.PartialText("Assign Portfolios")).Click();
             ClickEditRowButtonByText(portfolioId);
 
             Element Assessor_Dropdown = new Element("Assign Assessor to Portfolio: Assessor Dropdown", By.Id("m_c_ddlAssessors"));
@@ -86,7 +86,7 @@ namespace Golem.PageObjects.Cael
             Field DueDate_Field = new Field("Assign Assessor to Portfolio: Due Date Text Field", By.Id("m_c_dtDueDate_txtDateTime"));
             Button Assign_Btn = new Button("Assign Assessor to Portfolio: Assign Button", By.Id("m_c_Button1"));
 
-            Assessor_Dropdown.Verify.Visible().SelectOptionByPartialText(assessor_email);
+            Assessor_Dropdown.Verify().Visible().SelectOptionByPartialText(assessor_email);
 
             DateTime dateTimeNow = DateTime.Now;
             AssignDate_Field.SetText(dateTimeNow.ToString());

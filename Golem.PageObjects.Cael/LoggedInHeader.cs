@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael.MyAccount;
 using OpenQA.Selenium;
 
@@ -66,12 +66,12 @@ namespace Golem.PageObjects.Cael
 
         public override void WaitForElements()
         {
-            Welcome_Link.Verify.Visible();
-            SignOut_Link.Verify.Visible();
-            Dashboard_Link.Verify.Visible();
-            Portfolios_Link.Verify.Visible();
-            MyAccount_Link.Verify.Visible();
-            Advising_Link.Verify.Visible();
+            Welcome_Link.Verify().Visible();
+            SignOut_Link.Verify().Visible();
+            Dashboard_Link.Verify().Visible();
+            Portfolios_Link.Verify().Visible();
+            MyAccount_Link.Verify().Visible();
+            Advising_Link.Verify().Visible();
         }
     }
 }

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
+using ProtoTest.Golem.WebDriver.Elements.Validation;
 
 namespace Golem.PageObjects.Cael.MyAccount
 {
@@ -65,17 +66,17 @@ namespace Golem.PageObjects.Cael.MyAccount
         public ContactInfoPage VerifyContactInfo(string fName, string lName, string DOB_Month, string DOB_Day,
             string DOB_Year, string addr1, string addr2, string city, string state, string zip, string phone)
         {
-            FirstNameFIeld.Verify.Value(fName);
-            LastNameField.Verify.Value(lName);
-            DOB_Month_Dropdown.Verify.Text(DOB_Month);
-            DOB_Day_Dropdown.Verify.Text(DOB_Day);
-            DOB_Year_Dropdown.Verify.Text(DOB_Year);
-            Address1Field.Verify.Value(addr1);
-            Address2Field.Verify.Value(addr2);
-            CityField.Verify.Value(city);
-            StateDropdown.Verify.Text(state);
-            ZipField.Verify.Value(zip);
-            PhoneField.Verify.Value(phone);
+            FirstNameFIeld.Verify().Value(fName);
+            LastNameField.Verify().Value(lName);
+            DOB_Month_Dropdown.Verify().Text(DOB_Month);
+            DOB_Day_Dropdown.Verify().Text(DOB_Day);
+            DOB_Year_Dropdown.Verify().Text(DOB_Year);
+            Address1Field.Verify().Value(addr1);
+            Address2Field.Verify().Value(addr2);
+            CityField.Verify().Value(city);
+            StateDropdown.Verify().Text(state);
+            ZipField.Verify().Value(zip);
+            PhoneField.Verify().Value(phone);
             return this;
         }
 
@@ -98,8 +99,8 @@ namespace Golem.PageObjects.Cael.MyAccount
         }
         public override void WaitForElements()
         {
-            SaveButton.Verify.Visible();
-            FirstNameFIeld.Verify.Visible();
+            SaveButton.Verify().Visible();
+            FirstNameFIeld.Verify().Visible();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 
@@ -17,7 +17,7 @@ namespace Golem.PageObjects.Mailinator
 
         public static HomePage OpenPage()
         {
-            TestBaseClass.driver.Navigate().GoToUrl("http://mailinator.com/");
+            WebDriverTestBase.driver.Navigate().GoToUrl("http://mailinator.com/");
             return new HomePage();
         }
         public InboxPage Login(string email)
@@ -30,7 +30,7 @@ namespace Golem.PageObjects.Mailinator
 
         public override void WaitForElements()
         {
-            EmailField.Verify.Present();
+            EmailField.Verify().Present();
         }
     }
 }

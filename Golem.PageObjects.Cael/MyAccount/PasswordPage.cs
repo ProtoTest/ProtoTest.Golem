@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 
 namespace Golem.PageObjects.Cael.MyAccount
@@ -26,14 +26,14 @@ namespace Golem.PageObjects.Cael.MyAccount
 
         public PasswordPage VerifyEmail(string email)
         {
-            EmailField.Verify.Text(email);
+            EmailField.Verify().Text(email);
             return this;
         }
 
         public override void WaitForElements()
         {
-            EmailField.Verify.Visible();
-            SaveChangesButton.Verify.Visible();
+            EmailField.Verify().Visible();
+            SaveChangesButton.Verify().Visible();
         }
 
 

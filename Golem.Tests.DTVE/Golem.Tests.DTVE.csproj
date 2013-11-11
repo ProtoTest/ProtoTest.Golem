@@ -54,13 +54,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Golem.Framework\Golem.Framework.csproj">
-      <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
-      <Name>Golem.Framework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Golem.PageObjects.DTVE\Golem.PageObjects.DTVE.csproj">
       <Project>{2460aa4d-8c2c-431e-b5d9-a2d82b0b16a3}</Project>
       <Name>Golem.PageObjects.DTVE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Golem\Golem.csproj">
+      <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
+      <Name>Golem</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

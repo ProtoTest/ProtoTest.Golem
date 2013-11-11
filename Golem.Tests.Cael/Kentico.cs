@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Golem.Framework;
+using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 
 namespace Golem.Tests.Cael
 {
-    [TestFixture, DependsOn(typeof(PortfolioTests))]
-    public class Kentico : TestBaseClass
+    [TestFixture]
+    public class Kentico : WebDriverTestBase
     {
         [Test]
         public void AssignPortfoliosToAssessor()
