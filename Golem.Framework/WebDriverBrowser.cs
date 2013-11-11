@@ -9,15 +9,14 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
-using OpenQA.Selenium.Support.Events;
+using OpenQA.Selenium.Support;
 
 
 namespace Golem.Framework
 {
     public class WebDriverBrowser
     {
-       // private OpenQA.Selenium.Browser browser = OpenQA.Selenium.Browser.Android;
-      //  public enum Browser { Firefox, Chrome, IE, Safari, Android, IPhone }
+        public enum Browser { Firefox, Chrome, IE, Safari, Android, IPhone }
         public IWebDriver driver;
         public WebDriverBrowser() { }
         public static Browser getBrowserFromString(string name)
@@ -43,31 +42,78 @@ namespace Golem.Framework
                     default:
                         driver = StartFirefoxBrowser();
                         break;
-                }
+              }
+            driver.Manage().Cookies.DeleteAllCookies();
             var eDriver = new EventedWebDriver(driver);
             return eDriver.driver;
+            return driver;
 
         }
 
         public static IWebDriver StartFirefoxBrowser()
         {
-            return new FirefoxDriver();
+            
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            Proxy proxy = new Proxy();
+            if (Config.Settings.httpProxy.startProxy)
+            {                
+                proxy.SslProxy = "localhost:" + Config.Settings.httpProxy.sslProxyPort;
+                proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
+                capabilities.SetCapability("proxy", proxy);
+            }
+            if (Config.Settings.localProxy.localProxy)
+            {
+                proxy.HttpProxy = Config.Settings.localProxy.localHost + ":" + Config.Settings.localProxy.localPort;
+                capabilities.SetCapability("proxy", proxy);                
+            }
+
+            
+            return new FirefoxDriver(capabilities);
         }
 
         public IWebDriver StartChromeBrowser()
         {
-            return new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            // Add the WebDriver proxy capability.
+            if (Config.Settings.httpProxy.startProxy)
+            {
+                Proxy proxy = new Proxy();
+                proxy.SslProxy = "localhost:" + Config.Settings.httpProxy.sslProxyPort;
+                proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
+                options.AddAdditionalCapability("proxy",proxy);
+            } 
+            return new ChromeDriver(options);
         }
 
         public IWebDriver StartIEBrowser()
         {
-            return new InternetExplorerDriver();
+            InternetExplorerOptions options = new InternetExplorerOptions();
+            options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
+            options.IgnoreZoomLevel = true;
+            if (Config.Settings.httpProxy.startProxy)
+            {
+            Proxy proxy = new Proxy();
+            proxy.SslProxy = "localhost:" + Config.Settings.httpProxy.sslProxyPort;
+            proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
+            options.AddAdditionalCapability("proxy",proxy);    
+            }
+            
+            return new InternetExplorerDriver(options);
         }
 
 
         public IWebDriver StartSafariBrowser()
         {
-            return new SafariDriver();
+            SafariOptions options = new SafariOptions();
+            // Add the WebDriver proxy capability.
+            if (Config.Settings.httpProxy.startProxy)
+            {
+                Proxy proxy = new Proxy();
+                proxy.SslProxy = @"localhost:" + Config.Settings.httpProxy.sslProxyPort;
+                proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
+                options.AddAdditionalCapability("proxy",proxy);
+            } 
+            return new SafariDriver(options);
         }
         public DesiredCapabilities GetCapabilitiesForBrowser(Browser browser)
         {
@@ -90,9 +136,22 @@ namespace Golem.Framework
 
         public IWebDriver LaunchRemoteBrowser(Browser browser, string host)
         {
-            DesiredCapabilities desiredCapabilities = DesiredCapabilities.Firefox();
+            DesiredCapabilities desiredCapabilities = GetCapabilitiesForBrowser(browser);
             var remoteAddress = new Uri("http://"+ host +":4444/wd/hub");
-            return new RemoteWebDriver(remoteAddress, desiredCapabilities);
+            return new EventedWebDriver(new RemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
+        }
+
+        public IWebDriver LaunchAppDriver(string appPath, string package, string activity)
+        {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.SetCapability(CapabilityType.BrowserName, "");
+            capabilities.SetCapability("device", "Android");
+            capabilities.SetCapability("app", appPath);
+            capabilities.SetCapability("app-package", package);
+            capabilities.SetCapability("app-activity", activity);
+
+            var eDriver = new EventedWebDriver(driver);
+            return eDriver.driver;
         }
        
     }

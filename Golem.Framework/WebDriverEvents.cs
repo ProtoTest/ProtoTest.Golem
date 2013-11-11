@@ -11,7 +11,7 @@ namespace Golem.Framework
 {
     public class EventedWebDriver
     {
-
+        private const string errorMessage = "{0}: {1} '{2}' ({3}) {4}";//function: command name(by) params
         public EventFiringWebDriver driver;
         public EventedWebDriver(IWebDriver driver)
         {
@@ -33,17 +33,29 @@ namespace Golem.Framework
         void driver_FindElementCompleted(object sender, FindElementEventArgs e)
         {
             TestContext.CurrentContext.IncrementAssertCount();
+
+
         }
 
         void driver_ElementValueChanged(object sender, WebElementEventArgs e)
         {
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Typing : " + e.Element.GetAttribute("value"));
+            try
+            {
+                TestBaseClass.LogEvent(GetLogMessage("Typing", e.Element.GetAttribute("value")));
+            }
+            catch (Exception)
+            {
+     
+            }
+            
         }
+
+        
 
         void driver_Navigating(object sender, WebDriverNavigationEventArgs e)
         {
-            Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Navigating to url " + e.Url);
+            Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
+            TestBaseClass.LogEvent(string.Format("Navigating to url {0}",e.Url));
         }
 
 
@@ -55,15 +67,20 @@ namespace Golem.Framework
 
         void driver_FindingElement(object sender, FindElementEventArgs e)
         {
-            Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Looking for Element : " + e.FindMethod);
+            Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
+            TestBaseClass.LogEvent(GetLogMessage("Finding"));
         }
 
         void driver_ElementClicking(object sender, WebElementEventArgs e)
         {
-            Thread.Sleep(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBaseClass.LogEvent(Common.GetCurrentClassAndMethodName() + ": Clicking Element");
+            Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
+            TestBaseClass.LogEvent(GetLogMessage("Click"));
         }
-
+        private string GetLogMessage(string command, string param = "")
+        {
+            if (param != "") param = "'" + param + "'";
+            return string.Format(errorMessage, Common.GetCurrentClassAndMethodName(), command,
+                TestBaseClass.testData.lastElement.name, TestBaseClass.testData.lastElement.by, param);
+        }
     }
 }

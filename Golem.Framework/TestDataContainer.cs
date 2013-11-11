@@ -20,6 +20,10 @@ namespace Golem.Framework
         public ScreenRecorder recorder;
         public List<VerificationError> VerificationErrors;
         public ActionList actions;
+        public Element lastElement = new Element();
+
+        public FiddlerProxy proxy;
+
         private IWebDriver _driver;
         public IWebDriver driver
         {
@@ -40,6 +44,5 @@ namespace Golem.Framework
             actions = new ActionList();
             VerificationErrors = new List<VerificationError>();
         }
-
     }
 }

@@ -8,6 +8,7 @@ C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\Golem.Framework.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\MbUnit.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\WebDriver.dll
+C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\CookComputing.XmlRpcV2.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\FiddlerCore.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\WebDriver.Common.Tests.dll
 C:\Users\Brian\Documents\GitHub\Golem\Golem.Tests.MotorolaStability\bin\Release\Ionic.Zip.dll

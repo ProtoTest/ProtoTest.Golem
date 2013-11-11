@@ -1,28 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using Gallio.Framework;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
 
 namespace Golem.Framework
 {
-    public class Element : IWebElement
+    public class Element : IWebElement, IWrapsDriver, IWrapsElement
     {
-        private By by;
-        private IWebDriver driver;
-        public string name;
-
-        private IWebElement _element;
-        private IWebElement element
+        public By by;
+        public string name = "Element";
+        public Verification Verify;
+        public Verification WaitUntil;
+        protected IWebDriver driver
         {
             get
             {
-      
-                    this._element = this.driver.FindElement(by);
-                    return this._element;
+                return TestBaseClass.driver;
+            }
+            set
+            {
+                TestBaseClass.driver = value;
+            }
+        }
+
+        protected IWebElement _element;
+        protected IWebElement element
+        {
+            get
+            {
+                this._element = GetElement();
+                return this._element;
             }
             set
             {
@@ -30,17 +43,50 @@ namespace Golem.Framework
             }
         }
 
+        private IWebElement GetElement()
+        {
+            try
+            {
+                TestBaseClass.testData.lastElement = this;
+                if(this._element.IsStale())
+                    this._element = driver.FindElement(this.by);
+                return this._element;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
+        }
+
+        public Element(){}
+
+        public Element(IWebElement element)
+        {
+            this.element = element;
+        }
+
         public Element(string name, By locator)
         {
             this.name = name;
-            this.driver = TestBaseClass.driver;
             this.by = locator;
+            Verify = new Verification(this,Config.Settings.runTimeSettings.ElementTimeoutSec,false);
+            WaitUntil = new Verification(this,Config.Settings.runTimeSettings.ElementTimeoutSec,true);
+            
+        }
+
+        public Element(By locator)
+        {
+            this.by = locator;
+            Verify = new Verification(this, Config.Settings.runTimeSettings.ElementTimeoutSec, false);
+            WaitUntil = new Verification(this, Config.Settings.runTimeSettings.ElementTimeoutSec, true);
         }
 
         public bool Displayed
         {
             get
             {
+                if (element == null) return false;
                 return element.Displayed;
             }
         }
@@ -49,6 +95,7 @@ namespace Golem.Framework
         {
             get
             {
+                if (element == null) return false;
                 return element.Enabled;
             }
         }
@@ -64,6 +111,7 @@ namespace Golem.Framework
         {
             get
             {
+                if (element == null) return false;
                 return element.Selected;
             }
         }
@@ -86,12 +134,15 @@ namespace Golem.Framework
         {
             get
             {
+                if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                    element.Highlight();
                 return element.Text;
             }
-            set
-            {
+            set { 
                 element.Clear();
                 element.SendKeys(value);
+                if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                    element.Highlight();
             }
         }
 
@@ -101,6 +152,7 @@ namespace Golem.Framework
             return element.FindElement(by);
         }
 
+        
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             return element.FindElements(by);
@@ -108,66 +160,120 @@ namespace Golem.Framework
 
         public void Clear()
         {
+            if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                element.Highlight();
             element.Clear();
+        }
+
+        /// <summary>
+        ///     Clear a checked element (radio or checkbox)
+        /// </summary>
+        public void ClearChecked()
+        {
+            if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                element.Highlight();
+            element.ClearChecked();
+        }
+
+        public void Highlight()
+        {
+            element.Highlight();
         }
 
         public void Click()
         {
+            if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                element.Highlight();
             element.Click();
         }
         public void Submit()
         {
+            if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                element.Highlight();
             element.Submit();
         }
         public void SendKeys(string text)
         {
+            if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                element.Highlight();
             element.SendKeys(text);
         }
         public string GetAttribute(string attribute)
         {
-            return element.GetAttribute(attribute);
+            try
+            {
+                return element.GetAttribute(attribute);
+            }
+            catch (Exception e)
+            {
+                return "";
+            }            
+            
         }
         public string GetCssValue(string text)
         {
             return element.GetCssValue(text);
         }
-        public void Wait()
+
+        public Element SetCheckbox(bool isChecked)
         {
-            driver.WaitForElement(this.by);
-        }
-        public void VerifyPresent(int seconds=0)
-        {
-            for (int i = 0; i <= seconds; i++)
+            if (element.Selected != isChecked)
             {
-                if (driver.FindElements(this.by).Count != 0)
-                {
-                    TestContext.CurrentContext.IncrementAssertCount();
-                    return;
-                }
-                    
-                else
-                    System.Threading.Thread.Sleep(1000);
+                element.Click();
             }
-            Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") not present after " + seconds + " seconds");   
+            return this;
+        }
+
+        public IWebDriver WrappedDriver
+        {
+            get
+            {
+                return this.driver;
+            }
+            private set
+            {
+                this.driver = value;
+            }
+        }
+
+        public IWebElement WrappedElement
+        {
+            get
+            {
+                return this._element;
+            }
+            private set
+            {
+                this._element = value;
+            }
+        }
+
+        public Element ScrollIntoView()
+        {
+            element.ScrollIntoView();
+            return this;
+        }
+
+        public Image GetImage()
+        {
+            Size size = new Size(element.Size.Width,element.Size.Height);
+            Rectangle cropRect = new Rectangle(element.Location,size);
+            return cropImage(driver.GetScreenshot(), cropRect);
 
         }
 
-        public void VerifyVisible(int seconds=0)
+        private static Image cropImage(Image img, Rectangle cropArea)
         {
-            for (int i = 0; i <= seconds; i++)
-            {
-                if (driver.FindElements(this.by).Count != 0)
-                {
-                    if (driver.FindElement(this.by).Displayed)
-                    {
-                        TestContext.CurrentContext.IncrementAssertCount();
-                        return;   
-                    }
-                }
-                else
-                    System.Threading.Thread.Sleep(1000);
-            }
-            Golem.Framework.TestBaseClass.AddVerificationError(Common.GetCurrentClassAndMethodName() + ": Element : " + this.name + " (" + this.by + ") not present after " + seconds + " seconds");
+            Bitmap bmpImage = new Bitmap(img);
+            Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+            return (Image)(bmpCrop);
         }
-    }
+
+        public void AttachImage()
+        {
+            TestLog.AttachImage(this.name, GetImage());
+        }
+       
+       
+   }
 }

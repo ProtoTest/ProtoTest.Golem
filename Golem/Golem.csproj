@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Golem</RootNamespace>
+    <AssemblyName>Golem</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHunspell, Version=1.1.1.0, Culture=neutral, PublicKeyToken=1ac793ea843b4366, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHunspell.1.1.1\lib\net\NHunspell.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.2.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+    <Reference Include="XnaFan.ImageComparison">
+      <HintPath>..\Libraries\ImageComparison\XnaFan.ImageComparison.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\ConfigSettings.cs" />
+    <Compile Include="Proxy\BrowserMobProxy.cs" />
+    <Compile Include="Proxy\HAR\Browser.cs" />
+    <Compile Include="Proxy\HAR\Cache.cs" />
+    <Compile Include="Proxy\HAR\CacheEntry.cs" />
+    <Compile Include="Proxy\HAR\Content.cs" />
+    <Compile Include="Proxy\HAR\Cookie.cs" />
+    <Compile Include="Proxy\HAR\Creator.cs" />
+    <Compile Include="Proxy\HAR\Entry.cs" />
+    <Compile Include="Proxy\HAR\HarResult.cs" />
+    <Compile Include="Proxy\HAR\Header.cs" />
+    <Compile Include="Proxy\HAR\Log.cs" />
+    <Compile Include="Proxy\HAR\Page.cs" />
+    <Compile Include="Proxy\HAR\PageTimings.cs" />
+    <Compile Include="Proxy\HAR\Param.cs" />
+    <Compile Include="Proxy\HAR\PostData.cs" />
+    <Compile Include="Proxy\HAR\QueryStringItem.cs" />
+    <Compile Include="Proxy\HAR\Request.cs" />
+    <Compile Include="Proxy\HAR\Response.cs" />
+    <Compile Include="Proxy\HAR\Timings.cs" />
+    <Compile Include="Proxy\ProxyTests.cs" />
+    <Compile Include="WebDriver\ByE.cs" />
+    <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
+    <Compile Include="WebDriver\Elements\Images\ImageComparer.cs" />
+    <Compile Include="Rest\DynamicXml.cs" />
+    <Compile Include="Rest\Given.cs" />
+    <Compile Include="Rest\RestTestBase.cs" />
+    <Compile Include="Rest\Tests.cs" />
+    <Compile Include="Rest\Then.cs" />
+    <Compile Include="Rest\RestResponseVerify.cs" />
+    <Compile Include="Rest\When.cs" />
+    <Compile Include="WebDriver\Elements\Images\ImageExtensions.cs" />
+    <Compile Include="WebDriver\ScreenshotRemoteDriver.cs" />
+    <Compile Include="WebDriver\WebDriverTestBase.cs" />
+    <Compile Include="WebDriver\ElementVerification.cs" />
+    <Compile Include="WebDriver\Elements\Types\Button.cs" />
+    <Compile Include="WebDriver\Elements\Types\Checkbox.cs" />
+    <Compile Include="WebDriver\Elements\Types\Text.cs" />
+    <Compile Include="WebDriver\Elements\Types\Image.cs" />
+    <Compile Include="WebDriver\Elements\Types\Dropdown.cs" />
+    <Compile Include="WebDriver\Elements\Types\Field.cs" />
+    <Compile Include="WebDriver\Elements\Types\Link.cs" />
+    <Compile Include="WebDriver\Elements\Types\Panel.cs" />
+    <Compile Include="WebDriver\Elements\Types\Radio.cs" />
+    <Compile Include="WebDriver\Element.cs" />
+    <Compile Include="Core\ActionList.cs" />
+    <Compile Include="Proxy\FiddlerProxy.cs" />
+    <Compile Include="WebDriver\BasePageObject.cs" />
+    <Compile Include="Core\Common.cs" />
+    <Compile Include="Core\Config.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Proxy\SAZFormat.cs" />
+    <Compile Include="Core\TestBase.cs" />
+    <Compile Include="Core\TestDataContainer.cs" />
+    <Compile Include="WebDriver\Elements\Validation\ValidationElement.cs" />
+    <Compile Include="Core\VerificationError.cs" />
+    <Compile Include="WebDriver\WebDriverBrowser.cs" />
+    <Compile Include="WebDriver\EventedWebDriver.cs" />
+    <Compile Include="WebDriver\WebDriverExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="chromedriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Hunspellx64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Hunspellx86.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IEDriverServer.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\en_US">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Proxy\browsermob-proxy-2.0-beta-8-bin.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Proxy\Data.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <EmbeddedResource Include="Resources\en_US.aff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FiddlerCore, Version=2.4.4.6, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\FiddlerCore\FiddlerCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Gallio, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gallio_MbUnit.3.4.14.0\lib\net40\Gallio.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\Ionic\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="MbUnit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gallio_MbUnit.3.4.14.0\lib\net40\MbUnit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebDriver, Version=2.37.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Selenium.WebDriver.2.37.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=2.37.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Selenium.Support.2.37.0\lib\net40\WebDriver.Support.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /s /y "$(SolutionDir)packages\NHunspell.1.1.1\native\*.*" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

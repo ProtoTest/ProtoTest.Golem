@@ -30,17 +30,21 @@ namespace Golem.Framework
         public RuntimeSettings runTimeSettings;
         public ReportSettings reportSettings;
         public HttpProxy httpProxy;
+        public LocalProxy localProxy;  //added to use local proxy testing for ebags
+        public AppiumSettings appiumSettings;
 
         public ConfigSettings()
         {
             runTimeSettings = new RuntimeSettings();
             reportSettings = new ReportSettings();
             httpProxy = new HttpProxy();
+            localProxy = new LocalProxy(); //added by seth
+            appiumSettings = new AppiumSettings();
         }
 
         public class RuntimeSettings
         {
-            public List<Browser> Browsers = new List<Browser>(); 
+            public List<WebDriverBrowser.Browser> Browsers = new List<WebDriverBrowser.Browser>(); 
             public bool LaunchBrowser;
             public int TestTimeoutMin;
             public int ElementTimeoutSec;
@@ -50,6 +54,8 @@ namespace Golem.Framework
             public int CommandDelayMs;
             public bool RunOnRemoteHost;
             public string HostIp;
+            public bool HighlightOnVerify;
+            
 
             public RuntimeSettings()
             {
@@ -64,13 +70,14 @@ namespace Golem.Framework
             CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
             RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
             HostIp = Config.GetConfigValue("HostIp", "localhost");
+            HighlightOnVerify = Common.IsTruthy(Config.GetConfigValue("HighlightOnVerify", "False"));
             }
 
             
 
-            private List<Browser> GetBrowserList()
+            private List<WebDriverBrowser.Browser> GetBrowserList()
             {
-                List<Browser> browsers = new List<Browser>();
+                List<WebDriverBrowser.Browser> browsers = new List<WebDriverBrowser.Browser>();
                 string browser = Config.GetConfigValue("Browser", "null");
                 if (browser != "null")
                     browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
@@ -81,8 +88,13 @@ namespace Golem.Framework
                         browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
                 }
                 if(browsers.Count==0)
-                    browsers.Add(Browser.Firefox);
+                    browsers.Add(WebDriverBrowser.Browser.Firefox);
                 return browsers;
+            }
+
+            public int GetTimeoutSettings()
+            {
+                return ElementTimeoutSec;
             }
         }
         public class ReportSettings
@@ -93,6 +105,7 @@ namespace Golem.Framework
             public bool videoRecordingOnError;
             public bool commandLogging;
             public bool actionLogging;
+            public bool spellChecking;
 
             public ReportSettings()
             {
@@ -101,20 +114,54 @@ namespace Golem.Framework
                 videoRecordingOnError = Common.IsTruthy(Config.GetConfigValue("VideoRecordingOnError", "True"));
                 commandLogging = Common.IsTruthy(Config.GetConfigValue("CommandLogging","True"));
                 actionLogging= Common.IsTruthy(Config.GetConfigValue("ActionLogging","True"));
-
+                spellChecking = Common.IsTruthy(Config.GetConfigValue("SpellChecking", "False"));
             }
             
         }
         public class HttpProxy
         {
             public bool startProxy;
+            public int proxyPort;
+            public int sslProxyPort;
             public HttpProxy()
             {
                 startProxy = Common.IsTruthy(Config.GetConfigValue("StartFiddlerProxy", "True"));
-
+                proxyPort = int.Parse(Config.GetConfigValue("ProxyPort", "8876"));
+                sslProxyPort = int.Parse(Config.GetConfigValue("SslProxyPort", "7777"));
             }
-            
+
+          }
+
+        public class LocalProxy
+        {
+            public bool localProxy;
+            public int localPort;
+            public string localHost;
+            public LocalProxy()
+            {
+                localProxy = Common.IsTruthy(Config.GetConfigValue("UseLocalProxy", "False"));
+                localPort = int.Parse(Config.GetConfigValue("ProxyPort", "8888"));
+                localHost = Config.GetConfigValue("HostIP", "localhost");
+            }
         }
+        public class AppiumSettings
+        {
+            public bool launchApp = false;
+            public string appPath;
+            public string package;
+            public string activity;
+            public string appOs;
+            public AppiumSettings()
+            {
+                launchApp = Common.IsTruthy(Config.GetConfigValue("LaunchApp", "False"));
+                appPath = Config.GetConfigValue("AppPath", "");
+                package = Config.GetConfigValue("AppPackage", "");
+                activity = Config.GetConfigValue("AppActivity", "");
+                appOs = Config.GetConfigValue("AppOs", "Android");
+            }
+        }
+
+        
       
     }
 }

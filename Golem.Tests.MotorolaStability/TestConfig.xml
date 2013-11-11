@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<<<<<<< HEAD
 <EggPlantSettings>
   <RunScript path="C:\Program Files (x86)\eggPlant\runscript.bat"/>
   <Suite path="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite">
@@ -43,6 +44,13 @@
     </Test>
     <Test repeat="3" retry="3" >
       <Script scriptName ="Shelter_Stability_Test_67" host="10.10.1.210" port="5901" timeout="10"></Script>
+=======
+<EggPlantSettings waitForDriveMs="20000" driveTimeoutMs="600000">
+  <DriveBatchFile path ="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite\RunDrive.bat"/>
+  <Suite repeat="1" path="C:\Users\Brian\Documents\GitHub\ShelterSuite\ShelterSuite.suite">
+    <Test repeat="3" retry="3" >
+      <Script scriptName ="Shelter_Stability_Test_09_08"  host="10.10.1.88" port="5901" timeout="10"></Script>
+>>>>>>> fd5222ad893bb54b450f20477492b5f238ec1cb6
     </Test>
   </Suite>
 </EggPlantSettings>

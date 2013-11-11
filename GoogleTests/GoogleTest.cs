@@ -5,7 +5,7 @@ using System.Text;
 using MbUnit.Framework;
 using Golem.Framework;
 using OpenQA.Selenium;
-using Golem.Framework.PageObjects.Google;
+using Golem.PageObjects.Google;
 
 namespace Golem.Tests.Google
 {
@@ -16,11 +16,12 @@ namespace Golem.Tests.Google
         [Test]
         public static void Test()
         {
-            GoogleHomePage.
-                OpenGoogle().
+            
+            OpenPage<GoogleHomePage>("http://www.google.com/").
                 SearchFor("Selenium").
                 VerifyResult("Selenium - Web Browser Automation").
                 GoToResult("Selenium - Web Browser Automation");
+
         }
 
         [Test]
