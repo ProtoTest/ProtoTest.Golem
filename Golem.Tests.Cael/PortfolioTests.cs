@@ -14,18 +14,24 @@ namespace Golem.Tests.Cael
     public class PortfolioTests : TestBaseClass
     {
         [Test, DependsOn("StartAnotherPortfolio")]
-        [Row("Test Course", "English", "Literary Theory")]
-        [Row("Decline Course", "English", "Literature (Classics, World, English, etc.)")]
-        public void SetupPortfolio(string courseName, string courseCategory, string courseSubCategory )
+        [Row("Test Course", "English", "Literary Theory", 0)]
+        [Row("Decline Course", "English", "Literature (Classics, World, English, etc.)", 1)]
+        public void SetupPortfolio(string courseName, string courseCategory, string courseSubCategory, int portfolioRef )
         {
+            // Pass this by reference, to return it from the calling function, since GetStarted() returns a page object
+            int portfolioID = 0;
+
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password).
                 Header.GoToPortfoliosPage().
-                GetStarted().
+                GetStarted(ref portfolioID).
                 CreatePortfolio(courseName, "12340", "4", "Course Description", @"http://school.url/description",
-                    "University of New England", "http://school.com", "New England Association of Schools and Colleges",
+                    "University of New England", @"http://school.com", "New England Association of Schools and Colleges",
                     courseCategory, courseSubCategory);
+
+            // Save the portfolio ID for in the app config for user in other tests
+            Common.UpdateConfigFile("PortfolioID_" + portfolioRef, portfolioID.ToString());
         }
 
         [Test]

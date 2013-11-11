@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Golem.Framework;
 using Golem.PageObjects.Cael.Setup_Portfolio;
 using OpenQA.Selenium;
+using System.Text.RegularExpressions;
 
 namespace Golem.PageObjects.Cael
 {
@@ -45,8 +46,22 @@ namespace Golem.PageObjects.Cael
             return new PaymentPage();
         }
 
-        public SetupPortfolioPage GetStarted()
+        public SetupPortfolioPage GetStarted(ref int portofolioID)
         {
+            Regex portfolio_regex = new Regex(@"\d+");
+
+            string link_href = GetStarted_Link.GetAttribute("href");
+
+            Match m = portfolio_regex.Match(link_href);
+            if (m.Success)
+            {
+                portofolioID = Convert.ToInt32(m.Value);
+            }
+            else
+            {
+                Common.Log("PortfoliosPage::GetStarted(): Failed to get the portfolio ID from link!");
+            }
+
             GetStarted_Link.Click();
             return new SetupPortfolioPage();
         }
