@@ -8,7 +8,7 @@ using System.Linq;
 // Created in 2012 by Jakob Krarup (www.xnafan.net).
 // Use, alter and redistribute this code freely,
 // but please leave this comment :)
-using XnaFan.ImageComparison;
+using Golem.WebDriver.Elements.Images;
 
 
 namespace ProtoTest.Golem.WebDriver.Elements.Images

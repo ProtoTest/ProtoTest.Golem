@@ -9,8 +9,6 @@ using Gallio.Common.Text;
 using Gallio.Framework;
 using Gallio.Model.Tree;
 using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Proxy;
-using XnaFan.ImageComparison;
 
 namespace ProtoTest.Golem.WebDriver.Elements.Images
 {

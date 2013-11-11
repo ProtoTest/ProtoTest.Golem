@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using ProtoTest.Golem.Core;
-using XnaFan.ImageComparison;
 
 namespace ProtoTest.Golem.WebDriver.Elements.Images
 {

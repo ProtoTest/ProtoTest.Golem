@@ -54,9 +54,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
-    <Reference Include="XnaFan.ImageComparison">
-      <HintPath>..\Libraries\ImageComparison\XnaFan.ImageComparison.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\ConfigSettings.cs" />
@@ -82,6 +79,7 @@
     <Compile Include="Proxy\ProxyTests.cs" />
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
+    <Compile Include="WebDriver\Elements\Images\Histogram.cs" />
     <Compile Include="WebDriver\Elements\Images\ImageComparer.cs" />
     <Compile Include="Rest\DynamicXml.cs" />
     <Compile Include="Rest\Given.cs" />
