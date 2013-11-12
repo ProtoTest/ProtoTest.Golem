@@ -50,9 +50,18 @@ namespace ProtoTest.Golem.WebDriver
                     break;
             }
             driver.Manage().Cookies.DeleteAllCookies();
+            SetBrowserSize();
             var eDriver = new EventedWebDriver(driver);
             return eDriver.driver;
-            return driver;
+            }
+
+        private void SetBrowserSize()
+        {
+            string resolution = Config.Settings.runTimeSettings.BrowserResolution;
+            if(resolution.Contains("Default")) 
+                driver.Manage().Window.Maximize();
+            else
+                driver.Manage().Window.Size = Common.GetSizeFromResolution(resolution);
         }
 
         public static IWebDriver StartFirefoxBrowser()

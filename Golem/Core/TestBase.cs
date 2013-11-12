@@ -194,15 +194,23 @@ namespace ProtoTest.Golem.Core
 
         private void GetHarFile()
         {
-            if (Config.Settings.httpProxy.useProxy)
+            try
             {
-                string name = Common.GetShortTestName(80);
-                proxy.SaveHarToFile();
-                TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".har",
-                    "application/json", File.ReadAllBytes(TestBase.proxy.GetHarFilePath())));
-                LogHttpTrafficMetrics();
-                proxy.CreateHar();
+                if (Config.Settings.httpProxy.useProxy)
+                {
+                    string name = Common.GetShortTestName(80);
+                    proxy.SaveHarToFile();
+                    TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".har",
+                        "application/json", File.ReadAllBytes(TestBase.proxy.GetHarFilePath())));
+                    LogHttpTrafficMetrics();
+                    proxy.CreateHar();
+                }
             }
+            catch (Exception)
+            {
+                
+            }
+           
         }
 
         private void StartProxy()
