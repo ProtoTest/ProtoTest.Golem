@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using Gallio.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions.Internal;
 using OpenQA.Selenium.Internal;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver.Elements.Images;
@@ -268,6 +269,10 @@ namespace ProtoTest.Golem.WebDriver
             return this;
         }
 
-  
+        public void MouseOver()
+        {
+            element.MouseOver();
+        }
+
     }
 }

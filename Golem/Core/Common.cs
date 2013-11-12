@@ -30,7 +30,7 @@ namespace ProtoTest.Golem.Core
                 {
                     Log("Killing Process : " + name);
                     process.Close();
-                   // process.Kill();
+                    process.Kill();
                 }
             }
            
