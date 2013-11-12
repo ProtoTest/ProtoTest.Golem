@@ -7,6 +7,7 @@ using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael;
 using MbUnit.Framework;
 using OpenQA.Selenium;
+using ProtoTest.Golem.Core;
 
 namespace Golem.Tests.Cael
 {

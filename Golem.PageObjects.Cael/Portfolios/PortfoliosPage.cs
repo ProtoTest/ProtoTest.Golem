@@ -59,7 +59,7 @@ namespace Golem.PageObjects.Cael
             }
             else
             {
-                Common.Log("PortfoliosPage::GetStarted(): Failed to get the portfolio ID from link!");
+                ProtoTest.Golem.Core.Common.Log("PortfoliosPage::GetStarted(): Failed to get the portfolio ID from link!");
             }
 
             GetStarted_Link.Click();
