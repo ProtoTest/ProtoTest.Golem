@@ -29,8 +29,7 @@ namespace ProtoTest.Golem.Core
                 if (process.ProcessName == name)
                 {
                     Log("Killing Process : " + name);
-                    process.Close();
-                   // process.Kill();
+                    process.Kill();
                 }
             }
            
@@ -285,6 +284,12 @@ namespace ProtoTest.Golem.Core
         public static void LogImage(Image image)
         {
             TestLog.EmbedImage(null, image);
+        }
+
+        public static Size GetSizeFromResolution(string resolution)
+        {
+            var dimensions = resolution.Split('x');
+            return new Size(int.Parse(dimensions[0]), int.Parse(dimensions[1]));
         }
     }
 }

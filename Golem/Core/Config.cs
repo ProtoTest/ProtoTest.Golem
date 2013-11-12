@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
+using OpenQA.Selenium;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Core
@@ -108,7 +110,7 @@ namespace ProtoTest.Golem.Core
             public int PageTimeoutSec;
             public bool RunOnRemoteHost;
             public int TestTimeoutMin;
-
+            public string BrowserResolution;
 
             public RuntimeSettings()
             {
@@ -124,6 +126,7 @@ namespace ProtoTest.Golem.Core
                 RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
                 HostIp = Config.GetConfigValue("HostIp", "localhost");
                 HighlightOnVerify = Common.IsTruthy(Config.GetConfigValue("HighlightOnVerify", "False"));
+                BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
             }
 
 

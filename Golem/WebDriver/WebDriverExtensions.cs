@@ -307,5 +307,16 @@ namespace ProtoTest.Golem.WebDriver
             {
             }
         }
+
+        public static void SetOrientation(this IWebDriver driver,ScreenOrientation orientation)
+        {
+            ((IRotatable) driver).Orientation = orientation;
+        }
+
+        public static void SetBrowserSize(this IWebDriver driver, Size size)
+        {
+            driver.Manage().Window.Size = size;
+        }
+
     }
 }

@@ -148,11 +148,19 @@ namespace ProtoTest.Golem.Proxy
 
         public HarResult GetHar()
         {
-            request.RequestFormat = DataFormat.Json;
-            request.Method = Method.GET;
-            request.Resource = string.Format("/proxy/{0}/har ", proxyPort);
-            IRestResponse<HarResult> responseHar = client.Execute<HarResult>(request);
-            return JsonConvert.DeserializeObject<HarResult>(responseHar.Content);
+            try
+            {
+                request.RequestFormat = DataFormat.Json;
+                request.Method = Method.GET;
+                request.Resource = string.Format("/proxy/{0}/har ", proxyPort);
+                IRestResponse<HarResult> responseHar = client.Execute<HarResult>(request);
+                return JsonConvert.DeserializeObject<HarResult>(responseHar.Content);
+            }
+            catch (Exception)
+            {
+                return new HarResult();
+            }
+            
         }
 
         public List<Entry> FilterEntries(string url)

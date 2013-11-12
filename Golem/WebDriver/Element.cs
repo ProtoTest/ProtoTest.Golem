@@ -268,6 +268,12 @@ namespace ProtoTest.Golem.WebDriver
             return this;
         }
 
+        public Element FindVisibleElement()
+        {
+            this.element = driver.FindVisibleElement(this.by);
+            return this;
+        }
+
   
     }
 }
