@@ -89,7 +89,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                if (element == null) return false;
+                if (!Present) return false;
                 return element.Displayed;
             }
         }
@@ -98,7 +98,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                if (element == null) return false;
+                if (!Present) return false;
                 return element.Enabled;
             }
         }
@@ -112,7 +112,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                if (element == null) return false;
+                if (!Present) return false;
                 return element.Selected;
             }
         }
@@ -131,7 +131,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                if (element == null)
+                if (!Present)
                     throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
                 if (Config.Settings.runTimeSettings.HighlightOnVerify)
                     element.Highlight();
@@ -139,7 +139,7 @@ namespace ProtoTest.Golem.WebDriver
             }
             set
             {
-                if (element == null)
+                if (!Present)
                     throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
                 element.Clear();
                 element.SendKeys(value);
@@ -162,7 +162,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public void Clear()
         {
-            if (element == null)
+            if (!Present)
                 throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
                 element.Highlight();
@@ -171,7 +171,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public void Click()
         {
-            if (element == null)
+            if (!Present)
                 throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
                 element.Highlight();
@@ -180,7 +180,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public void Submit()
         {
-            if (element == null)
+            if (!Present)
                 throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
                 element.Highlight();
@@ -189,7 +189,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public void SendKeys(string text)
         {
-            if (element == null)
+            if (!Present)
                 throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
                 element.Highlight();
@@ -246,7 +246,7 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         public void ClearChecked()
         {
-            if (element == null)
+            if (!Present)
                 throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
             if (Config.Settings.runTimeSettings.HighlightOnVerify)
                 element.Highlight();
@@ -255,7 +255,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public void Highlight()
         {
-            if (element == null)
+            if (!Present)
                 throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
             element.Highlight();
         }

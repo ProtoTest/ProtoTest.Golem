@@ -14,31 +14,32 @@ namespace Golem.Tests.Cael
 {
     class AssessmentTests : WebDriverTestBase
     {
-        //string email = "prototestassessor@mailinator.com";
-        //string password = "prototest123!!";
-
 
         [Test]
-        void Decline_Assessment()
+        [Row("English")]
+        void Decline_Assessment(string courseCateogry)
         {
+            string decline_reason = "This isn't my area of expertise";
+
             HomePage.OpenHomePage()
                 .GoToLoginPage()
                 .Login(UserTests.email2, UserTests.password).Header
                 .GoToDashboardPageForAssessor()
-                .DeclineAssessment("History")
+                .DeclineAssessment(courseCateogry)
                 .ClosePopup()
-                .DeclineAssessment("History")
-                .ConfirmDeclineWithReason("This isn't my area of expertise");
+                .DeclineAssessment(courseCateogry)
+                .ConfirmDeclineWithReason(decline_reason);
         }
 
         [Test]
-        public void Accept_Assessment()
+        [Row("English")]
+        public void Accept_Assessment(string courseCategory)
         {
             HomePage.OpenHomePage()
                 .GoToLoginPage()
                 .Login(UserTests.email2, UserTests.password).Header
                 .GoToDashboardPageForAssessor()
-                .AcceptAssessment("English");
+                .AcceptAssessment(courseCategory);
         }
 
         [Test, DependsOn("Accept_Assessment")]

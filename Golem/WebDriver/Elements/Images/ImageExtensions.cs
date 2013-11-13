@@ -46,7 +46,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             for (int i = 0; i < 256; i++)
             {
-                brushes[i] = new SolidBrush(Color.FromArgb(i/2, 255, 1 , 1 ));
+                brushes[i] = new SolidBrush(Color.FromArgb(i/2, 255, 2 , 2 ));
             }
         }
 
