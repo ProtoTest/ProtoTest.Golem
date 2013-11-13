@@ -269,8 +269,16 @@ namespace ProtoTest.Golem.WebDriver
 
         public static object ExecuteJavaScript(this IWebDriver driver, string script)
         {
-            var js = (IJavaScriptExecutor) driver;
-            return js.ExecuteScript("return " + script);
+            try
+            {
+                var js = (IJavaScriptExecutor)driver;
+                return js.ExecuteScript("return " + script);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
 
         public static object ExecuteJavaScript(this IWebDriver driver, string script, params object[] args)

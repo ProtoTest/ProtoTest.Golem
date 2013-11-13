@@ -46,8 +46,8 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             {
                 UpdateImage();
             }
-           // TestLog.EmbedImage(this.element.name+"original" + Common.GetRandomString(),this.storedImage);
-           // TestLog.EmbedImage(this.element.name + "live" + Common.GetRandomString(), this.liveImage);
+            //TestLog.EmbedImage(this.element.name+"original" + Common.GetRandomString(),this.storedImage);
+            TestLog.EmbedImage(this.element.name + "combined" + Common.GetRandomString(), GetMergedImage());
             this.difference = ImageComparer.ImageComparePercentage(this.storedImage, this.liveImage, Config.Settings.imageCompareSettings.fuzziness);
             //Common.Log(string.Format("{0} difference is {1}",this.element.name,this.difference));
             return difference < Config.Settings.imageCompareSettings.accuracy;
@@ -55,16 +55,16 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public Image GetMergedImage()
         {
-            var overlayImage =OverlayImages(this.liveImage,GetDifferenceImage());
+            var overlayImage = OverlayImages(this.liveImage,GetDifferenceImage());
             var mergedImage = CombineImages(this.storedImage, this.liveImage, overlayImage);
             return mergedImage;
         }
 
         private Image CombineImages(Image image1, Image image2, Image image3)
         {
-            Common.LogImage(image1);
-            Common.LogImage(image2);
-            Common.LogImage(image3);
+            //Common.LogImage(image1);
+            //Common.LogImage(image2);
+            //Common.LogImage(image3);
             int newWidth = image1.Width + image2.Width + image3.Width;
             int newHeight = image1.Height;
             Bitmap bmp = new Bitmap(newWidth, newHeight);

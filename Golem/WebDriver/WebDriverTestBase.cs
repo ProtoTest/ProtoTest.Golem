@@ -58,10 +58,18 @@ namespace ProtoTest.Golem.WebDriver
 
         public void LogHtmlIfTestFailed()
         {
-            if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
+            try
             {
-                TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95), driver.PageSource);
+                if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
+                {
+                    TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95), driver.PageSource);
+                }
             }
+            catch (Exception)
+            {
+                TestLog.Warnings.WriteLine("Error caught trying to get page source");
+            }
+           
         }
 
         public void LogVideoIfTestFailed()
