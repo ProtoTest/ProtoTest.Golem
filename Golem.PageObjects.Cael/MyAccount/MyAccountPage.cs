@@ -13,11 +13,24 @@ namespace Golem.PageObjects.Cael
     
     public abstract class MyAccountPage : BasePageObject
     {
-        public LoggedInHeader LoggedInHeader = new LoggedInHeader();
+        public LoggedInHeaderStudent StudentHeader = null;
+        public LoggedInHeaderAssessor AssessorHeader = null;
 
         public Element ContantInfoButton = new Element("Contant Info Button", By.XPath("//span[text()='Contact Information']"));
-        public Element ProfileButton = new Element("Profile Button", By.XPath("//span[@id='p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_LocalizedLabel1']"));
-        public Element PasswordButton = new Element("Password Button", By.XPath("//span[@id='p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_LocalizedLabel2']"));
+        public Element ProfileButton = new Element("Profile Button", By.XPath("//span[text()='Profile']"));
+        public Element PasswordButton = new Element("Password Button", By.XPath("//span[text()='Password']"));
+
+        public MyAccountPage()
+        {
+            if (LoginPage.isAssessor)
+            {
+                AssessorHeader = new LoggedInHeaderAssessor();
+            }
+            else
+            {
+                StudentHeader = new LoggedInHeaderStudent();
+            }
+        }
 
         public ContactInfoPage GoToContactInfoPage()
         {

@@ -16,8 +16,6 @@ namespace Golem.PageObjects.Cael
         public Element Logo_Button = new Element("Logo", By.Id("logo"));
 
         public Element Dashboard_Link = new Element("Dashboard Link", By.LinkText("Dashboard"));
-        public Element Portfolios_Link = new Element("Portfolios Link", By.LinkText("Portfolios"));
-        public Element Advising_Link = new Element("Advising Link", By.LinkText("Advising"));
         public Element MyAccount_Link = new Element("MyAccount Button", By.LinkText("My Account"));
 
         public ContactInfoPage ClickWelcomeLink()
@@ -25,8 +23,6 @@ namespace Golem.PageObjects.Cael
             Welcome_Link.Click();
             return new ContactInfoPage();
         }
-
-
 
         public ContactInfoPage GoToMyAccountPage()
         {
@@ -52,26 +48,12 @@ namespace Golem.PageObjects.Cael
             return new DashBoardAssessmentPage();
         }
 
-        public PortfoliosPage GoToPortfoliosPage()
-        {
-            Portfolios_Link.Click();
-            return new PortfoliosPage();
-        }
-
-        public void GoToAdvisingPage()
-        {
-            Advising_Link.Click();
-            //return new AdvisingPage();
-        }
-
         public override void WaitForElements()
         {
             Welcome_Link.Verify().Visible();
             SignOut_Link.Verify().Visible();
-            Dashboard_Link.Verify().Visible();
-            Portfolios_Link.Verify().Visible();
             MyAccount_Link.Verify().Visible();
-            Advising_Link.Verify().Visible();
+            Dashboard_Link.Verify().Visible();
         }
     }
 }

@@ -10,7 +10,7 @@ using MbUnit.Framework;
 
 namespace Golem.Tests.Cael
 {
-    [TestFixture]
+    [TestFixture, DependsOn(typeof(UserTests))]
     class DashboardTests : WebDriverTestBase
     {
         [Test]
@@ -19,9 +19,9 @@ namespace Golem.Tests.Cael
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email2, UserTests.password)
-                .Header.GoToDashboardPage().
+                .StudentHeader.GoToDashboardPage().
                 SelectInstructorLedCourse().
-                SelectCourse("December 1").
+                SelectCourse("February 01, 2014").
                 EnterPayment().
                 ReturnToDashboardPage();
         }
@@ -32,7 +32,7 @@ namespace Golem.Tests.Cael
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password)
-                .Header.GoToDashboardPage().
+                .StudentHeader.GoToDashboardPage().
                 SelectDIYCourse().
                 GoToPaymentPage().
                 EnterPayment().

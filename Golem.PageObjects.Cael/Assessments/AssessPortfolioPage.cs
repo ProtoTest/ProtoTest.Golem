@@ -14,7 +14,7 @@ namespace Golem.PageObjects.Cael
     public class AssessPortfolioPage : BasePageObject
     {
         string noCreditText = "Credit Not Recommended";
-        string creditRecommendedText = "Credit Recommended";
+        string creditRecommendedText = "Credits Recommended";
 
         Element Page_Title = new Element("Assess Portfolio Title", By.XPath("//div[@id='container_content_inner']/div/h1"));
         Element Detailed_Feedback = new Element("Detailed Feedback", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_AssessPortfolio_txtComments"));

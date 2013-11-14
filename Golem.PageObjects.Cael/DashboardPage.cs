@@ -12,10 +12,12 @@ namespace Golem.PageObjects.Cael
 {
     public class DashboardPage : BasePageObject
     {
-        public LoggedInHeader Header = new LoggedInHeader();
+        public LoggedInHeaderStudent StudentHeader = null;
+        public LoggedInHeaderAssessor AssessorHeader = null;
 
-        public Element DIY_Button = new Element("Do It Yourself Button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_NewStudent_diyWithPortfolioHyperLink"));
-        public Element InstructorLed_Button = new Element("Instructor Led Button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_NewStudent_caelWithPortfolioHyperLink"));
+
+        public Element DIY_Button = new Element("Do It Yourself Button", By.PartialLinkText("DO IT YOURSELF COURSE"));
+        public Element InstructorLed_Button = new Element("Instructor Led Button", By.PartialLinkText("INSTRUCTOR-LED COURSE"));
         public Element LeftColumn_Container = new Element("Left column container", By.Id("left_col"));
         public Element RightColumn_Container = new Element("Right column container", By.Id("right_col"));
 
@@ -23,7 +25,17 @@ namespace Golem.PageObjects.Cael
         public Element GetStarted_Link = new Element("Get Started Link", ByE.Text("Get Started"));
         public Element StartAnotherPortfolio_Button = new Element("Start Another portfolio button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_LC_Portfolios_portfolioHyperLink"));
 
-
+        public DashboardPage()
+        {
+            if (LoginPage.isAssessor)
+            {
+                AssessorHeader = new LoggedInHeaderAssessor();
+            }
+            else
+            {
+                StudentHeader = new LoggedInHeaderStudent();
+            }
+        }
 
         public EditPortfolioPage OpenPortfolio(string title)
         {

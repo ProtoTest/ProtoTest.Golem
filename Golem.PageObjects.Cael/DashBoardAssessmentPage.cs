@@ -12,7 +12,7 @@ namespace Golem.PageObjects.Cael
 {
     public class DashBoardAssessmentPage : BasePageObject
     {
-        public LoggedInHeader Header = new LoggedInHeader();
+        public LoggedInHeaderAssessor AssessorHeader = new LoggedInHeaderAssessor();
         
         public Element LeftColumn_Container = new Element("Left column container", By.Id("left_col"));
         public Element RightColumn_Container = new Element("Right column container", By.Id("right_col"));

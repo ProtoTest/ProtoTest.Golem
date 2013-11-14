@@ -48,13 +48,14 @@ namespace Golem.PageObjects.Cael.MyAccount
         public Element NameOrTypeOfTrainnig_Field = new Element("NameOrTypeOfTrainnig_Field", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_trainingTypeTextBox"));
         public Element HowDidYouHear_Drp = new Element("HowDidYouHear_Drp", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_howDidYouHearDDList"));
         public Element SaveChanges_Btn = new Element("SaveChanges_Btn", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_saveProfileButton"));
+        public Element SaveChangesComplete = new Element("Saved!", By.Id("lblSave2"));
 
 
         public ProfilePage EnterProfileInfo(string education, string areaOfStudy, string nameOfCollege, string collegeCreditInvestigated,
             string collegeCreditsEarned, string collegeCreditsNeeded, string onlineLearning, string financialAid,
             string topicOfInterest, string gender, string race, string militaryExperience, string employmentStatus,
             string nameOfEmployer, string tuitionAssitance, string annualIncome, string laborUnion, string receviedTraining,
-            string typeOfTraining, string howHear)
+            string typeOfTraining, string howHear, string savedCompletedText="Saved!")
         {
             if(education != null) EducationAchieved_Drp.SelectOption(education);
             if (areaOfStudy != null) AreaOfStudy_Drp.SelectOption(areaOfStudy);
@@ -77,6 +78,7 @@ namespace Golem.PageObjects.Cael.MyAccount
             if (typeOfTraining != null) NameOrTypeOfTrainnig_Field.Text = typeOfTraining;
             if (howHear != null) HowDidYouHear_Drp.SelectOption(howHear);
             SaveChanges_Btn.Click();
+            SaveChangesComplete.Verify().Visible().Verify().Text(savedCompletedText);
 
             return new ProfilePage();
 

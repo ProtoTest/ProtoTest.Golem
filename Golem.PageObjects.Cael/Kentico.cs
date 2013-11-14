@@ -29,7 +29,7 @@ namespace Golem.PageObjects.Cael
         /// <returns></returns>
         public static void ClickEditRowButtonByText(string text)
         {
-            WebDriverTestBase.driver.FindElementWithText(text).FindInSiblings(By.Id("m_c_grdListPortfolio_v_ctl18_aedit")).Click();
+            WebDriverTestBase.driver.FindElementWithText(text).FindInSiblings(By.ClassName("UnigridActionButton")).Click();
         }
 
         public static Kentico Login(string username, string password)
@@ -58,15 +58,17 @@ namespace Golem.PageObjects.Cael
             Button save_Button = new Button("New assessor save button", By.Id("m_actionsElem_editMenuElem_menu_menu_HA_00"));
 
             username_TextField.Text = username;
-            fullname_TextField.Text = username;
+            fullname_TextField.Text = "ProtoTest Assessor";
             email_TextField.Text = username;
-            password_TextField.Text = password;
-            password_confirm_TextField.Text = password;
+            
             department_DropDown.SelectOption(department);
             for (int i = 0; i < subjects.Count(); i++)
             {
                 subjects_MultiSelect.SelectOption(subjects[i]);
             }
+
+            password_TextField.Text = password;
+            password_confirm_TextField.Text = password;
 
             save_Button.Click();
 

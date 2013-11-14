@@ -60,6 +60,8 @@
     <Compile Include="DashBoardAssessmentPage.cs" />
     <Compile Include="Footer.cs" />
     <Compile Include="Kentico.cs" />
+    <Compile Include="LoggedInHeaderAssessor.cs" />
+    <Compile Include="LoggedInHeaderStudent.cs" />
     <Compile Include="LoggedOutHeader.cs" />
     <Compile Include="MyAccount\ContactInfoPage.cs" />
     <Compile Include="MyAccount\MyAccountPage.cs" />

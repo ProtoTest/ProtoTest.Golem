@@ -11,14 +11,17 @@ using OpenQA.Selenium;
 
 namespace Golem.Tests.Cael
 {
+    [TestFixture]
     public class SmokeTests : WebDriverTestBase
     {
-       [Test]
+       [Test, Category("Smoke Test")]
        public void SmokeTest()
        {
+           string global_admin = Config.GetConfigValue("GlobalAdmin", "msiwiec@prototest.com");
+
            HomePage.OpenHomePage().
                GoToLoginPage().
-               Login(UserTests.email1,UserTests.password);
+               Login(global_admin, UserTests.password);
        }
     }
 }

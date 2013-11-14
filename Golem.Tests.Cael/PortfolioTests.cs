@@ -11,7 +11,7 @@ using MbUnit.Framework;
 
 namespace Golem.Tests.Cael
 {
-    [TestFixture,DependsOn(typeof(DashboardTests))]
+    [TestFixture,DependsOn(typeof(MyAccountTests))]
     public class PortfolioTests : WebDriverTestBase
     {
         [Test, DependsOn("StartAnotherPortfolio")]
@@ -24,8 +24,7 @@ namespace Golem.Tests.Cael
 
             HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email1, UserTests.password).
-                Header.GoToPortfoliosPage().
+                Login(UserTests.email1, UserTests.password).StudentHeader.GoToPortfoliosPage().
                 GetStarted(ref portfolioID).
                 CreatePortfolio(courseName, "12340", "4", "Course Description", @"http://school.url/description",
                     "University of New England", @"http://school.com", "New England Association of Schools and Colleges",
@@ -41,7 +40,7 @@ namespace Golem.Tests.Cael
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password).
-                Header.GoToPortfoliosPage().
+                StudentHeader.GoToPortfoliosPage().
                 StartAnotherPortfolio().
                 EnterPayment().
                 ReturnToDashboardPage();
@@ -60,7 +59,7 @@ namespace Golem.Tests.Cael
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password).
-                Header.GoToPortfoliosPage().
+                StudentHeader.GoToPortfoliosPage().
                 EditPortfolio(portfolioName)
                 .EditOutcomesText("text of learning outcomes")
                 .ChooseNarrativeFile(narrativeFilePath)
@@ -77,7 +76,7 @@ namespace Golem.Tests.Cael
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password).
-                Header.GoToPortfoliosPage().
+                StudentHeader.GoToPortfoliosPage().
                 EditPortfolio(portfolioName).
                 SubmitPortfolio().
                 ConfirmAndSubmit().
@@ -90,7 +89,7 @@ namespace Golem.Tests.Cael
             HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password).
-                Header.GoToPortfoliosPage().
+                StudentHeader.GoToPortfoliosPage().
                 PreviewPortfolio("Test Course");
         }
     }

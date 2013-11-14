@@ -12,7 +12,7 @@ namespace Golem.PageObjects.Cael
 {
     public class PortfoliosPage : BasePageObject
     {
-        public LoggedInHeader Header = new LoggedInHeader();
+        public LoggedInHeaderStudent StudentHeader = new LoggedInHeaderStudent();
         public Footer Footer = new Footer();
 
         public Element GetStarted_Link = new Element("Get Started Link",ByE.Text("Get Started"));

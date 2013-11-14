@@ -11,7 +11,7 @@ using ProtoTest.Golem.Core;
 
 namespace Golem.Tests.Cael
 {
-    [TestFixture]
+    [TestFixture, DependsOn(typeof(PortfolioTests))]
     public class Kentico : WebDriverTestBase
     {
         [Test]
@@ -19,20 +19,23 @@ namespace Golem.Tests.Cael
         {
             // NOTE: Assessors can only be assigned to one area of expertise (i.e. English)
             // So make sure the portfolio's created are of category 'English'
-            string default_id = "invalid";
+
 
             // Grab the previously saved portfolio ids to test and assign them to the assessor
-            string portfolio_decline_id = Config.GetConfigValue("PortfolioID_1", default_id);
-            string portfolio_assess_id = Config.GetConfigValue("PortfolioID_2", default_id);
+            string portfolio_decline_id = Config.GetConfigValue("PortfolioID_0", null);
+            string portfolio_assess_id = Config.GetConfigValue("PortfolioID_1", null);
+            string assessor_login = Config.GetConfigValue("AssessorEmail", null);
 
-            if ((default_id != portfolio_assess_id) && (default_id != portfolio_decline_id))
-            {
-                Golem.PageObjects.Cael.Kentico.Login("bkitchener@prototest.com", "Qubit123!")
-                    .AssignPortfolioToAssessor(portfolio_decline_id, "prototestassessor2@mailinator.com");
+            Assert.IsNotNull(portfolio_assess_id);
+            Assert.IsNotNull(portfolio_decline_id);
+            Assert.IsNotNull(assessor_login);
+       
+            Golem.PageObjects.Cael.Kentico.Login("bkitchener@prototest.com", "Qubit123!")
+                .AssignPortfolioToAssessor(portfolio_decline_id, assessor_login);
 
-                Golem.PageObjects.Cael.Kentico.Login("bkitchener@prototest.com", "Qubit123!")
-                    .AssignPortfolioToAssessor(portfolio_assess_id, "prototestassessor2@mailinator.com");
-            }
+            Golem.PageObjects.Cael.Kentico.Login("bkitchener@prototest.com", "Qubit123!")
+                .AssignPortfolioToAssessor(portfolio_assess_id, assessor_login);
+            
         }
     }
 }

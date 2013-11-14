@@ -7,12 +7,11 @@ using Gallio.Runtime.Formatting;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Cael;
-using Golem.PageObjects.Mailinator;
 using MbUnit.Framework;
 
 namespace Golem.Tests.Cael
 {
-    [TestFixture, DependsOn(typeof(UserTests))]
+    [TestFixture, DependsOn(typeof(DashboardTests))]
     public class MyAccountTests : WebDriverTestBase
     {
         /* Profile inputs */
@@ -43,35 +42,33 @@ namespace Golem.Tests.Cael
         {
             Config.Settings.runTimeSettings.HighlightOnVerify = false;
             string newPassword = @"Changeme1234!!";
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password)
-                .Header.GoToMyAccountPage()
+                .StudentHeader.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(UserTests.email1, newPassword).LoggedInHeader.SignOut();
+                UpdateInfo(UserTests.email1, newPassword).StudentHeader.SignOut();
 
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, newPassword)
-                .Header.GoToMyAccountPage()
+                .StudentHeader.GoToMyAccountPage()
                 .GoToPasswordPage().
-                UpdateInfo(UserTests.email1, UserTests.password).
-                LoggedInHeader.SignOut();
+                UpdateInfo(UserTests.email1, UserTests.password);
         }
 
         [Test]
         public void VerifyContactInfo()
         {
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
-               GoToLoginPage().
-               Login(UserTests.email1, UserTests.password)
-               .Header.GoToMyAccountPage()
-               .GoToContactInfoPage()
-               .VerifyContactInfo(UserTests.firstName, UserTests.lastName,
-                                  UserTests.DOB_Month, UserTests.DOB_Day, UserTests.DOB_Year,
-                                  UserTests.address1, UserTests.address2, UserTests.city, UserTests.state, UserTests.zip,
-                                  UserTests.phone)
-               .LoggedInHeader.SignOut();
+            HomePage.OpenHomePage().
+                GoToLoginPage().
+                Login(UserTests.email1, UserTests.password)
+                .StudentHeader.GoToMyAccountPage()
+                .GoToContactInfoPage()
+                .VerifyContactInfo(UserTests.firstName, UserTests.lastName,
+                                   UserTests.DOB_Month, UserTests.DOB_Day, UserTests.DOB_Year,
+                                   UserTests.address1, UserTests.address2, UserTests.city, UserTests.state, UserTests.zip,
+                                   UserTests.phone);
         }
 
         [Test]
@@ -81,10 +78,10 @@ namespace Golem.Tests.Cael
             string txtBoxValidationStr = "* This field is required";
             string optionValidationStr = "* Please select an option";
 
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password)
-                .Header.GoToMyAccountPage()
+                .StudentHeader.GoToMyAccountPage()
                 .GoToProfilePage().EnterProfileInfo(defaultOptionStr,
                                                     defaultOptionStr,
                                                     defaultOptionStr,
@@ -104,23 +101,24 @@ namespace Golem.Tests.Cael
                                                     null,
                                                     null,
                                                     "",
-                                                    howHear).VerifyProfileFormValidations(txtBoxValidationStr,
+                                                    howHear,
+                                                    "").VerifyProfileFormValidations(txtBoxValidationStr,
                                                                                           txtBoxValidationStr,
                                                                                           optionValidationStr,
                                                                                           txtBoxValidationStr,
                                                                                           txtBoxValidationStr,
                                                                                           txtBoxValidationStr,
-                                                                                          txtBoxValidationStr).LoggedInHeader.SignOut();
+                                                                                          txtBoxValidationStr);
 
         }
 
         [Test, DependsOn("VerifyProfileFormValidations")]
         public void EditProfile()
         {
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
-                GoToLoginPage().
-                Login(UserTests.email1, UserTests.password)
-                .Header.GoToMyAccountPage()
+            HomePage.OpenHomePage().
+                GoToLoginPage()
+                .Login(UserTests.email1, UserTests.password)
+                .StudentHeader.GoToMyAccountPage()
                 .GoToProfilePage().EnterProfileInfo(education,
                                                     areaOfStudy,
                                                     nameOfCollege,
@@ -140,7 +138,7 @@ namespace Golem.Tests.Cael
                                                     laborUnion,
                                                     receivedTraining,
                                                     typeOfTraining,
-                                                    howHear).LoggedInHeader.SignOut();
+                                                    howHear);
 
         }
 
@@ -148,10 +146,10 @@ namespace Golem.Tests.Cael
         public void VerifyProfile()
         {
 
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
+            HomePage.OpenHomePage().
                 GoToLoginPage().
                 Login(UserTests.email1, UserTests.password)
-                .Header.GoToMyAccountPage()
+                .StudentHeader.GoToMyAccountPage()
                 .GoToProfilePage().VerifyProfileInfo(education,
                                                     areaOfStudy,
                                                     nameOfCollege,
@@ -171,7 +169,7 @@ namespace Golem.Tests.Cael
                                                     laborUnion,
                                                     receivedTraining,
                                                     typeOfTraining,
-                                                    howHear).LoggedInHeader.SignOut();
+                                                    howHear);
 
         }
 
@@ -181,17 +179,16 @@ namespace Golem.Tests.Cael
             string defaultOptionStr = "please select";
             string txtBoxValidationStr = "* This field is required";
 
-            OpenPage<PageObjects.Cael.HomePage>(@"http://lcdev.bluemodus.com/").
-               GoToLoginPage().
+            HomePage.OpenHomePage().
+                GoToLoginPage().
                Login(UserTests.email1, UserTests.password)
-               .Header.GoToMyAccountPage()
+               .StudentHeader.GoToMyAccountPage()
                .GoToContactInfoPage()
-               .EnterContactInfo("", "", "", "", "", "", "", "", defaultOptionStr, "", "")
+               .EnterContactInfo("", "", "", "", "", "", "", "", defaultOptionStr, "", "", "")
                .VerifyContactInfoFormValidations(txtBoxValidationStr, txtBoxValidationStr, txtBoxValidationStr,
                                                  txtBoxValidationStr, txtBoxValidationStr, txtBoxValidationStr,
                                                  txtBoxValidationStr, txtBoxValidationStr, txtBoxValidationStr,
-                                                 txtBoxValidationStr)
-               .LoggedInHeader.SignOut();
+                                                 txtBoxValidationStr);
         }
 
     }

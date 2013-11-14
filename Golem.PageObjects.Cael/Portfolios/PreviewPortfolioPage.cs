@@ -19,6 +19,7 @@ namespace Golem.PageObjects.Cael
 
         public SubmitPortfolioPage SubmitPortfolio()
         {
+            Submit_Btn.Verify().Visible().Verify().Value("Submit Portfolio For Assessment");
             Submit_Btn.Click();
             return new SubmitPortfolioPage();
         }
@@ -30,7 +31,6 @@ namespace Golem.PageObjects.Cael
             LearningOutcomes_Link.Verify().Visible();
             LearningOutcomes_Text.Verify().Visible();
             Credits_Text.Verify().Visible();
-            Submit_Btn.Verify().Visible().Verify().Value("Submit Portfolio For Assessment");
         }
     }
 }

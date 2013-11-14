@@ -19,8 +19,11 @@ namespace Golem.PageObjects.Cael
         public LoggedOutHeader Header = new LoggedOutHeader();
         public Footer Footer = new Footer();
 
-        public DashboardPage Login(string email, string password, bool rememberMe=false)
+        public static bool isAssessor;
+
+        public DashboardPage Login(string email, string password, bool rememberMe=false, bool assessorLogin=false)
         {
+            isAssessor = assessorLogin;
 
             EmailField.WaitUntil().Visible().Text = email;
             PasswordField.Text = password;

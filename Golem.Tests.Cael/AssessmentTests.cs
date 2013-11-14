@@ -12,8 +12,10 @@ using Golem.PageObjects.Cael.Portfolios;
 
 namespace Golem.Tests.Cael
 {
+    [TestFixture, DependsOn(typeof(Kentico))]
     class AssessmentTests : WebDriverTestBase
     {
+        bool AssessorLogin = true;
 
         [Test]
         [Row("English")]
@@ -23,7 +25,7 @@ namespace Golem.Tests.Cael
 
             HomePage.OpenHomePage()
                 .GoToLoginPage()
-                .Login(UserTests.email2, UserTests.password).Header
+                .Login(UserTests.assessor_email, UserTests.password, false, AssessorLogin).AssessorHeader
                 .GoToDashboardPageForAssessor()
                 .DeclineAssessment(courseCateogry)
                 .ClosePopup()
@@ -31,13 +33,13 @@ namespace Golem.Tests.Cael
                 .ConfirmDeclineWithReason(decline_reason);
         }
 
-        [Test]
+        [Test, DependsOn("Decline_Assessment")]
         [Row("English")]
         public void Accept_Assessment(string courseCategory)
         {
             HomePage.OpenHomePage()
                 .GoToLoginPage()
-                .Login(UserTests.email2, UserTests.password).Header
+                .Login(UserTests.assessor_email, UserTests.password, false, AssessorLogin).AssessorHeader
                 .GoToDashboardPageForAssessor()
                 .AcceptAssessment(courseCategory);
         }
@@ -48,7 +50,10 @@ namespace Golem.Tests.Cael
             // UserTests.email2 is the assessor
             HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email2, UserTests.password).Header.GoToDashboardPageForAssessor().SelectPendingAssessment().VerifyRecommendationSliderValues();
+                Login(UserTests.assessor_email, UserTests.password, false, AssessorLogin).AssessorHeader
+                .GoToDashboardPageForAssessor()
+                .SelectPendingAssessment()
+                .VerifyRecommendationSliderValues();
         }
 
         [Test, DependsOn("Verify_Slider_Value_Recommendations")]
@@ -58,12 +63,12 @@ namespace Golem.Tests.Cael
 
             HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email2, UserTests.password).Header
+                Login(UserTests.assessor_email, UserTests.password, false, AssessorLogin).AssessorHeader
                     .GoToDashboardPageForAssessor()
                     .SelectPendingAssessment()
                     .ReviewAssessmentNoCredit()
                     .ReviewAssessmentConfirm(allowStudentToResubmit)
-                    .SubmitAssessment().Header.SignOut();
+                    .SubmitAssessment().AssessorHeader.SignOut();
 
             // Login to Student and have them resubmit the portfolio so Assess_Portfolio_And_Submit can run
             PortfolioTests ptest = new PortfolioTests();
@@ -79,7 +84,7 @@ namespace Golem.Tests.Cael
 
             HomePage.OpenHomePage().
                 GoToLoginPage().
-                Login(UserTests.email2, UserTests.password).Header
+                Login(UserTests.assessor_email, UserTests.password, false, AssessorLogin).AssessorHeader
                     .GoToDashboardPageForAssessor()
                     .SelectPendingAssessment()
                     .SetSliderValues(slider_no_credit_values)
@@ -93,6 +98,5 @@ namespace Golem.Tests.Cael
                     .SubmitAssessment();
                     
         }
-       
     }
 }
