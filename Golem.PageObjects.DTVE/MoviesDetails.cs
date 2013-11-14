@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Golem.PageObjects.DTVE
 {
-    class MoviesDetails
+    public class MoviesDetails
     {
     }
 }

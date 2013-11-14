@@ -26,11 +26,19 @@ namespace ProtoTest.Golem.Core
             Process[] runningProcesses = Process.GetProcesses();
             foreach (Process process in runningProcesses)
             {
-                if (process.ProcessName == name)
+                try
                 {
-                    Log("Killing Process : " + name);
-                    process.Kill();
+                    if (process.ProcessName == name)
+                    {
+                        Log("Killing Process : " + name);
+                        process.Kill();
+                    }
                 }
+                catch (Exception)
+                {
+ 
+                }
+                
             }
            
         }

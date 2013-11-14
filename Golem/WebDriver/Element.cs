@@ -76,7 +76,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 try
                 {
-                    return (element != null);
+                    return (element.Displayed);
                 }
                 catch (Exception)
                 {

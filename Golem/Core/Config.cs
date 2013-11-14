@@ -105,7 +105,7 @@ namespace ProtoTest.Golem.Core
             public int ElementTimeoutSec;
             public string EnvironmentUrl;
             public bool HighlightOnVerify;
-            public string HostIp;
+            public List<string> Hosts;
             public bool LaunchBrowser;
             public int PageTimeoutSec;
             public bool RunOnRemoteHost;
@@ -115,7 +115,7 @@ namespace ProtoTest.Golem.Core
             public RuntimeSettings()
             {
                 Browsers = GetBrowserList();
-
+                Hosts = GetHostsList();
                 LaunchBrowser = Common.IsTruthy(Config.GetConfigValue("LaunchBrowser", "True"));
                 TestTimeoutMin = int.Parse(Config.GetConfigValue("TestTimeoutMin", "5"));
                 ElementTimeoutSec = int.Parse(Config.GetConfigValue("ElementTimeoutSec", "20"));
@@ -124,12 +124,28 @@ namespace ProtoTest.Golem.Core
                 DegreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "5"));
                 CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
                 RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
-                HostIp = Config.GetConfigValue("HostIp", "localhost");
+                
                 HighlightOnVerify = Common.IsTruthy(Config.GetConfigValue("HighlightOnVerify", "False"));
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
             }
+            //HostIp = Config.GetConfigValue("HostIp", "localhost");
 
-
+            private List<string> GetHostsList()
+            {
+                var hosts = new List<string>();
+                string host = Config.GetConfigValue("HostIp", "null");
+                if (host != "null")
+                    hosts.Add(host);
+                for (int i = 1; i < 10; i++)
+                {
+                    host = Config.GetConfigValue("HostIp" + i, "null");
+                    if (host != "null")
+                        hosts.Add(host);
+                }
+                if (hosts.Count == 0)
+                    hosts.Add("localhost");
+                return hosts;
+            }
             private List<WebDriverBrowser.Browser> GetBrowserList()
             {
                 var browsers = new List<WebDriverBrowser.Browser>();

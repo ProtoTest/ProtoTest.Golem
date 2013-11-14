@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTVE_CelebrityDetails_Scripts.cs" />
+    <Compile Include="DTVE_GoldenList_Scripts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

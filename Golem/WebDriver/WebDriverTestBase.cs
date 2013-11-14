@@ -16,6 +16,7 @@ namespace ProtoTest.Golem.WebDriver
     public class WebDriverTestBase : TestBase
     {
         [Factory("GetBrowser")] public WebDriverBrowser.Browser browser;
+        [Factory("GetHosts")] public string host;
 
         public static IWebDriver driver
         {
@@ -34,10 +35,15 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
+        public static IEnumerable<string> GetHosts()
+        {
+                return Config.Settings.runTimeSettings.Hosts;          
+        }
+
         public static T OpenPage<T>(string url)
         {
             driver.Navigate().GoToUrl(url);
-            driver.Manage().Window.Maximize();
+         //   driver.Manage().Window.Maximize();
             return (T) Activator.CreateInstance(typeof (T));
         }
 
@@ -52,10 +58,18 @@ namespace ProtoTest.Golem.WebDriver
 
         public void LogHtmlIfTestFailed()
         {
-            if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
+            try
             {
-                TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95), driver.PageSource);
+                if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
+                {
+                    TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95), driver.PageSource);
+                }
             }
+            catch (Exception)
+            {
+                TestLog.Warnings.WriteLine("Error caught trying to get page source");
+            }
+           
         }
 
         public void LogVideoIfTestFailed()
@@ -104,8 +118,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     if (Config.Settings.runTimeSettings.RunOnRemoteHost)
                     {
-                        driver = new WebDriverBrowser().LaunchRemoteBrowser(browser,
-                            Config.Settings.runTimeSettings.HostIp);
+                        driver = new WebDriverBrowser().LaunchRemoteBrowser(browser,host);
                     }
                     else
                     {

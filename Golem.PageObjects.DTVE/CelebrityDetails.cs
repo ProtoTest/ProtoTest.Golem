@@ -11,8 +11,7 @@ namespace Golem.PageObjects.DTVE
 {
     public class CelebrityDetails : BasePageObject
     {
-        //List of All Page Elements
-        #region Page Elements
+        #region List of All Page Elements
         public Element CelebrityName = new Element("CelebrityName",
             By.XPath("//div[@class='col-sm-12 col-lg-10']/h2[contains(@class,'details-title')]"));
         public Element CelebrityBirthDate = new Element("CelebrityBirthDate",
@@ -29,6 +28,9 @@ namespace Golem.PageObjects.DTVE
             By.Id("awards-tab"));
         public Element CelebrityShowsList = new Element("CelebrityShowsList",
             ByE.PartialAttribute("span", "@class", "text-overflow ng-binding"));
+        public Element ShowsListFirstItem = new Element("ShowsListFirstItem",
+            By.XPath("//div[@class='panel-group']/div[1]//div[@class='item-title-left']"));
+        //expanded list locators
         #endregion
 
         //ACTIONS
@@ -37,6 +39,7 @@ namespace Golem.PageObjects.DTVE
         public static CelebrityDetails OpenPage(string url)
         {
             WebDriverTestBase.driver.Navigate().GoToUrl(url);
+            WebDriverTestBase.driver.ExecuteJavaScript("document.getElementById(\"topnav-mobile-account-menu\").style.visibility='hidden';return;");
             return new CelebrityDetails();
         }
         
@@ -52,14 +55,36 @@ namespace Golem.PageObjects.DTVE
             return new CelebrityDetails();
         }
 
+ 
+
+    //desktop
+        public CelebrityDetails ExpandShowsListFirstItem()
+        {
+            ShowsListFirstItem.Click();
+            return new CelebrityDetails();
+        }
+
+        public CelebrityDetails VerifyExpandedListData()
+        {
+            //expanded list locators
+            return this;
+        }
+
+        //mobile
+        public MoviesDetails TapShowsListFirstItem()
+        {
+            ShowsListFirstItem.Click();
+            return new MoviesDetails();
+        }
+
         //VERIFICATIONS
 
         //Verifications on page for every page load
         public override void WaitForElements()
         {
-            CelebrityName.Verify().Visible();
-            CelebrityImage.Verify().Visible();
-            CelebrityShowsTab.Verify().Visible();
+            CelebrityName.Verify().Present();
+            CelebrityImage.Verify().Present();
+            CelebrityShowsTab.Verify().Present();
         }
 
         //Verifications for Celebrity API data (currently hardcoded)

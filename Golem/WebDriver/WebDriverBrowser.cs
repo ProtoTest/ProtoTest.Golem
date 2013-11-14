@@ -144,12 +144,13 @@ namespace ProtoTest.Golem.WebDriver
             if (browser == Browser.Android)
             {
                 port = "8080";
-                //var driver= new AndroidDriver(new Uri(string.Format("http://{0}:{1}/wd/hub",Config.Settings.runTimeSettings.HostIp,port)));
+
+               // var driver= new AndroidDriver(new Uri(string.Format("http://{0}:{1}/wd/hub",Config.Settings.runTimeSettings.HostIp,port)));
                 //driver.Orientation=ScreenOrientation.Landscape;
-               // return driver;
+              //   return driver;
             }
                 
-            var remoteAddress = new Uri(string.Format("http://{0}:{1}/wd/hub",Config.Settings.runTimeSettings.HostIp,port));
+            var remoteAddress = new Uri(string.Format("http://{0}:{1}/wd/hub",host,port));
            
            return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
         }

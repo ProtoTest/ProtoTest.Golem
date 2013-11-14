@@ -33,13 +33,21 @@ ITakesScreenshot
         /// </summary> 
         /// <returns>A <see cref="Screenshot"/> object containing the image.</returns> 
         public Screenshot GetScreenshot() 
-        { 
-            // Get the screenshot as base64. 
-            Response screenshotResponse = this.Execute(DriverCommand.Screenshot, null); 
-            string base64 = screenshotResponse.Value.ToString(); 
+        {
+            try
+            {
+                // Get the screenshot as base64. 
+                Response screenshotResponse = this.Execute(DriverCommand.Screenshot, null);
+                string base64 = screenshotResponse.Value.ToString();
 
-            // ... and convert it. 
-            return new Screenshot(base64); 
+                // ... and convert it. 
+                return new Screenshot(base64); 
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+           
         } 
 } 
 }
