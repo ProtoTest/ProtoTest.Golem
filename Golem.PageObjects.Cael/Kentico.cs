@@ -5,8 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Golem.PageObjects.Cael;
+using MbUnit.Framework;
+using Golem.PageObjects.Cael;
 using ProtoTest.Golem.WebDriver;
 using ProtoTest.Golem.WebDriver.Elements.Types;
+using ProtoTest.Golem.Core;
 
 namespace Golem.PageObjects.Cael
 {
@@ -34,7 +37,11 @@ namespace Golem.PageObjects.Cael
 
         public static Kentico Login(string username, string password)
         {
-            WebDriverTestBase.driver.Navigate().GoToUrl(@"http://lcdev.bluemodus.com/CMSPages/logon.aspx?ReturnUrl=%2fcmsdesk");
+            string site_addr = Config.GetConfigValue("EnvUrl", null);
+
+            Assert.IsNotNull(site_addr);
+
+            WebDriverTestBase.driver.Navigate().GoToUrl(string.Format("{0}/CMSPages/logon.aspx?ReturnUrl=%2fcmsdesk", site_addr));
             WebDriverTestBase.driver.FindElement(By.Id("Login1_UserName")).SendKeys(username);
             WebDriverTestBase.driver.FindElement(By.Id("Login1_Password")).SendKeys(password);
             WebDriverTestBase.driver.FindElement(By.Id("Login1_LoginButton")).Click();

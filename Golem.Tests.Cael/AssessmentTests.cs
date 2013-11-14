@@ -19,7 +19,7 @@ namespace Golem.Tests.Cael
 
         [Test]
         [Row("English")]
-        void Decline_Assessment(string courseCateogry)
+        public void Decline_Assessment(string courseCateogry)
         {
             string decline_reason = "This isn't my area of expertise";
 
