@@ -3,6 +3,7 @@
 
 # User-specific files
 *.suo
+Golem.v11.suo
 *.user
 *.sln.docstates
 
