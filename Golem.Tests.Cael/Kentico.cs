@@ -29,11 +29,13 @@ namespace Golem.Tests.Cael
             Assert.IsNotNull(portfolio_assess_id);
             Assert.IsNotNull(portfolio_decline_id);
             Assert.IsNotNull(assessor_login);
-       
-            Golem.PageObjects.Cael.Kentico.Login("bkitchener@prototest.com", "Qubit123!")
+
+            String admin = Config.GetConfigValue("GlobalAdmin", "msiwiec@prototest.com");
+
+            Golem.PageObjects.Cael.Kentico.Login(admin, UserTests.password)
                 .AssignPortfolioToAssessor(portfolio_decline_id, assessor_login);
 
-            Golem.PageObjects.Cael.Kentico.Login("bkitchener@prototest.com", "Qubit123!")
+            Golem.PageObjects.Cael.Kentico.Login(admin, UserTests.password)
                 .AssignPortfolioToAssessor(portfolio_assess_id, assessor_login);
             
         }

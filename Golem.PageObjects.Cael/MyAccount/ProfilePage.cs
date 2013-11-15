@@ -19,7 +19,7 @@ namespace Golem.PageObjects.Cael.MyAccount
         public ValidationElement NameOfCollege_Drp = new ValidationElement("Name of College",
                                                                            By.Id("schoolDDList"),
                                                                            By.XPath("//*[@class='schoolDDListformError parentFormform formError']/div"));
-        public Element CollegeCredit_Radio = new Element("College Credit Interest Radio", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_investigationRButton_0"));
+        public Element CollegeCredit_Radio = new Element("College Credit Interest Radio", ByE.PartialAttribute("input", "@id", "investigationRButton_0"));
         public Element CollegeCreditsEarned_Drp = new Element("College Credits Earned Dropdown", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_creditsEarnedDDList"));
         public Element CollegeCreditsNeed_Drp = new Element("College Credits Needed Dropdown", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_creditsRemainingDDList"));
         public Element InterestedOnline_Radio = new Element("InterestedOnline_Radio", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_onlineRButton_0"));
@@ -143,7 +143,8 @@ namespace Golem.PageObjects.Cael.MyAccount
         public override void WaitForElements()
         {
             SaveChanges_Btn.Verify().Visible();
-            AnnualIncome_Drp.Verify().Present();
+            //CollegeCredit_Radio.Verify().Visible();
+           // AnnualIncome_Drp.Verify().Visible();
         }
     }
 }
