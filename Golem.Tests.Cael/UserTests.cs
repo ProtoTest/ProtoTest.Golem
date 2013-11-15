@@ -52,7 +52,7 @@ namespace Golem.Tests.Cael
             // Activate Student and assessor accounts
             ActivateUser(email1);
             ActivateUser(email2);
-            ActivateUser(assessor_email, true);
+            ActivateAssessor(assessor_email);
         }
 
         private void CreateStudent(string configKey, ref string staticRef)
@@ -82,7 +82,7 @@ namespace Golem.Tests.Cael
             staticRef = email;
         }
 
-        private void ActivateUser(string user, bool isAssessor=false)
+        private void ActivateUser(string user)
         {
             OpenPage<PageObjects.Mailinator.HomePage>(@"http://mailinator.com/").
                Login(user).
@@ -91,16 +91,20 @@ namespace Golem.Tests.Cael
                ClickTextInBody("sign-in");
 
             LoginPage loginPage = new LoginPage();
-            DashboardPage dp = loginPage.Login(user, password, false, isAssessor);
+            loginPage.Login(user, password).StudentHeader.SignOut();
 
-            if (isAssessor)
-            {
-                dp.AssessorHeader.SignOut();
-            }
-            else
-            {
-                dp.StudentHeader.SignOut();
-            }
+        }
+
+        private void ActivateAssessor(string assessor_email)
+        {
+            OpenPage<PageObjects.Mailinator.HomePage>(@"http://mailinator.com/").
+                Login(assessor_email).
+                WaitForEmail("LearningCounts.org", 20).
+                OpenEmailWithText("LearningCounts.org").
+                ClickTextInBody("Click here to complete your profile");
+
+           LoginPage loginPage = new LoginPage();
+           loginPage.Login(assessor_email, UserTests.password, false, true).AssessorHeader.SignOut();
         }
     }
 }
