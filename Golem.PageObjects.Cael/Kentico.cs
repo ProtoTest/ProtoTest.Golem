@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Golem.PageObjects.Cael;
 using MbUnit.Framework;
-using Golem.PageObjects.Cael;
 using ProtoTest.Golem.WebDriver;
 using ProtoTest.Golem.WebDriver.Elements.Types;
 using ProtoTest.Golem.Core;
@@ -48,7 +47,7 @@ namespace Golem.PageObjects.Cael
             return new Kentico();
         }
 
-        public Kentico CreateAssessor(string username, string password, string department, string[] subjects)
+        public Kentico CreateAssessor(string username, string department, string[] subjects)
         {
             LearningCounts_Link.Verify().Visible().Click();
 
@@ -56,16 +55,17 @@ namespace Golem.PageObjects.Cael
             WebDriverTestBase.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("toolscontent").FindElement(ByE.PartialText("new Assessor")).Click();
 
             Element username_TextField = new Element("New Assessor User Name text field", By.Id("m_c_ucUserName_txtUserName"));
-            Element fullname_TextField = new Element("New Assessor Full Name text field", By.Id("m_c_TextBoxFullName"));
+            Element firstname_TextField = new Element("New Assessor First Name text field", By.Id("m_c_TextBoxFirstName"));
+            Element lastname_TextField = new Element("New Assessor Last Name text field", By.Id("m_c_TextBoxLastName"));
             Element email_TextField = new Element("New assessor email", By.Id("m_c_TextBoxEmail"));
             Element department_DropDown = new Element("New assessor Department Dropdown", By.Id("m_c_categoryDDList"));
             Element subjects_MultiSelect = new Element("New assessor subjects multi select", By.Id("m_c_subcategoryDDList"));
-            Element password_TextField = new Element("New assessor password", By.Id("m_c_passStrength_txtPassword"));
-            Element password_confirm_TextField = new Element("New assesor password confirm", By.Id("m_c_TextBoxConfirmPassword"));
             Button save_Button = new Button("New assessor save button", By.Id("m_actionsElem_editMenuElem_menu_menu_HA_00"));
+            Element status_Label = new Element("New assessor created success label", By.Id("m_c_LabelMessage"));
 
             username_TextField.Text = username;
-            fullname_TextField.Text = "ProtoTest Assessor";
+            firstname_TextField.Text = "ProtoTest";
+            lastname_TextField.Text = "Assessor";
             email_TextField.Text = username;
             
             department_DropDown.SelectOption(department);
@@ -74,10 +74,8 @@ namespace Golem.PageObjects.Cael
                 subjects_MultiSelect.SelectOption(subjects[i]);
             }
 
-            password_TextField.Text = password;
-            password_confirm_TextField.Text = password;
-
             save_Button.Click();
+            status_Label.Verify().Text("A notification has sent to the assessor sucessfully");
 
             return new Kentico();
         }

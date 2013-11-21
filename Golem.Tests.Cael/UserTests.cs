@@ -75,7 +75,7 @@ namespace Golem.Tests.Cael
             string[] subjects = { "Literature (Classics, World, English, etc.)", "Literary Theory" };
             string global_admin = Config.GetConfigValue("GlobalAdmin", "msiwiec@prototest.com");
 
-            Golem.PageObjects.Cael.Kentico.Login(global_admin, password).CreateAssessor(email, password, department, subjects);
+            Golem.PageObjects.Cael.Kentico.Login(global_admin, password).CreateAssessor(email, department, subjects);
 
             // Update the assessor email
             Common.UpdateConfigFile(configKey, email);
@@ -103,8 +103,11 @@ namespace Golem.Tests.Cael
                 OpenEmailWithText("LearningCounts.org").
                 ClickTextInBody("Click here to complete your profile");
 
-           LoginPage loginPage = new LoginPage();
-           loginPage.Login(assessor_email, UserTests.password, false, true).AssessorHeader.SignOut();
+            CreateUserPage createUserPage = new CreateUserPage();
+            createUserPage.CreateUser(null, password, null, null, address1, address2, city, state, zip, phone, DOB_Month, DOB_Day, DOB_Year);
+            
+            LoginPage loginPage = new LoginPage();
+            loginPage.Login(assessor_email, UserTests.password, false, true).AssessorHeader.SignOut();
         }
     }
 }
