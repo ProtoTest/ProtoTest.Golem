@@ -22,17 +22,6 @@ namespace Golem.PageObjects.Cael
         public Button Save = new Button("Save Button",By.XPath("//span[text()='Save']"));
 
         public Link LearningCounts_Link = new Link("Learning Counts Tab link", By.Id("TabItem_6"));
-        
-        /// <summary>
-        ///     Clicks the edit row for the requested string text
-        /// </summary>
-        /// <param name="text">The ID of the database column we are searching for</param>
-        /// <param name="title">The title of the button to find (i.e. 'Edit', 'Find Assessor') </param>
-        /// <returns></returns>
-        public static void ClickEditRowButtonByText(string text)
-        {
-            WebDriverTestBase.driver.FindElementWithText(text).FindInSiblings(By.ClassName("UnigridActionButton")).Click();
-        }
 
         public static Kentico Login(string username, string password)
         {
@@ -80,13 +69,39 @@ namespace Golem.PageObjects.Cael
             return new Kentico();
         }
 
-        public Kentico AssignPortfolioToAssessor(string portfolioId, string assessor_email)
+         /// <summary>
+        ///     Clicks the edit row for the requested string text
+        /// </summary>
+        /// <param name="text">The ID of the database column we are searching for</param>
+        /// <param name="title">The title of the button to find (i.e. 'Edit', 'Find Assessor') </param>
+        /// <returns></returns>
+        public static void ClickEditRowButtonByText(string text)
+        {
+            WebDriverTestBase.driver.FindElementWithText(text).FindInSiblings(By.ClassName("UnigridActionButton")).Click();
+        }
+
+        private Boolean FindAndClickPortfolioId(string portfolioID)
         {
             LearningCounts_Link.Verify().Visible().Click();
 
             // This link is within an iframe, and then another frame
             WebDriverTestBase.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("toolscontent").FindElement(ByE.PartialText("Assign Portfolios")).Click();
-            ClickEditRowButtonByText(portfolioId);
+            try
+            {
+                ClickEditRowButtonByText(portfolioID);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public Kentico AssignPortfolioToAssessor(string portfolioID, string assessor_email)
+        {
+            // The portfolio IDs submitted may take a bit to display on the 'Assign Portfolio' page before we can assign them to an Assessor
+            Retry.Repeat(5).WithPolling(10000).Until(() => FindAndClickPortfolioId(portfolioID));
 
             Element Assessor_Dropdown = new Element("Assign Assessor to Portfolio: Assessor Dropdown", By.Id("m_c_ddlAssessors"));
             Field AssignDate_Field = new Field("Assign Assessor to Portfolio: Assigning Date Text Field", By.Id("m_c_dtPickup_txtDateTime"));
