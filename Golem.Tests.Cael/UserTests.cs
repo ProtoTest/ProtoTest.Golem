@@ -18,6 +18,7 @@ namespace Golem.Tests.Cael
     [TestFixture, DependsOn(typeof(SmokeTests))]
     public class UserTests : WebDriverTestBase
     {
+        public static string global_admin = Config.GetConfigValue("GlobalAdmin", "msiwiec@prototest.com");
         public static string email1 = Config.GetConfigValue("UserEmail1", "prototestuser1@mailinator.com");
         public static string email2 = Config.GetConfigValue("UserEmail2", "prototestuser2@mailinator.com");
         public static string assessor_email = Config.GetConfigValue("AssessorEmail", "prototestassessor@mailinator.com");
@@ -71,11 +72,10 @@ namespace Golem.Tests.Cael
         private void CreateAssessor(string configKey, ref string staticRef)
         {
             string email = "prototestassessor" + Common.GetRandomString() + "@mailinator.com";
-            string department = "English";
+            string[] departments = { "English" };
             string[] subjects = { "Literature (Classics, World, English, etc.)", "Literary Theory" };
-            string global_admin = Config.GetConfigValue("GlobalAdmin", "msiwiec@prototest.com");
 
-            Golem.PageObjects.Cael.Kentico.Login(global_admin, password).CreateAssessor(email, department, subjects);
+            Golem.PageObjects.Cael.Kentico.Login(global_admin, password).CreateAssessor(email, departments, subjects);
 
             // Update the assessor email
             Common.UpdateConfigFile(configKey, email);

@@ -36,7 +36,7 @@ namespace Golem.PageObjects.Cael
             return new Kentico();
         }
 
-        public Kentico CreateAssessor(string username, string department, string[] subjects)
+        public Kentico CreateAssessor(string username, string[] departments, string[] subjects)
         {
             LearningCounts_Link.Verify().Visible().Click();
 
@@ -47,7 +47,7 @@ namespace Golem.PageObjects.Cael
             Element firstname_TextField = new Element("New Assessor First Name text field", By.Id("m_c_TextBoxFirstName"));
             Element lastname_TextField = new Element("New Assessor Last Name text field", By.Id("m_c_TextBoxLastName"));
             Element email_TextField = new Element("New assessor email", By.Id("m_c_TextBoxEmail"));
-            Element department_DropDown = new Element("New assessor Department Dropdown", By.Id("m_c_categoryDDList"));
+            Element department_MultiSelect = new Element("New assessor Department Dropdown", By.Id("m_c_lstDepartments"));
             Element subjects_MultiSelect = new Element("New assessor subjects multi select", By.Id("m_c_subcategoryDDList"));
             Button save_Button = new Button("New assessor save button", By.Id("m_actionsElem_editMenuElem_menu_menu_HA_00"));
             Element status_Label = new Element("New assessor created success label", By.Id("m_c_LabelMessage"));
@@ -56,8 +56,12 @@ namespace Golem.PageObjects.Cael
             firstname_TextField.Text = "ProtoTest";
             lastname_TextField.Text = "Assessor";
             email_TextField.Text = username;
-            
-            department_DropDown.SelectOption(department);
+
+            for (int i = 0; i < departments.Count(); i++)
+            {
+                department_MultiSelect.SelectOption(departments[i]);
+            }
+
             for (int i = 0; i < subjects.Count(); i++)
             {
                 subjects_MultiSelect.SelectOption(subjects[i]);
