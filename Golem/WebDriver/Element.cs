@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using Gallio.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions.Internal;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Internal;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver.Elements.Images;
@@ -15,9 +15,16 @@ namespace ProtoTest.Golem.WebDriver
         protected IWebElement _element;
         public By by;
         public string name = "Element";
+        private ElementImages _images;
+
+        public ElementImages Images
+        {
+            get { return _images ?? (_images = new ElementImages(this)); }
+        }
 
         public Element()
         {
+            
         }
 
         public Element(IWebElement element)
@@ -48,11 +55,6 @@ namespace ProtoTest.Golem.WebDriver
             return new ElementVerification(this, timeoutSec, true); 
         }
 
-        public ElementImages Images
-        {
-            get { return new ElementImages(this); }
-        }
-
         protected IWebDriver driver
         {
             get { return WebDriverTestBase.driver; }
@@ -76,7 +78,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 try
                 {
-                    return (element.Displayed);
+                    return (element.Enabled);
                 }
                 catch (Exception)
                 {

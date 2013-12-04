@@ -34,11 +34,6 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             new float[] {.11f, .11f, .11f, 0, 0},
             new float[] {0, 0, 0, 1, 0},
             new float[] {0, 0, 0, 0, 1}
-            //new float[] {1, 0, 0, 0, 0},
-            //new float[] {0, 0, 0, 0, 0},
-            //new float[] {0, 0, 0, 0, 0},
-            //new float[] {0, 0, 0, 1, 0},
-            //new float[] {0, 0, 0, 0, 1
         });
 
         //Create the brushes in varying intensities
@@ -208,7 +203,10 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             Bitmap thisOne = (Bitmap)img1.Resize(16, 16).GetGrayScaleVersion();
             Bitmap theOtherOne = (Bitmap)img2.Resize(16, 16).GetGrayScaleVersion();
-            byte[,] differences = new byte[16, 16];
+            byte[,] differencesRed = new byte[16, 16];
+            byte[,] differencesGreen = new byte[16, 16];
+            byte[,] differencesBlue = new byte[16, 16];
+            byte[,] differencesAvg = new byte[16, 16];
 
             Console.WriteLine();
 
@@ -216,11 +214,14 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             {
                 for (int x = 0; x < 16; x++)
                 {
-                    differences[x, y] = (byte)Math.Abs(thisOne.GetPixel(x, y).R - theOtherOne.GetPixel(x, y).R);
+                    differencesRed[x, y] = (byte)Math.Abs(thisOne.GetPixel(x, y).R - theOtherOne.GetPixel(x, y).R);
+                    differencesGreen[x, y] = (byte)Math.Abs(thisOne.GetPixel(x, y).G - theOtherOne.GetPixel(x, y).G);
+                    differencesBlue[x, y] = (byte)Math.Abs(thisOne.GetPixel(x, y).B - theOtherOne.GetPixel(x, y).B);
+                    differencesAvg[x, y] = (byte)Math.Abs((differencesRed[x, y] + differencesRed[x, y] + differencesRed[x, y])/3);
                 }
             }
             //differences.ToConsole();
-            return differences;
+            return differencesRed;
         }
 
 
@@ -253,6 +254,15 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
             //dispose the Graphics object
             g.Dispose();
+
+            return newBitmap;
+
+        }
+
+        public static Image GetAverageColorValue(this Image original)
+        {
+
+            Bitmap newBitmap = new Bitmap(original.Width, original.Height);
 
             return newBitmap;
 

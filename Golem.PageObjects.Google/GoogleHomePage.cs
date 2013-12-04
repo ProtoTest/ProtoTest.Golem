@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 using Golem.PageObjects.Google;
 using OpenQA.Selenium;
@@ -15,7 +16,7 @@ namespace Golem.PageObjects.Google
         Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
         Element searchButton = new Element("SearchButton", By.Name("btnK"));
         Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
-        Element signInButton = new Element("SignInButon", By.ClassName("gbit"));
+        Element signInButton = new Element("SignInButon", By.LinkText("Sign in"));
         Element gmailbutton = new Element("GmailButton", By.ClassName("gbts"));
 
         public static GoogleHomePage OpenGoogle()
@@ -45,6 +46,15 @@ namespace Golem.PageObjects.Google
             searchButton.Verify().Present();
             feelingLuckyButton.Verify().Present();
             signInButton.Verify().Present();
+        }
+
+        public void VerifyImages()
+        {
+            searchField.Verify().Image();
+            googleLogo.Verify().Image();
+            searchButton.Verify().Image();
+            feelingLuckyButton.Verify().Image();
+            signInButton.Verify().Image();
         }
     }
 }

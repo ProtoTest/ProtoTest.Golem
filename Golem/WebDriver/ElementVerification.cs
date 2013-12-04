@@ -222,7 +222,7 @@ namespace ProtoTest.Golem.WebDriver
         public Element Image()
         {
             message = "image matches";
-            notMessage = "image is different";
+            notMessage = "image is {0} different";
             condition = (element.Present) && (element.Images.ImagesMatch());
             if (condition == isTrue)
             {
@@ -232,7 +232,9 @@ namespace ProtoTest.Golem.WebDriver
                 
             else
             {
-                VerificationFailed(GetErrorMessage(), element.Images.GetMergedImage());
+                notMessage = string.Format(notMessage, element.Images.differenceString);
+                VerificationFailed(string.Format("{0}: {1}({2}): {3}", TestBase.GetCurrentClassAndMethodName(), element.name, element.by,
+                notMessage), element.Images.GetMergedImage());
             }
                 
             return element;

@@ -6,6 +6,7 @@ using System.Linq;
 using Gallio.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver.Elements;
@@ -324,6 +325,18 @@ namespace ProtoTest.Golem.WebDriver
         public static void SetBrowserSize(this IWebDriver driver, Size size)
         {
             driver.Manage().Window.Size = size;
+        }
+
+        public static IWebDriver GetWrappedDriver(this IWebElement element)
+        {
+            return ((IWrapsDriver) element).WrappedDriver;
+        }
+
+        public static IWebElement DragToOffset(this IWebElement element, int x, int y)
+        {
+            var action = new Actions(WebDriverTestBase.driver);
+            action.MoveToElement(element, x, y).Click().Build().Perform();
+            return element;
         }
 
     }

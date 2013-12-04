@@ -71,8 +71,8 @@ namespace ProtoTest.Golem.Core
             public HttpProxy()
             {
                 proxyServerPort = int.Parse(Config.GetConfigValue("ProxyServerPort", "8878"));
-                startProxy = Common.IsTruthy(Config.GetConfigValue("StartProxy", "True"));
-                useProxy = Common.IsTruthy(Config.GetConfigValue("UseProxy", "True"));
+                startProxy = Common.IsTruthy(Config.GetConfigValue("StartProxy", "False"));
+                useProxy = Common.IsTruthy(Config.GetConfigValue("UseProxy", "False"));
                 proxyPort = int.Parse(Config.GetConfigValue("ProxyPort", "8876"));
             }
         }
@@ -177,7 +177,7 @@ namespace ProtoTest.Golem.Core
 
             public ImageCompareSettings()
             {
-                fuzziness = Byte.Parse(Config.GetConfigValue("Fuzziness", "30"));
+                fuzziness = Byte.Parse(Config.GetConfigValue("Fuzziness", "50"));
                 accuracy = float.Parse(Config.GetConfigValue("Accuracy", ".01"));
                 updateImages = Common.IsTruthy(Config.GetConfigValue("UpdateImages", "false"));
             }

@@ -87,7 +87,6 @@
     <Compile Include="Proxy\HAR\Request.cs" />
     <Compile Include="Proxy\HAR\Response.cs" />
     <Compile Include="Proxy\HAR\Timings.cs" />
-    <Compile Include="Proxy\ProxyTests.cs" />
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
     <Compile Include="WebDriver\Elements\Images\Histogram.cs" />
@@ -114,7 +113,6 @@
     <Compile Include="WebDriver\Elements\Types\Radio.cs" />
     <Compile Include="WebDriver\Element.cs" />
     <Compile Include="Core\ActionList.cs" />
-    <Compile Include="Proxy\FiddlerProxy.cs" />
     <Compile Include="WebDriver\BasePageObject.cs" />
     <Compile Include="Core\Common.cs" />
     <Compile Include="Core\Config.cs" />
@@ -124,7 +122,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Proxy\SAZFormat.cs" />
     <Compile Include="Core\TestBase.cs" />
     <Compile Include="Core\TestDataContainer.cs" />
     <Compile Include="WebDriver\Elements\Validation\ValidationElement.cs" />
@@ -169,10 +166,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FiddlerCore, Version=2.4.4.6, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\FiddlerCore\FiddlerCore.dll</HintPath>
-    </Reference>
     <Reference Include="Gallio, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <HintPath>..\packages\Gallio_MbUnit.3.4.14.0\lib\net40\Gallio.dll</HintPath>
     </Reference>

@@ -123,18 +123,7 @@ namespace ProtoTest.Golem.Core
             return name;
         }
 
-        public static string GetCallStack()
-        {
-            var stackTrace = new StackTrace(); // get call stack
-            StackFrame[] stackFrames = stackTrace.GetFrames(); // get method calls (frames)
-            string name = "";
-            // write call stack method names
-            foreach (StackFrame stackFrame in stackFrames)
-            {
-                name += stackFrame.GetMethod().Name + ".";
-            }
-            return name;
-        }
+
 
         public string GetValueFromXmlFile(string filepath, string xpath)
         {
