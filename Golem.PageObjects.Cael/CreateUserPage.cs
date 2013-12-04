@@ -36,11 +36,11 @@ namespace Golem.PageObjects.Cael
             string address2, string city, string state, string zip, string phone, string DOB_Month, string DOB_Day,
             string DOB_Year)
         {
-            EmailField.Text = email;
+            if(null != email) EmailField.Text = email;
             PasswordField.Text = password;
             VerifyPasswordField.Text = password;
-            FirstNameField.Text = firstName;
-            LastNameField.Text = lastName;
+            if (null != firstName) FirstNameField.Text = firstName;
+            if (null != lastName) LastNameField.Text = lastName;
             AddressField.Text = address1;
             AddressField2.Text = address2;
             CityField.Text = city;
