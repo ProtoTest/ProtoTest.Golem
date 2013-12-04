@@ -13,7 +13,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Types
         {
         }
 
-        public Checkbox SetCheckbox(bool isChecked)
+        public new Checkbox SetCheckbox(bool isChecked)
         {
             if (element.Selected != isChecked)
             {

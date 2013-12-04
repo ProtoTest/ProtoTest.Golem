@@ -78,11 +78,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 try
                 {
-<<<<<<< HEAD
-                    return (element.Enabled);
-=======
                     return element.Enabled;
->>>>>>> 01f34130a961237adf11aa8c3ecfc7fe95f07312
                 }
                 catch (Exception)
                 {
