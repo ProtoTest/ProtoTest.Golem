@@ -63,6 +63,7 @@
     <Compile Include="PortfolioTests.cs" />
     <Compile Include="SmokeTest.cs" />
     <Compile Include="UserTests.cs" />
+    <Compile Include="ResetPasswordTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

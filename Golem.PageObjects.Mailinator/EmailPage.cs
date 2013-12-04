@@ -17,6 +17,17 @@ namespace Golem.PageObjects.Mailinator
             EmailBodyTextField.FindElement(ByE.PartialText(text)).Click();
         }
 
+        public void ClickLinkInBody(string link_text, string href_partial_text)
+        {
+            EmailBodyTextField.FindElement(ByE.PartialText(link_text)).GetParent().FindInSiblings(ByE.PartialAttribute("a", "@href", href_partial_text)).Click();
+        }
+
+        public void DeleteEmail()
+        {
+            Element Delete_Button = new Element("Delete email button", By.ClassName("icon-trash"));
+            Delete_Button.Click();
+        }
+
         public override void WaitForElements()
         {
             EmailBodyTextField.Verify().Visible();
