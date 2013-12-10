@@ -20,5 +20,8 @@
     <dependencies>
       <dependency id="Castle.Core" version="3.2.0.0" />
     </dependencies>
+    <references>
+      <reference file="TestStack.White.dll" />
+    </references>
   </metadata>
 </package>
