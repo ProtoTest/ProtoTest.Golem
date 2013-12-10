@@ -112,8 +112,8 @@ namespace ProtoTest.Golem.WebDriver
 
         public void LaunchBrowser()
         {
-            lock (locker)
-            {
+            //lock (locker)
+            //{
                 if (Config.Settings.runTimeSettings.LaunchBrowser)
                 {
                     if (Config.Settings.runTimeSettings.RunOnRemoteHost)
@@ -140,7 +140,7 @@ namespace ProtoTest.Golem.WebDriver
                     var tempDriver = new RemoteWebDriver(new Uri("http://127.0.0.1:4723/wd/hub"), capabilities);
                     driver = new EventedWebDriver(tempDriver).driver;
                 }
-            }
+            //}
         }
 
         [SetUp]

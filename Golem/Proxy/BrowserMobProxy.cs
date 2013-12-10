@@ -17,13 +17,11 @@ namespace ProtoTest.Golem.Proxy
 {
     public class BrowserMobProxy
     {
-        private static readonly string zipPath = Directory.GetCurrentDirectory() +
-                                                 @"\Proxy\browsermob-proxy-2.0-beta-8-bin.zip";
+        private static readonly string zipPath = Directory.GetCurrentDirectory() + @"\Proxy\browsermob-proxy-2.0-beta-8-bin.zip";
 
-        private static readonly string batchPath = Directory.GetCurrentDirectory() +
-                                                   @"\Proxy\browsermob-proxy-2.0-beta-8\bin\browsermob-proxy";
+        private static readonly string batchPath = @"C:\BMP\browsermob-proxy-2.0-beta-8\bin\browsermob-proxy";
 
-        private static readonly string extractPath = Directory.GetCurrentDirectory() + @"\Proxy";
+        private static readonly string extractPath = @"C:\BMP";
 
         private int proxyPort;
         private int serverPort;
@@ -52,8 +50,8 @@ namespace ProtoTest.Golem.Proxy
             var StartInfo = new ProcessStartInfo();
             StartInfo.FileName = batchPath;
             StartInfo.Arguments = "-port " + this.serverPort;
-            StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            StartInfo.CreateNoWindow = true;
+            StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+            StartInfo.CreateNoWindow = false;
             this.serverProcess.StartInfo = StartInfo;
             this.serverProcess.Start();
             WaitForServerToStart();
@@ -80,7 +78,7 @@ namespace ProtoTest.Golem.Proxy
                     return true;
                     Thread.Sleep(1000);
             }
-            return false;
+            throw new Exception("Could not start the BrowserMobProxy " + response.StatusDescription);
         }
 
         public void UnzipProxy()
@@ -103,6 +101,10 @@ namespace ProtoTest.Golem.Proxy
             request.Method = Method.POST;
             request.Resource = "/proxy?port="+this.proxyPort;
             response = client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Could not start Proxy at port : " + port + " : " + response.StatusDescription);
+            }
         }
 
         public void CreateHar()
@@ -111,6 +113,10 @@ namespace ProtoTest.Golem.Proxy
             request.Method = Method.PUT;
             request.Resource = string.Format("/proxy/{0}/har", proxyPort);
             response = client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Could not create Har : " + response.StatusDescription);
+            }
         }
 
         public string GetPrettyHar()
@@ -126,6 +132,10 @@ namespace ProtoTest.Golem.Proxy
             request.Method = Method.PUT;
             request.Resource = string.Format("/proxy/{0}/har/pageRef", proxyPort);
             response = client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Could not create Page : " + response.StatusDescription);
+            }
         }
 
         public void DeleteProxy(int port = 0)
@@ -136,6 +146,10 @@ namespace ProtoTest.Golem.Proxy
             request.Method = Method.DELETE;
             request.Resource = string.Format("/proxy/{0}", port);
             response = client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Could not delete proxy at port : " + port + " : " + response.StatusDescription);
+            }
         }
 
         public string GetHarString()
@@ -154,6 +168,10 @@ namespace ProtoTest.Golem.Proxy
                 request.Method = Method.GET;
                 request.Resource = string.Format("/proxy/{0}/har ", proxyPort);
                 IRestResponse<HarResult> responseHar = client.Execute<HarResult>(request);
+                if (responseHar.StatusCode != HttpStatusCode.OK)
+                {
+                    throw new Exception("Could not get har for proxy at port " + proxyPort + " : " + responseHar.StatusCode);
+                }
                 return JsonConvert.DeserializeObject<HarResult>(responseHar.Content);
             }
             catch (Exception)

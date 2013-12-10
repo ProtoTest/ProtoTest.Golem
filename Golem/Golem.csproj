@@ -100,6 +100,7 @@
     <Compile Include="Rest\When.cs" />
     <Compile Include="WebDriver\Elements\Images\ImageExtensions.cs" />
     <Compile Include="WebDriver\ScreenshotRemoteDriver.cs" />
+    <Compile Include="WebDriver\Spellchecker.cs" />
     <Compile Include="WebDriver\WebDriverTestBase.cs" />
     <Compile Include="WebDriver\ElementVerification.cs" />
     <Compile Include="WebDriver\Elements\Types\Button.cs" />

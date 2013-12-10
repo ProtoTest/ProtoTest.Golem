@@ -84,7 +84,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = "localhost:" + Config.Settings.httpProxy.proxyPort;
-                options.AddAdditionalCapability("proxy", proxy);
+                options.Proxy = proxy;
             }
             return new ChromeDriver(options);
         }
