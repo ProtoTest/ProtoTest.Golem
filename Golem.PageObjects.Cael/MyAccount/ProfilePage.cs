@@ -19,6 +19,7 @@ namespace Golem.PageObjects.Cael.MyAccount
         public ValidationElement NameOfCollege_Drp = new ValidationElement("Name of College",
                                                                            By.Id("schoolDDList"),
                                                                            By.XPath("//*[@class='schoolDDListformError parentFormform formError']/div"));
+        public Element CollegeNotListed_CheckBox = new Element("College not listed checkbox", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_checkboxMycollegenotinList"));
         public Element CollegeCredit_Radio = new Element("College Credit Interest Radio", ByE.PartialAttribute("input", "@id", "investigationRButton_0"));
         public Element CollegeCreditsEarned_Drp = new Element("College Credits Earned Dropdown", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_creditsEarnedDDList"));
         public Element CollegeCreditsNeed_Drp = new Element("College Credits Needed Dropdown", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_creditsRemainingDDList"));
@@ -59,7 +60,11 @@ namespace Golem.PageObjects.Cael.MyAccount
         {
             if(education != null) EducationAchieved_Drp.SelectOption(education);
             if (areaOfStudy != null) AreaOfStudy_Drp.SelectOption(areaOfStudy);
-            if (nameOfCollege != null) NameOfCollege_Drp.SelectOption(nameOfCollege);
+            if (nameOfCollege != null)
+            {
+                CollegeNotListed_CheckBox.SetCheckbox(false);
+                NameOfCollege_Drp.SelectOption(nameOfCollege);
+            }
             if (collegeCreditInvestigated != null) CollegeCredit_Radio.Click();
             if (collegeCreditsEarned != null) CollegeCreditsEarned_Drp.SelectOption(collegeCreditsEarned);
             if (collegeCreditsNeeded != null) CollegeCreditsNeed_Drp.SelectOption(collegeCreditsNeeded);
@@ -130,6 +135,7 @@ namespace Golem.PageObjects.Cael.MyAccount
             string race, string militaryExperience, string employmentStatus, string annualIncome)
         {
             EducationAchieved_Drp.VerifyTextValidation(education);
+            CollegeNotListed_CheckBox.SetCheckbox(false);
             NameOfCollege_Drp.VerifyTextValidation(nameOfCollege);
             Gender_Radio.VerifyTextValidation(gender);
             Race_Drp.VerifyTextValidation(race);
