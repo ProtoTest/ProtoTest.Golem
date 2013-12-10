@@ -50,6 +50,23 @@ namespace Golem.Tests.Cael
         [Test,DependsOn("CreateNewUsers")]
         public void ActivateUsers()
         {
+            bool forceSendEmails = Common.IsTruthy(Config.GetConfigValue("ForceSendKenticoEmails", "False"));
+
+            if (forceSendEmails)
+            {
+                string userEmail1 = Config.GetConfigValue("UserEmail1", null);
+                string userEmail2 = Config.GetConfigValue("UserEmail2", null);
+                string assessorEmail = Config.GetConfigValue("AssessorEmail", null);
+
+                Assert.IsNotNull(userEmail1);
+                Assert.IsNotNull(userEmail2);
+                Assert.IsNotNull(assessorEmail);
+
+                string[] emails = { userEmail1, userEmail2, assessorEmail };
+
+                Golem.PageObjects.Cael.Kentico.Login(global_admin, password).ForceSendEmail(emails).Logout();
+            }
+
             // Activate Student and assessor accounts
             ActivateUser(email1);
             ActivateUser(email2);

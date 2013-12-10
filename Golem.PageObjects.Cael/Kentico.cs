@@ -21,7 +21,7 @@ namespace Golem.PageObjects.Cael
         public Button Data = new Button("Data Link",By.XPath("//span[text()='Data']"));
         public Button Save = new Button("Save Button",By.XPath("//span[text()='Save']"));
 
-        public Link LearningCounts_Link = new Link("Learning Counts Tab link", By.Id("TabItem_6"));
+        public Link LearningCounts_Link = new Link("Learning Counts Tab link", By.XPath("//span[text()='LearningCounts']"));
 
         public static Kentico Login(string username, string password)
         {
@@ -41,13 +41,13 @@ namespace Golem.PageObjects.Cael
             LearningCounts_Link.Verify().Visible().Click();
 
             // This link is within an iframe, and then another frame
-            WebDriverTestBase.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("toolscontent").FindElement(ByE.PartialText("new Assessor")).Click();
+            WebDriverTestBase.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("toolscontent").WaitForPresent(ByE.PartialText("new Assessor")).Click();
 
             Element username_TextField = new Element("New Assessor User Name text field", By.Id("m_c_ucUserName_txtUserName"));
             Element firstname_TextField = new Element("New Assessor First Name text field", By.Id("m_c_TextBoxFirstName"));
             Element lastname_TextField = new Element("New Assessor Last Name text field", By.Id("m_c_TextBoxLastName"));
             Element email_TextField = new Element("New assessor email", By.Id("m_c_TextBoxEmail"));
-            Element department_MultiSelect = new Element("New assessor Department Dropdown", By.Id("m_c_lstDepartments"));
+            Element department_MultiSelect = new Element("New assessor Department multi select", By.Id("m_c_lstDepartments"));
             Element subjects_MultiSelect = new Element("New assessor subjects multi select", By.Id("m_c_subcategoryDDList"));
             Button save_Button = new Button("New assessor save button", By.Id("m_actionsElem_editMenuElem_menu_menu_HA_00"));
             Element status_Label = new Element("New assessor created success label", By.Id("m_c_LabelMessage"));
@@ -59,8 +59,13 @@ namespace Golem.PageObjects.Cael
 
             for (int i = 0; i < departments.Count(); i++)
             {
+                department_MultiSelect.Verify().Text(departments[i]);
                 department_MultiSelect.SelectOption(departments[i]);
+                
             }
+
+            // TODO: create an element verification to verify options in a multi-select
+            Common.Delay(500);
 
             for (int i = 0; i < subjects.Count(); i++)
             {
@@ -123,8 +128,62 @@ namespace Golem.PageObjects.Cael
             return new Kentico();
         }
 
+        public static void SelectEmail(string email)
+        {
+            try
+            {
+                // Kentico interface uses frames; need to default the webdriver back to main content,
+                // then switch through the frames again to select email addresses
+                WebDriverTestBase.driver.SwitchTo().DefaultContent().
+                    SwitchTo().Frame("m_c_cmsdesktop").
+                    SwitchTo().Frame("frameMain").
+                    SwitchTo().Frame("content").
+                    FindElementWithText(email).FindInSiblings(By.TagName("input")).Click();
+            }
+            catch (Exception)
+            {
+                // do nothing as webdriver failed to find this email address in the queue
+            }
+        }
+
+        public Kentico ForceSendEmail(string[] emails)
+        {
+            Element ResendSelected_Button = new Element("Resend Selected Button", By.XPath("//span[text()='Resend selected']"));
+
+            SiteManager.Verify().Visible().Click();
+            Administration.Verify().Visible().Click();
+
+            Common.Delay(3000);
+
+            // The Email Queue link is within an iframe, and then another frame
+            WebDriverTestBase.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("admintree").FindElement(By.XPath("//span[text()='E-mail queue']")).Click();
+
+            Common.Delay(3000);
+
+            foreach (string email in emails)
+            {
+                SelectEmail(email);
+            }
+
+             ResendSelected_Button.Click();
+
+            // Handle the alert popup to select OK
+            WebDriverTestBase.driver.SwitchTo().Alert().Accept();
+
+            return new Kentico();
+        }
+
+        public void Logout()
+        {
+            // Get out of whatever frame we are currently in
+            WebDriverTestBase.driver.SwitchTo().DefaultContent();
+
+            new Element("Sign out button", By.XPath("//span[text()='Sign Out']")).Click();
+        }
+
         public override void WaitForElements()
         {
         }
+
     }
 }
