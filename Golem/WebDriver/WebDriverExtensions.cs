@@ -131,7 +131,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
-            wait.Until(d => ((d.FindElements(by).Count > 0) && d.FindElement(@by).Displayed));
+            wait.Until(d => ((d.FindElements(by).Count > 0) && d.FindElement(by).Displayed));
             return driver.FindElement(by);
         }
 

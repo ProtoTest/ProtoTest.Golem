@@ -54,15 +54,7 @@ namespace Golem.Tests.Cael
 
             if (forceSendEmails)
             {
-                string userEmail1 = Config.GetConfigValue("UserEmail1", null);
-                string userEmail2 = Config.GetConfigValue("UserEmail2", null);
-                string assessorEmail = Config.GetConfigValue("AssessorEmail", null);
-
-                Assert.IsNotNull(userEmail1);
-                Assert.IsNotNull(userEmail2);
-                Assert.IsNotNull(assessorEmail);
-
-                string[] emails = { userEmail1, userEmail2, assessorEmail };
+                string[] emails = { email1, email2, assessor_email };
 
                 Golem.PageObjects.Cael.Kentico.Login(global_admin, password).ForceSendEmail(emails).Logout();
             }
@@ -92,7 +84,7 @@ namespace Golem.Tests.Cael
             string[] departments = { "English" };
             string[] subjects = { "Literature (Classics, World, English, etc.)", "Literary Theory" };
 
-            Golem.PageObjects.Cael.Kentico.Login(global_admin, password).CreateAssessor(email, departments, subjects);
+            Golem.PageObjects.Cael.Kentico.Login(global_admin, password).CreateAssessor(email, departments, subjects).Logout();
 
             // Update the assessor email
             Common.UpdateConfigFile(configKey, email);

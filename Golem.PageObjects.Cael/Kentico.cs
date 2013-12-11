@@ -135,7 +135,7 @@ namespace Golem.PageObjects.Cael
             try
             {
                 // Click the email checkbox
-                WebDriverTestBase.driver.WaitForVisible(By.XPath("//*[text()='" + email + "']")).FindInSiblings(By.TagName("input")).Click();
+                WebDriverTestBase.driver.WaitForVisible(By.XPath("//*[text()='" + email + "']"), 5).FindInSiblings(By.TagName("input")).Click();
                 Common.Log("Found and selected email " + email);
                 emailFound = true;
                 Common.Delay(500);
