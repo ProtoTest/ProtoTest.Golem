@@ -128,15 +128,12 @@ namespace Golem.PageObjects.Cael
             return new Kentico();
         }
 
-        public static bool SelectEmail(string email)
+        private bool SelectEmail(string email)
         {
             bool emailFound = false;
 
             try
             {
-                // Wait for the email table to be visible
-                WebDriverTestBase.driver.WaitForVisible(By.Id("m_c_gridEmailQueue_g_v"));
-
                 // Click the email checkbox
                 WebDriverTestBase.driver.WaitForVisible(By.XPath("//*[text()='" + email + "']")).FindInSiblings(By.TagName("input")).Click();
                 Common.Log("Found and selected email " + email);
@@ -168,6 +165,9 @@ namespace Golem.PageObjects.Cael
                 SwitchTo().Frame("m_c_cmsdesktop").
                 SwitchTo().Frame("frameMain").
                 SwitchTo().Frame("content");
+            
+            // Wait for the email table to be visible
+            WebDriverTestBase.driver.WaitForVisible(By.Id("m_c_gridEmailQueue_g_v"));
 
             foreach (string email in emails)
             {
