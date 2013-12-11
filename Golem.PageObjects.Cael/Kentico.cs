@@ -128,48 +128,64 @@ namespace Golem.PageObjects.Cael
             return new Kentico();
         }
 
-        public static void SelectEmail(string email)
+        public static bool SelectEmail(string email)
         {
+            bool emailFound = false;
+
             try
             {
-                // Kentico interface uses frames; need to default the webdriver back to main content,
-                // then switch through the frames again to select email addresses
-                WebDriverTestBase.driver.SwitchTo().DefaultContent().
-                    SwitchTo().Frame("m_c_cmsdesktop").
-                    SwitchTo().Frame("frameMain").
-                    SwitchTo().Frame("content").
-                    FindElementWithText(email).FindInSiblings(By.TagName("input")).Click();
+                // Wait for the email table to be visible
+                WebDriverTestBase.driver.WaitForVisible(By.Id("m_c_gridEmailQueue_g_v"));
+
+                // Click the email checkbox
+                WebDriverTestBase.driver.WaitForVisible(By.XPath("//*[text()='" + email + "']")).FindInSiblings(By.TagName("input")).Click();
                 Common.Log("Found and selected email " + email);
+                emailFound = true;
+                Common.Delay(500);
             }
             catch (Exception)
             {
                 // do nothing as webdriver failed to find this email address in the queue
             }
+
+            return emailFound;
         }
 
         public Kentico ForceSendEmail(string[] emails)
         {
+            bool anyEmailsFound = false;
             Element ResendSelected_Button = new Element("Resend Selected Button", By.XPath("//span[text()='Resend selected']"));
 
             SiteManager.Verify().Visible().Click();
             Administration.Verify().Visible().Click();
 
-            Common.Delay(3000);
-
             // The Email Queue link is within an iframe, and then another frame
-            WebDriverTestBase.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("admintree").FindElement(By.XPath("//span[text()='E-mail queue']")).Click();
+            WebDriverTestBase.driver.SwitchTo().Frame("m_c_cmsdesktop").SwitchTo().Frame("admintree").WaitForVisible(By.XPath("//span[text()='E-mail queue']")).Click();
 
-            Common.Delay(3000);
+            // Kentico interface uses frames; need to default the webdriver back to main content,
+            // then switch through the frames again to select email addresses
+            WebDriverTestBase.driver.SwitchTo().DefaultContent().
+                SwitchTo().Frame("m_c_cmsdesktop").
+                SwitchTo().Frame("frameMain").
+                SwitchTo().Frame("content");
 
             foreach (string email in emails)
             {
-                SelectEmail(email);
+                anyEmailsFound |= SelectEmail(email);
             }
 
-             ResendSelected_Button.Click();
+            if (anyEmailsFound)
+            {
+                ResendSelected_Button.Click();
 
-            // Handle the alert popup to select OK
-            WebDriverTestBase.driver.SwitchTo().Alert().Accept();
+                // Handle the alert popup to select OK
+                WebDriverTestBase.driver.SwitchTo().Alert().Accept();
+                Common.Log("Clicked OK on the Alert popup to send emails");
+            }
+            else
+            {
+                Common.Log("Did not find any emails to send");
+            }
 
             return new Kentico();
         }
@@ -180,6 +196,9 @@ namespace Golem.PageObjects.Cael
             WebDriverTestBase.driver.SwitchTo().DefaultContent();
 
             new Element("Sign out button", By.XPath("//span[text()='Sign Out']")).Click();
+            
+            // Verify the default home page is displayed
+            new Element("Create Account Link", By.LinkText("Create Account")).Verify().Visible();
         }
 
         public override void WaitForElements()
