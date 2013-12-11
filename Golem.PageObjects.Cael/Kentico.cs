@@ -139,6 +139,7 @@ namespace Golem.PageObjects.Cael
                     SwitchTo().Frame("frameMain").
                     SwitchTo().Frame("content").
                     FindElementWithText(email).FindInSiblings(By.TagName("input")).Click();
+                Common.Log("Found and selected email " + email);
             }
             catch (Exception)
             {
