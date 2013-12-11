@@ -94,7 +94,6 @@
     <Compile Include="Proxy\HAR\Response.cs" />
     <Compile Include="Proxy\HAR\Timings.cs" />
     <Compile Include="TestStack.White\BaseScreenObject.cs" />
-    <Compile Include="TestStack.White\Component.cs" />
     <Compile Include="TestStack.White\WhiteTestBase.cs" />
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
@@ -197,7 +196,7 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy /s /y "$(SolutionDir)packages\NHunspell.1.1.1\native\*.*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
