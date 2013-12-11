@@ -15,7 +15,7 @@ namespace Golem.White.Tests.LQP
         public void PleaseWorkTest()
         {
 
-            AboutScreen.clickOkButton();
+            AboutScreen.StartScreen().clickOkButton();
         }
     }
 }

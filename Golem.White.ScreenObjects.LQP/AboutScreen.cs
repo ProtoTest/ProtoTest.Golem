@@ -2,19 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TestStack.White.UIItems;
+using TestStack.White.UIItems.WindowItems;
+using TestStack.White.UIItems.Finders;
 using Golem.TestStack.White;
 
 namespace Golem.White.ScreenObjects.LQP
 {
     public class AboutScreen : BaseScreenObject
     {
-        public static Component OkButton = new Component("About", "OK", "Button");
+        public Window wind = WhiteTestBase._app.GetWindow("About");
+        public Button okButt;
 
-       
-
-        public static void clickOkButton()
+        public AboutScreen()
         {
-            OkButton.Click();
+            SearchCriteria buttonname = SearchCriteria.ByText("OK");
+            okButt = wind.Get<Button>(buttonname);            
+        }
+
+        public static AboutScreen StartScreen()
+        {
+            return new AboutScreen();
+        }
+
+        public void clickOkButton()
+        {
+            okButt.Click();
         }
 
     }
