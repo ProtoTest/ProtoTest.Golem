@@ -251,10 +251,22 @@ namespace ProtoTest.Golem.WebDriver
 
         public static Image GetScreenshot(this IWebDriver driver)
         {
-            if (driver == null) return null;
-            Screenshot ss = ((ITakesScreenshot) driver).GetScreenshot();
-            var ms = new MemoryStream(ss.AsByteArray);
-            return Image.FromStream(ms);
+            Image screen_shot = null;
+
+            try
+            {
+                if (driver == null) return screen_shot;
+                Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
+                var ms = new MemoryStream(ss.AsByteArray);
+                screen_shot = Image.FromStream(ms);
+            }
+            catch (Exception e)
+            {
+                TestLog.Failures.WriteLine("Failed to take screenshot: " + e.Message);
+            }
+
+            return screen_shot;
+            
         }
 
         public static void SetText(this IWebElement element, string text)
