@@ -27,6 +27,7 @@ namespace Golem.PageObjects.Cael.Setup_Portfolio
         public Element SupportDescription_Field = new Element("Support Description Field", By.XPath("//textarea[@ng-model='supportingDocument.description']"));
         public Element SupportSave_Button = new Element("Support save button", By.XPath("//button[text()='Save']"));
         public Element FileUpload_FileChooser = new Element("File UPload file cho oser", By.Id("file"));
+        public Element LearningNarrativeFileUploadedLink = new Element("Learning Narrative file successfully uploaded link", By.Id("narrative_link"));
 
         public EditPortfolioPage AddSupportDocument()
         {
@@ -54,6 +55,8 @@ namespace Golem.PageObjects.Cael.Setup_Portfolio
         public EditPortfolioPage ChooseNarrativeFile(string filePath)
         {
             LearningNarrative_FileChooser.SendKeys(filePath);
+            // verify text of just the file name with '\' removed
+            LearningNarrativeFileUploadedLink.Verify().Visible().Verify().Text(filePath.Substring(filePath.LastIndexOf('\\') + 1));
             return this;
         }
 
