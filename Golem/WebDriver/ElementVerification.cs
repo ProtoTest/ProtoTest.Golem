@@ -78,7 +78,7 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    TestContext.CurrentContext.IncrementAssertCount();
+                //    TestContext.CurrentContext.IncrementAssertCount();
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
                         element.Highlight();
                     return element;
@@ -100,7 +100,6 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    TestContext.CurrentContext.IncrementAssertCount();
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
                         element.Highlight();
                     return element;
@@ -123,7 +122,7 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    TestContext.CurrentContext.IncrementAssertCount();
+                   // TestContext.CurrentContext.IncrementAssertCount();
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
                         element.Highlight();
                     return element;
@@ -145,7 +144,7 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    TestContext.CurrentContext.IncrementAssertCount();
+                //    TestContext.CurrentContext.IncrementAssertCount();
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
                         element.Highlight();
                     return element;
@@ -166,7 +165,7 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    TestContext.CurrentContext.IncrementAssertCount();
+                //    TestContext.CurrentContext.IncrementAssertCount();
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
                         element.Highlight();
                     return element;
@@ -187,7 +186,7 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    TestContext.CurrentContext.IncrementAssertCount();
+               //     TestContext.CurrentContext.IncrementAssertCount();
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
                         element.Highlight();
                     return element;
@@ -208,7 +207,7 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    TestContext.CurrentContext.IncrementAssertCount();
+               //     TestContext.CurrentContext.IncrementAssertCount();
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
                         element.Highlight();
                     return element;

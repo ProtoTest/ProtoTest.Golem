@@ -13,11 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.PageObjects.DTVE", "G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.Tests.DTVE", "Golem.Tests.DTVE\Golem.Tests.DTVE.csproj", "{BDC55C0B-1219-430F-A5D9-C5F4DCC5BAFB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8B8FC481-7BDD-4502-BE04-EB36D32736A4}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem", "Golem\Golem.csproj", "{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.Tests.Appium", "Golem.Tests.Appium\Golem.Tests.Appium.csproj", "{6525FF11-72B4-486A-93E7-D44FDBE3F5BC}"

@@ -1,4 +1,5 @@
-﻿using MbUnit.Framework;
+﻿using Gallio.Framework;
+using MbUnit.Framework;
 using Golem.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;
 
@@ -11,8 +12,10 @@ namespace Golem.Tests.Google
         public static void TestImages()
         {
            GoogleHomePage.OpenGoogle().VerifyImages();
+            
         }
 
+        [Test]
         public void TestSearch()
         {
             var searchText = "Selenium";

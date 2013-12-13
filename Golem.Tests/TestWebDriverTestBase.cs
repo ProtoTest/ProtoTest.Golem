@@ -27,7 +27,7 @@ namespace Golem.Tests
         [Test]
         public void TestDefaultBrowser()
         {
-            Assert.AreEqual(browser, WebDriverBrowser.Browser.Firefox);
+            Assert.AreEqual(browser, WebDriverBrowser.Browser.Chrome);
         }
         [Test]
         public void TestEventFiringDriverLaunches()

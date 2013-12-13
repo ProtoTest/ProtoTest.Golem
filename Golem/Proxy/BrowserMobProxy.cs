@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using Gallio.Framework;
 using Gallio.Model.Filters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -54,13 +55,34 @@ namespace ProtoTest.Golem.Proxy
             StartInfo.CreateNoWindow = false;
             this.serverProcess.StartInfo = StartInfo;
             this.serverProcess.Start();
-            WaitForServerToStart();
             client.BaseUrl = "http://localhost:" + serverPort;
+            WaitForServerToStart();
+        }
+
+        public void KillOldProxy()
+        {
+            Process[] runningProcesses = Process.GetProcesses();
+            foreach (Process process in runningProcesses)
+            {
+                try
+                {
+                    if ((process.ProcessName == "java")&&(process.StartInfo.CreateNoWindow==false))
+                    {
+                        Common.Log("Killing old BMP Proxy");
+                        process.Kill();
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+            }
         }
 
         public void QuitServer()
         {
-            Common.Log("Stopping BrowserMobProxy");
+            Common.Log("Stopping BrowserMobProxy Server");
             this.serverProcess.CloseMainWindow();
             this.serverProcess.Kill();
             
@@ -78,7 +100,7 @@ namespace ProtoTest.Golem.Proxy
                     return true;
                     Thread.Sleep(1000);
             }
-            throw new Exception("Could not start the BrowserMobProxy " + response.StatusDescription);
+            throw new Exception("Could not start the BrowserMobProxy " + response.StatusCode);
         }
 
         public void UnzipProxy()
@@ -93,6 +115,20 @@ namespace ProtoTest.Golem.Proxy
             }
         }
 
+        public void QuitProxy(int port = 0)
+        {
+            if (port == 0) port = Config.Settings.httpProxy.proxyPort;
+            proxyPort = port;
+            Common.Log("Quitting Proxy on Port " + port);
+            request.Method = Method.DELETE;
+            request.Resource = "/proxy/" + this.proxyPort;
+            response = client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                TestLog.Warnings.WriteLine("Could not quit proxy on port : " + proxyPort);
+            }
+        }
+
         public void CreateProxy(int port = 0)
         {
             if (port == 0) port = Config.Settings.httpProxy.proxyPort;
@@ -103,19 +139,21 @@ namespace ProtoTest.Golem.Proxy
             response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Could not start Proxy at port : " + port + " : " + response.StatusDescription);
+                throw new Exception("Could not start Proxy at port : " + port + " : " + response.StatusCode);
             }
         }
 
         public void CreateHar()
         {
+            response = new RestResponse();
+            request = new RestRequest();
             Common.Log("Creating a new Har");
             request.Method = Method.PUT;
             request.Resource = string.Format("/proxy/{0}/har", proxyPort);
             response = client.Execute(request);
-            if (response.StatusCode != HttpStatusCode.OK)
+            if  (response.ResponseStatus!=ResponseStatus.Completed)
             {
-                throw new Exception("Could not create Har : " + response.StatusDescription);
+                throw new Exception("Could not create Har : " + response.StatusCode);
             }
         }
 
@@ -134,7 +172,7 @@ namespace ProtoTest.Golem.Proxy
             response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Could not create Page : " + response.StatusDescription);
+                throw new Exception("Could not create Page : " + response.StatusCode);
             }
         }
 
@@ -148,7 +186,7 @@ namespace ProtoTest.Golem.Proxy
             response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Could not delete proxy at port : " + port + " : " + response.StatusDescription);
+                throw new Exception("Could not delete proxy at port : " + port + " : " + response.StatusCode);
             }
         }
 

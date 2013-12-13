@@ -62,6 +62,7 @@ namespace ProtoTest.Golem.Core
         public void SetUp()
         {
             LogEvent(Common.GetCurrentTestName() + " started");
+            StartNewProxy();
         }
 
         [TearDown]
@@ -69,8 +70,10 @@ namespace ProtoTest.Golem.Core
         {
             LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
             GetHarFile();
+            QuitProxy();
             AssertNoVerificationErrors();
             DeleteTestData();
+            
         }
 
 
@@ -81,14 +84,14 @@ namespace ProtoTest.Golem.Core
             SetupEvents();
             testDataCollection = new Dictionary<string, TestDataContainer>();
             SetTestExecutionSettings();
-            StartProxy();
+            StartProxyServer();
         }
 
 
         [FixtureTearDown]
         public void SuiteTearDown()
         {
-            QuitProxy();
+            QuitProxyServer();
             RemoveEvents();
         }
 
@@ -121,12 +124,12 @@ namespace ProtoTest.Golem.Core
                 string name = Common.GetCurrentTestName();
                 if (!testDataCollection.ContainsKey(name))
                 {
-                    //lock (locker)
-                    //{
+                    lock (locker)
+                    {
                         var container = new TestDataContainer(name);
                         testDataCollection.Add(name, container);
                         return container;
-                    //}
+                    }
                 }
                 return testDataCollection[name];
             }
@@ -191,20 +194,6 @@ namespace ProtoTest.Golem.Core
         }
 
 
-        private void LogHttpTrafficMetrics()
-        {
-            if (Config.Settings.httpProxy.useProxy)
-            {
-                //TestBase.proxy.GetSessionMetrics();
-                //TestLog.BeginSection("HTTP Metrics");
-                //TestLog.WriteLine("Number of Requests : " + TestBase.proxy.numSessions);
-                //TestLog.WriteLine("Min Response Time : " + TestBase.proxy.minResponseTime);
-                //TestLog.WriteLine("Max Response Time : " + TestBase.proxy.maxResponseTime);
-                //TestLog.WriteLine("Avg Response Time : " + TestBase.proxy.avgResponseTime);
-                //TestLog.End();
-            }
-        }
-
         private void GetHarFile()
         {
             try
@@ -215,37 +204,52 @@ namespace ProtoTest.Golem.Core
                     proxy.SaveHarToFile();
                     TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".har",
                         "application/json", File.ReadAllBytes(TestBase.proxy.GetHarFilePath())));
-                    LogHttpTrafficMetrics();
                     proxy.CreateHar();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                
+                throw new Exception("Error caught getting BMP Har File : " + e.Message);
             }
            
         }
-
-        private void StartProxy()
+       
+         private void StartNewProxy()
         {
             try
             {
                 if (Config.Settings.httpProxy.startProxy)
                 {
-                    Common.KillProcess("java");
-                    proxy = new BrowserMobProxy();
-                    proxy.StartServer(Config.Settings.httpProxy.proxyServerPort);
+
                     proxy.CreateProxy(Config.Settings.httpProxy.proxyPort);
                     proxy.CreateHar();
-
                 }
             }
             catch (Exception e)
             {
+                throw new Exception("Error caught starting BMP Proxy : " + e.Message);
             }
         }
 
-        private void QuitProxy()
+        private void StartProxyServer()
+        {
+            try
+            {
+                if (Config.Settings.httpProxy.startProxy)
+                {
+                    
+                    proxy = new BrowserMobProxy();
+                    proxy.KillOldProxy();
+                    proxy.StartServer(Config.Settings.httpProxy.proxyServerPort);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error caught starting BMP Proxy Server : " + e.Message);
+            }
+        }
+
+        private void QuitProxyServer()
         {
             try
             {
@@ -254,7 +258,22 @@ namespace ProtoTest.Golem.Core
                     TestBase.proxy.QuitServer();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
+            {
+            }
+
+        }
+
+        private void QuitProxy()
+        {
+            try
+            {
+                if (Config.Settings.httpProxy.startProxy)
+                {
+                    TestBase.proxy.QuitProxy();
+                }
+            }
+            catch (Exception e)
             {
             }
             

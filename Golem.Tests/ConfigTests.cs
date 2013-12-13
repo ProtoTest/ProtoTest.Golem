@@ -11,6 +11,12 @@ namespace Golem.Tests
 {
     public class ConfigTests : TestBase
     {
+        [Test]
+        public void TestCustomConfigSettings()
+        {
+            string value = Config.GetConfigValue("CustomSetting", "default");
+            Assert.AreEqual(value,"WasFound");
+        }
 
         [Test]
         public void TestConfigSettingsAreModifiyable()

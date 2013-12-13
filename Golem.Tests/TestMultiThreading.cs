@@ -21,7 +21,7 @@ namespace Golem.Tests
             Config.Settings.runTimeSettings.DegreeOfParallelism = 10;
         }
       [Test, Parallelizable,ThreadedRepeat(10)]
-        public void Test()
+        public void TestThreadedRepeat()
         {
           OpenPage<GoogleHomePage>("http://www.google.com");
           Assert.AreEqual(testDataCollection.Count,10);

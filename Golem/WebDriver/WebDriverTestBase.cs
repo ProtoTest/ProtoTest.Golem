@@ -52,7 +52,9 @@ namespace ProtoTest.Golem.WebDriver
             if ((Config.Settings.reportSettings.screenshotOnError) &&
                 (TestContext.CurrentContext.Outcome != TestOutcome.Passed))
             {
-                TestLog.Failures.EmbedImage(null, testData.driver.GetScreenshot());
+                var screenshot = testData.driver.GetScreenshot();
+                if(screenshot!=null)
+                    TestLog.Failures.EmbedImage(null, screenshot);
             }
         }
 
@@ -77,6 +79,7 @@ namespace ProtoTest.Golem.WebDriver
             if ((Config.Settings.reportSettings.videoRecordingOnError) &&
                 (Common.GetTestOutcome() != TestOutcome.Passed))
             {
+            
                 TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
                 testData.recorder.Dispose();
             }
