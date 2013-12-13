@@ -90,6 +90,7 @@ namespace ProtoTest.Golem.WebDriver
             if (Config.Settings.runTimeSettings.LaunchBrowser)
             {
                 driver.Quit();
+                driver = null;
                 LogEvent(browser + " Browser Closed");
             }
         }

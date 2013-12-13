@@ -131,7 +131,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
-            wait.Until(d => ((d.FindElements(by).Count > 0) && d.FindElement(@by).Displayed));
+            wait.Until(d => ((d.FindElements(by).Count > 0) && d.FindElement(by).Displayed));
             return driver.FindElement(by);
         }
 
@@ -251,10 +251,22 @@ namespace ProtoTest.Golem.WebDriver
 
         public static Image GetScreenshot(this IWebDriver driver)
         {
-            if (driver == null) return null;
-            Screenshot ss = ((ITakesScreenshot) driver).GetScreenshot();
-            var ms = new MemoryStream(ss.AsByteArray);
-            return Image.FromStream(ms);
+            Image screen_shot = null;
+
+            try
+            {
+                if (driver == null) return screen_shot;
+                Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
+                var ms = new MemoryStream(ss.AsByteArray);
+                screen_shot = Image.FromStream(ms);
+            }
+            catch (Exception e)
+            {
+                TestLog.Failures.WriteLine("Failed to take screenshot: " + e.Message);
+            }
+
+            return screen_shot;
+            
         }
 
         public static void SetText(this IWebElement element, string text)
