@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Golem.PageObjects.Google;
 using MbUnit.Framework;
+using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 
@@ -30,6 +31,21 @@ namespace Golem.Tests
         {
             OpenPage<GoogleHomePage>("http://www.google.com/");
         }
-       
+
+        [Test]
+        public void TestProxyFilter()
+        {
+            OpenPage<GoogleHomePage>("http://www.google.com/");
+            var entries = proxy.FilterEntries("www.google.com");
+            Assert.AreEqual(1,entries.Count);
+            Assert.AreEqual("http://www.google.com",entries[0].Request.Url);
+        }
+
+        [Test]
+        public void TestHTTPValidation()
+        {
+            OpenPage<GoogleHomePage>("http://www.google.com/");
+           proxy.VerifyRequestMade("http://www.google.com");
+        }
     }
 }
