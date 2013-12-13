@@ -14,7 +14,7 @@ namespace Golem.PageObjects.Cael.MyAccount
         public Element PasswordField = new Element("Password Field", By.Id("passTextBox"));
         public Element VerifyField = new Element("Verify Field", By.Id("verifyTextBox"));
         public Element SaveChangesButton = new Element("Save Changes Button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_savePasswordButton"));
-        public Element SaveChangesComplete = new Element("Saved!", By.Id("lblSave3"));
+        public Element SaveChangesComplete = new Element("Saved! Label", By.Id("lblSave3"));
 
         public PasswordPage UpdateInfo(string email, string password, string savedCompletedText = "Saved!")
         {
@@ -22,7 +22,7 @@ namespace Golem.PageObjects.Cael.MyAccount
             PasswordField.SendKeys(password);
             VerifyField.SendKeys(password);
             SaveChangesButton.Click();
-            SaveChangesComplete.Verify().Visible().Verify().Text(savedCompletedText);
+            SaveChangesComplete.Verify(30).Visible().Verify(30).Text(savedCompletedText);
 
             return new PasswordPage();
         }
