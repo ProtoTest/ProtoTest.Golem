@@ -14,6 +14,8 @@ namespace Golem.Tests.Cael
     [TestFixture, DependsOn(typeof(PortfolioTests))]
     public class Kentico : WebDriverTestBase
     {
+        String admin = Config.GetConfigValue("GlobalAdmin", "msiwiec@prototest.com");
+
         [Test]
         public void AssignPortfoliosToAssessor()
         {
@@ -30,7 +32,7 @@ namespace Golem.Tests.Cael
             Assert.IsNotNull(portfolio_decline_id);
             Assert.IsNotNull(assessor_login);
 
-            String admin = Config.GetConfigValue("GlobalAdmin", "msiwiec@prototest.com");
+            
 
             Golem.PageObjects.Cael.Kentico.Login(admin, UserTests.password)
                 .AssignPortfolioToAssessor(portfolio_decline_id, assessor_login);

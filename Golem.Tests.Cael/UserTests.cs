@@ -50,6 +50,15 @@ namespace Golem.Tests.Cael
         [Test,DependsOn("CreateNewUsers")]
         public void ActivateUsers()
         {
+            bool forceSendEmails = Common.IsTruthy(Config.GetConfigValue("ForceSendKenticoEmails", "False"));
+
+            if (forceSendEmails)
+            {
+                string[] emails = { email1, email2, assessor_email };
+
+                Golem.PageObjects.Cael.Kentico.Login(global_admin, password).ForceSendEmail(emails).Logout();
+            }
+
             // Activate Student and assessor accounts
             ActivateUser(email1);
             ActivateUser(email2);
@@ -75,7 +84,7 @@ namespace Golem.Tests.Cael
             string[] departments = { "English" };
             string[] subjects = { "Literature (Classics, World, English, etc.)", "Literary Theory" };
 
-            Golem.PageObjects.Cael.Kentico.Login(global_admin, password).CreateAssessor(email, departments, subjects);
+            Golem.PageObjects.Cael.Kentico.Login(global_admin, password).CreateAssessor(email, departments, subjects).Logout();
 
             // Update the assessor email
             Common.UpdateConfigFile(configKey, email);
