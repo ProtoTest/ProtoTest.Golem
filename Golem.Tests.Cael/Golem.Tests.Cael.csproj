@@ -61,7 +61,7 @@
     <Compile Include="Kentico.cs" />
     <Compile Include="MyAccountTests.cs" />
     <Compile Include="PortfolioTests.cs" />
-    <Compile Include="SmokeTest.cs" />
+    <Compile Include="SmokeTests.cs" />
     <Compile Include="UserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
