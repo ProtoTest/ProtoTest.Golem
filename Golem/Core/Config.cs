@@ -118,7 +118,7 @@ namespace ProtoTest.Golem.Core
                 Hosts = GetHostsList();
                 LaunchBrowser = Common.IsTruthy(Config.GetConfigValue("LaunchBrowser", "True"));
                 TestTimeoutMin = int.Parse(Config.GetConfigValue("TestTimeoutMin", "5"));
-                ElementTimeoutSec = int.Parse(Config.GetConfigValue("ElementTimeoutSec", "5"));
+                ElementTimeoutSec = int.Parse(Config.GetConfigValue("ElementTimeoutSec", "20"));
                 PageTimeoutSec = int.Parse(Config.GetConfigValue("PageTimeoutSec", "30"));
                 EnvironmentUrl = Config.GetConfigValue("EnvironmentUrl", "");
                 DegreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "5"));
@@ -159,7 +159,7 @@ namespace ProtoTest.Golem.Core
                         browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
                 }
                 if (browsers.Count == 0)
-                    browsers.Add(WebDriverBrowser.Browser.Chrome);
+                    browsers.Add(WebDriverBrowser.Browser.Firefox);
                 return browsers;
             }
 

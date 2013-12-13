@@ -79,6 +79,7 @@
     <Compile Include="LoggedInHeader.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="LoginPage.cs" />
+    <Compile Include="ResetPasswordPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Portfolios\SelectCaelCoursePage.cs" />
     <Compile Include="Portfolios\SetupPortfolioPage.cs" />

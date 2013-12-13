@@ -21,7 +21,6 @@ namespace Golem.PageObjects.Google
 
         public static GoogleHomePage OpenGoogle()
         {
-            
             WebDriverTestBase.driver.Navigate().GoToUrl(@"http://www.google.com/");
             return new GoogleHomePage();
         }

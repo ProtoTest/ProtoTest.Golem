@@ -8,21 +8,9 @@ namespace Golem.Tests.Google
     public class GoogleTest : WebDriverTestBase
     {
         [Test]
-        public static void TestImages()
+        public static void TestSearch()
         {
            GoogleHomePage.OpenGoogle().VerifyImages();
-        }
-
-        public void TestSearch()
-        {
-            var searchText = "Selenium";
-            var searchResult = "Selenium - Web Browser Automation";
-
-            GoogleHomePage.
-                OpenGoogle().
-                SearchFor(searchText).
-                VerifyResult(searchResult).
-                GoToResult(searchResult);
         }
 
         [Test]

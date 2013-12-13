@@ -43,7 +43,7 @@ namespace Golem.PageObjects.Cael.MyAccount
         public ValidationElement PhoneField = new ValidationElement("Phone Field",
                                                                     By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_phoneTextBox"),
                                                                     By.XPath("//*[@class='p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_zipTextBoxformError parentFormform formError']/div"));
-        public Element SaveButton = new Element("", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_saveContactButton"));
+        public Element SaveButton = new Element("Save Changes Button", By.Id("p_lt_ctl02_pageplaceholder_p_lt_ctl00_MyAccount_1_saveContactButton"));
         public Element SaveChangesComplete = new Element("Saved!", By.Id("lblSave1"));
 
         public ContactInfoPage EnterContactInfo(string fName, string lName, string DOB_Month, string DOB_Day,

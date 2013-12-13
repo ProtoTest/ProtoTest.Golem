@@ -14,7 +14,7 @@ namespace ProtoTest.Golem.Core
     public class Common
     {
         private static string lastMessage;
-      //  private static Object locker = new Object();
+        private static Object locker = new Object();
 
         public static string GetRandomString()
         {

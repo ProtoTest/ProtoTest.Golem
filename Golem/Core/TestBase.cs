@@ -101,18 +101,7 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        private static IDictionary<string, TestDataContainer> _testDataCollection;
-        public static IDictionary<string, TestDataContainer> testDataCollection
-        {
-            get
-            {
-                return _testDataCollection ?? new Dictionary<string, TestDataContainer>();
-            }
-            set
-            {
-                _testDataCollection = value;
-            }
-        }
+        public static IDictionary<string, TestDataContainer> testDataCollection;
 
         public static TestDataContainer testData
         {
@@ -121,12 +110,12 @@ namespace ProtoTest.Golem.Core
                 string name = Common.GetCurrentTestName();
                 if (!testDataCollection.ContainsKey(name))
                 {
-                    //lock (locker)
-                    //{
+                    lock (locker)
+                    {
                         var container = new TestDataContainer(name);
                         testDataCollection.Add(name, container);
                         return container;
-                    //}
+                    }
                 }
                 return testDataCollection[name];
             }
@@ -137,14 +126,12 @@ namespace ProtoTest.Golem.Core
         {
             LogEvent("--> VerificationError Found: " + errorText);
             testData.VerificationErrors.Add(new VerificationError(errorText));
-            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         public static void AddVerificationError(string errorText, Image image)
         {
             LogEvent("--> VerificationError Found: " + errorText);
             testData.VerificationErrors.Add(new VerificationError(errorText, image));
-            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         private void AssertNoVerificationErrors()
