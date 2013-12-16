@@ -83,7 +83,7 @@ namespace Golem.PageObjects.Cael.MyAccount
             if (typeOfTraining != null) NameOrTypeOfTrainnig_Field.Text = typeOfTraining;
             if (howHear != null) HowDidYouHear_Drp.SelectOption(howHear);
             SaveChanges_Btn.Click();
-            SaveChangesComplete.Verify().Visible().Verify().Text(savedCompletedText);
+            SaveChangesComplete.Verify(30).Visible().Verify(30).Text(savedCompletedText);
 
             return new ProfilePage();
 
