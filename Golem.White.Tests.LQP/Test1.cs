@@ -10,12 +10,13 @@ namespace Golem.White.Tests.LQP
 {
     public class Test1 : WhiteTestBase
     {
-        
+
+    
         [Test]
         public void PleaseWorkTest()
         {
 
-            AboutScreen.StartScreen().clickOkButton();
+            AboutScreen.StartScreen().clickOkButton().CloseSplashScreen().OpenProject("TestDataImport.prj");
         }
     }
 }
