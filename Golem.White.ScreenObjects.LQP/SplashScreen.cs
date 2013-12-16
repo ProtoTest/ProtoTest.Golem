@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Gallio.Framework;
 using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.WindowStripControls;
@@ -27,17 +28,18 @@ namespace Golem.White.ScreenObjects.LQP
             SearchCriteria Close = SearchCriteria.ByText("Close");
             CloseSplash = SplishSplashScreen.Get<Button>(Close);  
             
-            
         }
 
         public MainScreen CloseSplashScreen()
         {
+            
             CloseSplash.Click();
             return new MainScreen();
         }
 
 
 
-         
+
+
     }
 }

@@ -10,8 +10,12 @@ using Image = System.Drawing.Image;
 
 namespace Golem.White
 {
-    public static class WhiteExtensions
+    public static class Extensions
     {
+
+        public static Image VerifyImage(this UIItem item)
+        {
+        }
         public static Image GetImage(this UIItem item)
         {
             Image screenImage = Capture.Screenshot();
@@ -30,17 +34,6 @@ namespace Golem.White
             result.Y = (int)value.Y;
             result.Width = (int)value.Width;
             result.Height = (int)value.Height;
-            return result;
-        }
-
-        public static Rect
-            ToRect(this System.Drawing.Rectangle value)
-        {
-            Rect result = new Rect();
-            result.X = value.X;
-            result.Y = value.Y;
-            result.Width = value.Width;
-            result.Height = value.Height;
             return result;
         }
     }

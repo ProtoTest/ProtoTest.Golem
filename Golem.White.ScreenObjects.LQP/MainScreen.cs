@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ProtoTest.Golem.Core;
+using ProtoTest.Golem.WebDriver;
 using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.WindowStripControls;
@@ -10,7 +12,6 @@ using TestStack.White.UIItems.PropertyGridItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.MenuItems;
-
 
 using TestStack.White.UIA;
 using TestStack.White.UIItems.WPFUIItems;
@@ -50,11 +51,13 @@ namespace Golem.White.ScreenObjects.LQP
             Project.Click();
 
             
-            
 
             return this;
 
         }
+
+
+      
 
     }
 }

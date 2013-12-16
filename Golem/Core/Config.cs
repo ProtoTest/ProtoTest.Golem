@@ -33,6 +33,7 @@ namespace ProtoTest.Golem.Core
         public ReportSettings reportSettings;
         public RuntimeSettings runTimeSettings;
         public ImageCompareSettings imageCompareSettings;
+        public WhiteSettings whiteSettings;
 
         public ConfigSettings()
         {
@@ -41,6 +42,7 @@ namespace ProtoTest.Golem.Core
             httpProxy = new HttpProxy();
             appiumSettings = new AppiumSettings();
             imageCompareSettings = new ImageCompareSettings();
+            whiteSettings = new WhiteSettings();
         }
 
         public class AppiumSettings
@@ -180,6 +182,16 @@ namespace ProtoTest.Golem.Core
                 fuzziness = Byte.Parse(Config.GetConfigValue("Fuzziness", "50"));
                 accuracy = float.Parse(Config.GetConfigValue("Accuracy", ".01"));
                 updateImages = Common.IsTruthy(Config.GetConfigValue("UpdateImages", "false"));
+            }
+        }
+
+        public class WhiteSettings
+        {
+            public string appPath;
+
+            public WhiteSettings()
+            {
+                appPath = Config.GetConfigValue("AppPath", "NOT_SET");
             }
         }
     }
