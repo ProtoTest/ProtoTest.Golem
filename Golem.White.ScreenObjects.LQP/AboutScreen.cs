@@ -12,6 +12,7 @@ namespace Golem.White.ScreenObjects.LQP
     public class AboutScreen : BaseScreenObject
     {
         public Window wind = WhiteTestBase._app.GetWindow("About");
+        
         public Button okButt;
 
         public AboutScreen()
@@ -25,9 +26,10 @@ namespace Golem.White.ScreenObjects.LQP
             return new AboutScreen();
         }
 
-        public void clickOkButton()
+        public SplashScreen clickOkButton()
         {
             okButt.Click();
+            return new SplashScreen();
         }
 
     }
