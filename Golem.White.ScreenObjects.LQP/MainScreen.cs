@@ -50,6 +50,13 @@ namespace Golem.White.ScreenObjects.LQP
             Open.Click();
             Project.Click();
 
+            var OpenFileWindow = mainScreen.ModalWindow(SearchCriteria.ByText("Open"));
+            var FileName = OpenFileWindow.Get<ComboBox>(SearchCriteria.ByText("File name:"));
+            FileName.EditableText = project;
+            var OpenFile = OpenFileWindow.Get<Button>(SearchCriteria.ByText("Open"));
+            OpenFile.Click();
+
+
             
 
             return this;

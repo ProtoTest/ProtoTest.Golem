@@ -17,5 +17,10 @@ namespace Golem.White
             return _window;
         }
 
+        public void setWindow(Window window)
+        {
+            _window = window;
+        }
+
     }
 }
