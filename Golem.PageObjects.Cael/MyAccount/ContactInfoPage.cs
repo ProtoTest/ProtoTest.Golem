@@ -61,7 +61,7 @@ namespace Golem.PageObjects.Cael.MyAccount
             ZipField.Text = zip;
             PhoneField.Text = phone;
             SaveButton.Click();
-            SaveChangesComplete.Verify().Visible().Verify().Text(savedCompletedText);
+            SaveChangesComplete.Verify(30).Visible().Verify(30).Text(savedCompletedText);
             return new ContactInfoPage();
         }
 
