@@ -12,7 +12,6 @@ namespace ProtoTest.Golem.Core
         public List<VerificationError> VerificationErrors;
         public ActionList actions;
         public Element lastElement = new Element();
-        public BrowserMobProxy proxy;
         public ScreenRecorder recorder;
         public string testName;
 

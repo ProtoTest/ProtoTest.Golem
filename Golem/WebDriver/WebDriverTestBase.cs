@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using Gallio.Common.Markup;
 using Gallio.Common.Media;
@@ -81,7 +82,7 @@ namespace ProtoTest.Golem.WebDriver
             {
             
                 TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
-                testData.recorder.Dispose();
+                //stData.recorder.Dispose();
             }
         }
 
@@ -95,11 +96,23 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
+        public static CaptionOverlay overlay = new CaptionOverlay()
+        {
+            FontSize = 20,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Bottom
+        };
+
         public void StartVideoRecording()
         {
             if (Config.Settings.reportSettings.videoRecordingOnError)
-                testData.recorder = Capture.StartRecording(new CaptureParameters {Zoom = .25}, 5);
+            {
+                testData.recorder = Capture.StartRecording(new CaptureParameters { Zoom = .25 }, 5);
+                testData.recorder.OverlayManager.AddOverlay(overlay);
+            }
+            
         }
+
 
         public void StopVideoRecording()
         {

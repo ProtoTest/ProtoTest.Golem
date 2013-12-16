@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using ProtoTest.Golem.WebDriver;
 
-namespace ProtoTest.Golem.Core
+namespace ProtoTest.Golem.WebDriver
 {
     public class VerificationError
     {

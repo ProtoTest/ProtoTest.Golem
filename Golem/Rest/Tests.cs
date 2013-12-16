@@ -2,6 +2,7 @@
 using System.Net;
 using ProtoTest.Golem.Core;
 using MbUnit.Framework;
+using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Rest
 {

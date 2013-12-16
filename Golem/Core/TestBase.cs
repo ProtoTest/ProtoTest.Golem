@@ -56,7 +56,7 @@ namespace ProtoTest.Golem.Core
 
         #endregion
         protected static Object locker = new object();
-        protected static BrowserMobProxy proxy;
+        public static BrowserMobProxy proxy;
 
         [SetUp]
         public void SetUp()
@@ -68,6 +68,17 @@ namespace ProtoTest.Golem.Core
         [TearDown]
         public void TearDown()
         {
+            TestContext.CurrentContext.AutoExecute(TriggerEvent.TestPassed, (Gallio.Common.Action)(() =>
+            {
+                try
+                {
+
+                }
+                catch (Exception e)
+                {
+
+                }
+            }));
             LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
             GetHarFile();
             QuitProxy();
@@ -221,7 +232,7 @@ namespace ProtoTest.Golem.Core
                 if (Config.Settings.httpProxy.startProxy)
                 {
 
-                    proxy.CreateProxy(Config.Settings.httpProxy.proxyPort);
+                    proxy.CreateProxy();
                     proxy.CreateHar();
                 }
             }
@@ -240,7 +251,7 @@ namespace ProtoTest.Golem.Core
                     
                     proxy = new BrowserMobProxy();
                     proxy.KillOldProxy();
-                    proxy.StartServer(Config.Settings.httpProxy.proxyServerPort);
+                    proxy.StartServer();
                 }
             }
             catch (Exception e)

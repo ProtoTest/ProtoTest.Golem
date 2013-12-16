@@ -21,7 +21,7 @@ namespace ProtoTest.Golem.Rest
                 WebProxy proxy = null;
                 if (Config.Settings.httpProxy.startProxy)
                 {
-                    proxy = new WebProxy("localhost:" + Config.Settings.httpProxy.proxyPort);
+                    proxy = new WebProxy("localhost:" + TestBase.proxy.proxyPort);
                 }
                 return new Given(proxy);
             }
@@ -63,8 +63,8 @@ namespace ProtoTest.Golem.Rest
                 if (Config.Settings.httpProxy.startProxy)
                 {
                     TestBase.proxy = new BrowserMobProxy();
-                    TestBase.proxy.StartServer(Config.Settings.httpProxy.proxyServerPort);
-                    TestBase.proxy.CreateProxy(Config.Settings.httpProxy.proxyPort);
+                    TestBase.proxy.StartServer();
+                    TestBase.proxy.CreateProxy();
                     TestBase.proxy.CreateHar();
                 }
             }

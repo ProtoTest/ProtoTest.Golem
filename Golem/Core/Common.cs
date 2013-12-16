@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Xml;
+using Gallio.Common.Media;
 using Gallio.Framework;
 using Gallio.Model;
 using ProtoTest.Golem.WebDriver;
@@ -14,7 +15,8 @@ namespace ProtoTest.Golem.Core
     public class Common
     {
         private static string lastMessage;
-      //  private static Object locker = new Object();
+
+        //  private static Object locker = new Object();
 
         public static string GetRandomString()
         {
@@ -81,10 +83,13 @@ namespace ProtoTest.Golem.Core
             return CMDprocess;
         }
 
+
+
         public static void Log(string msg)
         {
             DiagnosticLog.WriteLine(msg);
             TestLog.WriteLine(msg);
+            WebDriverTestBase.overlay.Text = msg;
         }
 
         public static bool IsTruthy(string truth)

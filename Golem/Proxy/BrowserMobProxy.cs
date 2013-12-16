@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using Gallio.Common.Xml.Diffing;
 using Gallio.Framework;
 using Gallio.Model.Filters;
 using Newtonsoft.Json;
@@ -24,7 +25,7 @@ namespace ProtoTest.Golem.Proxy
 
         private static readonly string extractPath = @"C:\BMP";
 
-        private int proxyPort;
+        private IDictionary<string, int> proxyPortsByTest;
         private int serverPort;
         private Process serverProcess;
 
@@ -32,25 +33,48 @@ namespace ProtoTest.Golem.Proxy
         private IRestRequest request;
         private IRestResponse response;
 
+        public int proxyPort
+        {
+            get
+            {
+                if (!proxyPortsByTest.ContainsKey(TestContext.CurrentContext.TestStep.FullName))
+                {
+                    proxyPortsByTest.Add(TestContext.CurrentContext.TestStep.FullName, Config.Settings.httpProxy.proxyPort);
+                    Config.Settings.httpProxy.proxyPort++;
+                }
+
+                return proxyPortsByTest[TestContext.CurrentContext.TestStep.FullName];
+            }
+            set
+            {
+                if (!proxyPortsByTest.ContainsKey(TestContext.CurrentContext.TestStep.FullName))
+                {
+                    proxyPortsByTest.Add(TestContext.CurrentContext.TestStep.FullName, Config.Settings.httpProxy.proxyPort);
+                    Config.Settings.httpProxy.proxyPort++;
+                }
+                proxyPortsByTest[TestContext.CurrentContext.TestStep.FullName] = value;
+            }
+        }
 
         public BrowserMobProxy()
         {
+            serverPort = Config.Settings.httpProxy.proxyServerPort;
+            proxyPortsByTest = new Dictionary<string, int>();
             client = new RestClient();
             request = new RestRequest();
             response = new RestResponse();
             UnzipProxy();
+
         }
 
 
-        public void StartServer(int port = 0)
+        public void StartServer()
         {
-            if (port == 0) port = 8081;
-            serverPort = port;
-            Common.Log("Starting BrowserMob server on port " + port);
+            Common.Log("Starting BrowserMob server on port " + serverPort);
             this.serverProcess = new Process();
             var StartInfo = new ProcessStartInfo();
             StartInfo.FileName = batchPath;
-            StartInfo.Arguments = "-port " + this.serverPort;
+            StartInfo.Arguments = "-port " + serverPort;
             StartInfo.WindowStyle = ProcessWindowStyle.Normal;
             StartInfo.CreateNoWindow = false;
             this.serverProcess.StartInfo = StartInfo;
@@ -115,13 +139,11 @@ namespace ProtoTest.Golem.Proxy
             }
         }
 
-        public void QuitProxy(int port = 0)
+        public void QuitProxy()
         {
-            if (port == 0) port = Config.Settings.httpProxy.proxyPort;
-            proxyPort = port;
-            Common.Log("Quitting Proxy on Port " + port);
+            Common.Log("Quitting Proxy on Port " + proxyPort);
             request.Method = Method.DELETE;
-            request.Resource = "/proxy/" + this.proxyPort;
+            request.Resource = "/proxy/" + proxyPort;
             response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {
@@ -129,31 +151,31 @@ namespace ProtoTest.Golem.Proxy
             }
         }
 
-        public void CreateProxy(int port = 0)
+        public void CreateProxy()
         {
-            if (port == 0) port = Config.Settings.httpProxy.proxyPort;
-            proxyPort = port;
-            Common.Log("Creating Proxy on Port " + port);
+            Common.Log("Creating Proxy on Port " + proxyPort);
+ 
             request.Method = Method.POST;
-            request.Resource = "/proxy?port="+this.proxyPort;
+            request.Resource = "/proxy?port=" + proxyPort;
             response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Could not start Proxy at port : " + port + " : " + response.StatusCode);
+                response = client.Execute(request);
+                if (response.StatusCode != HttpStatusCode.OK)
+                    throw new Exception("Could not start Proxy at port : " + proxyPort + " : " + response.StatusCode);
             }
+                
         }
 
         public void CreateHar()
         {
-            response = new RestResponse();
-            request = new RestRequest();
             Common.Log("Creating a new Har");
             request.Method = Method.PUT;
             request.Resource = string.Format("/proxy/{0}/har", proxyPort);
             response = client.Execute(request);
             if  (response.ResponseStatus!=ResponseStatus.Completed)
             {
-                throw new Exception("Could not create Har : " + response.StatusCode);
+                throw new Exception("Could not create Har on port " + proxyPort + ": " + response.StatusCode);
             }
         }
 
@@ -176,17 +198,16 @@ namespace ProtoTest.Golem.Proxy
             }
         }
 
-        public void DeleteProxy(int port = 0)
+        public void DeleteProxy()
         {
 
-            if (port == 0) port = proxyPort;
-            Common.Log("Deleting proxy on port " + port);
+            Common.Log("Deleting proxy on port " + proxyPort);
             request.Method = Method.DELETE;
-            request.Resource = string.Format("/proxy/{0}", port);
+            request.Resource = string.Format("/proxy/{0}", proxyPort);
             response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new Exception("Could not delete proxy at port : " + port + " : " + response.StatusCode);
+                throw new Exception("Could not delete proxy at port : " + proxyPort + " : " + response.StatusCode);
             }
         }
 

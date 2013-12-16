@@ -144,7 +144,7 @@
     <Compile Include="Core\TestBase.cs" />
     <Compile Include="Core\TestDataContainer.cs" />
     <Compile Include="WebDriver\Elements\Validation\ValidationElement.cs" />
-    <Compile Include="Core\VerificationError.cs" />
+    <Compile Include="WebDriver\VerificationError.cs" />
     <Compile Include="WebDriver\WebDriverBrowser.cs" />
     <Compile Include="WebDriver\EventedWebDriver.cs" />
     <Compile Include="WebDriver\WebDriverExtensions.cs" />
@@ -167,7 +167,9 @@
     <EmbeddedResource Include="Resources\en_US">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Proxy\browsermob-proxy-2.0-beta-8-bin.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

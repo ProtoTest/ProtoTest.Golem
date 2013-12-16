@@ -19,7 +19,7 @@ namespace Golem.Tests.Google
         public void TestSearch()
         {
             var searchText = "Selenium";
-            var searchResult = "Selenium - Web Browser Automation";
+            var searchResult = "Selenium - Web Browser Automationz";
 
             GoogleHomePage.
                 OpenGoogle().
