@@ -69,6 +69,10 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
+    <Reference Include="TestStack.White, Version=0.11.0.207, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\TestStack.White.0.11.0.207\lib\net40\TestStack.White.dll</HintPath>
+    </Reference>
     <Reference Include="WebDriver, Version=2.37.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Selenium.WebDriver.2.37.0\lib\net40\WebDriver.dll</HintPath>
@@ -99,8 +103,8 @@
     <Compile Include="Proxy\HAR\Request.cs" />
     <Compile Include="Proxy\HAR\Response.cs" />
     <Compile Include="Proxy\HAR\Timings.cs" />
-    <Compile Include="TestStack.White\BaseScreenObject.cs" />
-    <Compile Include="TestStack.White\WhiteTestBase.cs" />
+    <Compile Include="White\BaseScreenObject.cs" />
+    <Compile Include="White\WhiteTestBase.cs" />
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
     <Compile Include="WebDriver\Elements\Images\Histogram.cs" />

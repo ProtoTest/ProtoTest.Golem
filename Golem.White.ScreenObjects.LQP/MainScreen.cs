@@ -13,7 +13,7 @@ using TestStack.White.UIItems.MenuItems;
 
 
 using TestStack.White.UIA;
-using Golem.TestStack.White;
+using TestStack.White.UIItems.WPFUIItems;
 
 namespace Golem.White.ScreenObjects.LQP
 {
@@ -40,20 +40,15 @@ namespace Golem.White.ScreenObjects.LQP
 
         public MainScreen OpenProject(String project)
         {
-            SearchCriteria FileMenu = SearchCriteria.ByText("File");
-            try
-            {
-                mainScreen.LogStructure();
-                
-                
-                //menuscreen.Get<Button>(SearchCriteria.ByText("Project...")).Click();
-            }
-            catch (Exception)
-            {
-                Button OpenProj = mainScreen.Get<Button>("Project...");
-                OpenProj.Click();
- 
-            }
+            var DockTop = mainScreen.Get<GroupBox>(SearchCriteria.ByText("Dock Top"));
+            var menuBar = DockTop.GetMenuBar(SearchCriteria.ByText("Main Menu"));
+            var File = menuBar.Get<Menu>(SearchCriteria.ByText("File"));
+            var Open = menuBar.Get<Menu>(SearchCriteria.ByText("Open"));
+            var Project = Open.Get<Button>(SearchCriteria.ByText("Project..."));
+            File.Click();
+            Open.Click();
+            Project.Click();
+
             
             
 

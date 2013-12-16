@@ -11,7 +11,6 @@ using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
 
 using TestStack.White.UIA;
-using Golem.TestStack.White;
 
 namespace Golem.White.ScreenObjects.LQP
 {

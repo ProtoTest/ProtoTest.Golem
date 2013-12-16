@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MbUnit.Framework;
-using Gallio.Framework;
+﻿using MbUnit.Framework;
 using TestStack.White;
 using TestStack.White.UIItems.WindowItems;
-using ProtoTest.Golem.Core;
 
-namespace Golem.TestStack.White
+namespace Golem.White
 {
     public class WhiteTestBase 
     {
