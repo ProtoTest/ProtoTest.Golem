@@ -5,7 +5,6 @@ using System.Text;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.WindowItems;
 using TestStack.White.UIItems.Finders;
-using Golem.TestStack.White;
 
 namespace Golem.White.ScreenObjects.LQP
 {

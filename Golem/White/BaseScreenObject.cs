@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TestStack.White.UIItems.WindowItems;
+﻿using TestStack.White.UIItems.WindowItems;
 
-namespace Golem.TestStack.White
+namespace Golem.White
 {
     public class BaseScreenObject
     {
