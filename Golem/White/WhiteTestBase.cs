@@ -1,10 +1,11 @@
 ﻿using MbUnit.Framework;
+using ProtoTest.Golem.Core;
 using TestStack.White;
 using TestStack.White.UIItems.WindowItems;
 
 namespace Golem.White
 {
-    public class WhiteTestBase 
+    public class WhiteTestBase : TestBase
     {
         public static Application _app;
         public static Window window;
@@ -12,7 +13,7 @@ namespace Golem.White
         [SetUp]
         public void LaunchApp()
         {
-            _app = Application.Launch("C:\\Program Files\\Quest Integrity Group\\LifeQuest Pipeline\\LifeQuest.exe");
+            _app = Application.Launch(Config.Settings.whiteSettings.appPath);
         }
 
         //[TearDown]

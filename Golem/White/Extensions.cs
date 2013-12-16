@@ -12,10 +12,6 @@ namespace Golem.White
 {
     public static class Extensions
     {
-
-        public static Image VerifyImage(this UIItem item)
-        {
-        }
         public static Image GetImage(this UIItem item)
         {
             Image screenImage = Capture.Screenshot();
