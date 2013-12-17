@@ -1,12 +1,11 @@
-﻿using Gallio.Framework;
-using MbUnit.Framework;
-using ProtoTest.Golem.PageObjects.Google;
+﻿using MbUnit.Framework;
+using ProtoTest.Golem.Tests.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests.Google
+namespace ProtoTest.Golem.Tests
 {
     [TestFixture]
-    public class GoogleTest : WebDriverTestBase
+    public class GooglePageObjectTests : WebDriverTestBase
     {
         [Test]
         public static void TestImages()
@@ -19,7 +18,7 @@ namespace ProtoTest.Golem.Tests.Google
         public void TestSearch()
         {
             var searchText = "Selenium";
-            var searchResult = "Selenium - Web Browser Automationz";
+            var searchResult = "Selenium - Web Browser Automation";
 
             GoogleHomePage.
                 OpenGoogle().

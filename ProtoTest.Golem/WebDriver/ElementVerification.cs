@@ -94,9 +94,10 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "is present";
             notMessage = "not present";
-            condition = element.Present;
+            
             for (int i = 0; i <= timeoutSec; i++)
             {
+                condition = element.Present;
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
@@ -105,7 +106,6 @@ namespace ProtoTest.Golem.WebDriver
                     return element;
                 }
                 Common.Delay(1000);
-                condition = (element.Present);
             }
             VerificationFailed();
             return element;

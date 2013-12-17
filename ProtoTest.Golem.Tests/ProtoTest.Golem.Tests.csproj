@@ -59,26 +59,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigTests.cs" />
-    <Compile Include="GoogleTest.cs" />
-    <Compile Include="PageObjects\Google\GmailPage.cs" />
-    <Compile Include="PageObjects\Google\GoogleHomePage.cs" />
-    <Compile Include="PageObjects\Google\GoogleHomePage2.cs" />
-    <Compile Include="PageObjects\Google\GoogleResultsPage.cs" />
-    <Compile Include="PageObjects\Google\SearchResultPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestBasePageObject.cs" />
-    <Compile Include="TestBaseTests.cs" />
-    <Compile Include="TestDDT.cs" />
-    <Compile Include="TestMultiThreading.cs" />
-    <Compile Include="TestProxy.cs" />
-    <Compile Include="TestWebDriverTestBase.cs" />
-    <Compile Include="VerificationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Data.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

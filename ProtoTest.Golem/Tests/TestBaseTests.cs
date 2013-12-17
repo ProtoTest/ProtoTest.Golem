@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProtoTest.Golem.PageObjects.Google;
 using MbUnit.Framework;
 using ProtoTest.Golem.Core;
 
@@ -19,6 +18,5 @@ namespace ProtoTest.Golem.Tests
             Assert.IsNotNull(testData.actions);
             
         }
-        
     }
 }

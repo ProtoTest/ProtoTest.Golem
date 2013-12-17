@@ -4,21 +4,21 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using ProtoTest.Golem.PageObjects.Google;
 using MbUnit.Framework;
+using ProtoTest.Golem.Tests.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests
 {
     class TestDDT : WebDriverTestBase
     {
-        [XmlData("//Search",FilePath = "SearchData.xml")]
+        [XmlData("//Search",FilePath = ".\\Tests\\Data\\SearchData.xml")]
         [Test]
         public void TestXml([Bind("@term")]string search, [Bind("@result")]string result)
         {
             OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(search).VerifyResult(result);
         }
-        [CsvData(FilePath = "Data.csv",HasHeader = true)]
+        [CsvData(FilePath = ".\\Tests\\Data\\Data.csv", HasHeader = true)]
         [Test]
         public void TestCSV(string term, string result)
         {

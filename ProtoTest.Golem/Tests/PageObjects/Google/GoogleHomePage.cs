@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ProtoTest.Golem.Core;
+﻿using OpenQA.Selenium;
 using ProtoTest.Golem.WebDriver;
-using ProtoTest.Golem.PageObjects.Google;
-using OpenQA.Selenium;
 
-namespace ProtoTest.Golem.PageObjects.Google
+namespace ProtoTest.Golem.Tests.PageObjects.Google
 {
     public class GoogleHomePage : BasePageObject
     {

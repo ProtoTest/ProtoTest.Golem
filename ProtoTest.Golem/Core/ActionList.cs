@@ -27,11 +27,12 @@ namespace ProtoTest.Golem.Core
 
         public void PrintActions()
         {
-            Common.Log("PRINTING ACTIONS");
+            TestLog.BeginSection("Actions");
             foreach (Action a in actions)
             {
-                Common.Log(a.name + " : " + a._time.ToString("HH:mm:ss.ffff"));
+                TestLog.WriteLine(a.name + " : " + a._time.ToString("HH:mm:ss.ffff"));
             }
+            TestLog.End();
         }
 
         public void PrintActionTimings()
