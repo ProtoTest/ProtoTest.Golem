@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 
-namespace Golem.Tests
+namespace ProtoTest.Golem.Tests
 {
     class TestProxy : WebDriverTestBase
     {

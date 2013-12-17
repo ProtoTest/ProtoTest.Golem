@@ -61,9 +61,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Golem\Golem.csproj">
+    <ProjectReference Include="..\Golem\ProtoTest.Golem.csproj">
       <Project>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</Project>
-      <Name>Golem</Name>
+      <Name>ProtoTest.Golem</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -5,10 +5,9 @@ using System.Linq;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Proxy.HAR;
 using ProtoTest.Golem.WebDriver;
 
-namespace HGSiteCatalystTests
+namespace ProtoTest.Golem.DynamicTestRunner
 {
 
     public class CSVRowDataObject

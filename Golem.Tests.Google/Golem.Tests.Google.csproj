@@ -61,7 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GoogleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,13 +70,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Golem.PageObjects.Google\Golem.PageObjects.Google.csproj">
-      <Project>{7bcac7a9-3369-441b-9628-99f4c863b64b}</Project>
-      <Name>Golem.PageObjects.Google</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Golem\Golem.csproj">
+    <ProjectReference Include="..\Golem\ProtoTest.Golem.csproj">
       <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
-      <Name>Golem</Name>
+      <Name>ProtoTest.Golem</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

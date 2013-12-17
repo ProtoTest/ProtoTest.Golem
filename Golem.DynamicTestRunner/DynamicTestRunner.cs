@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Gallio.Framework;
-using Gallio.Model;
 using MbUnit.Framework;
-using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 
-namespace HGSiteCatalystTests
+namespace ProtoTest.Golem.DynamicTestRunner
 {
     internal class Omniture_Test_Runner : WebDriverTestBase
     {

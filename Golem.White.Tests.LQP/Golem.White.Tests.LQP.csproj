@@ -55,9 +55,9 @@
       <Project>{21705be8-ccd1-4334-afe0-d15f82c88bf0}</Project>
       <Name>Golem.White.ScreenObjects.LQP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Golem\Golem.csproj">
+    <ProjectReference Include="..\Golem\ProtoTest.Golem.csproj">
       <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
-      <Name>Golem</Name>
+      <Name>ProtoTest.Golem</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

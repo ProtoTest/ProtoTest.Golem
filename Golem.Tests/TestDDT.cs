@@ -8,7 +8,7 @@ using Golem.PageObjects.Google;
 using MbUnit.Framework;
 using ProtoTest.Golem.WebDriver;
 
-namespace Golem.Tests
+namespace ProtoTest.Golem.Tests
 {
     class TestDDT : WebDriverTestBase
     {

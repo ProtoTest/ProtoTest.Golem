@@ -6,7 +6,7 @@ using ProtoTest.Golem.WebDriver;
 using OpenQA.Selenium;
 using Golem.PageObjects.Google;
 
-namespace Golem.PageObjects.Google
+namespace ProtoTest.Golem.PageObjects.Google
 {
     public class GoogleHomePage2 : BasePageObject
     {

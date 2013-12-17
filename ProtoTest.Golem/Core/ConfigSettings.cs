@@ -1,0 +1,3 @@
+namespace ProtoTest.Golem.Core
+{
+}

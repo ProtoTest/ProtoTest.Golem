@@ -75,9 +75,9 @@
       <Project>{a6fa7be8-f5c1-455d-be30-b7b9b974f76f}</Project>
       <Name>Golem.PageObjects.Mailinator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Golem\Golem.csproj">
+    <ProjectReference Include="..\Golem\ProtoTest.Golem.csproj">
       <Project>{dabfc1cb-7c18-4ac7-afa2-91c453e9e266}</Project>
-      <Name>Golem</Name>
+      <Name>ProtoTest.Golem</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

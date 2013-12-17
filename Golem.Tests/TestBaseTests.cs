@@ -7,7 +7,7 @@ using Golem.PageObjects.Google;
 using MbUnit.Framework;
 using ProtoTest.Golem.Core;
 
-namespace Golem.Tests
+namespace ProtoTest.Golem.Tests
 {
     class TestBaseTests : TestBase
     {

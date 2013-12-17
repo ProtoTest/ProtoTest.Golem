@@ -23,6 +23,8 @@ namespace Golem.White.Tests.LQP
         {
 
             AboutScreen.StartScreen().clickOkButton().CloseSplashScreen().OpenProject("TestDataImport.prj");
+
+
         }
     }
 }

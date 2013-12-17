@@ -9,7 +9,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.Events;
 using ProtoTest.Golem.WebDriver;
 
-namespace Golem.Tests
+namespace ProtoTest.Golem.Tests
 {
     class TestWebDriverTestBase : WebDriverTestBase
     {
