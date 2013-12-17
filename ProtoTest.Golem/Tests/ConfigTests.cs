@@ -21,8 +21,10 @@ namespace ProtoTest.Golem.Tests
         [Test]
         public void TestConfigSettingsAreModifiyable()
         {
+            var timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             Config.Settings.runTimeSettings.ElementTimeoutSec = 1234;
             Assert.AreEqual(Config.Settings.runTimeSettings.ElementTimeoutSec,1234);
+            Config.Settings.runTimeSettings.ElementTimeoutSec = timeout;
         }
         [Test]
         public void TestConfigFileDefaults()

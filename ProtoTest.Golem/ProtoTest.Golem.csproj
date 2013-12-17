@@ -116,6 +116,7 @@
     <Compile Include="Tests\TestBasePageObject.cs" />
     <Compile Include="Tests\TestBaseTests.cs" />
     <Compile Include="Tests\TestDDT.cs" />
+    <Compile Include="Tests\TestImageComparison.cs" />
     <Compile Include="Tests\TestMultiThreading.cs" />
     <Compile Include="Tests\TestProxy.cs" />
     <Compile Include="Tests\TestWebDriverTestBase.cs" />

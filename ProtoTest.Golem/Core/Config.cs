@@ -70,10 +70,10 @@ namespace ProtoTest.Golem.Core
 
             public HttpProxy()
             {
-                proxyServerPort = int.Parse(Config.GetConfigValue("ProxyServerPort", "8880"));
+                proxyServerPort = int.Parse(Config.GetConfigValue("ProxyServerPort", "18880"));
                 startProxy = Common.IsTruthy(Config.GetConfigValue("StartProxy", "False"));
                 useProxy = Common.IsTruthy(Config.GetConfigValue("UseProxy", "False"));
-                proxyPort = int.Parse(Config.GetConfigValue("ProxyPort", "8881"));
+                proxyPort = int.Parse(Config.GetConfigValue("ProxyPort", "18881"));
             }
         }
 

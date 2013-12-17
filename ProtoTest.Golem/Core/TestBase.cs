@@ -101,6 +101,7 @@ namespace ProtoTest.Golem.Core
         {
             QuitProxyServer();
             RemoveEvents();
+            Config.Settings = new ConfigSettings();
         }
 
         private void DeleteTestData()
@@ -228,7 +229,8 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception e)
             {
-                throw new Exception("Error caught starting BMP Proxy : " + e.Message);
+                proxy.CreateProxy();
+                proxy.CreateHar();
             }
         }
 

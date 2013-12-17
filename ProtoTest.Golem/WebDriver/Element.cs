@@ -218,7 +218,7 @@ namespace ProtoTest.Golem.WebDriver
             return new ElementVerification(this, timeoutSec, false);
         }
 
-        public ElementVerification WaitUntil(int timeoutSec)
+        public ElementVerification WaitUntil(int timeoutSec = -1)
         {
             if (timeoutSec == -1) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
             return new ElementVerification(this, timeoutSec, true);

@@ -19,11 +19,8 @@ namespace ProtoTest.Golem.Tests
         public void setup()
         {
             Config.Settings.runTimeSettings.DegreeOfParallelism = 10;
-            Config.Settings.httpProxy.startProxy = true;
-            Config.Settings.httpProxy.useProxy = true;
-            Config.Settings.reportSettings.videoRecordingOnError = true;
         }
-      [Test, Parallelizable,ThreadedRepeat(1)]
+      [Test, Parallelizable,ThreadedRepeat(10)]
         public void TestThreadedRepeat()
         {
           OpenPage<GoogleHomePage>("http://www.google.com");
