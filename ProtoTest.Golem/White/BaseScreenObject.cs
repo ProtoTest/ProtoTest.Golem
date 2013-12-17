@@ -2,23 +2,25 @@
 
 namespace ProtoTest.Golem.White
 {
-    public abstract class BaseScreenObject
+    public class BaseScreenObject
     {
         //This class will act similarly to how the BasePageObject works on the webdriver side
+        private Window _window;
 
         public BaseScreenObject()
         {
+            
         }
 
-        public BaseScreenObject(Window window)
+        public Window getWindow()
         {
-            this.window = window;
+            return _window;
         }
 
-        public Window window
+        public void setWindow(Window window)
         {
-            get { return WhiteTestBase.window; }
-            set { WhiteTestBase.window = value; }
+            _window = window;
         }
+
     }
 }
