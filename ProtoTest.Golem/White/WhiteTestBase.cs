@@ -17,7 +17,6 @@ namespace ProtoTest.Golem.White
         public void LaunchApp()
         {
             app = Application.Launch(Config.Settings.whiteSettings.appPath);
-            window = app.GetWindows()[0];
         }
 
         [TearDown]

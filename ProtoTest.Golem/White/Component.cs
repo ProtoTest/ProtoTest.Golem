@@ -11,7 +11,7 @@ using TestStack.White.UIItems.MenuItems;
 using TestStack.White.UIItems.WindowItems;
 using TestStack.White.UIItems.WPFUIItems;
 
-namespace Golem.White
+namespace ProtoTest.Golem.White
 {
     public class Component<T> where T : UIItem
     {
