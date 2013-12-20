@@ -125,6 +125,7 @@
     <Compile Include="White\Elements\BaseItem.cs" />
     <Compile Include="White\Elements\Button.cs" />
     <Compile Include="White\Elements\ElementFactory.cs" />
+    <Compile Include="White\Elements\TextBox.cs" />
     <Compile Include="White\Extensions.cs" />
     <Compile Include="White\WhiteTestBase.cs" />
     <Compile Include="WebDriver\ByE.cs" />

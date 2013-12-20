@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
+using Gallio.Framework;
+using ProtoTest.Golem.Tests;
 using ProtoTest.Golem.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.MenuItems;
+using TestStack.White.UIItems.PropertyGridItems;
 using TestStack.White.UIItems.WindowItems;
 using TestStack.White.UIItems.WPFUIItems;
 
@@ -54,6 +57,22 @@ namespace ProtoTest.Golem.White
             _cname = title;
             _search = search;
             _rootItem = comp.thething;
+            
+        }
+
+        public Component(Component<Panel> comp, String title, SearchCriteria search)
+        {
+            _window = comp.getWindow();
+            _cname = title;
+            _search = search;
+            _rootItem = comp.thething;
+        }
+        public Component(Component<GroupBox> comp, String title, SearchCriteria search)
+        {
+            _window = comp.getWindow();
+            _cname = title;
+            _search = search;
+            _rootItem = comp.thething;
         }
 
         public Component(Window window, String title, SearchCriteria search)
@@ -61,8 +80,8 @@ namespace ProtoTest.Golem.White
             _window = window;
             _cname = title;
             _search = search;
-
         }
+
         public void Click()
         {
             if (thething != null)
@@ -76,10 +95,18 @@ namespace ProtoTest.Golem.White
         {
             if (thething != null)
             {
-                if (thething.GetType() == typeof(ComboBox))
+                var whatisthis = thething.GetType();
+                DiagnosticLog.WriteLine("***********" + whatisthis.ToString());
+                if (whatisthis == typeof(ComboBox))
                 {
                     ComboBox comboBox = (ComboBox)thething;
                     comboBox.EditableText = text;
+                }
+                
+                if (whatisthis == typeof(TextBox))
+                {
+                    TextBox textbox = (TextBox) thething;
+                    textbox.Text = text;
                 }
             }
         }
