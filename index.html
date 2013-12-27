@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>ProtoTest.Golem by ProtoTest</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>ProtoTest.Golem</h1>
+        <h2>Event driven WebDriver C# Framework</h2>
+        <a href="https://github.com/ProtoTest/ProtoTest.Golem" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="golem" class="anchor" href="#golem"><span class="octicon octicon-link"></span></a>Golem</h1>
+
+<h3>
+<a name="event-driven-webdriver-c-framework" class="anchor" href="#event-driven-webdriver-c-framework"><span class="octicon octicon-link"></span></a>Event driven WebDriver C# Framework</h3>
+
+<p>Golem is an event-driven framework written in C# for Selenium-WebDriver and Gallio/MbUnit.  It sits on top of gallio and webdriver to help make automating easier, as an incredible amount of additional information is included automatically in the report.  It was designed for tests written using the page object design pattern.  Without something like Golem it’s difficult to build and maintain a large-scale (enterprise) suite of selenium tests.  Most companies will build something similar, as without it there will be an incredibly large amount of duplicate code.   </p>
+
+<p>Its primary purpose is threefold: </p>
+
+<ul>
+<li>  Simplify/reduce coding by providing an enhanced Webdriver API and shared common functions </li>
+<li>  Define and enforce an organizational structure that standardizes how tests are written and helps with code readability and re-use</li>
+<li>  Provide “features” that can enhance webdriver functionality, such as diagnostic information (screenshots, HTTP requests).</li>
+</ul><h4>
+<a name="included-features" class="anchor" href="#included-features"><span class="octicon octicon-link"></span></a>Included Features:</h4>
+
+<ul>
+<li>  Standard app.config file can be used to turn on/off or configure all features.<br>
+</li>
+<li>  Page Object design pattern makes tests a BDD style function chain : <code>GoToWebPage().LogInWithUser(“GSmith”,”Password”).GoToProfilePage().EditName(“George Smith”).LogOut();</code>
+</li>
+<li>  Parallel test execution – Can execute up to 5 instances of a browser on each machine</li>
+<li>  Can run tests locally or on a remote machine</li>
+<li>  Multiple Browser support – Define multiple browsers and each test will run once per browser.</li>
+<li>  Logging of all WebDriver commands </li>
+<li>  Screenshots on test failure</li>
+<li>  Video Recording on test failure</li>
+<li>  HTTP Traffic recording, metrics, and validations</li>
+<li>  Automatic spell check each page </li>
+<li>  Log/Track all UI actions (like logging in) including AJAX waiting</li>
+<li>  Appium Support (mobile app automation)</li>
+<li>  Automatically validate pages loaded by defining a list of elements to check for<br>
+</li>
+<li>  Event-driven architecture makes customizations easy</li>
+</ul><h3>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview:</h3>
+
+<ul>
+<li>Golem Tests follow the unit testing pattern.  You will have a .cs file that contains a class (suite of tests).<br>
+</li>
+<li>The class will contain one or more methods marked with the [Test] attribute.<br>
+</li>
+<li>Each Test becomes executable separately in Gallio Icarus.<br>
+</li>
+<li>By default, the framework will automatically launch Firefox on your local browser before each test, and instantiates a webdriver instance.<br>
+</li>
+<li>All settings, such as which browsers to use, can be modified via the Config class, or an App.Config file. </li>
+<li>Golem includes a variety of "features" that get started automatically.  For example, having each webdriver command written to the test log.<br>
+</li>
+<li>Golem is event-driven, and has a variety of events that get triggered automatically.  In your test class you can define methods that are called when these events are fired.<br>
+</li>
+</ul><h3>
+<a name="things-to-know-" class="anchor" href="#things-to-know-"><span class="octicon octicon-link"></span></a>Things to know :</h3>
+
+<ul>
+<li>C# and .Net 4.0</li>
+<li>Built upon Gallio and MbUnit. (gallio.org)  Build the project into a dll, open dll in Gallio Icarus to execute.<br>
+</li>
+<li>Multi-threaded support (Parallel test execution)</li>
+<li>Selenium GRID/SauceLabs supported.</li>
+<li>Extended WebDriver API to add additional commands.</li>
+<li>Using EventDrivenWebDriver to log commands.</li>
+<li>Fully configurable programatically or with an App.Config.  Config class reads the App.config and stores all values as properties.  Each value should have a default defined.</li>
+<li>Built on the Page Object Design Pattern.  Page Objects should inherit BasePageObject</li>
+<li>Test class should inherit TestBaseClass, and each test function should be marked with the [Test] attribute.</li>
+<li>Optional Element class wraps and hides webdriver API</li>
+<li>WebDriver driver is instantiated automatically for each test, and stored in a static IDictionary in the TestBaseClass. This is for multi-threaded support. Each thread automatically knows which driver belongs to it.  Access it in any test or page object like "driver.FindElement".<br>
+</li>
+<li>Page Objects need to define a WaitForElements() function.  This is called automaticalled when the PO is instantiated. You should put waits or validations in here to wait or validate that a page object is fully loaded and ready to be used.<br>
+</li>
+<li>Page Objects don't need a constructor.  The base constructor instantiates everything, and the driver object is stored statically in the TestBaseClass</li>
+<li>You can use MbUnit.Framework.Assert to make assertions.  These will stop the test on failure.</li>
+<li>Created a variety of Verifications in the WebDriver API.  These will not stop the test if they fail.  '</li>
+<li>Supports data driven testing through MbUnit attributes.<br>
+</li>
+</ul><h4>
+<a name="configurable-features-" class="anchor" href="#configurable-features-"><span class="octicon octicon-link"></span></a>Configurable Features :</h4>
+
+<ul>
+<li>Multi Threaded Execution.  Mark test with [Parallelizable] attribute. Set number of threads with "DegreeOfParallelism", "1"</li>
+<li>Automatically Launch Browser - LaunchBrowser", "True"</li>
+<li>Specify up to five browsers - "Browser1" value="Firefox"</li>
+<li>Add a delay between commands - "CommandDelayMs" value="0"</li>
+<li>Run on local or remote computer - "RunOnRemoteHost" value="false", "HostIp" value="localhost"</li>
+<li>Capture screenshot on error - "ScreenshotOnError" value="True"</li>
+<li>Capture page html source on error - "HtmlOnError" value="True" </li>
+<li>Capture screen video recording on error - "VideoRecordingOnError", "True"</li>
+<li>Write all webdriver commands to the log - "CommandLogging" value="True"</li>
+<li>Write all page object functions to the log - "ActionLogging" value="True"</li>
+<li>Launch a proxy to capture http traffic - "StartFiddlerProxy" value="True", "ProxyPort" value="8876"</li>
+<li>Appium support - "LaunchApp", "False" - "AppPath", "" - "AppPackage", "" - "AppActivity", "" - "AppOs", "Android"</li>
+<li>Configurable Test timeout - "TestTimeoutMin","5"</li>
+<li>Configurable element Timeout - "ElementTimeoutSec","20"</li>
+<li>Configurable environment Url - "EnvironmentUrl",""</li>
+<li>Automatically check spelling on each page - </li>
+</ul><h3>
+<a name="getting-started-with-prototestgolem-" class="anchor" href="#getting-started-with-prototestgolem-"><span class="octicon octicon-link"></span></a>Getting Started With ProtoTest.Golem :</h3>
+
+<h4>
+<a name="install-the-following-components-" class="anchor" href="#install-the-following-components-"><span class="octicon octicon-link"></span></a>Install the following components :</h4>
+
+<ul>
+<li>Visual Studio 2012 for C#</li>
+<li>NuGet 3.7 or later (Comes with VS 2012)</li>
+<li>TestDriven.net Visual Studio plugin </li>
+<li>GallioBundle 3.4 (<a href="https://code.google.com/p/mb-unit/downloads/list">https://code.google.com/p/mb-unit/downloads/list</a>)</li>
+</ul><h4>
+<a name="creating-a-test" class="anchor" href="#creating-a-test"><span class="octicon octicon-link"></span></a>Creating a Test</h4>
+
+<ul>
+<li>Create a new Class Library File -&gt; New -&gt; Project -&gt; Class Library.</li>
+<li>Right click on references -&gt; Manage NuGet Packages</li>
+<li>Add Package “ProtoTest.Golem”. </li>
+<li>WebDriver is available via "driver' property.</li>
+<li>Paste the following code into your clas file, save the project/solution, and build:</li>
+</ul><pre><code>using MbUnit.Framework;
+using ProtoTest.Golem.Tests.PageObjects.Google;
+using ProtoTest.Golem.WebDriver;
+
+namespace ProtoTest.Golem.Tests
+{
+    class Test : WebDriverTestBase
+    {
+        [Test]
+        public void TestGoogle()
+        {
+            OpenPage&lt;GoogleHomePage&gt;("http://www.google.com/").SearchFor("Selenium").VerifyResult("Selenium – Web Browser Automation");
+        }
+    }
+}
+</code></pre>
+
+<h4>
+<a name="executing-a-test-" class="anchor" href="#executing-a-test-"><span class="octicon octicon-link"></span></a>Executing a Test :</h4>
+
+<h5>
+<a name="from-within-visual-studio" class="anchor" href="#from-within-visual-studio"><span class="octicon octicon-link"></span></a>From Within Visual Studio</h5>
+
+<ul>
+<li>TestDriven.net plugin is required</li>
+<li>Right Click on Test - &gt; Run Test (Should open browser and close it)</li>
+<li>Right Click on Class or project to run all tests within.</li>
+</ul><h5>
+<a name="from-gallio-icarus" class="anchor" href="#from-gallio-icarus"><span class="octicon octicon-link"></span></a>From Gallio Icarus</h5>
+
+<ul>
+<li>Open Gallio Icarus</li>
+<li>Click "Add" and navigate to our ProjectName.dll file located in the /bin/release or /bin/debug/ directory.</li>
+<li>Select tests to execute.</li>
+<li>Click Run.</li>
+</ul><h4>
+<a name="configuring-tests" class="anchor" href="#configuring-tests"><span class="octicon octicon-link"></span></a>Configuring Tests</h4>
+
+<h5>
+<a name="through-an-appconfig-" class="anchor" href="#through-an-appconfig-"><span class="octicon octicon-link"></span></a>Through an App.Config :</h5>
+
+<ul>
+<li>Add an "Application Configuration File".<br>
+</li>
+<li>Edit the App.config -&gt; Set browser using key “Browser1” value=”Firefox”</li>
+</ul><pre><code>&lt;?xml version="1.0"?&gt;
+&lt;configuration&gt;
+  &lt;appSettings&gt;
+    &lt;add key="Browser1" value="Firefox"/&gt;
+   &lt;/appSettings&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<ul>
+<li>Execute Test - &gt; Should open Firefox instead of Chrome.<br>
+</li>
+<li>Supports Firefox, Chrome, IE, Safari, HtmlUnit, and Android (remote only)</li>
+</ul><h5>
+<a name="through-code-" class="anchor" href="#through-code-"><span class="octicon octicon-link"></span></a>Through code :</h5>
+
+<pre><code>[FixtureInitializer]
+        public void init()
+        {
+            Config.Settings.httpProxy.startProxy = false;
+            Config.Settings.httpProxy.useProxy = false;
+
+        }
+
+</code></pre>
+
+<h4>
+<a name="building-a-new-page-object-" class="anchor" href="#building-a-new-page-object-"><span class="octicon octicon-link"></span></a>Building a new Page Object :</h4>
+
+<ul>
+<li>Page Objects Inherit BasePage</li>
+<li>No Constructor needed</li>
+<li>May define and instantiate Elements in class header </li>
+<li>Use element API directly, no finding needed</li>
+<li>WebDriver APi available through 'driver' property;</li>
+<li>WaitForElements method is called when page object is instantiated.  Use it to wait for dynamic elements.</li>
+</ul><pre><code>using OpenQA.Selenium;
+using ProtoTest.Golem.WebDriver;
+
+namespace ProtoTest.Golem.Tests.PageObjects.Google
+{
+    public class GoogleHomePage : BasePageObject
+    {
+        Element searchField = new Element("SearchField", By.Name("q"));
+        Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
+        Element searchButton = new Element("SearchButton", By.Name("btnK"));
+        Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
+        Element signInButton = new Element("SignInButon", By.LinkText("Sign in"));
+
+        public GoogleResultsPage SearchFor(string text)
+        {
+            searchField.Text = text;
+            searchField.Submit();
+            return new GoogleResultsPage();
+        }
+
+        public override void WaitForElements()
+        {
+            searchField.Verify().Present();
+            googleLogo.Verify().Present();
+            searchButton.Verify().Present();
+            feelingLuckyButton.Verify().Present();
+            signInButton.Verify().Present();
+        }
+    }
+}
+
+</code></pre>
+
+<h4>
+<a name="executing-on-a-remote-computer" class="anchor" href="#executing-on-a-remote-computer"><span class="octicon octicon-link"></span></a>Executing on a Remote Computer</h4>
+
+<ul>
+<li>Modify App Config, set host to IP or Hostname of remote computer </li>
+</ul><pre><code>&lt;?xml version="1.0"?&gt;
+&lt;configuration&gt;
+  &lt;appSettings&gt;
+    &lt;add key="Browser1" value="Chrome"/&gt;
+    &lt;add key="RunOnRemoteHost" value="True"/&gt;
+    &lt;add key="HostIp" value="10.10.1.151"/&gt;
+   &lt;/appSettings&gt;
+&lt;/configuration&gt;
+</code></pre>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/ProtoTest/ProtoTest.Golem/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/ProtoTest/ProtoTest.Golem/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/ProtoTest/ProtoTest.Golem"></a> is maintained by <a href="https://github.com/ProtoTest">ProtoTest</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
