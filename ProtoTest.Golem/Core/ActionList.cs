@@ -4,6 +4,9 @@ using Gallio.Framework;
 
 namespace ProtoTest.Golem.Core
 {
+    /// <summary>
+    /// Holds a list of Actions, with some functions to help print
+    /// </summary>
     public class ActionList
     {
         public List<Action> actions;

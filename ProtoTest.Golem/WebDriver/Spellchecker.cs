@@ -7,6 +7,9 @@ using ProtoTest.Golem.Properties;
 
 namespace ProtoTest.Golem.WebDriver
 {
+    /// <summary>
+    /// Spell check hte text on the page.  
+    /// </summary>
     internal class Spellchecker
     {
         private readonly Element AllText = new Element("AllText", By.XPath("//html"));

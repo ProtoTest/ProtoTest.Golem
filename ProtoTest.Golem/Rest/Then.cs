@@ -9,6 +9,9 @@ using RestSharp;
 
 namespace ProtoTest.Golem.Rest
 {
+    /// <summary>
+    /// Then contains post-operation commands such as validations and return statements;
+    /// </summary>
     public class Then
     {
         public IRestClient client;

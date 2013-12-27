@@ -8,42 +8,57 @@ using ProtoTest.Golem.WebDriver.Elements.Images;
 
 namespace ProtoTest.Golem.WebDriver
 {
+    /// <summary>
+    /// Provides a simplified API to the IWebELement.  Can be instantiated in a class header.  Will automatically find the IWebElement each time it is used, not when it is instantiated.  
+    /// </summary>
     public class Element : IWebElement, IWrapsDriver, IWrapsElement
     {
         protected IWebElement _element;
         private ElementImages _images;
         public By by;
         public string name = "Element";
+        protected IWebDriver driver;
 
         public Element()
         {
+            this.driver = WebDriverTestBase.driver;
         }
 
         public Element(IWebElement element)
         {
             this.element = element;
+            this.driver = ((IWrapsDriver) element).WrappedDriver;
         }
 
         public Element(string name, By locator)
         {
             this.name = name;
-            @by = locator;
+            this.by = locator;
+            this.driver = this.driver = WebDriverTestBase.driver;
+        }
+
+        public Element(string name, By locator, IWebDriver driver)
+        {
+            this.driver = driver;
+            this.name = name;
+            this.by = locator;
         }
 
         public Element(By locator)
         {
-            @by = locator;
+            by = locator;
+            this.driver = WebDriverTestBase.driver;
+        }
+
+        public Element(By locator, IWebDriver driver)
+        {
+            by = locator;
+            this.driver = driver;
         }
 
         public ElementImages Images
         {
             get { return _images ?? (_images = new ElementImages(this)); }
-        }
-
-        protected IWebDriver driver
-        {
-            get { return WebDriverTestBase.driver; }
-            set { WebDriverTestBase.driver = value; }
         }
 
         protected IWebElement element

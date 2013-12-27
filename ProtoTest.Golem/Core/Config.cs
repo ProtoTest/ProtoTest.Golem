@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
+using System.Reflection;
+using System.Xml;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Core
 {
+    /// <summary>
+    /// The Config class holds instantiates the ConfigSettings class, and any Config-related functions
+    /// </summary>
     public class Config
     {
         private static ConfigSettings _settings;
@@ -22,8 +28,25 @@ namespace ProtoTest.Golem.Core
                 return defaultValue;
             return setting;
         }
-    }
 
+        public static void UpdateConfigFile(string key, string value)
+        {
+            var doc = new XmlDocument();
+            string path = Assembly.GetCallingAssembly().Location + ".config";
+            doc.Load(path);
+            doc.SelectSingleNode("//add[@key='" + key + "']").Attributes["value"].Value = value;
+            doc.Save(path);
+
+            path = Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
+                   "\\App.config";
+            doc.Load(path);
+            doc.SelectSingleNode("//add[@key='" + key + "']").Attributes["value"].Value = value;
+            doc.Save(path);
+        }
+    }
+    /// <summary>
+    /// ConfigSettings holds each config section, and reads them in from the App.Config upon instantiation.  To override these settings put the commands in a [FixtureInitializer]
+    /// </summary>
     public class ConfigSettings
     {
         public AppiumSettings appiumSettings;
@@ -43,6 +66,9 @@ namespace ProtoTest.Golem.Core
             whiteSettings = new WhiteSettings();
         }
 
+        /// <summary>
+        /// Contains all settings related to appium support.
+        /// </summary>
         public class AppiumSettings
         {
             public string activity;
@@ -61,6 +87,9 @@ namespace ProtoTest.Golem.Core
             }
         }
 
+        /// <summary>
+        /// Contains all settings related to the BrowserMobProxy
+        /// </summary>
         public class HttpProxy
         {
             public int proxyPort;
@@ -77,6 +106,9 @@ namespace ProtoTest.Golem.Core
             }
         }
 
+        /// <summary>
+        /// Contains settings for image comparison.
+        /// </summary>
         public class ImageCompareSettings
         {
             public float accuracy;
@@ -91,6 +123,9 @@ namespace ProtoTest.Golem.Core
             }
         }
 
+        /// <summary>
+        /// Specify what should show up in the report
+        /// </summary>
         public class ReportSettings
         {
             public bool actionLogging;
@@ -111,6 +146,9 @@ namespace ProtoTest.Golem.Core
             }
         }
 
+        /// <summary>
+        /// Specify execution settings
+        /// </summary>
         public class RuntimeSettings
         {
             public string BrowserResolution;

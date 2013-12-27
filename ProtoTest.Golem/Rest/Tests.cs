@@ -5,6 +5,9 @@ using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Rest
 {
+    /// <summary>
+    /// Example tests on how to use the REST Framework
+    /// </summary>
     internal class Tests : RestTestBase
     {
         [Test]

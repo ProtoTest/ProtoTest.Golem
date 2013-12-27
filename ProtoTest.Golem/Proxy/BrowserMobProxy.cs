@@ -14,6 +14,9 @@ using RestSharp;
 
 namespace ProtoTest.Golem.Proxy
 {
+    /// <summary>
+    /// This class acts as a wrapper around a BrowserMobProxy jar.  it contains methods to launch and stop the server, as well as to issue REST commands to start/stop/configure an individual proxy.  
+    /// </summary>
     public class BrowserMobProxy
     {
         private static readonly string zipPath = Directory.GetCurrentDirectory() +

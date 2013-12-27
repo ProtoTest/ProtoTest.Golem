@@ -6,6 +6,9 @@ using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver
 {
+    /// <summary>
+    /// Methods for performing non-terminating validations, and Wait commands.
+    /// </summary>
     public class ElementVerification
     {
         private const string errorMessage = "{0}: {1}({2}): {3} after {4} seconds";

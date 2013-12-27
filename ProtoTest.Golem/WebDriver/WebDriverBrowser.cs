@@ -9,6 +9,9 @@ using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver
 {
+    /// <summary>
+    /// Contains all functionality relating to launching the webdriver browsers.
+    /// </summary>
     public class WebDriverBrowser
     {
         public enum Browser

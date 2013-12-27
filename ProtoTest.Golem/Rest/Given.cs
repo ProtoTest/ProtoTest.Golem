@@ -4,6 +4,9 @@ using RestSharp;
 namespace ProtoTest.Golem.Rest
 {
     //given.Domain("http://www.google.com").Header("key","value").Authentication(username,password).when.post("/resource/id").then.responseBody.Verify().Text("text in body").header.Verify().Text("Header text");
+    /// <summary>
+    /// Given class holds methods for any setup, such as url setting, and request configuring. 
+    /// </summary>
     public class Given
     {
         private readonly IRestClient client;

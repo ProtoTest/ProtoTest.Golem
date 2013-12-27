@@ -12,6 +12,9 @@ using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver
 {
+    /// <summary>
+    /// Extension methods added to the IWebDriver and IWebElement API's
+    /// </summary>
     public static class WebDriverExtensions
     {
         public static ElementVerification Verify(this IWebElement element)

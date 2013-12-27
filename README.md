@@ -71,6 +71,47 @@ Its primary purpose is threefold:
 - Configurable environment Url - "EnvironmentUrl",""
 - Automatically check spelling on each page - 
 
+####Getting Started With ProtoTest.Golem : 
+- Install the following components : 
+	1) Visual Studio 
+	2) NuGet 3.7 or later (Comes with VS 2012)
+	3) TestDriven.net Visual Studio plugin 
+	4) Gallio 3.4 (http://www.gallio.org/)
+
+-In visual Studio : 
+	--File -> New -> Project -> Class Library.
+-In NuGet Package Manager 
+	--Add Package “ProtoTest.Golem”. 
+Add references : 
+```
+using ProtoTest.Golem.Core;
+using MbUnit.Framework;
+```
+-Test Class inherits WebDriverTestBase
+-Test Method Marked with [Test] attribute.
+-Right Click on Test - > Run Test (Should open browser and close it)
+-Add an App.config -> Set browser using key “Browser1” value=”Firefox”
+-Execute Test -> Should open firefox instead of chrome.
+-Add this code into the Test : 
+```OpenPage<GoogleHomePage>(http://www.google.com.).SearchFor(“Selenium”).VerifyResult(“Selenium – Web Browser Automation”);```
+-Execute Test - > Should open google and validate it loaded.  Inspect HTML report. 
+-Edit expected result to be incorrect, and execute the test again.  Test will fail, inspect the report.  
+
+#####Building a new Page Object : 
+-Create a new Class.
+-Inherit BasePage
+-Define and instantiate Elements in a class header :  
+-Public Element GoogleSearchButton = new Element(“Google Search Button”,By.Id(“q”));
+-Use element API Directly in methods :  
+```
+public GoogleHomePage ClickSearchButton()
+{
+GoogleSearchButton.Click();
+}
+```
+Verifications and Waits appear in line : 
+```GoogleSearchButton.WaitUntil(20).Visible();```
+
 
 
 

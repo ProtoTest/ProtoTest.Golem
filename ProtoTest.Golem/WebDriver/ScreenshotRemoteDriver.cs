@@ -4,6 +4,9 @@ using OpenQA.Selenium.Remote;
 
 namespace ProtoTest.Golem.WebDriver
 {
+    /// <summary>
+    /// implements the GetScreenshot() method to su pport remote screenshots.  
+    /// </summary>
     public class ScreenshotRemoteWebDriver : RemoteWebDriver,
         ITakesScreenshot
     {

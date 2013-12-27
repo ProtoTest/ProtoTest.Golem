@@ -2,6 +2,9 @@
 
 namespace ProtoTest.Golem.WebDriver
 {
+    /// <summary>
+    /// Contains By Extensions for the OpenQA.Selenium.By class
+    /// </summary>
     public class ByE
     {
         public static By Text(string text)

@@ -7,6 +7,9 @@ using ProtoTest.Golem.Proxy;
 
 namespace ProtoTest.Golem.Rest
 {
+    /// <summary>
+    /// Test Base class to be inherited by all test fixtures.  Will automatically instantiate an object named Given
+    /// </summary>
     public class RestTestBase : TestBase
     {
         protected IDictionary<string, string> Tokens;

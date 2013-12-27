@@ -2,6 +2,9 @@
 
 namespace ProtoTest.Golem.WebDriver
 {
+    /// <summary>
+    /// Holds an error message and a screenshot.  
+    /// </summary>
     public class VerificationError
     {
         public string errorText;

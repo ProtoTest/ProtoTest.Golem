@@ -69,15 +69,6 @@ namespace ProtoTest.Golem.Core
         [TearDown]
         public void TearDown()
         {
-            TestContext.CurrentContext.AutoExecute(TriggerEvent.TestPassed, () =>
-            {
-                try
-                {
-                }
-                catch (Exception e)
-                {
-                }
-            });
             LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
             GetHarFile();
             QuitProxy();
@@ -139,6 +130,19 @@ namespace ProtoTest.Golem.Core
             }
         }
 
+        public static void Log(string message)
+        {
+            string msg = "(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + message;
+            DiagnosticLog.WriteLine(msg);
+            TestLog.WriteLine(msg);
+            WebDriverTestBase.overlay.Text = msg;
+        }
+
+        public static void LogVerificationPassed(string successText)
+        {
+            LogEvent("--> VerificationError Passed: " + successText);
+            TestContext.CurrentContext.IncrementAssertCount();
+        }
 
         public static void AddVerificationError(string errorText)
         {

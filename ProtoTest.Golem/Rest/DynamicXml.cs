@@ -8,6 +8,11 @@ namespace ProtoTest.Golem.Rest
 {
     public class DynamicXml
     {
+        /// <summary>
+        /// Provides a mechanism to get a dynamic object from an xml document
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="node"></param>
         public static void Parse(dynamic parent, XElement node)
         {
             if (node.HasElements)

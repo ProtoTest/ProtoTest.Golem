@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MbUnit.Framework;
 using ProtoTest.Golem.Core;
-using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests
 {

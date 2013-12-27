@@ -11,6 +11,9 @@ using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver
 {
+    /// <summary>
+    /// This class should be inherited by all webdriver tests.  It will automatically launch a browser and include the Driver object in each test.  I
+    /// </summary>
     public class WebDriverTestBase : TestBase
     {
         public static CaptionOverlay overlay = new CaptionOverlay
