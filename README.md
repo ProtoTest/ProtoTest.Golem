@@ -76,7 +76,7 @@ Its primary purpose is threefold:
 - Visual Studio 2012 for C#
 - NuGet 3.7 or later (Comes with VS 2012)
 - TestDriven.net Visual Studio plugin 
-- Gallio 3.4 (http://www.gallio.org/)
+- GallioBundle 3.4 (https://code.google.com/p/mb-unit/downloads/list)
 
 #### Creating a Test
 - Create a new Class Library File -> New -> Project -> Class Library.
