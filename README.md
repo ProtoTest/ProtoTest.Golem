@@ -83,7 +83,7 @@ Its primary purpose is threefold:
 - Right click on references -> Manage NuGet Packages
 - Add Package “ProtoTest.Golem”. 
 - WebDriver is available via "driver' property.
-- Use the following code and build:
+- Paste the following code into your clas file, save the project/solution, and build:
 
 ```
 using MbUnit.Framework;
@@ -104,7 +104,8 @@ namespace ProtoTest.Golem.Tests
 ```
 
 #### Executing a Test : 
-##### From Within Visual Studio : 
+##### From Within Visual Studio
+- TestDriven.net plugin is required
 - Right Click on Test - > Run Test (Should open browser and close it)
 - Right Click on Class or project to run all tests within.
 
