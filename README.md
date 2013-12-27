@@ -78,16 +78,12 @@ Its primary purpose is threefold:
 - TestDriven.net Visual Studio plugin 
 - Gallio 3.4 (http://www.gallio.org/)
 
-##### In Visual Studio
+##### Creating a Test
 - Create a new Class Library File -> New -> Project -> Class Library.
 - Right click on references -> Manage NuGet Packages
 - Add Package “ProtoTest.Golem”. 
-- Add references : 
-```
-using ProtoTest.Golem.Core;
-using MbUnit.Framework;
-```
-5) Create our Test :
+- Use the following code and build.  :
+
 ```
 using MbUnit.Framework;
 using ProtoTest.Golem.Tests.PageObjects.Google;
@@ -105,25 +101,45 @@ namespace ProtoTest.Golem.Tests
 	}
 }
 ```
+
+##### Executing a Test : 
+###### From Within Visual Studio : 
 - Right Click on Test - > Run Test (Should open browser and close it)
-- Add an App.config -> Set browser using key “Browser1” value=”Firefox”
--Execute Test - > Should open google and validate it loaded.  Inspect HTML report. 
--Edit expected result to be incorrect, and execute the test again.  Test will fail, inspect the report.  
+- Right Click on Class or project to run all tests within.
+
+###### From Gallio Icarus 
+- Open Gallio Icarus
+- Click "Add" and navigate to our ProjectName.dll file located in the /bin/release or /bin/debug/ directory.
+- Select tests to execute.
+- Click Run.
+
+
+##### Configuring Tests
+
+###### Through an App.Config :
+- Add an "Application Configuration File".  
+- Edit the App.config -> Set browser using key “Browser1” value=”Firefox”
+
+```
+<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="Browser1" value="Firefox"/>
+   </appSettings>
+</configuration>
+```
+- Execute Test - > Should open Firefox instead of Chrome.  
+
+###### Through code : 
+
+
 
 #####Building a new Page Object : 
--Create a new Class.
--Inherit BasePage
--Define and instantiate Elements in a class header :  
--Public Element GoogleSearchButton = new Element(“Google Search Button”,By.Id(“q”));
--Use element API Directly in methods :  
-```
-public GoogleHomePage ClickSearchButton()
-{
-GoogleSearchButton.Click();
-}
-```
-Verifications and Waits appear in line : 
-```GoogleSearchButton.WaitUntil(20).Visible();```
+- Create a new Class.
+- Inherit BasePage
+- Define and instantiate Elements in a class header :  
+- Public Element GoogleSearchButton = new Element(“Google Search Button”,By.Id(“q”));
+- Use element API Directly in methods :  
 
 
 
