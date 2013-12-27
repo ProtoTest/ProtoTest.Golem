@@ -72,21 +72,22 @@ Its primary purpose is threefold:
 - Automatically check spelling on each page - 
 
 ####Getting Started With ProtoTest.Golem : 
-- Install the following components : 
+###Install the following components : 
 	1) Visual Studio 
 	2) NuGet 3.7 or later (Comes with VS 2012)
 	3) TestDriven.net Visual Studio plugin 
 	4) Gallio 3.4 (http://www.gallio.org/)
 
--In visual Studio : 
-	--File -> New -> Project -> Class Library.
--In NuGet Package Manager 
-	--Add Package “ProtoTest.Golem”. 
-Add references : 
+### In Visual Studio
+1) Create a new Class Library File -> New -> Project -> Class Library.
+2) Right click on references -> Manage NuGet Packages
+3) Add Package “ProtoTest.Golem”. 
+4) Add references : 
 ```
 using ProtoTest.Golem.Core;
 using MbUnit.Framework;
 ```
+
 -Test Class inherits WebDriverTestBase
 -Test Method Marked with [Test] attribute.
 -Right Click on Test - > Run Test (Should open browser and close it)
