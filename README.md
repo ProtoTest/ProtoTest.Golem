@@ -72,13 +72,13 @@ Its primary purpose is threefold:
 - Automatically check spelling on each page - 
 
 ####Getting Started With ProtoTest.Golem : 
-###Install the following components : 
-	1) Visual Studio 
-	2) NuGet 3.7 or later (Comes with VS 2012)
-	3) TestDriven.net Visual Studio plugin 
-	4) Gallio 3.4 (http://www.gallio.org/)
+#####Install the following components : 
+1) Visual Studio 
+2) NuGet 3.7 or later (Comes with VS 2012)
+3) TestDriven.net Visual Studio plugin 
+4) Gallio 3.4 (http://www.gallio.org/)
 
-### In Visual Studio
+##### In Visual Studio
 1) Create a new Class Library File -> New -> Project -> Class Library.
 2) Right click on references -> Manage NuGet Packages
 3) Add Package “ProtoTest.Golem”. 
@@ -87,14 +87,19 @@ Its primary purpose is threefold:
 using ProtoTest.Golem.Core;
 using MbUnit.Framework;
 ```
-
--Test Class inherits WebDriverTestBase
--Test Method Marked with [Test] attribute.
--Right Click on Test - > Run Test (Should open browser and close it)
--Add an App.config -> Set browser using key “Browser1” value=”Firefox”
--Execute Test -> Should open firefox instead of chrome.
--Add this code into the Test : 
-```OpenPage<GoogleHomePage>(http://www.google.com.).SearchFor(“Selenium”).VerifyResult(“Selenium – Web Browser Automation”);```
+5) Create our Test :
+```
+- Test Class inherits WebDriverTestBase
+- Test Method Marked with [Test] attribute.
+```
+- Right Click on Test - > Run Test (Should open browser and close it)
+- Add an App.config -> Set browser using key “Browser1” value=”Firefox”
+- Execute Test -> Should open firefox instead of chrome.
+- Add this code into the Test : 
+```
+OpenPage<GoogleHomePage>(http://www.google.com.).
+SearchFor(“Selenium”).
+VerifyResult(“Selenium – Web Browser Automation”);```
 -Execute Test - > Should open google and validate it loaded.  Inspect HTML report. 
 -Edit expected result to be incorrect, and execute the test again.  Test will fail, inspect the report.  
 
