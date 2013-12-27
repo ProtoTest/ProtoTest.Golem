@@ -198,18 +198,3 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
    </appSettings>
 </configuration>
 ```
-
-####Parallel Test Execution
-- Set Degree of Parallelism : 
-
-```
-<add key="DegreeOfParallelism" value="5"/>
-```
-OR
-```
-[FixtureInitializer]
-public void setup()
-{
-    Config.Settings.runTimeSettings.DegreeOfParallelism = 10;
-}
-```
