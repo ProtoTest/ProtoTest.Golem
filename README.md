@@ -3,7 +3,7 @@ Golem
 
 ###Event driven WebDriver C# Framework
 
-Golem is an event-driven framework written in C# for Selenium-WebDriver and Gallio/MbUnit.  It sits on top of webdriver to help make automating easier, as an incredible amount of additional information is included automatically in the report.  It was designed for tests written using the page object design pattern.  Without something like Golem it’s difficult to build and maintain a large-scale (enterprise) suite of selenium tests.  Most companies will build something similar, as without it there will be an incredibly large amount of duplicate code.   
+Golem is an event-driven framework written in C# for Selenium-WebDriver and Gallio/MbUnit.  It sits on top of gallio and webdriver to help make automating easier, as an incredible amount of additional information is included automatically in the report.  It was designed for tests written using the page object design pattern.  Without something like Golem it’s difficult to build and maintain a large-scale (enterprise) suite of selenium tests.  Most companies will build something similar, as without it there will be an incredibly large amount of duplicate code.   
 
 Its primary purpose is threefold: 
 -	Simplify/reduce coding by providing an enhanced Webdriver API and shared common functions 
@@ -12,7 +12,7 @@ Its primary purpose is threefold:
 
 ####Included Features:
 -	Standard app.config file can be used to turn on/off or configure all features.  
--	Page Object design pattern makes tests a BDD style function chain : GoToWebPage().LogInWithUser(“GSmith”,”Password”).GoToProfilePage().EditName(“George Smith”).LogOut();
+-	Page Object design pattern makes tests a BDD style function chain : ```GoToWebPage().LogInWithUser(“GSmith”,”Password”).GoToProfilePage().EditName(“George Smith”).LogOut();```
 -	Parallel test execution – Can execute up to 5 instances of a browser on each machine
 -	Can run tests locally or on a remote machine
 -	Multiple Browser support – Define multiple browsers and each test will run once per browser.
@@ -71,18 +71,19 @@ Its primary purpose is threefold:
 - Configurable environment Url - "EnvironmentUrl",""
 - Automatically check spelling on each page - 
 
-####Getting Started With ProtoTest.Golem : 
-#####Install the following components : 
-- Visual Studio 
+###Getting Started With ProtoTest.Golem : 
+####Install the following components : 
+- Visual Studio 2012 for C#
 - NuGet 3.7 or later (Comes with VS 2012)
 - TestDriven.net Visual Studio plugin 
 - Gallio 3.4 (http://www.gallio.org/)
 
-##### Creating a Test
+#### Creating a Test
 - Create a new Class Library File -> New -> Project -> Class Library.
 - Right click on references -> Manage NuGet Packages
 - Add Package “ProtoTest.Golem”. 
-- Use the following code and build.  :
+- WebDriver is available via "driver' property.
+- Use the following code and build:
 
 ```
 using MbUnit.Framework;
@@ -102,21 +103,21 @@ namespace ProtoTest.Golem.Tests
 }
 ```
 
-##### Executing a Test : 
-###### From Within Visual Studio : 
+#### Executing a Test : 
+##### From Within Visual Studio : 
 - Right Click on Test - > Run Test (Should open browser and close it)
 - Right Click on Class or project to run all tests within.
 
-###### From Gallio Icarus 
+##### From Gallio Icarus 
 - Open Gallio Icarus
 - Click "Add" and navigate to our ProjectName.dll file located in the /bin/release or /bin/debug/ directory.
 - Select tests to execute.
 - Click Run.
 
 
-##### Configuring Tests
+#### Configuring Tests
 
-###### Through an App.Config :
+##### Through an App.Config :
 - Add an "Application Configuration File".  
 - Edit the App.config -> Set browser using key “Browser1” value=”Firefox”
 
@@ -129,18 +130,86 @@ namespace ProtoTest.Golem.Tests
 </configuration>
 ```
 - Execute Test - > Should open Firefox instead of Chrome.  
+- Supports Firefox, Chrome, IE, Safari, HtmlUnit, and Android (remote only)
 
-###### Through code : 
+##### Through code : 
+```
+[FixtureInitializer]
+        public void init()
+        {
+            Config.Settings.httpProxy.startProxy = false;
+            Config.Settings.httpProxy.useProxy = false;
 
+        }
 
+```
+####Building a new Page Object : 
+- Page Objects Inherit BasePage
+- No Constructor needed
+- May define and instantiate Elements in class header 
+- Use element API directly, no finding needed
+- WebDriver APi available through 'driver' property;
+- WaitForElements method is called when page object is instantiated.  Use it to wait for dynamic elements.
 
-#####Building a new Page Object : 
-- Create a new Class.
-- Inherit BasePage
-- Define and instantiate Elements in a class header :  
-- Public Element GoogleSearchButton = new Element(“Google Search Button”,By.Id(“q”));
-- Use element API Directly in methods :  
+```
+using OpenQA.Selenium;
+using ProtoTest.Golem.WebDriver;
 
+namespace ProtoTest.Golem.Tests.PageObjects.Google
+{
+    public class GoogleHomePage : BasePageObject
+    {
+        Element searchField = new Element("SearchField", By.Name("q"));
+        Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
+        Element searchButton = new Element("SearchButton", By.Name("btnK"));
+        Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
+        Element signInButton = new Element("SignInButon", By.LinkText("Sign in"));
 
+        public GoogleResultsPage SearchFor(string text)
+        {
+            searchField.Text = text;
+            searchField.Submit();
+            return new GoogleResultsPage();
+        }
 
+        public override void WaitForElements()
+        {
+            searchField.Verify().Present();
+            googleLogo.Verify().Present();
+            searchButton.Verify().Present();
+            feelingLuckyButton.Verify().Present();
+            signInButton.Verify().Present();
+        }
+    }
+}
 
+```
+
+####Executing on a Remote Computer
+- Modify App Config, set host to IP or Hostname of remote computer 
+
+```
+<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="Browser1" value="Chrome"/>
+    <add key="RunOnRemoteHost" value="True"/>
+    <add key="HostIp" value="10.10.1.151"/>
+   </appSettings>
+</configuration>
+```
+
+####Parallel Test Execution
+- Set Degree of Parallelism : 
+
+```
+<add key="DegreeOfParallelism" value="5"/>
+```
+OR
+```
+[FixtureInitializer]
+public void setup()
+{
+    Config.Settings.runTimeSettings.DegreeOfParallelism = 10;
+}
+```
