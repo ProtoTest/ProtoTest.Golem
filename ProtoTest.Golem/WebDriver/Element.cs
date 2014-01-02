@@ -17,29 +17,34 @@ namespace ProtoTest.Golem.WebDriver
         private ElementImages _images;
         public By by;
         public string name = "Element";
-        protected IWebDriver driver;
+
+        protected IWebDriver driver
+        {
+            get { return TestBase.testData.driver; }
+            set { TestBase.testData.driver = value; }
+        }
 
         public Element()
         {
-            this.driver = WebDriverTestBase.driver;
+           // this.driver = WebDriverTestBase.driver;
         }
 
         public Element(IWebElement element)
         {
             this.element = element;
-            this.driver = ((IWrapsDriver) element).WrappedDriver;
+           // this.driver = ((IWrapsDriver) element).WrappedDriver;
         }
 
         public Element(string name, By locator)
         {
             this.name = name;
             this.by = locator;
-            this.driver = this.driver = WebDriverTestBase.driver;
+            //this.driver = this.driver = WebDriverTestBase.driver;
         }
 
         public Element(string name, By locator, IWebDriver driver)
         {
-            this.driver = driver;
+          //  this.driver = driver;
             this.name = name;
             this.by = locator;
         }
@@ -47,13 +52,13 @@ namespace ProtoTest.Golem.WebDriver
         public Element(By locator)
         {
             by = locator;
-            this.driver = WebDriverTestBase.driver;
+           // this.driver = WebDriverTestBase.driver;
         }
 
         public Element(By locator, IWebDriver driver)
         {
             by = locator;
-            this.driver = driver;
+           // this.driver = driver;
         }
 
         public ElementImages Images
