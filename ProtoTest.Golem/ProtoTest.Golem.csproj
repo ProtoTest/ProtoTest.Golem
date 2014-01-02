@@ -36,6 +36,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\Castle.Core.3.2.2\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Gallio, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <HintPath>packages\Gallio_MbUnit.3.4.14.0\lib\net40\Gallio.dll</HintPath>
     </Reference>
@@ -76,7 +79,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TestStack.White, Version=0.11.0.207, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\TestStack.White.0.11.0.207\lib\net40\TestStack.White.dll</HintPath>
+      <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\TestStack.White.0.11.0.207\lib\net40\TestStack.White.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationTypes" />
