@@ -209,7 +209,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 return element.GetAttribute(attribute);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return "";
             }
@@ -253,7 +253,7 @@ namespace ProtoTest.Golem.WebDriver
                     _element = driver.FindElement(@by);
                 return _element;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 string message = string.Format("Could not locate element '{0}' ({1})", name, @by);
                 throw new NoSuchElementException(message);

@@ -16,8 +16,6 @@ namespace ProtoTest.Golem.Core
     /// </summary>
     public class Common
     {
-        private static string lastMessage;
-
         //  private static Object locker = new Object();
 
         public static string GetRandomString()
@@ -54,7 +52,6 @@ namespace ProtoTest.Golem.Core
         public static Process ExecuteDosCommand(string command, bool waitToFinish = true)
         {
             DiagnosticLog.WriteLine("Executing DOS Command: " + command);
-            string tempGETCMD = null;
             var CMDprocess = new Process();
             var StartInfo = new ProcessStartInfo();
             StartInfo.FileName = "cmd"; //starts cmd window

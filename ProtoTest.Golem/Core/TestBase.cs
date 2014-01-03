@@ -231,7 +231,7 @@ namespace ProtoTest.Golem.Core
                     proxy.CreateHar();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 proxy.CreateProxy();
                 proxy.CreateHar();
@@ -264,7 +264,7 @@ namespace ProtoTest.Golem.Core
                     proxy.QuitServer();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }
@@ -278,7 +278,7 @@ namespace ProtoTest.Golem.Core
                     proxy.QuitProxy();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }
