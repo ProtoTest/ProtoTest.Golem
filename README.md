@@ -30,8 +30,8 @@ Golem has three goals:
 -	Automatically validate pages loaded by defining a list of elements to check for  
 -	Event-driven architecture makes customizations easy
 
-###Getting Started With ProtoTest.Golem : 
-####Install the following components : 
+###Getting Started With ProtoTest.Golem: 
+####Requirements: 
 - Visual Studio 2012 for C#
 - NuGet 3.7 or later (Comes with VS 2012)
 - TestDriven.net Visual Studio plugin 
@@ -41,8 +41,8 @@ Golem has three goals:
 - Create a new Class Library File -> New -> Project -> Class Library.
 - Right click on references -> Manage NuGet Packages
 - Add Package “ProtoTest.Golem”. 
-- WebDriver is available via "driver' property.
-- Paste the following code into your clas file, save the project/solution, and build:
+- WebDriver is available via "driver" property.
+- Paste the following code into your class file, save the project/solution, and build:
 
 ```
 using MbUnit.Framework;
@@ -62,7 +62,7 @@ namespace ProtoTest.Golem.Tests
 }
 ```
 
-#### Executing a Test : 
+#### Executing a Test: 
 ##### From Within Visual Studio
 - TestDriven.net plugin is required
 - Right Click on Test - > Run Test (Should open browser and close it)
@@ -103,12 +103,12 @@ namespace ProtoTest.Golem.Tests
         }
 
 ```
-####Building a new Page Object : 
+####Building a new Page Object:
+- Look in the Tests/PageObjects directory in the Golem repository for examples
 - Page Objects Inherit BasePage
-- No Constructor needed
-- May define and instantiate Elements in class header 
-- Use element API directly, no finding needed
-- WebDriver APi available through 'driver' property;
+- Instances of Element represent elements in the web page under test
+- The Element API provides convenient methods for locating elements
+- WebDriver API available through 'driver' property;
 - WaitForElements method is called when page object is instantiated.  Use it to wait for dynamic elements.
 
 ```
@@ -159,6 +159,24 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
 </configuration>
 ```
 
+####Configurable Features : 
+- Multi Threaded Execution.  Mark test with [Parallelizable] attribute. Set number of threads with "DegreeOfParallelism", "1"
+- Automatically Launch Browser - LaunchBrowser", "True"
+- Specify up to five browsers - "Browser1" value="Firefox"
+- Add a delay between commands - "CommandDelayMs" value="0"
+- Run on local or remote computer - "RunOnRemoteHost" value="false", "HostIp" value="localhost"
+- Capture screenshot on error - "ScreenshotOnError" value="True"
+- Capture page html source on error - "HtmlOnError" value="True" 
+- Capture screen video recording on error - "VideoRecordingOnError", "True"
+- Write all webdriver commands to the log - "CommandLogging" value="True"
+- Write all page object functions to the log - "ActionLogging" value="True"
+- Launch a proxy to capture http traffic - "StartFiddlerProxy" value="True", "ProxyPort" value="8876"
+- Appium support - "LaunchApp", "False" - "AppPath", "" - "AppPackage", "" - "AppActivity", "" - "AppOs", "Android"
+- Configurable Test timeout - "TestTimeoutMin","5"
+- Configurable element Timeout - "ElementTimeoutSec","20"
+- Configurable environment Url - "EnvironmentUrl",""
+- Automatically check spelling on each page - 
+
 ###Things to know : 
 - C# and .Net 4.0
 - Built upon Gallio and MbUnit. (gallio.org)  Build the project into a dll, open dll in Gallio Icarus to execute.  
@@ -177,20 +195,4 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
 - Created a variety of Verifications in the WebDriver API.  These will not stop the test if they fail.  '
 - Supports data driven testing through MbUnit attributes.  
 
-####Configurable Features : 
-- Multi Threaded Execution.  Mark test with [Parallelizable] attribute. Set number of threads with "DegreeOfParallelism", "1"
-- Automatically Launch Browser - LaunchBrowser", "True"
-- Specify up to five browsers - "Browser1" value="Firefox"
-- Add a delay between commands - "CommandDelayMs" value="0"
-- Run on local or remote computer - "RunOnRemoteHost" value="false", "HostIp" value="localhost"
-- Capture screenshot on error - "ScreenshotOnError" value="True"
-- Capture page html source on error - "HtmlOnError" value="True" 
-- Capture screen video recording on error - "VideoRecordingOnError", "True"
-- Write all webdriver commands to the log - "CommandLogging" value="True"
-- Write all page object functions to the log - "ActionLogging" value="True"
-- Launch a proxy to capture http traffic - "StartFiddlerProxy" value="True", "ProxyPort" value="8876"
-- Appium support - "LaunchApp", "False" - "AppPath", "" - "AppPackage", "" - "AppActivity", "" - "AppOs", "Android"
-- Configurable Test timeout - "TestTimeoutMin","5"
-- Configurable element Timeout - "ElementTimeoutSec","20"
-- Configurable environment Url - "EnvironmentUrl",""
-- Automatically check spelling on each page - 
+
