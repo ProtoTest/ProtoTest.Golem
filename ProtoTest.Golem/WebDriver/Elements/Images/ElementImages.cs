@@ -28,7 +28,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             get
             {
-                return Common.GetCodeDirectory() + "\\ElementImages\\" + TestBase.GetCurrentClassName() + "." +
+                return Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") + "\\ElementImages\\" + element.pageObjectName + "_" +
                        element.name.Replace(" ", "") + ".bmp";
             }
         }
@@ -36,7 +36,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         public Image GetDifferenceImage()
         {
             var bmp = new Bitmap(liveImage.Width, liveImage.Height);
-            return liveImage.GetDifferenceOverlayImage(storedImage, true, true)
+            return liveImage.GetDifferenceOverlayImage(storedImage)
                 .Resize(storedImage.Width, storedImage.Height);
         }
 
@@ -46,17 +46,9 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             {
                 UpdateImage();
             }
-            //ImageComparer.ImageComparePercentage(this.storedImage, this.liveImage,Config.Settings.imageCompareSettings.fuzziness);
-            //TestLog.EmbedImage(this.element.name+"original" + Common.GetRandomString(),this.storedImage);
-            //TestLog.EmbedImage(this.element.name + "combined" + Common.GetRandomString(), GetMergedImage());
-            Image overlayImage = OverlayImages(liveImage, GetDifferenceImage());
-            Image mergedImage = CombineImages(storedImage.Resize(8, 8), liveImage.Resize(8, 8),
-                overlayImage.Resize(8, 8));
-            Common.LogImage(mergedImage);
             difference = ImageComparer.ImageComparePercentage(storedImage, liveImage,
                 Config.Settings.imageCompareSettings.fuzziness);
             differenceString = (difference*100).ToString("0.##\\%");
-            // Common.Log(string.Format("{0} difference is {1}",this.element.name,this.differenceString));
             return difference < Config.Settings.imageCompareSettings.accuracy;
         }
 
@@ -129,6 +121,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             try
             {
+                
                 DeleteOldImage();
                 using (var tempImage = new Bitmap(image))
                 {
@@ -137,7 +130,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             }
             catch (Exception e)
             {
-                Common.Log("Exception saving : " + e.Message);
+                Common.Log("Exception saving image : " + e.Message);
             }
         }
 

@@ -17,6 +17,7 @@ namespace ProtoTest.Golem.WebDriver
         private ElementImages _images;
         public By by;
         public string name = "Element";
+        public string pageObjectName = "";
 
         protected IWebDriver driver
         {
@@ -39,7 +40,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             this.name = name;
             this.by = locator;
-            //this.driver = this.driver = WebDriverTestBase.driver;
+            this.pageObjectName = TestBase.GetCurrentClassName();
         }
 
         public Element(string name, By locator, IWebDriver driver)
