@@ -16,12 +16,7 @@ namespace ProtoTest.Golem.Core
     /// </summary>
     public class Common
     {
-<<<<<<< HEAD
-        //  private static Object locker = new Object();
-=======
         private static string lastMessage;
->>>>>>> Fixing some bugs with locators.
-
         public static string GetRandomString()
         {
             return DateTime.Now.ToString("ddHHmmss");
