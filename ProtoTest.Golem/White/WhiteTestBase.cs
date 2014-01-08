@@ -23,6 +23,7 @@ namespace ProtoTest.Golem.White
         public void CloseApplication()
         {
             TestLog.EmbedImage(null, app.GetImage());
+            app.ApplicationSession.Save();
         }
     }
 }

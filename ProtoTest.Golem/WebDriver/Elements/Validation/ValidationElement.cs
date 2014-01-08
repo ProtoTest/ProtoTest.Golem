@@ -19,7 +19,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Validation
         /// <summary>
         ///     Constructor
         /// </summary>
-        /// <param name="name">Name of the element</param>
+        /// <param name="name">Description of the element</param>
         /// <param name="locatorElement">Locator for the element</param>
         /// <param name="locatorValidation">Locator for the form validation</param>
         public ValidationElement(string name, By locatorElement, By locatorValidation) : base(name, locatorElement)

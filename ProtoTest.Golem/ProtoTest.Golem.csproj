@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}</ProjectGuid>
+    <ProjectGuid>{80688686-B02E-42F3-B3E0-F5C59933B1BD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProtoTest.Golem</RootNamespace>
@@ -127,10 +127,11 @@
     <Compile Include="Tests\VerificationTests.cs" />
     <Compile Include="White\BaseScreenObject.cs" />
     <Compile Include="White\Component.cs" />
+    <Compile Include="White\ElementFactory.cs" />
     <Compile Include="White\Elements\BaseItem.cs" />
-    <Compile Include="White\Elements\Button.cs" />
-    <Compile Include="White\Elements\ElementFactory.cs" />
-    <Compile Include="White\Elements\TextBox.cs" />
+    <Compile Include="White\Elements\WhiteButton.cs" />
+    <Compile Include="White\Elements\WhitePanel.cs" />
+    <Compile Include="White\Elements\WhiteTextBox.cs" />
     <Compile Include="White\Extensions.cs" />
     <Compile Include="White\UIUtilities.cs" />
     <Compile Include="White\WhiteTestBase.cs" />
