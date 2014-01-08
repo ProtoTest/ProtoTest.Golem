@@ -287,7 +287,7 @@ namespace ProtoTest.Golem.Proxy
             }
             else
             {
-                message = string.Format("No QueryString found with Name={0}", queryString.Name);
+                message = string.Format("No QueryString found with Description={0}", queryString.Name);
             }
             TestBase.AddVerificationError(string.Format("Request From {0} to {1} not correct. {2}",
                 TestBase.testData.driver.Url, "om.healthgrades.com", message));
@@ -317,7 +317,7 @@ namespace ProtoTest.Golem.Proxy
             }
             else
             {
-                message = string.Format("No QueryString found with Name={0}", queryString.Name);
+                message = string.Format("No QueryString found with Description={0}", queryString.Name);
             }
             TestBase.AddVerificationError(string.Format("Request From {0} to {1} not correct. {2}",
                 TestBase.testData.driver.Url, url, message));
