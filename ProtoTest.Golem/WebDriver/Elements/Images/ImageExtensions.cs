@@ -158,51 +158,26 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         /// </param>
         /// <param name="percentages">Whether to write percentages in each of the 255 squares (true) or the absolute value (false)</param>
         /// <returns>an image which displays the differences between two images</returns>
-        public static Bitmap GetDifferenceOverlayImage(this Image img1, Image img2,
-            bool adjustColorSchemeToMaxDifferenceFound = false, bool absoluteText = false)
+        public static Bitmap GetDifferenceOverlayImage(this Image img1, Image img2)
         {
-            //create a 8x8 tiles image with information about how much the two images differ
-            int cellsize = 16; //each tile is 16 pixels wide and high
-            var bmp = new Bitmap(16*cellsize + 1, 16*cellsize + 1);
-                //16 blocks * 16 pixels + a borderpixel at left/bottom
-
+            var bmp = new Bitmap(16*16 + 1, 16*16 + 1);
             Graphics g = Graphics.FromImage(bmp);
-            //g.FillRectangle(Brushes, 0, 0, bmp.Width, bmp.Height);
             byte[,] differences = img1.GetDifferences(img2);
-            byte maxDifference = 255;
-
-            //if wanted - adjust the color scheme, by finding the new maximum difference
-            if (adjustColorSchemeToMaxDifferenceFound)
+            byte maxDifference = 1;
+            foreach (byte b in differences)
             {
-                maxDifference = 0;
-                foreach (byte b in differences)
-                {
-                    if (b > maxDifference)
-                    {
-                        maxDifference = b;
-                    }
-                }
-
-                if (maxDifference == 0)
-                {
-                    maxDifference = 1;
-                }
+                if (b > maxDifference)
+                    maxDifference = b;                    
             }
-
             for (int y = 0; y < differences.GetLength(1); y++)
             {
                 for (int x = 0; x < differences.GetLength(0); x++)
                 {
-                    byte cellValue = differences[x, y];
-
                     float percentageDifference = (float) differences[x, y]/maxDifference;
                     var colorIndex = (int) (255*percentageDifference);
-
-                    g.FillRectangle(brushes[colorIndex], x*cellsize, y*cellsize, cellsize, cellsize);
-                    //   g.DrawRectangle(Pens.Blue, x * cellsize, y * cellsize, cellsize, cellsize);
+                    g.FillRectangle(new SolidBrush(Color.FromArgb(colorIndex, 255, 2, 2)), x*16, y*16, 16, 16);
                 }
             }
-
             return bmp;
         }
 
@@ -216,11 +191,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             var thisOne = (Bitmap) img1.Resize(16, 16).GetGrayScaleVersion();
             var theOtherOne = (Bitmap) img2.Resize(16, 16).GetGrayScaleVersion();
-            var differencesRed = new byte[16, 16];
-            var differencesGreen = new byte[16, 16];
-            var differencesBlue = new byte[16, 16];
-            var differencesAvg = new byte[16, 16];
-
+            var differencesRed = new byte[16, 16]; 
             Console.WriteLine();
 
             for (int y = 0; y < 16; y++)
@@ -228,16 +199,10 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                 for (int x = 0; x < 16; x++)
                 {
                     differencesRed[x, y] = (byte) Math.Abs(thisOne.GetPixel(x, y).R - theOtherOne.GetPixel(x, y).R);
-                    differencesGreen[x, y] = (byte) Math.Abs(thisOne.GetPixel(x, y).G - theOtherOne.GetPixel(x, y).G);
-                    differencesBlue[x, y] = (byte) Math.Abs(thisOne.GetPixel(x, y).B - theOtherOne.GetPixel(x, y).B);
-                    differencesAvg[x, y] =
-                        (byte) Math.Abs((differencesRed[x, y] + differencesRed[x, y] + differencesRed[x, y])/3);
                 }
             }
-            //differences.ToConsole();
             return differencesRed;
         }
-
 
         /// <summary>
         ///     Converts an image to grayscale

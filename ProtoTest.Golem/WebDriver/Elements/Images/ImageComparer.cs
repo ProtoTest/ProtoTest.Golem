@@ -8,7 +8,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 {
     public class ImageComparer
     {
-        public static bool ImageCompareString(Image firstImage, Image secondImage)
+        public static bool ImageCompareString(Image firstImage, Image secondImage, float failurePercent)
         {
             var ms1 = new MemoryStream();
             var ms2 = new MemoryStream();
@@ -22,11 +22,14 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             ms1.Dispose();
             ms2.Dispose();
 
-            if (firstBitmap.Equals(secondBitmap))
+            var total = 0;
+            for (var i = 0; i < firstBitmap.Length; i++)
             {
-                return true;
+                if (firstBitmap[i] != secondBitmap[i])
+                    total++;
             }
-            return false;
+            float failure = (float)total/(float)firstBitmap.Length;
+            return failure < failurePercent;
         }
 
         public static bool ImageCompareArray(Image firstImage, Image secondImage)
@@ -35,7 +38,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             string firstPixel;
             string secondPixel;
             firstImage = Common.ScaleImage(firstImage);
-            secondImage = Common.ScaleImage(firstImage);
+            secondImage = Common.ScaleImage(secondImage);
 
             if (firstImage.Size.Width > secondImage.Size.Width)
             {
@@ -78,10 +81,6 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public static float ImageComparePercentage(Image firstImage, Image secondImage, byte fuzzyness = 10)
         {
-            //for (byte i = 0; i < 100; i++)
-            //{
-            //    Common.Log("Diff of image : " + TestBase.testData.lastElement.name + " at level : " + i + " : " + firstImage.PercentageDifference(secondImage, i));
-            //}
             return firstImage.PercentageDifference(secondImage, fuzzyness);
         }
 
@@ -122,7 +121,6 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                     }
                 }
             }
-            //Common.Log(hashString);
             return hashString;
         }
 

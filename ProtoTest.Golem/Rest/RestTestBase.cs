@@ -68,7 +68,7 @@ namespace ProtoTest.Golem.Rest
                     proxy.CreateHar();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }

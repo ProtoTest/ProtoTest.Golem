@@ -1,7 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows;
 using TestStack.White;
+using TestStack.White.UIItemEvents;
 using TestStack.White.UIItems;
+using TestStack.White.UIItems.WindowItems;
 using Image = System.Drawing.Image;
 
 namespace ProtoTest.Golem.White
@@ -11,6 +14,12 @@ namespace ProtoTest.Golem.White
         public static Image GetImage(this Application window)
         {
             return new ScreenCapture().CaptureScreenShot();
+        }
+
+        public static void SetCheckbox(this CheckBox box, bool isChecked)
+        {
+            if(box.Checked!=isChecked)
+                box.Click();
         }
 
         public static Image GetImage(this UIItem item)
@@ -32,6 +41,18 @@ namespace ProtoTest.Golem.White
             result.Width = (int) value.Width;
             result.Height = (int) value.Height;
             return result;
+        }
+
+        public static bool IsStale(this UIItem item)
+        {
+            try
+            {
+                return item.Enabled;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
