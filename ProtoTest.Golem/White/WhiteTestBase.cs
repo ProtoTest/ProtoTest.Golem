@@ -21,22 +21,12 @@ namespace ProtoTest.Golem.White
         [FixtureInitializer]
         public void WhiteSettings()
         {
-<<<<<<< HEAD
+
             //CoreAppXmlConfiguration.Instance.RawElementBasedSearch = false;
             //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
             CoreAppXmlConfiguration.Instance.LoggerFactory = new WhiteDefaultLoggerFactory(LoggerLevel.Debug);
             
-=======
-            get
-            {
-                return _window;
-            }
 
-            set
-            {
-                _window = value;
-            }
->>>>>>> c9941934e531306f953c2413d2ba260e60c3c414
         }
 
 
