@@ -130,6 +130,7 @@
     <Compile Include="White\ElementFactory.cs" />
     <Compile Include="White\Elements\BaseItem.cs" />
     <Compile Include="White\Elements\WhiteButton.cs" />
+    <Compile Include="White\Elements\WhiteListView.cs" />
     <Compile Include="White\Elements\WhitePanel.cs" />
     <Compile Include="White\Elements\WhiteTextBox.cs" />
     <Compile Include="White\Extensions.cs" />
