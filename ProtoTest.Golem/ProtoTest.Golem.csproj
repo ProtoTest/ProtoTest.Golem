@@ -133,6 +133,7 @@
     <Compile Include="White\Elements\WhiteMenu.cs" />
     <Compile Include="White\Elements\WhitePanel.cs" />
     <Compile Include="White\Elements\WhiteTextBox.cs" />
+    <Compile Include="White\Elements\WhiteToolStrip.cs" />
     <Compile Include="White\Elements\WhiteWindow.cs">
       <SubType>Code</SubType>
     </Compile>
