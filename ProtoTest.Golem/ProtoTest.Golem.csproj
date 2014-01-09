@@ -128,10 +128,14 @@
     <Compile Include="White\BaseScreenObject.cs" />
     <Compile Include="White\ElementFactory.cs" />
     <Compile Include="White\Elements\WhiteButton.cs" />
+    <Compile Include="White\Elements\WhiteCheckBox.cs" />
+    <Compile Include="White\Elements\WhiteLabel.cs" />
+    <Compile Include="White\Elements\WhiteListItem.cs" />
     <Compile Include="White\Elements\WhiteListView.cs" />
     <Compile Include="White\Elements\WhiteComboBox.cs" />
     <Compile Include="White\Elements\WhiteMenu.cs" />
     <Compile Include="White\Elements\WhitePanel.cs" />
+    <Compile Include="White\Elements\WhiteTable.cs" />
     <Compile Include="White\Elements\WhiteTextBox.cs" />
     <Compile Include="White\Elements\WhiteWindow.cs">
       <SubType>Code</SubType>

@@ -17,6 +17,7 @@ namespace ProtoTest.Golem.White
             {
                 return _window;
             }
+
             set
             {
                 _window = value;
