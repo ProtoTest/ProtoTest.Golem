@@ -21,17 +21,16 @@ namespace ProtoTest.Golem.White.Elements
 {
     public class WhiteListView : ListView
     {
-        public string Description;
-        public SearchCriteria Criteria;
-        public Window Window;
+        public string description;
+        public SearchCriteria criteria;
         private ListView _item;
-        private UIItem Parent;
+        private UIItem parent;
 
         public ListView item
         {
             get
             {
-                _item = ElementFactory.GetItem(_item, Criteria, Parent);
+                _item = ElementFactory.GetItem(_item, criteria, parent);
                 return _item;
             }
             set
@@ -40,18 +39,11 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteListView(string Description, SearchCriteria Criteria, Window Window = null)
+        public WhiteListView(SearchCriteria Criteria, string Description = null, UIItem Parent = null)
         {
-            this.Description = Description;
-            this.Criteria = Criteria;
-            this.Window = Window ?? WhiteTestBase.window;
-        }
-
-        public WhiteListView(string Description, SearchCriteria Criteria, UIItem Parent)
-        {
-            this.Description = Description;
-            this.Criteria = Criteria;
-            this.Window = null;
+            this.description = Description ?? Criteria.ToString();
+            this.criteria = Criteria;
+            this.parent = Parent ?? WhiteTestBase.window;
         }
 
         public override void Select(int zeroitemdRowIndex)

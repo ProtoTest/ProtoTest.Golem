@@ -59,7 +59,17 @@ namespace ProtoTest.Golem.White.Elements
             item.Toggle();
         }
 
-        public override ToggleState State { get; set; }
+        public override ToggleState State
+        {
+            get
+            {
+                return item.State;
+            }
+            set
+            {
+                item.State = value;
+            }
+        }
 
         public override string Text
         {
