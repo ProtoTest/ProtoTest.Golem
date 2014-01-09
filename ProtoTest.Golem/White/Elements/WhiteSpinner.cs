@@ -38,6 +38,13 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
+        public WhiteSpinner(SearchCriteria Criteria, UIItem Parent = null, string Description = null)
+        {
+            this.description = Description ?? Criteria.ToString();
+            this.criteria = Criteria;
+            this.parent = Parent ?? WhiteTestBase.window;
+        }
+
         public override void Decrement()
         {
             item.Decrement();
@@ -258,13 +265,6 @@ namespace ProtoTest.Golem.White.Elements
         public override void Visit(WindowControlVisitor windowControlVisitor)
         {
             item.Visit(windowControlVisitor);
-        }
-
-        public WhiteSpinner(SearchCriteria Criteria, string Description = null, UIItem Parent = null)
-        {
-            this.description = Description ?? Criteria.ToString();
-            this.criteria = Criteria;
-            this.parent = Parent ?? WhiteTestBase.window;
         }
 
     }

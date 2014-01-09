@@ -40,7 +40,7 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteListItem(SearchCriteria Criteria, string Description = null, UIItem Parent = null)
+        public WhiteListItem(SearchCriteria Criteria, UIItem Parent = null, string Description=null)
         {
             this.description = Description ?? Criteria.ToString();
             this.criteria = Criteria;

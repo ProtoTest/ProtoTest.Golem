@@ -39,7 +39,7 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteCheckBox(SearchCriteria Criteria, string Description = null, UIItem Parent = null)
+        public WhiteCheckBox(SearchCriteria Criteria, UIItem Parent = null, string Description=null)
         {
             this.description = Description ?? Criteria.ToString();
             this.criteria = Criteria;

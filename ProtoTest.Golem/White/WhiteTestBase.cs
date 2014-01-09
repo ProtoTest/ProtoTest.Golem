@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using Castle.Core.Logging;
-using Gallio.Framework;
+﻿using Gallio.Framework;
 using MbUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.White.Elements;
@@ -24,7 +22,7 @@ namespace ProtoTest.Golem.White
 
             //CoreAppXmlConfiguration.Instance.RawElementBasedSearch = false;
             //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
-            CoreAppXmlConfiguration.Instance.LoggerFactory = new WhiteDefaultLoggerFactory(LoggerLevel.Debug);
+           // CoreAppXmlConfiguration.Instance.LoggerFactory = new WhiteDefaultLoggerFactory(LoggerLevel.Debug);
             
 
         }

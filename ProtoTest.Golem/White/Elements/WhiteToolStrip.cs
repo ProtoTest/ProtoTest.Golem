@@ -43,7 +43,7 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteToolStrip(SearchCriteria Criteria, string Description=null, UIItem Parent = null)
+        public WhiteToolStrip(SearchCriteria Criteria, UIItem Parent = null,string Description=null)
         {
             this.description = Description ?? Criteria.ToString();
             this.criteria = Criteria;

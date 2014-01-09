@@ -45,6 +45,19 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
+        public WhiteWindow(string title, Window parent = null, string description = null)
+        {
+            this.description = description ?? title;
+            this.title = title;
+            this.parent = parent;
+        }
+        public WhiteWindow(SearchCriteria criteria, Window parent = null, string description = null)
+        {
+            this.description = description ?? criteria.ToString();
+            this.criteria = criteria;
+            this.parent = parent;
+        }
+
         private Window getWindow()
         {
             if (_window == null)
@@ -482,18 +495,7 @@ namespace ProtoTest.Golem.White.Elements
             get { return window.HelpText; }
         }
 
-        public WhiteWindow(string title, string description = null, Window parent = null)
-        {
-            this.description = description ?? title;
-            this.title = title;
-            this.parent = parent;
-        }
-        public WhiteWindow(SearchCriteria criteria, string description = null, Window parent = null)
-        {
-            this.description = description ?? criteria.ToString();
-            this.criteria = criteria;
-            this.parent = parent;
-        }
+
         public override Window ModalWindow(string title, InitializeOption option)
         {
             return window.ModalWindow(title, option);

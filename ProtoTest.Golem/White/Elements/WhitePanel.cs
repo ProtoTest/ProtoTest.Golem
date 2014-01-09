@@ -45,7 +45,7 @@ namespace ProtoTest.Golem.White.Elements
 
         }
 
-        public WhitePanel(SearchCriteria criteria, string description=null, UIItem parent = null)
+        public WhitePanel(SearchCriteria criteria, UIItem parent = null, string description=null)
         {
             this.description = description ?? criteria.ToString();
             this.criteria = criteria;
