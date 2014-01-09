@@ -38,11 +38,10 @@ namespace ProtoTest.Golem.White
         public void CloseApplication()
         {
             TestLog.EmbedImage(null, app.GetImage());
+
             TestLog.WriteLine(CoreAppXmlConfiguration.Instance.WorkSessionLocation.ToString());
             app.Close();
             app.ApplicationSession.Save();
-            
-
         }
     }
 }
