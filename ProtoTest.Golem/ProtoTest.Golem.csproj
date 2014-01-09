@@ -126,13 +126,16 @@
     <Compile Include="Tests\TestWebDriverTestBase.cs" />
     <Compile Include="Tests\VerificationTests.cs" />
     <Compile Include="White\BaseScreenObject.cs" />
-    <Compile Include="White\Component.cs" />
     <Compile Include="White\ElementFactory.cs" />
-    <Compile Include="White\Elements\BaseItem.cs" />
     <Compile Include="White\Elements\WhiteButton.cs" />
     <Compile Include="White\Elements\WhiteListView.cs" />
+    <Compile Include="White\Elements\WhiteComboBox.cs" />
+    <Compile Include="White\Elements\WhiteMenu.cs" />
     <Compile Include="White\Elements\WhitePanel.cs" />
     <Compile Include="White\Elements\WhiteTextBox.cs" />
+    <Compile Include="White\Elements\WhiteWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="White\Extensions.cs" />
     <Compile Include="White\UIUtilities.cs" />
     <Compile Include="White\WhiteTestBase.cs" />
@@ -224,6 +227,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

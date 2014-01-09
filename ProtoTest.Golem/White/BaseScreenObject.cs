@@ -1,26 +1,42 @@
-﻿using TestStack.White.UIItems.WindowItems;
+﻿using ProtoTest.Golem.White.Elements;
+using TestStack.White.UIItems.WindowItems;
 
 namespace ProtoTest.Golem.White
 {
     public class BaseScreenObject
     {
-        //This class will act similarly to how the BasePageObject works on the webdriver side
-        private Window _window;
+        private WhiteWindow _window;
+
+        public WhiteWindow window
+        {
+            get
+            {
+                return _window ?? WhiteTestBase.window;
+            }
+            set
+            {
+                _window = value;
+            }
+        }
 
         public BaseScreenObject()
         {
-            
         }
 
-        public Window getWindow()
+        public BaseScreenObject(WhiteWindow window)
         {
-            return _window;
+            this.window = window;
         }
 
-        public void setWindow(Window window)
+        public void setWindow(WhiteWindow window)
         {
-            _window = window;
+            this.window = window;
         }
 
-    }
+        public WhiteWindow getWindow(WhiteWindow window)
+        {
+            return window;
+        }
+}
+
 }

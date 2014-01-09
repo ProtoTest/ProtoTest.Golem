@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows;
 using TestStack.White;
 using TestStack.White.UIItemEvents;
@@ -53,6 +54,22 @@ namespace ProtoTest.Golem.White
             {
                 return false;
             }
+        }
+
+        public static void WaitForVisible(this IUIItem item)
+        {
+
+            try
+            {
+
+                var enabled = item.Enabled;
+            }
+            catch (Exception)
+            {
+                
+            }
+            
+            
         }
     }
 }

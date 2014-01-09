@@ -26,17 +26,16 @@ namespace ProtoTest.Golem.White.Elements
 {
     public class WhitePanel : Panel
     {
-        public string Description;
-        public SearchCriteria Criteria;
-        public Window Window;
-        public UIItem Parent;
+        public string description;
+        public SearchCriteria criteria;
+        public UIItem parent;
         private Panel _item;
 
         public Panel item
         {
             get
             {
-                _item = ElementFactory.GetItem(_item, Criteria, Window, Parent);
+                _item = ElementFactory.GetItem(_item, criteria, parent);
                 return _item;
             }
             set
@@ -46,19 +45,11 @@ namespace ProtoTest.Golem.White.Elements
 
         }
 
-        public WhitePanel(string Description, SearchCriteria criteria, Window Window = null)
+        public WhitePanel(SearchCriteria criteria, string description=null, UIItem parent = null)
         {
-            this.Description = Description;
-            this.Criteria = criteria;
-            this.Window = Window ?? WhiteTestBase.window;
-        }
-
-        public WhitePanel(string Description, SearchCriteria criteria, UIItem Parent = null)
-        {
-            this.Description = Description;
-            this.Criteria = criteria;
-            this.Window = null;
-            this.Parent = Parent;
+            this.description = description ?? criteria.ToString();
+            this.criteria = criteria;
+            this.parent = parent ?? WhiteTestBase.window;
         }
 
         public override string AccessKey
@@ -73,6 +64,7 @@ namespace ProtoTest.Golem.White.Elements
 
         public override bool Visible
         {
+
             get { return item.Visible; }
         }
 
@@ -111,9 +103,9 @@ namespace ProtoTest.Golem.White.Elements
             item.LogStructure();
         }
 
-        public override AutomationElement GetElement(SearchCriteria searchCriteria)
+        public override AutomationElement GetElement(SearchCriteria SearchCriteria)
         {
-            return item.GetElement(searchCriteria);
+            return item.GetElement(SearchCriteria);
         }
 
         public override void SetValue(object value)
@@ -126,9 +118,9 @@ namespace ProtoTest.Golem.White.Elements
             item.ActionPerforming(uiItem);
         }
 
-        public override MenuBar GetMenuBar(SearchCriteria searchCriteria)
+        public override MenuBar GetMenuBar(SearchCriteria SearchCriteria)
         {
-            return item.GetMenuBar(searchCriteria);
+            return item.GetMenuBar(SearchCriteria);
         }
 
         public override ToolTip GetToolTipOn(UIItem uiItem)
@@ -356,14 +348,14 @@ namespace ProtoTest.Golem.White.Elements
             return ((UIItemContainer) this).Get<T>(primaryIdentification);
         }
 
-        public override T Get<T>(SearchCriteria searchCriteria)
+        public override T Get<T>(SearchCriteria SearchCriteria)
         {
-            return ((UIItemContainer) this).Get<T>(searchCriteria);
+            return ((UIItemContainer) this).Get<T>(SearchCriteria);
         }
 
-        public override IUIItem Get(SearchCriteria searchCriteria)
+        public override IUIItem Get(SearchCriteria SearchCriteria)
         {
-            return item.Get(searchCriteria);
+            return item.Get(SearchCriteria);
         }
 
         public override ToolTip ToolTip
@@ -381,9 +373,9 @@ namespace ProtoTest.Golem.White.Elements
             get { return item.Tabs; }
         }
 
-        public override IUIItem Get(SearchCriteria searchCriteria, TimeSpan timeout)
+        public override IUIItem Get(SearchCriteria SearchCriteria, TimeSpan timeout)
         {
-            return item.Get(searchCriteria, timeout);
+            return item.Get(SearchCriteria, timeout);
         }
 
         public override void ReInitialize(InitializeOption option)

@@ -19,17 +19,16 @@ namespace ProtoTest.Golem.White.Elements
 {
     public class WhiteButton : Button
     {
-        public string Description;
-        public SearchCriteria Criteria;
-        public Window Window;
+        public string description;
+        public SearchCriteria criteria;
         private Button _item;
-        private UIItem Parent;
+        private UIItem parent;
 
         public Button item
         {
             get
             {
-                _item = ElementFactory.GetItem(_item, Criteria, Window, Parent);
+                _item = ElementFactory.GetItem(_item, criteria, parent);
                 return _item;
             }
             set
@@ -38,18 +37,11 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteButton(string Description, SearchCriteria Criteria, Window Window = null)
+        public WhiteButton(SearchCriteria Criteria, string Description=null, UIItem Parent = null)
         {
-            this.Description = Description;
-            this.Criteria = Criteria;
-            this.Window = Window ?? WhiteTestBase.window;
-        }
-
-        public WhiteButton(string Description, SearchCriteria Criteria, UIItem Parent)
-        {
-            this.Description = Description;
-            this.Criteria = Criteria;
-            this.Window = null;
+            this.description = Description ?? Criteria.ToString();
+            this.criteria = Criteria;
+            this.parent = Parent ?? WhiteTestBase.window;
         }
 
         public override void HookEvents(UIItemEventListener eventListener)
@@ -74,30 +66,10 @@ namespace ProtoTest.Golem.White.Elements
             get { return item.Text; }
         }
 
-        //protected override object Property(AutomationProperty automationProperty)
-        //{
-        //    return base.Property(automationProperty);
-        //}
-
-        //protected override void ActionPerformed()
-        //{
-        //    base.ActionPerformed();
-        //}
-
         public override bool ValueOfEquals(AutomationProperty property, object compareTo)
         {
             return item.ValueOfEquals(property, compareTo);
         }
-
-        //protected override T Pattern<T>()
-        //{
-        //    return item.Pattern();
-        //}
-
-        //protected override itemPattern Pattern(AutomationPattern pattern)
-        //{
-        //    return item.Pattern(pattern);
-        //}
 
         public override void RightClickAt(Point point)
         {
