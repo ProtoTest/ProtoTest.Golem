@@ -60,14 +60,14 @@ namespace ProtoTest.Golem.Core
         public static BrowserMobProxy proxy;
 
         [SetUp]
-        public void SetUp()
+        public void SetUpTestBase()
         {
             LogEvent(Common.GetCurrentTestName() + " started");
             StartNewProxy();
         }
 
         [TearDown]
-        public void TearDown()
+        public void TearDownTestBase()
         {
             LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
             GetHarFile();
