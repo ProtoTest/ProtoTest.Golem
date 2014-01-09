@@ -121,13 +121,13 @@
     <Compile Include="Tests\TestProxy.cs" />
     <Compile Include="Tests\TestWebDriverTestBase.cs" />
     <Compile Include="Tests\VerificationTests.cs" />
-    <Compile Include="White\BaseScreenObject.cs" />
-    <Compile Include="White\Component.cs" />
+    <Compile Include="White\ElementFactory.cs" />
     <Compile Include="White\Elements\BaseItem.cs" />
-    <Compile Include="White\Elements\Button.cs" />
-    <Compile Include="White\Elements\ElementFactory.cs" />
-    <Compile Include="White\Elements\TextBox.cs" />
+    <Compile Include="White\Elements\WhiteButton.cs" />
+    <Compile Include="White\Elements\WhitePanel.cs" />
+    <Compile Include="White\Elements\WhiteTextBox.cs" />
     <Compile Include="White\Extensions.cs" />
+    <Compile Include="White\UIUtilities.cs" />
     <Compile Include="White\WhiteTestBase.cs" />
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
@@ -233,7 +233,7 @@
     <PostBuildEvent>xcopy /s /y "$(SolutionDir)packages\NHunspell.1.1.1\native\*.*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
