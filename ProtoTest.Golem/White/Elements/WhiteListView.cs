@@ -31,7 +31,7 @@ namespace ProtoTest.Golem.White.Elements
         {
             get
             {
-                _item = ElementFactory.GetItem(_item, Criteria, Window, Parent);
+                _item = ElementFactory.GetItem(_item, Criteria, Parent);
                 return _item;
             }
             set
