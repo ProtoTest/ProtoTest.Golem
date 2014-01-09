@@ -28,9 +28,8 @@ namespace ProtoTest.Golem.White
         [SetUp]
         public void LaunchApp()
         {
-            
             app = Application.Launch(Config.Settings.whiteSettings.appPath);
-            app.ApplicationSession.WindowSession(InitializeOption.NoCache.AndIdentifiedBy("MainWindowX"));
+            //app.ApplicationSession.WindowSession(InitializeOption.NoCache.AndIdentifiedBy("MainWindowX"));
         }
 
         [TearDown]
