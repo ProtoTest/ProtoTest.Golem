@@ -37,7 +37,7 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteButton(SearchCriteria Criteria, string Description=null, UIItem Parent = null)
+        public WhiteButton(SearchCriteria Criteria, UIItem Parent = null, string Description=null)
         {
             this.description = Description ?? Criteria.ToString();
             this.criteria = Criteria;

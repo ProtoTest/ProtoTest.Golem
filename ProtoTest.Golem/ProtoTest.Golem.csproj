@@ -127,6 +127,7 @@
     <Compile Include="Tests\VerificationTests.cs" />
     <Compile Include="White\BaseScreenObject.cs" />
     <Compile Include="White\ElementFactory.cs" />
+    <Compile Include="White\Elements\WhiteSpinner.cs" />
     <Compile Include="White\Elements\WhiteButton.cs" />
     <Compile Include="White\Elements\WhiteCheckBox.cs" />
     <Compile Include="White\Elements\WhiteLabel.cs" />

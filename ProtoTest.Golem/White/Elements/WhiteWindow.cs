@@ -173,7 +173,17 @@ namespace ProtoTest.Golem.White.Elements
             get { return window.IsClosed; }
         }
 
-        public override DisplayState DisplayState { get; set; }
+        public override DisplayState DisplayState
+        {
+            get
+            {
+                return window.DisplayState;
+            }
+            set
+            {
+                window.DisplayState = value;
+            }
+        }
 
         public override ActionListener ActionListener
         {
