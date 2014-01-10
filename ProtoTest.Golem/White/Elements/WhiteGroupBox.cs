@@ -22,12 +22,13 @@ using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.White.Elements
 {
-    public class WhiteGroupBox : GroupBox
+    public class WhiteGroupBox : GroupBox, IWhiteElement
     {
-        public string description;
-        public SearchCriteria criteria;
+        public string description { get; set; }
+        public SearchCriteria criteria { get; set; }
+        public UIItem parent { get; set; }
         private GroupBox _item;
-        private UIItem parent;
+
 
         public GroupBox item
         {
@@ -352,5 +353,7 @@ namespace ProtoTest.Golem.White.Elements
         {
             get { return item.HelpText; }
         }
+
+       
     }
 }
