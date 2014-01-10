@@ -13,6 +13,7 @@ namespace ProtoTest.Golem.White.Elements
 {
     public class ElementFactory
     {
+        private static string LogFormatString = "{0} : Looking for item in '{1}' with '{2}'";
         public static T GetItem<T>(T item, SearchCriteria criteria, UIItem parent) where T : UIItem
         {
         if (item == null || item.IsStale())
@@ -21,13 +22,12 @@ namespace ProtoTest.Golem.White.Elements
                 {
                     var window = (WhiteWindow)parent;
                     if (window == null) window = WhiteTestBase.window;
-                    TestBase.LogEvent(string.Format("Looking for item in '{0}' with '{1}'", window.description, criteria));
+                    TestBase.LogEvent(string.Format(LogFormatString, TestBase.GetCurrentClassAndMethodName(), window.description, criteria));
                     item = window.Get<T>(criteria);
                 }
                 else
                 {
-
-                    TestBase.LogEvent(string.Format("Looking for item in '{0}' with '{1}'", parent.Name, criteria));
+                    TestBase.LogEvent(string.Format(LogFormatString, parent.Name, criteria));
                     item = parent.Get<T>(criteria);
                 }            
             }

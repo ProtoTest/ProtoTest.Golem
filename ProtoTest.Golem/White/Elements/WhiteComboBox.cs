@@ -11,12 +11,12 @@ using TestStack.White.UIItems.Scrolling;
 
 namespace ProtoTest.Golem.White.Elements
 {
-    public class WhiteComboBox : ComboBox
+    public class WhiteComboBox : ComboBox, IWhiteElement
     {
-        public string description;
-        public SearchCriteria criteria;
+        public string description { get; set; }
+        public SearchCriteria criteria { get; set; }
+        public UIItem parent { get; set; }
         private ComboBox _item;
-        private UIItem parent;
         public ComboBox item
         {
             get
@@ -30,11 +30,11 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteComboBox(SearchCriteria Criteria, UIItem Parent = null, string Description = null)
+        public WhiteComboBox(SearchCriteria criteria, UIItem parent = null, string description = null)
         {
-            this.description = Description ?? Criteria.ToString();
-            this.criteria = Criteria;
-            this.parent = Parent ?? WhiteTestBase.window;
+            this.description = description ?? criteria.ToString();
+            this.criteria = criteria;
+            this.parent = parent ?? WhiteTestBase.window;
         }
 
         public override ListItem Item(string itemText)

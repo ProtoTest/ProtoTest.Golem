@@ -16,12 +16,7 @@ namespace ProtoTest.Golem.WebDriver
     /// </summary>
     public class WebDriverTestBase : TestBase
     {
-        public static CaptionOverlay overlay = new CaptionOverlay
-        {
-            FontSize = 20,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Bottom
-        };
+
 
         [Factory("GetBrowser")] public WebDriverBrowser.Browser browser;
         [Factory("GetHosts")] public string host;
@@ -81,16 +76,6 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-        public void LogVideoIfTestFailed()
-        {
-            if ((Config.Settings.reportSettings.videoRecordingOnError) &&
-                (Common.GetTestOutcome() != TestOutcome.Passed))
-            {
-                TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
-                //stData.recorder.Dispose();
-            }
-        }
-
         public void QuitBrowser()
         {
             if (Config.Settings.runTimeSettings.LaunchBrowser)
@@ -101,33 +86,10 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-        public void StartVideoRecording()
-        {
-            if (Config.Settings.reportSettings.videoRecordingOnError)
-            {
-                testData.recorder = Capture.StartRecording(new CaptureParameters {Zoom = .25}, 5);
-                testData.recorder.OverlayManager.AddOverlay(overlay);
-            }
-        }
 
-
-        public void StopVideoRecording()
-        {
-            try
-            {
-                if (Config.Settings.reportSettings.videoRecordingOnError)
-                    testData.recorder.Stop();
-            }
-            catch (Exception e)
-            {
-                TestLog.Failures.WriteLine(e.Message);
-            }
-        }
 
         public void LaunchBrowser()
         {
-            //lock (locker)
-            //{
             if (Config.Settings.runTimeSettings.LaunchBrowser)
             {
                 if (Config.Settings.runTimeSettings.RunOnRemoteHost)
@@ -154,25 +116,20 @@ namespace ProtoTest.Golem.WebDriver
                 var tempDriver = new RemoteWebDriver(new Uri("http://127.0.0.1:4723/wd/hub"), capabilities);
                 driver = new EventedWebDriver(tempDriver).driver;
             }
-            //}
         }
 
         [SetUp]
         public void SetUp()
         {
-            StartVideoRecording();
             LaunchBrowser();
         }
 
         [TearDown]
         public void TearDown()
         {
-            StopVideoRecording();
             LogScreenshotIfTestFailed();
-            LogVideoIfTestFailed();
             LogHtmlIfTestFailed();
             QuitBrowser();
-            //GetHTTPTrafficInfo();
         }
     }
 }

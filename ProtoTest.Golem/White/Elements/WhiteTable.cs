@@ -19,13 +19,12 @@ using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.White.Elements
 {
-    public class WhiteTable : Table
+    public class WhiteTable : Table, IWhiteElement
     {
-        public string description;
-        public SearchCriteria criteria;
+        public string description { get; set; }
+        public SearchCriteria criteria { get; set; }
+        public UIItem parent { get; set; }
         private Table _item;
-        private UIItem parent;
-
         public Table item
         {
             get
@@ -39,11 +38,11 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteTable(SearchCriteria Criteria, UIItem Parent = null, string Description=null)
+        public WhiteTable(SearchCriteria criteria, UIItem parent = null, string description=null)
         {
-            this.description = Description ?? Criteria.ToString();
-            this.criteria = Criteria;
-            this.parent = Parent ?? WhiteTestBase.window;
+            this.description = description ?? criteria.ToString();
+            this.criteria = criteria;
+            this.parent = parent ?? WhiteTestBase.window;
         }
 
         public override void ActionPerforming(UIItem uiItem)

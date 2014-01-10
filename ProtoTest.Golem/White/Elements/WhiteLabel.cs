@@ -18,13 +18,12 @@ using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.White.Elements
 {
-    public class WhiteLabel : Label
+    public class WhiteLabel : Label, IWhiteElement
     {
-        public string description;
-        public SearchCriteria criteria;
+        public string description { get; set; }
+        public SearchCriteria criteria { get; set; }
+        public UIItem parent { get; set; }
         private Label _item;
-        private UIItem parent;
-
         public Label item
         {
             get
@@ -38,11 +37,11 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteLabel(SearchCriteria Criteria, UIItem Parent = null, string Description=null)
+        public WhiteLabel(SearchCriteria criteria, UIItem parent = null, string description=null)
         {
-            this.description = Description ?? Criteria.ToString();
-            this.criteria = Criteria;
-            this.parent = Parent ?? WhiteTestBase.window;
+            this.description = description ?? criteria.ToString();
+            this.criteria = criteria;
+            this.parent = parent ?? WhiteTestBase.window;
         }
 
         public override string Text

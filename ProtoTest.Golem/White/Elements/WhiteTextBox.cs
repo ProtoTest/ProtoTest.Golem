@@ -18,13 +18,12 @@ using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.White.Elements
 {
-    public class WhiteTextBox : TextBox
+    public class WhiteTextBox : TextBox, IWhiteElement
     {
-        public string description;
-        public SearchCriteria criteria;
-        public UIItem parent;
+        public string description { get; set; }
+        public SearchCriteria criteria { get; set; }
+        public UIItem parent { get; set; }
         private Panel _item;
-
         public Panel item
         {
             get

@@ -83,7 +83,7 @@ namespace ProtoTest.Golem.Core
         {
             DiagnosticLog.WriteLine(msg);
             TestLog.WriteLine(msg);
-            WebDriverTestBase.overlay.Text = msg;
+            TestBase.overlay.Text = msg;
         }
 
         public static bool IsTruthy(string truth)

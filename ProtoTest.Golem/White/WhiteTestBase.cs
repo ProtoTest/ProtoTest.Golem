@@ -1,7 +1,10 @@
-﻿using Gallio.Framework;
+﻿using Castle.Core.Logging;
+using Gallio.Framework;
+using Gallio.Model;
 using MbUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.White.Elements;
+using RestSharp.Extensions;
 using TestStack.White;
 using TestStack.White.Configuration;
 using TestStack.White.Factory;
@@ -22,26 +25,31 @@ namespace ProtoTest.Golem.White
 
             //CoreAppXmlConfiguration.Instance.RawElementBasedSearch = false;
             //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
-           // CoreAppXmlConfiguration.Instance.LoggerFactory = new WhiteDefaultLoggerFactory(LoggerLevel.Debug);
-            
-
+            CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
         }
 
 
         [SetUp]
-        public void LaunchApp()
+        public void SetUp()
         {
             app = Application.Launch(Config.Settings.whiteSettings.appPath);
             //app.ApplicationSession.WindowSession(InitializeOption.NoCache.AndIdentifiedBy("MainWindowX"));
         }
 
         [TearDown]
-        public void CloseApplication()
+        public void TearDown()
         {
-            TestLog.EmbedImage(null, app.GetImage());
-            TestLog.WriteLine(CoreAppXmlConfiguration.Instance.WorkSessionLocation.ToString());
+            
+            //TestLog.WriteLine(CoreAppXmlConfiguration.Instance.WorkSessionLocation.ToString());
+            LogScreenshotIfTestFailed();
             app.Close();
-            app.ApplicationSession.Save();
+            //app.ApplicationSession.Save();
         }
+
+        public void LogScreenshotIfTestFailed()
+        {
+            if(TestContext.CurrentContext.Outcome!=TestOutcome.Passed)
+                TestLog.EmbedImage(null, app.GetImage());
+        }       
     }
 }

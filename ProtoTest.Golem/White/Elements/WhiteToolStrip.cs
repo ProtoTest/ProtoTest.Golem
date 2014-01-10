@@ -23,13 +23,12 @@ using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.White.Elements
 {
-    public class WhiteToolStrip : ToolStrip
+    public class WhiteToolStrip : ToolStrip, IWhiteElement
     {
-        public string description;
-        public SearchCriteria criteria;
+        public string description { get; set; }
+        public SearchCriteria criteria { get; set; }
+        public UIItem parent { get; set; }
         private ToolStrip _item;
-        private UIItem parent;
-
         public ToolStrip item
         {
             get
@@ -43,11 +42,11 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteToolStrip(SearchCriteria Criteria, UIItem Parent = null,string Description=null)
+        public WhiteToolStrip(SearchCriteria criteria, UIItem parent = null,string description=null)
         {
-            this.description = Description ?? Criteria.ToString();
-            this.criteria = Criteria;
-            this.parent = Parent ?? WhiteTestBase.window;
+            this.description = description ?? criteria.ToString();
+            this.criteria = criteria;
+            this.parent = parent ?? WhiteTestBase.window;
         }
 
         public override Menu MenuItem(params string[] path)

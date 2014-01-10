@@ -17,13 +17,12 @@ using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.White.Elements
 {
-    public class WhiteButton : Button
+    public class WhiteButton : Button, IWhiteElement
     {
-        public string description;
-        public SearchCriteria criteria;
+        public string description { get; set; }
+        public SearchCriteria criteria { get; set; }
+        public UIItem parent { get; set; }
         private Button _item;
-        private UIItem parent;
-
         public Button item
         {
             get
@@ -37,11 +36,11 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
-        public WhiteButton(SearchCriteria Criteria, UIItem Parent = null, string Description=null)
+        public WhiteButton(SearchCriteria criteria, UIItem parent = null, string description=null)
         {
-            this.description = Description ?? Criteria.ToString();
-            this.criteria = Criteria;
-            this.parent = Parent ?? WhiteTestBase.window;
+            this.description = description ?? criteria.ToString();
+            this.criteria = criteria;
+            this.parent = parent ?? WhiteTestBase.window;
         }
 
         public override void HookEvents(UIItemEventListener eventListener)

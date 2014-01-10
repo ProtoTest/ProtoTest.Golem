@@ -24,12 +24,13 @@ using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.White.Elements
 {
-    public class WhiteWindow : Window
+    public class WhiteWindow : Window, IWhiteElement
     {
-        public string description;
-        public string title;
-        public SearchCriteria criteria;
-        public Window parent;
+
+        public string description { get; set; }
+        public SearchCriteria criteria { get; set; }
+        public UIItem parent { get; set; }
+        public string title { get; set; }
         private Window _window;
 
         public Window window
@@ -62,13 +63,14 @@ namespace ProtoTest.Golem.White.Elements
         {
             if (_window == null)
             {
+                var parentWindow = (Window) parent;
                 return criteria != null
                     ? (parent == null
                         ? WhiteTestBase.app.GetWindow(criteria, InitializeOption.NoCache)
-                        : parent.ModalWindow(criteria, InitializeOption.NoCache))
+                        : parentWindow.ModalWindow(criteria, InitializeOption.NoCache))
                     : (parent == null
                         ? WhiteTestBase.app.GetWindow(title, InitializeOption.NoCache)
-                        : parent.ModalWindow(title, InitializeOption.NoCache));
+                        : parentWindow.ModalWindow(title, InitializeOption.NoCache));
             }
             return _window;
         }

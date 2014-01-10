@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using Gallio.Common.Markup;
+using Gallio.Common.Media;
 using Gallio.Framework;
 using Gallio.Framework.Pattern;
 using Gallio.Model;
@@ -56,14 +57,23 @@ namespace ProtoTest.Golem.Core
 
         #endregion
 
+        public static CaptionOverlay overlay = new CaptionOverlay
+        {
+            FontSize = 20,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Bottom
+        };
+
         protected static Object locker = new object();
         public static BrowserMobProxy proxy;
 
         [SetUp]
         public void SetUpTestBase()
         {
+            StartVideoRecording();
             LogEvent(Common.GetCurrentTestName() + " started");
             StartNewProxy();
+
         }
 
         [TearDown]
@@ -72,6 +82,8 @@ namespace ProtoTest.Golem.Core
             LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
             GetHarFile();
             QuitProxy();
+            StopVideoRecording();
+            LogVideoIfTestFailed();
             AssertNoVerificationErrors();
             DeleteTestData();
         }
@@ -135,7 +147,7 @@ namespace ProtoTest.Golem.Core
             string msg = "(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + message;
             DiagnosticLog.WriteLine(msg);
             TestLog.WriteLine(msg);
-            WebDriverTestBase.overlay.Text = msg;
+            overlay.Text = msg;
         }
 
         public static void LogVerificationPassed(string successText)
@@ -332,6 +344,41 @@ namespace ProtoTest.Golem.Core
             }
             // DiagnosticLog.WriteLine(stackTrace.ToString());
             return "";
+        }
+
+
+
+        public void LogVideoIfTestFailed()
+        {
+            if ((Config.Settings.reportSettings.videoRecordingOnError) &&
+                (Common.GetTestOutcome() != TestOutcome.Passed))
+            {
+                TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
+                //stData.recorder.Dispose();
+            }
+        }
+
+        public void StartVideoRecording()
+        {
+            if (Config.Settings.reportSettings.videoRecordingOnError)
+            {
+                testData.recorder = Capture.StartRecording(new CaptureParameters { Zoom = .25 }, 5);
+                testData.recorder.OverlayManager.AddOverlay(overlay);
+            }
+        }
+
+
+        public void StopVideoRecording()
+        {
+            try
+            {
+                if (Config.Settings.reportSettings.videoRecordingOnError)
+                    testData.recorder.Stop();
+            }
+            catch (Exception e)
+            {
+                TestLog.Failures.WriteLine(e.Message);
+            }
         }
     }
 }
