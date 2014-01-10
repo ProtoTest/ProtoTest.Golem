@@ -48,11 +48,12 @@ namespace ProtoTest.Golem.White
         {
             try
             {
-                return item.Enabled;
+                var enabled = item.Enabled;
+                return false;
             }
             catch (Exception)
             {
-                return false;
+                return true;
             }
         }
 

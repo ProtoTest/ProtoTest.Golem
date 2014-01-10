@@ -13,29 +13,24 @@ namespace ProtoTest.Golem.White.Elements
 {
     public class ElementFactory
     {
-        private static string LogFormatString = "{0} : Looking for item in '{1}' with '{2}'";
+        private static string LogFormatString = "{0}Looking for item in '{1}' with '{2}'";
         public static T GetItem<T>(T item, SearchCriteria criteria, UIItem parent) where T : UIItem
         {
-        if (item == null || item.IsStale())
+            if (item == null || item.IsStale())
             {
                 if (parent.GetType() == typeof (WhiteWindow))
                 {
                     var window = (WhiteWindow)parent;
                     if (window == null) window = WhiteTestBase.window;
-                    TestBase.LogEvent(string.Format(LogFormatString, TestBase.GetCurrentClassAndMethodName(), window.description, criteria));
+                    TestBase.LogEvent(string.Format(LogFormatString, WhiteTestBase.GetCurrentClassAndMethodName(), window.description, criteria));
                     item = window.Get<T>(criteria);
                 }
                 else
                 {
-                    TestBase.LogEvent(string.Format(LogFormatString, parent.Name, criteria));
+                    TestBase.LogEvent(string.Format(LogFormatString, ((IWhiteElement)parent).description, criteria));
                     item = parent.Get<T>(criteria);
                 }            
             }
-            else
-            {
-                TestBase.LogEvent(string.Format("Item already exists : '{0}'", item.GetType().ToString()));
-            }
-            
             return item;
         }
     }
