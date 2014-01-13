@@ -57,7 +57,12 @@ namespace ProtoTest.Golem.White
             }
         }
 
-        public static void WaitForVisible(this IUIItem item)
+        public static bool Present(this UIItem item)
+        {
+            return !item.IsStale() && item.Enabled;
+        }
+
+        public static void WaitForVisible(this UIItem item)
         {
 
             try

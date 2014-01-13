@@ -30,6 +30,12 @@ namespace ProtoTest.Golem.White.Elements
         public string description { get; set; }
         public SearchCriteria criteria { get; set; }
         public UIItem parent { get; set; }
+
+        public UIItem getItem()
+        {
+            return window;
+        }
+
         public string title { get; set; }
         private Window _window;
 
@@ -44,6 +50,16 @@ namespace ProtoTest.Golem.White.Elements
             {
                 _window = value;
             }
+        }
+
+        public ElementVerification Verify(int timeout=0)
+        {
+            return new ElementVerification(this,timeout,false,true);
+        }
+
+        public ElementVerification WaitUntil(int timeout=0)
+        {
+            return new ElementVerification(this,timeout,true,true);
         }
 
         public WhiteWindow(string title, Window parent = null, string description = null)

@@ -19,8 +19,6 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
             return searchResult;
         }
 
-        private string searchString;
-
         public GoogleResultsPage SearchFor(string text)
         {
             SearchField.SendKeys(text);

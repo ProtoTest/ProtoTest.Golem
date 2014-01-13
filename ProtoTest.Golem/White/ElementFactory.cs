@@ -1,4 +1,5 @@
-﻿using ProtoTest.Golem.Core;
+﻿using System;
+using ProtoTest.Golem.Core;
 using ProtoTest.Golem.White.Elements;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
@@ -11,13 +12,21 @@ namespace ProtoTest.Golem.White
         private static string LogFormatString = "{0}.{1}() : in '{4}' with '{5}' : {2}.{3}()";
         public static T GetItem<T>(T item, SearchCriteria criteria, UIItem parent) where T : UIItem
         {
-            string description = parent.GetType() == typeof(WhiteWindow) ? ((WhiteWindow)parent).description : ((IWhiteElement)parent).description;
-            var procInfo = new CurrentProcessInfo(typeof (BaseScreenObject), typeof (IWhiteElement));
-            string logInfo = string.Format(LogFormatString, procInfo.className, procInfo.methodName, procInfo.elementName, procInfo.commandName, description, criteria);
-            TestBase.LogEvent(logInfo);
-            if (item != null && !item.IsStale()) return item;
-            item = parent.Get<T>(criteria);
-            return item;
+            try
+            {
+                string description = parent.GetType() == typeof(WhiteWindow) ? ((WhiteWindow)parent).description : ((IWhiteElement)parent).description;
+                var procInfo = new CurrentProcessInfo(typeof(BaseScreenObject), typeof(IWhiteElement));
+                string logInfo = string.Format(LogFormatString, procInfo.className, procInfo.methodName, procInfo.elementName, procInfo.commandName, description, criteria);
+                TestBase.LogEvent(logInfo);
+                if (item != null && !item.IsStale()) return item;
+                item = parent.Get<T>(criteria);
+                return item;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+      
         }
 
     }

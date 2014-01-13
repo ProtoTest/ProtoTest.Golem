@@ -16,7 +16,6 @@ namespace ProtoTest.Golem.Core
     /// </summary>
     public class Common
     {
-        private static string lastMessage;
         public static string GetRandomString()
         {
             return DateTime.Now.ToString("ddHHmmss");

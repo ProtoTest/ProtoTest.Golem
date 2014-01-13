@@ -23,8 +23,8 @@ namespace ProtoTest.Golem.White.Elements
         public string description { get; set; }
         public SearchCriteria criteria { get; set; }
         public UIItem parent { get; set; }
-        private Panel _item;
-        public Panel item
+        private TextBox _item;
+        public TextBox item
         {
             get
             {
@@ -37,6 +37,21 @@ namespace ProtoTest.Golem.White.Elements
             }
 
         }
+        public UIItem getItem()
+        {
+            return item;
+        }
+
+        public ElementVerification Verify(int timeout = 0)
+        {
+            return new ElementVerification(this, timeout, false, true);
+        }
+
+        public ElementVerification WaitUntil(int timeout = 0)
+        {
+            return new ElementVerification(this, timeout, true, true);
+        }
+
 
         public WhiteTextBox(SearchCriteria criteria,UIItem parent = null, string description =null)
         {
@@ -60,8 +75,13 @@ namespace ProtoTest.Golem.White.Elements
             item.SetValue(value);
         }
 
-        public override string Text { get; set; }
-        public override string BulkText { get; set; }
+        public override string Text
+        {
+            get
+            {
+                return item.Text;
+            }
+        }
 
         public override bool ValueOfEquals(AutomationProperty property, object compareTo)
         {

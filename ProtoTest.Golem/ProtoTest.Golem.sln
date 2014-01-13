@@ -7,11 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.White.Tests.LQP", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.White.ScreenObjects.LQP", "..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\Golem.White.ScreenObjects.LQP.csproj", "{21705BE8-CCD1-4334-AFE0-D15F82C88BF0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6B5D5A05-4285-4838-A02A-CA5C70F425D0}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

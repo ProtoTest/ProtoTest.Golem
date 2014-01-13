@@ -67,6 +67,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
@@ -122,7 +123,11 @@
     <Compile Include="Tests\VerificationTests.cs" />
     <Compile Include="White\BaseScreenObject.cs" />
     <Compile Include="White\ElementFactory.cs" />
+    <Compile Include="White\ElementImageComparer.cs" />
     <Compile Include="White\Elements\WhiteGroupBox.cs" />
+    <Compile Include="White\ElementVerification.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="White\IWhiteElement.cs" />
     <Compile Include="White\Elements\WhiteSpinner.cs" />
     <Compile Include="White\Elements\WhiteButton.cs" />

@@ -42,6 +42,22 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
+        public UIItem getItem()
+        {
+            return item;
+        }
+
+        public ElementVerification Verify(int timeout = 0)
+        {
+            return new ElementVerification(this, timeout, false, true);
+        }
+
+        public ElementVerification WaitUntil(int timeout = 0)
+        {
+            return new ElementVerification(this, timeout, true, true);
+        }
+
+
         public WhiteToolStrip(SearchCriteria criteria, UIItem parent = null,string description=null)
         {
             this.description = description ?? criteria.ToString();
