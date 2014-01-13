@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Xml;
+using Castle.Core.Logging;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Core
@@ -226,10 +227,14 @@ namespace ProtoTest.Golem.Core
         public class WhiteSettings
         {
             public string appPath;
+            public string windowTitle;
+            public LoggerLevel logLevel;
 
             public WhiteSettings()
             {
                 appPath = Config.GetConfigValue("AppPath", "NOT_SET");
+                windowTitle = Config.GetConfigValue("WindowTitle", "NOT_SET");
+                logLevel = (LoggerLevel) Enum.Parse(typeof(LoggerLevel), Config.GetConfigValue("LogLevel", "Info"));
             }
         }
     }

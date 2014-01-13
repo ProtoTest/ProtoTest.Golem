@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Linq;
+using Castle.Components.DictionaryAdapter.Xml;
 using Castle.Core.Logging;
 using Gallio.Framework;
 using Gallio.Model;
@@ -10,6 +12,7 @@ using RestSharp.Extensions;
 using TestStack.White;
 using TestStack.White.Configuration;
 using TestStack.White.Factory;
+using TestStack.White.UIItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace ProtoTest.Golem.White
@@ -27,7 +30,7 @@ namespace ProtoTest.Golem.White
 
             //CoreAppXmlConfiguration.Instance.RawElementBasedSearch = false;
             //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
-            CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
+           // CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
         }
 
 
@@ -35,7 +38,8 @@ namespace ProtoTest.Golem.White
         public void SetUp()
         {
             app = Application.Launch(Config.Settings.whiteSettings.appPath);
-            //app.ApplicationSession.WindowSession(InitializeOption.NoCache.AndIdentifiedBy("MainWindowX"));
+            if(Config.Settings.whiteSettings.windowTitle!="NOT_SET")
+                 window = new WhiteWindow(Config.Settings.whiteSettings.windowTitle);
         }
 
         [TearDown]
@@ -52,25 +56,6 @@ namespace ProtoTest.Golem.White
         {
             if(TestContext.CurrentContext.Outcome!=TestOutcome.Passed)
                 TestLog.EmbedImage(null, app.GetImage());
-        }
-
-        public static string GetCurrentClassAndMethodName()
-        {
-            var stackTrace = new StackTrace(); // get call stack
-            StackFrame[] stackFrames = stackTrace.GetFrames(); // get method calls (frames)
-            // string trace = "";
-            foreach (StackFrame stackFrame in stackFrames)
-            {
-                // trace += stackFrame.GetMethod().ReflectedType.FullName;
-                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof(BaseScreenObject)) &&
-                    (!stackFrame.GetMethod().IsConstructor))
-                {
-                    string name = stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name + "() : ";
-                    return name;
-                }
-            }
-            // DiagnosticLog.WriteLine(stackTrace.ToString());
-            return "";
         }
     }
 }

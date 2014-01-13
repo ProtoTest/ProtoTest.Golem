@@ -8,32 +8,15 @@ namespace ProtoTest.Golem.White
 {
     public class ElementFactory 
     {
-        private static string LogFormatString = "{0}Looking for item in '{1}' with '{2}'";
+        private static string LogFormatString = "{0}.{1}() : in '{4}' with '{5}' : {2}.{3}()";
         public static T GetItem<T>(T item, SearchCriteria criteria, UIItem parent) where T : UIItem
         {
-<<<<<<< HEAD
-
-            if (item != null && !item.IsStale()) return item;
             string description = parent.GetType() == typeof(WhiteWindow) ? ((WhiteWindow)parent).description : ((IWhiteElement)parent).description;
-            TestBase.LogEvent(string.Format(LogFormatString, WhiteTestBase.GetCurrentClassAndMethodName(), description, criteria));
+            var procInfo = new CurrentProcessInfo(typeof (BaseScreenObject), typeof (IWhiteElement));
+            string logInfo = string.Format(LogFormatString, procInfo.className, procInfo.methodName, procInfo.elementName, procInfo.commandName, description, criteria);
+            TestBase.LogEvent(logInfo);
+            if (item != null && !item.IsStale()) return item;
             item = parent.Get<T>(criteria);
-=======
-            if (item == null || item.IsStale())
-            {
-                if (parent.GetType() == typeof (WhiteWindow))
-                {
-                    var window = (WhiteWindow)parent;
-                    if (window == null) window = WhiteTestBase.window;
-                    TestBase.LogEvent(string.Format(LogFormatString, WhiteTestBase.GetCurrentClassAndMethodName(), window.description, criteria));
-                    item = window.Get<T>(criteria);
-                }
-                else
-                {
-                    TestBase.LogEvent(string.Format(LogFormatString, WhiteTestBase.GetCurrentClassAndMethodName(), ((IWhiteElement)parent).description, criteria));
-                    item = parent.Get<T>(criteria);
-                }            
-            }
->>>>>>> d816fa3d4af27c6afe54189172cd0018c21756fb
             return item;
         }
 
