@@ -25,7 +25,7 @@ namespace ProtoTest.Golem.White.Elements
         public SearchCriteria criteria { get; set; }
         public UIItem parent { get; set; }
 
-       private Menu _item;
+        private Menu _item;
         public Menu item
         {
             get
