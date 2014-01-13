@@ -27,7 +27,7 @@ namespace ProtoTest.Golem.White.Elements
                 }
                 else
                 {
-                    TestBase.LogEvent(string.Format(LogFormatString, ((IWhiteElement)parent).description, criteria));
+                    TestBase.LogEvent(string.Format(LogFormatString, WhiteTestBase.GetCurrentClassAndMethodName(), ((IWhiteElement)parent).description, criteria));
                     item = parent.Get<T>(criteria);
                 }            
             }
