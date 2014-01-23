@@ -1,11 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoTest.Golem", "ProtoTest.Golem.csproj", "{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.White.Tests.LQP", "..\..\ProtoTest.Golem.Tests\Golem.White.Tests.LQP\Golem.White.Tests.LQP.csproj", "{E2FD1953-B4EA-469D-86D6-6158D8727B56}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem.White.ScreenObjects.LQP", "..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\Golem.White.ScreenObjects.LQP.csproj", "{21705BE8-CCD1-4334-AFE0-D15F82C88BF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{201BD059-D37B-49E6-B15B-25FAEB7B3786}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

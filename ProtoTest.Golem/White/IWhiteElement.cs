@@ -14,7 +14,7 @@ namespace ProtoTest.Golem.White.Elements
         SearchCriteria criteria { get; set; }
         UIItem parent{ get; set; }
         UIItem getItem();
-        ElementVerification Verify(int timeout = 0);
-        ElementVerification WaitUntil(int timeout = 0);
+        ElementVerification Verify(int timeout);
+        ElementVerification WaitUntil(int timeout);
     }
 }
