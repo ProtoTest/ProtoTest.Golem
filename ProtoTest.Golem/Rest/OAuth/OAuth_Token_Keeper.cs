@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using ProtoTest.Golem.Proxy.HAR;
 
 namespace ProtoTest.Golem.Rest.OAuth
 {
@@ -28,6 +29,16 @@ namespace ProtoTest.Golem.Rest.OAuth
         public static string oauth_signature_method { get; set; }
         public static string resource_url { get; set; }
         public static string oauth_version { get; set; }
+
+        public static bool checkvalues()
+        {
+            bool populated = false;
+            if (oauth_token != null && oauth_token_secret != null && oauth_consumer_key != null && oauth_consumer_secret != null && oauth_signature_method != null && resource_url != null && oauth_version != null)
+            {
+                populated = true;
+            }
+            return populated;
+        }
     }
     public class OAuth_Request_Builder
     {
@@ -35,9 +46,11 @@ namespace ProtoTest.Golem.Rest.OAuth
         private string oauth_nonce;
         private string oauth_timestamp;
         private string resource_URL;
-        private string baseFormat;
+        private string baseFormat = "oauth_consumer_key={0}&oauth_nonce={1}&oauth_signature_method={2}&oauth_timestamp={3}&oauth_token={4}&oauth_version={5}";
         private string baseString;
         private string http_verb;
+
+        private List<string> Params; 
        
 
         public OAuth_Request_Builder(string URL, string verb)
@@ -60,12 +73,27 @@ namespace ProtoTest.Golem.Rest.OAuth
             oauth_timestamp = Convert.ToInt64(timeSpan.TotalSeconds).ToString();
         }
 
-        private void BuildBaseRequest(string[] parameters)
+        private void BuildBaseString(string parameters)
         {
             //we need to get a basestring out of this eventually
             //There maybe some special considerations in here (i.e. Twitter API expects parameters in alphabetical order)
-            baseFormat = "oauth_consumer_key={0}&oauth_nonce={1}&oauth_signature_method={2}&oauth_timestamp={3}&oauth_token={4}&oauth_version={5}";
-
+            //check the keys from the token_keeper
+            if (OAuth_Token_Keeper.checkvalues())
+            {
+                setNonce();
+                setTimestamp();
+                baseString = string.Format(baseFormat,
+                                        OAuth_Token_Keeper.oauth_consumer_key,
+                                        oauth_nonce,
+                                        OAuth_Token_Keeper.oauth_signature_method,
+                                        oauth_timestamp,
+                                        OAuth_Token_Keeper.oauth_token,
+                                        OAuth_Token_Keeper.oauth_version
+                                        );
+            }
+            baseString += parameters;
+            //TODO: check to make sure base string doesn't end with &
+            baseString = string.Concat(http_verb + "&", Uri.EscapeDataString(resource_URL), "&", Uri.EscapeDataString(baseString));
         }
 
         private string compositeKey()
@@ -83,7 +111,6 @@ namespace ProtoTest.Golem.Rest.OAuth
             return key;
         }
 
-        
         private void buildHash()
         {
             if (OAuth_Token_Keeper.oauth_signature_method != null)
@@ -104,11 +131,24 @@ namespace ProtoTest.Golem.Rest.OAuth
             }
         }
 
+        private void buildHeader()
+        {
+            string headerFormat = "OAuth oauth_nonce=\"{0}\", oauth_signature_method=\"{1}\", " +
+                               "oauth_timestamp=\"{2}\", oauth_consumer_key=\"{3}\", " +
+                               "oauth_token=\"{4}\", oauth_signature=\"{5}\", " +
+                               "oauth_version=\"{6}\"";
+
+            string authHeader = string.Format(headerFormat,
+                                    Uri.EscapeDataString(oauth_nonce),
+                                    Uri.EscapeDataString(OAuth_Token_Keeper.oauth_signature_method),
+                                    Uri.EscapeDataString(oauth_timestamp),
+                                    Uri.EscapeDataString(OAuth_Token_Keeper.oauth_consumer_key),
+                                    Uri.EscapeDataString(OAuth_Token_Keeper.oauth_token),
+                                    Uri.EscapeDataString(oauth_signature),
+                                    Uri.EscapeDataString(OAuth_Token_Keeper.oauth_version)
+                            );
+        }
         
-        
-
-
-
     }
 
 }
