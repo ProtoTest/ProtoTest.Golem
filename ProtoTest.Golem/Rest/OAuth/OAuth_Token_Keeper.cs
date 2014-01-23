@@ -5,6 +5,11 @@ using System.Text;
 
 namespace ProtoTest.Golem.Rest.OAuth
 {
+    public static class REST_VERB
+    {
+        public const string GET = "GET";
+        public const string POST = "POST";
+    }
     public static class Oauth_Signature_Methods
     {
         //enum Signautre_Methods {HMAC_SHA1, RSA_SHA1}
@@ -19,6 +24,22 @@ namespace ProtoTest.Golem.Rest.OAuth
         public static string oauth_consumer_key { get; set; }
         public static string oauth_consumer_secret { get; set; }
         public static string oauth_signature_method { get; set; }
+        public static string resource_url { get; set; }
+    }
+    public class OAuth_Request_Builder
+    {
+        private string resource_URL;
+        private string oauth_nonce;
+        private string oauth_timestamp;
+        private string baseFormat;
+
+        public OAuth_Request_Builder(string URL, string verb)
+        {
+            resource_URL = URL;
+        }
+
+
 
     }
+
 }
