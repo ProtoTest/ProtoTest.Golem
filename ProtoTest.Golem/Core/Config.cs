@@ -157,6 +157,7 @@ namespace ProtoTest.Golem.Core
             public int CommandDelayMs;
             public int DegreeOfParallelism;
             public int ElementTimeoutSec;
+            public int OpenWindowTimeoutSec;
             public string EnvironmentUrl;
             public bool HighlightOnVerify;
             public List<string> Hosts;
@@ -172,6 +173,7 @@ namespace ProtoTest.Golem.Core
                 LaunchBrowser = Common.IsTruthy(Config.GetConfigValue("LaunchBrowser", "True"));
                 TestTimeoutMin = int.Parse(Config.GetConfigValue("TestTimeoutMin", "5"));
                 ElementTimeoutSec = int.Parse(Config.GetConfigValue("ElementTimeoutSec", "5"));
+                OpenWindowTimeoutSec = int.Parse(Config.GetConfigValue("WindowOpenTimeoutSec", "10"));
                 PageTimeoutSec = int.Parse(Config.GetConfigValue("PageTimeoutSec", "30"));
                 EnvironmentUrl = Config.GetConfigValue("EnvironmentUrl", "");
                 DegreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "5"));
@@ -216,11 +218,6 @@ namespace ProtoTest.Golem.Core
                 if (browsers.Count == 0)
                     browsers.Add(WebDriverBrowser.Browser.Chrome);
                 return browsers;
-            }
-
-            public int GetTimeoutSettings()
-            {
-                return ElementTimeoutSec;
             }
         }
 

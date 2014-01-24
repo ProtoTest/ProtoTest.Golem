@@ -313,14 +313,19 @@ namespace ProtoTest.Golem.WebDriver
             return element;
         }
 
-        public static void SelectNewWindow(this IWebDriver driver)
+        public static void SelectNewWindow(this IWebDriver driver, int timeout = 0)
         {
+            if (timeout == 0) timeout = Config.Settings.runTimeSettings.OpenWindowTimeoutSec;
+
             try
             {
-                string currentHanlde = driver.CurrentWindowHandle;
+                string currentHandle = driver.CurrentWindowHandle;
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+                wait.Until(d => (driver.WindowHandles.Count() > 1));
+
                 foreach (string handle in (driver.WindowHandles))
                 {
-                    if (handle != currentHanlde)
+                    if (handle != currentHandle)
                         driver.SwitchTo().Window(handle);
                 }
             }
