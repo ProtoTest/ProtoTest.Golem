@@ -107,6 +107,8 @@
     <Compile Include="Proxy\HAR\Request.cs" />
     <Compile Include="Proxy\HAR\Response.cs" />
     <Compile Include="Proxy\HAR\Timings.cs" />
+    <Compile Include="Rest\OAuth\OAuth_Token_Keeper.cs" />
+    <Compile Include="Rest\OAuth\simpleTwitterHandler.cs" />
     <Compile Include="Tests\BrowserTests.cs" />
     <Compile Include="Tests\ConfigTests.cs" />
     <Compile Include="Tests\PageObjects\Google\GmailPage.cs" />

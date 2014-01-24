@@ -50,9 +50,6 @@ namespace ProtoTest.Golem.Rest.OAuth
         private string baseString;
         private string http_verb;
 
-        private List<string> Params; 
-       
-
         public OAuth_Request_Builder(string URL, string verb)
         {
             resource_URL = URL;
@@ -124,10 +121,7 @@ namespace ProtoTest.Golem.Rest.OAuth
                         oauth_signature = Convert.ToBase64String(hasher.ComputeHash(ASCIIEncoding.ASCII.GetBytes(baseString)));
                     }
                 }
-                if (OAuth_Token_Keeper.oauth_signature_method == Oauth_Signature_Methods.RSA_SHA1)
-                {
-                    //TODO: Figure out how to do proper RSA hashing
-                }
+                
             }
         }
 
