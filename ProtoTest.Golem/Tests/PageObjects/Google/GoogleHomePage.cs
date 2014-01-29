@@ -13,13 +13,6 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
         Element signInButton = new Element("SignInButon", By.LinkText("Sign in"));
         Element gmailbutton = new Element("GmailButton", By.ClassName("gbts"));
 
-        public static GoogleHomePage OpenGoogle()
-        {
-            
-            WebDriverTestBase.driver.Navigate().GoToUrl(@"http://www.google.com/");
-            return new GoogleHomePage();
-        }
-
         public GmailPage GoToGmail()
         {
             gmailbutton.Click();

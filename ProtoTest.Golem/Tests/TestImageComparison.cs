@@ -10,7 +10,7 @@ namespace ProtoTest.Golem.Tests
         [Test]
         public static void TestImages()
         {
-            GoogleHomePage.OpenGoogle().VerifyImages();
+            OpenPage<GoogleHomePage>("http://www.google.com/").VerifyImages();
 
         }
     }

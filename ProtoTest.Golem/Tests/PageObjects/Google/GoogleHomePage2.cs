@@ -11,13 +11,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
         By feelingLuckyButton =  By.Name("btnI");
         By signInButton =  By.ClassName("gbit");
         By gmailbutton = By.ClassName("gbts");
-
-        public static GoogleHomePage2 OpenGoogle()
-        {
-            WebDriverTestBase.driver.Navigate().GoToUrl("http://www.google.com/");
-            return new GoogleHomePage2();
-        }
-
+        
         public GmailPage GoToGmail()
         {
             driver.FindElement(gmailbutton).Click();

@@ -55,7 +55,7 @@ namespace ProtoTest.Golem.WebDriver
 
         private void driver_ExceptionThrown(object sender, WebDriverExceptionEventArgs e)
         {
-            //Common.Log("Exception: " + e.ThrownException.ToString());
+            Common.Log("Exception: " + e.ThrownException.ToString());
         }
 
         private void driver_FindingElement(object sender, FindElementEventArgs e)

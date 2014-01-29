@@ -22,7 +22,7 @@ namespace ProtoTest.Golem.Tests
         [Test]
         public void TestPageObjectHasDriver()
         {
-            driver.Navigate().GoToUrl("http://www.google.com");
+            OpenPage<GoogleHomePage>("http://www.google.com");
             var page = new GoogleHomePage();
             Assert.IsNotNull(page.driver);
         }

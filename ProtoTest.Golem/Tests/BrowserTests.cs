@@ -9,6 +9,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Safari;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
+using ProtoTest.Golem.Tests.PageObjects.Google;
 
 namespace ProtoTest.Golem.Tests
 {
@@ -24,29 +25,30 @@ namespace ProtoTest.Golem.Tests
         public void TestIE()
         {
             driver = new InternetExplorerDriver();
-            driver.Navigate().GoToUrl("http://www.google.com");
-            driver.Navigate().GoToUrl("http://www.google.com");
+            //OpenPage needs to run twice because of an initialization bug with the IE driver
+            OpenPage<GoogleHomePage>("http://www.google.com/");
+            OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }
         [Test]
         public void TestFF()
         {
             driver = new FirefoxDriver();
-            driver.Navigate().GoToUrl("http://www.google.com");
+            OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }
         [Test]
         public void TestChrome()
         {
             driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("http://www.google.com");
+            OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }
         [Test]
         public void TestSafari()
         {
             driver = new SafariDriver();
-            driver.Navigate().GoToUrl("http://www.google.com");
+            OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }
     }
