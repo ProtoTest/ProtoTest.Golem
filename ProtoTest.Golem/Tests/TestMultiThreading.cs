@@ -18,7 +18,7 @@ namespace ProtoTest.Golem.Tests
         [FixtureInitializer]
         public void setup()
         {
-            Config.Settings.runTimeSettings.DegreeOfParallelism = 10;
+            Config.Settings.runTimeSettings.DegreeOfParallelism = 7;
         }
       [Test, Parallelizable,ThreadedRepeat(10)]
         public void TestThreadedRepeat()

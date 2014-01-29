@@ -194,9 +194,6 @@
     <Compile Include="WebDriver\WebDriverExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="chromedriver-license.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Hunspellx64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
