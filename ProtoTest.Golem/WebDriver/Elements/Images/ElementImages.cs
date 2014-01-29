@@ -20,7 +20,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             this.element = element;
             CreateDirectory();
-            liveImage = GetLiveImage();
+            liveImage = GetImage();
             storedImage = GetStoredImage();
         }
 
@@ -36,6 +36,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         public Image GetDifferenceImage()
         {
             var bmp = new Bitmap(liveImage.Width, liveImage.Height);
+
             return liveImage.GetDifferenceOverlayImage(storedImage)
                 .Resize(storedImage.Width, storedImage.Height);
         }
@@ -49,6 +50,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             difference = ImageComparer.ImageComparePercentage(storedImage, liveImage,
                 Config.Settings.imageCompareSettings.fuzziness);
             differenceString = (difference*100).ToString("0.##\\%");
+
             return difference < Config.Settings.imageCompareSettings.accuracy;
         }
 
@@ -56,6 +58,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             Image overlayImage = OverlayImages(liveImage, GetDifferenceImage());
             Image mergedImage = CombineImages(storedImage, liveImage, overlayImage);
+
             return mergedImage;
         }
 
@@ -70,19 +73,18 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                 gr.DrawImage(image2, new Point(image1.Width, 0));
                 gr.DrawImage(image3, new Point(image2.Width + image1.Width, 0));
             }
-            return bmp;
-        }
 
-        public Image GetLiveImage()
-        {
-            return GetImage();
+            return bmp;
         }
 
         public Image GetStoredImage()
         {
             if (File.Exists(ImageLocation))
+            {
                 return Image.FromFile(ImageLocation);
-            return GetLiveImage();
+            }
+
+            return GetImage();
         }
 
         public Image OverlayImages(Image imageBackground, Image imageOverlay)
@@ -94,24 +96,29 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                 gr.DrawImage(imageBackground, new Point(0, 0));
                 gr.DrawImage(imageOverlay, new Point(0, 0));
             }
+
             return img;
         }
 
         public void CreateDirectory()
         {
             if (!Directory.Exists(Common.GetCodeDirectory() + "\\ElementImages"))
+            {
                 Directory.CreateDirectory(Common.GetCodeDirectory() + "\\ElementImages");
+            }
         }
 
         public void DeleteOldImage()
         {
             if (File.Exists(ImageLocation))
+            {
                 File.Delete(ImageLocation);
+            }
         }
 
         public void UpdateImage()
         {
-            using (Image image = GetLiveImage())
+            using (Image image = GetImage())
             {
                 SaveImage(image);
             }
@@ -121,7 +128,6 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             try
             {
-                
                 DeleteOldImage();
                 using (var tempImage = new Bitmap(image))
                 {
@@ -138,10 +144,11 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             var size = new Size(element.Size.Width, element.Size.Height);
             if (element.Displayed == false)
+            {
                 throw new BadImageFormatException(string.Format(
                     "Could not create image for element {0} as it is hidden", element.name));
+            }
             var cropRect = new Rectangle(element.Location, size);
-            // Common.Log("Rect is " + cropRect);
 
             return cropImage(TestBase.testData.driver.GetScreenshot(), cropRect);
         }
@@ -150,6 +157,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             var bmpImage = new Bitmap(img);
             Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+
             return bmpCrop;
         }
 

@@ -173,7 +173,10 @@ namespace ProtoTest.Golem.Core
         private void AssertNoVerificationErrors()
         {
             if (testData.VerificationErrors.Count == 0)
+            {
                 return;
+            }
+
             int i = 1;
             TestLog.BeginMarker(Marker.AssertionFailure);
             foreach (VerificationError error in testData.VerificationErrors)
@@ -181,7 +184,9 @@ namespace ProtoTest.Golem.Core
                 TestLog.Failures.BeginSection("ElementVerification Error " + i);
                 TestLog.Failures.WriteLine(error.errorText);
                 if (error.screenshot != null)
+                {
                     TestLog.Failures.EmbedImage(null, error.screenshot);
+                }
                 TestLog.Failures.End();
                 i++;
             }
@@ -243,8 +248,9 @@ namespace ProtoTest.Golem.Core
                     proxy.CreateHar();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log("Failed to setup proxy: " + e.Message + ": Trying again...");
                 proxy.CreateProxy();
                 proxy.CreateHar();
             }
@@ -302,14 +308,12 @@ namespace ProtoTest.Golem.Core
 
             foreach (StackFrame stackFrame in stackFrames)
             {
-                // trace += stackFrame.GetMethod().ReflectedType.FullName;
                 if (stackFrame.GetMethod().ReflectedType.FullName.Contains("PageObject"))
                 {
-                    string name = stackFrame.GetMethod().ReflectedType.Name;
-                    return name;
+                    return stackFrame.GetMethod().ReflectedType.Name;
                 }
             }
-            // DiagnosticLog.WriteLine(stackTrace.ToString());
+
             return "";
         }
 
@@ -321,8 +325,10 @@ namespace ProtoTest.Golem.Core
             // write call stack method names
             foreach (StackFrame stackFrame in stackFrames)
             {
-                if (stackFrame.GetMethod().ReflectedType.BaseType == typeof (BasePageObject))
+                if (stackFrame.GetMethod().ReflectedType.BaseType == typeof(BasePageObject))
+                {
                     return stackFrame.GetMethod().Name;
+                }
             }
             return "";
         }
@@ -331,18 +337,16 @@ namespace ProtoTest.Golem.Core
         {
             var stackTrace = new StackTrace(); // get call stack
             StackFrame[] stackFrames = stackTrace.GetFrames(); // get method calls (frames)
-            // string trace = "";
+
             foreach (StackFrame stackFrame in stackFrames)
             {
-                // trace += stackFrame.GetMethod().ReflectedType.FullName;
                 if ((stackFrame.GetMethod().ReflectedType.FullName.Contains("PageObject")) &&
                     (!stackFrame.GetMethod().IsConstructor))
                 {
-                    string name = stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
-                    return name;
+                    return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
                 }
             }
-            // DiagnosticLog.WriteLine(stackTrace.ToString());
+
             return "";
         }
 
@@ -354,7 +358,6 @@ namespace ProtoTest.Golem.Core
                 (Common.GetTestOutcome() != TestOutcome.Passed))
             {
                 TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
-                //stData.recorder.Dispose();
             }
         }
 
@@ -373,7 +376,9 @@ namespace ProtoTest.Golem.Core
             try
             {
                 if (Config.Settings.reportSettings.videoRecordingOnError)
+                {
                     testData.recorder.Stop();
+                }
             }
             catch (Exception e)
             {

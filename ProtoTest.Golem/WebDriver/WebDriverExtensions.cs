@@ -138,13 +138,6 @@ namespace ProtoTest.Golem.WebDriver
             return driver.FindElement(by);
         }
 
-        //public static IWebElement WaitForVisible(this IWebElement element, By by, int timeout = 0)
-        //{
-        //    if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-        //    WebDriverWait wait = new WebDriverWait(WebDriverTestBase.driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
-        //    wait.Until(d => ((d.FindElements(by).Count > 0) && (d.FindElement(by).Displayed == true)));
-        //    return element.FindElement(by);
-        //}
         public static void WaitForNotVisible(this IWebDriver driver, By by, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
@@ -221,7 +214,9 @@ namespace ProtoTest.Golem.WebDriver
                 foreach (IWebElement element in elements)
                 {
                     if (element.Displayed)
+                    {
                         visible = true;
+                    }
                 }
             }
             Verify(isVisible != visible,
@@ -326,7 +321,9 @@ namespace ProtoTest.Golem.WebDriver
                 foreach (string handle in (driver.WindowHandles))
                 {
                     if (handle != currentHandle)
+                    {
                         driver.SwitchTo().Window(handle);
+                    }
                 }
             }
             catch (Exception)

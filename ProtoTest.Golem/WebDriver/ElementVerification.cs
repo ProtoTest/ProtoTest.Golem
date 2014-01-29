@@ -43,9 +43,13 @@ namespace ProtoTest.Golem.WebDriver
             else
             {
                 if (image == null)
+                {
                     TestBase.AddVerificationError(message);
+                }
                 else
+                {
                     TestBase.AddVerificationError(message, image);
+                }
             }
         }
 
@@ -81,9 +85,12 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    //    TestContext.CurrentContext.IncrementAssertCount();
+
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                    {
                         element.Highlight();
+                    }
+
                     return element;
                 }
                 Common.Delay(1000);
@@ -105,7 +112,10 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                    {
                         element.Highlight();
+                    }
+
                     return element;
                 }
                 Common.Delay(1000);
@@ -125,9 +135,12 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    // TestContext.CurrentContext.IncrementAssertCount();
+
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                    {
                         element.Highlight();
+                    }
+
                     return element;
                 }
                 Common.Delay(1000);
@@ -147,9 +160,12 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    //    TestContext.CurrentContext.IncrementAssertCount();
+
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                    {
                         element.Highlight();
+                    }
+
                     return element;
                 }
                 Common.Delay(1000);
@@ -168,9 +184,12 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    //    TestContext.CurrentContext.IncrementAssertCount();
+
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                    {
                         element.Highlight();
+                    }
+
                     return element;
                 }
                 Common.Delay(1000);
@@ -189,9 +208,12 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    //     TestContext.CurrentContext.IncrementAssertCount();
+
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                    {
                         element.Highlight();
+                    }
+
                     return element;
                 }
                 Common.Delay(1000);
@@ -210,9 +232,12 @@ namespace ProtoTest.Golem.WebDriver
                 if (condition == isTrue)
                 {
                     TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-                    //     TestContext.CurrentContext.IncrementAssertCount();
+
                     if (Config.Settings.runTimeSettings.HighlightOnVerify)
+                    {
                         element.Highlight();
+                    }
+
                     return element;
                 }
                 Common.Delay(1000);

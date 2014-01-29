@@ -26,7 +26,9 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             for (var i = 0; i < firstBitmap.Length; i++)
             {
                 if (firstBitmap[i] != secondBitmap[i])
+                {
                     total++;
+                }
             }
             float failure = (float)total/(float)firstBitmap.Length;
             return failure < failurePercent;
@@ -34,7 +36,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public static bool ImageCompareArray(Image firstImage, Image secondImage)
         {
-            bool flag = true;
+            bool images_match = false;
             string firstPixel;
             string secondPixel;
             firstImage = Common.ScaleImage(firstImage);
@@ -52,7 +54,6 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             var firstBmp = new Bitmap(firstImage);
             var secondBmp = new Bitmap(secondImage);
 
-
             if (firstBmp.Width == secondBmp.Width
                 && firstBmp.Height == secondBmp.Height)
             {
@@ -64,19 +65,17 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                         secondPixel = secondBmp.GetPixel(i, j).ToString();
                         if (firstPixel != secondPixel)
                         {
-                            flag = false;
-                            break;
+                            // pixels do not match, bail...
+                            return false;
                         }
                     }
                 }
 
-                if (flag == false)
-                {
-                    return false;
-                }
-                return true;
+                // all pixels match
+                images_match = true;
             }
-            return false;
+
+            return images_match;
         }
 
         public static float ImageComparePercentage(Image firstImage, Image secondImage, byte fuzzyness = 10)
@@ -98,6 +97,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             }
             Common.Log("The Hamming Distance is " + diff);
             Common.Log("The Hamming Difference is " + ((float) diff/first.Length));
+
             return ((float) diff/first.Length);
         }
 
@@ -121,6 +121,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                     }
                 }
             }
+
             return hashString;
         }
 

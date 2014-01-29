@@ -35,9 +35,6 @@ namespace ProtoTest.Golem.WebDriver
         {
             switch (browser)
             {
-                case Browser.Firefox:
-                    driver = StartFirefoxBrowser();
-                    break;
                 case Browser.IE:
                     driver = StartIEBrowser();
                     break;
@@ -47,13 +44,16 @@ namespace ProtoTest.Golem.WebDriver
                 case Browser.Safari:
                     driver = StartSafariBrowser();
                     break;
+                case Browser.Firefox:
                 default:
                     driver = StartFirefoxBrowser();
                     break;
             }
+
             driver.Manage().Cookies.DeleteAllCookies();
             SetBrowserSize();
             var eDriver = new EventedWebDriver(driver);
+
             return eDriver.driver;
         }
 
@@ -61,9 +61,13 @@ namespace ProtoTest.Golem.WebDriver
         {
             string resolution = Config.Settings.runTimeSettings.BrowserResolution;
             if (resolution.Contains("Default"))
+            {
                 driver.Manage().Window.Maximize();
+            }
             else
+            {
                 driver.Manage().Window.Size = Common.GetSizeFromResolution(resolution);
+            }
         }
 
         public static IWebDriver StartFirefoxBrowser()
@@ -75,12 +79,14 @@ namespace ProtoTest.Golem.WebDriver
                 proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
                 capabilities.SetCapability("proxy", proxy);
             }
+
             return new FirefoxDriver(capabilities);
         }
 
         public IWebDriver StartChromeBrowser()
         {
             var options = new ChromeOptions();
+            
             // Add the WebDriver proxy capability.
             if (Config.Settings.httpProxy.useProxy)
             {
@@ -88,6 +94,7 @@ namespace ProtoTest.Golem.WebDriver
                 proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
                 options.Proxy = proxy;
             }
+
             return new ChromeDriver(options);
         }
 
@@ -110,6 +117,7 @@ namespace ProtoTest.Golem.WebDriver
         public IWebDriver StartSafariBrowser()
         {
             var options = new SafariOptions();
+
             // Add the WebDriver proxy capability.
             if (Config.Settings.httpProxy.startProxy)
             {
@@ -117,6 +125,7 @@ namespace ProtoTest.Golem.WebDriver
                 proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
                 options.AddAdditionalCapability("proxy", proxy);
             }
+
             return new SafariDriver(options);
         }
 
@@ -124,8 +133,6 @@ namespace ProtoTest.Golem.WebDriver
         {
             switch (browser)
             {
-                case Browser.Firefox:
-                    return DesiredCapabilities.Firefox();
                 case Browser.IE:
                     return DesiredCapabilities.InternetExplorer();
                 case Browser.Chrome:
@@ -134,6 +141,7 @@ namespace ProtoTest.Golem.WebDriver
                     return DesiredCapabilities.Safari();
                 case Browser.Android:
                     return DesiredCapabilities.Android();
+                case Browser.Firefox:
                 default:
                     return DesiredCapabilities.Firefox();
             }
@@ -146,10 +154,6 @@ namespace ProtoTest.Golem.WebDriver
             if (browser == Browser.Android)
             {
                 port = "8080";
-
-                // var driver= new AndroidDriver(new Uri(string.Format("http://{0}:{1}/wd/hub",Config.Settings.runTimeSettings.HostIp,port)));
-                //driver.Orientation=ScreenOrientation.Landscape;
-                //   return driver;
             }
 
             var remoteAddress = new Uri(string.Format("http://{0}:{1}/wd/hub", host, port));
@@ -167,6 +171,7 @@ namespace ProtoTest.Golem.WebDriver
             capabilities.SetCapability("app-activity", activity);
 
             var eDriver = new EventedWebDriver(driver);
+
             return eDriver.driver;
         }
     }
