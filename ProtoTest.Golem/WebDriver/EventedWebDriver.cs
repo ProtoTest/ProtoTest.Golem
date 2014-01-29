@@ -78,9 +78,13 @@ namespace ProtoTest.Golem.WebDriver
         private string GetLogMessage(string command, WebElementEventArgs e = null, string param = "")
         {
             if (param != "") param = "'" + param + "'";
+
             if (TestBase.testData.lastElement.name != "")
+            {
                 return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
                     TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);
+            }
+
             return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element", e.Element,
                 param);
         }
@@ -88,9 +92,13 @@ namespace ProtoTest.Golem.WebDriver
         private string GetLogMessage(string command, FindElementEventArgs e = null, string param = "")
         {
             if (param != "") param = "'" + param + "'";
+
             if (TestBase.testData.lastElement.name != "")
+            {
                 return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
                     TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);
+            }
+
             return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element",
                 e.Element.Location,
                 param);

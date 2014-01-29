@@ -15,7 +15,8 @@ using RestSharp;
 namespace ProtoTest.Golem.Proxy
 {
     /// <summary>
-    /// This class acts as a wrapper around a BrowserMobProxy jar.  it contains methods to launch and stop the server, as well as to issue REST commands to start/stop/configure an individual proxy.  
+    /// This class acts as a wrapper around a BrowserMobProxy jar.  
+    /// It contains methods to launch and stop the server, as well as to issue REST commands to start/stop/configure an individual proxy.  
     /// </summary>
     public class BrowserMobProxy
     {
@@ -72,17 +73,24 @@ namespace ProtoTest.Golem.Proxy
 
         public void StartServer()
         {
-            Common.Log("Starting BrowserMob server on port " + serverPort);
-            serverProcess = new Process();
-            var StartInfo = new ProcessStartInfo();
-            StartInfo.FileName = batchPath;
-            StartInfo.Arguments = "-port " + serverPort;
-            StartInfo.WindowStyle = ProcessWindowStyle.Normal;
-            StartInfo.CreateNoWindow = false;
-            serverProcess.StartInfo = StartInfo;
-            serverProcess.Start();
-            client.BaseUrl = "http://localhost:" + serverPort;
-            WaitForServerToStart();
+            try
+            {
+                Common.Log("Starting BrowserMob server on port " + serverPort);
+                serverProcess = new Process();
+                var StartInfo = new ProcessStartInfo();
+                StartInfo.FileName = batchPath;
+                StartInfo.Arguments = "-port " + serverPort;
+                StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                StartInfo.CreateNoWindow = false;
+                serverProcess.StartInfo = StartInfo;
+                serverProcess.Start();
+                client.BaseUrl = "http://localhost:" + serverPort;
+                WaitForServerToStart();
+            }
+            catch (Exception e)
+            {
+                Common.Log(e.Message);
+            }
         }
 
         public void KillOldProxy()
@@ -106,9 +114,13 @@ namespace ProtoTest.Golem.Proxy
 
         public void QuitServer()
         {
-            Common.Log("Stopping BrowserMobProxy Server");
-            serverProcess.CloseMainWindow();
-            serverProcess.Kill();
+            try
+            {
+                Common.Log("Stopping BrowserMobProxy Server");
+                serverProcess.CloseMainWindow();
+                serverProcess.Kill();
+            }
+            catch (Exception) { }
         }
 
         public bool WaitForServerToStart(int timeout = 30)
@@ -119,7 +131,9 @@ namespace ProtoTest.Golem.Proxy
                 request.Resource = "/";
                 response = client.Execute(request);
                 if (response.StatusCode == HttpStatusCode.NotFound)
+                {
                     return true;
+                }
                 Thread.Sleep(1000);
             }
             throw new Exception("Could not start the BrowserMobProxy " + response.StatusCode);
@@ -160,7 +174,9 @@ namespace ProtoTest.Golem.Proxy
             {
                 response = client.Execute(request);
                 if (response.StatusCode != HttpStatusCode.OK)
+                {
                     throw new Exception("Could not start Proxy at port : " + proxyPort + " : " + response.StatusCode);
+                }
             }
         }
 
@@ -278,6 +294,7 @@ namespace ProtoTest.Golem.Proxy
                     queryString.Value));
                 return;
             }
+
             string message;
             string value = GetValueForQueryStringWithName(queryString.Name, entry);
             if (value != null)
@@ -290,14 +307,16 @@ namespace ProtoTest.Golem.Proxy
                 message = string.Format("No QueryString found with Description={0}", queryString.Name);
             }
             TestBase.AddVerificationError(string.Format("Request From {0} to {1} not correct. {2}",
-                TestBase.testData.driver.Url, "om.healthgrades.com", message));
+                TestBase.testData.driver.Url, entry.Request.Url, message));
         }
 
         public void VerifyRequestMade(string url)
         {
             List<Entry> entries = FilterEntries(url);
             if (entries.Count == 0)
+            {
                 TestBase.AddVerificationError("Did not find request with url " + url);
+            }
         }
 
         public void VerifyRequestQueryString(string url, QueryStringItem queryString)
@@ -308,6 +327,7 @@ namespace ProtoTest.Golem.Proxy
                     queryString.Value));
                 return;
             }
+
             string message;
             string value = GetValueForQueryStringWithName(queryString.Name, GetLastEntryForUrl(url));
             if (value != null)
@@ -376,11 +396,9 @@ namespace ProtoTest.Golem.Proxy
 
         public string GetHarFilePath()
         {
-            string name = Common.GetShortTestName(80);
-            string path = Directory.GetCurrentDirectory()
+            return Directory.GetCurrentDirectory()
                           + Path.DirectorySeparatorChar
-                          + "HTTP_Traffic_" + name + ".har";
-            return path;
+                          + "HTTP_Traffic_" + Common.GetShortTestName(80) + ".har";
         }
     }
 }

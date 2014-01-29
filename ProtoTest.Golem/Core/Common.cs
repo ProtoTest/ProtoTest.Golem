@@ -16,6 +16,10 @@ namespace ProtoTest.Golem.Core
     /// </summary>
     public class Common
     {
+        /// <summary>
+        /// Return a psuedo-random string based on the current timestamp
+        /// </summary>
+        /// <returns></returns>
         public static string GetRandomString()
         {
             return DateTime.Now.ToString("ddHHmmss");
@@ -43,7 +47,10 @@ namespace ProtoTest.Golem.Core
         public static Process ExecuteBatchFile(string filePath)
         {
             if (!File.Exists(filePath))
+            {
                 throw new SilentTestException(TestOutcome.Failed, "Could not find batch file : " + filePath);
+            }
+
             return Process.Start(filePath);
         }
 
@@ -96,7 +103,6 @@ namespace ProtoTest.Golem.Core
                 case "0":
                 case "false":
                 case "False":
-                    return false;
                 default:
                     return false;
             }
@@ -116,7 +122,9 @@ namespace ProtoTest.Golem.Core
             name = name.Replace("\"", "");
             name = name.Replace(" ", "");
             if (name.Length > length)
+            {
                 name = name.Substring((name.Length - length), length);
+            }
 
             return name;
         }
@@ -139,7 +147,10 @@ namespace ProtoTest.Golem.Core
         public static TestOutcome GetTestOutcome()
         {
             if (TestBase.testData.VerificationErrors.Count != 0)
+            {
                 return TestOutcome.Failed;
+            }
+
             return TestContext.CurrentContext.Outcome;
         }
 

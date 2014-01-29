@@ -46,7 +46,6 @@ namespace ProtoTest.Golem.WebDriver
         public static T OpenPage<T>(string url)
         {
             driver.Navigate().GoToUrl(url);
-            //   driver.Manage().Window.Maximize();
             return (T) Activator.CreateInstance(typeof (T));
         }
 
@@ -57,7 +56,9 @@ namespace ProtoTest.Golem.WebDriver
             {
                 Image screenshot = testData.driver.GetScreenshot();
                 if (screenshot != null)
+                {
                     TestLog.Failures.EmbedImage(null, screenshot);
+                }
             }
         }
 
@@ -104,6 +105,7 @@ namespace ProtoTest.Golem.WebDriver
                 LogEvent(browser + " Browser Launched");
                 testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser + " Browser Launched");
             }
+
             if (Config.Settings.appiumSettings.launchApp)
             {
                 var capabilities = new DesiredCapabilities();

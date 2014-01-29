@@ -22,14 +22,28 @@ namespace ProtoTest.Golem.Core
             set { _settings = value; }
         }
 
+        /// <summary>
+        /// Returns the App.config value for requested key, or default value if not defined.
+        /// </summary>
+        /// <param name="key">Application configuration key</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <returns></returns>
         public static string GetConfigValue(string key, string defaultValue)
         {
             string setting = ConfigurationManager.AppSettings[key];
             if (setting == null)
+            {
                 return defaultValue;
+            }
+
             return setting;
         }
 
+        /// <summary>
+        /// Updates the App.config setting key with value
+        /// </summary>
+        /// <param name="key">Application configuration key</param>
+        /// <param name="value">Application configuration key value to set</param>
         public static void UpdateConfigFile(string key, string value)
         {
             var doc = new XmlDocument();
@@ -184,14 +198,14 @@ namespace ProtoTest.Golem.Core
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
             }
 
-            //HostIp = Config.GetConfigValue("HostIp", "localhost");
-
             private List<string> GetHostsList()
             {
                 var hosts = new List<string>();
                 string host = Config.GetConfigValue("HostIp", "null");
                 if (host != "null")
+                {
                     hosts.Add(host);
+                }
                 for (int i = 1; i < 10; i++)
                 {
                     host = Config.GetConfigValue("HostIp" + i, "null");
@@ -199,7 +213,10 @@ namespace ProtoTest.Golem.Core
                         hosts.Add(host);
                 }
                 if (hosts.Count == 0)
+                {
                     hosts.Add("localhost");
+                }
+
                 return hosts;
             }
 
@@ -208,19 +225,29 @@ namespace ProtoTest.Golem.Core
                 var browsers = new List<WebDriverBrowser.Browser>();
                 string browser = Config.GetConfigValue("Browser", "null");
                 if (browser != "null")
+                {
                     browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
+                }
                 for (int i = 1; i < 5; i++)
                 {
                     browser = Config.GetConfigValue("Browser" + i, "null");
                     if (browser != "null")
+                    {
                         browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
+                    }
                 }
                 if (browsers.Count == 0)
+                {
                     browsers.Add(WebDriverBrowser.Browser.Chrome);
+                }
+
                 return browsers;
             }
         }
 
+        /// <summary>
+        /// Settings for TestStack.White module
+        /// </summary>
         public class WhiteSettings
         {
             public string appPath;
