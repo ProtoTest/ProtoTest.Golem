@@ -55,7 +55,11 @@ namespace ProtoTest.Golem.WebDriver
 
         private void driver_ExceptionThrown(object sender, WebDriverExceptionEventArgs e)
         {
-            Common.Log("Exception: " + e.ThrownException.ToString());
+            // Do not want to flood the log with these element not found exceptions. 
+            // Especially with the ability to wait for elements to display within a timeout period. 
+            // Turn it on if you really want them there.
+
+            //Common.Log("Exception: " + e.ThrownException.ToString());
         }
 
         private void driver_FindingElement(object sender, FindElementEventArgs e)
