@@ -203,14 +203,12 @@
     <Content Include="IEDriverServer.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="packages\Selenium.WebDriver.ChromeDriver.2.3.0.0\content\chromedriver.exe" />
-    <Content Include="packages\Selenium.WebDriver.IEDriver.2.35.3.3\content\IEDriverServer.exe" />
-    <Content Include="packages\WebDriver.IEDriverServer.win32.2.34.0\content\IEDriverServer.exe" />
-    <Content Include="packages\WebDriver.IEDriverServer.win64.2.34.0\content\IEDriverServer.exe" />
-    <Content Include="packages\WebDriverChromeDriver.2.8\tools\chromedriver.exe" />
-    <Content Include="Tests\Data\SearchData.xml">
+    <Content Include="chromedriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Tests\Data\SearchData.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\en_US">
