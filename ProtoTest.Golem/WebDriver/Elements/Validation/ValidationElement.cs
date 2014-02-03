@@ -34,9 +34,10 @@ namespace ProtoTest.Golem.WebDriver.Elements.Validation
         /// <param name="text">The text to verify</param>
         /// <param name="seconds">Number iterations in seconds to retry finding the element</param>
         /// <returns>this</returns>
-        public ValidationElement VerifyTextValidation(string text, int seconds = 0)
+        public ValidationElement VerifyTextValidation(string text, int timeoutSec = 0)
         {
-            for (int i = 0; i <= seconds; i++)
+            if (timeoutSec == 0) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            for (int i = 0; i <= timeoutSec; i++)
             {
                 if (driver.FindElements(locatorValidation).Count != 0)
                 {
@@ -53,7 +54,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Validation
             }
 
             TestBase.AddVerificationError(TestBase.GetCurrentClassAndMethodName() + ": Element : " + name + " (" +
-                                          locatorValidation + ") not present after " + seconds + " seconds");
+                                          locatorValidation + ") not present after " + timeoutSec + " seconds");
             return this;
         }
     }
