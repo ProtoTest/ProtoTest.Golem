@@ -18,13 +18,13 @@ namespace ProtoTest.Golem.Tests
         [FixtureInitializer]
         public void setup()
         {
-            Config.Settings.runTimeSettings.DegreeOfParallelism = 7;
+            Config.Settings.runTimeSettings.DegreeOfParallelism = 5;
         }
-      [Test, Parallelizable,ThreadedRepeat(10)]
+      [Test, Parallelizable,ThreadedRepeat(5)]
         public void TestThreadedRepeat()
         {
           OpenPage<GoogleHomePage>("http://www.google.com");
-          Assert.AreEqual(testDataCollection.Count,10);
+          Assert.AreEqual(testDataCollection.Count,5);
         }
    
     }
