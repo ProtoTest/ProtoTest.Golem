@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ProtoTest.Golem</id>
+    <version>1.0.0.12</version>
+    <title>ProtoTest.Golem</title>
+    <authors>ProtoTest</authors>
+    <owners>ProtoTest</owners>
+    <projectUrl>http://www.github.com/prototest/prototest.golem</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>EventDriven WebDriver Automation Framework</description>
+    <releaseNotes>Adding TestStack.White support, and fixing IE/Chrome Driver issues</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <language />
+    <tags>Selenium WebDriver Framework Golem ProtoTest Gallio MbUnit Rest White TestStack</tags>
+    <dependencies>
+      <dependency id="Gallio_MbUnit" version="3.4.14.0" />
+      <dependency id="Selenium.Support" version="2.39.0" />
+      <dependency id="Selenium.WebDriver" version="2.39.0" />
+      <dependency id="Castle.Core" version="3.2.2" />
+    </dependencies>
+  </metadata>
+<files>
+    <file src="install.ps1" target="tools" /> 
+</files>
+</package>
