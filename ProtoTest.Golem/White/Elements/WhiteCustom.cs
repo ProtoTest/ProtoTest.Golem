@@ -59,6 +59,27 @@ namespace ProtoTest.Golem.White.Elements
             this.criteria = criteria;
             this.parent = parent ?? WhiteTestBase.window;
         }
+        public virtual string Value
+        {
+            get
+            {
+                if (this.AutomationElement.Current.IsPassword)
+                    throw new WhiteException("Text cannot be retrieved from textbox which has secret text (e.g. password) stored in it");
+                ValuePattern valuePattern = this.Pattern(ValuePattern.Pattern) as ValuePattern;
+                if (valuePattern != null)
+                    return valuePattern.Current.Value;
+                TextPattern textPattern = this.Pattern(TextPattern.Pattern) as TextPattern;
+                if (textPattern != null)
+                    return textPattern.DocumentRange.GetText(int.MaxValue);
+                else
+                    throw new WhiteException(string.Format("AutomationElement for {0} supports neither ValuePattern or TextPattern", (object)this.ToString()));
+            }
+            set
+            {
+                this.Enter(value);
+            }
+        }
+
 
         public override bool ValueOfEquals(AutomationProperty property, object compareTo)
         {
