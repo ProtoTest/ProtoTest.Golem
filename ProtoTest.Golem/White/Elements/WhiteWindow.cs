@@ -75,18 +75,30 @@ namespace ProtoTest.Golem.White.Elements
             this.parent = parent;
         }
 
+        private Window FindWindow()
+        {
+            var windows = WhiteTestBase.app.GetWindows();
+            foreach (var win in windows)
+            {
+                if (win.Title.Contains(title))
+                    return win;
+            }
+            return null;
+        }
+
         private Window getWindow()
         {
             if (_window == null)
             {
-                var parentWindow = (Window) parent;
-                return criteria != null
-                    ? (parent == null
-                        ? WhiteTestBase.app.GetWindow(criteria, InitializeOption.NoCache)
-                        : parentWindow.ModalWindow(criteria, InitializeOption.NoCache))
-                    : (parent == null
-                        ? WhiteTestBase.app.GetWindow(title, InitializeOption.NoCache)
-                        : parentWindow.ModalWindow(title, InitializeOption.NoCache));
+                    var parentWindow = (Window)parent;
+                    return criteria != null
+                        ? (parent == null
+                            ? WhiteTestBase.app.GetWindow(criteria, InitializeOption.NoCache)
+                            : parentWindow.ModalWindow(criteria, InitializeOption.NoCache))
+                        : (parent == null
+                            ? FindWindow()
+                            : parentWindow.ModalWindow(title, InitializeOption.NoCache));  
+
             }
             return _window;
         }

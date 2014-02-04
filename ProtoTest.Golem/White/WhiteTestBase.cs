@@ -37,9 +37,18 @@ namespace ProtoTest.Golem.White
         [SetUp]
         public void SetUp()
         {
-            app = Application.Launch(Config.Settings.whiteSettings.appPath);
-            if(Config.Settings.whiteSettings.windowTitle!="NOT_SET")
-                 window = new WhiteWindow(Config.Settings.whiteSettings.windowTitle);
+            var startInfo = new ProcessStartInfo(Config.Settings.whiteSettings.appPath);
+            if (Config.Settings.whiteSettings.launchApp)
+            {
+                app = Application.Launch(startInfo);
+            }
+            else
+            {            
+                app = Application.AttachOrLaunch(startInfo);
+            }
+            if (Config.Settings.whiteSettings.windowTitle != "NOT_SET")
+                window = new WhiteWindow(Config.Settings.whiteSettings.windowTitle);
+            
         }
 
         [TearDown]
@@ -48,7 +57,7 @@ namespace ProtoTest.Golem.White
             
             //TestLog.WriteLine(CoreAppXmlConfiguration.Instance.WorkSessionLocation.ToString());
             LogScreenshotIfTestFailed();
-            app.Close();
+          //  app.Close();
             //app.ApplicationSession.Save();
         }
 

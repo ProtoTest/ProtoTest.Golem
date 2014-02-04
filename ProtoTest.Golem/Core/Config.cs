@@ -252,11 +252,13 @@ namespace ProtoTest.Golem.Core
         {
             public string appPath;
             public string windowTitle;
+            public bool launchApp;
             public LoggerLevel logLevel;
 
             public WhiteSettings()
             {
                 appPath = Config.GetConfigValue("AppPath", "NOT_SET");
+                launchApp = Common.IsTruthy(Config.GetConfigValue("LaunchApp", "True"));
                 windowTitle = Config.GetConfigValue("WindowTitle", "NOT_SET");
                 logLevel = (LoggerLevel) Enum.Parse(typeof(LoggerLevel), Config.GetConfigValue("LogLevel", "Info"));
             }

@@ -29,5 +29,23 @@ namespace ProtoTest.Golem.White
       
         }
 
+        public static UIItem GetItem(UIItem item, SearchCriteria criteria, UIItem parent)
+        {
+            try
+            {
+                string description = parent.GetType() == typeof(WhiteWindow) ? ((WhiteWindow)parent).description : ((IWhiteElement)parent).description;
+                var procInfo = new CurrentProcessInfo(typeof(BaseScreenObject), typeof(IWhiteElement));
+                string logInfo = string.Format(LogFormatString, procInfo.className, procInfo.methodName, procInfo.elementName, procInfo.commandName, description, criteria);
+                TestBase.LogEvent(logInfo);
+                if (item != null && !item.IsStale()) return item;
+                item =  (UIItem) parent.Get(criteria);
+                return item;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
     }
 }
