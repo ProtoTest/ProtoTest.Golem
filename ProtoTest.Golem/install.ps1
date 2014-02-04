@@ -18,3 +18,6 @@ if (!$currentPostBuildCmd.Contains($CopyChromeDriver)) {
 if (!$currentPostBuildCmd.Contains($CopyIEDriver)) {
     $project.Properties.Item("PostBuildEvent").Value += $CopyIEDriver
 }
+
+$mobFile = $project.ProjectItems.Item("Proxy").ProjectItems.Item("browsermob-proxy-2.0-beta-8-bin.zip")
+$mobFile.Properties.Item("CopyToOutputDirectory").Value = 2
