@@ -159,7 +159,7 @@ namespace ProtoTest.Golem.Core
         public static void AddVerificationError(string errorText)
         {
             LogEvent("--> VerificationError Found: " + errorText);
-            testData.VerificationErrors.Add(new VerificationError(errorText));
+            testData.VerificationErrors.Add(new VerificationError(errorText, Config.Settings.reportSettings.screenshotOnError));
             TestContext.CurrentContext.IncrementAssertCount();
         }
 

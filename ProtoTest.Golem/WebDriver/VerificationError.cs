@@ -8,12 +8,15 @@ namespace ProtoTest.Golem.WebDriver
     public class VerificationError
     {
         public string errorText;
-        public Image screenshot;
+        public Image screenshot = null;
 
-        public VerificationError(string errorText)
+        public VerificationError(string errorText, bool takeScreenshot)
         {
             this.errorText = errorText;
-            screenshot = WebDriverTestBase.driver.GetScreenshot();
+            if (takeScreenshot)
+            {
+                screenshot = WebDriverTestBase.driver.GetScreenshot();
+            }
         }
 
         public VerificationError(string errorText, Image screenshot)
