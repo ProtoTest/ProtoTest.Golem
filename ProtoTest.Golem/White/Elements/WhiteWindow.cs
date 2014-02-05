@@ -96,7 +96,8 @@ namespace ProtoTest.Golem.White.Elements
                             ? WhiteTestBase.app.GetWindow(criteria, InitializeOption.NoCache)
                             : parentWindow.ModalWindow(criteria, InitializeOption.NoCache))
                         : (parent == null
-                            ? FindWindow()
+                            //? FindWindow()
+                            ? WhiteTestBase.app.GetWindow(title, InitializeOption.NoCache)
                             : parentWindow.ModalWindow(title, InitializeOption.NoCache));  
 
             }
