@@ -48,6 +48,11 @@ namespace ProtoTest.Golem.WebDriver
             return element.GetParent().FindElement(by);
         }
 
+        public static IWebElement FindInChildren(this IWebElement element, By by)
+        {
+            return element.FindElement(by);
+        }
+
         public static IWebElement GetParent(this IWebElement element)
         {
             IWebDriver driver = WebDriverTestBase.driver;
