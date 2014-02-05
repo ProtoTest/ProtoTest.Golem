@@ -49,6 +49,21 @@ namespace ProtoTest.Golem.WebDriver
             return (T) Activator.CreateInstance(typeof (T));
         }
 
+        /// <summary>
+        /// Take a screenshot and embed it within the TestLog.
+        /// </summary>
+        /// <param name="message">Associate a message with the screenshot (optional)</param>
+        public static void LogScreenShot(string message=null)
+        {
+            Image screenshot = testData.driver.GetScreenshot();
+            if (screenshot != null)
+            {
+                if (message != null) TestLog.Default.WriteLine("!------- " + message + " --------!");
+
+                TestLog.Default.EmbedImage(null, screenshot);
+            }
+        }
+
         private void LogScreenshotIfTestFailed()
         {
             if ((Config.Settings.reportSettings.screenshotOnError) &&
