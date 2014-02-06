@@ -183,7 +183,7 @@ namespace ProtoTest.Golem.Core
             {
                 TestLog.Failures.BeginSection("ElementVerification Error " + i);
                 TestLog.Failures.WriteLine(error.errorText);
-                if (error.screenshot != null)
+                if (Config.Settings.reportSettings.screenshotOnError && (error.screenshot != null))
                 {
                     TestLog.Failures.EmbedImage(null, error.screenshot);
                 }
