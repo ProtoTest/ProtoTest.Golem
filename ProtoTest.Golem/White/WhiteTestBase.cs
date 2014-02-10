@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Castle.Components.DictionaryAdapter.Xml;
 using Castle.Core.Logging;
@@ -29,8 +30,9 @@ namespace ProtoTest.Golem.White
         {
 
             //CoreAppXmlConfiguration.Instance.RawElementBasedSearch = false;
+            CoreAppXmlConfiguration.Instance.WorkSessionLocation = new DirectoryInfo(@"C:\Users\SethUrban\Documents\Customer Projects\QuestIntegrity\");
             //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
-           // CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
+            // CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
         }
 
 
@@ -58,7 +60,7 @@ namespace ProtoTest.Golem.White
             //TestLog.WriteLine(CoreAppXmlConfiguration.Instance.WorkSessionLocation.ToString());
             LogScreenshotIfTestFailed();
           //  app.Close();
-            //app.ApplicationSession.Save();
+            app.ApplicationSession.Save();
         }
 
         public void LogScreenshotIfTestFailed()

@@ -52,6 +52,11 @@ namespace ProtoTest.Golem.White.Elements
             }
         }
 
+        private void foo()
+        {
+            WindowSession.Register(this);
+        }
+
         public ElementVerification Verify(int timeout=0)
         {
             return new ElementVerification(this,timeout,false,true);
@@ -68,9 +73,10 @@ namespace ProtoTest.Golem.White.Elements
             this.title = title;
             this.parent = parent;
         }
-        public WhiteWindow(SearchCriteria criteria, Window parent = null, string description = null)
+        //SU - Changed this to require description  will use for caching name
+        public WhiteWindow(SearchCriteria criteria, string description, Window parent = null)
         {
-            this.description = description ?? criteria.ToString();
+            this.description = description;
             this.criteria = criteria;
             this.parent = parent;
         }
@@ -86,6 +92,8 @@ namespace ProtoTest.Golem.White.Elements
             return null;
         }
 
+        
+
         private Window getWindow()
         {
             if (_window == null)
@@ -93,12 +101,12 @@ namespace ProtoTest.Golem.White.Elements
                     var parentWindow = (Window)parent;
                     return criteria != null
                         ? (parent == null
-                            ? WhiteTestBase.app.GetWindow(criteria, InitializeOption.NoCache)
-                            : parentWindow.ModalWindow(criteria, InitializeOption.NoCache))
+                            ? WhiteTestBase.app.GetWindow(criteria, InitializeOption.NoCache.AndIdentifiedBy(this.description))
+                            : parentWindow.ModalWindow(criteria, InitializeOption.NoCache.AndIdentifiedBy(this.description)))
                         : (parent == null
-                            //? FindWindow()
-                            ? WhiteTestBase.app.GetWindow(title, InitializeOption.NoCache)
-                            : parentWindow.ModalWindow(title, InitializeOption.NoCache));  
+                            //? FindWindow()  //SU - Reverted this change, causing timing issue in QI tests
+                            ? WhiteTestBase.app.GetWindow(title, InitializeOption.NoCache.AndIdentifiedBy(this.description))
+                            : parentWindow.ModalWindow(title, InitializeOption.NoCache.AndIdentifiedBy(this.description)));  
 
             }
             return _window;
@@ -204,8 +212,6 @@ namespace ProtoTest.Golem.White.Elements
         {
             return window.HasPopup();
         }
-
-      
 
         public override string Title
         {
