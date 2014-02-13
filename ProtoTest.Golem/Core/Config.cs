@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using Castle.Core.Logging;
+using ProtoTest.Golem.Appium;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Core
@@ -91,6 +92,10 @@ namespace ProtoTest.Golem.Core
             public string appPath;
             public bool launchApp = false;
             public string package;
+            public string appiumPort;
+            public bool useIpa;
+            public string appiumServerPath;
+            public bool resetApp = false;
 
             public AppiumSettings()
             {
@@ -98,7 +103,11 @@ namespace ProtoTest.Golem.Core
                 appPath = Config.GetConfigValue("AppPath", "");
                 package = Config.GetConfigValue("AppPackage", "");
                 activity = Config.GetConfigValue("AppActivity", "");
-                appOs = Config.GetConfigValue("AppOs", "Android");
+                appOs = Config.GetConfigValue("AppOs", "");
+                appiumPort = Config.GetConfigValue("AppiumPort", "4723");
+                useIpa = Common.IsTruthy(Config.GetConfigValue("UseIpa", "False"));
+                appiumServerPath = Config.GetConfigValue("AppiumServerPath", "");
+                resetApp = Common.IsTruthy(Config.GetConfigValue("ResetApp", "False"));
             }
         }
 

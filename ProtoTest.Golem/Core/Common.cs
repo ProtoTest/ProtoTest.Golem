@@ -61,8 +61,8 @@ namespace ProtoTest.Golem.Core
             var StartInfo = new ProcessStartInfo();
             StartInfo.FileName = "cmd"; //starts cmd window
             StartInfo.Arguments = "/c \"" + command + "\"";
-            StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            StartInfo.CreateNoWindow = true;
+            //StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+           // StartInfo.CreateNoWindow = true;
             StartInfo.RedirectStandardInput = true;
             StartInfo.RedirectStandardOutput = true;
             StartInfo.UseShellExecute = false; //required to redirect

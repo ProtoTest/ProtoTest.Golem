@@ -120,26 +120,12 @@ namespace ProtoTest.Golem.WebDriver
                 LogEvent(browser + " Browser Launched");
                 testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser + " Browser Launched");
             }
-
-            if (Config.Settings.appiumSettings.launchApp)
-            {
-                var capabilities = new DesiredCapabilities();
-                capabilities.SetCapability(CapabilityType.BrowserName, "");
-                capabilities.SetCapability("device", Config.Settings.appiumSettings.appOs);
-                capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);
-                capabilities.SetCapability("app-package", Config.Settings.appiumSettings.package);
-                capabilities.SetCapability("app-activity", Config.Settings.appiumSettings.activity);
-
-                var tempDriver = new RemoteWebDriver(new Uri("http://127.0.0.1:4723/wd/hub"), capabilities);
-                driver = new EventedWebDriver(tempDriver).driver;
-            }
         }
 
         [SetUp]
         public void SetUp()
         {
             LaunchBrowser();
-
             // Register cleanup and logging methods to be performed after the test completes.
             TestContext.CurrentContext.AutoExecute(TriggerEvent.TestFinished, QuitBrowser);
             TestContext.CurrentContext.AutoExecute(TriggerEvent.TestFinished, LogScreenshotIfTestFailed);
@@ -157,6 +143,8 @@ namespace ProtoTest.Golem.WebDriver
              * LogScreenshotIfTestFailed(), and LogHtmlIfTestFailed(). A possible solution is to AutoExecute these methods
              * by registering them to be executed after the 'TestFinished' event fires. Set Setup() above.
              */
-        }
+            LogScreenshotIfTestFailed();
+            LogHtmlIfTestFailed();
+ }
     }
 }

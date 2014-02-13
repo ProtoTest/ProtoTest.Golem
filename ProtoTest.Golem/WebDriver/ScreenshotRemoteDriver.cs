@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Android;
 using OpenQA.Selenium.Remote;
 
 namespace ProtoTest.Golem.WebDriver
@@ -8,7 +9,7 @@ namespace ProtoTest.Golem.WebDriver
     /// implements the GetScreenshot() method to su pport remote screenshots.  
     /// </summary>
     public class ScreenshotRemoteWebDriver : RemoteWebDriver,
-        ITakesScreenshot
+        ITakesScreenshot, IHasTouchScreen
     {
         public ScreenshotRemoteWebDriver(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
             : base(commandExecutor, desiredCapabilities)
@@ -27,6 +28,19 @@ namespace ProtoTest.Golem.WebDriver
         public ScreenshotRemoteWebDriver(Uri remoteAddress, ICapabilities desiredCapabilities, TimeSpan commandTimeout)
             : base(remoteAddress, desiredCapabilities, commandTimeout)
         {
+        }
+        private ITouchScreen touchScreen;
+
+        /// <summary>
+        /// Gets the device representing the touch screen.
+        /// 
+        /// </summary>
+        public ITouchScreen TouchScreen
+        {
+            get
+            {
+                return this.touchScreen;
+            }
         }
 
         /// <summary>
