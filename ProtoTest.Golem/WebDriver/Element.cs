@@ -118,7 +118,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        /// Get the upper-left (x,y) coordinates of the element relative to the upper-left corner of the page
+        /// Get the upper-left (x,y) coordinates of the element relative to the upper-left corner of the page.
         /// </summary>
         public Point Location
         {
@@ -126,7 +126,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        /// Is the element selected on the page?
+        /// Checks if the element is selected on the page.
         /// </summary>
         public bool Selected
         {
@@ -138,7 +138,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        /// Return an object containing the size of the element (height, width)
+        /// Return an object containing the size of the element (height, width).
         /// </summary>
         public Size Size
         {
@@ -146,7 +146,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        /// Return the tag name of the element
+        /// Return the tag name of the element.
         /// </summary>
         public string TagName
         {
@@ -154,7 +154,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        /// Property to get and set the Text for the element
+        /// Property to get and set the Text for the element.
         /// </summary>
         public string Text
         {
@@ -189,27 +189,27 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        /// Returns the element found by the locator
+        /// Returns the first element found by the locator.
         /// </summary>
-        /// <param name="by">locator to use</param>
-        /// <returns>The IWebElement found</returns>
+        /// <param name="by">The locator to use.</param>
+        /// <returns>The IWebElement found.</returns>
         public IWebElement FindElement(By by)
         {
             return element.FindElement(by);
         }
 
         /// <summary>
-        /// Return a collection of elements found by the locator
+        /// Return a collection of elements found by the locator.
         /// </summary>
-        /// <param name="by">locator to use</param>
-        /// <returns>Collection of IWebElements found</returns>
+        /// <param name="by">The locator to use.</param>
+        /// <returns>Collection of IWebElements found.</returns>
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             return element.FindElements(by);
         }
 
         /// <summary>
-        /// Clears the contents of the element and optionally highlights the element if set in the application configuration settings.
+        /// Clears the contents of the element and optionally highlights the element if highlightOnVerify is set to true in the application configuration settings.
         /// </summary>
         public void Clear()
         {
