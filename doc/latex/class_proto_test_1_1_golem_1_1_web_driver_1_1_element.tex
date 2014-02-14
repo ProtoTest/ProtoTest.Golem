@@ -1,0 +1,462 @@
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element}{\section{Proto\-Test.\-Golem.\-Web\-Driver.\-Element Class Reference}
+\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element}\index{Proto\-Test.\-Golem.\-Web\-Driver.\-Element@{Proto\-Test.\-Golem.\-Web\-Driver.\-Element}}
+}
+
+
+Provides a simplified A\-P\-I to the I\-Web\-E\-Lement. Can be instantiated in a class header. Will automatically find the I\-Web\-Element each time it is used, not when it is instantiated.  
+
+
+
+
+Inherits I\-Web\-Element, I\-Wraps\-Driver, and I\-Wraps\-Element.
+
+
+
+Inherited by \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_types_1_1_button}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Types.\-Button}, \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_types_1_1_checkbox}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Types.\-Checkbox}, \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_types_1_1_dropdown}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Types.\-Dropdown}, \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_types_1_1_field}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Types.\-Field}, \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_types_1_1_image}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Types.\-Image}, \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_types_1_1_link}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Types.\-Link}, \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_types_1_1_panel}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Types.\-Panel}, \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_types_1_1_radio}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Types.\-Radio}, \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_types_1_1_text}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Types.\-Text}, and \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_validation_1_1_validation_element}{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Validation.\-Validation\-Element}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a1a5e5985c0f331c987da8d1e340d6405}{Element} (I\-Web\-Element element)
+\begin{DoxyCompactList}\small\item\em Construct an element using an existing element \end{DoxyCompactList}\item 
+\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aa21488bc7d4809f61366115af259aebf}{Element} (string name, By locator)
+\begin{DoxyCompactList}\small\item\em Construct an element \end{DoxyCompactList}\item 
+\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_abfd2a4dfd8501bf4241e3e2dad8b1918}{Element} (By locator)
+\begin{DoxyCompactList}\small\item\em Construct an element \end{DoxyCompactList}\item 
+I\-Web\-Element \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a1c9f71a8149055f3b049d11039cd4ace}{Find\-Element} (By by)
+\begin{DoxyCompactList}\small\item\em Returns the first element found by the locator. \end{DoxyCompactList}\item 
+Read\-Only\-Collection$<$ I\-Web\-Element $>$ \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a3f09a65a106e6af452eda932066a2352}{Find\-Elements} (By by)
+\begin{DoxyCompactList}\small\item\em Return a collection of elements found by the locator. \end{DoxyCompactList}\item 
+void \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a248aa8a1b73eea51e3daf5ff6c8c0219}{Clear} ()
+\begin{DoxyCompactList}\small\item\em Clears the contents of the element and optionally highlights the element if highlight\-On\-Verify is set to true in the application configuration settings. \end{DoxyCompactList}\item 
+void \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a0aaa9196593b063807069db139c34cc8}{Click} ()
+\begin{DoxyCompactList}\small\item\em Click the element and optionally highlights the element if set in the application configuration settings. \end{DoxyCompactList}\item 
+void \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a610b15316d94eba5e693fbbd1cee1440}{Submit} ()
+\begin{DoxyCompactList}\small\item\em Submit this element to the web server and optionally highlights the element if set in the application configuration settings. \end{DoxyCompactList}\item 
+void \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a46beac2cffb084d97bf7759622764c06}{Send\-Keys} (string text)
+\begin{DoxyCompactList}\small\item\em Simulates typing text into the element and optionally highlights the element if set in the application configuration settings. \end{DoxyCompactList}\item 
+string \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aab043d596b86ea3c6d4b92db98267a07}{Get\-Attribute} (string attribute)
+\begin{DoxyCompactList}\small\item\em Get the value of the requested attribute for the element \end{DoxyCompactList}\item 
+string \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a41883e9527a7e9bef791367fcbed327a}{Get\-Css\-Value} (string property\-Name)
+\begin{DoxyCompactList}\small\item\em Get the value of a C\-S\-S property for the element \end{DoxyCompactList}\item 
+\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_verification}{Element\-Verification} \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a541592963d3f93a5aedd2e08c9dc48c5}{Verify} (int timeout\-Sec=-\/1)
+\begin{DoxyCompactList}\small\item\em Create an element verification for some condition \end{DoxyCompactList}\item 
+\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_verification}{Element\-Verification} \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a58c95f30b4c82eae0708d01d4a60e1fc}{Wait\-Until} (int timeout\-Sec=-\/1)
+\begin{DoxyCompactList}\small\item\em Wait for some condition on the element \end{DoxyCompactList}\item 
+void \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_abb6dc27bc4c56c202f91288bb4b0d2ba}{Clear\-Checked} ()
+\begin{DoxyCompactList}\small\item\em Clear a checked element (radio or checkbox) \end{DoxyCompactList}\item 
+void \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a439591ece590bc0e7d6eb71fbb45c5dd}{Highlight} ()
+\begin{DoxyCompactList}\small\item\em Highlight the element on the page \end{DoxyCompactList}\item 
+\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element}{Element} \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_ad63d92124e0937164fd83a5b6bcd358c}{Set\-Checkbox} (bool is\-Checked)
+\begin{DoxyCompactList}\small\item\em Set the checkbox element \end{DoxyCompactList}\item 
+\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element}{Element} \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a9de73505796e421f1d9531406b4ae124}{Find\-Visible\-Element} ()
+\begin{DoxyCompactList}\small\item\em If there are multiple elements that can be found using the same locator, find one that is displayed and enabled. \end{DoxyCompactList}\item 
+void \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aefa360b37e897c68ac96c512dc29f4ec}{Mouse\-Over} ()
+\begin{DoxyCompactList}\small\item\em Move the mouse over the element \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a16bb5e344819e39647be80e9cbc7e6ad}{By {\bfseries by}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a16bb5e344819e39647be80e9cbc7e6ad}
+
+\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a54ee102321b3b75ab85e1fbab0ad178b}{string {\bfseries name} = \char`\"{}Element\char`\"{}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a54ee102321b3b75ab85e1fbab0ad178b}
+
+\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_ab72ea052a9c7d0181896be9815427536}{string {\bfseries page\-Object\-Name} = \char`\"{}\char`\"{}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_ab72ea052a9c7d0181896be9815427536}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aca8df8cb92f2add867faafe92fdb283d}{I\-Web\-Element {\bfseries \-\_\-element}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aca8df8cb92f2add867faafe92fdb283d}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a270501197bd07537227a4105cb8bb67d}{I\-Web\-Driver {\bfseries driver}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a270501197bd07537227a4105cb8bb67d}
+
+\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_acdcd640ad9ef82dd9a51d46172ce3915}{\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_element_images}{Element\-Images} {\bfseries Images}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_acdcd640ad9ef82dd9a51d46172ce3915}
+
+\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a3f96bebead72ef5c528b04751f9925f9}{I\-Web\-Element {\bfseries element}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a3f96bebead72ef5c528b04751f9925f9}
+
+\item 
+bool \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_adedd809d0baf2f903a8e51fd4f4a4d26}{Present}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Is the element present on the page, but not necesarily displayed and visible? \end{DoxyCompactList}\item 
+bool \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a186948a50e3f9b07a65be8eb522f4585}{Displayed}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Is the element present and displayed on the page? \end{DoxyCompactList}\item 
+bool \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_ab60ba928770c80ed9d58858b58522785}{Enabled}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Is the element present on the page and able to be interacted with? \end{DoxyCompactList}\item 
+Point \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a9ac12ce269e1e373fe01f9bc4a1c594a}{Location}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Get the upper-\/left (x,y) coordinates of the element relative to the upper-\/left corner of the page. \end{DoxyCompactList}\item 
+bool \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a674df76d24ad9569b9c76aaa7f61fe23}{Selected}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Checks if the element is selected on the page. \end{DoxyCompactList}\item 
+Size \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aa4238f30d0a8b17147135c261b6a4460}{Size}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Return an object containing the size of the element (height, width). \end{DoxyCompactList}\item 
+string \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a9a7f8583131d5e0a97e8280e56617360}{Tag\-Name}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Return the tag name of the element. \end{DoxyCompactList}\item 
+string \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_af3b6f6f3e2afdd7d5e08c25dd516220f}{Text}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Property to get and set the Text for the element. \end{DoxyCompactList}\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a4b86d1587d9df06cbd1bd39c08b8e592}{I\-Web\-Driver {\bfseries Wrapped\-Driver}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a4b86d1587d9df06cbd1bd39c08b8e592}
+
+\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a45f5f1bc2f5ab643a4ab15b0d8831a2f}{I\-Web\-Element {\bfseries Wrapped\-Element}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a45f5f1bc2f5ab643a4ab15b0d8831a2f}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provides a simplified A\-P\-I to the I\-Web\-E\-Lement. Can be instantiated in a class header. Will automatically find the I\-Web\-Element each time it is used, not when it is instantiated. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a1a5e5985c0f331c987da8d1e340d6405}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Element@{Element}}
+\index{Element@{Element}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Element}]{\setlength{\rightskip}{0pt plus 5cm}Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Element (
+\begin{DoxyParamCaption}
+\item[{I\-Web\-Element}]{element}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a1a5e5985c0f331c987da8d1e340d6405}
+
+
+Construct an element using an existing element 
+
+
+\begin{DoxyParams}{Parameters}
+{\em element} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aa21488bc7d4809f61366115af259aebf}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Element@{Element}}
+\index{Element@{Element}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Element}]{\setlength{\rightskip}{0pt plus 5cm}Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Element (
+\begin{DoxyParamCaption}
+\item[{string}]{name, }
+\item[{By}]{locator}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aa21488bc7d4809f61366115af259aebf}
+
+
+Construct an element 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Human readable name of the element\\
+\hline
+{\em locator} & By locator\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_abfd2a4dfd8501bf4241e3e2dad8b1918}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Element@{Element}}
+\index{Element@{Element}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Element}]{\setlength{\rightskip}{0pt plus 5cm}Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Element (
+\begin{DoxyParamCaption}
+\item[{By}]{locator}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_abfd2a4dfd8501bf4241e3e2dad8b1918}
+
+
+Construct an element 
+
+
+\begin{DoxyParams}{Parameters}
+{\em locator} & By locator\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a248aa8a1b73eea51e3daf5ff6c8c0219}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Clear@{Clear}}
+\index{Clear@{Clear}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Clear}]{\setlength{\rightskip}{0pt plus 5cm}void Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a248aa8a1b73eea51e3daf5ff6c8c0219}
+
+
+Clears the contents of the element and optionally highlights the element if highlight\-On\-Verify is set to true in the application configuration settings. 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_abb6dc27bc4c56c202f91288bb4b0d2ba}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Clear\-Checked@{Clear\-Checked}}
+\index{Clear\-Checked@{Clear\-Checked}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Clear\-Checked}]{\setlength{\rightskip}{0pt plus 5cm}void Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Clear\-Checked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_abb6dc27bc4c56c202f91288bb4b0d2ba}
+
+
+Clear a checked element (radio or checkbox) 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a0aaa9196593b063807069db139c34cc8}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Click@{Click}}
+\index{Click@{Click}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Click}]{\setlength{\rightskip}{0pt plus 5cm}void Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Click (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a0aaa9196593b063807069db139c34cc8}
+
+
+Click the element and optionally highlights the element if set in the application configuration settings. 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a1c9f71a8149055f3b049d11039cd4ace}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Find\-Element@{Find\-Element}}
+\index{Find\-Element@{Find\-Element}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Find\-Element}]{\setlength{\rightskip}{0pt plus 5cm}I\-Web\-Element Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Find\-Element (
+\begin{DoxyParamCaption}
+\item[{By}]{by}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a1c9f71a8149055f3b049d11039cd4ace}
+
+
+Returns the first element found by the locator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em by} & The locator to use.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The I\-Web\-Element found.
+\end{DoxyReturn}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a3f09a65a106e6af452eda932066a2352}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Find\-Elements@{Find\-Elements}}
+\index{Find\-Elements@{Find\-Elements}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Find\-Elements}]{\setlength{\rightskip}{0pt plus 5cm}Read\-Only\-Collection$<$I\-Web\-Element$>$ Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Find\-Elements (
+\begin{DoxyParamCaption}
+\item[{By}]{by}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a3f09a65a106e6af452eda932066a2352}
+
+
+Return a collection of elements found by the locator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em by} & The locator to use.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Collection of I\-Web\-Elements found.
+\end{DoxyReturn}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a9de73505796e421f1d9531406b4ae124}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Find\-Visible\-Element@{Find\-Visible\-Element}}
+\index{Find\-Visible\-Element@{Find\-Visible\-Element}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Find\-Visible\-Element}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Element} Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Find\-Visible\-Element (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a9de73505796e421f1d9531406b4ae124}
+
+
+If there are multiple elements that can be found using the same locator, find one that is displayed and enabled. 
+
+\begin{DoxyReturn}{Returns}
+The element found
+\end{DoxyReturn}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aab043d596b86ea3c6d4b92db98267a07}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Get\-Attribute@{Get\-Attribute}}
+\index{Get\-Attribute@{Get\-Attribute}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Get\-Attribute}]{\setlength{\rightskip}{0pt plus 5cm}string Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Get\-Attribute (
+\begin{DoxyParamCaption}
+\item[{string}]{attribute}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aab043d596b86ea3c6d4b92db98267a07}
+
+
+Get the value of the requested attribute for the element 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attribute} & The attribute name\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a41883e9527a7e9bef791367fcbed327a}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Get\-Css\-Value@{Get\-Css\-Value}}
+\index{Get\-Css\-Value@{Get\-Css\-Value}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Get\-Css\-Value}]{\setlength{\rightskip}{0pt plus 5cm}string Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Get\-Css\-Value (
+\begin{DoxyParamCaption}
+\item[{string}]{property\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a41883e9527a7e9bef791367fcbed327a}
+
+
+Get the value of a C\-S\-S property for the element 
+
+
+\begin{DoxyParams}{Parameters}
+{\em property\-Name} & The C\-S\-S property name\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a439591ece590bc0e7d6eb71fbb45c5dd}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Highlight@{Highlight}}
+\index{Highlight@{Highlight}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Highlight}]{\setlength{\rightskip}{0pt plus 5cm}void Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Highlight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a439591ece590bc0e7d6eb71fbb45c5dd}
+
+
+Highlight the element on the page 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aefa360b37e897c68ac96c512dc29f4ec}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Mouse\-Over@{Mouse\-Over}}
+\index{Mouse\-Over@{Mouse\-Over}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Mouse\-Over}]{\setlength{\rightskip}{0pt plus 5cm}void Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Mouse\-Over (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aefa360b37e897c68ac96c512dc29f4ec}
+
+
+Move the mouse over the element 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a46beac2cffb084d97bf7759622764c06}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Send\-Keys@{Send\-Keys}}
+\index{Send\-Keys@{Send\-Keys}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Send\-Keys}]{\setlength{\rightskip}{0pt plus 5cm}void Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Send\-Keys (
+\begin{DoxyParamCaption}
+\item[{string}]{text}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a46beac2cffb084d97bf7759622764c06}
+
+
+Simulates typing text into the element and optionally highlights the element if set in the application configuration settings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Text to send\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_ad63d92124e0937164fd83a5b6bcd358c}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Set\-Checkbox@{Set\-Checkbox}}
+\index{Set\-Checkbox@{Set\-Checkbox}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Set\-Checkbox}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Element} Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Set\-Checkbox (
+\begin{DoxyParamCaption}
+\item[{bool}]{is\-Checked}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_ad63d92124e0937164fd83a5b6bcd358c}
+
+
+Set the checkbox element 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\-Checked} & if true, check it; if false, uncheck it\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The element reference
+\end{DoxyReturn}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a610b15316d94eba5e693fbbd1cee1440}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Submit@{Submit}}
+\index{Submit@{Submit}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Submit}]{\setlength{\rightskip}{0pt plus 5cm}void Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Submit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a610b15316d94eba5e693fbbd1cee1440}
+
+
+Submit this element to the web server and optionally highlights the element if set in the application configuration settings. 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a541592963d3f93a5aedd2e08c9dc48c5}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Verify@{Verify}}
+\index{Verify@{Verify}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Verify}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Element\-Verification} Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Verify (
+\begin{DoxyParamCaption}
+\item[{int}]{timeout\-Sec = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a541592963d3f93a5aedd2e08c9dc48c5}
+
+
+Create an element verification for some condition 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\-Sec} & Optional timeout that overrides the default timeout set in the configuration settings class or App.\-config file\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_verification}{Element\-Verification} for the element
+\end{DoxyReturn}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a58c95f30b4c82eae0708d01d4a60e1fc}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Wait\-Until@{Wait\-Until}}
+\index{Wait\-Until@{Wait\-Until}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Wait\-Until}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Element\-Verification} Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Wait\-Until (
+\begin{DoxyParamCaption}
+\item[{int}]{timeout\-Sec = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a58c95f30b4c82eae0708d01d4a60e1fc}
+
+
+Wait for some condition on the element 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\-Sec} & Optional timeout that overrides the default timeout set in the configuration settings class or App.\-config file\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_verification}{Element\-Verification} for the element
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a186948a50e3f9b07a65be8eb522f4585}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Displayed@{Displayed}}
+\index{Displayed@{Displayed}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Displayed}]{\setlength{\rightskip}{0pt plus 5cm}bool Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Displayed\hspace{0.3cm}{\ttfamily [get]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a186948a50e3f9b07a65be8eb522f4585}
+
+
+Is the element present and displayed on the page? 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_ab60ba928770c80ed9d58858b58522785}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Enabled@{Enabled}}
+\index{Enabled@{Enabled}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Enabled}]{\setlength{\rightskip}{0pt plus 5cm}bool Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Enabled\hspace{0.3cm}{\ttfamily [get]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_ab60ba928770c80ed9d58858b58522785}
+
+
+Is the element present on the page and able to be interacted with? 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a9ac12ce269e1e373fe01f9bc4a1c594a}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Location@{Location}}
+\index{Location@{Location}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Location}]{\setlength{\rightskip}{0pt plus 5cm}Point Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Location\hspace{0.3cm}{\ttfamily [get]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a9ac12ce269e1e373fe01f9bc4a1c594a}
+
+
+Get the upper-\/left (x,y) coordinates of the element relative to the upper-\/left corner of the page. 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_adedd809d0baf2f903a8e51fd4f4a4d26}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Present@{Present}}
+\index{Present@{Present}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Present}]{\setlength{\rightskip}{0pt plus 5cm}bool Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Present\hspace{0.3cm}{\ttfamily [get]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_adedd809d0baf2f903a8e51fd4f4a4d26}
+
+
+Is the element present on the page, but not necesarily displayed and visible? 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a674df76d24ad9569b9c76aaa7f61fe23}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Selected@{Selected}}
+\index{Selected@{Selected}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Selected}]{\setlength{\rightskip}{0pt plus 5cm}bool Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Selected\hspace{0.3cm}{\ttfamily [get]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a674df76d24ad9569b9c76aaa7f61fe23}
+
+
+Checks if the element is selected on the page. 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aa4238f30d0a8b17147135c261b6a4460}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Size@{Size}}
+\index{Size@{Size}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Size}]{\setlength{\rightskip}{0pt plus 5cm}Size Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Size\hspace{0.3cm}{\ttfamily [get]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_aa4238f30d0a8b17147135c261b6a4460}
+
+
+Return an object containing the size of the element (height, width). 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a9a7f8583131d5e0a97e8280e56617360}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Tag\-Name@{Tag\-Name}}
+\index{Tag\-Name@{Tag\-Name}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Tag\-Name}]{\setlength{\rightskip}{0pt plus 5cm}string Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Tag\-Name\hspace{0.3cm}{\ttfamily [get]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_a9a7f8583131d5e0a97e8280e56617360}
+
+
+Return the tag name of the element. 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_af3b6f6f3e2afdd7d5e08c25dd516220f}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}!Text@{Text}}
+\index{Text@{Text}!ProtoTest::Golem::WebDriver::Element@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Element}}
+\subsubsection[{Text}]{\setlength{\rightskip}{0pt plus 5cm}string Proto\-Test.\-Golem.\-Web\-Driver.\-Element.\-Text\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_element_af3b6f6f3e2afdd7d5e08c25dd516220f}
+
+
+Property to get and set the Text for the element. 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Web\-Driver/Element.\-cs\end{DoxyCompactItemize}

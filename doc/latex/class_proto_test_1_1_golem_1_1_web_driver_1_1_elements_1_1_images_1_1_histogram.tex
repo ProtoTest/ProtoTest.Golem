@@ -1,0 +1,143 @@
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram}{\section{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram Class Reference}
+\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram}\index{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram@{Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram}}
+}
+
+
+A class which facilitates working with R\-G\-B histograms It encapsulates a Bitmap and lets you get information about the Bitmap  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_ac2fdbcc1c150819d17ce40ffef68d464}{{\bfseries Histogram} (\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_af986fdc664c75a0de3285a9ab81cd558}{Bitmap} bitmap)}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_ac2fdbcc1c150819d17ce40ffef68d464}
+
+\item 
+\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a5e8bc43894807dcd6bc6921660353706}{Histogram} (string file\-Path)
+\begin{DoxyCompactList}\small\item\em Constructs a new \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram}{Histogram} from a file, given its path \end{DoxyCompactList}\item 
+\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_af986fdc664c75a0de3285a9ab81cd558}{Bitmap} \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_af6c3452129843e9644fe9b35c72e8fc5}{Visualize} ()
+\begin{DoxyCompactList}\small\item\em Gets a bitmap with the R\-G\-B histograms \end{DoxyCompactList}\item 
+override string \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a0e13921f2b5b2c35cf15dbf9d04ee7ce}{To\-String} ()
+\begin{DoxyCompactList}\small\item\em Gives a human-\/readable representation of the R\-G\-B values in the histogram \end{DoxyCompactList}\item 
+float \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_ad3576f6620debd499d1cab16e21d9a7a}{Get\-Variance} (\hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram}{Histogram} histogram)
+\begin{DoxyCompactList}\small\item\em Gets the variance between two histograms (\href{http://en.wikipedia.org/wiki/Variance}{\tt http\-://en.\-wikipedia.\-org/wiki/\-Variance}) as a percentage of the maximum possible variance\-: 256 (for a white image compared to a black image) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+byte\mbox{[}$\,$\mbox{]} \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a1526e0e844601560be71b8f186ccaf08}{Red}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The red values in an image \end{DoxyCompactList}\item 
+byte\mbox{[}$\,$\mbox{]} \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a585d3b0381034e08dc6192eb332ae13d}{Green}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The green values in an image \end{DoxyCompactList}\item 
+byte\mbox{[}$\,$\mbox{]} \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a3a8e951ec47a138a008416f73d957eae}{Blue}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The blue values in an image \end{DoxyCompactList}\item 
+Bitmap \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_af986fdc664c75a0de3285a9ab81cd558}{Bitmap}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The bitmap to get histogram info for \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class which facilitates working with R\-G\-B histograms It encapsulates a Bitmap and lets you get information about the Bitmap 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a5e8bc43894807dcd6bc6921660353706}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}!Histogram@{Histogram}}
+\index{Histogram@{Histogram}!ProtoTest::Golem::WebDriver::Elements::Images::Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}}
+\subsubsection[{Histogram}]{\setlength{\rightskip}{0pt plus 5cm}Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram.\-Histogram (
+\begin{DoxyParamCaption}
+\item[{string}]{file\-Path}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a5e8bc43894807dcd6bc6921660353706}
+
+
+Constructs a new \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram}{Histogram} from a file, given its path 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\-Path} & The path to the image to work with\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_ad3576f6620debd499d1cab16e21d9a7a}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}!Get\-Variance@{Get\-Variance}}
+\index{Get\-Variance@{Get\-Variance}!ProtoTest::Golem::WebDriver::Elements::Images::Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}}
+\subsubsection[{Get\-Variance}]{\setlength{\rightskip}{0pt plus 5cm}float Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram.\-Get\-Variance (
+\begin{DoxyParamCaption}
+\item[{{\bf Histogram}}]{histogram}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_ad3576f6620debd499d1cab16e21d9a7a}
+
+
+Gets the variance between two histograms (\href{http://en.wikipedia.org/wiki/Variance}{\tt http\-://en.\-wikipedia.\-org/wiki/\-Variance}) as a percentage of the maximum possible variance\-: 256 (for a white image compared to a black image) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em histogram} & the histogram to compare this one to\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A percentage which tells how different the two histograms are
+\end{DoxyReturn}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a0e13921f2b5b2c35cf15dbf9d04ee7ce}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}!To\-String@{To\-String}}
+\index{To\-String@{To\-String}!ProtoTest::Golem::WebDriver::Elements::Images::Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}}
+\subsubsection[{To\-String}]{\setlength{\rightskip}{0pt plus 5cm}override string Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram.\-To\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a0e13921f2b5b2c35cf15dbf9d04ee7ce}
+
+
+Gives a human-\/readable representation of the R\-G\-B values in the histogram 
+
+\begin{DoxyReturn}{Returns}
+a human-\/readable representation of the R\-G\-B values in the histogram
+\end{DoxyReturn}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_af6c3452129843e9644fe9b35c72e8fc5}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}!Visualize@{Visualize}}
+\index{Visualize@{Visualize}!ProtoTest::Golem::WebDriver::Elements::Images::Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}}
+\subsubsection[{Visualize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bitmap} Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram.\-Visualize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_af6c3452129843e9644fe9b35c72e8fc5}
+
+
+Gets a bitmap with the R\-G\-B histograms 
+
+\begin{DoxyReturn}{Returns}
+Three histograms for R, G and B values in the \hyperlink{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram}{Histogram}
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_af986fdc664c75a0de3285a9ab81cd558}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}!Bitmap@{Bitmap}}
+\index{Bitmap@{Bitmap}!ProtoTest::Golem::WebDriver::Elements::Images::Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}}
+\subsubsection[{Bitmap}]{\setlength{\rightskip}{0pt plus 5cm}Bitmap Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram.\-Bitmap\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_af986fdc664c75a0de3285a9ab81cd558}
+
+
+The bitmap to get histogram info for 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a3a8e951ec47a138a008416f73d957eae}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}!Blue@{Blue}}
+\index{Blue@{Blue}!ProtoTest::Golem::WebDriver::Elements::Images::Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}}
+\subsubsection[{Blue}]{\setlength{\rightskip}{0pt plus 5cm}byte \mbox{[}$\,$\mbox{]} Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram.\-Blue\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a3a8e951ec47a138a008416f73d957eae}
+
+
+The blue values in an image 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a585d3b0381034e08dc6192eb332ae13d}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}!Green@{Green}}
+\index{Green@{Green}!ProtoTest::Golem::WebDriver::Elements::Images::Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}}
+\subsubsection[{Green}]{\setlength{\rightskip}{0pt plus 5cm}byte \mbox{[}$\,$\mbox{]} Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram.\-Green\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a585d3b0381034e08dc6192eb332ae13d}
+
+
+The green values in an image 
+
+\hypertarget{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a1526e0e844601560be71b8f186ccaf08}{\index{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}!Red@{Red}}
+\index{Red@{Red}!ProtoTest::Golem::WebDriver::Elements::Images::Histogram@{Proto\-Test\-::\-Golem\-::\-Web\-Driver\-::\-Elements\-::\-Images\-::\-Histogram}}
+\subsubsection[{Red}]{\setlength{\rightskip}{0pt plus 5cm}byte \mbox{[}$\,$\mbox{]} Proto\-Test.\-Golem.\-Web\-Driver.\-Elements.\-Images.\-Histogram.\-Red\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}}\label{class_proto_test_1_1_golem_1_1_web_driver_1_1_elements_1_1_images_1_1_histogram_a1526e0e844601560be71b8f186ccaf08}
+
+
+The red values in an image 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Web\-Driver/\-Elements/\-Images/Histogram.\-cs\end{DoxyCompactItemize}
