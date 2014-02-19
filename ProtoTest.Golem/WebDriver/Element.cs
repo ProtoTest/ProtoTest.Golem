@@ -57,6 +57,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(By locator) : base()
         {
+            this.name = locator.ToString();
             this.by = locator;
         }
 

@@ -109,32 +109,29 @@ namespace ProtoTest.Golem.Appium
             {
                 var capabilities = new DesiredCapabilities();
                 capabilities.SetCapability(CapabilityType.BrowserName, "");
-                capabilities.SetCapability("device", Config.Settings.appiumSettings.appOs);
+                capabilities.SetCapability("device", Config.Settings.appiumSettings.device);
                 capabilities.SetCapability("launch", Config.Settings.appiumSettings.launchApp);
 
 
-                if (Config.Settings.appiumSettings.appOs == "Android")
+                if (Config.Settings.appiumSettings.device == "Android")
                 {
                     capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);
                     capabilities.SetCapability("app-package", Config.Settings.appiumSettings.package);
                     capabilities.SetCapability("app-activity", Config.Settings.appiumSettings.activity);
                     
                 }
-                else if (Config.Settings.appiumSettings.appOs == "iOS")
+                else 
                 {
                     if (Config.Settings.appiumSettings.useIpa)
                     {
                         capabilities.SetCapability("ipa", Config.Settings.appiumSettings.appPath);
+                        capabilities.SetCapability("app",Config.Settings.appiumSettings.bundleId);
                     }
                     else
                     {
                         capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);    
                     }
                     capabilities.SetCapability("launch", Config.Settings.appiumSettings.launchApp);
-                }
-                else
-                {
-                    throw new Exception("Appium appOs should be set to iOS or Android");
                 }
                 IWebDriver tempDriver = driver;
                 try

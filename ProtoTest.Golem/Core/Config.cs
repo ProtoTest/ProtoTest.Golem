@@ -88,7 +88,7 @@ namespace ProtoTest.Golem.Core
         public class AppiumSettings
         {
             public string activity;
-            public string appOs;
+            public string device;
             public string appPath;
             public bool launchApp = false;
             public string package;
@@ -96,6 +96,7 @@ namespace ProtoTest.Golem.Core
             public bool useIpa;
             public string appiumServerPath;
             public bool resetApp = false;
+            public string bundleId;
 
             public AppiumSettings()
             {
@@ -103,11 +104,12 @@ namespace ProtoTest.Golem.Core
                 appPath = Config.GetConfigValue("AppPath", "");
                 package = Config.GetConfigValue("AppPackage", "");
                 activity = Config.GetConfigValue("AppActivity", "");
-                appOs = Config.GetConfigValue("AppOs", "");
+                device = Config.GetConfigValue("Device", "");
                 appiumPort = Config.GetConfigValue("AppiumPort", "4723");
                 useIpa = Common.IsTruthy(Config.GetConfigValue("UseIpa", "False"));
                 appiumServerPath = Config.GetConfigValue("AppiumServerPath", "");
                 resetApp = Common.IsTruthy(Config.GetConfigValue("ResetApp", "False"));
+                bundleId = Config.GetConfigValue("BundleId", "");
             }
         }
 

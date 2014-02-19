@@ -13,7 +13,7 @@ namespace GoogleTests
             Config.Settings.appiumSettings.launchApp = true;
             Config.Settings.appiumSettings.package = "com.wegmans.wegmansapp";
             Config.Settings.appiumSettings.activity = "com.wegmans.android.wegmans.common.activities.StartupActivity";
-            Config.Settings.appiumSettings.appOs = "Android";
+            Config.Settings.appiumSettings.device = "Android";
             Config.Settings.appiumSettings.appPath = @"C:\Users\Brian\Documents\Wegmans\Wegmans.apk";
         }
         [Test]
