@@ -41,7 +41,7 @@ namespace ProtoTest.Golem.Appium
             return (T)Activator.CreateInstance(typeof(T));
         }
 
-        private void LogScreenshotIfTestFailed()
+        public void LogScreenshotIfTestFailed()
         {
             if ((Config.Settings.reportSettings.screenshotOnError) &&
                 (TestContext.CurrentContext.Outcome != TestOutcome.Passed))
@@ -80,7 +80,7 @@ namespace ProtoTest.Golem.Appium
 
         [FixtureSetUp]
         public void SetupFixture()
-        {
+        {            
             server.StartProcess();
         }
 
@@ -97,8 +97,8 @@ namespace ProtoTest.Golem.Appium
         }
 
         [TearDown]
-        public void TearDown()
-        {
+        public void Teardown()
+        {            
             LogScreenshotIfTestFailed();
             LogSourceIfTestFailed();
             QuitAppium();
@@ -111,6 +111,7 @@ namespace ProtoTest.Golem.Appium
                 capabilities.SetCapability(CapabilityType.BrowserName, "");
                 capabilities.SetCapability("device", Config.Settings.appiumSettings.device);
                 capabilities.SetCapability("launch", Config.Settings.appiumSettings.launchApp);
+                
 
 
                 if (Config.Settings.appiumSettings.device == "Android")
