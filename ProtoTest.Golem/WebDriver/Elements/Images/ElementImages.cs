@@ -149,8 +149,27 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                     "Could not create image for element {0} as it is hidden", element.name));
             }
             var cropRect = new Rectangle(element.Location, size);
+            Image screenShot = TestBase.testData.driver.GetScreenshot();
+            
+            // Trim the crop to not extend off the screenshot, preventing OutOfMemoryException.
+            if (cropRect.X < 0) 
+            {
+                cropRect.X = 0;
+            }
+            if (cropRect.Y < 0 )
+            {
+                cropRect.Y = 0;
+            }
+            if (cropRect.X + cropRect.Width > screenShot.Width) 
+            {
+                cropRect.Width = screenShot.Width - cropRect.X;
+            }
+            if (cropRect.Y + cropRect.Height > screenShot.Height) 
+            {
+                cropRect.Height = screenShot.Height - cropRect.Y;
+            }
 
-            return cropImage(TestBase.testData.driver.GetScreenshot(), cropRect);
+            return cropImage(screenShot, cropRect);
         }
 
         private Image cropImage(Image img, Rectangle cropArea)
