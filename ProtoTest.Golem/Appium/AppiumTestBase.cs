@@ -114,7 +114,7 @@ namespace ProtoTest.Golem.Appium
                 
 
 
-                if (Config.Settings.appiumSettings.device == "Android")
+                if (Config.Settings.appiumSettings.device.Contains("droid"))
                 {
                     capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);
                     capabilities.SetCapability("app-package", Config.Settings.appiumSettings.package);
@@ -125,11 +125,15 @@ namespace ProtoTest.Golem.Appium
                 {
                     if (Config.Settings.appiumSettings.useIpa)
                     {
+                        
                         capabilities.SetCapability("ipa", Config.Settings.appiumSettings.appPath);
                         capabilities.SetCapability("app",Config.Settings.appiumSettings.bundleId);
+                        
                     }
                     else
                     {
+                        capabilities.SetCapability(CapabilityType.BrowserName, "iOS");
+                        capabilities.SetCapability(CapabilityType.Platform, "Mac");
                         capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);    
                     }
                     capabilities.SetCapability("launch", Config.Settings.appiumSettings.launchApp);
