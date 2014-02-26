@@ -29,8 +29,8 @@ namespace ProtoTest.Golem.White
         public void WhiteSettings()
         {
 
-            //CoreAppXmlConfiguration.Instance.RawElementBasedSearch = false;
-            CoreAppXmlConfiguration.Instance.WorkSessionLocation = new DirectoryInfo(@"C:\Users\SethUrban\Documents\Customer Projects\QuestIntegrity\");
+            DirectoryInfo workDirectoryInfo = new DirectoryInfo(Config.Settings.whiteSettings.workSessionLocation);
+            CoreAppXmlConfiguration.Instance.WorkSessionLocation = workDirectoryInfo;
             //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
             // CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
         }
