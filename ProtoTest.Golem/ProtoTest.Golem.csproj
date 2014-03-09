@@ -57,6 +57,10 @@
     <Reference Include="NHunspell">
       <HintPath>..\..\Golem.Tests.Wegmans\packages\NHunspell.1.1.1\lib\net\NHunspell.dll</HintPath>
     </Reference>
+    <Reference Include="PurpleLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\PurpleLib.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\..\Golem.Tests.Wegmans\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
@@ -150,6 +154,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="White\Extensions.cs" />
+    <Compile Include="White\PurpleCore\WindowsConstants.cs" />
+    <Compile Include="White\PurpleElements\PurpleButton.cs" />
+    <Compile Include="White\PurpleElements\PurpleElementBase.cs" />
+    <Compile Include="White\PurpleElements\PurpleMenu.cs" />
     <Compile Include="White\UIUtilities.cs" />
     <Compile Include="White\WhiteTestBase.cs" />
     <Compile Include="WebDriver\ByE.cs" />
@@ -248,6 +256,7 @@
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /s /y "$(SolutionDir)packages\NHunspell.1.1.1\native\*.*" "$(TargetDir)"</PostBuildEvent>

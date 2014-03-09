@@ -266,6 +266,7 @@ namespace ProtoTest.Golem.Core
             public bool launchApp;
             public LoggerLevel logLevel;
             public string workSessionLocation;
+            public int appStartupTime;
             public WhiteSettings()
             {
                 appPath = Config.GetConfigValue("AppPath", "NOT_SET");
@@ -273,6 +274,7 @@ namespace ProtoTest.Golem.Core
                 windowTitle = Config.GetConfigValue("WindowTitle", "NOT_SET");
                 workSessionLocation = Config.GetConfigValue("WorkSessionLocation", "C:\\");
                 logLevel = (LoggerLevel) Enum.Parse(typeof(LoggerLevel), Config.GetConfigValue("LogLevel", "Info"));
+                appStartupTime = int.Parse(Config.GetConfigValue("AppStartUpTime", "10"));
             }
         }
     }

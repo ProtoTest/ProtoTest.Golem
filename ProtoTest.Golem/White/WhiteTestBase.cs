@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Castle.Components.DictionaryAdapter.Xml;
 using Castle.Core.Logging;
 using Gallio.Framework;
@@ -43,6 +44,9 @@ namespace ProtoTest.Golem.White
             if (Config.Settings.whiteSettings.launchApp)
             {
                 app = Application.Launch(startInfo);
+                //Wait for the application to start -- make this configurable.  White doesn't seem to care
+                LogEvent(string.Format("Waiting {0} seconds for {1} to start up...", Config.Settings.whiteSettings.appStartupTime, Config.Settings.whiteSettings.appPath));
+                Thread.Sleep(Config.Settings.whiteSettings.appStartupTime * 1000);
             }
             else
             {            

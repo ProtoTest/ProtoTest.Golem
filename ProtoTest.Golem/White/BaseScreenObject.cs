@@ -5,6 +5,7 @@ namespace ProtoTest.Golem.White
 {
     public class BaseScreenObject
     {
+        //TODO: Update this for purple --which may not need to do much :D
         private WhiteWindow _window;
 
         public WhiteWindow window
