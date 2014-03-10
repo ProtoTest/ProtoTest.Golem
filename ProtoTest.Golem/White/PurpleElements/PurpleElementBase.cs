@@ -17,35 +17,48 @@ namespace ProtoTest.Golem.White.PurpleElements
         [DllImport("user32.dll")]
         private static extern void mouse_event(uint dwFlags, int dx, int dy, uint cButtons, uint dwExtraInfo);
 
-        private AutomationElement _UIAElement;
+        protected AutomationElement _UIAElement;
+        private String _PurplePath;
         private String _elementName;
         private bool isOffScreen;
 
         //This is not built yet -- should be interesting we might want to do this on the screenobject base
         private UIA_ElementCacher elementCache;
-        
 
-        public AutomationElement PurpleElement {get { return _UIAElement; }}
+        public AutomationElement PurpleElement
+        {
+            get
+            {
+                _UIAElement = FindElement(_PurplePath);
+                if (_UIAElement == null)
+                {
+                    Common.Log(string.Format("Unable to find element with PurplePath Specified: {0}\n", _PurplePath));
+                }
+                return _UIAElement;
+            }
+        }
+
+        public String ElementName {get { return _elementName; }}
 
         public PurpleElementBase(string name, string locatorPath)
         {
             _elementName = name;
-            
-            _UIAElement = FindElement(locatorPath);
-            if (_UIAElement == null)
-            {
-                Common.Log(string.Format("Unable to find element with PurplePath Specified: {0}\n", locatorPath));
-            }
+            _PurplePath = locatorPath;
         }
         
         public void Click()
         {
-            if (!_UIAElement.Current.IsOffscreen)
+            if (!PurpleElement.Current.IsOffscreen)
             {
-                SetCursorPos((int) _UIAElement.GetClickablePoint().X, (int) _UIAElement.GetClickablePoint().Y);
+                SetCursorPos((int) PurpleElement.GetClickablePoint().X, (int) PurpleElement.GetClickablePoint().Y);
                 mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                 mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
+        }
+
+        public void Invoke()
+        {
+            ((InvokePattern)PurpleElement.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
         }
 
 

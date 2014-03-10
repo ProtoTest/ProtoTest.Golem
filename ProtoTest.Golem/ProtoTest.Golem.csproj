@@ -158,6 +158,7 @@
     <Compile Include="White\PurpleElements\PurpleButton.cs" />
     <Compile Include="White\PurpleElements\PurpleElementBase.cs" />
     <Compile Include="White\PurpleElements\PurpleMenu.cs" />
+    <Compile Include="White\PurpleElements\PurpleTextBox.cs" />
     <Compile Include="White\UIUtilities.cs" />
     <Compile Include="White\WhiteTestBase.cs" />
     <Compile Include="WebDriver\ByE.cs" />
