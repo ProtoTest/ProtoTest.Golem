@@ -26,7 +26,7 @@ namespace ProtoTest.Golem.White.Elements
 {
     public class WhiteWindow : Window, IWhiteElement
     {
-
+        //This is obviously a UIItemCOntainer
         public string description { get; set; }
         public SearchCriteria criteria { get; set; }
         public UIItem parent { get; set; }

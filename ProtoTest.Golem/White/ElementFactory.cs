@@ -20,7 +20,7 @@ namespace ProtoTest.Golem.White
                 string logInfo = string.Format(LogFormatString, procInfo.className, procInfo.methodName, procInfo.elementName, procInfo.commandName, description, criteria);
                 TestBase.LogEvent(logInfo);
                 if (item != null && !item.IsStale()) return item;
-                //item = parent.Get<T>(criteria);
+                //This is the thing that actually marks the UI element as being contained in the window and writes it to the cache file
                 if (parentContainer == null)
                 {
                     parentContainer = WhiteTestBase.window;
@@ -44,7 +44,7 @@ namespace ProtoTest.Golem.White
                 string logInfo = string.Format(LogFormatString, procInfo.className, procInfo.methodName, procInfo.elementName, procInfo.commandName, description, criteria);
                 TestBase.LogEvent(logInfo);
                 if (item != null && !item.IsStale()) return item;
-                //item =  (UIItem) parent.Get(criteria);if (parentContainer == null)
+                //This is the thing that actually marks the UI element as being contained in the window and writes it to the cache file
                 if (parentContainer == null)
                 {
                     parentContainer = WhiteTestBase.window;

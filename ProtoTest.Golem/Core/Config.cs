@@ -4,7 +4,8 @@ using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Xml;
-using Castle.Core.Logging;
+//using Castle.Core.Logging;
+
 using ProtoTest.Golem.Appium;
 using ProtoTest.Golem.WebDriver;
 
@@ -264,7 +265,7 @@ namespace ProtoTest.Golem.Core
             public string appPath;
             public string windowTitle;
             public bool launchApp;
-            public LoggerLevel logLevel;
+            //public LoggerLevel logLevel;
             public string workSessionLocation;
             public WhiteSettings()
             {
@@ -272,7 +273,7 @@ namespace ProtoTest.Golem.Core
                 launchApp = Common.IsTruthy(Config.GetConfigValue("LaunchApp", "True"));
                 windowTitle = Config.GetConfigValue("WindowTitle", "NOT_SET");
                 workSessionLocation = Config.GetConfigValue("WorkSessionLocation", "C:\\");
-                logLevel = (LoggerLevel) Enum.Parse(typeof(LoggerLevel), Config.GetConfigValue("LogLevel", "Info"));
+                //logLevel = (LoggerLevel) Enum.Parse(typeof(LoggerLevel), Config.GetConfigValue("LogLevel", "Info"));
             }
         }
     }

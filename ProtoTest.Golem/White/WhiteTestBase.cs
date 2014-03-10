@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Castle.Components.DictionaryAdapter.Xml;
-using Castle.Core.Logging;
 using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
@@ -28,11 +26,9 @@ namespace ProtoTest.Golem.White
         [FixtureInitializer]
         public void WhiteSettings()
         {
-
+            //The 'workSessionLocation' key value needs to be in the appSettings section of the app.config for the test suite - SU 02/25/14
             DirectoryInfo workDirectoryInfo = new DirectoryInfo(Config.Settings.whiteSettings.workSessionLocation);
             CoreAppXmlConfiguration.Instance.WorkSessionLocation = workDirectoryInfo;
-            //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
-            // CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
         }
 
 
