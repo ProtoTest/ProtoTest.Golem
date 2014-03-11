@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows;
 using System.Windows.Automation;
+using WindowsInput;
 using ProtoTest.Golem.Core;
 using PurpleLib;
+using TestStack.White.WindowsAPI;
 using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.White.PurpleElements
@@ -34,6 +40,7 @@ namespace ProtoTest.Golem.White.PurpleElements
         {
             get
             {
+                WhiteTestBase.WaitUntilReady();
                 _UIAElement = purplePathLocator.FindElement(_PurplePath);
                 if (_UIAElement == null)
                 {
@@ -41,6 +48,11 @@ namespace ProtoTest.Golem.White.PurpleElements
                 }
                 return _UIAElement;
             }
+        }
+
+        public Rect Bounds
+        {
+            get { return PurpleElement.Current.BoundingRectangle; }
         }
 
         public String ElementName {get { return _elementName; }}
@@ -65,7 +77,32 @@ namespace ProtoTest.Golem.White.PurpleElements
             }
             
         }
-        
+        #region MouseFunctions Functions for dealing with and simulating mouse input
+
+        public void MoveCursor(Point position)
+        {
+            SetCursorPos((int) position.X, (int) position.Y);
+        }
+
+        public void LMB_Down()
+        {
+            mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+        }
+
+        public void LMB_Up()
+        {
+            mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+        }
+
+        public void RMB_Down()
+        {
+            mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_RIGHTDOWN, 0,0,0,0);
+        }
+
+        public void RMB_Up()
+        {
+            mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
+        }
         public void Click()
         {
             if (!PurpleElement.Current.IsOffscreen)
@@ -76,11 +113,43 @@ namespace ProtoTest.Golem.White.PurpleElements
             }
         }
 
+        public void DoubleLeftClick(Point pointToClick)
+        {
+            if (PurpleElement.Current.IsEnabled && !PurpleElement.Current.IsOffscreen)
+            {
+                SetCursorPos((int) pointToClick.X, (int) pointToClick.Y);
+                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                Thread.Sleep(50);
+                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+            }
+        }
+        #endregion
+
+        //This function may need to go in a different class
         public void Invoke()
         {
             ((InvokePattern)PurpleElement.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
         }
+        #region KeyboardInput Functions for simulating keyboard input
+        public void HoldShift()
+        {
+            InputSimulator.SimulateKeyDown(VirtualKeyCode.SHIFT);
+        }
 
+        public void ReleaseShift()
+        {
+            InputSimulator.SimulateKeyUp(VirtualKeyCode.SHIFT);
+        }
+
+        public void PressKey(VirtualKeyCode key)
+        {
+            InputSimulator.SimulateKeyPress(key);
+        }
+        #endregion
+
+        
 
 
 

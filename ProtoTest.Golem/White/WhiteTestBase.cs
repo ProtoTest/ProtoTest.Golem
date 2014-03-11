@@ -22,9 +22,8 @@ namespace ProtoTest.Golem.White
     public class WhiteTestBase : TestBase
     {
         public static Application app { get; set; }
-
-
         public static WhiteWindow window { get; set; }
+
 
         [FixtureInitializer]
         public void WhiteSettings()
@@ -34,6 +33,23 @@ namespace ProtoTest.Golem.White
             CoreAppXmlConfiguration.Instance.WorkSessionLocation = workDirectoryInfo;
             //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
             // CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
+        }
+
+        public static void WaitUntilReady()
+        {
+            Process[] processes = Process.GetProcessesByName("LifeQuest");
+            if (processes.Length == 0)
+            {
+                Common.Log(string.Format("Can not find process {0} ", Config.Settings.whiteSettings.appPath));
+            }
+            for (int x = 0; x < processes.Count(); x++)
+            {
+                if (processes[x].WaitForInputIdle(30000))
+                {
+                    Thread.Sleep(500);
+                }
+                
+            }
         }
 
 
@@ -47,13 +63,15 @@ namespace ProtoTest.Golem.White
                 //Wait for the application to start -- make this configurable.  White doesn't seem to care
                 LogEvent(string.Format("Waiting {0} seconds for {1} to start up...", Config.Settings.whiteSettings.appStartupTime, Config.Settings.whiteSettings.appPath));
                 Thread.Sleep(Config.Settings.whiteSettings.appStartupTime * 1000);
+                //WaitUntilReady();
             }
             else
             {            
                 app = Application.AttachOrLaunch(startInfo);
+                //WaitUntilReady();
             }
-            if (Config.Settings.whiteSettings.windowTitle != "NOT_SET")
-                window = new WhiteWindow(Config.Settings.whiteSettings.windowTitle);
+            if (Config.Settings.whiteSettings.Purple_windowTitle != "NOT_SET")
+                window = new WhiteWindow(Config.Settings.whiteSettings.Purple_windowTitle);
             
         }
 

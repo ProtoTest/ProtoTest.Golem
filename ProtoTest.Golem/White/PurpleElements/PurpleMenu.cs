@@ -21,7 +21,7 @@ namespace ProtoTest.Golem.White.PurpleElements
 
         private void FindMenuPath()
         {
-            _pathtoMenuSelection = _pathAfterMenu.Split(getDelimiter().ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            //_pathtoMenuSelection = _pathAfterMenu.Split(getDelimiter().ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         }
 
         public new void Click()

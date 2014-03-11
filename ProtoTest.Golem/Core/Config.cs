@@ -284,7 +284,7 @@ namespace ProtoTest.Golem.Core
                 Purple_blankValue = Config.GetConfigValue("Purple_BlankValue", "!BLANK!");
                 Purple_Delimiter = Config.GetConfigValue("Purple_Delimiter", "/");
                 Purple_ValueDelimiterStart = Config.GetConfigValue("Purple_ValueDelimiterStart", "[");
-                Purple_ValueDelimiterEnd = Config.GetConfigValue("Purple_ValueDelimiterEdu", "]");
+                Purple_ValueDelimiterEnd = Config.GetConfigValue("Purple_ValueDelimiterEnd", "]");
             }
         }
     }

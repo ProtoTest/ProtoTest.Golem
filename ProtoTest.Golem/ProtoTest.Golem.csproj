@@ -45,6 +45,9 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\Golem.Tests.Wegmans\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="InputSimulator">
+      <HintPath>Resources\InputSimulator.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\Golem.Tests.Wegmans\packages\DotNetZip.1.9.2\lib\net20\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -156,8 +159,12 @@
     <Compile Include="White\Extensions.cs" />
     <Compile Include="White\PurpleCore\WindowsConstants.cs" />
     <Compile Include="White\PurpleElements\PurpleButton.cs" />
+    <Compile Include="White\PurpleElements\PurpleCheckBox.cs" />
+    <Compile Include="White\PurpleElements\PurpleComboBox.cs" />
     <Compile Include="White\PurpleElements\PurpleElementBase.cs" />
     <Compile Include="White\PurpleElements\PurpleMenu.cs" />
+    <Compile Include="White\PurpleElements\PurplePanel.cs" />
+    <Compile Include="White\PurpleElements\PurpleSpinner.cs" />
     <Compile Include="White\PurpleElements\PurpleTextBox.cs" />
     <Compile Include="White\UIUtilities.cs" />
     <Compile Include="White\WhiteTestBase.cs" />
