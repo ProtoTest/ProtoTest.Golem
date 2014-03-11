@@ -54,7 +54,7 @@ namespace ProtoTest.Golem.White.PurpleElements
                 if (!PurpleElement.Current.IsOffscreen)
                 {
                     PurpleElement.SetFocus();
-                    SendKeys.Send(val);
+                    SendKeys.SendWait(val);
                 }
             }
         }

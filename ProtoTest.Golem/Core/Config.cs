@@ -262,19 +262,29 @@ namespace ProtoTest.Golem.Core
         public class WhiteSettings
         {
             public string appPath;
-            public string windowTitle;
+            
             public bool launchApp;
             public LoggerLevel logLevel;
             public string workSessionLocation;
             public int appStartupTime;
+            public string Purple_windowTitle;
+            public string Purple_blankValue;
+            public string Purple_Delimiter;
+            public string Purple_ValueDelimiterStart;
+            public string Purple_ValueDelimiterEnd;
+
             public WhiteSettings()
             {
                 appPath = Config.GetConfigValue("AppPath", "NOT_SET");
                 launchApp = Common.IsTruthy(Config.GetConfigValue("LaunchApp", "True"));
-                windowTitle = Config.GetConfigValue("WindowTitle", "NOT_SET");
                 workSessionLocation = Config.GetConfigValue("WorkSessionLocation", "C:\\");
                 logLevel = (LoggerLevel) Enum.Parse(typeof(LoggerLevel), Config.GetConfigValue("LogLevel", "Info"));
                 appStartupTime = int.Parse(Config.GetConfigValue("AppStartUpTime", "10"));
+                Purple_windowTitle = Config.GetConfigValue("Purple_WindowTitle", "EMPTY");
+                Purple_blankValue = Config.GetConfigValue("Purple_BlankValue", "!BLANK!");
+                Purple_Delimiter = Config.GetConfigValue("Purple_Delimiter", "/");
+                Purple_ValueDelimiterStart = Config.GetConfigValue("Purple_ValueDelimiterStart", "[");
+                Purple_ValueDelimiterEnd = Config.GetConfigValue("Purple_ValueDelimiterEdu", "]");
             }
         }
     }

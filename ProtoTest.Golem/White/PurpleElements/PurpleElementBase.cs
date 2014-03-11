@@ -8,7 +8,7 @@ using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.White.PurpleElements
 {
-    public class PurpleElementBase : PurplePath
+    public class PurpleElementBase
     {
         //These functions are used to set the cursor position and handle click events
         [DllImport("user32.dll")]
@@ -22,6 +22,11 @@ namespace ProtoTest.Golem.White.PurpleElements
         private String _elementName;
         private bool isOffScreen;
 
+        //Need to read locator setup functions from App.config
+        //Only want to go out to the disk filesystem once per test suite
+        private static PurplePath purplePathLocator = new PurplePath();
+        private static bool purpleInit = false;
+        
         //This is not built yet -- should be interesting we might want to do this on the screenobject base
         private UIA_ElementCacher elementCache;
 
@@ -29,7 +34,7 @@ namespace ProtoTest.Golem.White.PurpleElements
         {
             get
             {
-                _UIAElement = FindElement(_PurplePath);
+                _UIAElement = purplePathLocator.FindElement(_PurplePath);
                 if (_UIAElement == null)
                 {
                     Common.Log(string.Format("Unable to find element with PurplePath Specified: {0}\n", _PurplePath));
@@ -44,6 +49,21 @@ namespace ProtoTest.Golem.White.PurpleElements
         {
             _elementName = name;
             _PurplePath = locatorPath;
+            InitPurpleLocator();
+        }
+
+        private void InitPurpleLocator()
+        {
+            if (!purpleInit)
+            {
+                purplePathLocator.Delimiter = Config.Settings.whiteSettings.Purple_Delimiter;
+                purplePathLocator.BlankValue = Config.Settings.whiteSettings.Purple_blankValue;
+                purplePathLocator.DefaultWindowName = Config.Settings.whiteSettings.Purple_windowTitle;
+                purplePathLocator.ValueDelimiterStart = Config.Settings.whiteSettings.Purple_ValueDelimiterStart;
+                purplePathLocator.ValueDelimiterEnd = Config.Settings.whiteSettings.Purple_ValueDelimiterEnd;
+                purpleInit = true;
+            }
+            
         }
         
         public void Click()
