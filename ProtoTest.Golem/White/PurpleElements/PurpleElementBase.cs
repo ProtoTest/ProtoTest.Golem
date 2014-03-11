@@ -113,17 +113,18 @@ namespace ProtoTest.Golem.White.PurpleElements
             }
         }
 
-        public void DoubleLeftClick(Point pointToClick)
+        public void DoubleLeftClick()
         {
-            if (PurpleElement.Current.IsEnabled && !PurpleElement.Current.IsOffscreen)
+            if (!PurpleElement.Current.IsOffscreen)
             {
-                SetCursorPos((int) pointToClick.X, (int) pointToClick.Y);
+                SetCursorPos((int) PurpleElement.GetClickablePoint().X, (int) PurpleElement.GetClickablePoint().Y);
                 mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                 mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
                 Thread.Sleep(50);
                 mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                 mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
+            
         }
         #endregion
 

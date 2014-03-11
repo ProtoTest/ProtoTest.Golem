@@ -30,19 +30,19 @@ namespace ProtoTest.Golem.White.PurpleElements
                 WhiteTestBase.LogEvent(string.Format("Field is {0} is a Password field, cannot get value", ElementName));
                 textValue = "PASSWORD FIELD CANNOT BE READ";
             }
-            ValuePattern valuePattern = PurpleElement.GetCurrentPattern(ValuePattern.Pattern) as ValuePattern;
-            if (valuePattern != null)
+            object basePattern;
+            if (PurpleElement.TryGetCurrentPattern(ValuePattern.Pattern, out basePattern))
             {
-                textValue = valuePattern.Current.Value;
-            }
-            TextPattern textPattern = PurpleElement.GetCurrentPattern(TextPattern.Pattern) as TextPattern;
-            if (textPattern != null)
-            {
-                textValue = textPattern.DocumentRange.GetText(int.MaxValue);
-            }
-            else
-            {
-                WhiteTestBase.LogEvent(string.Format("AutomationElement for {0} supports neither ValuePattern or TextPattern", ElementName));
+                ValuePattern valuePattern = (BasePattern)basePattern as ValuePattern;
+                if (valuePattern != null)
+                {
+                    textValue = valuePattern.Current.Value;
+                }
+                TextPattern textPattern = (BasePattern)basePattern as TextPattern;
+                if (textPattern != null)
+                {
+                    textValue = textPattern.DocumentRange.GetText(int.MaxValue);
+                }
             }
             return textValue;
         }
