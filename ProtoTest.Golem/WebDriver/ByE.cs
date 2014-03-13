@@ -19,7 +19,19 @@ namespace ProtoTest.Golem.WebDriver
 
         public static By PartialAttribute(string tag, string attribute, string value)
         {
-            return By.XPath(string.Format("//{0}[contains({1},'{2}')]", tag, attribute, value));
+            string attr;
+
+            // put a '@' in front of the attribute if the user did not
+            if(!attribute.StartsWith("@"))
+            {
+                attr = string.Format("@{0}", attribute);
+            }
+            else
+            {
+                attr = attribute;
+            }
+
+            return By.XPath(string.Format("//{0}[contains({1},'{2}')]", tag, attr, value));
         }
     }
 }

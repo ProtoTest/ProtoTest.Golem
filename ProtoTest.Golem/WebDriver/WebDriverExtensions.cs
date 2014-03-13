@@ -56,7 +56,7 @@ namespace ProtoTest.Golem.WebDriver
         public static IWebElement GetParent(this IWebElement element)
         {
             IWebDriver driver = WebDriverTestBase.driver;
-            return (IWebElement) driver.ExecuteJavaScript(@"return arguments[0].parentNode;", element);
+            return (IWebElement)element.FindElement(By.XPath(".."));
         }
 
         public static string GetHtml(this IWebElement element)
