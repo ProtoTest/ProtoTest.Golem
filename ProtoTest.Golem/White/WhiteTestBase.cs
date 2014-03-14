@@ -10,6 +10,7 @@ using MbUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 using ProtoTest.Golem.White.Elements;
+using ProtoTest.Golem.White.PurpleElements;
 using RestSharp.Extensions;
 using TestStack.White;
 using TestStack.White.Configuration;
@@ -22,7 +23,7 @@ namespace ProtoTest.Golem.White
     public class WhiteTestBase : TestBase
     {
         public static Application app { get; set; }
-        public static WhiteWindow window { get; set; }
+        
 
 
         [FixtureInitializer]
@@ -37,10 +38,10 @@ namespace ProtoTest.Golem.White
 
         public static void WaitUntilReady()
         {
-            Process[] processes = Process.GetProcessesByName("LifeQuest");
+            Process[] processes = Process.GetProcessesByName(Config.Settings.whiteSettings.ProcessName);
             if (processes.Length == 0)
             {
-                Common.Log(string.Format("Can not find process {0} ", Config.Settings.whiteSettings.appPath));
+                Common.Log(string.Format("Can not find process {0} ", Config.Settings.whiteSettings.ProcessName));
             }
             for (int x = 0; x < processes.Count(); x++)
             {
@@ -59,7 +60,8 @@ namespace ProtoTest.Golem.White
             var startInfo = new ProcessStartInfo(Config.Settings.whiteSettings.appPath);
             if (Config.Settings.whiteSettings.launchApp)
             {
-                app = Application.Launch(startInfo);
+                //app = Application.Launch(startInfo);
+                Process.Start(startInfo);
                 //Wait for the application to start -- make this configurable.  White doesn't seem to care
                 LogEvent(string.Format("Waiting {0} seconds for {1} to start up...", Config.Settings.whiteSettings.appStartupTime, Config.Settings.whiteSettings.appPath));
                 Thread.Sleep(Config.Settings.whiteSettings.appStartupTime * 1000);
@@ -70,8 +72,7 @@ namespace ProtoTest.Golem.White
                 app = Application.AttachOrLaunch(startInfo);
                 //WaitUntilReady();
             }
-            if (Config.Settings.whiteSettings.Purple_windowTitle != "NOT_SET")
-                window = new WhiteWindow(Config.Settings.whiteSettings.Purple_windowTitle);
+            
             
         }
 

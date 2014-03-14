@@ -267,6 +267,7 @@ namespace ProtoTest.Golem.Core
             public LoggerLevel logLevel;
             public string workSessionLocation;
             public int appStartupTime;
+            public string ProcessName;
             public string Purple_windowTitle;
             public string Purple_blankValue;
             public string Purple_Delimiter;
@@ -280,6 +281,7 @@ namespace ProtoTest.Golem.Core
                 workSessionLocation = Config.GetConfigValue("WorkSessionLocation", "C:\\");
                 logLevel = (LoggerLevel) Enum.Parse(typeof(LoggerLevel), Config.GetConfigValue("LogLevel", "Info"));
                 appStartupTime = int.Parse(Config.GetConfigValue("AppStartUpTime", "10"));
+                ProcessName = Config.GetConfigValue("ProcessName", "NOT SET");
                 Purple_windowTitle = Config.GetConfigValue("Purple_WindowTitle", "EMPTY");
                 Purple_blankValue = Config.GetConfigValue("Purple_BlankValue", "!BLANK!");
                 Purple_Delimiter = Config.GetConfigValue("Purple_Delimiter", "/");

@@ -76,10 +76,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestStack.White, Version=0.12.0.0, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Golem.Tests.Wegmans\packages\TestStack.White.0.12.0\lib\net40\TestStack.White.dll</HintPath>
-    </Reference>
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WebDriver">
@@ -158,6 +154,7 @@
     </Compile>
     <Compile Include="White\Extensions.cs" />
     <Compile Include="White\PurpleCore\WindowsConstants.cs" />
+    <Compile Include="White\PurpleCore\Window_VisualStyle.cs" />
     <Compile Include="White\PurpleElements\PurpleButton.cs" />
     <Compile Include="White\PurpleElements\PurpleCheckBox.cs" />
     <Compile Include="White\PurpleElements\PurpleComboBox.cs" />
@@ -166,6 +163,7 @@
     <Compile Include="White\PurpleElements\PurplePanel.cs" />
     <Compile Include="White\PurpleElements\PurpleSpinner.cs" />
     <Compile Include="White\PurpleElements\PurpleTextBox.cs" />
+    <Compile Include="White\PurpleElements\PurpleWindow.cs" />
     <Compile Include="White\UIUtilities.cs" />
     <Compile Include="White\WhiteTestBase.cs" />
     <Compile Include="WebDriver\ByE.cs" />
@@ -264,7 +262,12 @@
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\White\src\TestStack.White\TestStack.White.csproj">
+      <Project>{12c59ce2-9cf7-44f4-b27c-90754609f979}</Project>
+      <Name>TestStack.White</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /s /y "$(SolutionDir)packages\NHunspell.1.1.1\native\*.*" "$(TargetDir)"</PostBuildEvent>

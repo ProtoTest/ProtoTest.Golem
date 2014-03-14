@@ -1,4 +1,5 @@
 ﻿using ProtoTest.Golem.White.Elements;
+using ProtoTest.Golem.White.PurpleElements;
 using TestStack.White.UIItems.WindowItems;
 
 namespace ProtoTest.Golem.White
@@ -8,7 +9,7 @@ namespace ProtoTest.Golem.White
         //TODO: Update this for purple --which may not need to do much :D
         private WhiteWindow _window;
 
-        public WhiteWindow window
+        public PurpleWindow window
         {
             get
             {
