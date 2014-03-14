@@ -6,7 +6,7 @@ using System.Windows.Automation;
 using System.Windows.Forms;
 using Gallio.Runner.Reports.Schema;
 
-namespace ProtoTest.Golem.White.PurpleElements
+namespace ProtoTest.Golem.Purple.PurpleElements
 {
     public class PurpleTextBox : PurpleElementBase
     {
@@ -27,7 +27,7 @@ namespace ProtoTest.Golem.White.PurpleElements
             string textValue = "THERE IS NO TEXT";
             if (PurpleElement.Current.IsPassword)
             {
-                WhiteTestBase.LogEvent(string.Format("Field is {0} is a Password field, cannot get value", ElementName));
+                PurpleTestBase.LogEvent(string.Format("Field is {0} is a Password field, cannot get value", ElementName));
                 textValue = "PASSWORD FIELD CANNOT BE READ";
             }
             object basePattern;

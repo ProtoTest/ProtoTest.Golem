@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Automation;
 
-namespace ProtoTest.Golem.White.PurpleElements
+namespace ProtoTest.Golem.Purple.PurpleElements
 {
     public class PurpleMenu : PurpleElementBase
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ProtoTest.Golem.White.PurpleCore
+namespace ProtoTest.Golem.Purple.PurpleCore
 {
     public enum Window_VisualStyle
     {

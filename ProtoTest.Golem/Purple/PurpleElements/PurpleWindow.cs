@@ -5,15 +5,15 @@ using System.Text;
 using System.Windows.Automation;
 using WindowsInput;
 using ProtoTest.Golem.Core;
-using ProtoTest.Golem.White.PurpleCore;
+using ProtoTest.Golem.Purple.PurpleCore;
 using PurpleLib;
 
-namespace ProtoTest.Golem.White.PurpleElements
+namespace ProtoTest.Golem.Purple.PurpleElements
 {
     public static class PurpleWindow
     {
-        private static string windowTitle = Config.Settings.whiteSettings.Purple_windowTitle;
         private static AutomationElement window = new PurplePath().FindElement(Config.Settings.whiteSettings.Purple_Delimiter + Config.Settings.whiteSettings.Purple_windowTitle);
+        public static AutomationElement purpleWindow { get { return window; } }
 
         private static WindowPattern GetWindowPattern(AutomationElement targetControl)
         {

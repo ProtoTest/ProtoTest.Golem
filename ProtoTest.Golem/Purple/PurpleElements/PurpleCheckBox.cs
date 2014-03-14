@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Automation;
 
-namespace ProtoTest.Golem.White.PurpleElements
+namespace ProtoTest.Golem.Purple.PurpleElements
 {
     public class PurpleCheckBox : PurpleElementBase
     {

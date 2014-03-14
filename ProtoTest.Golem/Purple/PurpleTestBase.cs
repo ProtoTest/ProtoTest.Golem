@@ -8,30 +8,20 @@ using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
 using ProtoTest.Golem.Core;
+using ProtoTest.Golem.Purple.PurpleElements;
 using ProtoTest.Golem.WebDriver;
-using ProtoTest.Golem.White.Elements;
-using ProtoTest.Golem.White.PurpleElements;
+using ProtoTest.Golem.Purple.Elements;
 using RestSharp.Extensions;
-using TestStack.White;
-using TestStack.White.Configuration;
-using TestStack.White.Factory;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.WindowItems;
 
-namespace ProtoTest.Golem.White
+
+namespace ProtoTest.Golem.Purple
 {
-    public class WhiteTestBase : TestBase
+    public class PurpleTestBase : TestBase
     {
-        public static Application app { get; set; }
         
-
-
         [FixtureInitializer]
         public void WhiteSettings()
         {
-
-            DirectoryInfo workDirectoryInfo = new DirectoryInfo(Config.Settings.whiteSettings.workSessionLocation);
-            CoreAppXmlConfiguration.Instance.WorkSessionLocation = workDirectoryInfo;
             //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
             // CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
         }
@@ -69,7 +59,7 @@ namespace ProtoTest.Golem.White
             }
             else
             {            
-                app = Application.AttachOrLaunch(startInfo);
+                //app = Application.AttachOrLaunch(startInfo);
                 //WaitUntilReady();
             }
             
@@ -82,14 +72,14 @@ namespace ProtoTest.Golem.White
             
             //TestLog.WriteLine(CoreAppXmlConfiguration.Instance.WorkSessionLocation.ToString());
             LogScreenshotIfTestFailed();
-          //  app.Close();
-            app.ApplicationSession.Save();
+            //app.Close();
+            //app.ApplicationSession.Save();
         }
 
         public void LogScreenshotIfTestFailed()
         {
             if(TestContext.CurrentContext.Outcome!=TestOutcome.Passed)
-                TestLog.EmbedImage(null, app.GetImage());
+                TestLog.EmbedImage(null, PurpleWindow.purpleWindow.GetImage());
         }
     }
 }

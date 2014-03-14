@@ -8,11 +8,11 @@ using System.Windows;
 using System.Windows.Automation;
 using WindowsInput;
 using ProtoTest.Golem.Core;
+using Purple.Core;
 using PurpleLib;
-using TestStack.White.WindowsAPI;
 using Point = System.Windows.Point;
 
-namespace ProtoTest.Golem.White.PurpleElements
+namespace ProtoTest.Golem.Purple.PurpleElements
 {
     public class PurpleElementBase
     {
@@ -40,7 +40,7 @@ namespace ProtoTest.Golem.White.PurpleElements
         {
             get
             {
-                WhiteTestBase.WaitUntilReady();
+                PurpleTestBase.WaitUntilReady();
                 _UIAElement = purplePathLocator.FindElement(_PurplePath);
                 if (_UIAElement == null)
                 {
@@ -86,30 +86,30 @@ namespace ProtoTest.Golem.White.PurpleElements
 
         public void LMB_Down()
         {
-            mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+            mouse_event(WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
         }
 
         public void LMB_Up()
         {
-            mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+            mouse_event(WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
         }
 
         public void RMB_Down()
         {
-            mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_RIGHTDOWN, 0,0,0,0);
+            mouse_event(WindowsConstants.MOUSEEVENTF_RIGHTDOWN, 0,0,0,0);
         }
 
         public void RMB_Up()
         {
-            mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
+            mouse_event(WindowsConstants.MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
         }
         public void Click()
         {
             if (!PurpleElement.Current.IsOffscreen)
             {
                 SetCursorPos((int) PurpleElement.GetClickablePoint().X, (int) PurpleElement.GetClickablePoint().Y);
-                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                mouse_event(WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                mouse_event(WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
         }
 
@@ -118,11 +118,11 @@ namespace ProtoTest.Golem.White.PurpleElements
             if (!PurpleElement.Current.IsOffscreen)
             {
                 SetCursorPos((int) PurpleElement.GetClickablePoint().X, (int) PurpleElement.GetClickablePoint().Y);
-                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                mouse_event(WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                mouse_event(WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
                 Thread.Sleep(50);
-                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-                mouse_event(Purple.Core.WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                mouse_event(WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                mouse_event(WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
             
         }
