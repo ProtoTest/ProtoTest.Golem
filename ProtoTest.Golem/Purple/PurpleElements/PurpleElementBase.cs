@@ -41,7 +41,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             get
             {
                 PurpleTestBase.WaitUntilReady();
-                _UIAElement = purplePathLocator.FindElement(_PurplePath);
+                _UIAElement = PurpleCore.PurplePath.Locator.FindElement(_PurplePath);
+                //_UIAElement = purplePathLocator.FindElement(_PurplePath);
                 if (_UIAElement == null)
                 {
                     Common.Log(string.Format("Unable to find element with PurplePath Specified: {0}\n", _PurplePath));
@@ -61,7 +62,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
             _elementName = name;
             _PurplePath = locatorPath;
-            InitPurpleLocator();
+            //InitPurpleLocator();
         }
 
         private void InitPurpleLocator()

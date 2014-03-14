@@ -110,6 +110,7 @@
     <Compile Include="Proxy\HAR\Request.cs" />
     <Compile Include="Proxy\HAR\Response.cs" />
     <Compile Include="Proxy\HAR\Timings.cs" />
+    <Compile Include="Purple\PurpleCore\PurplePath.cs" />
     <Compile Include="Purple\PurpleCore\RectX.cs" />
     <Compile Include="Rest\OAuth\OAuth_Token_Keeper.cs" />
     <Compile Include="Rest\OAuth\simpleTwitterHandler.cs" />

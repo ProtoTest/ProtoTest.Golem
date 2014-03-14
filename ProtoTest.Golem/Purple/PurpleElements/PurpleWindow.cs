@@ -12,8 +12,14 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 {
     public static class PurpleWindow
     {
-        private static AutomationElement window = new PurplePath().FindElement(Config.Settings.whiteSettings.Purple_Delimiter + Config.Settings.whiteSettings.Purple_windowTitle);
+        private static AutomationElement window;
         public static AutomationElement purpleWindow { get { return window; } }
+
+        static PurpleWindow()
+        {
+            window = PurpleCore.PurplePath.Locator.FindElement(Config.Settings.whiteSettings.Purple_Delimiter + Config.Settings.whiteSettings.Purple_windowTitle);
+            //new PurplePath().FindElement(Config.Settings.whiteSettings.Purple_Delimiter + Config.Settings.whiteSettings.Purple_windowTitle);
+        }
 
         private static WindowPattern GetWindowPattern(AutomationElement targetControl)
         {
