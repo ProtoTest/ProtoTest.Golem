@@ -22,49 +22,17 @@ namespace ProtoTest.Golem.Purple
         [FixtureInitializer]
         public void WhiteSettings()
         {
-            //CoreAppXmlConfiguration.Instance.MaxElementSearchDepth = 4;
-            // CoreAppXmlConfiguration.Instance.LoggerFactory.Create("WhiteDefaultLogger",LoggerLevel.Info);
-        }
-
-        public static void WaitUntilReady()
-        {
-            Process[] processes = Process.GetProcessesByName(Config.Settings.whiteSettings.ProcessName);
-            if (processes.Length == 0)
-            {
-                Common.Log(string.Format("Can not find process {0} ", Config.Settings.whiteSettings.ProcessName));
-            }
-            for (int x = 0; x < processes.Count(); x++)
-            {
-                if (processes[x].WaitForInputIdle(30000))
-                {
-                    Thread.Sleep(500);
-                }
-                
-            }
+            
         }
 
 
         [SetUp]
         public void SetUp()
         {
-            var startInfo = new ProcessStartInfo(Config.Settings.whiteSettings.appPath);
-            if (Config.Settings.whiteSettings.launchApp)
-            {
-                //app = Application.Launch(startInfo);
-                Process.Start(startInfo);
-                //Wait for the application to start -- make this configurable.  White doesn't seem to care
-                LogEvent(string.Format("Waiting {0} seconds for {1} to start up...", Config.Settings.whiteSettings.appStartupTime, Config.Settings.whiteSettings.appPath));
-                Thread.Sleep(Config.Settings.whiteSettings.appStartupTime * 1000);
-                //WaitUntilReady();
-            }
-            else
-            {            
-                //app = Application.AttachOrLaunch(startInfo);
-                //WaitUntilReady();
-            }
-            
-            
+            PurpleWindow.FindRunningProcess();
         }
+
+        
 
         [TearDown]
         public void TearDown()

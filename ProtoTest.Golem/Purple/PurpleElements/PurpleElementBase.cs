@@ -28,10 +28,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         private String _elementName;
         private bool isOffScreen;
 
-        //Need to read locator setup functions from App.config
-        //Only want to go out to the disk filesystem once per test suite
-        private static PurplePath purplePathLocator = new PurplePath();
-        private static bool purpleInit = false;
         
         //This is not built yet -- should be interesting we might want to do this on the screenobject base
         private UIA_ElementCacher elementCache;
@@ -40,17 +36,11 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
             get
             {
-                PurpleTestBase.WaitUntilReady();
-                _UIAElement = PurpleCore.PurplePath.Locator.FindElement(_PurplePath);
-                //_UIAElement = purplePathLocator.FindElement(_PurplePath);
-                if (_UIAElement == null)
-                {
-                    Common.Log(string.Format("Unable to find element with PurplePath Specified: {0}\n", _PurplePath));
-                }
+                _UIAElement = PurpleCore.Locator.WaitForElementAvailable(_PurplePath);
                 return _UIAElement;
             }
         }
-
+        
         public Rect Bounds
         {
             get { return PurpleElement.Current.BoundingRectangle; }
@@ -62,22 +52,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
             _elementName = name;
             _PurplePath = locatorPath;
-            //InitPurpleLocator();
         }
-
-        private void InitPurpleLocator()
-        {
-            if (!purpleInit)
-            {
-                purplePathLocator.Delimiter = Config.Settings.whiteSettings.Purple_Delimiter;
-                purplePathLocator.BlankValue = Config.Settings.whiteSettings.Purple_blankValue;
-                purplePathLocator.DefaultWindowName = Config.Settings.whiteSettings.Purple_windowTitle;
-                purplePathLocator.ValueDelimiterStart = Config.Settings.whiteSettings.Purple_ValueDelimiterStart;
-                purplePathLocator.ValueDelimiterEnd = Config.Settings.whiteSettings.Purple_ValueDelimiterEnd;
-                purpleInit = true;
-            }
-            
-        }
+       
         #region MouseFunctions Functions for dealing with and simulating mouse input
 
         public void MoveCursor(Point position)
@@ -116,6 +92,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public void DoubleLeftClick()
         {
+            
             if (!PurpleElement.Current.IsOffscreen)
             {
                 SetCursorPos((int) PurpleElement.GetClickablePoint().X, (int) PurpleElement.GetClickablePoint().Y);
