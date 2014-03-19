@@ -53,7 +53,7 @@ Page Objects are simple, and stable.  Configurable automatic waiting and page va
 
 Test reports include robust diagnostic information.  A command log, source html, screenshots/video, and HTTP traffic configurable through code or an App.config.  
 
-![ScreenShot](https://raw.github.com/ProtoTest/ProtoTest.Golem/Tests/SampleReport/Report_Screenshot.bmp)
+![ScreenShot](https://raw.github.com/ProtoTest/ProtoTest.Golem/Tests/SampleReport/Report.bmp)
 
 ##How to Get Started
 
