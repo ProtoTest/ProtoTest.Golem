@@ -191,6 +191,7 @@ namespace ProtoTest.Golem.Core
             public int PageTimeoutSec;
             public bool RunOnRemoteHost;
             public int TestTimeoutMin;
+            public bool AutoWaitForElements;
 
             public RuntimeSettings()
             {
@@ -205,7 +206,7 @@ namespace ProtoTest.Golem.Core
                 DegreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "5"));
                 CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
                 RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
-
+                AutoWaitForElements = Common.IsTruthy(Config.GetConfigValue("AutoWaitForElements", "True"));
                 HighlightOnVerify = Common.IsTruthy(Config.GetConfigValue("HighlightOnVerify", "False"));
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
             }
