@@ -14,7 +14,46 @@ requests (Golem.Rest).
 
 For all documentation, visit the [Golem Wiki](https://github.com/ProtoTest/ProtoTest.Golem/wiki).
 
+##Example
+Tests are written using a human readable DSL via Page Objects.  
+```C#
+    class TestExample : WebDriverTestBase
+    {
+        [Test]
+        public void TestNormal()
+        {
+            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor("Selenium").VerifyResult("Selenium - Web Browser Automation");
+        }
+```
+Page Objects are simple, and stable.  Configurable automatic waiting and page validations.  
+```C#
+    public class GoogleHomePage : BasePageObject
+    {
+        Element searchField = new Element("SearchField", By.Name("q"));
+        Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
+        Element searchButton = new Element("SearchButton", By.Name("btnK"));
+        Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
 
+        public GoogleResultsPage SearchFor(string text)
+        {
+            searchField.Text = text;
+            searchField.Submit();
+            return new GoogleResultsPage();
+        }
+
+        public override void WaitForElements()
+        {
+            searchField.WaitUntil().Present();
+            googleLogo.WaitUntil().Present();
+            searchButton.WaitUntil().Present();
+            feelingLuckyButton.WaitUntil().Present();
+        }
+    }
+```
+
+Test reports include robust diagnostic information.  A command log, source html, screenshots/video, and HTTP traffic configurable through code or an App.config.  
+
+![ScreenShot](https://raw.github.com/ProtoTest/ProtoTest.Golem/Tests/SampleReport/Report_Screenshot.bmp)
 
 ##How to Get Started
 
