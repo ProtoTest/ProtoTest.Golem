@@ -83,12 +83,13 @@ namespace ProtoTest.Golem.WebDriver
             {
                 if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
                 {
-                    TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95), driver.PageSource);
+                    var source = driver.PageSource;
+                    TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95),source );
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                TestLog.Warnings.WriteLine("Error caught trying to get page source");
+                TestLog.Warnings.WriteLine("Error caught trying to get page source: " + e.Message);
             }
         }
 
@@ -126,25 +127,14 @@ namespace ProtoTest.Golem.WebDriver
         public void SetUp()
         {
             LaunchBrowser();
-            // Register cleanup and logging methods to be performed after the test completes.
-            TestContext.CurrentContext.AutoExecute(TriggerEvent.TestFinished, QuitBrowser);
-            TestContext.CurrentContext.AutoExecute(TriggerEvent.TestFinished, LogScreenshotIfTestFailed);
-            TestContext.CurrentContext.AutoExecute(TriggerEvent.TestFinished, LogHtmlIfTestFailed);
         }
-
         [TearDown]
-        public void TearDown()
+        public override void TearDownTestBase()
         {
-            /*
-             * There is a race condition with Gallio/Mbunit in performing the [TearDown] for derived classes
-             * from TestBase.cs. The ordering of WebDriverTestBase's TearDown with the TearDown from TestBase is not guaranteed.
-             * Since the call to AssertNoVerificationErrors() in TestBase::TearDownTestBase() throws a silent
-             * exception to end the test, the Teardown here may NOT be called to cleanup. Specifically, QuitBrowser(),
-             * LogScreenshotIfTestFailed(), and LogHtmlIfTestFailed(). A possible solution is to AutoExecute these methods
-             * by registering them to be executed after the 'TestFinished' event fires. Set Setup() above.
-             */
             LogScreenshotIfTestFailed();
             LogHtmlIfTestFailed();
- }
+            QuitBrowser();
+            base.TearDownTestBase();
+        }
     }
 }

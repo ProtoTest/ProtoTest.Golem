@@ -68,7 +68,7 @@ namespace ProtoTest.Golem.Core
         public static BrowserMobProxy proxy;
 
         [SetUp]
-        public void SetUpTestBase()
+        public virtual void SetUpTestBase()
         {
             StartVideoRecording();
             LogEvent(Common.GetCurrentTestName() + " started");
@@ -77,7 +77,7 @@ namespace ProtoTest.Golem.Core
         }
 
         [TearDown]
-        public void TearDownTestBase()
+        public virtual void TearDownTestBase()
         {
             LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
             GetHarFile();
@@ -90,7 +90,7 @@ namespace ProtoTest.Golem.Core
 
 
         [FixtureSetUp]
-        public void SuiteSetUp()
+        public virtual void SuiteSetUp()
         {
             SetupEvents();
             testDataCollection = new Dictionary<string, TestDataContainer>();
@@ -100,7 +100,7 @@ namespace ProtoTest.Golem.Core
 
 
         [FixtureTearDown]
-        public void SuiteTearDown()
+        public virtual void SuiteTearDown()
         {
             QuitProxyServer();
             RemoveEvents();
