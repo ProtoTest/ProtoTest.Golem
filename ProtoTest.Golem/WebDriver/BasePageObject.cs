@@ -18,11 +18,6 @@ namespace ProtoTest.Golem.WebDriver
             className = GetType().Name;
             WaitForElements();
             TestBase.testData.actions.addAction(TestBase.GetCurrentClassAndMethodName());
-
-            if (Config.Settings.reportSettings.spellChecking)
-            {
-                new Spellchecker().VerifyNoMisspelledWords();
-            }
         }
 
         public BasePageObject(IWebDriver driver)
@@ -31,11 +26,6 @@ namespace ProtoTest.Golem.WebDriver
             className = GetType().Name;
             WaitForElements();
             TestBase.testData.actions.addAction(TestBase.GetCurrentClassAndMethodName());
-
-            if (Config.Settings.reportSettings.spellChecking)
-            {
-                new Spellchecker().VerifyNoMisspelledWords();
-            }
         }
 
         public IWebDriver driver { get; set; }

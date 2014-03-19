@@ -61,13 +61,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public static string GetHtml(this IWebElement element)
         {
-            IWebDriver driver = WebDriverTestBase.driver;
-            var html =
-                (string)
-                    driver.ExecuteJavaScript(
-                        "var f = document.createElement('div').appendChild(arguments[0].cloneNode(true)); return f.parentNode.innerHTML",
-                        element);
-            return html;
+            return element.GetAttribute("outerHTML");
         }
 
         public static bool IsStale(this IWebElement element)
