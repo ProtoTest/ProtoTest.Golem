@@ -7,6 +7,8 @@ Golem was created to simplify the process of creating enterprise-scale automated
 
 The Golem repository contains several modules that can be used to test desktop or mobile browsers (Golem.WebDriver), Android and iOS applications (Golem.Appium), Windows applications (Golem.White), or HTTP requests and web services (Golem.Rest). 
 
+Golem is available via NuGet : https://www.nuget.org/packages/ProtoTest.Golem/
+
 For all documentation, visit the [Golem Wiki](https://github.com/ProtoTest/ProtoTest.Golem/wiki).
 
 ##Example
