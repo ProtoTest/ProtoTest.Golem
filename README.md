@@ -1,15 +1,12 @@
 ﻿Golem Overview
 ====================
 
-##Event driven WebDriver C# Framework
+##Object Oriented C# Automated Testing Framework
 
-Golem is an event-driven automation testing framework written in C# that was created to simplify the design of enterprise-scale automation test suites. 
-It wraps around Selenium-WebDriver and Gallio/MbUnit to provide the tester with a more robust, flexible framework than would be possible by using either 
-application alone. The inclusion of diagnostic features, an intelligently designed library, and enhanced API's helps Golem address issues currently 
-overlooked by Selenium and Gallio. A standard test structure is enforced throughout the Golem framework to make the code readable and easy to reuse. 
+Golem was created to simplify the process of creating enterprise-scale automated testing suites. It wraps around Gallio/MbUnit and a number of automation tools (such as Selenium-WebDriver) to provide the tester with a simple process for creating automated tests no matter what the tool. The inclusion of advanced features, diagnostic information, easy configuration, and enhanced API's helps Golem make automating in code-based automation tools much more practical. A standard test structure is enforced throughout the Golem framework to make the code readable and easy to reuse. 
 
-The Golem repository contains several modules that can be installed in conjunction with Golem Core to perform browser-based testing (Golem.WebDriver), 
-create automated test scripts for Windows desktop applications (Golem.White), and use an API built on top of RestSharp to execute and validate REST 
+The Golem repository contains several modules that can be used to test desktop or mobile browsers (Golem.WebDriver), Android and iOS applications (Golem.Appium), Windows applications (Golem.White), or HTTP requests and web services (Golem.Rest). 
+
 requests (Golem.Rest). 
 
 For all documentation, visit the [Golem Wiki](https://github.com/ProtoTest/ProtoTest.Golem/wiki).
