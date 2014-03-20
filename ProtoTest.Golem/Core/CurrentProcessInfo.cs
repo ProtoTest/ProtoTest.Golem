@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using ProtoTest.Golem.Proxy.HAR;
 using ProtoTest.Golem.WebDriver;
-using ProtoTest.Golem.White;
-using ProtoTest.Golem.White.Elements;
+using ProtoTest.Golem.Purple;
+using ProtoTest.Golem.Purple.Elements;
 using RestSharp.Extensions;
 
 namespace ProtoTest.Golem.Core

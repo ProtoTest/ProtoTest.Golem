@@ -45,6 +45,9 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="InputSimulator">
+      <HintPath>Resources\InputSimulator.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>packages\DotNetZip.1.9.2\lib\net20\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -53,6 +56,10 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PurpleLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\PurpleLib.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
       <HintPath>packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
@@ -105,6 +112,8 @@
     <Compile Include="Proxy\HAR\Request.cs" />
     <Compile Include="Proxy\HAR\Response.cs" />
     <Compile Include="Proxy\HAR\Timings.cs" />
+    <Compile Include="Purple\PurpleCore\Locator.cs" />
+    <Compile Include="Purple\PurpleCore\RectX.cs" />
     <Compile Include="Rest\OAuth\OAuth_Token_Keeper.cs" />
     <Compile Include="Rest\OAuth\simpleTwitterHandler.cs" />
     <Compile Include="Tests\AppiumTest.cs" />
@@ -146,11 +155,26 @@
     <Compile Include="White\Elements\WhiteTextBox.cs" />
     <Compile Include="White\Elements\WhiteToolStrip.cs" />
     <Compile Include="White\Elements\WhiteWindow.cs">
+    <Compile Include="Purple\BaseScreenObject.cs" />
+    <Compile Include="Purple\ElementImageComparer.cs" />
+    <Compile Include="Purple\ElementVerification.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="White\Extensions.cs" />
-    <Compile Include="White\UIUtilities.cs" />
-    <Compile Include="White\WhiteTestBase.cs" />
+    <Compile Include="Purple\IPurpleElement.cs" />
+    <Compile Include="Purple\Extensions.cs" />
+    <Compile Include="Purple\PurpleCore\ScreenCapture.cs" />
+    <Compile Include="Purple\PurpleCore\WindowsConstants.cs" />
+    <Compile Include="Purple\PurpleCore\Window_VisualStyle.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleButton.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleCheckBox.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleComboBox.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleElementBase.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleMenu.cs" />
+    <Compile Include="Purple\PurpleElements\PurplePanel.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleSpinner.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleTextBox.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleWindow.cs" />
+    <Compile Include="Purple\PurpleTestBase.cs" />
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
     <Compile Include="WebDriver\Elements\Images\Histogram.cs" />

@@ -71,7 +71,7 @@ namespace ProtoTest.Golem.Core
         public ImageCompareSettings imageCompareSettings;
         public ReportSettings reportSettings;
         public RuntimeSettings runTimeSettings;
-        public WhiteSettings whiteSettings;
+        public PurpleSettings purpleSettings;
 
         public ConfigSettings()
         {
@@ -80,7 +80,7 @@ namespace ProtoTest.Golem.Core
             httpProxy = new HttpProxy();
             appiumSettings = new AppiumSettings();
             imageCompareSettings = new ImageCompareSettings();
-            whiteSettings = new WhiteSettings();
+            purpleSettings = new PurpleSettings();
         }
 
         /// <summary>
@@ -261,11 +261,12 @@ namespace ProtoTest.Golem.Core
         /// <summary>
         /// Settings for TestStack.White module
         /// </summary>
-        public class WhiteSettings
+        public class PurpleSettings
         {
             public string appPath;
-            public string windowTitle;
+            
             public bool launchApp;
+<<<<<<< HEAD
             //public LoggerLevel logLevel;
             public string workSessionLocation;
             public WhiteSettings()
@@ -275,6 +276,28 @@ namespace ProtoTest.Golem.Core
                 windowTitle = Config.GetConfigValue("WindowTitle", "NOT_SET");
                 workSessionLocation = Config.GetConfigValue("WorkSessionLocation", "C:\\");
                 //logLevel = (LoggerLevel) Enum.Parse(typeof(LoggerLevel), Config.GetConfigValue("LogLevel", "Info"));
+=======
+            public string ProcessName;
+            public string Purple_windowTitle;
+            public string Purple_blankValue;
+            public string Purple_Delimiter;
+            public string Purple_ValueDelimiterStart;
+            public string Purple_ValueDelimiterEnd;
+            public int Purple_ElementTimeoutWaitSeconds;
+
+            public PurpleSettings()
+            {
+                appPath = Config.GetConfigValue("AppPath", "NOT_SET");
+                launchApp = Common.IsTruthy(Config.GetConfigValue("LaunchApp", "True"));
+                ProcessName = Config.GetConfigValue("ProcessName", "NOT SET");
+                Purple_windowTitle = Config.GetConfigValue("Purple_WindowTitle", "EMPTY");
+                Purple_blankValue = Config.GetConfigValue("Purple_BlankValue", "!BLANK!");
+                Purple_Delimiter = Config.GetConfigValue("Purple_Delimiter", "/");
+                Purple_ValueDelimiterStart = Config.GetConfigValue("Purple_ValueDelimiterStart", "[");
+                Purple_ValueDelimiterEnd = Config.GetConfigValue("Purple_ValueDelimiterEnd", "]");
+                Purple_ElementTimeoutWaitSeconds = int.Parse(Config.GetConfigValue("Purple_ElementWaitTimeOutSeconds", "0"));
+
+>>>>>>> purple
             }
         }
     }
