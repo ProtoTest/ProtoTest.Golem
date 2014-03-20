@@ -154,7 +154,6 @@
     <Compile Include="White\Elements\WhiteTable.cs" />
     <Compile Include="White\Elements\WhiteTextBox.cs" />
     <Compile Include="White\Elements\WhiteToolStrip.cs" />
-    <Compile Include="White\Elements\WhiteWindow.cs">
     <Compile Include="Purple\BaseScreenObject.cs" />
     <Compile Include="Purple\ElementImageComparer.cs" />
     <Compile Include="Purple\ElementVerification.cs">
