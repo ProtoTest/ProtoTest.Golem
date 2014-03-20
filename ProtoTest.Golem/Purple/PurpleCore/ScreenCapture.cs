@@ -10,6 +10,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
     public class ScreenCapture
     {
         // This code is a modified version of many similar classes along the same lines. Source from TestStack.White
+        // TestStack.white available: http://docs.teststack.net/White/GettingStarted.html
 
         [DllImport("gdi32.dll")]
         static extern bool BitBlt(IntPtr hdcDest, int xDest, int yDest, int wDest, int hDest, IntPtr hdcSource, int xSrc, int ySrc, CopyPixelOperation rop);

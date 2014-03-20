@@ -28,14 +28,15 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         private String _elementName;
         private bool isOffScreen;
 
-        
         //This is not built yet -- should be interesting we might want to do this on the screenobject base
         private UIA_ElementCacher elementCache;
 
+        #region Accessor Methods
         public AutomationElement PurpleElement
         {
             get
             {
+                //This will wait for specified ElementTimeout config before trying to interact with the element
                 _UIAElement = PurpleCore.Locator.WaitForElementAvailable(_PurplePath);
                 return _UIAElement;
             }
@@ -47,11 +48,26 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         }
 
         public String ElementName {get { return _elementName; }}
+        #endregion
 
         public PurpleElementBase(string name, string locatorPath)
         {
             _elementName = name;
             _PurplePath = locatorPath;
+        }
+
+        public void Invoke()
+        {
+            //This function may need to go in a different class -- although a lot of elements use the Invoke Pattern
+            ((InvokePattern)PurpleElement.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
+        }
+
+        public void SetFocus()
+        {
+            if (!PurpleElement.Current.IsOffscreen)
+            {
+                PurpleElement.SetFocus();
+            }
         }
        
         #region MouseFunctions Functions for dealing with and simulating mouse input
@@ -105,32 +121,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             
         }
         #endregion
-
-        //This function may need to go in a different class
-        public void Invoke()
-        {
-            ((InvokePattern)PurpleElement.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
-        }
-        #region KeyboardInput Functions for simulating keyboard input
-        public void HoldShift()
-        {
-            InputSimulator.SimulateKeyDown(VirtualKeyCode.SHIFT);
-        }
-
-        public void ReleaseShift()
-        {
-            InputSimulator.SimulateKeyUp(VirtualKeyCode.SHIFT);
-        }
-
-        public void PressKey(VirtualKeyCode key)
-        {
-            InputSimulator.SimulateKeyPress(key);
-        }
-        #endregion
-
         
-
-
-
     }
 }

@@ -11,7 +11,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
         }
 
-        //TODO: Impliment
+        //TODO: Impliment PurpleComboBox
         public void Select(string option)
         {
             

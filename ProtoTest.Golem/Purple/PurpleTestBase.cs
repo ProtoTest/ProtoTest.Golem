@@ -37,11 +37,7 @@ namespace ProtoTest.Golem.Purple
         [TearDown]
         public void TearDown()
         {
-            
-            //TestLog.WriteLine(CoreAppXmlConfiguration.Instance.WorkSessionLocation.ToString());
             LogScreenshotIfTestFailed();
-            //app.Close();
-            //app.ApplicationSession.Save();
         }
 
         public void LogScreenshotIfTestFailed()

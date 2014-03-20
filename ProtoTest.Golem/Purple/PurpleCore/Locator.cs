@@ -31,12 +31,12 @@ namespace ProtoTest.Golem.Purple.PurpleCore
         public static AutomationElement WaitForElementAvailable(string purplePath)
         {
             elementTimeoutTimer.Start();
-            AutomationElement getsomething = null;
-            while (getsomething == null)
+            AutomationElement elementAvailable = null;
+            while (elementAvailable == null)
             {
                 try
                 {
-                    getsomething = ByPurplePath.FindElement(purplePath);
+                    elementAvailable = ByPurplePath.FindElement(purplePath);
                 }
                 catch (Exception e)
                 {
@@ -44,12 +44,12 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                 }
                 if (notfound)
                 {
-                    Assert.Fail("Fail damnit");
+                    Assert.Fail("Element Failed to respond in alloted time.");
                     
                 }
             }
             elementTimeoutTimer.Stop();
-            return getsomething;
+            return elementAvailable;
         }
 
         private static void elementTimeout(object source, ElapsedEventArgs args)

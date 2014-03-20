@@ -16,16 +16,11 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         public PurpleMenu(string name, string locatorPath, string targetPath) : base(name, locatorPath)
         {
             _pathAfterMenu = targetPath;
-            FindMenuPath();
-        }
-
-        private void FindMenuPath()
-        {
-            //_pathtoMenuSelection = _pathAfterMenu.Split(getDelimiter().ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         }
 
         public new void Click()
         {
+            //This is not used since we can invoke menu directly
             int menuNums = _pathtoMenuSelection.Count();
             AutomationElement menu = null;
             for(int x = 0; x < menuNums - 1; x++)

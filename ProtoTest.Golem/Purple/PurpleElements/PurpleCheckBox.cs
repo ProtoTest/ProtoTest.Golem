@@ -8,7 +8,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 {
     public class PurpleCheckBox : PurpleElementBase
     {
-        //TODO: Finish this shit.
+        //TODO: Finish Implimenting PurpleCheckBox.
         public bool Checked { get; set; }
 
         public PurpleCheckBox(string name, string locatorPath) : base(name, locatorPath)

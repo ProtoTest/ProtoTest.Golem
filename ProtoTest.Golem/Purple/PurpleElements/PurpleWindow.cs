@@ -41,7 +41,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                 waitForWindow();
             }
             //the PurpleLib will always try to find an element the first window the with name = Purple_windowTitle;
-
             return processRunning;
         }
 
@@ -112,11 +111,11 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
             InputSimulator.SimulateKeyDown(key);
         }
-        public static void LeaveKey(VirtualKeyCode key)
+        public static void ReleaseKey(VirtualKeyCode key)
         {
             InputSimulator.SimulateKeyUp(key);
         }
-        public static void PressSpecialKey(VirtualKeyCode key)
+        public static void PressKey(VirtualKeyCode key)
         {
             InputSimulator.SimulateKeyPress(key);
         }

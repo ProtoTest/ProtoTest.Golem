@@ -2,7 +2,8 @@ using System.Windows;
 
 namespace ProtoTest.Golem.Purple.PurpleCore
 {
-    //This was copied from TestStack.White
+    //This was copied from TestStack.White source code
+    //Teststack.White available at http://docs.teststack.net/White/GettingStarted.html
     public static class RectX
     {
         public static bool IsZeroSize(this Rect rect)
