@@ -45,6 +45,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                 if (notfound)
                 {
                     Assert.Fail("Fail damnit");
+                    
                 }
             }
             elementTimeoutTimer.Stop();
