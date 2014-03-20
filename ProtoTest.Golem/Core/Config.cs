@@ -266,17 +266,7 @@ namespace ProtoTest.Golem.Core
             public string appPath;
             
             public bool launchApp;
-<<<<<<< HEAD
-            //public LoggerLevel logLevel;
-            public string workSessionLocation;
-            public WhiteSettings()
-            {
-                appPath = Config.GetConfigValue("AppPath", "NOT_SET");
-                launchApp = Common.IsTruthy(Config.GetConfigValue("LaunchApp", "True"));
-                windowTitle = Config.GetConfigValue("WindowTitle", "NOT_SET");
-                workSessionLocation = Config.GetConfigValue("WorkSessionLocation", "C:\\");
-                //logLevel = (LoggerLevel) Enum.Parse(typeof(LoggerLevel), Config.GetConfigValue("LogLevel", "Info"));
-=======
+
             public string ProcessName;
             public string Purple_windowTitle;
             public string Purple_blankValue;
@@ -297,7 +287,6 @@ namespace ProtoTest.Golem.Core
                 Purple_ValueDelimiterEnd = Config.GetConfigValue("Purple_ValueDelimiterEnd", "]");
                 Purple_ElementTimeoutWaitSeconds = int.Parse(Config.GetConfigValue("Purple_ElementWaitTimeOutSeconds", "0"));
 
->>>>>>> purple
             }
         }
     }

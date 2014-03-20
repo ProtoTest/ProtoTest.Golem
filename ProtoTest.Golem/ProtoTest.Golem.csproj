@@ -73,9 +73,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestStack.White">
-      <HintPath>packages\TestStack.White.0.12.0\lib\net40\TestStack.White.dll</HintPath>
-    </Reference>
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WebDriver">
@@ -132,28 +129,6 @@
     <Compile Include="Tests\TestProxy.cs" />
     <Compile Include="Tests\TestWebDriverTestBase.cs" />
     <Compile Include="Tests\VerificationTests.cs" />
-    <Compile Include="White\BaseScreenObject.cs" />
-    <Compile Include="White\ElementFactory.cs" />
-    <Compile Include="White\ElementImageComparer.cs" />
-    <Compile Include="White\Elements\WhiteCustom.cs" />
-    <Compile Include="White\Elements\WhiteElement.cs" />
-    <Compile Include="White\Elements\WhiteGroupBox.cs" />
-    <Compile Include="White\ElementVerification.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="White\IWhiteElement.cs" />
-    <Compile Include="White\Elements\WhiteSpinner.cs" />
-    <Compile Include="White\Elements\WhiteButton.cs" />
-    <Compile Include="White\Elements\WhiteCheckBox.cs" />
-    <Compile Include="White\Elements\WhiteLabel.cs" />
-    <Compile Include="White\Elements\WhiteListItem.cs" />
-    <Compile Include="White\Elements\WhiteListView.cs" />
-    <Compile Include="White\Elements\WhiteComboBox.cs" />
-    <Compile Include="White\Elements\WhiteMenu.cs" />
-    <Compile Include="White\Elements\WhitePanel.cs" />
-    <Compile Include="White\Elements\WhiteTable.cs" />
-    <Compile Include="White\Elements\WhiteTextBox.cs" />
-    <Compile Include="White\Elements\WhiteToolStrip.cs" />
     <Compile Include="Purple\BaseScreenObject.cs" />
     <Compile Include="Purple\ElementImageComparer.cs" />
     <Compile Include="Purple\ElementVerification.cs">
