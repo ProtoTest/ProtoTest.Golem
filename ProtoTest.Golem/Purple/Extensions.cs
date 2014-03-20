@@ -2,29 +2,30 @@
 using System.Drawing;
 using System.Threading;
 using System.Windows;
-using TestStack.White;
-using TestStack.White.UIItemEvents;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.WindowItems;
+using System.Windows.Automation;
+using ProtoTest.Golem.Purple.PurpleCore;
+using ProtoTest.Golem.Purple.PurpleElements;
 using Image = System.Drawing.Image;
 
-namespace ProtoTest.Golem.White
+namespace ProtoTest.Golem.Purple
 {
     public static class Extensions
     {
-        public static Image GetImage(this Application window)
+        //TODO this has to be refactored
+        public static Image GetImage(this AutomationElement window)
         {
             return new ScreenCapture().CaptureScreenShot();
         }
 
-        public static void SetCheckbox(this CheckBox box, bool isChecked)
+        public static void SetCheckbox(this PurpleCheckBox box, bool isChecked)
         {
-            if(box.Checked!=isChecked)
+            if (box.Checked != isChecked)
                 box.Click();
         }
 
-        public static Image GetImage(this UIItem item)
+        public static Image GetImage(this PurpleElementBase item)
         {
+            
             Image screenImage = new ScreenCapture().CaptureScreenShot();
             Rectangle cropArea = item.Bounds.ToRectangle();
             var bmpImage = new Bitmap(screenImage);
@@ -37,18 +38,18 @@ namespace ProtoTest.Golem.White
         {
             var result =
                 new Rectangle();
-            result.X = (int) value.X;
-            result.Y = (int) value.Y;
-            result.Width = (int) value.Width;
-            result.Height = (int) value.Height;
+            result.X = (int)value.X;
+            result.Y = (int)value.Y;
+            result.Width = (int)value.Width;
+            result.Height = (int)value.Height;
             return result;
         }
 
-        public static bool IsStale(this UIItem item)
+        public static bool IsStale(this PurpleElementBase item)
         {
             try
             {
-                var enabled = item.Enabled;
+                var enabled = item.PurpleElement.Current.IsEnabled;
                 return false;
             }
             catch (Exception)
@@ -57,25 +58,25 @@ namespace ProtoTest.Golem.White
             }
         }
 
-        public static bool Present(this UIItem item)
+        public static bool Present(this PurpleElementBase item)
         {
-            return !item.IsStale() && item.Enabled;
+            return !item.IsStale() && item.PurpleElement.Current.IsEnabled;
         }
 
-        public static void WaitForVisible(this UIItem item)
+        public static void WaitForVisible(this PurpleElementBase item)
         {
 
             try
             {
 
-                var enabled = item.Enabled;
+                var enabled = item.PurpleElement.Current.IsEnabled;
             }
             catch (Exception)
             {
-                
+
             }
-            
-            
+
+
         }
     }
 }
