@@ -2,8 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Castle.Components.DictionaryAdapter.Xml;
-using Castle.Core.Logging;
 using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
