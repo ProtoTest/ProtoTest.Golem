@@ -19,8 +19,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         private static void waitForWindow()
         {
-            window = Locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle);
-            //WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle);
+            window = Locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
+            
         }
         
         public static bool FindRunningProcess()

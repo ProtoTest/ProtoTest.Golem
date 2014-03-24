@@ -28,10 +28,12 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             elementTimeoutTimer.Elapsed += elementTimeout;
         }
 
-        public static AutomationElement WaitForElementAvailable(string purplePath)
+        public static AutomationElement WaitForElementAvailable(string purplePath, string name)
         {
             elementTimeoutTimer.Start();
             AutomationElement elementAvailable = null;
+            DateTime startTime = DateTime.Now;
+            DateTime endTime;
             while (elementAvailable == null)
             {
                 try
@@ -44,11 +46,17 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                 }
                 if (notfound)
                 {
-                    Assert.Fail("Element Failed to respond in alloted time.");
+                    Assert.Fail(string.Format("Element: {0} Failed to respond in alloted time.", name));
                     
                 }
             }
             elementTimeoutTimer.Stop();
+            endTime = DateTime.Now;
+            if (!notfound)
+            {
+                int seconds = endTime.Second - startTime.Second;
+                TestBase.Log(string.Format("Element: {2} found in {0}.{1} seconds.", seconds, endTime.Millisecond, name));
+            }
             return elementAvailable;
         }
 
