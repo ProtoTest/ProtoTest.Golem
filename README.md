@@ -7,6 +7,8 @@ Golem was created to simplify the process of creating enterprise-scale automated
 
 The Golem repository contains several modules that can be used to test desktop or mobile browsers (Golem.WebDriver), Android and iOS applications (Golem.Appium), Windows applications (Golem.White), or HTTP requests and web services (Golem.Rest). 
 
+As Golem is built on top of MbUnit, all advanced MbUnit attributes are supported including data driven testing, parallel test execution, and test filtering via meta-data.   
+
 Golem is available via NuGet : https://www.nuget.org/packages/ProtoTest.Golem/
 
 For all documentation, visit the [Golem Wiki](https://github.com/ProtoTest/ProtoTest.Golem/wiki).
@@ -17,7 +19,11 @@ Tests are written using a human readable DSL via Page Objects.
     class TestExample : WebDriverTestBase
     {
         [Test]
-        public void TestNormal()
+        [Category("Google Example")]
+        [TestsOn("Search Results")]
+        [Author("Brian Kitchener")]
+        [Description("Performs a search on google and validates a result is displayed")]
+        public void TestGoogleSearch()
         {
             OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor("Selenium").VerifyResult("Selenium - Web Browser Automation");
         }
