@@ -108,6 +108,8 @@
     <Compile Include="Proxy\HAR\Timings.cs" />
     <Compile Include="Purple\PurpleCore\Locator.cs" />
     <Compile Include="Purple\PurpleCore\RectX.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleDropDown.cs" />
+    <Compile Include="Purple\PurpleElements\PurpleRadioButton.cs" />
     <Compile Include="Purple\PurpleElements\PurpleTable.cs" />
     <Compile Include="Rest\OAuth\OAuth_Token_Keeper.cs" />
     <Compile Include="Rest\OAuth\simpleTwitterHandler.cs" />
