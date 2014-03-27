@@ -121,10 +121,12 @@
     <Compile Include="Tests\PageObjects\Google\GoogleHomePage2.cs" />
     <Compile Include="Tests\PageObjects\Google\GoogleResultsPage.cs" />
     <Compile Include="Tests\PageObjects\Google\SearchResultPage.cs" />
+    <Compile Include="Tests\PageObjects\MSPaint\MSPaint_6.cs" />
     <Compile Include="Tests\TestBasePageObject.cs" />
     <Compile Include="Tests\TestBaseTests.cs" />
     <Compile Include="Tests\TestDDT.cs" />
     <Compile Include="Tests\TestImageComparison.cs" />
+    <Compile Include="Tests\TestMSPaint6.cs" />
     <Compile Include="Tests\TestMultiThreading.cs" />
     <Compile Include="Tests\TestProxy.cs" />
     <Compile Include="Tests\TestWebDriverTestBase.cs" />
