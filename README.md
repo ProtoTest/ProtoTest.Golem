@@ -70,4 +70,10 @@ Test reports include robust diagnostic information.  A command log, source html,
 * For desktop applications, use [Golem.White](https://github.com/ProtoTest/ProtoTest.Golem/wiki/Golem.White,-Getting-Started).
 
 
-
+##Contributing to Golem
+If you would like to contribute to golem:
+* Post a thread detailed proposed changes in prototest-golem user group
+* Clone Golem 
+* Perform modifications on a new branch
+* Commit branch changes
+* Issue pull-request against that branch
