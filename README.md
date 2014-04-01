@@ -28,7 +28,7 @@ Tests are written using a human readable DSL via Page Objects.
             OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor("Selenium").VerifyResult("Selenium - Web Browser Automation");
         }
 ```
-Page Objects are simple, and stable.  Configurable automatic waiting and page validations.  
+Page Objects are simple, and stable.  WaitForElements() allows for automatic waiting and page validations.  
 ```C#
     public class GoogleHomePage : BasePageObject
     {
@@ -53,6 +53,14 @@ Page Objects are simple, and stable.  Configurable automatic waiting and page va
         }
     }
 ```
+
+The Element class extends IWebElement and handles finding the element and includes a chainable DSL.
+```C#
+searchField.WaitUntil(30).Visible().Verify().Value("ProtoTest").Click();
+
+```
+
+
 
 Test reports include robust diagnostic information.  A command log, source html, screenshots/video, and HTTP traffic configurable through code or an App.config.  
 
