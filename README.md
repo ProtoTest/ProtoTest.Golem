@@ -14,7 +14,7 @@ Golem is available via NuGet : https://www.nuget.org/packages/ProtoTest.Golem/
 For all documentation, visit the [Golem Wiki](https://github.com/ProtoTest/ProtoTest.Golem/wiki).
 
 ##Example
-Tests are written using a human readable DSL via Page Objects.  
+Tests are written as MbUnit Tests using a human readable DSL via Page Objects, and can be executed via Gallio or TestDriven.net.  
 ```C#
     class TestExample : WebDriverTestBase
     {
