@@ -45,8 +45,9 @@
     <Reference Include="InputSimulator">
       <HintPath>Resources\InputSimulator.dll</HintPath>
     </Reference>
-    <Reference Include="Ionic.Zip">
-      <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\DotNetZip.1.9.2\lib\net20\Ionic.Zip.dll</HintPath>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\SikuliIntegrator.1.1.0\lib\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="MbUnit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <HintPath>packages\Gallio_MbUnit.3.4.14.0\lib\net40\MbUnit.dll</HintPath>
@@ -61,10 +62,16 @@
     <Reference Include="RestSharp">
       <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="SikuliModule">
+      <HintPath>packages\SikuliIntegrator.1.1.0\lib\SikuliModule.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+      <HintPath>packages\SikuliIntegrator.1.1.0\lib\System.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -110,9 +117,13 @@
     <Compile Include="Purple\PurpleCore\RectX.cs" />
     <Compile Include="Rest\OAuth\OAuth_Token_Keeper.cs" />
     <Compile Include="Rest\OAuth\simpleTwitterHandler.cs" />
+    <Compile Include="Sikuli\By.cs" />
+    <Compile Include="Sikuli\SikuliElement.cs" />
+    <Compile Include="Sikuli\SikuliTestBase.cs" />
     <Compile Include="Tests\AppiumTest.cs" />
     <Compile Include="Tests\BrowserTests.cs" />
     <Compile Include="Tests\ConfigTests.cs" />
+    <Compile Include="Tests\ElementTests.cs" />
     <Compile Include="Tests\PageObjects\Google\GmailPage.cs" />
     <Compile Include="Tests\PageObjects\Google\GoogleHomePage.cs" />
     <Compile Include="Tests\PageObjects\Google\GoogleHomePage2.cs" />
@@ -207,6 +218,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="JSikuliModule.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Proxy\browsermob-proxy-2.0-beta-8-bin.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

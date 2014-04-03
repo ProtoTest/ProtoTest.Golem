@@ -83,29 +83,18 @@ namespace ProtoTest.Golem.WebDriver
         {
             if (param != "") param = "'" + param + "'";
 
-            if (TestBase.testData.lastElement.name != "")
-            {
-                return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
+            return string.Format("{0}: {1} '{2}' ({3}) {4}", TestBase.GetCurrentClassAndMethodName(), command,
                     TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);
-            }
 
-            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element", e.Element,
-                param);
         }
 
         private string GetLogMessage(string command, FindElementEventArgs e = null, string param = "")
         {
             if (param != "") param = "'" + param + "'";
 
-            if (TestBase.testData.lastElement.name != "")
-            {
-                return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
-                    TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);
-            }
+            return string.Format("{0}: {1} '{2}' ({3})", TestBase.GetCurrentClassAndMethodName(), command,
+                   TestBase.testData.lastElement.name, e.FindMethod, param);
 
-            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element",
-                e.Element.Location,
-                param);
         }
     }
 }

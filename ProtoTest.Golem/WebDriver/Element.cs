@@ -14,6 +14,7 @@ namespace ProtoTest.Golem.WebDriver
     /// </summary>
     public class Element : IWebElement, IWrapsDriver, IWrapsElement
     {
+        private Element frame;
         protected IWebElement _element;
         private ElementImages _images;
         public By by;
@@ -29,6 +30,7 @@ namespace ProtoTest.Golem.WebDriver
         public Element()
         {
             this.pageObjectName = TestBase.GetCurrentClassName();
+            
         }
 
         /// <summary>
@@ -47,7 +49,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(string name, By locator) : base()
         {
-            this.name = name;
+            this.name =  name;
             this.by = locator;
         }
 
@@ -57,7 +59,32 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(By locator) : base()
         {
-            this.name = locator.ToString();
+            this.name = "Element";
+            this.by = locator;
+        }
+
+        /// <summary>
+        /// Construct an element within an iframe
+        /// </summary>
+        /// <param name="name">Human readable name of the element</param>
+        /// <param name="locator">By locator</param>
+        public Element(string name, By locator, Element frame)
+            : base()
+        {
+            this.frame = frame;
+            this.name = frame.name + "." + name;
+            this.by = locator;
+        }
+
+        /// <summary>
+        /// Construct an element
+        /// </summary>
+        /// <param name="locator">By locator</param>
+        public Element(By locator, Element frame)
+            : base()
+        {
+            this.frame = frame;
+            this.name = frame + "." + "Element";
             this.by = locator;
         }
 
@@ -317,8 +344,8 @@ namespace ProtoTest.Golem.WebDriver
 
         public IWebElement WrappedElement
         {
-            get { return _element; }
-            private set { _element = value; }
+            get { return element; }
+            private set { element = value; }
         }
 
         /// <summary>
@@ -350,9 +377,20 @@ namespace ProtoTest.Golem.WebDriver
                 TestBase.testData.lastElement = this;
                 if (_element.IsStale())
                 {
-                    _element = driver.FindElement(@by);
-                }
+                    if (this.frame != null)
+                    {
+                        driver.SwitchTo().Frame(frame.WrappedElement);
+                        TestBase.testData.lastElement = this;
+                    }
+                    else
+                    {
+                        driver.SwitchTo().DefaultContent();
+                    }
+                    var ele = driver.FindElement(@by);
+                   
+                    return ele;
 
+                }
                 return _element;
             }
             catch (Exception)
