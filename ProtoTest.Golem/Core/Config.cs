@@ -274,7 +274,7 @@ namespace ProtoTest.Golem.Core
                 CommandDelayMs = Config.GetConfigValueAsInt("CommandDelayMs", "0");
                 RunOnRemoteHost = Config.GetConfigValueAsBool("RunOnRemoteHost", "False");
                 AutoWaitForElements = Config.GetConfigValueAsBool("AutoWaitForElements", "True");
-                HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "False");
+                HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "True");
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
             }
 

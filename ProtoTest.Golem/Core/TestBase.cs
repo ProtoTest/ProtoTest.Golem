@@ -367,10 +367,6 @@ namespace ProtoTest.Golem.Core
             foreach (StackFrame stackFrame in stackFrames)
             {
                 var type = stackFrame.GetMethod().ReflectedType;
-                if (stackFrame.GetMethod().Name.Contains("Test"))
-                {
-                    DiagnosticLog.WriteLine(type.ToString());
-                }
                 if (type.IsSubclassOf(typeof(TestBase)) && (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;

@@ -16,7 +16,10 @@ namespace ProtoTest.Golem.WebDriver
         {
             driver = WebDriverTestBase.driver;
             className = GetType().Name;
-            WaitForElements();
+            if (Config.Settings.runTimeSettings.AutoWaitForElements)
+            {
+                WaitForElements();
+            }
             TestBase.testData.actions.addAction(TestBase.GetCurrentClassAndMethodName());
         }
 

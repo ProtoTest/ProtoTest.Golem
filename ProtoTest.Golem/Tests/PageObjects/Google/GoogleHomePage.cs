@@ -6,7 +6,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
     public class GoogleHomePage : BasePageObject
     {
 
-        Element searchField = new Element("SearchField", By.Name("q"));
+        Element searchField = new Element("SearchField", By.Name("zq"));
         Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
         Element searchButton = new Element("SearchButton", By.Name("btnK"));
         Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));

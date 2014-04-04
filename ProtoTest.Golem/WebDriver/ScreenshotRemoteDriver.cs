@@ -1,6 +1,5 @@
 ﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Android;
 using OpenQA.Selenium.Remote;
 
 namespace ProtoTest.Golem.WebDriver

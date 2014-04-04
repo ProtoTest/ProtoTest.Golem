@@ -21,7 +21,7 @@ namespace ProtoTest.Golem.Tests
         public void TestNoName()
         {
             var element = new Element(By.Id("Id"));
-            Assert.AreEqual(element.name, "By.Id: Id");
+            Assert.AreEqual(element.name, "Element");
         }
         [Test]
         public void TestWithName()
@@ -34,12 +34,19 @@ namespace ProtoTest.Golem.Tests
         {
             driver.Navigate().GoToUrl("http://www.google.com/");
             var element = new Element("NameOfElement", By.Name("q"));
-            element.WaitUntil(20).Visible().SetText("ProtoTest");
-            element.Verify().Value("ProtoTest").Click();
-
+            element.SetText("ProtoTest");
+            element.Verify().Value("ProtoTest").Submit();
             element.WaitUntil(20).Visible().Text = "Golem";
-            element.Verify().Value("Golem");
+            element.Verify(23).Value("Golem");
         }
-
+        [Test]
+        public void TestNotPresent()
+        {
+            driver.Navigate().GoToUrl("http://www.google.com/");
+            var SearchField = new Element("SearchField", By.Name("q"));
+            var element = new Element("NotPresentElement", By.Name("z"));
+            SearchField.WaitUntil().Present();
+            element.Verify().Not().Present();
+        }
     }
 }

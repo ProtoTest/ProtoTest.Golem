@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Support.UI;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver.Elements.Images;
 
@@ -20,6 +21,7 @@ namespace ProtoTest.Golem.WebDriver
         public By by;
         public string name = "Element";
         public string pageObjectName = "";
+        public int timeoutSec;
 
         protected IWebDriver driver
         {
@@ -30,18 +32,21 @@ namespace ProtoTest.Golem.WebDriver
         public Element()
         {
             this.pageObjectName = TestBase.GetCurrentClassName();
-
+            this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
         /// Construct an element using an existing element
         /// </summary>
         /// <param name="element"></param>
-        public Element(IWebElement element)
-            : base()
+        public Element(IWebElement element): base()
         {
             this.element = element;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
         }
+
+ 
 
         /// <summary>
         /// Construct an element
@@ -49,21 +54,23 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="name">Human readable name of the element</param>
         /// <param name="locator">By locator</param>
         public Element(string name, By locator)
-            : base()
         {
             this.name = name;
             this.by = locator;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
         /// Construct an element
         /// </summary>
         /// <param name="locator">By locator</param>
-        public Element(By locator)
-            : base()
+        public Element(By locator): base()
         {
             this.name = "Element";
             this.by = locator;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
@@ -71,24 +78,26 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="name">Human readable name of the element</param>
         /// <param name="locator">By locator</param>
-        public Element(string name, By locator, Element frame)
-            : base()
+        public Element(string name, By locator, Element frame): base()
         {
             this._frame = frame;
             this.name = name;
             this.by = locator;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
         /// Construct an element
         /// </summary>
         /// <param name="locator">By locator</param>
-        public Element(By locator, Element frame)
-            : base()
+        public Element(By locator, Element frame): base()
         {
             this._frame = frame;
             this.name = "Element";
             this.by = locator;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
         }
 
         public ElementImages Images
@@ -100,6 +109,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
+                
                 _element = GetElement();
                 return _element;
             }
@@ -191,19 +201,10 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                if (!Present)
-                {
-                    throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
-                }
                 return element.Text;
             }
             set
             {
-                if (!Present)
-                {
-                    throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
-                }
-
                 element.Clear();
                 element.SendKeys(value);
             }
@@ -234,10 +235,6 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         public void Clear()
         {
-            if (!Present)
-            {
-                throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
-            }
             element.Clear();
         }
 
@@ -246,10 +243,6 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         public void Click()
         {
-            if (!Present)
-            {
-                throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
-            }
             element.Click();
         }
 
@@ -258,10 +251,6 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         public void Submit()
         {
-            if (!Present)
-            {
-                throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
-            }
             element.Submit();
         }
 
@@ -271,10 +260,6 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="text">Text to send</param>
         public void SendKeys(string text)
         {
-            if (!Present)
-            {
-                throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
-            }
             element.SendKeys(text);
         }
 
@@ -318,14 +303,34 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
+        /// Create an element verification for some condition.  
+        /// </summary>
+        /// <returns>A new ElementVerification for the element</returns>
+        public ElementVerification Verify()
+        {
+            this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            return new ElementVerification(this, this.timeoutSec, false);
+        }
+
+        /// <summary>
+        /// Wait for some condition on the element
+        /// </summary>
+        /// <returns>A new ElementVerification for the element</returns>
+        public ElementVerification WaitUntil(int timeoutSec)
+        {
+            this.timeoutSec = timeoutSec;
+            return new ElementVerification(this, this.timeoutSec, true);
+        }
+
+        /// <summary>
         /// Create an element verification for some condition
         /// </summary>
-        /// <param name="timeoutSec">Optional timeout that overrides the default timeout set in the configuration settings class or App.config file</param>
+        /// <param name="timeoutSec"> timeout that overrides the default timeout set in the configuration settings class or App.config file</param>
         /// <returns>A new ElementVerification for the element</returns>
-        public ElementVerification Verify(int timeoutSec = -1)
+        public ElementVerification Verify(int timeoutSec)
         {
-            if (timeoutSec == -1) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            return new ElementVerification(this, timeoutSec, false);
+            this.timeoutSec = timeoutSec;
+            return new ElementVerification(this, this.timeoutSec, false);
         }
 
         /// <summary>
@@ -333,10 +338,10 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="timeoutSec">Optional timeout that overrides the default timeout set in the configuration settings class or App.config file</param>
         /// <returns>A new ElementVerification for the element</returns>
-        public ElementVerification WaitUntil(int timeoutSec = -1)
+        public ElementVerification WaitUntil()
         {
-            if (timeoutSec == -1) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            return new ElementVerification(this, timeoutSec, true);
+            this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            return new ElementVerification(this, this.timeoutSec, true);
         }
 
         private IWebElement GetElement()
@@ -355,16 +360,13 @@ namespace ProtoTest.Golem.WebDriver
                     {
                         driver.SwitchTo().DefaultContent();
                     }
-                    var ele = driver.FindElement(@by);
-
-                    return ele;
-
+                    return driver.WaitForPresent(@by,timeoutSec);
                 }
                 return _element;
             }
             catch (Exception)
             {
-                string message = string.Format("Could not locate element '{0}' ({1})", name, @by);
+                string message = string.Format("Could not find element '{0}' ({1}) after {2} seconds", name, @by,timeoutSec);
                 throw new NoSuchElementException(message);
             }
         }
@@ -374,8 +376,6 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         public void ClearChecked()
         {
-            if (!Present)
-                throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
             element.ClearChecked();
         }
 
@@ -384,11 +384,6 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         public void Highlight()
         {
-            if (!Present)
-            {
-                throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
-            }
-
             element.Highlight();
         }
 
@@ -411,7 +406,7 @@ namespace ProtoTest.Golem.WebDriver
         /// find one that is displayed and enabled. 
         /// </summary>
         /// <returns>The element found</returns>
-        public Element FindVisibleElement()
+        public Element GetVisibleElement()
         {
             element = driver.FindVisibleElement(@by);
             return this;

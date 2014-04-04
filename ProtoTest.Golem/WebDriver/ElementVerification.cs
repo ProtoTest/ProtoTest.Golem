@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Threading;
 using Gallio.Framework;
 using MbUnit.Framework;
 using OpenQA.Selenium;
@@ -20,7 +23,7 @@ namespace ProtoTest.Golem.WebDriver
         private string notMessage;
         private int timeoutSec;
 
-        public ElementVerification(Element element, int timeoutSec = 0, bool failTest = false, bool isTrue = true)
+        public ElementVerification(Element element, int timeoutSec, bool failTest = false, bool isTrue = true)
         {
             this.element = element;
             this.timeoutSec = timeoutSec;
@@ -30,6 +33,12 @@ namespace ProtoTest.Golem.WebDriver
 
         public ElementVerification Not()
         {
+            element.timeoutSec = 1;
+            return new ElementVerification(element, timeoutSec, failTest, false);
+        }
+        public ElementVerification Not(int timeoutSec)
+        {
+            this.timeoutSec = timeoutSec;
             return new ElementVerification(element, timeoutSec, failTest, false);
         }
 
@@ -78,8 +87,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "is found";
             notMessage = "not found";
-
-            for (int i = 0; i <= timeoutSec; i++)
+            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now;now<then;now = DateTime.Now)
             {
                 condition = element.FindElements(bylocator).Count > 0;
                 if (condition == isTrue)
@@ -99,7 +108,8 @@ namespace ProtoTest.Golem.WebDriver
             message = "is present";
             notMessage = "not present";
             
-            for (int i = 0; i <= timeoutSec; i++)
+            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now;now<then;now = DateTime.Now)
             {
                 condition = element.Present;
                 if (condition == isTrue)
@@ -117,8 +127,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "is visible";
             notMessage = "not visible";
-            if (timeoutSec == 0) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            for (int i = 0; i <= timeoutSec; i++)
+            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = element.Displayed;
                 if (condition == isTrue)
@@ -137,7 +147,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "contains text '" + text + "'";
             notMessage = "doesn't contain text '" + text + "'";
-            for (int i = 0; i <= timeoutSec; i++)
+            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.Text.Contains(text));
                 if (condition == isTrue)
@@ -155,7 +166,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "has value " + text;
             notMessage = "doesn't have value " + text;
-            for (int i = 0; i <= timeoutSec; i++)
+            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.GetAttribute("value").Contains(text));
                 if (condition == isTrue)
@@ -173,7 +185,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "has attribute " + attribute + " with value " + value;
             notMessage = "doesn't have attribute " + attribute + " with value " + value;
-            for (int i = 0; i <= timeoutSec; i++)
+            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.GetAttribute(attribute).Contains(value));
                 if (condition == isTrue)
@@ -191,7 +204,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "is selected";
             notMessage = "isn't selected";
-            for (int i = 0; i <= timeoutSec; i++)
+            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.Selected);
                 if (condition == isTrue)
@@ -209,21 +223,24 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "image matches";
             notMessage = "image is {0} different";
-            condition = (element.Present) && (element.Images.ImagesMatch());
-            if (condition == isTrue)
+            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
-                TestContext.CurrentContext.IncrementAssertCount();
-                TestBase.LogEvent(GetSuccessMessage());
+                condition = (element.Present) && (element.Images.ImagesMatch());
+                if (condition == isTrue)
+                {
+                    TestContext.CurrentContext.IncrementAssertCount();
+                    TestBase.LogEvent(GetSuccessMessage());
+                    return element;
+                }
+                Common.Delay(1000);
             }
-
-            else
-            {
-                notMessage = string.Format(notMessage, element.Images.differenceString);
-                VerificationFailed(
-                    string.Format("{0}: {1}({2}): {3}", TestBase.GetCurrentClassAndMethodName(), element.name,
-                        element.by,
-                        notMessage), element.Images.GetMergedImage());
-            }
+   
+            notMessage = string.Format(notMessage, element.Images.differenceString);
+            VerificationFailed(
+                string.Format("{0}: {1}({2}): {3}", TestBase.GetCurrentClassAndMethodName(), element.name,
+                    element.by,
+                    notMessage), element.Images.GetMergedImage());
 
             return element;
         }
