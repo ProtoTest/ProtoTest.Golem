@@ -14,9 +14,9 @@ namespace ProtoTest.Golem.WebDriver
     /// </summary>
     public class Element : IWebElement, IWrapsDriver, IWrapsElement
     {
-        private Element frame;
+        protected Element _frame;
         protected IWebElement _element;
-        private ElementImages _images;
+        protected ElementImages _images;
         public By by;
         public string name = "Element";
         public string pageObjectName = "";
@@ -74,8 +74,8 @@ namespace ProtoTest.Golem.WebDriver
         public Element(string name, By locator, Element frame)
             : base()
         {
-            this.frame = frame;
-            this.name = frame.name + "." + name;
+            this._frame = frame;
+            this.name = name;
             this.by = locator;
         }
 
@@ -86,8 +86,8 @@ namespace ProtoTest.Golem.WebDriver
         public Element(By locator, Element frame)
             : base()
         {
-            this.frame = frame;
-            this.name = frame + "." + "Element";
+            this._frame = frame;
+            this.name = "Element";
             this.by = locator;
         }
 
@@ -195,12 +195,6 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
                 }
-
-                if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                {
-                    element.Highlight();
-                }
-
                 return element.Text;
             }
             set
@@ -212,10 +206,6 @@ namespace ProtoTest.Golem.WebDriver
 
                 element.Clear();
                 element.SendKeys(value);
-                if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                {
-                    element.Highlight();
-                }
             }
         }
 
@@ -240,7 +230,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        /// Clears the contents of the element and optionally highlights the element if highlightOnVerify is set to true in the application configuration settings.
+        /// Clears the contents of the element\\.
         /// </summary>
         public void Clear()
         {
@@ -248,12 +238,6 @@ namespace ProtoTest.Golem.WebDriver
             {
                 throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
             }
-
-            if (Config.Settings.runTimeSettings.HighlightOnVerify)
-            {
-                element.Highlight();
-            }
-
             element.Clear();
         }
 
@@ -266,12 +250,6 @@ namespace ProtoTest.Golem.WebDriver
             {
                 throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
             }
-
-            if (Config.Settings.runTimeSettings.HighlightOnVerify)
-            {
-                element.Highlight();
-            }
-
             element.Click();
         }
 
@@ -284,12 +262,6 @@ namespace ProtoTest.Golem.WebDriver
             {
                 throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
             }
-
-            if (Config.Settings.runTimeSettings.HighlightOnVerify)
-            {
-                element.Highlight();
-            }
-
             element.Submit();
         }
 
@@ -303,12 +275,6 @@ namespace ProtoTest.Golem.WebDriver
             {
                 throw new NoSuchElementException(string.Format("No Such Element '{0}' ({1}) ", name, @by));
             }
-
-            if (Config.Settings.runTimeSettings.HighlightOnVerify)
-            {
-                element.Highlight();
-            }
-
             element.SendKeys(text);
         }
 
@@ -380,9 +346,9 @@ namespace ProtoTest.Golem.WebDriver
                 TestBase.testData.lastElement = this;
                 if (_element.IsStale())
                 {
-                    if (this.frame != null)
+                    if (this._frame != null)
                     {
-                        driver.SwitchTo().Frame(frame.WrappedElement);
+                        driver.SwitchTo().Frame(_frame.WrappedElement);
                         TestBase.testData.lastElement = this;
                     }
                     else
@@ -410,8 +376,6 @@ namespace ProtoTest.Golem.WebDriver
         {
             if (!Present)
                 throw new NoSuchElementException("No Such Element '{0}' ({1}) ");
-            if (Config.Settings.runTimeSettings.HighlightOnVerify)
-                element.Highlight();
             element.ClearChecked();
         }
 

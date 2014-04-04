@@ -9,11 +9,11 @@ namespace ProtoTest.Golem.WebDriver
     public class EventedWebDriver
     {
         private const string errorMessage = "{0}: {1} '{2}' ({3}) {4}";
-        public EventFiringWebDriver driver;
+        public ProtoTest.Golem.WebDriver.EventFiringWebDriver driver;
 
         public EventedWebDriver(IWebDriver driver)
         {
-            this.driver = new EventFiringWebDriver(driver);
+            this.driver = new ProtoTest.Golem.WebDriver.EventFiringWebDriver(driver);
             RegisterEvents();
         }
 
@@ -25,13 +25,23 @@ namespace ProtoTest.Golem.WebDriver
             driver.Navigating += driver_Navigating;
             driver.ElementValueChanged += driver_ElementValueChanged;
             driver.FindElementCompleted += driver_FindElementCompleted;
+            driver.FoundElement += driver_FoundElement;
             return driver;
+        }
+
+        void driver_FoundElement(object sender, FoundElementEventArgs e)
+        {
+            if (Config.Settings.runTimeSettings.HighlightFoundElements)
+            {
+                e.Element.Highlight(); 
+            }
+            TestContext.CurrentContext.IncrementAssertCount();
         }
 
 
         private void driver_FindElementCompleted(object sender, FindElementEventArgs e)
         {
-            TestContext.CurrentContext.IncrementAssertCount();
+            
         }
 
         private void driver_ElementValueChanged(object sender, WebElementEventArgs e)

@@ -308,9 +308,18 @@ namespace ProtoTest.Golem.Core
 
             foreach (StackFrame stackFrame in stackFrames)
             {
-                if (stackFrame.GetMethod().ReflectedType.FullName.Contains("PageObject"))
+                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof(BasePageObject)) &&
+                    (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name;
+                }
+            }
+            foreach (StackFrame stackFrame in stackFrames)
+            {
+                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof(TestBase)) &&
+                    (!stackFrame.GetMethod().IsConstructor))
+                {
+                    return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
                 }
             }
 
@@ -325,11 +334,19 @@ namespace ProtoTest.Golem.Core
             // write call stack method names
             foreach (StackFrame stackFrame in stackFrames)
             {
-                if (stackFrame.GetMethod().ReflectedType.BaseType == typeof(BasePageObject))
+                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof(BasePageObject))) && (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().Name;
                 }
             }
+            foreach (StackFrame stackFrame in stackFrames)
+            {
+                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof(TestBase)) && (!stackFrame.GetMethod().IsConstructor)))
+                {
+                    return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
+                }
+            }
+
             return "";
         }
 
@@ -340,8 +357,21 @@ namespace ProtoTest.Golem.Core
 
             foreach (StackFrame stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.FullName.Contains("PageObject")) &&
-                    (!stackFrame.GetMethod().IsConstructor))
+                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof(BasePageObject)) &&
+                    (!stackFrame.GetMethod().IsConstructor)))
+                {
+                    return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
+                }
+            }
+
+            foreach (StackFrame stackFrame in stackFrames)
+            {
+                var type = stackFrame.GetMethod().ReflectedType;
+                if (stackFrame.GetMethod().Name.Contains("Test"))
+                {
+                    DiagnosticLog.WriteLine(type.ToString());
+                }
+                if (type.IsSubclassOf(typeof(TestBase)) && (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
                 }
