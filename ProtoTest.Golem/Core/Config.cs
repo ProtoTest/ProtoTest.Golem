@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Deployment.Internal;
 using System.IO;
 using System.Reflection;
 using System.Xml;
 //using Castle.Core.Logging;
-
+using Gallio.Framework;
 using ProtoTest.Golem.Appium;
 using ProtoTest.Golem.WebDriver;
 
@@ -39,6 +40,72 @@ namespace ProtoTest.Golem.Core
             }
 
             return setting;
+        }
+
+        /// <summary>
+        /// Returns the App.config value for requested key, or default value if not defined, and tries to parse it for an byte.  
+        /// </summary>
+        /// <param name="key">Application configuration key</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <returns></returns>
+        public static byte GetConfigValueAsByte(string key, string defaultValue)
+        {
+            string setting = "";
+            try
+            {
+                setting = GetConfigValue(key, defaultValue);
+                return byte.Parse(setting);
+            }
+            catch (Exception e)
+            {
+                TestLog.Warnings.WriteLine(
+                    string.Format(
+                        "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
+                        key, setting, e.Message));
+                return 1;
+            }
+
+        }
+
+
+        /// <summary>
+        /// Returns the App.config value for requested key, or default value if not defined, and tries to parse it for an int.  
+        /// </summary>
+        /// <param name="key">Application configuration key</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <returns></returns>
+        public static int GetConfigValueAsInt(string key, string defaultValue)
+        {
+            string setting = "";
+            try
+            {
+                setting = GetConfigValue(key, defaultValue);
+                return int.Parse(setting);
+            }
+            catch (Exception e)
+            {
+                TestLog.Warnings.WriteLine(
+                    string.Format(
+                        "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
+                        key, setting,e.Message));
+                return 1;
+            }
+            
+        }
+        /// <summary>
+        /// Returns the App.config value for requested key, or default value if not defined and returns a boolean.  Looks for True, true, False, false.  
+        /// </summary>
+        /// <param name="key">Application configuration key</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <returns></returns>
+        public static bool GetConfigValueAsBool(string key, string defaultValue)
+        {
+            string setting = ConfigurationManager.AppSettings[key];
+            if (setting == null)
+            {
+                setting = defaultValue;
+            }
+            return Common.IsTruthy(setting);
         }
 
         /// <summary>
@@ -101,15 +168,15 @@ namespace ProtoTest.Golem.Core
 
             public AppiumSettings()
             {
-                launchApp = Common.IsTruthy(Config.GetConfigValue("LaunchApp", "False"));
+                launchApp = Config.GetConfigValueAsBool("LaunchApp", "False");
                 appPath = Config.GetConfigValue("AppPath", "");
                 package = Config.GetConfigValue("AppPackage", "");
                 activity = Config.GetConfigValue("AppActivity", "");
                 device = Config.GetConfigValue("Device", "");
                 appiumPort = Config.GetConfigValue("AppiumPort", "4723");
-                useIpa = Common.IsTruthy(Config.GetConfigValue("UseIpa", "False"));
+                useIpa = Config.GetConfigValueAsBool("UseIpa", "False");
                 appiumServerPath = Config.GetConfigValue("AppiumServerPath", "");
-                resetApp = Common.IsTruthy(Config.GetConfigValue("ResetApp", "False"));
+                resetApp = Config.GetConfigValueAsBool("ResetApp", "False");
                 bundleId = Config.GetConfigValue("BundleId", "");
             }
         }
@@ -126,10 +193,10 @@ namespace ProtoTest.Golem.Core
 
             public HttpProxy()
             {
-                proxyServerPort = int.Parse(Config.GetConfigValue("ProxyServerPort", "18880"));
-                startProxy = Common.IsTruthy(Config.GetConfigValue("StartProxy", "False"));
-                useProxy = Common.IsTruthy(Config.GetConfigValue("UseProxy", "False"));
-                proxyPort = int.Parse(Config.GetConfigValue("ProxyPort", "18881"));
+                proxyServerPort = Config.GetConfigValueAsInt("ProxyServerPort", "18880");
+                startProxy = Config.GetConfigValueAsBool("StartProxy", "False");
+                useProxy = Config.GetConfigValueAsBool("UseProxy", "False");
+                proxyPort = Config.GetConfigValueAsInt("ProxyPort", "18881");
             }
         }
 
@@ -144,9 +211,9 @@ namespace ProtoTest.Golem.Core
 
             public ImageCompareSettings()
             {
-                fuzziness = Byte.Parse(Config.GetConfigValue("Fuzziness", "50"));
-                accuracy = float.Parse(Config.GetConfigValue("Accuracy", ".01"));
-                updateImages = Common.IsTruthy(Config.GetConfigValue("UpdateImages", "false"));
+                fuzziness = Config.GetConfigValueAsByte("Fuzziness", "50");
+                accuracy = float.Parse(Config.GetConfigValue("Accuracy", "1"))/100;
+                updateImages = Config.GetConfigValueAsBool("UpdateImages", "false");
             }
         }
 
@@ -164,13 +231,13 @@ namespace ProtoTest.Golem.Core
 
             public ReportSettings()
             {
-                htmlOnError = Common.IsTruthy(Config.GetConfigValue("HtmlOnError", "True"));
-                screenshotOnError = Common.IsTruthy(Config.GetConfigValue("ScreenshotOnError", "True"));
-                videoRecordingOnError = Common.IsTruthy(Config.GetConfigValue("VideoRecordingOnError", "True"));
-                commandLogging = Common.IsTruthy(Config.GetConfigValue("CommandLogging", "True"));
-                actionLogging = Common.IsTruthy(Config.GetConfigValue("ActionLogging", "True"));
-                spellChecking = Common.IsTruthy(Config.GetConfigValue("SpellChecking", "False"));
-            }
+                htmlOnError = Config.GetConfigValueAsBool("HtmlOnError", "True");
+                screenshotOnError = Config.GetConfigValueAsBool("ScreenshotOnError", "True");
+                videoRecordingOnError = Config.GetConfigValueAsBool("VideoRecordingOnError", "True");
+                commandLogging = Config.GetConfigValueAsBool("CommandLogging", "True");
+                actionLogging = Config.GetConfigValueAsBool("ActionLogging", "True");
+                spellChecking = Config.GetConfigValueAsBool("SpellChecking", "False");
+            }        
         }
 
         /// <summary>
@@ -185,7 +252,7 @@ namespace ProtoTest.Golem.Core
             public int ElementTimeoutSec;
             public int OpenWindowTimeoutSec;
             public string EnvironmentUrl;
-            public bool HighlightOnVerify;
+            public bool HighlightFoundElements;
             public List<string> Hosts;
             public bool LaunchBrowser;
             public int PageTimeoutSec;
@@ -197,17 +264,17 @@ namespace ProtoTest.Golem.Core
             {
                 Browsers = GetBrowserList();
                 Hosts = GetHostsList();
-                LaunchBrowser = Common.IsTruthy(Config.GetConfigValue("LaunchBrowser", "True"));
-                TestTimeoutMin = int.Parse(Config.GetConfigValue("TestTimeoutMin", "5"));
-                ElementTimeoutSec = int.Parse(Config.GetConfigValue("ElementTimeoutSec", "5"));
-                OpenWindowTimeoutSec = int.Parse(Config.GetConfigValue("WindowOpenTimeoutSec", "10"));
-                PageTimeoutSec = int.Parse(Config.GetConfigValue("PageTimeoutSec", "30"));
+                LaunchBrowser = Config.GetConfigValueAsBool("LaunchBrowser", "True");
+                TestTimeoutMin = Config.GetConfigValueAsInt("TestTimeoutMin", "5");
+                ElementTimeoutSec = Config.GetConfigValueAsInt("ElementTimeoutSec", "5");
+                OpenWindowTimeoutSec = Config.GetConfigValueAsInt("WindowOpenTimeoutSec", "10");
+                PageTimeoutSec = Config.GetConfigValueAsInt("PageTimeoutSec", "30");
                 EnvironmentUrl = Config.GetConfigValue("EnvironmentUrl", "");
-                DegreeOfParallelism = int.Parse(Config.GetConfigValue("DegreeOfParallelism", "5"));
-                CommandDelayMs = int.Parse(Config.GetConfigValue("CommandDelayMs", "0"));
-                RunOnRemoteHost = Common.IsTruthy(Config.GetConfigValue("RunOnRemoteHost", "False"));
-                AutoWaitForElements = Common.IsTruthy(Config.GetConfigValue("AutoWaitForElements", "True"));
-                HighlightOnVerify = Common.IsTruthy(Config.GetConfigValue("HighlightOnVerify", "False"));
+                DegreeOfParallelism = Config.GetConfigValueAsInt("DegreeOfParallelism", "5");
+                CommandDelayMs = Config.GetConfigValueAsInt("CommandDelayMs", "0");
+                RunOnRemoteHost = Config.GetConfigValueAsBool("RunOnRemoteHost", "False");
+                AutoWaitForElements = Config.GetConfigValueAsBool("AutoWaitForElements", "True");
+                HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "False");
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
             }
 
@@ -278,14 +345,14 @@ namespace ProtoTest.Golem.Core
             public PurpleSettings()
             {
                 appPath = Config.GetConfigValue("AppPath", "NOT_SET");
-                launchApp = Common.IsTruthy(Config.GetConfigValue("LaunchApp", "True"));
+                launchApp = Config.GetConfigValueAsBool("LaunchApp", "True");
                 ProcessName = Config.GetConfigValue("ProcessName", "NOT SET");
                 Purple_windowTitle = Config.GetConfigValue("Purple_WindowTitle", "EMPTY");
                 Purple_blankValue = Config.GetConfigValue("Purple_BlankValue", "!BLANK!");
                 Purple_Delimiter = Config.GetConfigValue("Purple_Delimiter", "/");
                 Purple_ValueDelimiterStart = Config.GetConfigValue("Purple_ValueDelimiterStart", "[");
                 Purple_ValueDelimiterEnd = Config.GetConfigValue("Purple_ValueDelimiterEnd", "]");
-                Purple_ElementTimeoutWaitSeconds = int.Parse(Config.GetConfigValue("Purple_ElementWaitTimeOutSeconds", "0"));
+                Purple_ElementTimeoutWaitSeconds = Config.GetConfigValueAsInt("Purple_ElementWaitTimeOutSeconds", "0");
 
             }
         }
