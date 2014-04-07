@@ -64,10 +64,31 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public void SetFocus()
         {
-            if (!PurpleElement.Current.IsOffscreen)
+            if (_UIAElement != null)
             {
-                PurpleElement.SetFocus();
+                _UIAElement.SetFocus();
             }
+            else
+            {
+                if (!PurpleElement.Current.IsOffscreen)
+                {
+                    SetFocus();
+                }
+            }
+        }
+
+        public bool IsEnabled()
+        {
+            bool enabled = false;
+            if (_UIAElement == null)
+            {
+                enabled = PurpleElement.Current.IsEnabled;
+            }
+            else
+            {
+                enabled = _UIAElement.Current.IsEnabled;
+            }
+            return enabled;
         }
        
         #region MouseFunctions Functions for dealing with and simulating mouse input
@@ -98,29 +119,55 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         }
         public void Click()
         {
-            if (!PurpleElement.Current.IsOffscreen)
+            if (_UIAElement != null)
             {
-                SetCursorPos((int) PurpleElement.GetClickablePoint().X, (int) PurpleElement.GetClickablePoint().Y);
+                SetCursorPos((int)_UIAElement.GetClickablePoint().X, (int)_UIAElement.GetClickablePoint().Y);
+                Thread.Sleep(50);
                 mouse_event(WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                Thread.Sleep(50);
                 mouse_event(WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
+            else
+            {
+                if (!PurpleElement.Current.IsOffscreen)
+                {
+                    if (_UIAElement.Current.IsEnabled)
+                    {
+                        Click();
+                    }
+                }
+            }
+
         }
 
         public void DoubleLeftClick()
         {
-            
-            if (!PurpleElement.Current.IsOffscreen)
+            if (_UIAElement != null)
             {
                 SetCursorPos((int) PurpleElement.GetClickablePoint().X, (int) PurpleElement.GetClickablePoint().Y);
                 mouse_event(WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                Thread.Sleep(50);
                 mouse_event(WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
                 Thread.Sleep(50);
                 mouse_event(WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                Thread.Sleep(50);
                 mouse_event(WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+            }
+            else
+            {
+                if (!PurpleElement.Current.IsOffscreen)
+                {
+                    if (_UIAElement.Current.IsEnabled)
+                    {
+                        DoubleLeftClick();
+                    }
+                }
             }
             
         }
         #endregion
+
+
         
     }
 }

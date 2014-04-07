@@ -18,7 +18,7 @@ namespace ProtoTest.Golem.Purple
     {
         
         [FixtureInitializer]
-        public void WhiteSettings()
+        public void TestSettings()
         {
             
         }

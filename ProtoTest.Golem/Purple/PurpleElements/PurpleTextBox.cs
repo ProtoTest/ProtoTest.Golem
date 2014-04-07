@@ -14,8 +14,22 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public string Text
         {
-            get { return GetText(); }
-            set { EnterText(value); }
+            get
+            {
+                string enteredText = "ELEMENT NOT FOUND";
+                if (PurpleElement.Current.IsEnabled)
+                {
+                    enteredText = GetText();
+                }
+                return enteredText;
+            }
+            set
+            {
+                if (PurpleElement.Current.IsEnabled)
+                {
+                    EnterText(value);
+                }
+            }
         }
 
         public PurpleTextBox(string name, string locatorPath) : base(name, locatorPath)
@@ -25,13 +39,13 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         private string GetText()
         {
             string textValue = "THERE IS NO TEXT";
-            if (PurpleElement.Current.IsPassword)
+            if (_UIAElement.Current.IsPassword)
             {
                 PurpleTestBase.LogEvent(string.Format("Field is {0} is a Password field, cannot get value", ElementName));
                 textValue = "PASSWORD FIELD CANNOT BE READ";
             }
             object basePattern;
-            if (PurpleElement.TryGetCurrentPattern(ValuePattern.Pattern, out basePattern))
+            if (_UIAElement.TryGetCurrentPattern(ValuePattern.Pattern, out basePattern))
             {
                 ValuePattern valuePattern = (BasePattern)basePattern as ValuePattern;
                 if (valuePattern != null)
@@ -49,14 +63,12 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         private void EnterText(string val)
         {
-            if (PurpleElement.Current.IsEnabled)
+            if (!_UIAElement.Current.IsOffscreen)
             {
-                if (!PurpleElement.Current.IsOffscreen)
-                {
-                    PurpleElement.SetFocus();
-                    SendKeys.SendWait(val);
-                }
+                _UIAElement.SetFocus();
+                SendKeys.SendWait(val);
             }
+            
         }
 
     }

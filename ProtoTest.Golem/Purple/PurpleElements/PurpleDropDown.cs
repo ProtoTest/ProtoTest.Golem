@@ -18,17 +18,27 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         public string GetSelected()
         {
             string nameofSelected = "";
-            object basePattern;
-            if (PurpleElement.TryGetCurrentPattern(SelectionPattern.Pattern, out basePattern))
+            if (_UIAElement != null)
             {
-                SelectionPattern selection = (BasePattern) basePattern as SelectionPattern;
-                if (selection != null)
+                object basePattern;
+                if (_UIAElement.TryGetCurrentPattern(SelectionPattern.Pattern, out basePattern))
                 {
-                    AutomationElement[] automationElements = selection.Current.GetSelection();
-                    foreach (var automationElement in automationElements)
+                    SelectionPattern selection = (BasePattern) basePattern as SelectionPattern;
+                    if (selection != null)
                     {
-                        nameofSelected = automationElement.Current.Name;
+                        AutomationElement[] automationElements = selection.Current.GetSelection();
+                        foreach (var automationElement in automationElements)
+                        {
+                            nameofSelected = automationElement.Current.Name;
+                        }
                     }
+                }
+            }
+            else
+            {
+                if (PurpleElement.Current.IsEnabled)
+                {
+                    GetSelected();
                 }
             }
             return nameofSelected;
@@ -36,41 +46,46 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public void SelectItem(string item)
         {
-            //Now we need to find the right one
-            int matchingIndex = -1;
-            AutomationElement itemToSelect = null;
-
-            object basePattern;
-            if (PurpleElement.TryGetCurrentPattern(ExpandCollapsePattern.Pattern, out basePattern))
+            if (_UIAElement != null)
             {
-                ExpandCollapsePattern expand = (BasePattern)basePattern as ExpandCollapsePattern;
-                if (expand != null)
+                //Now we need to find the right one
+                int matchingIndex = -1;
+                AutomationElement itemToSelect = null;
+
+                object basePattern;
+                if (_UIAElement.TryGetCurrentPattern(ExpandCollapsePattern.Pattern, out basePattern))
                 {
-                    if (expand.Current.ExpandCollapseState == ExpandCollapseState.Collapsed)
+                    ExpandCollapsePattern expand = (BasePattern) basePattern as ExpandCollapsePattern;
+                    if (expand != null)
                     {
-                        expand.Expand();
-                        
-                        availableOptions = PurpleElement.FindAll(TreeScope.Subtree, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem));
-                        for (int x = 0; x < availableOptions.Count; x++)
+                        if (expand.Current.ExpandCollapseState == ExpandCollapseState.Collapsed)
                         {
-                            if (item == availableOptions[x].Current.Name)
+                            expand.Expand();
+
+                            availableOptions = _UIAElement.FindAll(TreeScope.Subtree, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem));
+                            for (int x = 0; x < availableOptions.Count; x++)
                             {
-                                itemToSelect = availableOptions[x];
+                                if (item == availableOptions[x].Current.Name)
+                                {
+                                    itemToSelect = availableOptions[x];
+                                }
+                            }
+                            if (itemToSelect != null)
+                            {
+                                SelectionItemPattern selectPattern = (SelectionItemPattern) itemToSelect.GetCurrentPattern(SelectionItemPattern.Pattern);
+                                selectPattern.Select();
                             }
                         }
-                        if (itemToSelect != null)
-                        {
-                           SelectionItemPattern selectPattern = (SelectionItemPattern)itemToSelect.GetCurrentPattern(SelectionItemPattern.Pattern);
-                            selectPattern.Select(); 
-                        }
                     }
-
                 }
             }
-            
-
-            
-
+            else
+            {
+                if (PurpleElement.Current.IsEnabled)
+                {
+                    SelectItem(item);
+                }
+            }
         }
 
     }
