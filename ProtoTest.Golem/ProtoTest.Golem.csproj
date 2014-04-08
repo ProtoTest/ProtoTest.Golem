@@ -40,27 +40,27 @@
       <HintPath>packages\Gallio_MbUnit.3.4.14.0\lib\net40\Gallio.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
+      <HintPath>packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="InputSimulator">
       <HintPath>Resources\InputSimulator.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip">
-      <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\DotNetZip.1.9.2\lib\net20\Ionic.Zip.dll</HintPath>
+      <HintPath>packages\DotNetZip.1.9.2\lib\net20\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="MbUnit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <HintPath>packages\Gallio_MbUnit.3.4.14.0\lib\net40\MbUnit.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.6.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PurpleLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Resources\PurpleLib.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+      <HintPath>packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -75,11 +75,11 @@
     <Reference Include="UIAutomationTypes" />
     <Reference Include="WebDriver, Version=2.41.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.WebDriver.2.41.0\lib\net40\WebDriver.dll</HintPath>
+      <HintPath>packages\Selenium.WebDriver.2.41.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver.Support, Version=2.41.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.Support.2.41.0\lib\net40\WebDriver.Support.dll</HintPath>
+      <HintPath>packages\Selenium.Support.2.41.0\lib\net40\WebDriver.Support.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -90,25 +90,25 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\ProcessRunner.cs" />
-    <Compile Include="obj\Proxy\BrowserMobProxy.cs" />
-    <Compile Include="obj\Proxy\HAR\Browser.cs" />
-    <Compile Include="obj\Proxy\HAR\Cache.cs" />
-    <Compile Include="obj\Proxy\HAR\CacheEntry.cs" />
-    <Compile Include="obj\Proxy\HAR\Content.cs" />
-    <Compile Include="obj\Proxy\HAR\Cookie.cs" />
-    <Compile Include="obj\Proxy\HAR\Creator.cs" />
-    <Compile Include="obj\Proxy\HAR\Entry.cs" />
-    <Compile Include="obj\Proxy\HAR\HarResult.cs" />
-    <Compile Include="obj\Proxy\HAR\Header.cs" />
-    <Compile Include="obj\Proxy\HAR\Log.cs" />
-    <Compile Include="obj\Proxy\HAR\Page.cs" />
-    <Compile Include="obj\Proxy\HAR\PageTimings.cs" />
-    <Compile Include="obj\Proxy\HAR\Param.cs" />
-    <Compile Include="obj\Proxy\HAR\PostData.cs" />
-    <Compile Include="obj\Proxy\HAR\QueryStringItem.cs" />
-    <Compile Include="obj\Proxy\HAR\Request.cs" />
-    <Compile Include="obj\Proxy\HAR\Response.cs" />
-    <Compile Include="obj\Proxy\HAR\Timings.cs" />
+    <Compile Include="Proxy\BrowserMobProxy.cs" />
+    <Compile Include="Proxy\HAR\Browser.cs" />
+    <Compile Include="Proxy\HAR\Cache.cs" />
+    <Compile Include="Proxy\HAR\CacheEntry.cs" />
+    <Compile Include="Proxy\HAR\Content.cs" />
+    <Compile Include="Proxy\HAR\Cookie.cs" />
+    <Compile Include="Proxy\HAR\Creator.cs" />
+    <Compile Include="Proxy\HAR\Entry.cs" />
+    <Compile Include="Proxy\HAR\HarResult.cs" />
+    <Compile Include="Proxy\HAR\Header.cs" />
+    <Compile Include="Proxy\HAR\Log.cs" />
+    <Compile Include="Proxy\HAR\Page.cs" />
+    <Compile Include="Proxy\HAR\PageTimings.cs" />
+    <Compile Include="Proxy\HAR\Param.cs" />
+    <Compile Include="Proxy\HAR\PostData.cs" />
+    <Compile Include="Proxy\HAR\QueryStringItem.cs" />
+    <Compile Include="Proxy\HAR\Request.cs" />
+    <Compile Include="Proxy\HAR\Response.cs" />
+    <Compile Include="Proxy\HAR\Timings.cs" />
     <Compile Include="Purple\PurpleCore\Locator.cs" />
     <Compile Include="Purple\PurpleCore\RectX.cs" />
     <Compile Include="Rest\OAuth\OAuth_Token_Keeper.cs" />
@@ -213,7 +213,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="obj\Proxy\browsermob-proxy-2.0-beta-8-bin.zip">
+    <Content Include="Proxy\browsermob-proxy-2.0-beta-8-bin.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Tests\Data\Data.csv">
