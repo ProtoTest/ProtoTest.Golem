@@ -80,7 +80,7 @@ namespace ProtoTest.Golem.Rest
                 proxy.QuitServer();
             }
         }
-
+        [NUnit.Framework.SetUp]
         [SetUp]
         public void SetUp()
         {
@@ -88,6 +88,7 @@ namespace ProtoTest.Golem.Rest
             StartProxy();
         }
 
+        [NUnit.Framework.TearDown]
         [TearDown]
         public void TearDown()
         {

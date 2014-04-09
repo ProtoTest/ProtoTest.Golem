@@ -66,7 +66,7 @@ namespace ProtoTest.Golem.Core
 
         protected static Object locker = new object();
         public static BrowserMobProxy proxy;
-
+        [NUnit.Framework.SetUp]
         [SetUp]
         public virtual void SetUpTestBase()
         {
@@ -76,6 +76,7 @@ namespace ProtoTest.Golem.Core
 
         }
 
+        [NUnit.Framework.SetUp]
         [TearDown]
         public virtual void TearDownTestBase()
         {
@@ -88,7 +89,7 @@ namespace ProtoTest.Golem.Core
             DeleteTestData();
         }
 
-
+        [NUnit.Framework.TestFixtureSetUp]
         [FixtureSetUp]
         public virtual void SuiteSetUp()
         {
@@ -98,7 +99,7 @@ namespace ProtoTest.Golem.Core
             StartProxyServer();
         }
 
-
+        [NUnit.Framework.TestFixtureTearDown]
         [FixtureTearDown]
         public virtual void SuiteTearDown()
         {
