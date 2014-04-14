@@ -32,8 +32,9 @@ namespace ProtoTest.Golem.Purple.PurpleCore
         {
             elementTimeoutTimer.Start();
             AutomationElement elementAvailable = null;
-            DateTime startTime = DateTime.Now;
-            DateTime endTime;
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            TestBase.Log(string.Format("Locating Element: {0}", name));
             while (elementAvailable == null)
             {
                 try
@@ -46,16 +47,16 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                 }
                 if (notfound)
                 {
-                    Assert.Fail(string.Format("Element: {0} Failed to respond in alloted time.", name));
+                    Assert.Fail(string.Format("Element: {0} with Path: {1} Failed to respond in alloted time.", name, purplePath));
                     
                 }
             }
             elementTimeoutTimer.Stop();
-            endTime = DateTime.Now;
+            stopWatch.Stop();
             if (!notfound)
             {
-                int seconds = endTime.Second - startTime.Second;
-                TestBase.Log(string.Format("Element: {2} found in {0}.{1} seconds.", seconds, endTime.Millisecond, name));
+                TimeSpan time = stopWatch.Elapsed;
+                TestBase.Log(string.Format("Element: {2} found in {0}.{1} seconds.", time.Seconds, time.Milliseconds, name));
             }
             return elementAvailable;
         }
