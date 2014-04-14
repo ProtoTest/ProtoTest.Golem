@@ -2,12 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>ProtoTest.Golem</id>
-    <version>1.0.0.13</version>
+    <version>1.1.0.0</version>
     <title>ProtoTest.Golem</title>
     <authors>ProtoTest, LLC</authors>
     <owners>ProtoTest, LLC</owners>
     <projectUrl>http://www.github.com/prototest/prototest.golem</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Selenium/MbUnit Test Automation Framework</description>
     <releaseNotes>Initial Open Source Release</releaseNotes>
     <copyright>Copyright 2014, ProtoTest</copyright>

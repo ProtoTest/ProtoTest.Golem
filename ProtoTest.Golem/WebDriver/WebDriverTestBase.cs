@@ -123,11 +123,14 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
+        [NUnit.Framework.SetUp]
         [SetUp]
         public void SetUp()
         {
             LaunchBrowser();
         }
+
+        [NUnit.Framework.TearDown]
         [TearDown]
         public override void TearDownTestBase()
         {

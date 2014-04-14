@@ -111,37 +111,70 @@ namespace ProtoTest.Golem.WebDriver
         public static IWebElement WaitForPresent(this IWebElement element, By by, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            var wait = new WebDriverWait(WebDriverTestBase.driver, TimeSpan.FromSeconds(timeout));
-            return wait.Until(d => element.FindElement(@by));
+            var then = DateTime.Now.AddSeconds(timeout);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var eles = element.FindElements(by);
+                if (eles.Count > 0)
+                    return eles[0];
+                Common.Delay(1000);
+            }
+            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds", by.ToString(), timeout));
         }
 
         public static IWebElement WaitForPresent(this IWebDriver driver, By by, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-            return wait.Until(d => d.FindElement(@by));
+            var then = DateTime.Now.AddSeconds(timeout);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var eles = driver.FindElements(by);
+                if (eles.Count > 0)
+                    return eles[0];
+                Common.Delay(1000);
+            }
+            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds", by.ToString(), timeout));
         }
 
         public static void WaitForNotPresent(this IWebDriver driver, By by, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d => d.FindElements(by).Count == 0);
+            var then = DateTime.Now.AddSeconds(timeout);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var eles = driver.FindElements(by);
+                if (eles.Count > 0)
+                    return;
+                Common.Delay(1000);
+            }
+            throw new InvalidElementStateException(string.Format("Element ({0}) was still present after {1} seconds", by.ToString(),timeout));
         }
 
         public static IWebElement WaitForVisible(this IWebDriver driver, By by, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Config.Settings.runTimeSettings.ElementTimeoutSec));
-            wait.Until(d => ((d.FindElements(by).Count > 0) && d.FindElement(by).Displayed));
-            return driver.FindElement(by);
+            var then = DateTime.Now.AddSeconds(timeout);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var eles = driver.FindElements(by);
+                if (eles.Count > 0 && eles[0].Displayed)
+                    return eles[0];
+            }
+            throw new ElementNotVisibleException(string.Format("Element ({0}) was not visible after {1} seconds", by.ToString(), timeout));
         }
 
         public static void WaitForNotVisible(this IWebDriver driver, By by, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-            wait.Until(d => ((d.FindElements(by).Count == 0) || (d.FindElement(by).Displayed == false)));
+            var then = DateTime.Now.AddSeconds(timeout);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var eles = driver.FindElements(by);
+                if (eles.Count > 0 && !eles[0].Displayed)
+                    return;
+                Common.Delay(1000);
+            }
+            throw new ElementNotVisibleException(string.Format("Element ({0}) was still visible after {1} seconds", by.ToString(), timeout));
         }
 
         public static IWebElement FindElementWithText(this IWebDriver driver, string text)

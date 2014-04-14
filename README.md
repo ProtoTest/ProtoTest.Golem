@@ -14,7 +14,7 @@ Golem is available via NuGet : https://www.nuget.org/packages/ProtoTest.Golem/
 For all documentation, visit the [Golem Wiki](https://github.com/ProtoTest/ProtoTest.Golem/wiki).
 
 ##Example
-Tests are written using a human readable DSL via Page Objects.  
+Tests are written as MbUnit Tests using a human readable DSL via Page Objects, and can be executed via Gallio or TestDriven.net.  
 ```C#
     class TestExample : WebDriverTestBase
     {
@@ -28,7 +28,7 @@ Tests are written using a human readable DSL via Page Objects.
             OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor("Selenium").VerifyResult("Selenium - Web Browser Automation");
         }
 ```
-Page Objects are simple, and stable.  Configurable automatic waiting and page validations.  
+Page Objects are simple, and stable.  WaitForElements() allows for automatic waiting and page validations.  
 ```C#
     public class GoogleHomePage : BasePageObject
     {
@@ -54,6 +54,14 @@ Page Objects are simple, and stable.  Configurable automatic waiting and page va
     }
 ```
 
+The Element class extends IWebElement and handles finding the element and includes a chainable DSL.
+```C#
+searchField.WaitUntil(30).Visible().Verify().Value("ProtoTest").Click();
+
+```
+
+
+
 Test reports include robust diagnostic information.  A command log, source html, screenshots/video, and HTTP traffic configurable through code or an App.config.  
 
 ![ScreenShot](http://raw.github.com/ProtoTest/ProtoTest.Golem/master/ProtoTest.Golem/Tests/SampleReport/Report.jpg)
@@ -70,4 +78,10 @@ Test reports include robust diagnostic information.  A command log, source html,
 * For desktop applications, use [Golem.White](https://github.com/ProtoTest/ProtoTest.Golem/wiki/Golem.White,-Getting-Started).
 
 
-
+##Contributing to Golem
+If you would like to contribute to golem:
+* Post a thread detailed proposed changes in prototest-golem user group
+* Clone Golem 
+* Perform modifications on a new branch
+* Commit branch changes
+* Issue pull-request against that branch

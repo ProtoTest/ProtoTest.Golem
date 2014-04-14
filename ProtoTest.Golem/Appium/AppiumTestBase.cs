@@ -78,24 +78,28 @@ namespace ProtoTest.Golem.Appium
             }
         }
 
+        [NUnit.Framework.TestFixtureSetUp]
         [FixtureSetUp]
         public void SetupFixture()
         {            
             server.StartProcess();
         }
 
+        [NUnit.Framework.TestFixtureTearDown]
         [FixtureTearDown]
         public void TeardowmFixture()
         {
             server.StopProcess();
         }
 
+        [NUnit.Framework.SetUp]
         [SetUp]
         public void SetUp()
         {
             LaunchApp();
         }
 
+        [NUnit.Framework.TearDown]
         [TearDown]
         public void Teardown()
         {            

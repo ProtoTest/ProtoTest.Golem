@@ -23,15 +23,15 @@ namespace ProtoTest.Golem.Purple
             
         }
 
-
+        [NUnit.Framework.SetUp]
         [SetUp]
         public void SetUp()
         {
             PurpleWindow.FindRunningProcess();
         }
 
-        
 
+        [NUnit.Framework.TearDown]
         [TearDown]
         public void TearDown()
         {
