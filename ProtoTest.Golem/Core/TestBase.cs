@@ -219,7 +219,7 @@ namespace ProtoTest.Golem.Core
             GenericEvent -= WriteActionToLog;
         }
 
-
+        //commented out Proxy stuff because browserMobProxy is not implimented
         private void GetHarFile()
         {
             try

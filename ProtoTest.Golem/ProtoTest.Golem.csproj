@@ -55,9 +55,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="PurpleLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -94,25 +93,26 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\ProcessRunner.cs" />
-    <Compile Include="obj\Proxy\BrowserMobProxy.cs" />
-    <Compile Include="obj\Proxy\HAR\Browser.cs" />
-    <Compile Include="obj\Proxy\HAR\Cache.cs" />
-    <Compile Include="obj\Proxy\HAR\CacheEntry.cs" />
-    <Compile Include="obj\Proxy\HAR\Content.cs" />
-    <Compile Include="obj\Proxy\HAR\Cookie.cs" />
-    <Compile Include="obj\Proxy\HAR\Creator.cs" />
-    <Compile Include="obj\Proxy\HAR\Entry.cs" />
-    <Compile Include="obj\Proxy\HAR\HarResult.cs" />
-    <Compile Include="obj\Proxy\HAR\Header.cs" />
-    <Compile Include="obj\Proxy\HAR\Log.cs" />
-    <Compile Include="obj\Proxy\HAR\Page.cs" />
-    <Compile Include="obj\Proxy\HAR\PageTimings.cs" />
-    <Compile Include="obj\Proxy\HAR\Param.cs" />
-    <Compile Include="obj\Proxy\HAR\PostData.cs" />
-    <Compile Include="obj\Proxy\HAR\QueryStringItem.cs" />
-    <Compile Include="obj\Proxy\HAR\Request.cs" />
-    <Compile Include="obj\Proxy\HAR\Response.cs" />
-    <Compile Include="obj\Proxy\HAR\Timings.cs" />
+    <Compile Include="Proxy\BrowserMobProxy.cs" />
+    <Compile Include="Proxy\HAR\Browser.cs" />
+    <Compile Include="Proxy\HAR\Cache.cs" />
+    <Compile Include="Proxy\HAR\CacheEntry.cs" />
+    <Compile Include="Proxy\HAR\Content.cs" />
+    <Compile Include="Proxy\HAR\Cookie.cs" />
+    <Compile Include="Proxy\HAR\Creator.cs" />
+    <Compile Include="Proxy\HAR\Entry.cs" />
+    <Compile Include="Proxy\HAR\HarResult.cs" />
+    <Compile Include="Proxy\HAR\Header.cs" />
+    <Compile Include="Proxy\HAR\Log.cs" />
+    <Compile Include="Proxy\HAR\Page.cs" />
+    <Compile Include="Proxy\HAR\PageTimings.cs" />
+    <Compile Include="Proxy\HAR\Param.cs" />
+    <Compile Include="Proxy\HAR\PostData.cs" />
+    <Compile Include="Proxy\HAR\QueryStringItem.cs" />
+    <Compile Include="Proxy\HAR\Request.cs" />
+    <Compile Include="Proxy\HAR\Response.cs" />
+    <Compile Include="Proxy\HAR\Timings.cs" />
+    <Compile Include="Proxy\ProxyTests.cs" />
     <Compile Include="Purple\PurpleCore\Locator.cs" />
     <Compile Include="Purple\PurpleCore\RectX.cs" />
     <Compile Include="Purple\PurpleElements\PurpleDropDown.cs" />
@@ -211,6 +211,7 @@
     <Content Include="chromedriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Proxy\browsermob-proxy-2.0-beta-8-bin.zip" />
     <None Include="Tests\Data\SearchData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -222,9 +223,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="obj\Proxy\browsermob-proxy-2.0-beta-8-bin.zip">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Tests\Data\Data.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
