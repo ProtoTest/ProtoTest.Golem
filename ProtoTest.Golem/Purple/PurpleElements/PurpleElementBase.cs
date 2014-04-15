@@ -8,13 +8,14 @@ using System.Windows;
 using System.Windows.Automation;
 using WindowsInput;
 using ProtoTest.Golem.Core;
+using ProtoTest.Golem.Purple.Elements;
 using Purple.Core;
 using PurpleLib;
 using Point = System.Windows.Point;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {
-    public class PurpleElementBase
+    public class PurpleElementBase : IPurpleElement
     {
         //These functions are used to set the cursor position and handle click events
         [DllImport("user32.dll")]
@@ -47,7 +48,12 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             get { return PurpleElement.Current.BoundingRectangle; }
         }
 
+        //used with Interface
         public String ElementName {get { return _elementName; }}
+        public String PurplePath{ get { return _PurplePath; }}
+        public AutomationElement UIAElement {get { return _UIAElement; }}
+
+
         #endregion
 
         public PurpleElementBase(string name, string locatorPath)

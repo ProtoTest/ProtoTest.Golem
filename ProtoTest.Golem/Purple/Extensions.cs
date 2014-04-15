@@ -65,10 +65,8 @@ namespace ProtoTest.Golem.Purple
 
         public static void WaitForVisible(this PurpleElementBase item)
         {
-
             try
             {
-
                 var enabled = item.PurpleElement.Current.IsEnabled;
             }
             catch (Exception)
