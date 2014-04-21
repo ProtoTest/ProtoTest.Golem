@@ -44,6 +44,15 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             return processRunning;
         }
 
+        public static void EndProcess()
+        {
+            Process[] processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
+            foreach (Process process in processes)
+            {
+                process.CloseMainWindow();
+            }
+        }
+
         private static WindowPattern GetWindowPattern(AutomationElement targetControl)
         {
             WindowPattern windowPattern = null;
