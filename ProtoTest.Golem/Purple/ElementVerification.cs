@@ -74,82 +74,82 @@ namespace ProtoTest.Golem.Purple
         }
 
 
-        public IPurpleElement HasChildElement(string PurplePath)
-        {
-            //message = "has child with PurplePath " + PurplePath;
-            //notMessage = "no child with PurplePath " + PurplePath;
+        //public IPurpleElement HasChildElement(string PurplePath)
+        //{
+        //    //message = "has child with PurplePath " + PurplePath;
+        //    //notMessage = "no child with PurplePath " + PurplePath;
 
-            //for (int i = 0; i <= timeoutSec; i++)
-            //{
-            //    condition = element.UIAElement.Current.IsEnabled && element.getItem().GetMultiple(PurplePath).Length > 0;
-            //    if (condition == isTrue)
-            //    {
-            //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-            //        return element;
-            //    }
-            //    Common.Delay(1000);
-            //}
-            //VerificationFailed();
-            //return element;
-        }
+        //    //for (int i = 0; i <= timeoutSec; i++)
+        //    //{
+        //    //    condition = element.UIAElement.Current.IsEnabled && element.getItem().GetMultiple(PurplePath).Length > 0;
+        //    //    if (condition == isTrue)
+        //    //    {
+        //    //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+        //    //        return element;
+        //    //    }
+        //    //    Common.Delay(1000);
+        //    //}
+        //    //VerificationFailed();
+        //    //return element;
+        //}
 
 
-        public IPurpleElement Present()
-        {
-            //message = "is present";
-            //notMessage = "not present";
+        //public IPurpleElement Present()
+        //{
+        //    //message = "is present";
+        //    //notMessage = "not present";
 
-            //for (int i = 0; i <= timeoutSec; i++)
-            //{
-            //    condition = element.getItem().Present();
-            //    if (condition == isTrue)
-            //    {
-            //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-            //        return element;
-            //    }
-            //    Common.Delay(1000);
-            //}
-            //VerificationFailed();
-            //return element;
-        }
+        //    //for (int i = 0; i <= timeoutSec; i++)
+        //    //{
+        //    //    condition = element.getItem().Present();
+        //    //    if (condition == isTrue)
+        //    //    {
+        //    //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+        //    //        return element;
+        //    //    }
+        //    //    Common.Delay(1000);
+        //    //}
+        //    //VerificationFailed();
+        //    //return element;
+        //}
 
-        public IPurpleElement Visible()
-        {
-            //message = "is visible";
-            //notMessage = "not visible";
-            //if (timeoutSec == 0) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            //for (int i = 0; i <= timeoutSec; i++)
-            //{
-            //    condition = element.getItem().Present() && element.getItem().Visible;
-            //    if (condition == isTrue)
-            //    {
-            //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-            //        return element;
-            //    }
-            //    Common.Delay(1000);
-            //}
-            //VerificationFailed();
-            //return element;
-        }
+        //public IPurpleElement Visible()
+        //{
+        //    //message = "is visible";
+        //    //notMessage = "not visible";
+        //    //if (timeoutSec == 0) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+        //    //for (int i = 0; i <= timeoutSec; i++)
+        //    //{
+        //    //    condition = element.getItem().Present() && element.getItem().Visible;
+        //    //    if (condition == isTrue)
+        //    //    {
+        //    //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+        //    //        return element;
+        //    //    }
+        //    //    Common.Delay(1000);
+        //    //}
+        //    //VerificationFailed();
+        //    //return element;
+        //}
 
-        public IPurpleElement Name(string value)
-        {
-            //message = "contains text '" + value + "'";
-            //notMessage = "doesn't contain text '" + value + "'";
-            //for (int i = 0; i <= timeoutSec; i++)
-            //{
+        //public IPurpleElement Name(string value)
+        //{
+        //    //message = "contains text '" + value + "'";
+        //    //notMessage = "doesn't contain text '" + value + "'";
+        //    //for (int i = 0; i <= timeoutSec; i++)
+        //    //{
 
-            //    condition = element.getItem().Present() && (element.getItem().Name.Contains(value));
-            //    if (condition == isTrue)
-            //    {
-            //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
-            //        return element;
-            //    }
-            //    Common.Delay(1000);
-            //}
-            //VerificationFailed();
-            //return element;
-        }
+        //    //    condition = element.getItem().Present() && (element.getItem().Name.Contains(value));
+        //    //    if (condition == isTrue)
+        //    //    {
+        //    //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+        //    //        return element;
+        //    //    }
+        //    //    Common.Delay(1000);
+        //    //}
+        //    //VerificationFailed();
+        //    //return element;
+        //}
 
         public IPurpleElement Image()
         {

@@ -44,12 +44,15 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             return processRunning;
         }
 
-        public static void EndProcess()
+        public static void EndProcess(String DontsaveProjectPath = "notused")
         {
+            //TODO: Want to make this configurable - for now it's hard coded
             Process[] processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
             foreach (Process process in processes)
             {
                 process.CloseMainWindow();
+                PurpleButton dontsave = new PurpleButton("Save Dialog: No", "/LifeQuest™ Pipeline/Save Project?/Save Project?/No");
+                dontsave.Invoke();
             }
         }
 
