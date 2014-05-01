@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Timers;
 using System.Windows.Automation;
-using MbUnit.Framework;
+using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using Timer = System.Timers.Timer;
 

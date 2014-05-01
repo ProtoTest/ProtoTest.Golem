@@ -36,7 +36,7 @@ namespace ProtoTest.Golem.Purple
         public void TearDown()
         {
             LogScreenshotIfTestFailed();
-            PurpleWindow.EndProcess();
+            //PurpleWindow.EndProcess();
         }
 
         public void LogScreenshotIfTestFailed()
