@@ -21,7 +21,8 @@ namespace ProtoTest.Golem.WebDriver
             IE,
             Safari,
             Android,
-            IPhone
+            IPhone,
+            IPad
         }
 
         public IWebDriver driver;
@@ -141,6 +142,13 @@ namespace ProtoTest.Golem.WebDriver
                     return DesiredCapabilities.Safari();
                 case Browser.Android:
                     return DesiredCapabilities.Android();
+                case Browser.IPhone:
+                    var capabilities = DesiredCapabilities.IPhone();
+                    capabilities.SetCapability("device", "iphone");
+                    capabilities.SetCapability("app", "safari");
+                    return capabilities;
+                case Browser.IPad:
+                    return DesiredCapabilities.IPad();
                 case Browser.Firefox:
                 default:
                     return DesiredCapabilities.Firefox();
@@ -149,15 +157,9 @@ namespace ProtoTest.Golem.WebDriver
 
         public IWebDriver LaunchRemoteBrowser(Browser browser, string host)
         {
+            Common.Log(string.Format("Starting {0} browser on host : {1}:{2}",browser,host,Config.Settings.runTimeSettings.RemoteHostPort));
             DesiredCapabilities desiredCapabilities = GetCapabilitiesForBrowser(browser);
-            string port = "4444";
-            if (browser == Browser.Android)
-            {
-                port = "8080";
-            }
-
-            var remoteAddress = new Uri(string.Format("http://{0}:{1}/wd/hub", host, port));
-
+            var remoteAddress = new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.runTimeSettings.RemoteHostPort));
             return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
         }
 

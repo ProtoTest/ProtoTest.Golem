@@ -257,6 +257,7 @@ namespace ProtoTest.Golem.Core
             public bool LaunchBrowser;
             public int PageTimeoutSec;
             public bool RunOnRemoteHost;
+            public int RemoteHostPort;
             public int TestTimeoutMin;
             public bool AutoWaitForElements;
 
@@ -276,6 +277,7 @@ namespace ProtoTest.Golem.Core
                 AutoWaitForElements = Config.GetConfigValueAsBool("AutoWaitForElements", "True");
                 HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "True");
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
+                RemoteHostPort = Config.GetConfigValueAsInt("RemoteHostPort", "4444");
             }
 
             private List<string> GetHostsList()
