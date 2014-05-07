@@ -86,7 +86,6 @@
   <ItemGroup>
     <Compile Include="Appium\AppiumTestBase.cs" />
     <Compile Include="Appium\AppiumTouchCommands.cs" />
-    <Compile Include="WebDriver\WebDriverRecorder.cs" />
     <Compile Include="Core\CurrentProcessInfo.cs">
       <SubType>Code</SubType>
     </Compile>
