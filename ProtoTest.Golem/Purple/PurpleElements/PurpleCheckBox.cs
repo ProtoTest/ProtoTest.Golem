@@ -15,9 +15,16 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
         }
 
-        private bool IsElementToggledOn()
+        public bool IsElementToggledOn()
         {
-            return true;
+            Object objPattern;
+            TogglePattern togPattern;
+            if (true == this.PurpleElement.TryGetCurrentPattern(TogglePattern.Pattern, out objPattern))
+            {
+                togPattern = objPattern as TogglePattern;
+                return togPattern.Current.ToggleState == ToggleState.On;
+            }
+            return false;
         }
 
         public void Check()
