@@ -88,6 +88,47 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             }
         }
 
+        
+        public void SelectItemByPosition(int item)
+        {
+            if (_UIAElement != null)
+            {
+                //Now we need to find the right one
+                //int matchingIndex = -1;
+                //AutomationElement itemToSelect = null;
+                object basePattern;
+                if (_UIAElement.TryGetCurrentPattern(ExpandCollapsePattern.Pattern, out basePattern))
+                {
+                    ExpandCollapsePattern expand = (BasePattern)basePattern as ExpandCollapsePattern;
+                    if (expand != null)
+                    {
+                        if (expand.Current.ExpandCollapseState == ExpandCollapseState.Collapsed)
+                        {
+                            expand.Expand();
+
+                            availableOptions = _UIAElement.FindAll(TreeScope.Subtree,
+                                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem));
+
+                            if (item < availableOptions.Count && availableOptions[item - 1] != null)
+                            {
+                                SelectionItemPattern selectPattern =
+                                    (SelectionItemPattern) availableOptions[item - 1].GetCurrentPattern(SelectionItemPattern.Pattern);
+                                selectPattern.Select();
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (PurpleElement.Current.IsEnabled)
+                {
+                    SelectItemByPosition(item);
+                }
+            }
+        }
+        
+
     }
 }
 

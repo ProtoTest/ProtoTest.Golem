@@ -127,7 +127,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
             if (_UIAElement != null)
             {
-                SetCursorPos((int)_UIAElement.GetClickablePoint().X, (int)_UIAElement.GetClickablePoint().Y);
+                var point = _UIAElement.GetClickablePoint();
+                SetCursorPos((int)point.X, (int)point.Y);
                 Thread.Sleep(50);
                 mouse_event(WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                 Thread.Sleep(50);
@@ -150,7 +151,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
             if (_UIAElement != null)
             {
-                SetCursorPos((int) PurpleElement.GetClickablePoint().X, (int) PurpleElement.GetClickablePoint().Y);
+                var point = PurpleElement.GetClickablePoint();
+                SetCursorPos((int) point.X, (int) point.Y);
                 mouse_event(WindowsConstants.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                 Thread.Sleep(50);
                 mouse_event(WindowsConstants.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
