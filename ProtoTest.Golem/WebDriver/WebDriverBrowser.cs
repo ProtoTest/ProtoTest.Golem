@@ -108,7 +108,8 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
-                options.AddAdditionalCapability("proxy", proxy);
+                options.Proxy = proxy;
+                options.UsePerProcessProxy = true;
             }
 
             return new InternetExplorerDriver(options);

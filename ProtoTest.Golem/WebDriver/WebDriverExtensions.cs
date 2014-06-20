@@ -66,6 +66,25 @@ namespace ProtoTest.Golem.WebDriver
             return element.GetAttribute("outerHTML");
         }
 
+        public static string GetHtml(this IWebElement element, int length)
+        {
+            try
+            {
+                string html = element.GetAttribute("outerHTML").Replace("\r\n","");
+                if (html.Length <= length)
+                    return html;
+                int halfLength = length/2;
+                string start = html.Substring(0, halfLength);
+                string end = html.Substring((html.Length - halfLength), halfLength);
+                return string.Format("{0}...{1}", start, end);
+            }
+            catch (Exception e)
+            {
+                return "HTML Not found " + e.Message;
+            }
+            
+        }
+
         public static bool IsStale(this IWebElement element)
         {
             try

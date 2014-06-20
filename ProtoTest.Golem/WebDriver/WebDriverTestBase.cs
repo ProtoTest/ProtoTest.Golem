@@ -128,6 +128,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             LaunchBrowser();
         }
+
         [TearDown]
         public override void TearDownTestBase()
         {

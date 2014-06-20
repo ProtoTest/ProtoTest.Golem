@@ -165,6 +165,7 @@
     <Compile Include="WebDriver\EventFiringWebDriver.cs" />
     <Compile Include="WebDriver\FoundElementEventArgs.cs" />
     <Compile Include="WebDriver\ScreenshotRemoteDriver.cs" />
+    <Compile Include="WebDriver\WebDriverRecorder.cs" />
     <Compile Include="WebDriver\WebDriverTestBase.cs" />
     <Compile Include="WebDriver\ElementVerification.cs" />
     <Compile Include="WebDriver\Elements\Types\Button.cs" />

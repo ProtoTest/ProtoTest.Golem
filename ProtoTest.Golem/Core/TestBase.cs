@@ -384,7 +384,7 @@ namespace ProtoTest.Golem.Core
 
 
 
-        public void LogVideoIfTestFailed()
+        public virtual void LogVideoIfTestFailed()
         {
             if ((Config.Settings.reportSettings.videoRecordingOnError) &&
                 (Common.GetTestOutcome() != TestOutcome.Passed))
@@ -393,7 +393,7 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        public void StartVideoRecording()
+        public virtual void StartVideoRecording()
         {
             if (Config.Settings.reportSettings.videoRecordingOnError)
             {
@@ -403,7 +403,7 @@ namespace ProtoTest.Golem.Core
         }
 
 
-        public void StopVideoRecording()
+        public virtual void StopVideoRecording()
         {
             try
             {

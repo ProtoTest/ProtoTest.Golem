@@ -29,7 +29,7 @@ namespace ProtoTest.Golem.WebDriver
         public System.Timers.Timer timer;
         public Bitmap lastImage;
 
-        public WebDriverRecorder(int fps)
+        public WebDriverRecorder(int fps) 
         {
             this.fps = fps;
             if (WebDriverTestBase.browser == WebDriverBrowser.Browser.Android)
