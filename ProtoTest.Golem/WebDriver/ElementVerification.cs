@@ -158,6 +158,7 @@ namespace ProtoTest.Golem.WebDriver
                 }
                 Common.Delay(1000);
             }
+            notMessage += ". Actual : " + element.Text;
             VerificationFailed();
             return element;
         }
@@ -177,6 +178,7 @@ namespace ProtoTest.Golem.WebDriver
                 }
                 Common.Delay(1000);
             }
+            notMessage += ". Actual : " + element.GetAttribute("value");
             VerificationFailed();
             return element;
         }
@@ -196,6 +198,27 @@ namespace ProtoTest.Golem.WebDriver
                 }
                 Common.Delay(1000);
             }
+            notMessage += ". Actual : " + element.GetAttribute(attribute);
+            VerificationFailed();
+            return element;
+        }
+
+        public Element CSS(string attribute, string value)
+        {
+            message = "has css " + attribute + " with value " + value;
+            notMessage = "doesn't have css " + attribute + " with value " + value;
+            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                condition = (element.Present) && (element.GetAttribute(attribute).Contains(value));
+                if (condition == isTrue)
+                {
+                    TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+                    return element;
+                }
+                Common.Delay(1000);
+            }
+            notMessage += ". Actual : " + element.GetCssValue(attribute);
             VerificationFailed();
             return element;
         }

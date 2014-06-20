@@ -40,22 +40,26 @@ namespace ProtoTest.Golem.Core
 
         public void PrintActionTimings()
         {
-            TestLog.BeginSection("Test Action Timings:");
-            DateTime start;
-            DateTime end;
-            TimeSpan difference;
-            for (int i = 1; i < actions.Count; i++)
+            if (actions.Count > 0)
             {
-                start = actions[i - 1]._time;
-                end = actions[i]._time;
+                TestLog.BeginSection("Test Action Timings:");
+                DateTime start;
+                DateTime end;
+                TimeSpan difference;
+                for (int i = 1; i < actions.Count; i++)
+                {
+                    start = actions[i - 1]._time;
+                    end = actions[i]._time;
+                    difference = end.Subtract(start);
+                    TestLog.WriteLine(actions[i].name + " : " + difference.ToString("mm':'ss'.'ffff"));
+                }
+                start = actions[0]._time;
+                end = actions[actions.Count - 1]._time;
                 difference = end.Subtract(start);
-                TestLog.WriteLine(actions[i].name + " : " + difference);
+                TestLog.WriteLine("All Actions : " + difference.ToString("mm':'ss'.'ffff"));
+                TestLog.End();  
             }
-            start = actions[0]._time;
-            end = actions[actions.Count - 1]._time;
-            difference = end.Subtract(start);
-            TestLog.WriteLine("All Actions : " + difference);
-            TestLog.End();
+            
         }
 
         public class Action

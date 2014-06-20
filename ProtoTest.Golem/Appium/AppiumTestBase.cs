@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -41,6 +42,13 @@ namespace ProtoTest.Golem.Appium
             return (T)Activator.CreateInstance(typeof(T));
         }
 
+        public static T OpenPage<T>(string url)
+        {
+            driver.Navigate().GoToUrl(url);
+            return (T)Activator.CreateInstance(typeof(T));
+        }
+
+
         public void LogScreenshotIfTestFailed()
         {
             if ((Config.Settings.reportSettings.screenshotOnError) &&
@@ -80,14 +88,15 @@ namespace ProtoTest.Golem.Appium
 
         [FixtureSetUp]
         public void SetupFixture()
-        {            
-            server.StartProcess();
+        {    
+        
+            //server.StartProcess();
         }
 
         [FixtureTearDown]
         public void TeardowmFixture()
         {
-            server.StopProcess();
+            //server.StopProcess();
         }
 
         [SetUp]
@@ -110,15 +119,15 @@ namespace ProtoTest.Golem.Appium
                 var capabilities = new DesiredCapabilities();
                 capabilities.SetCapability(CapabilityType.BrowserName, "");
                 capabilities.SetCapability("device", Config.Settings.appiumSettings.device);
-                capabilities.SetCapability("launch", Config.Settings.appiumSettings.launchApp);
+                capabilities.SetCapability("autoLaunch", Config.Settings.appiumSettings.launchApp);
                 
 
 
                 if (Config.Settings.appiumSettings.device.Contains("droid"))
                 {
                     capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);
-                    capabilities.SetCapability("app-package", Config.Settings.appiumSettings.package);
-                    capabilities.SetCapability("app-activity", Config.Settings.appiumSettings.activity);
+                    capabilities.SetCapability("appPackage", Config.Settings.appiumSettings.package);
+                    capabilities.SetCapability("appActivity", Config.Settings.appiumSettings.activity);
                     
                 }
                 else 
@@ -136,21 +145,41 @@ namespace ProtoTest.Golem.Appium
                         capabilities.SetCapability(CapabilityType.Platform, "Mac");
                         capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);    
                     }
-                    capabilities.SetCapability("launch", Config.Settings.appiumSettings.launchApp);
+                    capabilities.SetCapability("autoLaunch", Config.Settings.appiumSettings.launchApp);
                 }
                 IWebDriver tempDriver = driver;
                 try
                 {
-                   tempDriver  = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities);
+                    tempDriver = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities, TimeSpan.FromSeconds(120));
                 }
                 catch (Exception)
                 {
                     Common.Log("Did not get a driver.  Trying again");
                    server.StopProcess();
                     server.StartProcess();
-                    tempDriver  = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities);
+                    tempDriver = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities, TimeSpan.FromSeconds(120));
                 }
                 
+                driver = new EventedWebDriver(tempDriver).driver;  
+            }
+            if (Config.Settings.appiumSettings.launchBrowser)
+            {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.SetCapability("device", "Android");
+                capabilities.SetCapability("app", "Chrome");
+                capabilities.SetCapability(CapabilityType.BrowserName, "Browser");
+                capabilities.SetCapability(CapabilityType.Version, "4.3");
+                capabilities.SetCapability(CapabilityType.Platform, "WINDOWS");
+                IWebDriver tempDriver;
+                try
+                {
+                    tempDriver = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities, TimeSpan.FromSeconds(120));
+                }
+                catch (Exception e)
+                {
+                    tempDriver = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities, TimeSpan.FromSeconds(120)); 
+                }
+               
                 driver = new EventedWebDriver(tempDriver).driver;  
             }
         }

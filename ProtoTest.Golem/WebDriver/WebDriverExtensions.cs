@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Gallio.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -56,7 +58,7 @@ namespace ProtoTest.Golem.WebDriver
         public static IWebElement GetParent(this IWebElement element)
         {
             IWebDriver driver = WebDriverTestBase.driver;
-            return (IWebElement)element.FindElement(By.XPath(".."));
+            return (IWebElement) element.FindElement(By.XPath(".."));
         }
 
         public static string GetHtml(this IWebElement element)
@@ -84,6 +86,7 @@ namespace ProtoTest.Golem.WebDriver
                 var jsDriver = ((IJavaScriptExecutor) WebDriverTestBase.driver);
                 var originalElementBorder = (string) jsDriver.ExecuteScript("return arguments[0].style.border", element);
                 jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
+                Thread.Sleep(20);
                 jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", element);
             }
             catch (Exception)
@@ -104,8 +107,9 @@ namespace ProtoTest.Golem.WebDriver
         public static void MouseOver(this IWebElement element)
         {
             IWebDriver driver = WebDriverTestBase.driver;
-            var action = new Actions(driver);
-            action.MoveToElement(element).Build().Perform();
+            var action = new Actions(driver).MoveToElement(element);
+            Thread.Sleep(2000);
+            action.Build().Perform();
         }
 
         public static IWebElement WaitForPresent(this IWebElement element, By by, int timeout = 0)
@@ -119,7 +123,8 @@ namespace ProtoTest.Golem.WebDriver
                     return eles[0];
                 Common.Delay(1000);
             }
-            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds", by.ToString(), timeout));
+            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
+                by.ToString(), timeout));
         }
 
         public static IWebElement WaitForPresent(this IWebDriver driver, By by, int timeout = 0)
@@ -133,7 +138,8 @@ namespace ProtoTest.Golem.WebDriver
                     return eles[0];
                 Common.Delay(1000);
             }
-            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds", by.ToString(), timeout));
+            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
+                by.ToString(), timeout));
         }
 
         public static void WaitForNotPresent(this IWebDriver driver, By by, int timeout = 0)
@@ -147,7 +153,8 @@ namespace ProtoTest.Golem.WebDriver
                     return;
                 Common.Delay(1000);
             }
-            throw new InvalidElementStateException(string.Format("Element ({0}) was still present after {1} seconds", by.ToString(),timeout));
+            throw new InvalidElementStateException(string.Format("Element ({0}) was still present after {1} seconds",
+                by.ToString(), timeout));
         }
 
         public static IWebElement WaitForVisible(this IWebDriver driver, By by, int timeout = 0)
@@ -160,7 +167,8 @@ namespace ProtoTest.Golem.WebDriver
                 if (eles.Count > 0 && eles[0].Displayed)
                     return eles[0];
             }
-            throw new ElementNotVisibleException(string.Format("Element ({0}) was not visible after {1} seconds", by.ToString(), timeout));
+            throw new ElementNotVisibleException(string.Format("Element ({0}) was not visible after {1} seconds",
+                by.ToString(), timeout));
         }
 
         public static void WaitForNotVisible(this IWebDriver driver, By by, int timeout = 0)
@@ -174,7 +182,8 @@ namespace ProtoTest.Golem.WebDriver
                     return;
                 Common.Delay(1000);
             }
-            throw new ElementNotVisibleException(string.Format("Element ({0}) was still visible after {1} seconds", by.ToString(), timeout));
+            throw new ElementNotVisibleException(string.Format("Element ({0}) was still visible after {1} seconds",
+                by.ToString(), timeout));
         }
 
         public static IWebElement FindElementWithText(this IWebDriver driver, string text)
@@ -286,8 +295,10 @@ namespace ProtoTest.Golem.WebDriver
             {
                 if (driver == null) return screen_shot;
                 Screenshot ss = ((ITakesScreenshot) driver).GetScreenshot();
-                var ms = new MemoryStream(ss.AsByteArray);
-                screen_shot = Image.FromStream(ms);
+                    var ms = new MemoryStream(ss.AsByteArray);
+                    screen_shot = Image.FromStream(ms); 
+                    ms.Dispose();
+   
             }
             catch (Exception e)
             {
@@ -336,7 +347,7 @@ namespace ProtoTest.Golem.WebDriver
         public static IWebElement ScrollIntoView(this IWebElement element)
         {
             var js = (IJavaScriptExecutor) WebDriverTestBase.driver;
-            js.ExecuteScript("arguments[0].scrollIntoView(); return;");
+            js.ExecuteScript("arguments[0].scrollIntoView(); return;", element);
             return element;
         }
 
@@ -383,6 +394,52 @@ namespace ProtoTest.Golem.WebDriver
             var action = new Actions(WebDriverTestBase.driver);
             action.MoveToElement(element, x, y).Click().Build().Perform();
             return element;
+        }
+
+        public static Image GetImage(this IWebElement element)
+        {
+            var size = new Size(element.Size.Width, element.Size.Height);
+            if (element.Displayed == false || element.Location.X<0 || element.Location.Y <0)
+            {
+                throw new BadImageFormatException(string.Format(
+                    "Could not create image for element as it is hidden"));
+            }
+            var cropRect = new Rectangle(element.Location, size);
+            using (Image screenShot = TestBase.testData.driver.GetScreenshot())
+            {
+                if (cropRect.X < 0)
+                {
+                    cropRect.X = 0;
+
+                }
+                if (cropRect.Y < 0)
+                {
+                    cropRect.Y = 0;
+
+                }
+                if (cropRect.X + cropRect.Width > screenShot.Width)
+                {
+                    cropRect.Width = screenShot.Width - cropRect.X;
+                }
+                if (cropRect.Y + cropRect.Height > screenShot.Height)
+                {
+                    cropRect.Height = screenShot.Height - cropRect.Y;
+                }
+
+                try
+                {
+                    var bmpImage = new Bitmap(screenShot);
+                    Bitmap bmpCrop = bmpImage.Clone(cropRect, bmpImage.PixelFormat);
+                    return bmpCrop;
+
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+                
+            }
+
         }
     }
 }

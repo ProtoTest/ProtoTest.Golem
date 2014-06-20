@@ -165,9 +165,11 @@ namespace ProtoTest.Golem.Core
             public string appiumServerPath;
             public bool resetApp = false;
             public string bundleId;
+            public bool  launchBrowser;
 
             public AppiumSettings()
             {
+                launchBrowser = Config.GetConfigValueAsBool("LaunchBrowser", "False");
                 launchApp = Config.GetConfigValueAsBool("LaunchApp", "False");
                 appPath = Config.GetConfigValue("AppPath", "");
                 package = Config.GetConfigValue("AppPackage", "");

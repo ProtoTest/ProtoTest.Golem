@@ -84,8 +84,14 @@ namespace ProtoTest.Golem.Core
             QuitProxy();
             StopVideoRecording();
             LogVideoIfTestFailed();
+            LogActionTimings();
             AssertNoVerificationErrors();
             DeleteTestData();
+        }
+
+        private void LogActionTimings()
+        {
+            testData.actions.PrintActionTimings();
         }
 
 

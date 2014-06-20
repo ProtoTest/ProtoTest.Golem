@@ -169,8 +169,8 @@ namespace ProtoTest.Golem.WebDriver
             capabilities.SetCapability(CapabilityType.BrowserName, "");
             capabilities.SetCapability("device", "Android");
             capabilities.SetCapability("app", appPath);
-            capabilities.SetCapability("app-package", package);
-            capabilities.SetCapability("app-activity", activity);
+            capabilities.SetCapability("appPackage", package);
+            capabilities.SetCapability("appActivity", activity);
 
             var eDriver = new EventedWebDriver(driver);
 

@@ -208,7 +208,11 @@ namespace ProtoTest.Golem.Core
 
         public static void LogImage(Image image)
         {
-            TestLog.EmbedImage(null, image);
+            if (image != null)
+            {
+                TestLog.EmbedImage(null, image);
+            }
+            
         }
 
         public static Size GetSizeFromResolution(string resolution)
