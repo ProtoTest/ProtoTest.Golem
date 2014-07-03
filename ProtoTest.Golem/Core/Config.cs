@@ -249,13 +249,15 @@ namespace ProtoTest.Golem.Core
         {
             public string BrowserResolution;
             public List<WebDriverBrowser.Browser> Browsers = new List<WebDriverBrowser.Browser>();
+            public List<string> Hosts;
+            public string Version;
+            public string Platform;
             public int CommandDelayMs;
             public int DegreeOfParallelism;
             public int ElementTimeoutSec;
             public int OpenWindowTimeoutSec;
             public string EnvironmentUrl;
             public bool HighlightFoundElements;
-            public List<string> Hosts;
             public bool LaunchBrowser;
             public int PageTimeoutSec;
             public bool RunOnRemoteHost;
@@ -263,10 +265,13 @@ namespace ProtoTest.Golem.Core
             public int TestTimeoutMin;
             public bool AutoWaitForElements;
 
+
             public RuntimeSettings()
             {
                 Browsers = GetBrowserList();
                 Hosts = GetHostsList();
+                Version = Config.GetConfigValue("Version", "ANY");
+                Platform = Config.GetConfigValue("Platform", "ANY");
                 LaunchBrowser = Config.GetConfigValueAsBool("LaunchBrowser", "True");
                 TestTimeoutMin = Config.GetConfigValueAsInt("TestTimeoutMin", "5");
                 ElementTimeoutSec = Config.GetConfigValueAsInt("ElementTimeoutSec", "5");

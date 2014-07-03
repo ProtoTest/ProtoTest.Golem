@@ -71,7 +71,7 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-        public static IWebDriver StartFirefoxBrowser()
+        public IWebDriver StartFirefoxBrowser()
         {
             var capabilities = new DesiredCapabilities();
             var proxy = new OpenQA.Selenium.Proxy();
@@ -160,6 +160,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             Common.Log(string.Format("Starting {0} browser on host : {1}:{2}",browser,host,Config.Settings.runTimeSettings.RemoteHostPort));
             DesiredCapabilities desiredCapabilities = GetCapabilitiesForBrowser(browser);
+            desiredCapabilities.SetCapability(CapabilityType.Platform,Config.Settings.runTimeSettings.Platform);
+            desiredCapabilities.SetCapability(CapabilityType.Version, Config.Settings.runTimeSettings.Version);
             var remoteAddress = new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.runTimeSettings.RemoteHostPort));
             return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
         }
