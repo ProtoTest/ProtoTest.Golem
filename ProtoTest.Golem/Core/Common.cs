@@ -2,12 +2,10 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 using System.Threading;
 using System.Xml;
 using Gallio.Framework;
 using Gallio.Model;
-using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Core
 {

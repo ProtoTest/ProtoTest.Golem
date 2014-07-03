@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MbUnit.Framework;
+﻿using MbUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Safari;
-using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
-using ProtoTest.Golem.Tests.PageObjects.Google;
 
 namespace ProtoTest.Golem.Tests
 {

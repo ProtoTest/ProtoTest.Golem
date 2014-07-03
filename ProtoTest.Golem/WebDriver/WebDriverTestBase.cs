@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Gallio.Common.Media;
 using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
 using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver

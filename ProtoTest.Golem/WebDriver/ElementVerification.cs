@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Threading;
 using Gallio.Framework;
 using MbUnit.Framework;
 using OpenQA.Selenium;

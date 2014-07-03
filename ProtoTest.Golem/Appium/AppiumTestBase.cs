@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Proxy.HAR;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Appium

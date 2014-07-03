@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Automation;
 using WindowsInput;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.PurpleCore;
-using PurpleLib;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {

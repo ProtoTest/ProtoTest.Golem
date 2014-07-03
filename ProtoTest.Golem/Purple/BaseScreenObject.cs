@@ -1,8 +1,4 @@
-﻿using ProtoTest.Golem.Purple.Elements;
-using ProtoTest.Golem.Purple.PurpleElements;
-
-
-namespace ProtoTest.Golem.Purple
+﻿namespace ProtoTest.Golem.Purple
 {
     public class BaseScreenObject
     {

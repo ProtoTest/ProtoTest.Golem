@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MbUnit.Framework;
-using OpenQA.Selenium;
+﻿using MbUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Tests.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;

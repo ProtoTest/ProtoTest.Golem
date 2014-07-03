@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using MbUnit.Framework;
 using ProtoTest.Golem.Tests.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;

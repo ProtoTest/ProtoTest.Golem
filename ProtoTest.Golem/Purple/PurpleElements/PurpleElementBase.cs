@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Automation;
-using WindowsInput;
-using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.Elements;
 using Purple.Core;
 using PurpleLib;

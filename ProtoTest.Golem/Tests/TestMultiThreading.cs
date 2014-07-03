@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Gallio.Framework.Pattern;
-using MbUnit.Framework;
-using OpenQA.Selenium.Firefox;
+﻿using MbUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Tests.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;

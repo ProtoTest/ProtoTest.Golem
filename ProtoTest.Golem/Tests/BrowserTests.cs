@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MbUnit.Framework;
+﻿using MbUnit.Framework;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;

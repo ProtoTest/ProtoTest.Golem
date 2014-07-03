@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using ProtoTest.Golem.Proxy.HAR;
-using ProtoTest.Golem.WebDriver;
-using ProtoTest.Golem.Purple;
-using ProtoTest.Golem.Purple.Elements;
-using RestSharp.Extensions;
 
 namespace ProtoTest.Golem.Core
 {

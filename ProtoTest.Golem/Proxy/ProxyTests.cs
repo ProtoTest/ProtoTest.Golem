@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Proxy.HAR;
 using ProtoTest.Golem.WebDriver;
-using ProtoTest.Golem.WebDriver.Elements;
 
 namespace ProtoTest.Golem.Proxy
 {

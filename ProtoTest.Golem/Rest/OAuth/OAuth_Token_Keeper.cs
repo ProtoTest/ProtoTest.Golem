@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using ProtoTest.Golem.Proxy.HAR;
 
 namespace ProtoTest.Golem.Rest.OAuth
 {

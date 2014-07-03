@@ -1,15 +1,5 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using Gallio.Framework;
-using Gallio.Model;
-using NUnit.Framework;
-using ProtoTest.Golem.Core;
+﻿using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.PurpleElements;
-using ProtoTest.Golem.WebDriver;
-using ProtoTest.Golem.Purple.Elements;
-using RestSharp.Extensions;
 
 
 namespace ProtoTest.Golem.Purple

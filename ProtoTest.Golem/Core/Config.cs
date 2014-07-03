@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Deployment.Internal;
 using System.IO;
 using System.Reflection;
 using System.Xml;
 //using Castle.Core.Logging;
 using Gallio.Framework;
-using ProtoTest.Golem.Appium;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Core

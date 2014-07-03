@@ -1,10 +1,7 @@
-﻿using System.Linq;
-using Gallio.Framework;
+﻿using Gallio.Framework;
 using MbUnit.Framework;
-using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.Elements;
-using ProtoTest.Golem.WebDriver;
 using Image = System.Drawing.Image;
 
 namespace ProtoTest.Golem.Purple

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Threading;
 using System.Windows;
 using System.Windows.Automation;
 using ProtoTest.Golem.Purple.PurpleCore;
