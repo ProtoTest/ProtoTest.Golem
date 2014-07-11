@@ -70,7 +70,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
-                string html = element.GetAttribute("outerHTML").Replace("\r\n","");
+                string html = element.GetAttribute("innerHTML").Replace("\r\n","");
                 if (html.Length <= length)
                     return html;
                 int halfLength = length/2;
@@ -168,7 +168,7 @@ namespace ProtoTest.Golem.WebDriver
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 var eles = driver.FindElements(by);
-                if (eles.Count > 0)
+                if (eles.Count == 0)
                     return;
                 Common.Delay(1000);
             }
@@ -197,7 +197,7 @@ namespace ProtoTest.Golem.WebDriver
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 var eles = driver.FindElements(by);
-                if (eles.Count > 0 && !eles[0].Displayed)
+                if (eles.Count == 0 || !eles[0].Displayed)
                     return;
                 Common.Delay(1000);
             }

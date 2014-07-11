@@ -116,6 +116,8 @@
     <Compile Include="Rest\OAuth\simpleTwitterHandler.cs" />
     <Compile Include="Tests\AppiumTest.cs" />
     <Compile Include="Tests\BrowserTests.cs" />
+    <Compile Include="Tests\TestDriver.cs" />
+    <Compile Include="Tests\TestPageObjects.cs" />
     <Compile Include="Tests\ConfigTests.cs" />
     <Compile Include="Tests\ElementTests.cs" />
     <Compile Include="Tests\PageObjects\Google\GmailPage.cs" />
