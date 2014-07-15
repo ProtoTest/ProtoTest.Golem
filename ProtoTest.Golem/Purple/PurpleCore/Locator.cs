@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Timers;
@@ -66,6 +67,20 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             notfound = true;
         }
 
+        public static bool HasChildren(string purplePath, string name)
+        {
+            AutomationElement presumedParent = WaitForElementAvailable(purplePath, name);
+            return ByPurplePath.HasChildren(presumedParent);
+        }
 
+        public static List<AutomationElement> GetChildren(AutomationElement presumedParent)
+        {
+            return ByPurplePath.GetChildren(presumedParent);
+        }
+
+        public static string GetLocatorString(AutomationElement element)
+        {
+            return ByPurplePath.getPurplePath(element);
+        }
     }
 }

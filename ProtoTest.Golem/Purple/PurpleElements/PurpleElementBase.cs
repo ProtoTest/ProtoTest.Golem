@@ -22,7 +22,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         protected AutomationElement _UIAElement;
         private String _PurplePath;
         private String _elementName;
-        private bool isOffScreen;
+        
 
         //This is not built yet -- should be interesting we might want to do this on the screenobject base
         private UIA_ElementCacher elementCache;
@@ -47,7 +47,9 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         public String ElementName {get { return _elementName; }}
         public String PurplePath{ get { return _PurplePath; }}
         public AutomationElement UIAElement {get { return _UIAElement; }}
-
+        public bool HasChildren {get { return PurpleCore.Locator.HasChildren(_PurplePath, _elementName); }}
+        
+        
 
         #endregion
 
@@ -169,6 +171,34 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             
         }
         #endregion
+
+        public bool IsOnScreen()
+        {
+            bool isVisible;
+            if (_UIAElement != null)
+            {
+                if (_UIAElement.Current.IsOffscreen)
+                {
+                    isVisible = false;
+                }
+                else
+                {
+                    isVisible = true;
+                }
+            }
+            else
+            {
+                if (PurpleElement.Current.IsOffscreen)
+                {
+                    isVisible = false;
+                }
+                else
+                {
+                    isVisible = true;
+                }
+            }
+            return isVisible;
+        }
 
 
         

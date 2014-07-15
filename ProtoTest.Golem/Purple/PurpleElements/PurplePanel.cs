@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Automation;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {
@@ -24,9 +25,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                 MoveCursor(endPoint);
                 RMB_Up(); 
             }
-            
         }
-
-
+        
     }
 }
