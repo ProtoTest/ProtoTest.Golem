@@ -78,7 +78,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             return ByPurplePath.GetChildren(presumedParent);
         }
 
-        public static string GetLocatorString(AutomationElement element)
+        public static string FindPurplePath(AutomationElement element)
         {
             return ByPurplePath.getPurplePath(element);
         }
