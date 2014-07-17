@@ -53,6 +53,41 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             return somenonsense;
         }
 
+        // Changes for the sake of speeding up the code - Start
+        
+        private bool PElementPattern;
+
+        private object basePattern2;
+        public void EvaluatePattern()
+        {
+            if (PurpleElement.TryGetCurrentPattern(TablePattern.Pattern, out basePattern2))
+            {
+                PElementPattern = true;
+            }
+            else
+            {
+                PElementPattern = false;
+            }
+        }
+
+        public string GetValueNew(int row, int column)
+        {
+            string somenonsense = "";
+            if (PElementPattern)
+            {
+                TablePattern gridItem = (BasePattern)basePattern2 as TablePattern;
+                if (gridItem != null)
+                {
+                    var tableitem = gridItem.GetItem(row, column);
+                    somenonsense = tableitem.Current.Name;
+                }
+
+            }
+            return somenonsense;
+        }
+
+        // Changes for the sake of speeding up the code - End
+
         private void SetCounts()
         {
             object basePattern;
