@@ -59,6 +59,13 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             _PurplePath = locatorPath;
         }
 
+        public PurpleElementBase(string name, AutomationElement element)
+        {
+            _elementName = name;
+            _UIAElement = element;
+            _PurplePath = PurpleCore.Locator.FindPurplePath(element);
+        }
+
         public void Invoke()
         {
             //This function may need to go in a different class -- although a lot of elements use the Invoke Pattern
@@ -170,6 +177,31 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             }
             
         }
+
+        public void RightClick()
+        {
+            if (_UIAElement != null)
+            {
+                var point = _UIAElement.GetClickablePoint();
+                SetCursorPos((int)point.X, (int)point.Y);
+                Thread.Sleep(50);
+                mouse_event(WindowsConstants.MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
+                Thread.Sleep(50);
+                mouse_event(WindowsConstants.MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
+            }
+            else
+            {
+                if (!PurpleElement.Current.IsOffscreen)
+                {
+                    if (_UIAElement.Current.IsEnabled)
+                    {
+                        RightClick();
+                    }
+                }
+            }
+
+        }
+        
         #endregion
 
         public bool IsOnScreen()
