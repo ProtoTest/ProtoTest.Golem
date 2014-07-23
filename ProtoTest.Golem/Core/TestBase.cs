@@ -70,13 +70,14 @@ namespace ProtoTest.Golem.Core
         [SetUp]
         public virtual void SetUpTestBase()
         {
+            
             StartVideoRecording();
             LogEvent(Common.GetCurrentTestName() + " started");
             StartNewProxy();
 
         }
 
-        [NUnit.Framework.SetUp]
+        [NUnit.Framework.TearDown]
         [TearDown]
         public virtual void TearDownTestBase()
         {

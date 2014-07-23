@@ -108,12 +108,17 @@ namespace ProtoTest.Golem.Core
 
         public static string GetCurrentTestName()
         {
-            return TestContext.CurrentContext.TestStep.FullName;
+            string TestName = TestContext.CurrentContext.TestStep.FullName;
+            if (string.IsNullOrEmpty(TestName))
+            {
+                TestName = NUnit.Framework.TestContext.CurrentContext.Test.Name;
+            }
+            return TestName;
         }
 
         public static string GetShortTestName(int length)
         {
-            string name = TestContext.CurrentContext.TestStep.Name;
+            string name = GetCurrentTestName();
             name = name.Replace("/", "_");
             name = name.Replace(":", "_");
             name = name.Replace("\\", "_");

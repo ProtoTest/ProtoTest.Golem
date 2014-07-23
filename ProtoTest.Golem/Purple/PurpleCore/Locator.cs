@@ -17,6 +17,8 @@ namespace ProtoTest.Golem.Purple.PurpleCore
         private static bool notfound = false;
 
         public static PurpleLib.PurplePath ByPurplePath{ get { return _purplePath; }}
+        
+        
 
         static Locator()
         {
@@ -25,6 +27,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             _purplePath.DefaultWindowName = Config.Settings.purpleSettings.Purple_windowTitle;
             _purplePath.ValueDelimiterStart = Config.Settings.purpleSettings.Purple_ValueDelimiterStart;
             _purplePath.ValueDelimiterEnd = Config.Settings.purpleSettings.Purple_ValueDelimiterEnd;
+            
             elementTimeoutTimer.Elapsed += elementTimeout;
         }
 
@@ -47,6 +50,10 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                 }
                 if (notfound)
                 {
+                    if (PurpleTestBase.PerfLogging)
+                    {
+                        PurplePerformanceLogger.AddEntry(name, purplePath, Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds, 0);
+                    }
                     Assert.Fail(string.Format("Element: {0} with Path: {1} Failed to respond in alloted time.", name, purplePath));
                     
                 }
@@ -57,6 +64,10 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             {
                 TimeSpan time = stopWatch.Elapsed;
                 TestBase.Log(string.Format("Element: {2} found in {0}.{1} seconds.", time.Seconds, time.Milliseconds, name));
+                if (PurpleTestBase.PerfLogging)
+                {
+                    PurplePerformanceLogger.AddEntry(name, purplePath, time.Seconds, time.Milliseconds);
+                }
             }
             return elementAvailable;
         }

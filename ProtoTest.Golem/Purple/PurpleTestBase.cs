@@ -6,8 +6,10 @@ namespace ProtoTest.Golem.Purple
 {
     public class PurpleTestBase : TestBase
     {
-        
-        
+        //Used for logging how long it takes elements to appear.
+        //Has to be set in the constructor for the testclass
+        public static bool PerfLogging { get; set; }
+         
         public void TestSettings()
         {
             
@@ -25,8 +27,12 @@ namespace ProtoTest.Golem.Purple
         [MbUnit.Framework.TearDown]
         public void TearDown()
         {
-            LogScreenshotIfTestFailed();
+            //LogScreenshotIfTestFailed();
             //PurpleWindow.EndProcess();
+            if (PerfLogging)
+            {
+                //write perflog file
+            }
         }
 
         public void LogScreenshotIfTestFailed()
