@@ -27,7 +27,7 @@ namespace ProtoTest.Golem.Tests
             element.SetText("ProtoTest");
             element.Verify().Value("ProtoTest").Submit();
             element.WaitUntil(20).Visible().Text = "Golem";
-            element.Verify(23).Value("Golem");
+            element.Verify(20).Value("Golem");
         }
         [Test]
         public void TestNotPresent()

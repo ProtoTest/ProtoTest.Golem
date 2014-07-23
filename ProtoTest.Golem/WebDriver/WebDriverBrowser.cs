@@ -21,7 +21,8 @@ namespace ProtoTest.Golem.WebDriver
             IE,
             Safari,
             Android,
-            IPhone
+            IPhone,
+            IPad
         }
 
         public IWebDriver driver;
@@ -70,7 +71,7 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-        public static IWebDriver StartFirefoxBrowser()
+        public IWebDriver StartFirefoxBrowser()
         {
             var capabilities = new DesiredCapabilities();
             var proxy = new OpenQA.Selenium.Proxy();
@@ -107,7 +108,8 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
-                options.AddAdditionalCapability("proxy", proxy);
+                options.Proxy = proxy;
+                options.UsePerProcessProxy = true;
             }
 
             return new InternetExplorerDriver(options);
@@ -141,6 +143,13 @@ namespace ProtoTest.Golem.WebDriver
                     return DesiredCapabilities.Safari();
                 case Browser.Android:
                     return DesiredCapabilities.Android();
+                case Browser.IPhone:
+                    var capabilities = DesiredCapabilities.IPhone();
+                    capabilities.SetCapability("device", "iphone");
+                    capabilities.SetCapability("app", "safari");
+                    return capabilities;
+                case Browser.IPad:
+                    return DesiredCapabilities.IPad();
                 case Browser.Firefox:
                 default:
                     return DesiredCapabilities.Firefox();
@@ -149,15 +158,11 @@ namespace ProtoTest.Golem.WebDriver
 
         public IWebDriver LaunchRemoteBrowser(Browser browser, string host)
         {
+            Common.Log(string.Format("Starting {0} browser on host : {1}:{2}",browser,host,Config.Settings.runTimeSettings.RemoteHostPort));
             DesiredCapabilities desiredCapabilities = GetCapabilitiesForBrowser(browser);
-            string port = "4444";
-            if (browser == Browser.Android)
-            {
-                port = "8080";
-            }
-
-            var remoteAddress = new Uri(string.Format("http://{0}:{1}/wd/hub", host, port));
-
+            desiredCapabilities.SetCapability(CapabilityType.Platform,Config.Settings.runTimeSettings.Platform);
+            desiredCapabilities.SetCapability(CapabilityType.Version, Config.Settings.runTimeSettings.Version);
+            var remoteAddress = new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.runTimeSettings.RemoteHostPort));
             return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
         }
 
@@ -167,8 +172,8 @@ namespace ProtoTest.Golem.WebDriver
             capabilities.SetCapability(CapabilityType.BrowserName, "");
             capabilities.SetCapability("device", "Android");
             capabilities.SetCapability("app", appPath);
-            capabilities.SetCapability("app-package", package);
-            capabilities.SetCapability("app-activity", activity);
+            capabilities.SetCapability("appPackage", package);
+            capabilities.SetCapability("appActivity", activity);
 
             var eDriver = new EventedWebDriver(driver);
 

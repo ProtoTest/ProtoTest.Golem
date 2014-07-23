@@ -16,8 +16,8 @@ namespace ProtoTest.Golem.WebDriver
     {
 
 
-        [Factory("GetBrowser")] public WebDriverBrowser.Browser browser;
-        [Factory("GetHosts")] public string host;
+        [Factory("GetBrowser")] public static WebDriverBrowser.Browser browser;
+        [Factory("GetHosts")] public static string host;
 
         public static IWebDriver driver
         {
@@ -115,7 +115,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     driver = new WebDriverBrowser().LaunchBrowser(browser);
                 }
-
+                
                 LogEvent(browser + " Browser Launched");
                 testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser + " Browser Launched");
             }
@@ -128,7 +128,10 @@ namespace ProtoTest.Golem.WebDriver
             LaunchBrowser();
         }
 
+<<<<<<< HEAD
         [NUnit.Framework.TearDown]
+=======
+>>>>>>> origin/master
         [TearDown]
         public override void TearDownTestBase()
         {

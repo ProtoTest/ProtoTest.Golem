@@ -108,7 +108,6 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                
                 _element = GetElement();
                 return _element;
             }
@@ -140,8 +139,16 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                if (!Present) return false;
-                return element.Displayed;
+                try
+                {
+                    if (!Present) return false;
+                    return element.Displayed;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+                
             }
         }
 
@@ -363,7 +370,7 @@ namespace ProtoTest.Golem.WebDriver
                 }
                 return _element;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 string message = string.Format("Could not find element '{0}' ({1}) after {2} seconds", name, @by,timeoutSec);
                 throw new NoSuchElementException(message);

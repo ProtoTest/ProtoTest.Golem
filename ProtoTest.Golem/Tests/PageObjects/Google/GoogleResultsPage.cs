@@ -21,7 +21,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
 
         public GoogleResultsPage SearchFor(string text)
         {
-            SearchField.SendKeys(text);
+            SearchField.SetText(text);
             SearchField.Submit();
             return new GoogleResultsPage();
         }
@@ -49,7 +49,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
         public override void WaitForElements()
         {
             SearchField.Verify().Present();
-            GoogleLogo.Verify().Present();
+            //GoogleLogo.Verify().Present();
             SearchButton.Verify().Present();
             SignInButton.Verify().Present();
         }

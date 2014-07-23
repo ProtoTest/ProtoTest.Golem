@@ -48,7 +48,10 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
-                TestBase.LogEvent(GetLogMessage("Typing", e, e.Element.GetAttribute("value")));
+                if (Config.Settings.reportSettings.commandLogging)
+                {
+                    TestBase.LogEvent(GetLogMessage("Typing", e, e.Element.GetAttribute("value")));
+                }
             }
             catch (Exception)
             {
@@ -59,29 +62,37 @@ namespace ProtoTest.Golem.WebDriver
         private void driver_Navigating(object sender, WebDriverNavigationEventArgs e)
         {
             Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBase.LogEvent(string.Format("Navigating to url {0}", e.Url));
+            if (Config.Settings.reportSettings.commandLogging)
+            {
+                TestBase.LogEvent(string.Format("Navigating to url {0}", e.Url));
+            }
+            
         }
 
 
         private void driver_ExceptionThrown(object sender, WebDriverExceptionEventArgs e)
         {
-            // Do not want to flood the log with these element not found exceptions. 
-            // Especially with the ability to wait for elements to display within a timeout period. 
-            // Turn it on if you really want them there.
 
-            //Common.Log("Exception: " + e.ThrownException.ToString());
         }
 
         private void driver_FindingElement(object sender, FindElementEventArgs e)
         {
             Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBase.LogEvent(GetLogMessage("Finding", e));
+            if (Config.Settings.reportSettings.commandLogging)
+            {
+                TestBase.LogEvent(GetLogMessage("Finding", e));
+            }
+            
         }
 
         private void driver_ElementClicking(object sender, WebElementEventArgs e)
         {
             Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
-            TestBase.LogEvent(GetLogMessage("Click", e));
+            if (Config.Settings.reportSettings.commandLogging)
+            {
+                TestBase.LogEvent(GetLogMessage("Click", e)); 
+            }
+            
             if (e.Element == null)
             {
                 throw new NoSuchElementException(string.Format("Element '{0}' not present, cannot click on it",
@@ -93,29 +104,25 @@ namespace ProtoTest.Golem.WebDriver
         {
             if (param != "") param = "'" + param + "'";
 
-            if (TestBase.testData.lastElement.name != "")
+            if (TestBase.testData.lastElement.name != "Element")
             {
-                return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
-                    TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);
+                return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, TestBase.testData.lastElement.name, e.Element.GetHtml(60), param);
             }
 
-            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element", e.Element,
-                param);
+            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element", e.Element.GetHtml(60),param);
         }
 
         private string GetLogMessage(string command, FindElementEventArgs e = null, string param = "")
         {
             if (param != "") param = "'" + param + "'";
 
-            if (TestBase.testData.lastElement.name != "")
+            if (TestBase.testData.lastElement.name != "Element")
             {
                 return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
                     TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);
             }
 
-            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element",
-                e.Element.Location,
-                param);
+            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element",e.FindMethod,param);
         }
     }
 }
