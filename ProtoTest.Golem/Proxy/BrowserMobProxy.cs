@@ -147,6 +147,7 @@ namespace ProtoTest.Golem.Proxy
                 using (ZipFile zf = ZipFile.Read(zipPath))
                 {
                     zf.ExtractAll(extractPath);
+                    
                 }
             }
         }
