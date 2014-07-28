@@ -1,9 +1,5 @@
-﻿
-using MbUnit.Framework;
-<<<<<<< HEAD
-=======
+﻿using MbUnit.Framework;
 using OpenQA.Selenium.Firefox;
->>>>>>> origin/master
 using ProtoTest.Golem.Tests.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;
 
