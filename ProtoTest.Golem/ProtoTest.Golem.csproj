@@ -58,9 +58,6 @@
     <Reference Include="MbUnit40">
       <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\Gallio_MbUnit.3.4.14.0\lib\net40\MbUnit40.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\ProtoTest.Golem.Tests\Golem.White.ScreenObjects.LQP\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>

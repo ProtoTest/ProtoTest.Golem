@@ -252,9 +252,12 @@ namespace ProtoTest.Golem.Core
             public string EnvironmentUrl;
             public bool HighlightFoundElements;
             public List<string> Hosts;
+            public string Version;
+            public string Platform;
             public bool LaunchBrowser;
             public int PageTimeoutSec;
             public bool RunOnRemoteHost;
+            public string RemoteHostPort;
             public int TestTimeoutMin;
             public bool AutoWaitForElements;
 
@@ -262,6 +265,9 @@ namespace ProtoTest.Golem.Core
             {
                 Browsers = GetBrowserList();
                 Hosts = GetHostsList();
+                Version = Config.GetConfigValue("Version", "ANY");
+                Platform = Config.GetConfigValue("Platform", "ANY");
+                
                 LaunchBrowser = Config.GetConfigValueAsBool("LaunchBrowser", "True");
                 TestTimeoutMin = Config.GetConfigValueAsInt("TestTimeoutMin", "5");
                 ElementTimeoutSec = Config.GetConfigValueAsInt("ElementTimeoutSec", "5");
@@ -271,6 +277,7 @@ namespace ProtoTest.Golem.Core
                 DegreeOfParallelism = Config.GetConfigValueAsInt("DegreeOfParallelism", "5");
                 CommandDelayMs = Config.GetConfigValueAsInt("CommandDelayMs", "0");
                 RunOnRemoteHost = Config.GetConfigValueAsBool("RunOnRemoteHost", "False");
+                RemoteHostPort = Config.GetConfigValue("RemoteHostPort", "8080");
                 AutoWaitForElements = Config.GetConfigValueAsBool("AutoWaitForElements", "True");
                 HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "True");
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
