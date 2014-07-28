@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows.Automation;
 using WindowsInput;
 using ProtoTest.Golem.Core;
@@ -45,9 +46,11 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             Process[] processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
             foreach (Process process in processes)
             {
-                process.CloseMainWindow();
-                PurpleButton dontsave = new PurpleButton("Save Dialog: No", "/LifeQuest™ Pipeline/Save Project?/Save Project?/No");
-                dontsave.Invoke();
+                process.Kill();
+                Thread.Sleep(2000);
+                //process.CloseMainWindow();
+                //PurpleButton dontsave = new PurpleButton("Save Dialog: No", "/LifeQuest™ Pipeline/Save Project?/Save Project?/No");
+                //dontsave.Invoke();
             }
         }
 
