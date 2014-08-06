@@ -6,6 +6,7 @@ using System.Linq;
 using Gallio.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.Elements;
+using ProtoTest.Golem.Purple.PurpleElements;
 using ProtoTest.Golem.WebDriver.Elements.Images;
 using Image = System.Drawing.Image;
 
@@ -15,7 +16,7 @@ namespace ProtoTest.Golem.Purple
     {
         public static bool UpdateImages = Config.Settings.imageCompareSettings.updateImages;
         private readonly Image liveImage;
-        private readonly Image storedImage;
+        //private readonly Image storedImage;
         public float difference;
         public string differenceString;
         public IPurpleElement element;
@@ -34,7 +35,7 @@ namespace ProtoTest.Golem.Purple
             this.element = element;
             CreateDirectory();
             liveImage = GetLiveImage();
-            storedImage = GetStoredImage();
+            //storedImage = GetStoredImage();
             DirLocation = Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") + "\\ElementImages\\";
             FileName = element.ElementName.Replace(" ", "");
             DeleteAllSnapshots();
@@ -51,7 +52,7 @@ namespace ProtoTest.Golem.Purple
             this.element = element;
             CreateDirectory();
             liveImage = GetLiveImage();
-            storedImage = GetStoredImage();
+            //storedImage = GetStoredImage();
             DirLocation = Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") + "\\ElementImages\\";
             FileName = element.ElementName.Replace(" ", "");
             if (keepOld)
@@ -148,7 +149,21 @@ namespace ProtoTest.Golem.Purple
                 return Image.FromFile(DirLocation + fName + ".bmp");
             return null;
         }
-        
+
+        /// <summary>
+        /// Retruns the image which is the result of the difference between 2 given images.
+        /// The resultimg image will have the size of image 2
+        /// </summary>
+        /// <param name="image1">Image 1</param>
+        /// <param name="image2">Image 2</param>
+        /// <returns>Image resulting from comparisson</returns>
+        public Image GetDifferenceImage(Image image1, Image image2)
+        {
+            var bmp = new Bitmap(image2.Width, image2.Height);
+            return liveImage.GetDifferenceOverlayImage(image1).Resize(image2.Width, image2.Height);
+        }
+
+
         /// <summary>
         /// Retruns the image which is the result of the difference between an image previoulsy captured and the current image on screen.
         /// </summary>
@@ -157,7 +172,7 @@ namespace ProtoTest.Golem.Purple
         public Image GetDifferenceImage(Image oldImage)
         {
             var bmp = new Bitmap(liveImage.Width, liveImage.Height);
-            return liveImage.GetDifferenceOverlayImage(oldImage).Resize(storedImage.Width, storedImage.Height);
+            return liveImage.GetDifferenceOverlayImage(oldImage).Resize(liveImage.Width, liveImage.Height);
         }
 
         /// <summary>
@@ -169,11 +184,11 @@ namespace ProtoTest.Golem.Purple
         {
             var oldImage = GetStoredSnapshot(snapshot);
             var bmp = new Bitmap(liveImage.Width, liveImage.Height);
-            return liveImage.GetDifferenceOverlayImage(oldImage).Resize(storedImage.Width, storedImage.Height);
+            return liveImage.GetDifferenceOverlayImage(oldImage).Resize(liveImage.Width, liveImage.Height);
         }
 
         /// <summary>
-        /// Compares 2 images 
+        /// Compares 2 images and returns a boolean value indicating if the change is greater than an accuracy value.
         /// </summary>
         /// <param name="source1">Image 1</param>
         /// <param name="source2">Image 2</param>
@@ -186,16 +201,67 @@ namespace ProtoTest.Golem.Purple
         }
 
         /// <summary>
-        /// Compares an image captured on a previous snapshot and the current image
+        /// Compares 2 images, and returns a boolean value indicating if the change is greater than an accuracy value.
+        /// </summary>
+        /// <param name="source1">Image 1</param>
+        /// <param name="source2">Image 2</param>
+        /// <param name="accuracy">Accuracy of the comparisson</param>
+        /// <returns>boolean</returns>
+        public bool ImagesMatch(Image source1, Image source2, float accuracy)
+        {
+            difference = ImageComparer.ImageComparePercentage(source1, source2, Config.Settings.imageCompareSettings.fuzziness);
+            differenceString = (difference * 100).ToString("0.##\\%");
+            return difference < accuracy;
+        }
+
+        /// <summary>
+        /// Compares 2 images and return the difference expressed as a percentage
+        /// </summary>
+        /// <param name="source1">Image 1</param>
+        /// <param name="source2">Image 2</param>
+        /// <param name="fuzzines">Image 2</param>
+        /// <returns>float value that indicates the difference</returns>
+        public string ImagesMatchReturnValue(Image source1, Image source2, int fuzzines=-1)
+        {
+            byte fuz;
+            if (fuzzines == -1)
+            {
+                fuz = Config.Settings.imageCompareSettings.fuzziness;
+            }
+            else
+            {
+                fuz = Byte.Parse(fuzzines.ToString());
+            }
+            difference = ImageComparer.ImageComparePercentage(source1, source2, fuz);
+            differenceString = (difference * 100).ToString("0.##\\%");
+            return differenceString;
+        }
+
+        /// <summary>
+        /// Compares an image captured on a previous snapshot and the current image, and returns a boolean value indicating if the change is greater than an accuracy value.
         /// </summary>
         /// <param name="snapshot">number of snapshot</param>
         /// <returns>boolean</returns>
-        public bool ImageMatchCurrentAndSnapshot(int snapshot)
+        public bool ImagesMatchCurrentAndSnapshot(int snapshot)
         {
             Image current = GetLiveImage();
             Image oldImage = GetStoredSnapshot(snapshot);
             return ImagesMatch(current, oldImage);
         }
+
+        /// <summary>
+        /// Compares an image captured on a previous snapshot and the current image, and returns a boolean value indicating if the change is greater than an accuracy value.
+        /// </summary>
+        /// <param name="snapshot">number of snapshot</param>
+        /// <param name="accuracy">accuracy to campare against</param>
+        /// <returns>boolean</returns>
+        public bool ImagesMatchCurrentAndSnapshot(int snapshot, float accuracy)
+        {
+            Image current = GetLiveImage();
+            Image oldImage = GetStoredSnapshot(snapshot);
+            return ImagesMatch(current, oldImage, accuracy);
+        }
+
 
         /// <summary>
         /// Creates a combination of 2 images side by side
@@ -228,9 +294,7 @@ namespace ProtoTest.Golem.Purple
             return img;
         }
 
-
-
-        // Functions copied from ElementImageComparer
+        // Functions copied and modified from ElementImageComparer
 
         private string ImageLocation
         {
@@ -248,123 +312,20 @@ namespace ProtoTest.Golem.Purple
 
         public Image GetLiveImage()
         {
-            return element.UIAElement.GetImage();
+            var img = element.UIAElement.GetImage();
+            Rectangle cropArea = ((PurpleElementBase)element).Bounds.ToRectangle();
+            return cropImage(img, cropArea);
         }
 
+        
+        /*
         public Image GetStoredImage()
         {
             if (File.Exists(ImageLocation))
                 return Image.FromFile(ImageLocation);
             return GetLiveImage();
         }
-
-        /*
-
-
-
-        public Image GetDifferenceImage()
-        {
-            var bmp = new Bitmap(liveImage.Width, liveImage.Height);
-            return liveImage.GetDifferenceOverlayImage(storedImage)
-                .Resize(storedImage.Width, storedImage.Height);
-        }
-
-        public bool ImagesMatch()
-        {
-            if ((!File.Exists(ImageLocation)) || (UpdateImages))
-            {
-                UpdateImage();
-            }
-            difference = ImageComparer.ImageComparePercentage(storedImage, liveImage,
-                Config.Settings.imageCompareSettings.fuzziness);
-            differenceString = (difference * 100).ToString("0.##\\%");
-            return difference < Config.Settings.imageCompareSettings.accuracy;
-        }
-
-        public Image GetMergedImage()
-        {
-            Image overlayImage = OverlayImages(liveImage, GetDifferenceImage());
-            Image mergedImage = CombineImages(storedImage, liveImage, overlayImage);
-            return mergedImage;
-        }
-
-        private Image CombineImages(Image image1, Image image2, Image image3)
-        {
-            int newWidth = image1.Width + image2.Width + image3.Width;
-            int newHeight = image1.Height;
-            var bmp = new Bitmap(newWidth, newHeight);
-            using (Graphics gr = Graphics.FromImage(bmp))
-            {
-                gr.DrawImage(image1, new Point(0, 0));
-                gr.DrawImage(image2, new Point(image1.Width, 0));
-                gr.DrawImage(image3, new Point(image2.Width + image1.Width, 0));
-            }
-            return bmp;
-        }
-
-
-
-
-
-        public Image GetStoredImageByName(string name)
-        {
-            if (File.Exists(ImageLocation))
-                return Image.FromFile(DirLocation + name + ".bmp");
-            return null;
-        }
-
-        public Image OverlayImages(Image imageBackground, Image imageOverlay)
-        {
-            imageOverlay = imageOverlay.Resize(imageBackground.Width, imageBackground.Height);
-            Image img = new Bitmap(imageBackground.Width, imageBackground.Height);
-            using (Graphics gr = Graphics.FromImage(img))
-            {
-                gr.DrawImage(imageBackground, new Point(0, 0));
-                gr.DrawImage(imageOverlay, new Point(0, 0));
-            }
-            return img;
-        }
-
-
-
-        public void DeleteOldImage()
-        {
-            if (File.Exists(ImageLocation))
-                File.Delete(ImageLocation);
-        }
-
-        public void UpdateImage()
-        {
-            using (Image image = GetLiveImage())
-            {
-                SaveImage(image);
-            }
-        }
-
-        private void SaveImage(Image image)
-        {
-            try
-            {
-
-                DeleteOldImage();
-                using (var tempImage = new Bitmap(image))
-                {
-                    tempImage.Save(ImageLocation, ImageFormat.Bmp);
-                }
-            }
-            catch (Exception e)
-            {
-                Common.Log("Exception saving image : " + e.Message);
-            }
-        }
-
-        public void Save(Image image, string imageName)
-        {
-            using (var tempImage = new Bitmap(image))
-            {
-                tempImage.Save(DirLocation+imageName+".bmp", ImageFormat.Bmp);
-            }
-        }
+        */
 
         private Image cropImage(Image img, Rectangle cropArea)
         {
@@ -372,21 +333,7 @@ namespace ProtoTest.Golem.Purple
             Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
             return bmpCrop;
         }
-
-        public void VerifyImage()
-        {
-
-            if (ImagesMatch())
-            {
-                TestContext.CurrentContext.IncrementAssertCount();
-                TestBase.LogEvent("Images match!");
-            }
-
-            else
-            {
-                TestBase.AddVerificationError("Images don't match", GetMergedImage());
-            }
-        }
-        */
+        
+        //TODO: Functions to manage snapshots such as delete file, delete a specific snapshot, etc.
     }
 }
