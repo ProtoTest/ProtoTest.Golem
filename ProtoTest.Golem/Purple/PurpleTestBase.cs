@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.PurpleElements;
 
@@ -10,6 +12,7 @@ namespace ProtoTest.Golem.Purple
         //Used for logging how long it takes elements to appear.
         //Has to be set in the constructor for the testclass
         public static bool PerfLogging { get; set; }
+        public static List<string> TestOutcomes = new List<string>();
 
         public string TestFileLocation
         {
@@ -65,10 +68,20 @@ namespace ProtoTest.Golem.Purple
         public void TearDown()
         {
             //LogScreenshotIfTestFailed();
+            var testoutcome = TestContext.CurrentContext.Test.Name + " Result: " + TestContext.CurrentContext.Result.State;
+            TestOutcomes.Add(testoutcome);
             PurpleWindow.EndProcess();
             if (PerfLogging)
             {
                 //write perflog file
+            }
+        }
+        [NUnit.Framework.TestFixtureTearDown]
+        public void FixtureTearDown()
+        {
+            foreach (var testOutcome in TestOutcomes)
+            {
+                TestBase.Log(testOutcome);
             }
         }
 
