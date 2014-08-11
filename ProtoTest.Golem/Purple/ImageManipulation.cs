@@ -220,7 +220,7 @@ namespace ProtoTest.Golem.Purple
         /// <param name="source1">Image 1</param>
         /// <param name="source2">Image 2</param>
         /// <param name="fuzzines">Image 2</param>
-        /// <returns>float value that indicates the difference</returns>
+        /// <returns>float value that indicates the difference expressed as percentage</returns>
         public string ImagesMatchReturnValue(Image source1, Image source2, int fuzzines=-1)
         {
             byte fuz;
@@ -233,7 +233,7 @@ namespace ProtoTest.Golem.Purple
                 fuz = Byte.Parse(fuzzines.ToString());
             }
             difference = ImageComparer.ImageComparePercentage(source1, source2, fuz);
-            differenceString = (difference * 100).ToString("0.##\\%");
+            differenceString = (difference * 100).ToString("0.##");
             return differenceString;
         }
 
@@ -327,7 +327,7 @@ namespace ProtoTest.Golem.Purple
         }
         */
 
-        private Image cropImage(Image img, Rectangle cropArea)
+        public Image cropImage(Image img, Rectangle cropArea)
         {
             var bmpImage = new Bitmap(img);
             Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
