@@ -46,7 +46,7 @@ namespace ProtoTest.Golem.Purple
         {
             get
             {
-                return "RLF2013TestFile.qig";
+                return Config.Settings.purpleSettings.ProjName;
             }
         }
 

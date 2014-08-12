@@ -151,6 +151,19 @@ namespace ProtoTest.Golem.Purple
         }
 
         /// <summary>
+        /// Gets an image stored on disk. Do not include file extension
+        /// </summary>
+        /// <param name="imageName">Name of the file without extension</param>
+        /// <returns>Image</returns>
+        public Image GetImageFromDisk(string imageName)
+        {
+            string fName = imageName + ".bmp";
+            if (File.Exists(DirLocation + fName))
+                return Image.FromFile(DirLocation + fName);
+            return null;
+        }
+
+        /// <summary>
         /// Retruns the image which is the result of the difference between 2 given images.
         /// The resultimg image will have the size of image 2
         /// </summary>
@@ -310,6 +323,10 @@ namespace ProtoTest.Golem.Purple
                 Directory.CreateDirectory(Common.GetCodeDirectory() + "\\ElementImages");
         }
 
+        /// <summary>
+        /// Returns an image that represents the screen at this moment
+        /// </summary>
+        /// <returns>Image</returns>
         public Image GetLiveImage()
         {
             var img = element.UIAElement.GetImage();
