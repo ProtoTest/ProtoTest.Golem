@@ -13,43 +13,59 @@ namespace ProtoTest.Golem.Purple
         //Has to be set in the constructor for the testclass
         public static bool PerfLogging { get; set; }
         public static List<string> TestOutcomes = new List<string>();
+        private string TestFileLoc;
+        private string ProjectFile;
 
         public string TestFileLocation
         {
-            get { return GetTestFile(); }
+            get
+            {
+                if (TestFileLoc == null)
+                {
+                    SetFileInfo();
+                }
+                return TestFileLoc;
+            }
         }
-
-        private string GetTestFile()
-        {
-            string TestFileLoc = @"C:\";
-            var machineName = Environment.MachineName;
-            if (machineName == Config.Settings.purpleSettings.Machine1)
-            {
-                TestFileLoc = Config.Settings.purpleSettings.DataSetPath1;
-            }
-            if (machineName == Config.Settings.purpleSettings.Machine2)
-            {
-                TestFileLoc = Config.Settings.purpleSettings.DataSetPath2;
-            }
-            if (machineName == Config.Settings.purpleSettings.Machine3)
-            {
-                TestFileLoc = Config.Settings.purpleSettings.DataSetPath3;
-            }
-            if (machineName == Config.Settings.purpleSettings.Machine4)
-            {
-                TestFileLoc = Config.Settings.purpleSettings.DataSetPath4;
-            }
-            return TestFileLoc;
-        }
-
         public string ProjectFileName
         {
             get
             {
-                return Config.Settings.purpleSettings.ProjName;
+                if (ProjectFile == null)
+                {
+                    SetFileInfo();
+                }
+                return ProjectFile;
             }
         }
 
+        private void SetFileInfo()
+        {
+            TestFileLoc = @"C:\";
+            ProjectFile = "NOT CONFIGURED";
+            var machineName = Environment.MachineName;
+            if (machineName == Config.Settings.purpleSettings.Machine1)
+            {
+                TestFileLoc = Config.Settings.purpleSettings.DataSetPath1;
+                ProjectFile = Config.Settings.purpleSettings.ProjectName1;
+            }
+            if (machineName == Config.Settings.purpleSettings.Machine2)
+            {
+                TestFileLoc = Config.Settings.purpleSettings.DataSetPath2;
+                ProjectFile = Config.Settings.purpleSettings.ProjectName2;
+            }
+            if (machineName == Config.Settings.purpleSettings.Machine3)
+            {
+                TestFileLoc = Config.Settings.purpleSettings.DataSetPath3;
+                ProjectFile = Config.Settings.purpleSettings.ProjectName3;
+            }
+            if (machineName == Config.Settings.purpleSettings.Machine4)
+            {
+                TestFileLoc = Config.Settings.purpleSettings.DataSetPath4;
+                ProjectFile = Config.Settings.purpleSettings.ProjectName4;
+            }
+        }
+        
         public void TestSettings()
         {
             

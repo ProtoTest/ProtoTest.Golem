@@ -347,7 +347,10 @@ namespace ProtoTest.Golem.Core
             public string DataSetPath2;
             public string DataSetPath3;
             public string DataSetPath4;
-            public string ProjName;
+            public string ProjectName1;
+            public string ProjectName2;
+            public string ProjectName3;
+            public string ProjectName4;
 
             public PurpleSettings()
             {
@@ -368,7 +371,10 @@ namespace ProtoTest.Golem.Core
                 DataSetPath2 = Config.GetConfigValue("DS2", "NOT_SET");
                 DataSetPath3 = Config.GetConfigValue("DS3", "NOT_SET");
                 DataSetPath4 = Config.GetConfigValue("DS4", "NOT_SET");
-                ProjName = Config.GetConfigValue("PrjName", "NOT SET");
+                ProjectName1 = Config.GetConfigValue("PrjName1", "NOT SET");
+                ProjectName2 = Config.GetConfigValue("PrjName2", "NOT SET");
+                ProjectName3 = Config.GetConfigValue("PrjName3", "NOT SET");
+                ProjectName4 = Config.GetConfigValue("PrjName4", "NOT SET");
             }
         }
     }
