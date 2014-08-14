@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Automation;
 using WindowsInput;
@@ -8,17 +9,22 @@ using ProtoTest.Golem.Purple.PurpleCore;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {
+
     public static class PurpleWindow
     {
+        
         private static AutomationElement window;
         public static AutomationElement purpleWindow { get { return window; } }
+         [DllImport("User32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+        private static IntPtr handle;
 
         private static void waitForWindow()
         {
             window = Locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
             
         }
-        
+       
         public static bool FindRunningProcess()
         {
             bool processRunning = false;
@@ -27,7 +33,9 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             {
                 TestBase.Log(string.Format("Could not find process {0}. Attempting to start process...", Config.Settings.purpleSettings.ProcessName));
                 var startProcess = new ProcessStartInfo(Config.Settings.purpleSettings.appPath);
-                Process.Start(startProcess);
+                Process app = Process.Start(startProcess);
+                handle = app.MainWindowHandle;
+                SetForegroundWindow(handle);
                 waitForWindow();
             }
             else
