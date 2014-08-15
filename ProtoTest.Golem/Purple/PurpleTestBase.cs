@@ -84,8 +84,8 @@ namespace ProtoTest.Golem.Purple
         public void TearDown()
         {
             //LogScreenshotIfTestFailed();
-            var testoutcome = TestContext.CurrentContext.Test.Name + " Result: " + TestContext.CurrentContext.Result.State;
-            TestOutcomes.Add(testoutcome);
+            //var testoutcome = TestContext.CurrentContext.Test.Name + " Result: " + TestContext.CurrentContext.Result.State;
+            //TestOutcomes.Add(testoutcome);
             PurpleWindow.EndProcess();
             if (PerfLogging)
             {

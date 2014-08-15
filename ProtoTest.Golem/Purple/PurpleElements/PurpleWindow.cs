@@ -51,7 +51,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public static void EndProcess(String DontsaveProjectPath = "notused")
         {
-            //TODO: Want to make this configurable - for now it's hard coded
             Process[] processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
             foreach (Process process in processes)
             {
