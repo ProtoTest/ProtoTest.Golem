@@ -24,6 +24,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             window = Locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
             
         }
+
        
         public static bool FindRunningProcess()
         {
@@ -33,10 +34,10 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             {
                 TestBase.Log(string.Format("Could not find process {0}. Attempting to start process...", Config.Settings.purpleSettings.ProcessName));
                 var startProcess = new ProcessStartInfo(Config.Settings.purpleSettings.appPath);
+                waitForWindow();
                 Process app = Process.Start(startProcess);
                 handle = app.MainWindowHandle;
                 SetForegroundWindow(handle);
-                waitForWindow();
             }
             else
             {
