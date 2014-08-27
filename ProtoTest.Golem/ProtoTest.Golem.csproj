@@ -131,6 +131,7 @@
     <Compile Include="Rest\OAuth\OAuth_Token_Keeper.cs" />
     <Compile Include="Rest\OAuth\simpleTwitterHandler.cs" />
     <Compile Include="Tests\AppiumTest.cs" />
+    <Compile Include="Tests\BrowserStackTest.cs" />
     <Compile Include="Tests\BrowserTests.cs" />
     <Compile Include="Tests\TestDriver.cs" />
     <Compile Include="Tests\TestPageObjects.cs" />

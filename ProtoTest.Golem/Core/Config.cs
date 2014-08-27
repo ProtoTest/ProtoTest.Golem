@@ -137,6 +137,7 @@ namespace ProtoTest.Golem.Core
         public ReportSettings reportSettings;
         public RuntimeSettings runTimeSettings;
         public PurpleSettings purpleSettings;
+        public BrowserStackSettings browserStackSettings;
 
         public ConfigSettings()
         {
@@ -146,6 +147,7 @@ namespace ProtoTest.Golem.Core
             appiumSettings = new AppiumSettings();
             imageCompareSettings = new ImageCompareSettings();
             purpleSettings = new PurpleSettings();
+            browserStackSettings = new BrowserStackSettings();
         }
 
         /// <summary>
@@ -359,6 +361,24 @@ namespace ProtoTest.Golem.Core
                 Purple_ValueDelimiterEnd = Config.GetConfigValue("Purple_ValueDelimiterEnd", "]");
                 Purple_ElementTimeoutWaitSeconds = Config.GetConfigValueAsInt("Purple_ElementWaitTimeOutSeconds", "0");
 
+            }
+        }
+
+        public class BrowserStackSettings
+        {
+            public string BrowserStack_User;
+            public string BrowserStack_Key;
+            public string BrowserStack_OS;
+            public string BrowserStack_OS_Version;
+            public string BrowserStackRemoteURL;
+
+            public BrowserStackSettings()
+            {
+                BrowserStack_User = Config.GetConfigValue("BrowserStack_User", null);
+                BrowserStack_Key = Config.GetConfigValue("BrowserStack_Key", null);
+                BrowserStack_OS = Config.GetConfigValue("BrowserStack_OS", null);
+                BrowserStack_OS_Version = Config.GetConfigValue("BrowserStack_OS_Version", null);
+                BrowserStackRemoteURL = Config.GetConfigValue("BrowserStackRemoteURL", "hub.browserstack.com");
             }
         }
     }

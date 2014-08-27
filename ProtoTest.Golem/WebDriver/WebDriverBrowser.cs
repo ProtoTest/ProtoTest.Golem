@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -158,11 +159,39 @@ namespace ProtoTest.Golem.WebDriver
 
         public IWebDriver LaunchRemoteBrowser(Browser browser, string host)
         {
-            Common.Log(string.Format("Starting {0} browser on host : {1}:{2}",browser,host,Config.Settings.runTimeSettings.RemoteHostPort));
+            String URIStr = null;
             DesiredCapabilities desiredCapabilities = GetCapabilitiesForBrowser(browser);
             desiredCapabilities.SetCapability(CapabilityType.Platform,Config.Settings.runTimeSettings.Platform);
             desiredCapabilities.SetCapability(CapabilityType.Version, Config.Settings.runTimeSettings.Version);
-            var remoteAddress = new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.runTimeSettings.RemoteHostPort));
+            
+            if (host.Equals(Config.Settings.browserStackSettings.BrowserStackRemoteURL))
+            {
+                String user = Config.Settings.browserStackSettings.BrowserStack_User;
+                String key = Config.Settings.browserStackSettings.BrowserStack_Key;
+                String os = Config.Settings.browserStackSettings.BrowserStack_OS;
+                String os_version = Config.Settings.browserStackSettings.BrowserStack_OS_Version;
+
+                if (user == null) { throw new ConfigurationErrorsException("Framework configured to use BrowserStack, however 'BrowserStack_User' is not defined in App.config"); }
+                if (key == null) { throw new ConfigurationErrorsException("Framework configured to use BrowserStack, however 'BrowserStack_Key' is not defined in App.config"); }
+                if (os == null) { throw new ConfigurationErrorsException("Framework configured to use BrowserStack, however 'BrowserStack_OS' is not defined in App.config"); }
+                if (os_version == null) { throw new ConfigurationErrorsException("Framework configured to use BrowserStack, however 'BrowserStack_OS_Version' is not defined in App.config"); }
+
+                // Browser stack does not require a remote host port
+                desiredCapabilities.SetCapability("browserstack.user", user);
+                desiredCapabilities.SetCapability("browserstack.key", key);
+                desiredCapabilities.SetCapability("os", os);
+                desiredCapabilities.SetCapability("os_version", os_version);
+
+                URIStr = string.Format("http://{0}/wd/hub", host);
+                Common.Log(string.Format("Starting {0} browser on host : {1}", browser, host));
+            }
+            else
+            {
+                URIStr = string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.runTimeSettings.RemoteHostPort);
+                Common.Log(string.Format("Starting {0} browser on host : {1}:{2}", browser, host, Config.Settings.runTimeSettings.RemoteHostPort));
+            }
+           
+            var remoteAddress = new Uri(URIStr);
             return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
         }
 
