@@ -207,13 +207,13 @@ namespace ProtoTest.Golem.WebDriver
 
         public static IWebElement FindElementWithText(this IWebDriver driver, string text)
         {
-            return driver.FindElement(By.XPath("//*[text()='" + text + "']"));
+            return driver.FindElement(By.XPath("//*[text()=\"" + text + "\"]"));
         }
 
         public static IWebElement WaitForElementWithText(this IWebDriver driver, string text, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            return driver.WaitForPresent(By.XPath("//*[text()='" + text + "']"));
+            return driver.WaitForPresent(By.XPath("//*[text()=\"" + text + "\"]"));
         }
 
         public static void VerifyElementPresent(this IWebDriver driver, By by, bool isPresent = true)

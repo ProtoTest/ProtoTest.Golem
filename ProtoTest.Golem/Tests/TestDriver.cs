@@ -24,6 +24,7 @@ namespace ProtoTest.Golem.Tests
         public void TestWebDriverExtensions()
         {
             driver.Navigate().GoToUrl("http://google.com");
+            driver.WaitForElementWithText("Google Search").Highlight();
             driver.FindElementWithText("Google Search").Highlight();
         }
 
