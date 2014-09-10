@@ -1,4 +1,6 @@
-﻿using System.Windows.Automation;
+﻿using System;
+using System.Windows.Automation;
+using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {
@@ -69,7 +71,15 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                             if (itemToSelect != null)
                             {
                                 SelectionItemPattern selectPattern = (SelectionItemPattern) itemToSelect.GetCurrentPattern(SelectionItemPattern.Pattern);
-                                selectPattern.Select();
+                                try
+                                {
+                                    selectPattern.Select();
+                                }
+                                catch (Exception e)
+                                {
+                                    TestBase.Log("An exception was handled by PurpleDropDown Class: " + e.Message);
+                                }
+                                
                             }
                         }
                     }
@@ -109,7 +119,17 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                             {
                                 SelectionItemPattern selectPattern =
                                     (SelectionItemPattern) availableOptions[item - 1].GetCurrentPattern(SelectionItemPattern.Pattern);
-                                selectPattern.Select();
+                                try
+                                {
+                                    selectPattern.Select();
+                                }
+                                catch (Exception e)
+                                {
+                                    //There is a timeout exception on the filter data panel
+                                    TestBase.Log("An exception was handled by PurpleDropDown Class: " + e.Message);
+                                }
+                                
+                                
                             }
                         }
                     }
