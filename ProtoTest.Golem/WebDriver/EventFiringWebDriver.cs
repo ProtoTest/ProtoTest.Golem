@@ -1138,6 +1138,10 @@ namespace ProtoTest.Golem.WebDriver
           throw;
         }
       }
+      public IWebDriver ParentFrame()
+      {
+          return this.wrappedLocator.DefaultContent();
+      }
     }
 
     /// <summary>
