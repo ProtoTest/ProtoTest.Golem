@@ -95,10 +95,7 @@ namespace ProtoTest.Golem.Purple
         [NUnit.Framework.TestFixtureTearDown]
         public void FixtureTearDown()
         {
-            foreach (var testOutcome in TestOutcomes)
-            {
-                TestBase.Log(testOutcome);
-            }
+            
         }
 
         public void LogScreenshotIfTestFailed()
