@@ -41,9 +41,9 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             }
             else
             {
-                processRunning = true;
-                TestBase.Log("Attempting to attach to currently running process " + processes[0].ProcessName + " ID:" + processes[0].Id);
-                waitForWindow();
+                TestBase.Log(string.Format("Process Length is: {0}. Attempting to kill existing process and start it up again.", processes.Length));
+                EndProcess();
+                FindRunningProcess();
             }
             //the PurpleLib will always try to find an element the first window the with name = Purple_windowTitle;
             return processRunning;
