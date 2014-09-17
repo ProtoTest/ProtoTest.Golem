@@ -11,7 +11,11 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
             get
             {
-                string enteredText = GetText();
+                string enteredText = "ELEMENT NOT FOUND";
+                if (PurpleElement.Current.IsControlElement)
+                {
+                    enteredText = GetText();
+                }
                 return enteredText;
             }
             set
