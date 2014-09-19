@@ -54,8 +54,8 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                     {
                         PurplePerformanceLogger.AddEntry(name, purplePath, Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds, 0);
                     }
-                    Assert.Fail(string.Format("Element: {0} with Path: {1} Failed to respond in alloted time.", name, purplePath));
-                    
+                    TestBase.Log(string.Format("Element: {0} with Path: {1} Failed to respond in alloted time.", name, purplePath));
+                    break;  //This will log the error and throw a null reference exception in the calling function - other tests in the suite should continue though
                 }
             }
             elementTimeoutTimer.Stop();

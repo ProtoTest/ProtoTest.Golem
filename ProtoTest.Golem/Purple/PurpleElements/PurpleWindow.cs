@@ -15,17 +15,15 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         
         private static AutomationElement window;
         public static AutomationElement purpleWindow { get { return window; } }
-         [DllImport("User32.dll")]
+         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy,
+            uint uFlags);
         private static IntPtr handle;
 
-        private static void waitForWindow()
-        {
-            window = Locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
-            
-        }
-
-       
+        
         public static bool FindRunningProcess()
         {
             bool processRunning = false;
@@ -37,7 +35,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                 Process app = Process.Start(startProcess);
                 waitForWindow();
                 handle = app.MainWindowHandle;
-                SetForegroundWindow(handle);
+                SetWindowPos(app.MainWindowHandle, new IntPtr(-1), 0, 0, 0, 0, 3); //This should bring the application to the front once it starts
+                //SetForegroundWindow(handle);  //this didn't bring the app to the front
             }
             else
             {
@@ -47,6 +46,12 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             }
             //the PurpleLib will always try to find an element the first window the with name = Purple_windowTitle;
             return processRunning;
+        }
+
+        private static void waitForWindow()
+        {
+            window = Locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
+
         }
 
         public static void EndProcess(String DontsaveProjectPath = "notused")
@@ -88,6 +93,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         public static void SetVisualState(Window_VisualStyle visualState)
         {
             WindowPattern windowPattern = GetWindowPattern(window);
+            
             try
             {
                 if (windowPattern.Current.WindowInteractionState == WindowInteractionState.ReadyForUserInteraction)
