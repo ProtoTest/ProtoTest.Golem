@@ -35,8 +35,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                 Process app = Process.Start(startProcess);
                 waitForWindow();
                 handle = app.MainWindowHandle;
-                SetWindowPos(app.MainWindowHandle, new IntPtr(-1), 0, 0, 0, 0, 3); //This should bring the application to the front once it starts
-                Thread.Sleep(2000);
+                //SetWindowPos(app.MainWindowHandle, new IntPtr(-1), 0, 0, 0, 0, 3); //This should bring the application to the front once it starts
+                //Thread.Sleep(2000);
                 //SetForegroundWindow(handle);  //this didn't bring the app to the front
             }
             else
