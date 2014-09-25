@@ -41,6 +41,7 @@ namespace ProtoTest.Golem.Purple
 
         private void SetFileInfo()
         {
+            //TODO This is fugly - need a better solution
             TestFileLoc = @"C:\";
             ProjectFile = "NOT CONFIGURED";
             var machineName = Environment.MachineName;

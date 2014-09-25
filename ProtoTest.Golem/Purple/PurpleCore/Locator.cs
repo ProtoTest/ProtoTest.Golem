@@ -31,6 +31,8 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             elementTimeoutTimer.Elapsed += elementTimeout;
         }
 
+        //TODO need to figure out how and why this kills subsequent tests - prossible due to unhandled exception
+        //handling it though causes the test to hang instead of moving onto the next test in the suite
         public static AutomationElement WaitForElementAvailable(string purplePath, string name)
         {
             elementTimeoutTimer.Start();
@@ -54,8 +56,9 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                     {
                         PurplePerformanceLogger.AddEntry(name, purplePath, Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds, 0);
                     }
-                    TestBase.Log(string.Format("Element: {0} with Path: {1} Failed to respond in alloted time.", name, purplePath));
-                    break;  //This will log the error and throw a null reference exception in the calling function.
+                    Assert.Fail(string.Format("Element: {0} with Path: {1} Failed to respond in alloted time.", name, purplePath));
+                  
+                    
                 }
             }
             elementTimeoutTimer.Stop();
