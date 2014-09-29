@@ -6,21 +6,22 @@ using System.Timers;
 using System.Windows.Automation;
 using NUnit.Framework;
 using ProtoTest.Golem.Core;
+using ProtoTest.Golem.Purple.PurpleElements;
 using Timer = System.Timers.Timer;
 
 namespace ProtoTest.Golem.Purple.PurpleCore
 {
-    public static class Locator
+    public class Locator
     {
-        private static PurpleLib.PurplePath _purplePath = new PurpleLib.PurplePath();
-        private static Timer elementTimeoutTimer = new Timer(Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds * 1000);
-        private static bool notfound = false;
+        private  PurpleLib.PurplePath _purplePath = new PurpleLib.PurplePath();
+        private  Timer elementTimeoutTimer = new Timer(Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds * 1000);
+        private  bool notfound = false;
 
-        public static PurpleLib.PurplePath ByPurplePath{ get { return _purplePath; }}
+        public  PurpleLib.PurplePath ByPurplePath{ get { return _purplePath; }}
         
         
 
-        static Locator()
+        public Locator()
         {
             _purplePath.Delimiter = Config.Settings.purpleSettings.Purple_Delimiter;
             _purplePath.BlankValue = Config.Settings.purpleSettings.Purple_blankValue;
@@ -33,13 +34,13 @@ namespace ProtoTest.Golem.Purple.PurpleCore
 
         //TODO need to figure out how and why this kills subsequent tests - prossible due to unhandled exception
         //handling it though causes the test to hang instead of moving onto the next test in the suite
-        public static AutomationElement WaitForElementAvailable(string purplePath, string name)
+        public AutomationElement WaitForElementAvailable(string purplePath, string name)
         {
             elementTimeoutTimer.Start();
             AutomationElement elementAvailable = null;
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
-            TestBase.Log(string.Format("Locating Element: {0}", name));
+            TestBase.Log(string.Format("Locating Element: {0} ", name));
             while (elementAvailable == null)
             {
                 try
@@ -56,10 +57,9 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                     {
                         PurplePerformanceLogger.AddEntry(name, purplePath, Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds, 0);
                     }
-                    Assert.Fail(string.Format("Element: {0} with Path: {1} Failed to respond in alloted time.", name, purplePath));
-                  
-                    
+                    break;
                 }
+                
             }
             elementTimeoutTimer.Stop();
             stopWatch.Stop();
@@ -72,27 +72,31 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                     PurplePerformanceLogger.AddEntry(name, purplePath, time.Seconds, time.Milliseconds);
                 }
             }
+            if (elementAvailable == null)
+            {
+                Assert.Fail(string.Format("Element: {0} with Path: {1} Failed to respond in alloted time.", name, purplePath));
+            }
             return elementAvailable;
         }
 
-        private static void elementTimeout(object source, ElapsedEventArgs args)
+        private void elementTimeout(object source, ElapsedEventArgs args)
         {
             TestBase.Log("Element took longer than " + Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds + " Seconds to respond.");
             notfound = true;
         }
 
-        public static bool HasChildren(string purplePath, string name)
+        public bool HasChildren(string purplePath, string name)
         {
             AutomationElement presumedParent = WaitForElementAvailable(purplePath, name);
             return ByPurplePath.HasChildren(presumedParent);
         }
 
-        public static List<AutomationElement> GetChildren(AutomationElement presumedParent)
+        public List<AutomationElement> GetChildren(AutomationElement presumedParent)
         {
             return ByPurplePath.GetChildren(presumedParent);
         }
 
-        public static string FindPurplePath(AutomationElement element)
+        public string FindPurplePath(AutomationElement element)
         {
             return ByPurplePath.getPurplePath(element);
         }

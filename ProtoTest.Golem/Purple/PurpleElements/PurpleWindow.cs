@@ -22,6 +22,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy,
             uint uFlags);
         private static IntPtr handle;
+        private static Locator _locator;
 
         
         public static bool FindRunningProcess()
@@ -34,7 +35,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                 var startProcess = new ProcessStartInfo(Config.Settings.purpleSettings.appPath);
                 Process app = Process.Start(startProcess);
                 waitForWindow();
-                handle = app.MainWindowHandle;
+                
                 //SetWindowPos(app.MainWindowHandle, new IntPtr(-1), 0, 0, 0, 0, 3); //This should bring the application to the front once it starts
                 //Thread.Sleep(2000);
                 //SetForegroundWindow(handle);  //this didn't bring the app to the front
@@ -51,12 +52,13 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         private static void waitForWindow()
         {
-            window = Locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
-
+           _locator = new Locator();
+           window = _locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
         }
 
         public static void EndProcess(String DontsaveProjectPath = "notused")
         {
+            window = null;
             Process[] processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
             foreach (Process process in processes)
             {
