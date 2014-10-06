@@ -13,11 +13,11 @@ namespace ProtoTest.Golem.Purple.PurpleCore
 {
     public class Locator
     {
-        private  PurpleLib.PurplePath _purplePath = new PurpleLib.PurplePath();
+        private static  PurpleLib.PurplePath _purplePath = new PurpleLib.PurplePath();
         private  Timer elementTimeoutTimer = new Timer(Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds * 1000);
         private  bool notfound = false;
 
-        public  PurpleLib.PurplePath ByPurplePath{ get { return _purplePath; }}
+        public PurpleLib.PurplePath ByPurplePath{ get { return _purplePath; }}
         
         
 
