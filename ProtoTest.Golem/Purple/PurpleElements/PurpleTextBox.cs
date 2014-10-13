@@ -31,6 +31,11 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
         }
 
+        public PurpleTextBox(string name, AutomationElement element) : base(name, element)
+        {
+            
+        }
+
         private string GetText()
         {
             string textValue = "THERE IS NO TEXT";

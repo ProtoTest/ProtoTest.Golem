@@ -44,7 +44,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             get
             {
                 //This will wait for specified ElementTimeout config before trying to interact with the element
-                
                 _UIAElement = aLocator.WaitForElementAvailable(_PurplePath, _elementName);
                 return _UIAElement;
             }
