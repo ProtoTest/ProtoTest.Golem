@@ -26,7 +26,9 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         private String _PurplePath;
         private String _elementName;
         private Locator _locator;
-
+        /// <summary>
+        /// This can be used to find a PurplePath for an automation element
+        /// </summary>
         public Locator aLocator
         {
             get { return new Locator(); }
