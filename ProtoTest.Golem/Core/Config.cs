@@ -348,6 +348,18 @@ namespace ProtoTest.Golem.Core
             public string Purple_ValueDelimiterStart;
             public string Purple_ValueDelimiterEnd;
             public int Purple_ElementTimeoutWaitSeconds;
+            public string Machine1;
+            public string Machine2;
+            public string Machine3;
+            public string Machine4;
+            public string DataSetPath1;
+            public string DataSetPath2;
+            public string DataSetPath3;
+            public string DataSetPath4;
+            public string ProjectName1;
+            public string ProjectName2;
+            public string ProjectName3;
+            public string ProjectName4;
 
             public PurpleSettings()
             {
@@ -360,7 +372,18 @@ namespace ProtoTest.Golem.Core
                 Purple_ValueDelimiterStart = Config.GetConfigValue("Purple_ValueDelimiterStart", "[");
                 Purple_ValueDelimiterEnd = Config.GetConfigValue("Purple_ValueDelimiterEnd", "]");
                 Purple_ElementTimeoutWaitSeconds = Config.GetConfigValueAsInt("Purple_ElementWaitTimeOutSeconds", "0");
-
+                Machine1 = Config.GetConfigValue("Machine1", "NOT_SET");
+                Machine2 = Config.GetConfigValue("Machine2", "NOT_SET");
+                Machine3 = Config.GetConfigValue("Machine3", "NOT_SET");
+                Machine4 = Config.GetConfigValue("Machine4", "NOT_SET");
+                DataSetPath1 = Config.GetConfigValue("DS1", "NOT_SET");
+                DataSetPath2 = Config.GetConfigValue("DS2", "NOT_SET");
+                DataSetPath3 = Config.GetConfigValue("DS3", "NOT_SET");
+                DataSetPath4 = Config.GetConfigValue("DS4", "NOT_SET");
+                ProjectName1 = Config.GetConfigValue("PrjName1", "NOT SET");
+                ProjectName2 = Config.GetConfigValue("PrjName2", "NOT SET");
+                ProjectName3 = Config.GetConfigValue("PrjName3", "NOT SET");
+                ProjectName4 = Config.GetConfigValue("PrjName4", "NOT SET");
             }
         }
 

@@ -120,6 +120,7 @@
     <Compile Include="Proxy\HAR\Response.cs" />
     <Compile Include="Proxy\HAR\Timings.cs" />
     <Compile Include="Proxy\ProxyTests.cs" />
+    <Compile Include="Purple\ImageManipulation.cs" />
     <Compile Include="Purple\PurpleCore\Locator.cs" />
     <Compile Include="Purple\PurpleCore\PurplePerformanceLogger.cs" />
     <Compile Include="Purple\PurpleCore\RectX.cs" />

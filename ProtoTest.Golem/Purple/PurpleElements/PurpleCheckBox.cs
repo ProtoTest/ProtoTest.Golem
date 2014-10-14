@@ -6,7 +6,11 @@ namespace ProtoTest.Golem.Purple.PurpleElements
     public class PurpleCheckBox : PurpleElementBase
     {
         //TODO: Finish Implimenting PurpleCheckBox.
-        public bool Checked { get; set; }
+        public bool Checked
+        {
+            get { return IsElementToggledOn(); } 
+            set { Check(value);}
+        }
 
         public PurpleCheckBox(string name, string locatorPath) : base(name, locatorPath)
         {
@@ -24,15 +28,21 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             return false;
         }
 
-        public void Check()
+        public void Check(bool value)
         {
             if (IsElementToggledOn())
             {
-                
+                if (!value)
+                {
+                    Click();
+                }
             }
             else
             {
-                
+                if (value)
+                {
+                    Click();
+                }
             }
         }
     }

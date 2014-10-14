@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Automation;
 using WindowsInput;
 using ProtoTest.Golem.Core;
@@ -7,16 +9,21 @@ using ProtoTest.Golem.Purple.PurpleCore;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {
+
     public static class PurpleWindow
     {
+        
         private static AutomationElement window;
         public static AutomationElement purpleWindow { get { return window; } }
+         [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        private static void waitForWindow()
-        {
-            window = Locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
-            
-        }
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy,
+            uint uFlags);
+        private static IntPtr handle;
+        private static Locator _locator;
+
         
         public static bool FindRunningProcess()
         {
@@ -26,28 +33,40 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             {
                 TestBase.Log(string.Format("Could not find process {0}. Attempting to start process...", Config.Settings.purpleSettings.ProcessName));
                 var startProcess = new ProcessStartInfo(Config.Settings.purpleSettings.appPath);
-                Process.Start(startProcess);
+                Process app = Process.Start(startProcess);
                 waitForWindow();
+                
+                //SetWindowPos(app.MainWindowHandle, new IntPtr(-1), 0, 0, 0, 0, 3); //This should bring the application to the front once it starts
+                //Thread.Sleep(2000);
+                //SetForegroundWindow(handle);  //this didn't bring the app to the front
             }
             else
             {
-                processRunning = true;
-                TestBase.Log("Attempting to attach to currently running process " + processes[0].ProcessName + " ID:" + processes[0].Id);
-                waitForWindow();
+                TestBase.Log(string.Format("Process Length is: {0}. Attempting to kill existing process and start it up again.", processes.Length));
+                EndProcess();
+                FindRunningProcess();
             }
             //the PurpleLib will always try to find an element the first window the with name = Purple_windowTitle;
             return processRunning;
         }
 
+        private static void waitForWindow()
+        {
+           _locator = new Locator();
+           window = _locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
+        }
+
         public static void EndProcess(String DontsaveProjectPath = "notused")
         {
-            //TODO: Want to make this configurable - for now it's hard coded
+            window = null;
             Process[] processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
             foreach (Process process in processes)
             {
-                process.CloseMainWindow();
-                PurpleButton dontsave = new PurpleButton("Save Dialog: No", "/LifeQuest™ Pipeline/Save Project?/Save Project?/No");
-                dontsave.Invoke();
+                process.Kill();
+                Thread.Sleep(2000);
+                //process.CloseMainWindow();
+                //PurpleButton dontsave = new PurpleButton("Save Dialog: No", "/LifeQuest™ Pipeline/Save Project?/Save Project?/No");
+                //dontsave.Invoke();
             }
         }
 
@@ -77,6 +96,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         public static void SetVisualState(Window_VisualStyle visualState)
         {
             WindowPattern windowPattern = GetWindowPattern(window);
+            
             try
             {
                 if (windowPattern.Current.WindowInteractionState == WindowInteractionState.ReadyForUserInteraction)

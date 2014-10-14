@@ -12,7 +12,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             get
             {
                 string enteredText = "ELEMENT NOT FOUND";
-                if (PurpleElement.Current.IsEnabled)
+                if (PurpleElement != null)
                 {
                     enteredText = GetText();
                 }
@@ -29,6 +29,11 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public PurpleTextBox(string name, string locatorPath) : base(name, locatorPath)
         {
+        }
+
+        public PurpleTextBox(string name, AutomationElement element) : base(name, element)
+        {
+            
         }
 
         private string GetText()

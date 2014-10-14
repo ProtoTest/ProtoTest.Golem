@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Automation;
+using NUnit.Framework;
 using ProtoTest.Golem.Purple.Elements;
+using ProtoTest.Golem.Purple.PurpleCore;
 using Purple.Core;
 using PurpleLib;
 using Point = System.Windows.Point;
@@ -22,6 +25,14 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         protected AutomationElement _UIAElement;
         private String _PurplePath;
         private String _elementName;
+        private Locator _locator;
+        /// <summary>
+        /// This can be used to find a PurplePath for an automation element
+        /// </summary>
+        public Locator aLocator
+        {
+            get { return new Locator(); }
+        }
         
 
         //This is not built yet -- should be interesting we might want to do this on the screenobject base
@@ -33,7 +44,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             get
             {
                 //This will wait for specified ElementTimeout config before trying to interact with the element
-                _UIAElement = PurpleCore.Locator.WaitForElementAvailable(_PurplePath, _elementName);
+                _UIAElement = aLocator.WaitForElementAvailable(_PurplePath, _elementName);
                 return _UIAElement;
             }
         }
@@ -47,9 +58,12 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         public String ElementName {get { return _elementName; }}
         public String PurplePath{ get { return _PurplePath; }}
         public AutomationElement UIAElement {get { return _UIAElement; }}
-        public bool HasChildren {get { return PurpleCore.Locator.HasChildren(_PurplePath, _elementName); }}
-        
-        
+        public bool HasChildren {get { return aLocator.HasChildren(_PurplePath, _elementName); }}
+
+        public List<AutomationElement> GetChildren()
+        {
+            return aLocator.GetChildren(PurpleElement);
+        }
 
         #endregion
 
@@ -63,7 +77,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
             _elementName = name;
             _UIAElement = element;
-            _PurplePath = PurpleCore.Locator.FindPurplePath(element);
+            _PurplePath = aLocator.FindPurplePath(element);
         }
 
         public void Invoke()
