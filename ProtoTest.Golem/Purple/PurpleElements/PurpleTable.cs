@@ -35,6 +35,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
 
         }
+        public PurpleTable(string name, AutomationElement element) :base(name,element){}
 
         public string GetValue(int row, int column)
         {
