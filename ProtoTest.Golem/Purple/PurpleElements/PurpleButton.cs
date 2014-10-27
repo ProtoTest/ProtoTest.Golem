@@ -1,4 +1,5 @@
-﻿using System.Windows.Automation;
+﻿using System;
+using System.Windows.Automation;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {
@@ -14,6 +15,19 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             
         }
 
+        public bool IsClickable()
+        {
+            bool clickable = true;
+            try
+            {
+                PurpleElement.GetClickablePoint();
+            }
+            catch (Exception)
+            {
+                clickable = false;
+            }
+            return clickable;
+        }
         
     }
 }
