@@ -9,6 +9,11 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
         }
 
+        public PurplePanel(string name, AutomationElement element) : base(name, element)
+        {
+            
+        }
+
         public void DragAndDrop(Point startPoint, Point endPoint, bool RMB = false)
         {
             if (!RMB)//Use the left mouse button as default
