@@ -75,7 +75,7 @@ Test reports include robust diagnostic information.  A command log, source html,
 3) Golem includes modules for testing web sites, REST api's and desktop applications. Take a look at the respective documentation to get started with each.
 * For web sites, use [Golem.WebDriver](https://github.com/ProtoTest/ProtoTest.Golem/wiki/Golem.WebDriver,-Getting-Started). 
 * For RESTful services, use [Golem.Rest](https://github.com/ProtoTest/ProtoTest.Golem/wiki/Golem.Rest,-Getting-Started). 
-* For desktop applications, use [Golem.White](https://github.com/ProtoTest/ProtoTest.Golem/wiki/Golem.White,-Getting-Started).
+* For desktop applications, use [Golem.Purple](https://github.com/ProtoTest/ProtoTest.Golem/wiki/Golem.White,-Getting-Started).
 
 
 ##Contributing to Golem
