@@ -5,7 +5,7 @@
 
 Golem was created to simplify the process of creating enterprise-scale automated testing suites. It wraps around Gallio/MbUnit and a number of automation tools (such as Selenium-WebDriver) to provide the tester with a simple process for creating automated tests no matter what the tool. The inclusion of advanced features, diagnostic information, easy configuration, and enhanced API's helps Golem make automating in code-based automation tools much more practical. A standard test structure is enforced throughout the Golem framework to make the code readable and easy to reuse. 
 
-The Golem repository contains several modules that can be used to test desktop or mobile browsers (Golem.WebDriver), Android and iOS applications (Golem.Appium), Windows applications (Golem.White), or HTTP requests and web services (Golem.Rest). 
+The Golem repository contains several modules that can be used to test desktop or mobile browsers (Golem.WebDriver), Android and iOS applications (Golem.Appium), Windows applications (Golem.Purple), or HTTP requests and web services (Golem.Rest). 
 
 As Golem is built on top of MbUnit, all advanced MbUnit attributes are supported including data driven testing, parallel test execution, and test filtering via meta-data.   
 
