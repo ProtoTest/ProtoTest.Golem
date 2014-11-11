@@ -105,54 +105,51 @@ namespace ProtoTest.Golem.Appium
         }
         public void LaunchApp()
         {
-            if (Config.Settings.appiumSettings.launchApp)
+            var capabilities = new DesiredCapabilities();
+            capabilities.SetCapability(CapabilityType.BrowserName, "");
+            capabilities.SetCapability("deviceName", Config.Settings.appiumSettings.device);
+            capabilities.SetCapability("autoLaunch", Config.Settings.appiumSettings.launchApp);
+            capabilities.SetCapability("platformVersion", Config.Settings.appiumSettings.platformVersion);
+
+
+            if (Config.Settings.appiumSettings.device.Contains("droid"))
             {
-                var capabilities = new DesiredCapabilities();
-                capabilities.SetCapability(CapabilityType.BrowserName, "");
-                capabilities.SetCapability("device", Config.Settings.appiumSettings.device);
-                capabilities.SetCapability("launch", Config.Settings.appiumSettings.launchApp);
-                
-
-
-                if (Config.Settings.appiumSettings.device.Contains("droid"))
-                {
-                    capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);
-                    capabilities.SetCapability("app-package", Config.Settings.appiumSettings.package);
-                    capabilities.SetCapability("app-activity", Config.Settings.appiumSettings.activity);
-                    
-                }
-                else 
-                {
-                    if (Config.Settings.appiumSettings.useIpa)
-                    {
-                        
-                        capabilities.SetCapability("ipa", Config.Settings.appiumSettings.appPath);
-                        capabilities.SetCapability("app",Config.Settings.appiumSettings.bundleId);
-                        
-                    }
-                    else
-                    {
-                        capabilities.SetCapability(CapabilityType.BrowserName, "iOS");
-                        capabilities.SetCapability(CapabilityType.Platform, "Mac");
-                        capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);    
-                    }
-                    capabilities.SetCapability("launch", Config.Settings.appiumSettings.launchApp);
-                }
-                IWebDriver tempDriver = driver;
-                try
-                {
-                   tempDriver  = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities);
-                }
-                catch (Exception)
-                {
-                    Common.Log("Did not get a driver.  Trying again");
-                   server.StopProcess();
-                    server.StartProcess();
-                    tempDriver  = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities);
-                }
-                
-                driver = new EventedWebDriver(tempDriver).driver;  
+                capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);
+                capabilities.SetCapability("appPackage", Config.Settings.appiumSettings.package);
+                capabilities.SetCapability("appActivity", Config.Settings.appiumSettings.activity);
+                capabilities.SetCapability("platformName", "Android");
             }
+            else 
+            {
+                if (Config.Settings.appiumSettings.useIpa)
+                {
+                    capabilities.SetCapability("platformName", "iOS");    
+                    capabilities.SetCapability("ipa", Config.Settings.appiumSettings.appPath);
+                    capabilities.SetCapability("app",Config.Settings.appiumSettings.bundleId);
+                        
+                }
+                else
+                {
+                    capabilities.SetCapability("platformName", "iOS");
+                    capabilities.SetCapability(CapabilityType.BrowserName, "iOS");
+                    capabilities.SetCapability(CapabilityType.Platform, "Mac");
+                    capabilities.SetCapability("app", Config.Settings.appiumSettings.appPath);    
+                }
+            }
+            IWebDriver tempDriver = driver;
+            try
+            {
+                tempDriver  = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities);
+            }
+            catch (Exception)
+            {
+                Common.Log("Did not get a driver.  Trying again");
+                server.StopProcess();
+                server.StartProcess();
+                tempDriver  = new ScreenshotRemoteWebDriver(new Uri(string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.appiumSettings.appiumPort)), capabilities);
+            }
+                
+            driver = new EventedWebDriver(tempDriver).driver;  
         }
     }
 }

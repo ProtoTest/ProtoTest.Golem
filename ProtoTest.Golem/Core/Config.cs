@@ -165,6 +165,8 @@ namespace ProtoTest.Golem.Core
             public string appiumServerPath;
             public bool resetApp = false;
             public string bundleId;
+            public string appiumVersion;
+            public string platformVersion;
 
             public AppiumSettings()
             {
@@ -178,6 +180,8 @@ namespace ProtoTest.Golem.Core
                 appiumServerPath = Config.GetConfigValue("AppiumServerPath", "");
                 resetApp = Config.GetConfigValueAsBool("ResetApp", "False");
                 bundleId = Config.GetConfigValue("BundleId", "");
+                appiumVersion = Config.GetConfigValue("AppiumVersion", "1.2");
+                platformVersion = Config.GetConfigValue("PlatformVersion", "4.3");
             }
         }
 

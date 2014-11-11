@@ -105,7 +105,7 @@ namespace ProtoTest.Golem.WebDriver
                 var jsDriver = ((IJavaScriptExecutor) WebDriverTestBase.driver);
                 var originalElementBorder = (string) jsDriver.ExecuteScript("return arguments[0].style.border", element);
                 jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
-                Thread.Sleep(20);
+                Thread.Sleep(50);
                 jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", element);
             }
             catch (Exception)
