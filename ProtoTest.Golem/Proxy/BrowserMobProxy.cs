@@ -84,7 +84,7 @@ namespace ProtoTest.Golem.Proxy
                 StartInfo.CreateNoWindow = false;
                 serverProcess.StartInfo = StartInfo;
                 serverProcess.Start();
-                client.BaseUrl = "http://localhost:" + serverPort;
+                client.BaseUrl = new Uri("http://localhost:" + serverPort);
                 WaitForServerToStart();
             }
             catch (Exception e)

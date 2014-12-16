@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using RestSharp;
 
 namespace ProtoTest.Golem.Rest
@@ -54,7 +55,7 @@ namespace ProtoTest.Golem.Rest
 
         public Given Domain(string domain)
         {
-            client.BaseUrl = domain;
+            client.BaseUrl = new Uri(domain);
             return this;
         }
 
