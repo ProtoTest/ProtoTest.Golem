@@ -21,13 +21,31 @@ namespace ProtoTest.Golem.WebDriver
     {
         public static ElementVerification Verify(this IWebElement element)
         {
-            return new ElementVerification(new Element(element), Config.Settings.runTimeSettings.ElementTimeoutSec,
+            try
+            {
+                var GolemElement = (Element) element;
+                return new ElementVerification(GolemElement, Config.Settings.runTimeSettings.ElementTimeoutSec,false);
+            }
+            catch(Exception)
+            {
+                return new ElementVerification(new Element(element), Config.Settings.runTimeSettings.ElementTimeoutSec,
                 false);
+            }
+            
         }
 
         public static ElementVerification WaitUntil(this IWebElement element)
         {
-            return new ElementVerification(new Element(element), Config.Settings.runTimeSettings.ElementTimeoutSec, true);
+            try
+            {
+                var GolemElement = (Element)element;
+                return new ElementVerification(GolemElement, Config.Settings.runTimeSettings.ElementTimeoutSec, true);
+            }
+            catch (Exception)
+            {
+                return new ElementVerification(new Element(element), Config.Settings.runTimeSettings.ElementTimeoutSec,
+                false);
+            }
         }
 
         public static IWebElement Hide(this IWebElement element)
@@ -98,14 +116,14 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-        public static void Highlight(this IWebElement element)
+        public static void Highlight(this IWebElement element, int ms=10)
         {
             try
             {
                 var jsDriver = ((IJavaScriptExecutor) WebDriverTestBase.driver);
                 var originalElementBorder = (string) jsDriver.ExecuteScript("return arguments[0].style.border", element);
                 jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
-                Thread.Sleep(50);
+                Thread.Sleep(ms);
                 jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", element);
             }
             catch (Exception)
@@ -133,10 +151,12 @@ namespace ProtoTest.Golem.WebDriver
 
         public static IWebElement WaitForPresent(this IWebElement element, By by, int timeout = 0)
         {
+            
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
+                element.Highlight();
                 var eles = element.FindElements(by);
                 if (eles.Count > 0)
                     return eles[0];
@@ -153,6 +173,8 @@ namespace ProtoTest.Golem.WebDriver
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 var eles = driver.FindElements(by);
+          //      if(eles.Count > 1)
+            //       TestLog.WriteLine("WARNING : More than one element was found that matches your locator " + by + ", using the first one");
                 if (eles.Count > 0)
                     return eles[0];
                 Common.Delay(1000);
@@ -411,7 +433,7 @@ namespace ProtoTest.Golem.WebDriver
         public static IWebElement DragToOffset(this IWebElement element, int x, int y)
         {
             var action = new Actions(WebDriverTestBase.driver);
-            action.MoveToElement(element, x, y).Click().Build().Perform();
+            action.DragAndDropToOffset(element, x, y).Build().Perform();
             return element;
         }
 
@@ -459,6 +481,13 @@ namespace ProtoTest.Golem.WebDriver
                 
             }
 
+        }
+
+        public static IWebElement ClickWithOffset(this IWebElement element, int x, int y)
+        {
+            var action = new Actions(WebDriverTestBase.driver);
+            action.MoveToElement(element, x, y).Click().Build().Perform();
+            return element;
         }
     }
 }

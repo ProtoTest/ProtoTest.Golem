@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using MbUnit.Framework;
+using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver
@@ -18,7 +20,15 @@ namespace ProtoTest.Golem.WebDriver
             className = GetType().Name;
             if (Config.Settings.runTimeSettings.AutoWaitForElements)
             {
-                WaitForElements();
+               // try
+              //  {
+                    WaitForElements();
+                //}
+                //catch (Exception e)
+                //{
+                //    Assert.Fail(string.Format("The {0} Page failed to load",this.className));
+                //}
+                
             }
             TestBase.testData.actions.addAction(TestBase.GetCurrentClassAndMethodName());
         }

@@ -9,7 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Linq;
 using OpenQA.Selenium.Support.Events;
+using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver
 {
@@ -403,9 +405,14 @@ namespace ProtoTest.Golem.WebDriver
       List<IWebElement> list = new List<IWebElement>();
       try
       {
+          
         FindElementEventArgs e = new FindElementEventArgs(this.driver, by);
         this.OnFindingElement(e);
-        ReadOnlyCollection<IWebElement> elements = this.driver.FindElements(by);
+        IEnumerable<IWebElement> elements = this.driver.FindElements(by);
+        if (!Config.Settings.runTimeSettings.FindHiddenElements)
+        {
+            elements = elements.Where(x => x.Displayed);
+        }
         this.OnFindElementCompleted(e);
         foreach (IWebElement underlyingElement in elements)
         {

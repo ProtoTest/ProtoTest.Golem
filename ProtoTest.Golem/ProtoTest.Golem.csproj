@@ -168,6 +168,8 @@
     <Compile Include="Purple\PurpleElements\PurpleWindow.cs" />
     <Compile Include="Purple\PurpleTestBase.cs" />
     <Compile Include="WebDriver\ByE.cs" />
+    <Compile Include="WebDriver\Component.cs" />
+    <Compile Include="WebDriver\ConsoleErrorGrabber.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
     <Compile Include="WebDriver\Elements\Images\Histogram.cs" />
     <Compile Include="WebDriver\Elements\Images\ImageComparer.cs" />
@@ -221,6 +223,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Proxy\browsermob-proxy-2.0-beta-8-bin.zip" />
+    <None Include="Proxy\browsermob-proxy-2.0-beta-9-bin.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Tests\Data\SearchData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

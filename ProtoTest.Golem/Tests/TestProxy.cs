@@ -41,5 +41,12 @@ namespace ProtoTest.Golem.Tests
             OpenPage<GoogleHomePage>("http://www.google.com/");
            proxy.VerifyRequestMade("http://www.google.com/");
         }
+
+        [Test]
+        public void TestResponseCodeValidation()
+        {
+            OpenPage<GoogleHomePage>("http://www.google.com/");
+            proxy.VerifyNoErrorsCodes();
+        }
     }
 }

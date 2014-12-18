@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using OpenQA.Selenium;
@@ -41,11 +42,23 @@ namespace ProtoTest.Golem.WebDriver
         public Element(IWebElement element): base()
         {
             this.element = element;
+            
             this.pageObjectName = TestBase.GetCurrentClassName();
             this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
         }
 
- 
+        /// <summary>
+        /// Construct an element using an existing element
+        /// </summary>
+        /// <param name="element"></param>
+        public Element(IWebElement element,By by)
+            : base()
+        {
+            this.element = element;
+            this.by = by;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+        }
 
         /// <summary>
         /// Construct an element
@@ -215,6 +228,15 @@ namespace ProtoTest.Golem.WebDriver
                 element.SendKeys(value);
             }
         }
+        /// <summary>
+        /// Returns the first element found by the locator.
+        /// </summary>
+        /// <param name="by">The locator to use.</param>
+        /// <returns>The IWebElement found.</returns>
+        public IWebElement FindElement(Element childElement)
+        {
+            return new Element(element.WaitForPresent(childElement.by),childElement.by);
+        }
 
         /// <summary>
         /// Returns the first element found by the locator.
@@ -223,7 +245,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>The IWebElement found.</returns>
         public IWebElement FindElement(By by)
         {
-            return element.FindElement(by);
+            return new Element(element.WaitForPresent(by),by);
         }
 
         /// <summary>
@@ -233,7 +255,12 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>Collection of IWebElements found.</returns>
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
-            return element.FindElements(by);
+            List<IWebElement> elements = new List<IWebElement>();
+            foreach (var element in driver.FindElements(by))
+            {
+                elements.Add(new Element(element,by));
+            }
+            return new ReadOnlyCollection<IWebElement>(elements);
         }
 
         /// <summary>
@@ -350,7 +377,7 @@ namespace ProtoTest.Golem.WebDriver
             return new ElementVerification(this, this.timeoutSec, true);
         }
 
-        private IWebElement GetElement()
+        protected virtual IWebElement GetElement()
         {
             try
             {
@@ -425,5 +452,6 @@ namespace ProtoTest.Golem.WebDriver
         {
             element.MouseOver();
         }
+
     }
 }

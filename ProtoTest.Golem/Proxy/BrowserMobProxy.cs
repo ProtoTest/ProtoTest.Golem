@@ -21,9 +21,9 @@ namespace ProtoTest.Golem.Proxy
     public class BrowserMobProxy
     {
         private static readonly string zipPath = Directory.GetCurrentDirectory() +
-                                                 @"\Proxy\browsermob-proxy-2.0-beta-8-bin.zip";
+                                                 @"\Proxy\browsermob-proxy-2.0-beta-9-bin.zip";
 
-        private static readonly string batchPath = @"C:\BMP\browsermob-proxy-2.0-beta-8\bin\browsermob-proxy";
+        private static readonly string batchPath = @"C:\BMP\browsermob-proxy-2.0-beta-9\bin\browsermob-proxy";
 
         private static readonly string extractPath = @"C:\BMP";
         public static string Indent = "    ";
@@ -401,5 +401,16 @@ namespace ProtoTest.Golem.Proxy
                           + Path.DirectorySeparatorChar
                           + "HTTP_Traffic_" + Common.GetShortTestName(80) + ".har";
         }
+
+        public void VerifyNoErrorsCodes()
+        {
+            var har = GetHar();
+            var errors =
+                har.Log.Entries.Where(entry => entry.Response.Status > 400 && entry.Response.Status < 599).ToList();
+            foreach (var error in errors)
+            {
+                TestBase.AddVerificationError(string.Format("Request to {0} returned an error code of {1} ({2}) : {3}",error.Request.Url,error.Response.Status, error.Response.StatusText,error.Response.Content.Text));
+            }
+    }
     }
 }

@@ -106,10 +106,10 @@ namespace ProtoTest.Golem.WebDriver
 
             if (TestBase.testData.lastElement.name != "Element")
             {
-                return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, TestBase.testData.lastElement.name, e.Element.GetHtml(60), param);
+                return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);
             }
 
-            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element", e.Element.GetHtml(60),param);
+            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element", TestBase.testData.lastElement.by,param);
         }
 
         private string GetLogMessage(string command, FindElementEventArgs e = null, string param = "")

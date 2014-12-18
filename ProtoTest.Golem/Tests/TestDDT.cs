@@ -21,7 +21,7 @@ namespace ProtoTest.Golem.Tests
         }
 
         [Row("Selenium","Selenium - Web Browser Automation")]
-        [Row("ProtoTest", "ProtoTest « Beyond Bugs")]
+        [Row("ProtoTest", "ProtoTest: Home")]
         [Test]
         public void TestRowData(string term, string result)
         {
@@ -37,7 +37,7 @@ namespace ProtoTest.Golem.Tests
         public IEnumerable<Search> GetDataEnumerable()
         {
             yield return new Search() {term = "Selenium", result = "Selenium - Web Browser Automation"};
-            yield return new Search() { term = "ProtoTest", result = "ProtoTest « Beyond Bugs" };
+            yield return new Search() { term = "ProtoTest", result = "ProtoTest: Home" };
         }
 
         public List<Search> GetDataList()

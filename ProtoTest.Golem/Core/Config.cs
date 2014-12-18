@@ -266,6 +266,7 @@ namespace ProtoTest.Golem.Core
             public string RemoteHostPort;
             public int TestTimeoutMin;
             public bool AutoWaitForElements;
+            public bool FindHiddenElements;
 
             public RuntimeSettings()
             {
@@ -287,6 +288,8 @@ namespace ProtoTest.Golem.Core
                 AutoWaitForElements = Config.GetConfigValueAsBool("AutoWaitForElements", "True");
                 HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "True");
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
+                FindHiddenElements = Config.GetConfigValueAsBool("FindHiddenElements", "True");
+
             }
 
             private List<string> GetHostsList()

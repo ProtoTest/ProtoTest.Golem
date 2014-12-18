@@ -82,12 +82,22 @@ namespace ProtoTest.Golem.Core
         public virtual void TearDownTestBase()
         {
             LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
+            VerifyHttpTraffic();
             GetHarFile();
+            
             QuitProxy();
             StopVideoRecording();
             LogVideoIfTestFailed();
             AssertNoVerificationErrors();
             DeleteTestData();
+        }
+
+        private void VerifyHttpTraffic()
+        {
+            if (Config.Settings.httpProxy.useProxy)
+            {
+                proxy.VerifyNoErrorsCodes();
+            }
         }
 
         [NUnit.Framework.TestFixtureSetUp]

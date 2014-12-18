@@ -4,6 +4,7 @@ using Gallio.Framework;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
+using ProtoTest.Golem.Proxy.HAR;
 
 namespace ProtoTest.Golem.WebDriver
 {
@@ -65,7 +66,10 @@ namespace ProtoTest.Golem.WebDriver
         {
             string newMessage;
             newMessage = isTrue ? notMessage : message;
-
+            if (element.by == null)
+            {
+                Common.Log("Blank By");
+            }
             return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), element.name, element.by,
                 newMessage, timeoutSec);
         }
@@ -75,7 +79,10 @@ namespace ProtoTest.Golem.WebDriver
             string newMessage;
             string correctMessage = "{0}: {1}({2}): {3}";
             newMessage = isTrue ? message : notMessage;
-
+            if (element.by == null)
+            {
+                Common.Log("Blank By");
+            }
             return string.Format(correctMessage, TestBase.GetCurrentClassAndMethodName(), element.name, element.by,
                 newMessage);
         }
