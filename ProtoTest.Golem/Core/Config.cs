@@ -230,6 +230,8 @@ namespace ProtoTest.Golem.Core
         {
             public bool actionLogging;
             public bool commandLogging;
+            public bool diagnosticLog;
+            public bool testLog;
             public bool htmlOnError;
             public bool screenshotOnError;
             public bool spellChecking;
@@ -243,6 +245,8 @@ namespace ProtoTest.Golem.Core
                 commandLogging = Config.GetConfigValueAsBool("CommandLogging", "True");
                 actionLogging = Config.GetConfigValueAsBool("ActionLogging", "True");
                 spellChecking = Config.GetConfigValueAsBool("SpellChecking", "False");
+                diagnosticLog = Config.GetConfigValueAsBool("DiagnosticLog", "True");
+                testLog = Config.GetConfigValueAsBool("TestLog", "True");
             }        
         }
 

@@ -13,7 +13,7 @@ namespace ProtoTest.Golem.Tests
                 SearchFor("Selenium").
                 VerifyResult("Web Browser Automation").
                 SearchFor("ProtoTest").
-                VerifyResult("ProtoTest « Beyond Bugs");
+                VerifyResult("ProtoTest: Home");
         }
     }
 }

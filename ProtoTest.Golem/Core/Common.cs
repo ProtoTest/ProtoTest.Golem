@@ -85,9 +85,7 @@ namespace ProtoTest.Golem.Core
 
         public static void Log(string msg)
         {
-            DiagnosticLog.WriteLine(msg);
-            TestLog.WriteLine(msg);
-            TestBase.overlay.Text = msg;
+            TestBase.LogEvent(msg);
         }
 
         public static bool IsTruthy(string truth)
