@@ -94,7 +94,7 @@ namespace ProtoTest.Golem.Core
 
         private void VerifyHttpTraffic()
         {
-            if (Config.Settings.httpProxy.useProxy)
+            if (Config.Settings.httpProxy.useProxy&&Config.Settings.httpProxy.validateTraffic)
             {
                 proxy.VerifyNoErrorsCodes();
             }
