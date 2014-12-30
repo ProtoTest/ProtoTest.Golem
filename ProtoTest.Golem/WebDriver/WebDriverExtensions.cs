@@ -107,10 +107,12 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
+                if (element == null)
+                    return true;
                 bool enabled = element.Enabled;
                 return false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return true;
             }
@@ -154,9 +156,9 @@ namespace ProtoTest.Golem.WebDriver
             
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
+            element.Highlight();
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
-                element.Highlight();
                 var eles = element.FindElements(by);
                 if (eles.Count > 0)
                     return eles[0];
