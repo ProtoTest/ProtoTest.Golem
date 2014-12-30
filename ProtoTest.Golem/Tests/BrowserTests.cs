@@ -2,6 +2,7 @@
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Safari;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
@@ -37,6 +38,13 @@ namespace ProtoTest.Golem.Tests
         public void TestChrome()
         {
             driver = new ChromeDriver();
+            OpenPage<GoogleHomePage>("http://www.google.com/");
+            driver.Quit();
+        }
+        [Test]
+        public void TestPhantomJS()
+        {
+            driver = new PhantomJSDriver();
             OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }

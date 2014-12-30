@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
 using ProtoTest.Golem.Core;
@@ -21,6 +22,7 @@ namespace ProtoTest.Golem.WebDriver
             Chrome,
             IE,
             Safari,
+            PhantomJS,
             Android,
             IPhone,
             IPad
@@ -46,7 +48,9 @@ namespace ProtoTest.Golem.WebDriver
                 case Browser.Safari:
                     driver = StartSafariBrowser();
                     break;
-                case Browser.Firefox:
+                case Browser.PhantomJS:
+                    driver = StartPhantomJSBrowser();
+                    break;
                 default:
                     driver = StartFirefoxBrowser();
                     break;
@@ -116,6 +120,19 @@ namespace ProtoTest.Golem.WebDriver
             return new InternetExplorerDriver(options);
         }
 
+        public IWebDriver StartPhantomJSBrowser()
+        {
+            var options = new PhantomJSOptions();
+
+            if (Config.Settings.httpProxy.useProxy)
+            {
+                var proxy = new OpenQA.Selenium.Proxy();
+                proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
+                options.AddAdditionalCapability("proxy", proxy);
+            }
+            
+            return new PhantomJSDriver(options);
+        }
 
         public IWebDriver StartSafariBrowser()
         {
