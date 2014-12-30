@@ -11,6 +11,8 @@ As Golem is built on top of MbUnit, all advanced MbUnit attributes are supported
 
 Golem is available via NuGet : https://www.nuget.org/packages/ProtoTest.Golem/
 
+Getting Started : https://github.com/ProtoTest/ProtoTest.Golem/wiki/Golem.WebDriver,-Getting-Started
+
 For all documentation, visit the [Golem Wiki](https://github.com/ProtoTest/ProtoTest.Golem/wiki).
 
 ##Example
