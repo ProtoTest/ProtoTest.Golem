@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver.Elements.Images;
+using RestSharp.Extensions;
 
 namespace ProtoTest.Golem.WebDriver
 {
@@ -138,7 +139,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     return element.Enabled;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return false;
                 }
@@ -445,6 +446,8 @@ namespace ProtoTest.Golem.WebDriver
             return this;
         }
 
+        
+
         /// <summary>
         /// Move the mouse over the element
         /// </summary>
@@ -453,5 +456,110 @@ namespace ProtoTest.Golem.WebDriver
             element.MouseOver();
         }
 
+        /// <summary>
+        /// WithParam swaps out {0} in the locator with the value entered
+        /// This allows us to adjust for params with specific strings
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Element WithParam(string value)
+        {
+            if (by == null)
+                throw new Exception("WithParams only works with Elements instantiated using a By locator");
+            var oldBy = this.by.ToString();
+            var toks = oldBy.Split(':');
+            var type = toks[0];
+            var locator = toks[1];
+            var newlocator = locator.Replace("{0}", value);
+            if (type.Contains("ClassName"))
+            {
+               this.by = By.ClassName(newlocator);
+            }
+            if (type.Contains("XPath"))
+            {
+                this.by = By.XPath(newlocator);
+            }
+            if (type.Contains("Id"))
+            {
+                this.by = By.Id(newlocator);
+            }
+            if (type.Contains("PartialLink"))
+            {
+               this.by = By.PartialLinkText(newlocator);
+            }
+            if (type.Contains("LinkText"))
+            {
+                this.by =  By.LinkText(newlocator);
+            }
+            if (type.Contains("Name"))
+            {
+                this.by =  By.Name(newlocator);
+            }
+            if (type.Contains("CssSelector"))
+            {
+                this.by =  By.CssSelector(newlocator);
+            }
+            if (type.Contains("TagName"))
+            {
+               this.by = By.TagName(newlocator);
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Swaps out {0},{1},{2}..etc with the values in values array
+        /// //div[contains(text(),'{0}) and contains(@class,'{1})] 
+        /// with values[] = {"textOfElement","classofElement"} becomes 
+        /// //div[contains(text(),'textOfElement') and contains(@class,'classOfElement)] 
+        /// will not work if element was instantiated with an existing IWebELement instead of a By locator.  
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public Element WithParams(string[] values)
+        {
+            if(by==null)
+                throw new Exception("WithParams only works with Elements instantiated using a By locator");
+            var oldBy = this.by.ToString();
+            var toks = oldBy.Split(':');
+            var type = toks[0];
+            var locator = toks[1];
+            for (var i = 0; i < values.Length;i++)
+            {
+                locator = locator.Replace("{" + i + "}", values[i]);
+            }
+            if (type.Contains("ClassName"))
+            {
+                this.by = By.ClassName(locator);
+            }
+            if (type.Contains("XPath"))
+            {
+                this.by = By.XPath(locator);
+            }
+            if (type.Contains("Id"))
+            {
+                this.by = By.Id(locator);
+            }
+            if (type.Contains("PartialLink"))
+            {
+                this.by = By.PartialLinkText(locator);
+            }
+            if (type.Contains("LinkText"))
+            {
+                this.by = By.LinkText(locator);
+            }
+            if (type.Contains("Name"))
+            {
+                this.by = By.Name(locator);
+            }
+            if (type.Contains("CssSelector"))
+            {
+                this.by = By.CssSelector(locator);
+            }
+            if (type.Contains("TagName"))
+            {
+                this.by = By.TagName(locator);
+            }
+            return this;
+        }
     }
 }
