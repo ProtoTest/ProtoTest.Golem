@@ -138,7 +138,6 @@ namespace ProtoTest.Golem.Core
         public RuntimeSettings runTimeSettings;
         public PurpleSettings purpleSettings;
         public BrowserStackSettings browserStackSettings;
-        public SauceLabsSettings sauceLabsSettings;
 
         public ConfigSettings()
         {
@@ -149,7 +148,6 @@ namespace ProtoTest.Golem.Core
             imageCompareSettings = new ImageCompareSettings();
             purpleSettings = new PurpleSettings();
             browserStackSettings = new BrowserStackSettings();
-            sauceLabsSettings = new SauceLabsSettings();
         }
 
         /// <summary>
@@ -417,23 +415,6 @@ namespace ProtoTest.Golem.Core
                 BrowserStack_OS = Config.GetConfigValue("BrowserStack_OS", null);
                 BrowserStack_OS_Version = Config.GetConfigValue("BrowserStack_OS_Version", null);
                 BrowserStackRemoteURL = Config.GetConfigValue("BrowserStackRemoteURL", "hub.browserstack.com");
-            }
-        }
-
-        public class SauceLabsSettings
-        {
-            public bool UseSauceLabs;
-            public string SauceLabsUsername;
-            public string SauceLabsAPIKey;
-            public string SauceLabsUrl;
-
-            public SauceLabsSettings()
-            {
-
-                UseSauceLabs = Config.GetConfigValueAsBool("UseSauceLabs", "False");
-                SauceLabsUrl = Config.GetConfigValue("SauceLabsUrl", "http://ondemand.saucelabs.com/wd/hub");
-                SauceLabsUsername = Config.GetConfigValue("SauceLabsUsername", "NOT_SET");
-                SauceLabsAPIKey = Config.GetConfigValue("SauceLabsAPIKey", "NOT_SET");
             }
         }
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using Gallio.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -178,29 +177,9 @@ namespace ProtoTest.Golem.WebDriver
         public IWebDriver LaunchRemoteBrowser(Browser browser, string host)
         {
             String URIStr = null;
-
-            if (Config.Settings.sauceLabsSettings.UseSauceLabs)
-            {
-                DesiredCapabilities caps = new DesiredCapabilities(browser.ToString(),Config.Settings.runTimeSettings.Version,Platform.CurrentPlatform);
-                caps.SetCapability("platform",Config.Settings.runTimeSettings.Platform);
-                caps.SetCapability("version",Config.Settings.runTimeSettings.Version);
-                caps.SetCapability("username", Config.Settings.sauceLabsSettings.SauceLabsUsername);
-                caps.SetCapability("accessKey", Config.Settings.sauceLabsSettings.SauceLabsAPIKey);
-                caps.SetCapability("name", TestContext.CurrentContext.TestStep.FullName);
-                caps.SetCapability("device","");
-                Common.Log(string.Format("Starting {0}:{1}:{2} browser on SauceLabs : {3}", browser,
-                    Config.Settings.runTimeSettings.Version, Config.Settings.runTimeSettings.Platform,
-                    Config.Settings.sauceLabsSettings.SauceLabsUrl));
-                var sauceLabs = new Uri(Config.Settings.sauceLabsSettings.SauceLabsUrl);
-                return new EventedWebDriver(new RemoteWebDriver(sauceLabs, caps)).driver;
-            }
-
-
-
             DesiredCapabilities desiredCapabilities = GetCapabilitiesForBrowser(browser);
             desiredCapabilities.SetCapability(CapabilityType.Platform,Config.Settings.runTimeSettings.Platform);
             desiredCapabilities.SetCapability(CapabilityType.Version, Config.Settings.runTimeSettings.Version);
-            
             
             if (host.Equals(Config.Settings.browserStackSettings.BrowserStackRemoteURL))
             {
