@@ -132,10 +132,20 @@ namespace ProtoTest.Golem.WebDriver
         [TearDown]
         public override void TearDownTestBase()
         {
+            UpdateSAuceLabsWithTestStatus();
             LogScreenshotIfTestFailed();
             LogHtmlIfTestFailed();
             QuitBrowser();
             base.TearDownTestBase();
+        }
+
+        private void UpdateSAuceLabsWithTestStatus()
+        {
+            if (Config.Settings.sauceLabsSettings.UseSauceLabs)
+            {
+                bool passed = TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
+                driver.ExecuteJavaScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+            }
         }
     }
 }
