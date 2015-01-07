@@ -265,8 +265,6 @@ namespace ProtoTest.Golem.Core
             public int OpenWindowTimeoutSec;
             public string EnvironmentUrl;
             public bool HighlightFoundElements;
-            public string Version;
-            public string Platform;
             public bool LaunchBrowser;
             public int PageTimeoutSec;
             public bool RunOnRemoteHost;
@@ -275,12 +273,33 @@ namespace ProtoTest.Golem.Core
             public bool AutoWaitForElements;
             public bool FindHiddenElements;
 
+            public string Version
+            {
+                get { return WebDriverTestBase.host.version; }
+                set { WebDriverTestBase.host.version = value; }
+            }
+
+            public string Platform
+            {
+                get { return WebDriverTestBase.host.platform; }
+                set { WebDriverTestBase.host.platform = value; }
+            }
+
+            public string HostIp
+            {
+                get { return WebDriverTestBase.host.hostIp; }
+                set { WebDriverTestBase.host.hostIp = value; }
+            }
+
+            public WebDriverBrowser.Browser Browser
+            {
+                get { return WebDriverTestBase.host.browser; }
+                set { WebDriverTestBase.host.browser = value; }
+            }
+
             public RuntimeSettings()
             {
                 Hosts = GetHosts();
-                Version = Config.GetConfigValue("Version", "ANY");
-                Platform = Config.GetConfigValue("Platform", "ANY");
-                
                 LaunchBrowser = Config.GetConfigValueAsBool("LaunchBrowser", "True");
                 TestTimeoutMin = Config.GetConfigValueAsInt("TestTimeoutMin", "5");
                 ElementTimeoutSec = Config.GetConfigValueAsInt("ElementTimeoutSec", "5");

@@ -181,13 +181,13 @@ namespace ProtoTest.Golem.WebDriver
 
             if (Config.Settings.sauceLabsSettings.UseSauceLabs)
             {
-                DesiredCapabilities caps = new DesiredCapabilities(browser.ToString(),Config.Settings.runTimeSettings.Version,Platform.CurrentPlatform);
+                DesiredCapabilities caps = GetCapabilitiesForBrowser(browser);
                 caps.SetCapability("platform",Config.Settings.runTimeSettings.Platform);
                 caps.SetCapability("version",Config.Settings.runTimeSettings.Version);
                 caps.SetCapability("username", Config.Settings.sauceLabsSettings.SauceLabsUsername);
                 caps.SetCapability("accessKey", Config.Settings.sauceLabsSettings.SauceLabsAPIKey);
                 caps.SetCapability("name", TestContext.CurrentContext.TestStep.FullName);
-                caps.SetCapability("device","");
+                //caps.SetCapability("device",Config.Settings.runTimeSettings.de);
                 Common.Log(string.Format("Starting {0}:{1}:{2} browser on SauceLabs : {3}", browser,
                     Config.Settings.runTimeSettings.Version, Config.Settings.runTimeSettings.Platform,
                     Config.Settings.sauceLabsSettings.SauceLabsUrl));
