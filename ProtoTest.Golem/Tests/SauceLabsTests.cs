@@ -25,6 +25,7 @@ namespace ProtoTest.Golem.Tests
             Config.Settings.runTimeSettings.Version = "";
             Config.Settings.runTimeSettings.HighlightFoundElements = false;
         }
+
         [Test]
         [Parallelizable]
         public void Test()
@@ -34,26 +35,5 @@ namespace ProtoTest.Golem.Tests
             element.WaitUntil(10).Visible();
             Common.Log("Successfully navigated to " + driver.Title);
         }
-
-        //[Test]
-        //public void sauceTest()
-        //{
-        //    Uri commandExecutorUri = new Uri("http://ondemand.saucelabs.com/wd/hub");
-
-        //     set up the desired capabilities
-        //    DesiredCapabilities desiredCapabilites = new DesiredCapabilities("Firefox", "", Platform.CurrentPlatform); // set the desired browser
-        //    desiredCapabilites.SetCapability("platform", "Windows 7"); // operating system to use
-        //    desiredCapabilites.SetCapability("username", "bkitchener"); // supply sauce labs username
-        //    desiredCapabilites.SetCapability("accessKey", "998969ff-ad37-4b2e-9ad7-edacd982bc59");  // supply sauce labs account key
-        //    desiredCapabilites.SetCapability("name", TestContext.CurrentContext.Test.Name); // give the test a name
-
-        //     start a new remote web driver session on sauce labs
-        //    var _Driver = new RemoteWebDriver(commandExecutorUri, desiredCapabilites);
-        //    _Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(30));
-        //    _Driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(30));
-
-        //     navigate to the page under test
-        //    _Driver.Navigate().GoToUrl("https://saucelabs.com/test/guinea-pig");
-        //}
     }
 }

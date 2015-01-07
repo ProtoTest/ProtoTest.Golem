@@ -258,14 +258,13 @@ namespace ProtoTest.Golem.Core
         public class RuntimeSettings
         {
             public string BrowserResolution;
-            public List<WebDriverBrowser.Browser> Browsers = new List<WebDriverBrowser.Browser>();
+            public List<WebDriverHost> Hosts = new List<WebDriverHost>();
             public int CommandDelayMs;
             public int DegreeOfParallelism;
             public int ElementTimeoutSec;
             public int OpenWindowTimeoutSec;
             public string EnvironmentUrl;
             public bool HighlightFoundElements;
-            public List<string> Hosts;
             public string Version;
             public string Platform;
             public bool LaunchBrowser;
@@ -278,8 +277,7 @@ namespace ProtoTest.Golem.Core
 
             public RuntimeSettings()
             {
-                Browsers = GetBrowserList();
-                Hosts = GetHostsList();
+                Hosts = GetHosts();
                 Version = Config.GetConfigValue("Version", "ANY");
                 Platform = Config.GetConfigValue("Platform", "ANY");
                 
@@ -300,51 +298,32 @@ namespace ProtoTest.Golem.Core
 
             }
 
-            private List<string> GetHostsList()
+            private List<WebDriverHost> GetHosts()
             {
-                var hosts = new List<string>();
+                var hosts = new List<WebDriverHost>();
+                string browser = Config.GetConfigValue("Browser", "null");
                 string host = Config.GetConfigValue("HostIp", "null");
-                if (host != "null")
+                string version = Config.GetConfigValue("Version", "");
+                string platform = Config.GetConfigValue("Platform", "");
+                if (browser != "null")
                 {
-                    hosts.Add(host);
+                    hosts.Add(new WebDriverHost(WebDriverBrowser.getBrowserFromString(browser),host,version,platform));
                 }
                 for (int i = 1; i < 10; i++)
                 {
+                    browser = Config.GetConfigValue("Browser" + i, "null");
                     host = Config.GetConfigValue("HostIp" + i, "null");
-                    if (host != "null")
-                        hosts.Add(host);
+                    version = Config.GetConfigValue("Version" + i, "");
+                    platform = Config.GetConfigValue("Platform" + i, "");
+                    if (browser != "null")
+                    {
+                        hosts.Add(new WebDriverHost(WebDriverBrowser.getBrowserFromString(browser), host, version, platform));
+                    }
                 }
-                if (hosts.Count == 0)
-                {
-                    hosts.Add("localhost");
-                }
-
                 return hosts;
             }
 
-            private List<WebDriverBrowser.Browser> GetBrowserList()
-            {
-                var browsers = new List<WebDriverBrowser.Browser>();
-                string browser = Config.GetConfigValue("Browser", "null");
-                if (browser != "null")
-                {
-                    browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
-                }
-                for (int i = 1; i < 5; i++)
-                {
-                    browser = Config.GetConfigValue("Browser" + i, "null");
-                    if (browser != "null")
-                    {
-                        browsers.Add(WebDriverBrowser.getBrowserFromString(browser));
-                    }
-                }
-                if (browsers.Count == 0)
-                {
-                    browsers.Add(WebDriverBrowser.Browser.Chrome);
-                }
-
-                return browsers;
-            }
+ 
         }
 
         /// <summary>

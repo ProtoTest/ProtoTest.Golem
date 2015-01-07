@@ -14,10 +14,7 @@ namespace ProtoTest.Golem.WebDriver
     /// </summary>
     public class WebDriverTestBase : TestBase
     {
-
-
-        [Factory("GetBrowser")] public static WebDriverBrowser.Browser browser;
-        [Factory("GetHosts")] public static string host;
+        [Factory("GetHosts")] public static WebDriverHost host;
 
         public static IWebDriver driver
         {
@@ -25,20 +22,39 @@ namespace ProtoTest.Golem.WebDriver
             set { testData.driver = value; }
         }
 
-        public static IEnumerable<WebDriverBrowser.Browser> GetBrowser
+        public static WebDriverBrowser.Browser browser
+        {
+            get { return host.browser; }
+            set { host.browser = value; }
+        }
+
+        public static string hostIp
+        {
+            get { return host.hostIp; }
+            set { host.hostIp = value; }
+        }
+
+        public static string version
+        {
+            get { return host.version; }
+            set { host.version = value; }
+        }
+
+        public static string platform    
+        {
+            get { return host.platform; }
+            set { host.platform = value; }
+        }
+
+        public static IEnumerable<WebDriverHost> GetHosts
         {
             get
             {
-                foreach (WebDriverBrowser.Browser browser in Config.Settings.runTimeSettings.Browsers)
+                foreach (WebDriverHost host in Config.Settings.runTimeSettings.Hosts)
                 {
-                    yield return browser;
+                    yield return host;
                 }
             }
-        }
-
-        public static IEnumerable<string> GetHosts()
-        {
-            return Config.Settings.runTimeSettings.Hosts;
         }
 
         public static T OpenPage<T>(string url)
@@ -109,7 +125,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 if (Config.Settings.runTimeSettings.RunOnRemoteHost)
                 {
-                    driver = new WebDriverBrowser().LaunchRemoteBrowser(browser, host);
+                    driver = new WebDriverBrowser().LaunchRemoteBrowser(browser, host.hostIp);
                 }
                 else
                 {

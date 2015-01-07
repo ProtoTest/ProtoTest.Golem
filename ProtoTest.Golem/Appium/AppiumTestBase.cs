@@ -27,7 +27,7 @@ namespace ProtoTest.Golem.Appium
         }
 
 
-        public static IEnumerable<string> GetHosts()
+        public static IEnumerable<WebDriverHost> GetHosts()
         {
             return Config.Settings.runTimeSettings.Hosts;
         }
