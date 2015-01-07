@@ -27,9 +27,9 @@ namespace ProtoTest.Golem.Appium
         }
 
 
-        public static IEnumerable<WebDriverHost> GetHosts()
+        public static IEnumerable<BrowserInfo> GetBrowsers()
         {
-            return Config.Settings.runTimeSettings.Hosts;
+            return Config.Settings.runTimeSettings.Browsers;
         }
 
         public static T OpenPage<T>()

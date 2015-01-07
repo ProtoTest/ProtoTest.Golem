@@ -258,7 +258,7 @@ namespace ProtoTest.Golem.Core
         public class RuntimeSettings
         {
             public string BrowserResolution;
-            public List<WebDriverHost> Hosts = new List<WebDriverHost>();
+            public List<BrowserInfo> Browsers = new List<BrowserInfo>();
             public int CommandDelayMs;
             public int DegreeOfParallelism;
             public int ElementTimeoutSec;
@@ -268,6 +268,7 @@ namespace ProtoTest.Golem.Core
             public bool LaunchBrowser;
             public int PageTimeoutSec;
             public bool RunOnRemoteHost;
+            public string HostIp;
             public string RemoteHostPort;
             public int TestTimeoutMin;
             public bool AutoWaitForElements;
@@ -275,31 +276,25 @@ namespace ProtoTest.Golem.Core
 
             public string Version
             {
-                get { return WebDriverTestBase.host.version; }
-                set { WebDriverTestBase.host.version = value; }
+                get { return WebDriverTestBase.browserInfo.version; }
+                set { WebDriverTestBase.browserInfo.version = value; }
             }
 
             public string Platform
             {
-                get { return WebDriverTestBase.host.platform; }
-                set { WebDriverTestBase.host.platform = value; }
-            }
-
-            public string HostIp
-            {
-                get { return WebDriverTestBase.host.hostIp; }
-                set { WebDriverTestBase.host.hostIp = value; }
+                get { return WebDriverTestBase.browserInfo.platform; }
+                set { WebDriverTestBase.browserInfo.platform = value; }
             }
 
             public WebDriverBrowser.Browser Browser
             {
-                get { return WebDriverTestBase.host.browser; }
-                set { WebDriverTestBase.host.browser = value; }
+                get { return WebDriverTestBase.browserInfo.browser; }
+                set { WebDriverTestBase.browserInfo.browser = value; }
             }
 
             public RuntimeSettings()
             {
-                Hosts = GetHosts();
+                Browsers = GetBrowserInfo();
                 LaunchBrowser = Config.GetConfigValueAsBool("LaunchBrowser", "True");
                 TestTimeoutMin = Config.GetConfigValueAsInt("TestTimeoutMin", "5");
                 ElementTimeoutSec = Config.GetConfigValueAsInt("ElementTimeoutSec", "5");
@@ -310,6 +305,7 @@ namespace ProtoTest.Golem.Core
                 CommandDelayMs = Config.GetConfigValueAsInt("CommandDelayMs", "0");
                 RunOnRemoteHost = Config.GetConfigValueAsBool("RunOnRemoteHost", "False");
                 RemoteHostPort = Config.GetConfigValue("RemoteHostPort", "8080");
+                HostIp = Config.GetConfigValue("HostIp", "localhost");
                 AutoWaitForElements = Config.GetConfigValueAsBool("AutoWaitForElements", "True");
                 HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "True");
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
@@ -317,26 +313,24 @@ namespace ProtoTest.Golem.Core
 
             }
 
-            private List<WebDriverHost> GetHosts()
+            private List<BrowserInfo> GetBrowserInfo()
             {
-                var hosts = new List<WebDriverHost>();
+                var hosts = new List<BrowserInfo>();
                 string browser = Config.GetConfigValue("Browser", "null");
-                string host = Config.GetConfigValue("HostIp", "null");
                 string version = Config.GetConfigValue("Version", "");
                 string platform = Config.GetConfigValue("Platform", "");
                 if (browser != "null")
                 {
-                    hosts.Add(new WebDriverHost(WebDriverBrowser.getBrowserFromString(browser),host,version,platform));
+                    hosts.Add(new BrowserInfo(WebDriverBrowser.getBrowserFromString(browser), version, platform));
                 }
                 for (int i = 1; i < 10; i++)
                 {
                     browser = Config.GetConfigValue("Browser" + i, "null");
-                    host = Config.GetConfigValue("HostIp" + i, "null");
                     version = Config.GetConfigValue("Version" + i, "");
                     platform = Config.GetConfigValue("Platform" + i, "");
                     if (browser != "null")
                     {
-                        hosts.Add(new WebDriverHost(WebDriverBrowser.getBrowserFromString(browser), host, version, platform));
+                        hosts.Add(new BrowserInfo(WebDriverBrowser.getBrowserFromString(browser), version, platform));
                     }
                 }
                 return hosts;

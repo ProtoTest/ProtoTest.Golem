@@ -14,7 +14,7 @@ namespace ProtoTest.Golem.WebDriver
     /// </summary>
     public class WebDriverTestBase : TestBase
     {
-        [Factory("GetHosts")] public static WebDriverHost host;
+        [Factory("GetBrowsers")] public static BrowserInfo browserInfo;
 
         public static IWebDriver driver
         {
@@ -24,33 +24,27 @@ namespace ProtoTest.Golem.WebDriver
 
         public static WebDriverBrowser.Browser browser
         {
-            get { return host.browser; }
-            set { host.browser = value; }
-        }
-
-        public static string hostIp
-        {
-            get { return host.hostIp; }
-            set { host.hostIp = value; }
+            get { return browserInfo.browser; }
+            set { browserInfo.browser = value; }
         }
 
         public static string version
         {
-            get { return host.version; }
-            set { host.version = value; }
+            get { return browserInfo.version; }
+            set { browserInfo.version = value; }
         }
 
         public static string platform    
         {
-            get { return host.platform; }
-            set { host.platform = value; }
+            get { return browserInfo.platform; }
+            set { browserInfo.platform = value; }
         }
 
-        public static IEnumerable<WebDriverHost> GetHosts
+        public static IEnumerable<BrowserInfo> GetBrowsers
         {
             get
             {
-                foreach (WebDriverHost host in Config.Settings.runTimeSettings.Hosts)
+                foreach (BrowserInfo host in Config.Settings.runTimeSettings.Browsers)
                 {
                     yield return host;
                 }
@@ -125,7 +119,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 if (Config.Settings.runTimeSettings.RunOnRemoteHost)
                 {
-                    driver = new WebDriverBrowser().LaunchRemoteBrowser(browser, host.hostIp);
+                    driver = new WebDriverBrowser().LaunchRemoteBrowser(browser, Config.Settings.runTimeSettings.HostIp);
                 }
                 else
                 {
