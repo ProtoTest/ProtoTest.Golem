@@ -10,11 +10,15 @@ using ProtoTest.Golem.Core;
 namespace ProtoTest.Golem.WebDriver
 {
     /// <summary>
-    /// This class should be inherited by all webdriver tests.  It will automatically launch a browser and include the Driver object in each test.  I
+    /// This class should be inherited by all webdriver tests.  It will automatically launch a browser and include the Driver object in each test.  
     /// </summary>
     public class WebDriverTestBase : TestBase
     {
-        [Factory("GetBrowsers")] public static BrowserInfo browserInfo;
+        [Factory("GetBrowsers")] protected BrowserInfo browserInfo;
+        protected static IEnumerable<BrowserInfo> GetBrowsers()
+        {
+            return Config.Settings.runTimeSettings.Browsers;
+        }
 
         public static IWebDriver driver
         {
@@ -22,34 +26,25 @@ namespace ProtoTest.Golem.WebDriver
             set { testData.driver = value; }
         }
 
-        public static WebDriverBrowser.Browser browser
+        public WebDriverBrowser.Browser browser
         {
             get { return browserInfo.browser; }
             set { browserInfo.browser = value; }
         }
 
-        public static string version
+        public string version
         {
             get { return browserInfo.version; }
             set { browserInfo.version = value; }
         }
 
-        public static string platform    
+        public string platform    
         {
             get { return browserInfo.platform; }
             set { browserInfo.platform = value; }
         }
 
-        public static IEnumerable<BrowserInfo> GetBrowsers
-        {
-            get
-            {
-                foreach (BrowserInfo host in Config.Settings.runTimeSettings.Browsers)
-                {
-                    yield return host;
-                }
-            }
-        }
+
 
         public static T OpenPage<T>(string url)
         {
@@ -111,30 +106,36 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-
+        protected static Object browserLocker = new object();
 
         public void LaunchBrowser()
         {
-            if (Config.Settings.runTimeSettings.LaunchBrowser)
+            TestLog.WriteLine("Browser is : " + browser);
+            lock (browserLocker)
             {
-                if (Config.Settings.runTimeSettings.RunOnRemoteHost)
+                if (Config.Settings.runTimeSettings.LaunchBrowser)
                 {
-                    driver = new WebDriverBrowser().LaunchRemoteBrowser(browser, Config.Settings.runTimeSettings.HostIp);
+                    if (Config.Settings.runTimeSettings.RunOnRemoteHost)
+                    {
+                        driver = new WebDriverBrowser().LaunchRemoteBrowser(browser, Config.Settings.runTimeSettings.HostIp);
+                    }
+                    else
+                    {
+                        driver = new WebDriverBrowser().LaunchBrowser(browser);
+                    }
+
+                    LogEvent(browser + " Browser Launched");
+                    testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser + " Browser Launched");
                 }
-                else
-                {
-                    driver = new WebDriverBrowser().LaunchBrowser(browser);
-                }
-                
-                LogEvent(browser + " Browser Launched");
-                testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser + " Browser Launched");
             }
+           
         }
 
         [NUnit.Framework.SetUp]
         [SetUp]
         public void SetUp()
         {
+            testData.browserInfo = browserInfo;
             LaunchBrowser();
         }
 

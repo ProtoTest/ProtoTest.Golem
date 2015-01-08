@@ -258,7 +258,7 @@ namespace ProtoTest.Golem.Core
         public class RuntimeSettings
         {
             public string BrowserResolution;
-            public List<BrowserInfo> Browsers = new List<BrowserInfo>();
+            public IEnumerable<BrowserInfo> Browsers = new List<BrowserInfo>();
             public int CommandDelayMs;
             public int DegreeOfParallelism;
             public int ElementTimeoutSec;
@@ -276,20 +276,20 @@ namespace ProtoTest.Golem.Core
 
             public string Version
             {
-                get { return WebDriverTestBase.browserInfo.version; }
-                set { WebDriverTestBase.browserInfo.version = value; }
+                get { return WebDriverTestBase.testData.browserInfo.version; }
+                set { WebDriverTestBase.testData.browserInfo.version = value; }
             }
 
             public string Platform
             {
-                get { return WebDriverTestBase.browserInfo.platform; }
-                set { WebDriverTestBase.browserInfo.platform = value; }
+                get { return WebDriverTestBase.testData.browserInfo.platform; }
+                set { WebDriverTestBase.testData.browserInfo.platform = value; }
             }
 
             public WebDriverBrowser.Browser Browser
             {
-                get { return WebDriverTestBase.browserInfo.browser; }
-                set { WebDriverTestBase.browserInfo.browser = value; }
+                get { return WebDriverTestBase.testData.browserInfo.browser; }
+                set { WebDriverTestBase.testData.browserInfo.browser = value; }
             }
 
             public RuntimeSettings()
@@ -315,6 +315,8 @@ namespace ProtoTest.Golem.Core
 
             private List<BrowserInfo> GetBrowserInfo()
             {
+                if (!Config.Settings.runTimeSettings.LaunchBrowser)
+                    return null;
                 var hosts = new List<BrowserInfo>();
                 string browser = Config.GetConfigValue("Browser", "null");
                 string version = Config.GetConfigValue("Version", "");

@@ -32,7 +32,7 @@ namespace ProtoTest.Golem.WebDriver
         public WebDriverRecorder(int fps) 
         {
             this.fps = fps;
-            if (WebDriverTestBase.browser == WebDriverBrowser.Browser.Android)
+            if (Config.Settings.runTimeSettings.Browser == WebDriverBrowser.Browser.Android)
             {
                 this.screensize = new Size(300, 500);
             }

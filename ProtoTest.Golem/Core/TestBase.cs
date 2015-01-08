@@ -19,43 +19,11 @@ namespace ProtoTest.Golem.Core
     {
         #region Events
 
-#pragma warning disable 67
-        public static event ActionEvent BeforeTestEvent;
-        public static event ActionEvent AfterTestEvent;
-        public static event ActionEvent PageObjectActionEvent;
-        public static event ActionEvent BeforeCommandEvent;
-        public static event ActionEvent AfterCommandEvent;
-        public static event ActionEvent BeforeSuiteEvent;
-        public static event ActionEvent AfterSuiteEvent;
-        public static event ActionEvent GenericEvent;
-#pragma warning restore 67
-        private void WriteActionToLog(string name, EventArgs e)
-        {
-            TestBase.overlay.Text = name;
-            if(Config.Settings.reportSettings.diagnosticLog)
-                DiagnosticLog.WriteLine(string.Format("({0}) : {1}",DateTime.Now.ToString("HH:mm:ss::ffff"),name));
-            if (Config.Settings.reportSettings.testLog)
-                TestLog.WriteLine(string.Format("({0}) : {1}",DateTime.Now.ToString("HH:mm:ss::ffff"),name));
-        }
 
-        private void AddAction(string name, EventArgs e)
-        {
-            testData.actions.addAction(name);
-        }
-
-        public delegate void ActionEvent(string name, EventArgs e);
-
+        
         public static void LogEvent(string name)
         {
-            GenericEvent(name, null);
-        }
-
-        public class GolemEventArgs : EventArgs
-        {
-            public IWebDriver driver;
-            public IWebElement element;
-            public string name;
-            public DateTime time;
+            testData.LogEvent(name);
         }
 
         #endregion
@@ -107,7 +75,6 @@ namespace ProtoTest.Golem.Core
         [FixtureSetUp]
         public virtual void SuiteSetUp()
         {
-            SetupEvents();
             testDataCollection = new Dictionary<string, TestDataContainer>();
             SetTestExecutionSettings();
             StartProxyServer();
@@ -118,7 +85,6 @@ namespace ProtoTest.Golem.Core
         public virtual void SuiteTearDown()
         {
             QuitProxyServer();
-            RemoveEvents();
             Config.Settings = new ConfigSettings();
         }
 
@@ -217,21 +183,7 @@ namespace ProtoTest.Golem.Core
                 TimeSpan.FromMinutes(Config.Settings.runTimeSettings.TestTimeoutMin);
         }
 
-        private void SetupEvents()
-        {
-            PageObjectActionEvent += AddAction;
-            BeforeTestEvent += WriteActionToLog;
-            AfterTestEvent += WriteActionToLog;
-            GenericEvent += WriteActionToLog;
-        }
-
-        private void RemoveEvents()
-        {
-            PageObjectActionEvent -= AddAction;
-            BeforeTestEvent -= WriteActionToLog;
-            AfterTestEvent -= WriteActionToLog;
-            GenericEvent -= WriteActionToLog;
-        }
+        
 
         //commented out Proxy stuff because browserMobProxy is not implimented
         private void GetHarFile()
