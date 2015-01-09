@@ -26,7 +26,8 @@ namespace ProtoTest.Golem.WebDriver
             PhantomJS,
             Android,
             IPhone,
-            IPad
+            IPad,
+            None
         }
 
         public IWebDriver driver;

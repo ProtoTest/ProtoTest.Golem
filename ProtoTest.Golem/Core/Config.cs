@@ -315,8 +315,6 @@ namespace ProtoTest.Golem.Core
 
             private List<BrowserInfo> GetBrowserInfo()
             {
-                if (!Config.Settings.runTimeSettings.LaunchBrowser)
-                    return null;
                 var hosts = new List<BrowserInfo>();
                 string browser = Config.GetConfigValue("Browser", "null");
                 string version = Config.GetConfigValue("Version", "");
@@ -334,6 +332,10 @@ namespace ProtoTest.Golem.Core
                     {
                         hosts.Add(new BrowserInfo(WebDriverBrowser.getBrowserFromString(browser), version, platform));
                     }
+                }
+                if (hosts.Count == 0)
+                {
+                    hosts.Add(new BrowserInfo(WebDriverBrowser.Browser.Chrome, "", ""));
                 }
                 return hosts;
             }
