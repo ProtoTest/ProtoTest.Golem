@@ -19,12 +19,14 @@ namespace ProtoTest.Golem.WebDriver
     /// </summary>
     public static class WebDriverExtensions
     {
-        public static ElementVerification Verify(this IWebElement element)
+        public static ElementVerification Verify(this IWebElement element, int timeout=-1)
         {
             try
             {
+                if (timeout == -1)
+                    timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
                 var GolemElement = (Element) element;
-                return new ElementVerification(GolemElement, Config.Settings.runTimeSettings.ElementTimeoutSec,false);
+                return new ElementVerification(GolemElement, timeout,false);
             }
             catch(Exception)
             {
@@ -34,12 +36,14 @@ namespace ProtoTest.Golem.WebDriver
             
         }
 
-        public static ElementVerification WaitUntil(this IWebElement element)
+        public static ElementVerification WaitUntil(this IWebElement element, int timeout=-1)
         {
             try
             {
+                if (timeout == -1)
+                    timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
                 var GolemElement = (Element)element;
-                return new ElementVerification(GolemElement, Config.Settings.runTimeSettings.ElementTimeoutSec, true);
+                return new ElementVerification(GolemElement, timeout, true);
             }
             catch (Exception)
             {
