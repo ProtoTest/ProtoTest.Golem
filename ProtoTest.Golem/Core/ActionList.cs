@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gallio.Framework;
 
 namespace ProtoTest.Golem.Core
@@ -46,6 +47,10 @@ namespace ProtoTest.Golem.Core
             TimeSpan difference;
             for (int i = 1; i < actions.Count; i++)
             {
+                while (actions[i].name == actions[i - 1].name)
+                {
+                    i++;
+                }
                 start = actions[i - 1]._time;
                 end = actions[i]._time;
                 difference = end.Subtract(start);
@@ -68,6 +73,12 @@ namespace ProtoTest.Golem.Core
                 this.name = name;
                 _time = time;
             }
+        }
+
+        public void RemoveDuplicateEntries()
+        {
+            IEnumerable<Action> distinctItems = actions.GroupBy(x => x.name).Select(y => y.Last());
+            actions = distinctItems.ToList();
         }
     }
 }
