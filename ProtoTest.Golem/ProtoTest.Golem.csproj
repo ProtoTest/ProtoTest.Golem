@@ -224,10 +224,9 @@
     <Content Include="chromedriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Proxy\browsermob-proxy-2.0-beta-8-bin.zip" />
-    <None Include="Proxy\browsermob-proxy-2.0-beta-9-bin.zip">
+    <Content Include="Proxy\browsermob-proxy-2.0-beta-9-bin.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Tests\Data\SearchData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -241,9 +240,6 @@
     </None>
     <Content Include="phantomjs.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Proxy\browsermob-proxy-2.0-beta-8-bin.zip">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Tests\Data\Data.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

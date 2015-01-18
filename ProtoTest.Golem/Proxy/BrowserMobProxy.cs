@@ -49,6 +49,8 @@ namespace ProtoTest.Golem.Proxy
         {
             get
             {
+                if (!Config.Settings.httpProxy.startProxy)
+                    return Config.Settings.httpProxy.proxyPort;
                 if (!proxyPortsByTest.ContainsKey(TestContext.CurrentContext.TestStep.FullName))
                 {
                     proxyPortsByTest.Add(TestContext.CurrentContext.TestStep.FullName,
@@ -60,6 +62,8 @@ namespace ProtoTest.Golem.Proxy
             }
             set
             {
+                if (!Config.Settings.httpProxy.startProxy)
+                    Config.Settings.httpProxy.proxyPort = value;
                 if (!proxyPortsByTest.ContainsKey(TestContext.CurrentContext.TestStep.FullName))
                 {
                     proxyPortsByTest.Add(TestContext.CurrentContext.TestStep.FullName,
@@ -95,21 +99,25 @@ namespace ProtoTest.Golem.Proxy
 
         public void KillOldProxy()
         {
-            Process[] runningProcesses = Process.GetProcesses();
-            foreach (Process process in runningProcesses)
+            if (Config.Settings.httpProxy.killOldProxy)
             {
-                try
+                Process[] runningProcesses = Process.GetProcesses();
+                foreach (Process process in runningProcesses)
                 {
-                    if ((process.ProcessName == "java") && (process.StartInfo.CreateNoWindow == false))
+                    try
                     {
-                        Common.Log("Killing old BMP Proxy");
-                        process.Kill();
+                        if ((process.ProcessName == "java") && (process.StartInfo.CreateNoWindow == false))
+                        {
+                            Common.Log("Killing old BMP Proxy");
+                            process.Kill();
+                        }
+                    }
+                    catch (Exception)
+                    {
                     }
                 }
-                catch (Exception)
-                {
-                }
             }
+           
         }
 
         public void QuitServer()

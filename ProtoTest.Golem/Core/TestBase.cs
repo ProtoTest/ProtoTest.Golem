@@ -190,7 +190,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                if (Config.Settings.httpProxy.useProxy)
+                if (Config.Settings.httpProxy.startProxy)
                 {
                     string name = Common.GetShortTestName(80);
                     proxy.SaveHarToFile();
@@ -227,9 +227,9 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
+                proxy = new BrowserMobProxy();
                 if (Config.Settings.httpProxy.startProxy)
                 {
-                    proxy = new BrowserMobProxy();
                     proxy.KillOldProxy();
                     proxy.StartServer();
                 }

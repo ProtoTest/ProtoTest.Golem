@@ -84,7 +84,7 @@ namespace ProtoTest.Golem.WebDriver
             var proxy = new OpenQA.Selenium.Proxy();
             if (Config.Settings.httpProxy.useProxy)
             {
-                proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 capabilities.SetCapability("proxy", proxy);
             }
 
@@ -99,7 +99,8 @@ namespace ProtoTest.Golem.WebDriver
             if (Config.Settings.httpProxy.useProxy)
             {
                 var proxy = new OpenQA.Selenium.Proxy();
-                proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+               // proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
                 options.Proxy = proxy;
             }
 
@@ -111,10 +112,10 @@ namespace ProtoTest.Golem.WebDriver
             var options = new InternetExplorerOptions();
             options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
             options.IgnoreZoomLevel = true;
-            if (Config.Settings.httpProxy.startProxy)
+            if (Config.Settings.httpProxy.useProxy)
             {
                 var proxy = new OpenQA.Selenium.Proxy();
-                proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.Proxy = proxy;
                 options.UsePerProcessProxy = true;
             }
@@ -129,7 +130,7 @@ namespace ProtoTest.Golem.WebDriver
             if (Config.Settings.httpProxy.useProxy)
             {
                 var proxy = new OpenQA.Selenium.Proxy();
-                proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.AddAdditionalCapability("proxy", proxy);
             }
             
@@ -141,10 +142,10 @@ namespace ProtoTest.Golem.WebDriver
             var options = new SafariOptions();
 
             // Add the WebDriver proxy capability.
-            if (Config.Settings.httpProxy.startProxy)
+            if (Config.Settings.httpProxy.useProxy)
             {
                 var proxy = new OpenQA.Selenium.Proxy();
-                proxy.HttpProxy = "localhost:" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.AddAdditionalCapability("proxy", proxy);
             }
 

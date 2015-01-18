@@ -197,6 +197,8 @@ namespace ProtoTest.Golem.Core
             public bool startProxy;
             public bool useProxy;
             public bool validateTraffic;
+            public string proxyUrl;
+            public bool killJava;
 
             public HttpProxy()
             {
@@ -204,7 +206,9 @@ namespace ProtoTest.Golem.Core
                 startProxy = Config.GetConfigValueAsBool("StartProxy", "False");
                 useProxy = Config.GetConfigValueAsBool("UseProxy", "False");
                 proxyPort = Config.GetConfigValueAsInt("ProxyPort", "18881");
+                proxyUrl = Config.GetConfigValue("ProxyUrl", "localhost");
                 validateTraffic = Config.GetConfigValueAsBool("ValidateTraffic", "False");
+                killJava = Config.GetConfigValueAsBool("KillJava", "True");
             }
         }
 
