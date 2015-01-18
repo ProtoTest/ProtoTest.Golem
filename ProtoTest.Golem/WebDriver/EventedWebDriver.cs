@@ -31,17 +31,18 @@ namespace ProtoTest.Golem.WebDriver
 
         void driver_FoundElement(object sender, FoundElementEventArgs e)
         {
-            if (Config.Settings.runTimeSettings.HighlightFoundElements)
-            {
-                e.Element.Highlight(); 
-            }
-            TestContext.CurrentContext.IncrementAssertCount();
+ 
+            
         }
 
 
         private void driver_FindElementCompleted(object sender, FindElementEventArgs e)
         {
-            
+            if (Config.Settings.runTimeSettings.HighlightFoundElements)
+            {
+                e.Element.Highlight();
+            }
+            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         private void driver_ElementValueChanged(object sender, WebElementEventArgs e)
