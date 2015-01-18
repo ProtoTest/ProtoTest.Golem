@@ -67,6 +67,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="name">Human readable name of the element</param>
         /// <param name="locator">By locator</param>
         public Element(string name, By locator)
+            : base()
         {
             this.name = name;
             this.by = locator;
@@ -139,7 +140,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     return element.Enabled;
                 }
-                catch (Exception e)
+                catch (NoSuchElementException e)
                 {
                     return false;
                 }
@@ -385,6 +386,12 @@ namespace ProtoTest.Golem.WebDriver
                 TestBase.testData.lastElement = this;
                 if (_element.IsStale())
                 {
+
+                    //if (WebDriverTestBase.defaultFrame != null)
+                    //{
+                    //    driver.SwitchTo().Frame(WebDriverTestBase.defaultFrame.WrappedElement);
+                    //    TestBase.testData.lastElement = this;
+                    //}
                     if (this._frame != null)
                     {
                         driver.SwitchTo().Frame(_frame.WrappedElement);
@@ -398,7 +405,7 @@ namespace ProtoTest.Golem.WebDriver
                 }
                 return _element;
             }
-            catch (Exception e)
+            catch (NoSuchElementException e)
             {
                 string message = string.Format("Could not find element '{0}' ({1}) after {2} seconds", name, @by,timeoutSec);
                 throw new NoSuchElementException(message);
