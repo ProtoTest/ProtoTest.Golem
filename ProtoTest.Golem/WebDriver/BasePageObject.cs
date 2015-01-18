@@ -20,14 +20,14 @@ namespace ProtoTest.Golem.WebDriver
             className = GetType().Name;
             if (Config.Settings.runTimeSettings.AutoWaitForElements)
             {
-               // try
-              //  {
+                try
+                {
                     WaitForElements();
-                //}
-                //catch (Exception e)
-                //{
-                //    Assert.Fail(string.Format("The {0} Page failed to load",this.className));
-                //}
+                }
+                catch (Exception e)
+                {
+                   throw new WebDriverException(string.Format("The {0} Page failed to load : " + e.Message, this.className));
+                }
                 
             }
             TestBase.testData.actions.addAction(TestBase.GetCurrentClassAndMethodName());
