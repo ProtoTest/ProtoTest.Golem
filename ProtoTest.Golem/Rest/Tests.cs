@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using MbUnit.Framework;
+using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Rest
@@ -10,6 +11,14 @@ namespace ProtoTest.Golem.Rest
     /// </summary>
     internal class Tests : RestTestBase
     {
+        [Test]
+        public void testSauce()
+        {
+            Given.Domain(string.Format("https://{0}:{1}@saucelabs.com", "bkitchener", "998969ff-ad37-4b2e-9ad7-edacd982bc59"))
+                   .When.Get("rest/v1/bkitchener/activity").Then.Verify().ResponseCode(HttpStatusCode.Accepted);
+        }
+
+
         [Test]
         public void TestGetStringFromBody()
         {

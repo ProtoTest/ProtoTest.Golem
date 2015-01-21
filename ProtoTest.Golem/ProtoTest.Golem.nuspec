@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>ProtoTest.Golem</id>
-    <version>1.2.2.0</version>
+    <version>1.2.3.2</version>
     <title>ProtoTest.Golem</title>
     <authors>ProtoTest, LLC</authors>
     <owners>ProtoTest, LLC</owners>
     <projectUrl>http://www.github.com/prototest/prototest.golem</projectUrl>
     <description>Selenium/MbUnit Test Automation Framework</description>
-    <releaseNotes>Now supports remote proxy</releaseNotes>
+    <releaseNotes>Now supports ssl/ftp/http proxy,f ixing some bugs</releaseNotes>
     <copyright>Copyright 2014, ProtoTest</copyright>
     <language />
     <tags>Selenium WebDriver Framework Golem ProtoTest Gallio MbUnit Rest White TestStack Test Testing</tags>

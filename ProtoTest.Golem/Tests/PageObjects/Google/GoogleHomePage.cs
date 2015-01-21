@@ -8,7 +8,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
 
         Element searchField = new Element("SearchField", By.Name("q"));
         Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
-        Element searchButton = new Element("SearchButton", By.Name("btnK"));
+        Element searchButton = new Element("SearchButton", By.Id("gbqfba"));
         Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
         Element signInButton = new Element("SignInButon", By.LinkText("Sign in"));
         Element gmailbutton = new Element("GmailButton", By.ClassName("gbts"));
@@ -30,7 +30,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
         {
             searchField.Verify().Present();
             googleLogo.Verify().Present();
-            searchButton.Verify().Present();
+           // searchButton.Verify().Present();
             feelingLuckyButton.Verify().Present();
             signInButton.Verify().Present();
         }

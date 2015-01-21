@@ -31,7 +31,7 @@ namespace ProtoTest.Golem.Tests
         {
             OpenPage<GoogleHomePage>("http://www.google.com/");
             var entries = proxy.FilterEntries("www.google.com");
-            Assert.AreEqual(1,entries.Count);
+            Assert.AreEqual(10,entries.Count);
             Assert.AreEqual("http://www.google.com/",entries[0].Request.Url);
         }
 

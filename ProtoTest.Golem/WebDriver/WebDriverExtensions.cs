@@ -126,8 +126,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
-                var jsDriver = ((IJavaScriptExecutor) WebDriverTestBase.driver);
-                var originalElementBorder = (string) jsDriver.ExecuteScript("return arguments[0].style.border", element);
+                var jsDriver = ((IJavaScriptExecutor)WebDriverTestBase.driver);
+                var originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
                 jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
                 Thread.Sleep(ms);
                 jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", element);
@@ -160,7 +160,6 @@ namespace ProtoTest.Golem.WebDriver
             
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
-            element.Highlight();
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 var eles = element.FindElements(by);
@@ -494,6 +493,11 @@ namespace ProtoTest.Golem.WebDriver
             var action = new Actions(WebDriverTestBase.driver);
             action.MoveToElement(element, x, y).Click().Build().Perform();
             return element;
+        }
+
+        public static void Sleep(this IWebDriver driver, int timeoutMs)
+        {
+            Thread.Sleep(timeoutMs);
         }
     }
 }

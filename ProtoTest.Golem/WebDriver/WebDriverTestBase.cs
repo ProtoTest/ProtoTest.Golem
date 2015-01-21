@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Net;
 using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
+using ProtoTest.Golem.Rest;
+using RestSharp;
 
 namespace ProtoTest.Golem.WebDriver
 {
@@ -156,6 +159,8 @@ namespace ProtoTest.Golem.WebDriver
             {
                 bool passed = TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
                 driver.ExecuteJavaScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+
+               
             }
         }
     }

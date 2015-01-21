@@ -247,6 +247,8 @@ namespace ProtoTest.Golem.WebDriver
             return element;
         }
 
+
+
         public Element Image()
         {
             message = "image matches";
@@ -272,5 +274,8 @@ namespace ProtoTest.Golem.WebDriver
 
             return element;
         }
+
+
+
     }
 }

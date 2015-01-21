@@ -34,6 +34,15 @@ namespace ProtoTest.Golem.Proxy
         private readonly int serverPort;
         private IRestResponse response;
         private Process serverProcess;
+        public HarResult har
+        {
+            get
+            {
+                if (!Config.Settings.httpProxy.useProxy)
+                    throw new Exception("Could not get Proxy Har as proxy has been turned off.  Please enabled it by updating your App.Config with the following keys : StartProxy=true, UseProxy=true");
+                    return GetHar();
+            }
+        }
 
         public BrowserMobProxy()
         {
@@ -240,30 +249,23 @@ namespace ProtoTest.Golem.Proxy
 
         public HarResult GetHar()
         {
-            try
+            request.RequestFormat = DataFormat.Json;
+            request.Method = Method.GET;
+            request.Resource = string.Format("/proxy/{0}/har ", proxyPort);
+            IRestResponse<HarResult> responseHar = client.Execute<HarResult>(request);
+            if (responseHar.StatusCode != HttpStatusCode.OK)
             {
-                request.RequestFormat = DataFormat.Json;
-                request.Method = Method.GET;
-                request.Resource = string.Format("/proxy/{0}/har ", proxyPort);
-                IRestResponse<HarResult> responseHar = client.Execute<HarResult>(request);
-                if (responseHar.StatusCode != HttpStatusCode.OK)
-                {
-                    throw new Exception("Could not get har for proxy at port " + proxyPort + " : " +
-                                        responseHar.StatusCode);
-                }
-                return JsonConvert.DeserializeObject<HarResult>(responseHar.Content);
+                throw new Exception("Could not get har for proxy at port " + proxyPort + " : " +
+                                    responseHar.StatusCode);
             }
-            catch (Exception)
-            {
-                return new HarResult();
-            }
+            return JsonConvert.DeserializeObject<HarResult>(responseHar.Content);
         }
 
         public List<Entry> FilterEntries(string url)
         {
             try
             {
-                return GetHar().Log.Entries.Where(entry => entry.Request.Url.Contains(url)).ToList();
+                return har.Log.Entries.Where(entry => entry.Request.Url.Contains(url)).ToList();
             }
             catch (Exception)
             {
@@ -292,7 +294,7 @@ namespace ProtoTest.Golem.Proxy
 
         public Entry GetLastEntryForUrl(string url)
         {
-            return GetHar().Log.Entries.Last(entry => entry.Request.Url.Contains(url));
+            return har.Log.Entries.Last(entry => entry.Request.Url.Contains(url));
         }
 
         public void VerifyQueryStringInEntry(QueryStringItem queryString, Entry entry)
@@ -412,7 +414,7 @@ namespace ProtoTest.Golem.Proxy
 
         public void VerifyNoErrorsCodes()
         {
-            var har = GetHar();
+            var har = this.har;
             var errors =
                 har.Log.Entries.Where(entry => entry.Response.Status > 400 && entry.Response.Status < 599).ToList();
             foreach (var error in errors)

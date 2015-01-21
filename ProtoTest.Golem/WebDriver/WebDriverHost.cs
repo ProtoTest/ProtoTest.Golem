@@ -17,5 +17,6 @@ namespace ProtoTest.Golem.WebDriver
             this.version = version;
             this.platform = platform;
         }
+
     }
 }

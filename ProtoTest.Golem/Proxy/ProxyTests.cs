@@ -138,11 +138,18 @@ namespace ProtoTest.Golem.Proxy
                 proxy.VerifyQueryStringInEntry(querystring,lastRequest);
             }
         }
+        [FixtureInitializer]
+        public void init()
+        {
+            Config.Settings.httpProxy.startProxy = true;
+            Config.Settings.httpProxy.useProxy = true;
+        }
 
         [Test]
         public void Test()
         {
             driver.Navigate().GoToUrl("http://www.healthgrades.com/physician/dr-john-schultz-2324x");
+            driver.Sleep(3000);
             proxy.VerifyRequestQueryString("om.healthgrades.com",new QueryStringItem(){Name = "c6",Value = "physician"});
         }
         

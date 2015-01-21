@@ -85,6 +85,8 @@ namespace ProtoTest.Golem.WebDriver
             if (Config.Settings.httpProxy.useProxy)
             {
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
                 capabilities.SetCapability("proxy", proxy);
             }
 
@@ -100,7 +102,8 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-               // proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
+                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
                 options.Proxy = proxy;
             }
 
@@ -116,6 +119,8 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
                 options.Proxy = proxy;
                 options.UsePerProcessProxy = true;
             }
@@ -131,6 +136,8 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
                 options.AddAdditionalCapability("proxy", proxy);
             }
             
@@ -146,6 +153,8 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
                 options.AddAdditionalCapability("proxy", proxy);
             }
 
@@ -156,6 +165,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             switch (browser)
             {
+                case Browser.PhantomJS:
+                    return DesiredCapabilities.PhantomJS();
                 case Browser.IE:
                     return DesiredCapabilities.InternetExplorer();
                 case Browser.Chrome:
