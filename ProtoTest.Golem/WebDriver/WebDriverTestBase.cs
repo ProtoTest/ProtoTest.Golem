@@ -51,7 +51,8 @@ namespace ProtoTest.Golem.WebDriver
 
         public static T OpenPage<T>(string url)
         {
-            driver.Navigate().GoToUrl(url);
+            if(Config.Settings.runTimeSettings.Browser == WebDriverBrowser.Browser.IE)
+                driver.Navigate().GoToUrl(url);
             return (T) Activator.CreateInstance(typeof (T));
         }
 

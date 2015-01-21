@@ -237,7 +237,16 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>The IWebElement found.</returns>
         public IWebElement FindElement(Element childElement)
         {
-            return new Element(element.WaitForPresent(childElement.by),childElement.by);
+            DateTime then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var eles = element.FindElements(childElement.by);
+                if (eles.Count > 0)
+                    return new Element(eles[0],by);
+                Common.Delay(1000);
+            }
+            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
+                childElement.by.ToString(), this.timeoutSec));         
         }
 
         /// <summary>
@@ -247,7 +256,16 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>The IWebElement found.</returns>
         public IWebElement FindElement(By by)
         {
-            return new Element(element.WaitForPresent(by),by);
+            DateTime then = DateTime.Now.AddSeconds(this.timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var eles = element.FindElements(by);
+                if (eles.Count > 0)
+                    return new Element(eles[0], by);
+                Common.Delay(1000);
+            }
+            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
+                by.ToString(), this.timeoutSec));      
         }
 
         /// <summary>
@@ -257,6 +275,8 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>Collection of IWebElements found.</returns>
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
+
+
             List<IWebElement> elements = new List<IWebElement>();
             foreach (var element in driver.FindElements(by))
             {
