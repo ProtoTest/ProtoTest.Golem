@@ -240,10 +240,15 @@ namespace ProtoTest.Golem.WebDriver
             DateTime then = DateTime.Now.AddSeconds(this.timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
-                var eles = element.FindElements(childElement.by);
-                if (eles.Count > 0)
-                    return new Element(eles[0],by);
-                Common.Delay(1000);
+                try
+                {
+                    var eles = element.FindElements(childElement.by);
+                    if (eles.Count > 0)
+                        return new Element(eles[0], by);
+                    Common.Delay(1000);
+                }
+                catch(Exception e)
+                { }
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
                 childElement.by.ToString(), this.timeoutSec));         
@@ -259,10 +264,16 @@ namespace ProtoTest.Golem.WebDriver
             DateTime then = DateTime.Now.AddSeconds(this.timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
-                var eles = element.FindElements(by);
-                if (eles.Count > 0)
-                    return new Element(eles[0], by);
-                Common.Delay(1000);
+                try
+                {
+                    var eles = element.FindElements(by);
+                    if (eles.Count > 0)
+                        return new Element(eles[0], by);
+                    Common.Delay(1000);
+                }
+                catch (Exception e)
+                {}
+
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
                 by.ToString(), this.timeoutSec));      
