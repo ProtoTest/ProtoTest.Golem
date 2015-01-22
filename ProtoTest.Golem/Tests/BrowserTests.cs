@@ -22,8 +22,6 @@ namespace ProtoTest.Golem.Tests
         public void TestIE()
         {
             driver = new InternetExplorerDriver();
-            //OpenPage needs to run twice because of an initialization bug with the IE driver
-            OpenPage<GoogleHomePage>("http://www.google.com/");
             OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }

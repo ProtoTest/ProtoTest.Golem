@@ -247,7 +247,7 @@ namespace ProtoTest.Golem.WebDriver
                         return new Element(eles[0], by);
                     Common.Delay(1000);
                 }
-                catch(Exception e)
+                catch(StaleElementReferenceException e)
                 { }
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
@@ -271,7 +271,7 @@ namespace ProtoTest.Golem.WebDriver
                         return new Element(eles[0], by);
                     Common.Delay(1000);
                 }
-                catch (Exception e)
+                catch (StaleElementReferenceException e)
                 {}
 
             }

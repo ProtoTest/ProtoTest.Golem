@@ -131,6 +131,7 @@
     <Compile Include="Tests\BrowserStackTest.cs" />
     <Compile Include="Tests\BrowserTests.cs" />
     <Compile Include="Tests\SauceLabsTests.cs" />
+    <Compile Include="Tests\Test.cs" />
     <Compile Include="Tests\TestDriver.cs" />
     <Compile Include="Tests\TestPageObjects.cs" />
     <Compile Include="Tests\ConfigTests.cs" />
@@ -220,11 +221,11 @@
     <Compile Include="WebDriver\WebDriverExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="IEDriverServer.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="chromedriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IEDriverServer.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Proxy\browsermob-proxy-2.0-beta-9-bin.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
