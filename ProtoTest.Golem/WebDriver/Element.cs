@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 using ProtoTest.Golem.Core;
@@ -230,6 +232,45 @@ namespace ProtoTest.Golem.WebDriver
                 element.SendKeys(value);
             }
         }
+
+
+        public bool IsPresent(int timeoutSec)
+        {
+            DateTime then = DateTime.Now.AddSeconds(timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                try
+                {
+                    var eles = driver.FindElements(by);
+                    if (eles.Count > 0)
+                        return true;
+                    Common.Delay(1000);
+                }
+                catch (StaleElementReferenceException e)
+                { }
+            }
+            return false;
+        }
+
+        public bool IsDisplayed(int timeoutSec)
+        {
+            DateTime then = DateTime.Now.AddSeconds(timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                try
+                {
+                    var eles = driver.FindElements(by).ToList();
+                    if (eles.Any(ele => ele.Displayed))
+                    {
+                        return true;
+                    }
+                }
+                catch (StaleElementReferenceException e)
+                { }
+            }
+            return false;
+        }
+
         /// <summary>
         /// Returns the first element found by the locator.
         /// </summary>
@@ -294,6 +335,11 @@ namespace ProtoTest.Golem.WebDriver
                 elements.Add(new Element(element,by));
             }
             return new ReadOnlyCollection<IWebElement>(elements);
+        }
+
+        public ReadOnlyCollection<IWebElement> FindElements(Element element)
+        {
+            return FindElements(element.by);
         }
 
         /// <summary>

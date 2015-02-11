@@ -131,7 +131,7 @@
     <Compile Include="Tests\BrowserStackTest.cs" />
     <Compile Include="Tests\BrowserTests.cs" />
     <Compile Include="Tests\SauceLabsTests.cs" />
-    <Compile Include="Tests\Test.cs" />
+    <Compile Include="Tests\TestElements.cs" />
     <Compile Include="Tests\TestDriver.cs" />
     <Compile Include="Tests\TestPageObjects.cs" />
     <Compile Include="Tests\ConfigTests.cs" />
@@ -174,6 +174,7 @@
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\Component.cs" />
     <Compile Include="WebDriver\ConsoleErrorGrabber.cs" />
+    <Compile Include="WebDriver\Elements.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
     <Compile Include="WebDriver\Elements\Images\Histogram.cs" />
     <Compile Include="WebDriver\Elements\Images\ImageComparer.cs" />

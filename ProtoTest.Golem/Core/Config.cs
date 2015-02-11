@@ -15,12 +15,10 @@ namespace ProtoTest.Golem.Core
     /// </summary>
     public class Config
     {
-        private static ConfigSettings _settings;
-
         public static ConfigSettings Settings
         {
-            get { return _settings ?? (_settings = new ConfigSettings()); }
-            set { _settings = value; }
+            get { return TestBase.testData.configSettings; }
+            set { TestBase.testData.configSettings = value; }
         }
 
         /// <summary>
@@ -426,6 +424,7 @@ namespace ProtoTest.Golem.Core
             public string SauceLabsUsername;
             public string SauceLabsAPIKey;
             public string SauceLabsUrl;
+            public string ScreenResolution;
 
             public SauceLabsSettings()
             {
@@ -434,6 +433,7 @@ namespace ProtoTest.Golem.Core
                 SauceLabsUrl = Config.GetConfigValue("SauceLabsUrl", "http://ondemand.saucelabs.com/wd/hub");
                 SauceLabsUsername = Config.GetConfigValue("SauceLabsUsername", "NOT_SET");
                 SauceLabsAPIKey = Config.GetConfigValue("SauceLabsAPIKey", "NOT_SET");
+                ScreenResolution = Config.GetConfigValue("ScreenResolution", "1280x1024");
             }
         }
     }

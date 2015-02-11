@@ -17,7 +17,7 @@ namespace ProtoTest.Golem.WebDriver
     /// </summary>
     public class WebDriverTestBase : TestBase
     {
-        [Factory("GetBrowsers")] protected BrowserInfo browserInfo;
+        [Factory("GetBrowsers")] protected BrowserInfo browserInfo = new BrowserInfo(WebDriverBrowser.Browser.Chrome,"","");
         protected static IEnumerable<BrowserInfo> GetBrowsers()
         {
             return Config.Settings.runTimeSettings.Browsers;

@@ -25,10 +25,11 @@ namespace ProtoTest.Golem.Core
 
         public List<VerificationError> VerificationErrors;
         public ActionList actions;
-        public Element lastElement = new Element();
+        public Element lastElement;
         public ScreenRecorder recorder;
         public string testName;
         public BrowserInfo browserInfo;
+        public ConfigSettings configSettings;
 
         public TestDataContainer(string name)
         {
@@ -36,6 +37,7 @@ namespace ProtoTest.Golem.Core
             actions = new ActionList();
             VerificationErrors = new List<VerificationError>();
             SetupEvents();
+            configSettings = new ConfigSettings();
         }
 
 
