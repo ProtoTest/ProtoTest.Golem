@@ -9,9 +9,13 @@ using Gallio.Framework;
 using Gallio.Framework.Pattern;
 using Gallio.Model;
 using MbUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Proxy;
 using ProtoTest.Golem.WebDriver;
+using Assert = MbUnit.Framework.Assert;
+using TestContext = Gallio.Framework.TestContext;
+
 
 namespace ProtoTest.Golem.Core
 {
@@ -39,6 +43,7 @@ namespace ProtoTest.Golem.Core
         public static BrowserMobProxy proxy;
         [NUnit.Framework.SetUp]
         [SetUp]
+        [TestInitialize]
         public virtual void SetUpTestBase()
         {
             
@@ -47,7 +52,7 @@ namespace ProtoTest.Golem.Core
             StartNewProxy();
 
         }
-
+        [TestCleanup]
         [NUnit.Framework.TearDown]
         [TearDown]
         public virtual void TearDownTestBase()

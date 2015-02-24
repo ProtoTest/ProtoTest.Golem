@@ -122,19 +122,29 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-        public static void Highlight(this IWebElement element, int ms=10)
+        public static void Highlight(this IWebElement element, int ms=50)
         {
             try
             {
-                var jsDriver = ((IJavaScriptExecutor)WebDriverTestBase.driver);
+                var jsDriver = ((IJavaScriptExecutor)((IWrapsDriver)element).WrappedDriver);
                 var originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
                 jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
-                Thread.Sleep(ms);
-                jsDriver.ExecuteScript("arguments[0].style.border='" + originalElementBorder + "'; return;", element);
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.DoWork += (obj, e) => Unhighlight(element, originalElementBorder, ms);
+                bw.RunWorkerAsync();
+                
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                TestLog.Warnings.WriteLine(e.Message);
             }
+        }
+
+        private static void Unhighlight(IWebElement element, string border, int timeMs)
+        {
+            var jsDriver = ((IJavaScriptExecutor)((IWrapsDriver)element).WrappedDriver);
+            Thread.Sleep(timeMs);
+            jsDriver.ExecuteScript("arguments[0].style.border='" + border + "'; return;", element);
         }
 
         /// <summary>
@@ -143,13 +153,13 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="element"></param>
         public static void ClearChecked(this IWebElement element)
         {
-            var jsDriver = ((IJavaScriptExecutor) WebDriverTestBase.driver);
+            var jsDriver = ((IJavaScriptExecutor)((IWrapsDriver)element));
             jsDriver.ExecuteScript("arguments[0].checked=false;", element);
         }
 
         public static void MouseOver(this IWebElement element)
         {
-            IWebDriver driver = WebDriverTestBase.driver;
+            IWebDriver driver = ((IWrapsDriver)element).WrappedDriver;
             var action = new Actions(driver).MoveToElement(element);
             Thread.Sleep(2000);
             action.Build().Perform();
@@ -178,8 +188,6 @@ namespace ProtoTest.Golem.WebDriver
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 var eles = driver.FindElements(by);
-          //      if(eles.Count > 1)
-            //       TestLog.WriteLine("WARNING : More than one element was found that matches your locator " + by + ", using the first one");
                 if (eles.Count > 0)
                     return eles[0];
                 Common.Delay(1000);
@@ -212,6 +220,7 @@ namespace ProtoTest.Golem.WebDriver
                 var eles = driver.FindElements(by);
                 if (eles.Count > 0 && eles[0].Displayed)
                     return eles[0];
+                Common.Delay(1000);
             }
             throw new ElementNotVisibleException(string.Format("Element ({0}) was not visible after {1} seconds",
                 by.ToString(), timeout));

@@ -146,6 +146,10 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     return false;
                 }
+                catch (StaleElementReferenceException e)
+                {
+                    return false;
+                }
             }
         }
 
@@ -161,7 +165,11 @@ namespace ProtoTest.Golem.WebDriver
                     if (!Present) return false;
                     return element.Displayed;
                 }
-                catch (Exception e)
+                catch (NoSuchElementException e)
+                {
+                    return false;
+                }
+                catch (StaleElementReferenceException e)
                 {
                     return false;
                 }
@@ -264,6 +272,7 @@ namespace ProtoTest.Golem.WebDriver
                     {
                         return true;
                     }
+                    Common.Delay(1000);
                 }
                 catch (StaleElementReferenceException e)
                 { }

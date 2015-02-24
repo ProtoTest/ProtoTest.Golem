@@ -9,6 +9,7 @@ using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Rest;
 using RestSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ProtoTest.Golem.WebDriver
 {
@@ -76,7 +77,7 @@ namespace ProtoTest.Golem.WebDriver
         private void LogScreenshotIfTestFailed()
         {
             if ((Config.Settings.reportSettings.screenshotOnError) &&
-                (TestContext.CurrentContext.Outcome != TestOutcome.Passed))
+                (Gallio.Framework.TestContext.CurrentContext.Outcome != TestOutcome.Passed))
             {
                 Image screenshot = testData.driver.GetScreenshot();
                 if (screenshot != null)
@@ -136,7 +137,7 @@ namespace ProtoTest.Golem.WebDriver
             }
            
         }
-
+        [TestInitialize]
         [NUnit.Framework.SetUp]
         [SetUp]
         public void SetUp()
@@ -144,7 +145,7 @@ namespace ProtoTest.Golem.WebDriver
             testData.browserInfo = browserInfo;
             LaunchBrowser();
         }
-
+        [TestCleanup]
         [NUnit.Framework.TearDown]
         [TearDown]
         public override void TearDownTestBase()
@@ -160,7 +161,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             if (Config.Settings.sauceLabsSettings.UseSauceLabs)
             {
-                bool passed = TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
+                bool passed = Gallio.Framework.TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
                 driver.ExecuteJavaScript("sauce:job-result=" + (passed ? "passed" : "failed"));
 
                

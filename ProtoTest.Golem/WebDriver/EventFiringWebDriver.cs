@@ -376,7 +376,7 @@ namespace ProtoTest.Golem.WebDriver
       {
         FindElementEventArgs e = new FindElementEventArgs(this.driver, by);
         this.OnFindingElement(e);
-        IWebElement element = this.driver.FindElement(by);
+        IWebElement element = this.driver.FindElements(by).FirstOrDefault(x => x.Displayed);
         this.OnFindElementCompleted(e);
         FoundElementEventArgs f= new FoundElementEventArgs(driver,element,by);
         this.OnFoundElement(f);
