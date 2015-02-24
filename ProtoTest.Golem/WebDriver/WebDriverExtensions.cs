@@ -159,7 +159,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public static void MouseOver(this IWebElement element)
         {
-            IWebDriver driver = ((IWrapsDriver)element).WrappedDriver;
+            IWebDriver driver = WebDriverTestBase.driver;
             var action = new Actions(driver).MoveToElement(element);
             Thread.Sleep(2000);
             action.Build().Perform();
