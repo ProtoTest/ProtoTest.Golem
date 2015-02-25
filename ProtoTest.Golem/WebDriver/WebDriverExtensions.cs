@@ -122,7 +122,7 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-        public static void Highlight(this IWebElement element, int ms=50)
+        public static void Highlight(this IWebElement element, int ms=30)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var eles = element.FindElements(by);
                 if (eles.Count > 0)
-                    return eles[0];
+                    return eles.FirstOrDefault(x => x.Displayed);
                 Common.Delay(1000);
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
@@ -189,7 +189,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var eles = driver.FindElements(by);
                 if (eles.Count > 0)
-                    return eles[0];
+                    return eles.FirstOrDefault(x => x.Displayed);
                 Common.Delay(1000);
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
@@ -217,9 +217,9 @@ namespace ProtoTest.Golem.WebDriver
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
-                var eles = driver.FindElements(by);
-                if (eles.Count > 0 && eles[0].Displayed)
-                    return eles[0];
+                var eles = driver.FindElements(by).Where(x => x.Displayed).ToList();
+                if (eles.Count>0)
+                    return eles.FirstOrDefault(x => x.Displayed);
                 Common.Delay(1000);
             }
             throw new ElementNotVisibleException(string.Format("Element ({0}) was not visible after {1} seconds",
@@ -232,8 +232,8 @@ namespace ProtoTest.Golem.WebDriver
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
-                var eles = driver.FindElements(by);
-                if (eles.Count == 0 || !eles[0].Displayed)
+                var eles = driver.FindElements(by).Where(x => x.Displayed).ToList();
+                if (eles.Count == 0)
                     return;
                 Common.Delay(1000);
             }
