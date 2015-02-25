@@ -142,9 +142,16 @@ namespace ProtoTest.Golem.WebDriver
 
         private static void Unhighlight(IWebElement element, string border, int timeMs)
         {
-            var jsDriver = ((IJavaScriptExecutor)((IWrapsDriver)element).WrappedDriver);
-            Thread.Sleep(timeMs);
-            jsDriver.ExecuteScript("arguments[0].style.border='" + border + "'; return;", element);
+            try
+            {
+                var jsDriver = ((IJavaScriptExecutor)((IWrapsDriver)element).WrappedDriver);
+                Thread.Sleep(timeMs);
+                jsDriver.ExecuteScript("arguments[0].style.border='" + border + "'; return;", element);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         /// <summary>

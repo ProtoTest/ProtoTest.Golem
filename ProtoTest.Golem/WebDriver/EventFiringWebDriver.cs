@@ -408,11 +408,7 @@ namespace ProtoTest.Golem.WebDriver
           
         FindElementEventArgs e = new FindElementEventArgs(this.driver, by);
         this.OnFindingElement(e);
-        IEnumerable<IWebElement> elements = this.driver.FindElements(by);
-        if (!Config.Settings.runTimeSettings.FindHiddenElements)
-        {
-            elements = elements.Where(x => x.Displayed);
-        }
+        IEnumerable<IWebElement> elements = this.driver.FindElements(by).Where(x => x.Displayed);
         this.OnFindElementCompleted(e);
         foreach (IWebElement underlyingElement in elements)
         {
@@ -1231,7 +1227,7 @@ namespace ProtoTest.Golem.WebDriver
     /// EventFiringWebElement allows you to have access to specific items that are found on the page
     /// 
     /// </summary>
-    private class EventFiringWebElement : IWebElement, ISearchContext, IWrapsElement
+    private class EventFiringWebElement : IWebElement, ISearchContext, IWrapsElement, IWrapsDriver
     {
       private IWebElement underlyingElement;
       private EventFiringWebDriver parentDriver;
@@ -1246,6 +1242,14 @@ namespace ProtoTest.Golem.WebDriver
         {
           return this.underlyingElement;
         }
+      }
+
+      public IWebDriver WrappedDriver
+      {
+          get
+          {
+              return this.parentDriver;
+          }
       }
 
       /// <summary>

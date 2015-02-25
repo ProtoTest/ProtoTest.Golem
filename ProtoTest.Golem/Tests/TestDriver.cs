@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gallio.Framework;
+using Golem.TestProject.PageObjects;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -29,7 +30,11 @@ namespace ProtoTest.Golem.Tests
             driver.FindElementWithText("Google Search").Highlight();
         }
 
-
+        [Test]
+        public void test()
+        {
+            OpenPage<LoginPanel>("http://www.radiofreeamerica.com");
+        }
 
     }
 }
