@@ -4,8 +4,16 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 {
     public class PurpleTable : PurpleElementBase
     {
-        private int _rowCount = -1;
         private int _colCount = -1;
+        private int _rowCount = -1;
+        private object basePattern2;
+        // Changes for the sake of speeding up the code - Start
+
+        private bool PElementPattern;
+
+        public PurpleTable(string name, string locatorPath) : base(name, locatorPath)
+        {
+        }
 
         public int RowCount
         {
@@ -31,33 +39,22 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             }
         }
 
-        public PurpleTable(string name, string locatorPath) : base(name, locatorPath)
-        {
-
-        }
-
         public string GetValue(int row, int column)
         {
-            string somenonsense = "";
+            var somenonsense = "";
             object basePattern;
             if (PurpleElement.TryGetCurrentPattern(TablePattern.Pattern, out basePattern))
             {
-                TablePattern gridItem = (BasePattern) basePattern as TablePattern;
+                var gridItem = (BasePattern) basePattern as TablePattern;
                 if (gridItem != null)
                 {
                     var tableitem = gridItem.GetItem(row, column);
                     somenonsense = tableitem.Current.Name;
                 }
-
             }
             return somenonsense;
         }
 
-        // Changes for the sake of speeding up the code - Start
-        
-        private bool PElementPattern;
-
-        private object basePattern2;
         public void EvaluatePattern()
         {
             if (PurpleElement.TryGetCurrentPattern(TablePattern.Pattern, out basePattern2))
@@ -72,16 +69,15 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public string GetValueNew(int row, int column)
         {
-            string somenonsense = "";
+            var somenonsense = "";
             if (PElementPattern)
             {
-                TablePattern gridItem = (BasePattern)basePattern2 as TablePattern;
+                var gridItem = (BasePattern) basePattern2 as TablePattern;
                 if (gridItem != null)
                 {
                     var tableitem = gridItem.GetItem(row, column);
                     somenonsense = tableitem.Current.Name;
                 }
-
             }
             return somenonsense;
         }
@@ -93,15 +89,13 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             object basePattern;
             if (PurpleElement.TryGetCurrentPattern(TablePattern.Pattern, out basePattern))
             {
-                TablePattern gridItem = (BasePattern)basePattern as TablePattern;
+                var gridItem = (BasePattern) basePattern as TablePattern;
                 if (gridItem != null)
                 {
                     _rowCount = gridItem.Current.RowCount;
                     _colCount = gridItem.Current.ColumnCount;
                 }
-            } 
+            }
         }
-        
-
     }
 }

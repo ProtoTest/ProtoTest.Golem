@@ -4,14 +4,14 @@ using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Xml;
-//using Castle.Core.Logging;
 using Gallio.Framework;
 using ProtoTest.Golem.WebDriver;
+//using Castle.Core.Logging;
 
 namespace ProtoTest.Golem.Core
 {
     /// <summary>
-    /// The Config class holds instantiates the ConfigSettings class, and any Config-related functions
+    ///     The Config class holds instantiates the ConfigSettings class, and any Config-related functions
     /// </summary>
     public class Config
     {
@@ -22,14 +22,14 @@ namespace ProtoTest.Golem.Core
         }
 
         /// <summary>
-        /// Returns the App.config value for requested key, or default value if not defined.
+        ///     Returns the App.config value for requested key, or default value if not defined.
         /// </summary>
         /// <param name="key">Application configuration key</param>
         /// <param name="defaultValue">Default value</param>
         /// <returns></returns>
         public static string GetConfigValue(string key, string defaultValue)
         {
-            string setting = ConfigurationManager.AppSettings[key];
+            var setting = ConfigurationManager.AppSettings[key];
             if (setting == null)
             {
                 return defaultValue;
@@ -39,14 +39,14 @@ namespace ProtoTest.Golem.Core
         }
 
         /// <summary>
-        /// Returns the App.config value for requested key, or default value if not defined, and tries to parse it for an byte.  
+        ///     Returns the App.config value for requested key, or default value if not defined, and tries to parse it for an byte.
         /// </summary>
         /// <param name="key">Application configuration key</param>
         /// <param name="defaultValue">Default value</param>
         /// <returns></returns>
         public static byte GetConfigValueAsByte(string key, string defaultValue)
         {
-            string setting = "";
+            var setting = "";
             try
             {
                 setting = GetConfigValue(key, defaultValue);
@@ -55,24 +55,21 @@ namespace ProtoTest.Golem.Core
             catch (Exception e)
             {
                 TestLog.Warnings.WriteLine(
-                    string.Format(
-                        "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
-                        key, setting, e.Message));
+                    "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
+                    key, setting, e.Message);
                 return 1;
             }
-
         }
 
-
         /// <summary>
-        /// Returns the App.config value for requested key, or default value if not defined, and tries to parse it for an int.  
+        ///     Returns the App.config value for requested key, or default value if not defined, and tries to parse it for an int.
         /// </summary>
         /// <param name="key">Application configuration key</param>
         /// <param name="defaultValue">Default value</param>
         /// <returns></returns>
         public static int GetConfigValueAsInt(string key, string defaultValue)
         {
-            string setting = "";
+            var setting = "";
             try
             {
                 setting = GetConfigValue(key, defaultValue);
@@ -81,22 +78,22 @@ namespace ProtoTest.Golem.Core
             catch (Exception e)
             {
                 TestLog.Warnings.WriteLine(
-                    string.Format(
-                        "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
-                        key, setting,e.Message));
+                    "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
+                    key, setting, e.Message);
                 return 1;
             }
-            
         }
+
         /// <summary>
-        /// Returns the App.config value for requested key, or default value if not defined and returns a boolean.  Looks for True, true, False, false.  
+        ///     Returns the App.config value for requested key, or default value if not defined and returns a boolean.  Looks for
+        ///     True, true, False, false.
         /// </summary>
         /// <param name="key">Application configuration key</param>
         /// <param name="defaultValue">Default value</param>
         /// <returns></returns>
         public static bool GetConfigValueAsBool(string key, string defaultValue)
         {
-            string setting = ConfigurationManager.AppSettings[key];
+            var setting = ConfigurationManager.AppSettings[key];
             if (setting == null)
             {
                 setting = defaultValue;
@@ -105,14 +102,14 @@ namespace ProtoTest.Golem.Core
         }
 
         /// <summary>
-        /// Updates the App.config setting key with value
+        ///     Updates the App.config setting key with value
         /// </summary>
         /// <param name="key">Application configuration key</param>
         /// <param name="value">Application configuration key value to set</param>
         public static void UpdateConfigFile(string key, string value)
         {
             var doc = new XmlDocument();
-            string path = Assembly.GetCallingAssembly().Location + ".config";
+            var path = Assembly.GetCallingAssembly().Location + ".config";
             doc.Load(path);
             doc.SelectSingleNode("//add[@key='" + key + "']").Attributes["value"].Value = value;
             doc.Save(path);
@@ -124,18 +121,20 @@ namespace ProtoTest.Golem.Core
             doc.Save(path);
         }
     }
+
     /// <summary>
-    /// ConfigSettings holds each config section, and reads them in from the App.Config upon instantiation.  To override these settings put the commands in a [FixtureInitializer]
+    ///     ConfigSettings holds each config section, and reads them in from the App.Config upon instantiation.  To override
+    ///     these settings put the commands in a [FixtureInitializer]
     /// </summary>
     public class ConfigSettings
     {
         public AppiumSettings appiumSettings;
+        public BrowserStackSettings browserStackSettings;
         public HttpProxy httpProxy;
         public ImageCompareSettings imageCompareSettings;
+        public PurpleSettings purpleSettings;
         public ReportSettings reportSettings;
         public RuntimeSettings runTimeSettings;
-        public PurpleSettings purpleSettings;
-        public BrowserStackSettings browserStackSettings;
         public SauceLabsSettings sauceLabsSettings;
 
         public ConfigSettings()
@@ -151,22 +150,22 @@ namespace ProtoTest.Golem.Core
         }
 
         /// <summary>
-        /// Contains all settings related to appium support.
+        ///     Contains all settings related to appium support.
         /// </summary>
         public class AppiumSettings
         {
             public string activity;
-            public string device;
-            public string appPath;
-            public bool launchApp = false;
-            public string package;
             public string appiumPort;
-            public bool useIpa;
             public string appiumServerPath;
-            public bool resetApp = false;
-            public string bundleId;
             public string appiumVersion;
+            public string appPath;
+            public string bundleId;
+            public string device;
+            public bool launchApp;
+            public string package;
             public string platformVersion;
+            public bool resetApp;
+            public bool useIpa;
 
             public AppiumSettings()
             {
@@ -186,17 +185,17 @@ namespace ProtoTest.Golem.Core
         }
 
         /// <summary>
-        /// Contains all settings related to the BrowserMobProxy
+        ///     Contains all settings related to the BrowserMobProxy
         /// </summary>
         public class HttpProxy
         {
+            public bool killOldProxy;
             public int proxyPort;
             public int proxyServerPort;
+            public string proxyUrl;
             public bool startProxy;
             public bool useProxy;
             public bool validateTraffic;
-            public string proxyUrl;
-            public bool killOldProxy;
 
             public HttpProxy()
             {
@@ -211,7 +210,7 @@ namespace ProtoTest.Golem.Core
         }
 
         /// <summary>
-        /// Contains settings for image comparison.
+        ///     Contains settings for image comparison.
         /// </summary>
         public class ImageCompareSettings
         {
@@ -228,17 +227,17 @@ namespace ProtoTest.Golem.Core
         }
 
         /// <summary>
-        /// Specify what should show up in the report
+        ///     Specify what should show up in the report
         /// </summary>
         public class ReportSettings
         {
             public bool actionLogging;
             public bool commandLogging;
             public bool diagnosticLog;
-            public bool testLog;
             public bool htmlOnError;
             public bool screenshotOnError;
             public bool spellChecking;
+            public bool testLog;
             public bool videoRecordingOnError;
 
             public ReportSettings()
@@ -251,48 +250,30 @@ namespace ProtoTest.Golem.Core
                 spellChecking = Config.GetConfigValueAsBool("SpellChecking", "False");
                 diagnosticLog = Config.GetConfigValueAsBool("DiagnosticLog", "True");
                 testLog = Config.GetConfigValueAsBool("TestLog", "True");
-            }        
+            }
         }
 
         /// <summary>
-        /// Specify execution settings
+        ///     Specify execution settings
         /// </summary>
         public class RuntimeSettings
         {
+            public bool AutoWaitForElements;
             public string BrowserResolution;
             public IEnumerable<BrowserInfo> Browsers = new List<BrowserInfo>();
             public int CommandDelayMs;
             public int DegreeOfParallelism;
             public int ElementTimeoutSec;
-            public int OpenWindowTimeoutSec;
             public string EnvironmentUrl;
-            public bool HighlightFoundElements;
-            public bool LaunchBrowser;
-            public int PageTimeoutSec;
-            public bool RunOnRemoteHost;
-            public string HostIp;
-            public string RemoteHostPort;
-            public int TestTimeoutMin;
-            public bool AutoWaitForElements;
             public bool FindHiddenElements;
-
-            public string Version
-            {
-                get { return WebDriverTestBase.testData.browserInfo.version; }
-                set { WebDriverTestBase.testData.browserInfo.version = value; }
-            }
-
-            public string Platform
-            {
-                get { return WebDriverTestBase.testData.browserInfo.platform; }
-                set { WebDriverTestBase.testData.browserInfo.platform = value; }
-            }
-
-            public WebDriverBrowser.Browser Browser
-            {
-                get { return WebDriverTestBase.testData.browserInfo.browser; }
-                set { WebDriverTestBase.testData.browserInfo.browser = value; }
-            }
+            public bool HighlightFoundElements;
+            public string HostIp;
+            public bool LaunchBrowser;
+            public int OpenWindowTimeoutSec;
+            public int PageTimeoutSec;
+            public string RemoteHostPort;
+            public bool RunOnRemoteHost;
+            public int TestTimeoutMin;
 
             public RuntimeSettings()
             {
@@ -312,20 +293,37 @@ namespace ProtoTest.Golem.Core
                 HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "True");
                 BrowserResolution = Config.GetConfigValue("BrowserResolution", "Default");
                 FindHiddenElements = Config.GetConfigValueAsBool("FindHiddenElements", "True");
+            }
 
+            public string Version
+            {
+                get { return TestBase.testData.browserInfo.version; }
+                set { TestBase.testData.browserInfo.version = value; }
+            }
+
+            public string Platform
+            {
+                get { return TestBase.testData.browserInfo.platform; }
+                set { TestBase.testData.browserInfo.platform = value; }
+            }
+
+            public WebDriverBrowser.Browser Browser
+            {
+                get { return TestBase.testData.browserInfo.browser; }
+                set { TestBase.testData.browserInfo.browser = value; }
             }
 
             private List<BrowserInfo> GetBrowserInfo()
             {
                 var hosts = new List<BrowserInfo>();
-                string browser = Config.GetConfigValue("Browser", "null");
-                string version = Config.GetConfigValue("Version", "");
-                string platform = Config.GetConfigValue("Platform", "");
+                var browser = Config.GetConfigValue("Browser", "null");
+                var version = Config.GetConfigValue("Version", "");
+                var platform = Config.GetConfigValue("Platform", "");
                 if (browser != "null")
                 {
                     hosts.Add(new BrowserInfo(WebDriverBrowser.getBrowserFromString(browser), version, platform));
                 }
-                for (int i = 1; i < 10; i++)
+                for (var i = 1; i < 10; i++)
                 {
                     browser = Config.GetConfigValue("Browser" + i, "null");
                     version = Config.GetConfigValue("Version" + i, "");
@@ -341,38 +339,34 @@ namespace ProtoTest.Golem.Core
                 }
                 return hosts;
             }
-
- 
         }
 
         /// <summary>
-        /// Settings for TestStack.White module
+        ///     Settings for TestStack.White module
         /// </summary>
         public class PurpleSettings
         {
             public string appPath;
-            
-            public bool launchApp;
-
-            public string ProcessName;
-            public string Purple_windowTitle;
-            public string Purple_blankValue;
-            public string Purple_Delimiter;
-            public string Purple_ValueDelimiterStart;
-            public string Purple_ValueDelimiterEnd;
-            public int Purple_ElementTimeoutWaitSeconds;
-            public string Machine1;
-            public string Machine2;
-            public string Machine3;
-            public string Machine4;
             public string DataSetPath1;
             public string DataSetPath2;
             public string DataSetPath3;
             public string DataSetPath4;
+            public bool launchApp;
+            public string Machine1;
+            public string Machine2;
+            public string Machine3;
+            public string Machine4;
+            public string ProcessName;
             public string ProjectName1;
             public string ProjectName2;
             public string ProjectName3;
             public string ProjectName4;
+            public string Purple_blankValue;
+            public string Purple_Delimiter;
+            public int Purple_ElementTimeoutWaitSeconds;
+            public string Purple_ValueDelimiterEnd;
+            public string Purple_ValueDelimiterStart;
+            public string Purple_windowTitle;
 
             public PurpleSettings()
             {
@@ -402,10 +396,10 @@ namespace ProtoTest.Golem.Core
 
         public class BrowserStackSettings
         {
-            public string BrowserStack_User;
             public string BrowserStack_Key;
             public string BrowserStack_OS;
             public string BrowserStack_OS_Version;
+            public string BrowserStack_User;
             public string BrowserStackRemoteURL;
 
             public BrowserStackSettings()
@@ -420,15 +414,14 @@ namespace ProtoTest.Golem.Core
 
         public class SauceLabsSettings
         {
-            public bool UseSauceLabs;
-            public string SauceLabsUsername;
             public string SauceLabsAPIKey;
             public string SauceLabsUrl;
+            public string SauceLabsUsername;
             public string ScreenResolution;
+            public bool UseSauceLabs;
 
             public SauceLabsSettings()
             {
-
                 UseSauceLabs = Config.GetConfigValueAsBool("UseSauceLabs", "False");
                 SauceLabsUrl = Config.GetConfigValue("SauceLabsUrl", "http://ondemand.saucelabs.com/wd/hub");
                 SauceLabsUsername = Config.GetConfigValue("SauceLabsUsername", "NOT_SET");

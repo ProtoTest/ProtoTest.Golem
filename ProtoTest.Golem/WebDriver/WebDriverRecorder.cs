@@ -1,47 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using Gallio.Common.Media;
-using Gallio.Framework;
 using ProtoTest.Golem.Core;
-using ProtoTest.Golem.WebDriver;
-using System.Timers;
+using Timer = System.Timers.Timer;
 
 namespace ProtoTest.Golem.WebDriver
 {
     public class WebDriverRecorder
     {
-        public BackgroundWorker videoBuilder;
-        public BackgroundWorker screenshotGetter;
-        public Video video;
-        public Size screensize;
         public int fps;
         public int frameDelayMs;
-        public int ticks;
-        public System.Timers.Timer timer;
         public Bitmap lastImage;
+        public BackgroundWorker screenshotGetter;
+        public Size screensize;
+        public int ticks;
+        public Timer timer;
+        public Video video;
+        public BackgroundWorker videoBuilder;
 
-        public WebDriverRecorder(int fps) 
+        public WebDriverRecorder(int fps)
         {
             this.fps = fps;
             if (Config.Settings.runTimeSettings.Browser == WebDriverBrowser.Browser.Android)
             {
-                this.screensize = new Size(300, 500);
+                screensize = new Size(300, 500);
             }
             else
             {
-                this.screensize = new Size(1024,768);
+                screensize = new Size(1024, 768);
             }
-            
-            this.frameDelayMs = 1000/fps;
+
+            frameDelayMs = 1000/fps;
             //Common.Log("The current dimensions are : " + screensize.Width + " x " + screensize.Height);
             video = new FlashScreenVideo(new FlashScreenVideoParameters(screensize.Width, screensize.Height, fps));
 
@@ -54,14 +44,13 @@ namespace ProtoTest.Golem.WebDriver
             videoBuilder.DoWork += videoBuilder_DoWork;
             videoBuilder.WorkerSupportsCancellation = true;
             videoBuilder.RunWorkerAsync();
-
         }
 
         private void screenshotGetter_DoWork(object sender, DoWorkEventArgs e)
         {
             while (!screenshotGetter.CancellationPending)
             {
-                var bitmap = new Bitmap(WebDriverTestBase.testData.driver.GetScreenshot());
+                var bitmap = new Bitmap(TestBase.testData.driver.GetScreenshot());
                 lastImage = new Bitmap(Common.ResizeImage(bitmap, screensize.Width, screensize.Height));
             }
         }
@@ -81,6 +70,5 @@ namespace ProtoTest.Golem.WebDriver
             screenshotGetter.CancelAsync();
             videoBuilder.CancelAsync();
         }
-
     }
 }

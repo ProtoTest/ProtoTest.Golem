@@ -1,14 +1,14 @@
-﻿using Gallio.Framework;
+﻿using System.Drawing;
+using Gallio.Framework;
 using MbUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.Elements;
-using Image = System.Drawing.Image;
 
 namespace ProtoTest.Golem.Purple
 {
     /// <summary>
-    /// Methods for performing non-terminating validations, and Wait commands.
-    /// TODO I refactored the IPurpleElement class - only used for image comparison at the moment
+    ///     Methods for performing non-terminating validations, and Wait commands.
+    ///     TODO I refactored the IPurpleElement class - only used for image comparison at the moment
     /// </summary>
     public class ElementVerification
     {
@@ -16,10 +16,10 @@ namespace ProtoTest.Golem.Purple
         private readonly IPurpleElement element;
         private readonly bool failTest;
         private readonly bool isTrue = true;
+        private readonly int timeoutSec;
         private bool condition;
         private string message;
         private string notMessage;
-        private int timeoutSec;
 
         public ElementVerification(IPurpleElement element, int timeoutSec = 0, bool failTest = false, bool isTrue = true)
         {
@@ -50,26 +50,26 @@ namespace ProtoTest.Golem.Purple
             }
         }
 
-
         private string GetErrorMessage()
         {
             string newMessage;
             newMessage = isTrue ? notMessage : message;
 
-            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), element.ElementName, element.PurplePath,
+            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), element.ElementName,
+                element.PurplePath,
                 newMessage, timeoutSec);
         }
 
         private string GetSuccessMessage()
         {
             string newMessage;
-            string correctMessage = "{0}: {1}({2}): {3}";
+            var correctMessage = "{0}: {1}({2}): {3}";
             newMessage = isTrue ? message : notMessage;
 
-            return string.Format(correctMessage, TestBase.GetCurrentClassAndMethodName(), element.ElementName, element.PurplePath,
+            return string.Format(correctMessage, TestBase.GetCurrentClassAndMethodName(), element.ElementName,
+                element.PurplePath,
                 newMessage);
         }
-
 
         //public IPurpleElement HasChildElement(string PurplePath)
         //{

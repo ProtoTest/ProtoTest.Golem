@@ -9,29 +9,16 @@ using Gallio.Framework;
 using Gallio.Framework.Pattern;
 using Gallio.Model;
 using MbUnit.Framework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium;
+using NUnit.Framework;
 using ProtoTest.Golem.Proxy;
 using ProtoTest.Golem.WebDriver;
 using Assert = MbUnit.Framework.Assert;
 using TestContext = Gallio.Framework.TestContext;
 
-
 namespace ProtoTest.Golem.Core
 {
     public abstract class TestBase
     {
-        #region Events
-
-
-        
-        public static void LogEvent(string name)
-        {
-            testData.LogEvent(name);
-        }
-
-        #endregion
-
         public static CaptionOverlay overlay = new CaptionOverlay
         {
             FontSize = 20,
@@ -41,72 +28,11 @@ namespace ProtoTest.Golem.Core
 
         protected static Object locker = new object();
         public static BrowserMobProxy proxy;
-        [NUnit.Framework.SetUp]
-        [SetUp]
-        [TestInitialize]
-        public virtual void SetUpTestBase()
-        {
-            
-            StartVideoRecording();
-            LogEvent(Common.GetCurrentTestName() + " started");
-            StartNewProxy();
-
-        }
-        [TestCleanup]
-        [NUnit.Framework.TearDown]
-        [TearDown]
-        public virtual void TearDownTestBase()
-        {
-            LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
-            VerifyHttpTraffic();
-            GetHarFile();
-            
-            QuitProxy();
-            StopVideoRecording();
-            LogVideoIfTestFailed();
-            AssertNoVerificationErrors();
-            DeleteTestData();
-        }
-
-        private void VerifyHttpTraffic()
-        {
-            if (Config.Settings.httpProxy.useProxy&&Config.Settings.httpProxy.validateTraffic)
-            {
-                proxy.VerifyNoErrorsCodes();
-            }
-        }
-
-        [NUnit.Framework.TestFixtureSetUp]
-        [FixtureSetUp]
-        public virtual void SuiteSetUp()
-        {
-            testDataCollection = new Dictionary<string, TestDataContainer>();
-            SetTestExecutionSettings();
-            StartProxyServer();
-        }
-
-        [NUnit.Framework.TestFixtureTearDown]
-        [FixtureTearDown]
-        public virtual void SuiteTearDown()
-        {
-            QuitProxyServer();
-            Config.Settings = new ConfigSettings();
-        }
-
-        private void DeleteTestData()
-        {
-            string testName = Common.GetCurrentTestName();
-            if (!testDataCollection.ContainsKey(testName))
-            {
-                testDataCollection.Remove(testName);
-            }
-        }
-
         private static IDictionary<string, TestDataContainer> _testDataCollection;
 
         public static IDictionary<string, TestDataContainer> testDataCollection
         {
-            get { return _testDataCollection ?? new Dictionary<string, TestDataContainer>(); }
+            get { return _testDataCollection ?? (_testDataCollection = new Dictionary<string, TestDataContainer>()); }
             set { _testDataCollection = value; }
         }
 
@@ -114,7 +40,7 @@ namespace ProtoTest.Golem.Core
         {
             get
             {
-                string name = Common.GetCurrentTestName();
+                var name = Common.GetCurrentTestName();
                 if (!testDataCollection.ContainsKey(name))
                 {
                     lock (locker)
@@ -128,9 +54,75 @@ namespace ProtoTest.Golem.Core
             }
         }
 
+        #region Events
+
+        public static void LogEvent(string name)
+        {
+            testData.LogEvent(name);
+        }
+
+        #endregion
+
+        [NUnit.Framework.SetUp]
+        [MbUnit.Framework.SetUp]
+        public virtual void SetUpTestBase()
+        {
+            StartVideoRecording();
+            LogEvent(Common.GetCurrentTestName() + " started");
+            StartNewProxy();
+        }
+
+        [NUnit.Framework.TearDown]
+        [MbUnit.Framework.TearDown]
+        public virtual void TearDownTestBase()
+        {
+            LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
+            VerifyHttpTraffic();
+            GetHarFile();
+
+            QuitProxy();
+            StopVideoRecording();
+            LogVideoIfTestFailed();
+            AssertNoVerificationErrors();
+            DeleteTestData();
+        }
+
+        private void VerifyHttpTraffic()
+        {
+            if (Config.Settings.httpProxy.useProxy && Config.Settings.httpProxy.validateTraffic)
+            {
+                proxy.VerifyNoErrorsCodes();
+            }
+        }
+
+        [TestFixtureSetUp]
+        [FixtureSetUp]
+        public virtual void SuiteSetUp()
+        {
+            SetTestExecutionSettings();
+            StartProxyServer();
+        }
+
+        [TestFixtureTearDown]
+        [FixtureTearDown]
+        public virtual void SuiteTearDown()
+        {
+            QuitProxyServer();
+            Config.Settings = new ConfigSettings();
+        }
+
+        private void DeleteTestData()
+        {
+            var testName = Common.GetCurrentTestName();
+            if (!testDataCollection.ContainsKey(testName))
+            {
+                testDataCollection.Remove(testName);
+            }
+        }
+
         public static void Log(string message)
         {
-            string msg = "(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + message;
+            var msg = "(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + message;
             DiagnosticLog.WriteLine(msg);
             TestLog.WriteLine(msg);
             overlay.Text = msg;
@@ -145,7 +137,8 @@ namespace ProtoTest.Golem.Core
         public static void AddVerificationError(string errorText)
         {
             LogEvent("--> VerificationError Found: " + errorText);
-            testData.VerificationErrors.Add(new VerificationError(errorText, Config.Settings.reportSettings.screenshotOnError));
+            testData.VerificationErrors.Add(new VerificationError(errorText,
+                Config.Settings.reportSettings.screenshotOnError));
             TestContext.CurrentContext.IncrementAssertCount();
         }
 
@@ -163,9 +156,9 @@ namespace ProtoTest.Golem.Core
                 return;
             }
 
-            int i = 1;
+            var i = 1;
             TestLog.BeginMarker(Marker.AssertionFailure);
-            foreach (VerificationError error in testData.VerificationErrors)
+            foreach (var error in testData.VerificationErrors)
             {
                 TestLog.Failures.BeginSection("ElementVerification Error " + i);
                 TestLog.Failures.WriteLine(error.errorText);
@@ -180,15 +173,12 @@ namespace ProtoTest.Golem.Core
             Assert.TerminateSilently(TestOutcome.Failed);
         }
 
-
         public void SetTestExecutionSettings()
         {
             TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.DegreeOfParallelism;
             TestAssemblyExecutionParameters.DefaultTestCaseTimeout =
                 TimeSpan.FromMinutes(Config.Settings.runTimeSettings.TestTimeoutMin);
         }
-
-        
 
         //commented out Proxy stuff because browserMobProxy is not implimented
         private void GetHarFile()
@@ -197,7 +187,7 @@ namespace ProtoTest.Golem.Core
             {
                 if (Config.Settings.httpProxy.startProxy)
                 {
-                    string name = Common.GetShortTestName(80);
+                    var name = Common.GetShortTestName(80);
                     proxy.SaveHarToFile();
                     TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".har",
                         "application/json", File.ReadAllBytes(proxy.GetHarFilePath())));
@@ -276,19 +266,19 @@ namespace ProtoTest.Golem.Core
         public static string GetCurrentClassName()
         {
             var stackTrace = new StackTrace(); // get call stack
-            StackFrame[] stackFrames = stackTrace.GetFrames(); // get method calls (frames)
+            var stackFrames = stackTrace.GetFrames(); // get method calls (frames)
 
-            foreach (StackFrame stackFrame in stackFrames)
+            foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof(BasePageObject)) &&
+                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof (BasePageObject)) &&
                     (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name;
                 }
             }
-            foreach (StackFrame stackFrame in stackFrames)
+            foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof(TestBase)) &&
+                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof (TestBase)) &&
                     (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
@@ -301,19 +291,21 @@ namespace ProtoTest.Golem.Core
         public static string GetCurrentMethodName()
         {
             var stackTrace = new StackTrace(); // get call stack
-            StackFrame[] stackFrames = stackTrace.GetFrames(); // get method calls (frames)
+            var stackFrames = stackTrace.GetFrames(); // get method calls (frames)
 
             // write call stack method names
-            foreach (StackFrame stackFrame in stackFrames)
+            foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof(BasePageObject))) && (!stackFrame.GetMethod().IsConstructor))
+                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof (BasePageObject))) &&
+                    (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().Name;
                 }
             }
-            foreach (StackFrame stackFrame in stackFrames)
+            foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof(TestBase)) && (!stackFrame.GetMethod().IsConstructor)))
+                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof (TestBase)) &&
+                     (!stackFrame.GetMethod().IsConstructor)))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
                 }
@@ -325,21 +317,21 @@ namespace ProtoTest.Golem.Core
         public static string GetCurrentClassAndMethodName()
         {
             var stackTrace = new StackTrace(); // get call stack
-            StackFrame[] stackFrames = stackTrace.GetFrames(); // get method calls (frames)
+            var stackFrames = stackTrace.GetFrames(); // get method calls (frames)
 
-            foreach (StackFrame stackFrame in stackFrames)
+            foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof(BasePageObject)) &&
-                    (!stackFrame.GetMethod().IsConstructor)))
+                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof (BasePageObject)) &&
+                     (!stackFrame.GetMethod().IsConstructor)))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
                 }
             }
 
-            foreach (StackFrame stackFrame in stackFrames)
+            foreach (var stackFrame in stackFrames)
             {
                 var type = stackFrame.GetMethod().ReflectedType;
-                if (type.IsSubclassOf(typeof(TestBase)) && (!stackFrame.GetMethod().IsConstructor))
+                if (type.IsSubclassOf(typeof (TestBase)) && (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
                 }
@@ -347,8 +339,6 @@ namespace ProtoTest.Golem.Core
 
             return "";
         }
-
-
 
         public void LogVideoIfTestFailed()
         {
@@ -363,11 +353,10 @@ namespace ProtoTest.Golem.Core
         {
             if (Config.Settings.reportSettings.videoRecordingOnError)
             {
-                testData.recorder = Capture.StartRecording(new CaptureParameters { Zoom = .25 }, 5);
+                testData.recorder = Capture.StartRecording(new CaptureParameters {Zoom = .25}, 5);
                 testData.recorder.OverlayManager.AddOverlay(overlay);
             }
         }
-
 
         public void StopVideoRecording()
         {

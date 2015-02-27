@@ -5,7 +5,7 @@ using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests
 {
-    class TestProxy : WebDriverTestBase
+    internal class TestProxy : WebDriverTestBase
     {
         [FixtureInitializer]
         public void setup()
@@ -31,15 +31,15 @@ namespace ProtoTest.Golem.Tests
         {
             OpenPage<GoogleHomePage>("http://www.google.com/");
             var entries = proxy.FilterEntries("www.google.com");
-            Assert.AreEqual(10,entries.Count);
-            Assert.AreEqual("http://www.google.com/",entries[0].Request.Url);
+            Assert.AreEqual(10, entries.Count);
+            Assert.AreEqual("http://www.google.com/", entries[0].Request.Url);
         }
 
         [Test]
         public void TestHTTPValidation()
         {
             OpenPage<GoogleHomePage>("http://www.google.com/");
-           proxy.VerifyRequestMade("http://www.google.com/");
+            proxy.VerifyRequestMade("http://www.google.com/");
         }
 
         [Test]

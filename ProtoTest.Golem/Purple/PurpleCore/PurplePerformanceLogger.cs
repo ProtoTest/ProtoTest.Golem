@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ProtoTest.Golem.Purple.PurpleCore
 {
     public static class PurplePerformanceLogger
     {
-        public struct LogEntries
-        {
-            public string ElementName;
-            public string ElementLocator;
-            public int SecondsToLocate;
-            public int MilisecondsToLocate;
-        }
-
-        private static List<LogEntries> LogEvents = new List<LogEntries>();
+        private static readonly List<LogEntries> LogEvents = new List<LogEntries>();
 
         public static void AddEntry(string name, string locator, int seconds, int miliseconds)
         {
-            LogEntries newEntry = new LogEntries();
+            var newEntry = new LogEntries();
             newEntry.ElementName = name;
             newEntry.ElementLocator = locator;
             newEntry.SecondsToLocate = seconds;
@@ -27,6 +16,12 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             LogEvents.Add(newEntry);
         }
 
-
+        public struct LogEntries
+        {
+            public string ElementLocator;
+            public string ElementName;
+            public int MilisecondsToLocate;
+            public int SecondsToLocate;
+        }
     }
 }

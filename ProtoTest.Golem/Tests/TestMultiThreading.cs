@@ -5,19 +5,19 @@ using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests
 {
-    class TestMultiThreading : WebDriverTestBase
+    internal class TestMultiThreading : WebDriverTestBase
     {
         [FixtureInitializer]
         public void setup()
         {
             Config.Settings.runTimeSettings.DegreeOfParallelism = 5;
         }
-      [Test, Parallelizable, ThreadedRepeat(5)]
+
+        [Test, Parallelizable, ThreadedRepeat(5)]
         public void TestThreadedRepeat()
         {
-          OpenPage<GoogleHomePage>("http://www.google.com");
-      //    Assert.AreEqual(testDataCollection.Count,5);
+            OpenPage<GoogleHomePage>("http://www.google.com");
+            //    Assert.AreEqual(testDataCollection.Count,5);
         }
-   
     }
 }

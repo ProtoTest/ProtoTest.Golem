@@ -3,7 +3,7 @@ using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.Tests
 {
-    class TestBaseTests : TestBase
+    internal class TestBaseTests : TestBase
     {
         [Test]
         public void TestDataContainerCreated()
@@ -11,7 +11,6 @@ namespace ProtoTest.Golem.Tests
             Assert.IsNotNull(testData);
             Assert.IsNotNull(testData.VerificationErrors);
             Assert.IsNotNull(testData.actions);
-            
         }
     }
 }

@@ -5,7 +5,7 @@ using OpenQA.Selenium.Remote;
 namespace ProtoTest.Golem.WebDriver
 {
     /// <summary>
-    /// implements the GetScreenshot() method to su pport remote screenshots.  
+    ///     implements the GetScreenshot() method to su pport remote screenshots.
     /// </summary>
     public class ScreenshotRemoteWebDriver : RemoteWebDriver,
         ITakesScreenshot, IHasTouchScreen
@@ -28,19 +28,11 @@ namespace ProtoTest.Golem.WebDriver
             : base(remoteAddress, desiredCapabilities, commandTimeout)
         {
         }
-        private ITouchScreen touchScreen;
 
         /// <summary>
-        /// Gets the device representing the touch screen.
-        /// 
+        ///     Gets the device representing the touch screen.
         /// </summary>
-        public ITouchScreen TouchScreen
-        {
-            get
-            {
-                return this.touchScreen;
-            }
-        }
+        public ITouchScreen TouchScreen { get; private set; }
 
         /// <summary>
         ///     Gets a <see cref="Screenshot" /> object representing the image of the page on the screen.
@@ -51,8 +43,8 @@ namespace ProtoTest.Golem.WebDriver
             try
             {
                 // Get the screenshot as base64. 
-                Response screenshotResponse = Execute(DriverCommand.Screenshot, null);
-                string base64 = screenshotResponse.Value.ToString();
+                var screenshotResponse = Execute(DriverCommand.Screenshot, null);
+                var base64 = screenshotResponse.Value.ToString();
 
                 // ... and convert it. 
                 return new Screenshot(base64);

@@ -6,8 +6,10 @@ namespace ProtoTest.Golem.Tests.PageObjects.MSPaint
 {
     public class MSPaint_6 : BaseScreenObject
     {
-        PurpleButton TextButton = new PurpleButton("MSPaintTextButton", "Untitled - Paint/Ribbon/Ribbon/!BLANK!/Ribbon/Lower Ribbon/!BLANK!/Home/Tools/Text");
-        PurplePanel PaintArea = new PurplePanel("PaintArea", "Untitled - Paint/!BLANK!/!BLANK!");
+        private readonly PurplePanel PaintArea = new PurplePanel("PaintArea", "Untitled - Paint/!BLANK!/!BLANK!");
+
+        private readonly PurpleButton TextButton = new PurpleButton("MSPaintTextButton",
+            "Untitled - Paint/Ribbon/Ribbon/!BLANK!/Ribbon/Lower Ribbon/!BLANK!/Home/Tools/Text");
 
         public void PaintText(string text)
         {

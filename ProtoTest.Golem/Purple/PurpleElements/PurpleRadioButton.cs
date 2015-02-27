@@ -5,8 +5,5 @@
         public PurpleRadioButton(string name, string locatorPath) : base(name, locatorPath)
         {
         }
-
-        //TODO Figure out how to get selected item value
-
     }
 }

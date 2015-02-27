@@ -28,7 +28,8 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             get
             {
-                return Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") + "\\ElementImages\\" + element.pageObjectName + "_" +
+                return Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
+                       "\\ElementImages\\" + element.pageObjectName + "_" +
                        element.name.Replace(" ", "") + ".bmp";
             }
         }
@@ -56,18 +57,18 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public Image GetMergedImage()
         {
-            Image overlayImage = OverlayImages(liveImage, GetDifferenceImage());
-            Image mergedImage = CombineImages(storedImage, liveImage, overlayImage);
+            var overlayImage = OverlayImages(liveImage, GetDifferenceImage());
+            var mergedImage = CombineImages(storedImage, liveImage, overlayImage);
 
             return mergedImage;
         }
 
         private Image CombineImages(Image image1, Image image2, Image image3)
         {
-            int newWidth = image1.Width + image2.Width + image3.Width;
-            int newHeight = image1.Height;
+            var newWidth = image1.Width + image2.Width + image3.Width;
+            var newHeight = image1.Height;
             var bmp = new Bitmap(newWidth, newHeight);
-            using (Graphics gr = Graphics.FromImage(bmp))
+            using (var gr = Graphics.FromImage(bmp))
             {
                 gr.DrawImage(image1, new Point(0, 0));
                 gr.DrawImage(image2, new Point(image1.Width, 0));
@@ -91,7 +92,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             imageOverlay = imageOverlay.Resize(imageBackground.Width, imageBackground.Height);
             Image img = new Bitmap(imageBackground.Width, imageBackground.Height);
-            using (Graphics gr = Graphics.FromImage(img))
+            using (var gr = Graphics.FromImage(img))
             {
                 gr.DrawImage(imageBackground, new Point(0, 0));
                 gr.DrawImage(imageOverlay, new Point(0, 0));
@@ -118,7 +119,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public void UpdateImage()
         {
-            using (Image image = GetImage())
+            using (var image = GetImage())
             {
                 SaveImage(image);
             }
@@ -149,22 +150,22 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                     "Could not create image for element {0} as it is hidden", element.name));
             }
             var cropRect = new Rectangle(element.Location, size);
-            Image screenShot = TestBase.testData.driver.GetScreenshot();
-            
+            var screenShot = TestBase.testData.driver.GetScreenshot();
+
             // Trim the crop to not extend off the screenshot, preventing OutOfMemoryException.
-            if (cropRect.X < 0) 
+            if (cropRect.X < 0)
             {
                 cropRect.X = 0;
             }
-            if (cropRect.Y < 0 )
+            if (cropRect.Y < 0)
             {
                 cropRect.Y = 0;
             }
-            if (cropRect.X + cropRect.Width > screenShot.Width) 
+            if (cropRect.X + cropRect.Width > screenShot.Width)
             {
                 cropRect.Width = screenShot.Width - cropRect.X;
             }
-            if (cropRect.Y + cropRect.Height > screenShot.Height) 
+            if (cropRect.Y + cropRect.Height > screenShot.Height)
             {
                 cropRect.Height = screenShot.Height - cropRect.Y;
             }
@@ -175,7 +176,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         private Image cropImage(Image img, Rectangle cropArea)
         {
             var bmpImage = new Bitmap(img);
-            Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+            var bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
 
             return bmpCrop;
         }

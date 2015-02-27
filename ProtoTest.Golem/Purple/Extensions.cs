@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Automation;
 using ProtoTest.Golem.Purple.PurpleCore;
 using ProtoTest.Golem.Purple.PurpleElements;
-using Image = System.Drawing.Image;
 
 namespace ProtoTest.Golem.Purple
 {
@@ -24,9 +23,8 @@ namespace ProtoTest.Golem.Purple
 
         public static Image GetImage(this PurpleElementBase item)
         {
-            
             Image screenImage = new ScreenCapture().CaptureScreenShot();
-            Rectangle cropArea = item.Bounds.ToRectangle();
+            var cropArea = item.Bounds.ToRectangle();
             var bmpImage = new Bitmap(screenImage);
             Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
             return bmpCrop;
@@ -37,10 +35,10 @@ namespace ProtoTest.Golem.Purple
         {
             var result =
                 new Rectangle();
-            result.X = (int)value.X;
-            result.Y = (int)value.Y;
-            result.Width = (int)value.Width;
-            result.Height = (int)value.Height;
+            result.X = (int) value.X;
+            result.Y = (int) value.Y;
+            result.Width = (int) value.Width;
+            result.Height = (int) value.Height;
             return result;
         }
 
@@ -70,10 +68,7 @@ namespace ProtoTest.Golem.Purple
             }
             catch (Exception)
             {
-
             }
-
-
         }
     }
 }

@@ -5,13 +5,12 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
 {
     public class GoogleHomePage : BasePageObject
     {
-
-        Element searchField = new Element("SearchField", By.Name("q"));
-        Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
-        Element searchButton = new Element("SearchButton", By.Id("gbqfba"));
-        Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
-        Element signInButton = new Element("SignInButon", By.LinkText("Sign in"));
-        Element gmailbutton = new Element("GmailButton", By.ClassName("gbts"));
+        private readonly Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
+        private readonly Element gmailbutton = new Element("GmailButton", By.ClassName("gbts"));
+        private readonly Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
+        private readonly Element searchButton = new Element("SearchButton", By.Id("gbqfba"));
+        private readonly Element searchField = new Element("SearchField", By.Name("q"));
+        private readonly Element signInButton = new Element("SignInButon", By.LinkText("Sign in"));
 
         public GmailPage GoToGmail()
         {
@@ -30,7 +29,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
         {
             searchField.Verify().Present();
             googleLogo.Verify().Present();
-           // searchButton.Verify().Present();
+            // searchButton.Verify().Present();
             feelingLuckyButton.Verify().Present();
             signInButton.Verify().Present();
         }

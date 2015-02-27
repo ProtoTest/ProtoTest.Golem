@@ -10,12 +10,12 @@ using Gallio.Model;
 namespace ProtoTest.Golem.Core
 {
     /// <summary>
-    /// Random methods that don't belong anywhere else
+    ///     Random methods that don't belong anywhere else
     /// </summary>
     public class Common
     {
         /// <summary>
-        /// Return a psuedo-random string based on the current timestamp
+        ///     Return a psuedo-random string based on the current timestamp
         /// </summary>
         /// <returns></returns>
         public static string GetRandomString()
@@ -25,8 +25,8 @@ namespace ProtoTest.Golem.Core
 
         public static void KillProcess(string name)
         {
-            Process[] runningProcesses = Process.GetProcesses();
-            foreach (Process process in runningProcesses)
+            var runningProcesses = Process.GetProcesses();
+            foreach (var process in runningProcesses)
             {
                 try
                 {
@@ -60,16 +60,16 @@ namespace ProtoTest.Golem.Core
             StartInfo.FileName = "cmd"; //starts cmd window
             StartInfo.Arguments = "/c \"" + command + "\"";
             //StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-           // StartInfo.CreateNoWindow = true;
+            // StartInfo.CreateNoWindow = true;
             StartInfo.RedirectStandardInput = true;
             StartInfo.RedirectStandardOutput = true;
             StartInfo.UseShellExecute = false; //required to redirect
             CMDprocess.StartInfo = StartInfo;
             CMDprocess.Start();
-            StreamReader SR = CMDprocess.StandardOutput;
-            StreamWriter SW = CMDprocess.StandardInput;
+            var SR = CMDprocess.StandardOutput;
+            var SW = CMDprocess.StandardInput;
             CMDprocess.Start();
-            string line = "";
+            var line = "";
 
             while ((line != null) && (waitToFinish))
             {
@@ -81,7 +81,6 @@ namespace ProtoTest.Golem.Core
             SR.Close();
             return CMDprocess;
         }
-
 
         public static void Log(string msg)
         {
@@ -106,16 +105,16 @@ namespace ProtoTest.Golem.Core
 
         public static string GetCurrentTestName()
         {
-            string TestName = TestContext.CurrentContext.TestStep.FullName;
+            var TestName = TestContext.CurrentContext.TestStep.FullName;
             if (string.IsNullOrEmpty(TestName))
             {
                 try
                 {
-                    TestName = NUnit.Framework.TestContext.CurrentContext.Test.Name;  
+                    TestName = NUnit.Framework.TestContext.CurrentContext.Test.Name;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    TestName =  "Test_" + Common.GetRandomString();
+                    TestName = "Test_" + GetRandomString();
                 }
             }
             return TestName;
@@ -123,7 +122,7 @@ namespace ProtoTest.Golem.Core
 
         public static string GetShortTestName(int length)
         {
-            string name = GetCurrentTestName();
+            var name = GetCurrentTestName();
             name = name.Replace("/", "_");
             name = name.Replace(":", "_");
             name = name.Replace("\\", "_");
@@ -136,7 +135,6 @@ namespace ProtoTest.Golem.Core
 
             return name;
         }
-
 
         public string GetValueFromXmlFile(string filepath, string xpath)
         {
@@ -161,7 +159,6 @@ namespace ProtoTest.Golem.Core
 
             return TestContext.CurrentContext.Outcome;
         }
-
 
         public static Image ScaleImage(Image image, double scale = .5)
         {
@@ -188,8 +185,6 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-
-
         /// <summary>
         ///     Create a dummy file with some ASCII
         /// </summary>
@@ -198,7 +193,7 @@ namespace ProtoTest.Golem.Core
         {
             if (!File.Exists(filepath))
             {
-                using (FileStream fs = File.Create(filepath))
+                using (var fs = File.Create(filepath))
                 {
                     for (byte i = 0; i < 100; i++)
                     {
@@ -222,7 +217,7 @@ namespace ProtoTest.Golem.Core
 
         public static Size GetSizeFromResolution(string resolution)
         {
-            string[] dimensions = resolution.Split('x');
+            var dimensions = resolution.Split('x');
             return new Size(int.Parse(dimensions[0]), int.Parse(dimensions[1]));
         }
     }

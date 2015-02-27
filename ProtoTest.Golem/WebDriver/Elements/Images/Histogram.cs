@@ -50,7 +50,6 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         /// </summary>
         public Bitmap Bitmap { get; private set; }
 
-
         /// <summary>
         ///     Calculates the values in the histogram
         /// </summary>
@@ -58,9 +57,9 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             var newBmp = (Bitmap) Bitmap.Resize(16, 16);
             Color c;
-            for (int x = 0; x < newBmp.Width; x++)
+            for (var x = 0; x < newBmp.Width; x++)
             {
-                for (int y = 0; y < newBmp.Height; y++)
+                for (var y = 0; y < newBmp.Height; y++)
                 {
                     c = newBmp.GetPixel(x, y);
                     Red[c.R]++;
@@ -70,35 +69,34 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             }
         }
 
-
         /// <summary>
         ///     Gets a bitmap with the RGB histograms
         /// </summary>
         /// <returns>Three histograms for R, G and B values in the Histogram</returns>
         public Bitmap Visualize()
         {
-            int oneColorHeight = 100;
-            int margin = 10;
+            var oneColorHeight = 100;
+            var margin = 10;
 
             float[] maxValues = {Red.Max(), Green.Max(), Blue.Max()};
             byte[][] values = {Red, Green, Blue};
 
 
             var histogramBitmap = new Bitmap(276, oneColorHeight*3 + margin*4);
-            Graphics g = Graphics.FromImage(histogramBitmap);
+            var g = Graphics.FromImage(histogramBitmap);
             g.FillRectangle(Brushes.White, 0, 0, histogramBitmap.Width, histogramBitmap.Height);
-            int yOffset = margin + oneColorHeight;
+            var yOffset = margin + oneColorHeight;
 
-            for (int i = 0; i < 256; i++)
+            for (var i = 0; i < 256; i++)
             {
-                for (int color = 0; color < 3; color++)
+                for (var color = 0; color < 3; color++)
                 {
                     g.DrawLine(p[color], margin + i, yOffset*(color + 1), margin + i,
                         yOffset*(color + 1) - (values[color][i]/maxValues[color])*oneColorHeight);
                 }
             }
 
-            for (int i = 0; i < 3; i++)
+            for (var i = 0; i < 3; i++)
             {
                 g.DrawString(p[i].Color.ToKnownColor() + ", max value: " + maxValues[i], SystemFonts.SmallCaptionFont,
                     Brushes.Silver, margin + 11, yOffset*i + margin + margin + 1);
@@ -111,7 +109,6 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             return histogramBitmap;
         }
 
-
         /// <summary>
         ///     Gives a human-readable representation of the RGB values in the histogram
         /// </summary>
@@ -120,7 +117,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             var sb = new StringBuilder();
 
-            for (int i = 0; i < 256; i++)
+            for (var i = 0; i < 256; i++)
             {
                 sb.Append(string.Format("RGB {0,3} : ", i) +
                           string.Format("({0,3},{1,3},{2,3})", Red[i], Green[i], Blue[i]));
@@ -129,7 +126,6 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
             return sb.ToString();
         }
-
 
         /// <summary>
         ///     Gets the variance between two histograms (http://en.wikipedia.org/wiki/Variance) as a percentage of the maximum
@@ -141,7 +137,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             //
             double diffRed = 0, diffGreen = 0, diffBlue = 0;
-            for (int i = 0; i < 256; i++)
+            for (var i = 0; i < 256; i++)
             {
                 diffRed += Math.Pow(Red[i] - histogram.Red[i], 2);
                 diffGreen += Math.Pow(Green[i] - histogram.Green[i], 2);

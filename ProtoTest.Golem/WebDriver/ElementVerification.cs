@@ -4,12 +4,11 @@ using Gallio.Framework;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Proxy.HAR;
 
 namespace ProtoTest.Golem.WebDriver
 {
     /// <summary>
-    /// Methods for performing non-terminating validations, and Wait commands.
+    ///     Methods for performing non-terminating validations, and Wait commands.
     /// </summary>
     public class ElementVerification
     {
@@ -35,6 +34,7 @@ namespace ProtoTest.Golem.WebDriver
             element.timeoutSec = 1;
             return new ElementVerification(element, timeoutSec, failTest, false);
         }
+
         public ElementVerification Not(int timeoutSec)
         {
             this.timeoutSec = timeoutSec;
@@ -61,7 +61,6 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-
         private string GetErrorMessage()
         {
             string newMessage;
@@ -77,7 +76,7 @@ namespace ProtoTest.Golem.WebDriver
         private string GetSuccessMessage()
         {
             string newMessage;
-            string correctMessage = "{0}: {1}({2}): {3}";
+            var correctMessage = "{0}: {1}({2}): {3}";
             newMessage = isTrue ? message : notMessage;
             if (element.by == null)
             {
@@ -87,13 +86,12 @@ namespace ProtoTest.Golem.WebDriver
                 newMessage);
         }
 
-
         public Element ChildElement(By bylocator)
         {
             message = "is found";
             notMessage = "not found";
-            var then = DateTime.Now.AddSeconds(this.timeoutSec);
-            for (var now = DateTime.Now;now<then;now = DateTime.Now)
+            var then = DateTime.Now.AddSeconds(timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = element.FindElements(bylocator).Count > 0;
                 if (condition == isTrue)
@@ -107,14 +105,13 @@ namespace ProtoTest.Golem.WebDriver
             return element;
         }
 
-
         public Element Present()
         {
             message = "is present";
             notMessage = "not present";
-            
-            var then = DateTime.Now.AddSeconds(this.timeoutSec);
-            for (var now = DateTime.Now;now<then;now = DateTime.Now)
+
+            var then = DateTime.Now.AddSeconds(timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = element.Present;
                 if (condition == isTrue)
@@ -132,7 +129,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "is visible";
             notMessage = "not visible";
-            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = element.Displayed;
@@ -147,12 +144,11 @@ namespace ProtoTest.Golem.WebDriver
             return element;
         }
 
-
         public Element Text(string text)
         {
             message = "contains text '" + text + "'";
             notMessage = "doesn't contain text '" + text + "'";
-            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.Text.Contains(text));
@@ -172,7 +168,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "has value " + text;
             notMessage = "doesn't have value " + text;
-            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.GetAttribute("value").Contains(text));
@@ -192,7 +188,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "has attribute " + attribute + " with value " + value;
             notMessage = "doesn't have attribute " + attribute + " with value " + value;
-            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.GetAttribute(attribute).Contains(value));
@@ -212,7 +208,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "has css " + attribute + " with value " + value;
             notMessage = "doesn't have css " + attribute + " with value " + value;
-            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.GetAttribute(attribute).Contains(value));
@@ -232,7 +228,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             message = "is selected";
             notMessage = "isn't selected";
-            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.Selected);
@@ -247,13 +243,11 @@ namespace ProtoTest.Golem.WebDriver
             return element;
         }
 
-
-
         public Element Image()
         {
             message = "image matches";
             notMessage = "image is {0} different";
-            var then = DateTime.Now.AddSeconds(this.timeoutSec);
+            var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 condition = (element.Present) && (element.Images.ImagesMatch());
@@ -265,7 +259,7 @@ namespace ProtoTest.Golem.WebDriver
                 }
                 Common.Delay(1000);
             }
-   
+
             notMessage = string.Format(notMessage, element.Images.differenceString);
             VerificationFailed(
                 string.Format("{0}: {1}({2}): {3}", TestBase.GetCurrentClassAndMethodName(), element.name,
@@ -274,8 +268,5 @@ namespace ProtoTest.Golem.WebDriver
 
             return element;
         }
-
-
-
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
-using MbUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver
 {
     /// <summary>
-    /// BasePageObject should be inherited by all page objects used in the framework.  It represents either a base component or page in an application.  You must implement void WaitForElements(), which should contain checks for ajax elements being present/not present.  It contains a static reference to the WebDriverTestBase.driver object
+    ///     BasePageObject should be inherited by all page objects used in the framework.  It represents either a base
+    ///     component or page in an application.  You must implement void WaitForElements(), which should contain checks for
+    ///     ajax elements being present/not present.  It contains a static reference to the WebDriverTestBase.driver object
     /// </summary>
     public abstract class BasePageObject
     {
@@ -26,9 +27,8 @@ namespace ProtoTest.Golem.WebDriver
                 }
                 catch (Exception e)
                 {
-                   throw new WebDriverException(string.Format("The {0} Page failed to load : " + e.Message, this.className));
+                    throw new WebDriverException(string.Format("The {0} Page failed to load : " + e.Message, className));
                 }
-                
             }
             TestBase.testData.actions.addAction(TestBase.GetCurrentClassAndMethodName());
         }
@@ -41,13 +41,11 @@ namespace ProtoTest.Golem.WebDriver
             {
                 WaitForElements();
             }
-            
+
             TestBase.testData.actions.addAction(TestBase.GetCurrentClassAndMethodName());
         }
 
         public IWebDriver driver { get; set; }
-
-
         public abstract void WaitForElements();
     }
 }

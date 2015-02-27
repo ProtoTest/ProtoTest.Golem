@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Automation;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {
@@ -11,7 +10,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public void DragAndDrop(Point startPoint, Point endPoint, bool RMB = false)
         {
-            if (!RMB)//Use the left mouse button as default
+            if (!RMB) //Use the left mouse button as default
             {
                 MoveCursor(startPoint);
                 LMB_Down();
@@ -23,9 +22,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                 MoveCursor(startPoint);
                 RMB_Down();
                 MoveCursor(endPoint);
-                RMB_Up(); 
+                RMB_Up();
             }
         }
-        
     }
 }

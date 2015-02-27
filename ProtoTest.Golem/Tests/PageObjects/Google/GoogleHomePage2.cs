@@ -5,13 +5,13 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
 {
     public class GoogleHomePage2 : BasePageObject
     {
-        By searchField = By.Name("q");
-        By googleLogo = By.Id("hplogo");
-        By searchButton = By.Name("btnK");
-        By feelingLuckyButton =  By.Name("btnI");
-        By signInButton =  By.ClassName("gbit");
-        By gmailbutton = By.ClassName("gbts");
-        
+        private readonly By feelingLuckyButton = By.Name("btnI");
+        private readonly By gmailbutton = By.ClassName("gbts");
+        private readonly By googleLogo = By.Id("hplogo");
+        private readonly By searchButton = By.Name("btnK");
+        private readonly By searchField = By.Name("q");
+        private readonly By signInButton = By.ClassName("gbit");
+
         public GmailPage GoToGmail()
         {
             driver.FindElement(gmailbutton).Click();
@@ -20,7 +20,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
 
         public GoogleResultsPage SearchFor(string text)
         {
-           IWebElement SearchField =  driver.FindElement(searchField);
+            var SearchField = driver.FindElement(searchField);
             SearchField.Clear();
             SearchField.SendKeys(text);
             SearchField.Submit();
@@ -34,7 +34,6 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
             driver.WaitForPresent(googleLogo);
             driver.WaitForPresent(feelingLuckyButton);
             driver.WaitForPresent(signInButton);
-           
         }
     }
 }

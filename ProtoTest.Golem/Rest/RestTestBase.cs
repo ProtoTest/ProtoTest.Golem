@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using MbUnit.Framework;
+using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Proxy;
 
 namespace ProtoTest.Golem.Rest
 {
     /// <summary>
-    /// Test Base class to be inherited by all test fixtures.  Will automatically instantiate an object named Given
+    ///     Test Base class to be inherited by all test fixtures.  Will automatically instantiate an object named Given
     /// </summary>
     public class RestTestBase : TestBase
     {
@@ -80,16 +80,17 @@ namespace ProtoTest.Golem.Rest
                 proxy.QuitServer();
             }
         }
-        [NUnit.Framework.SetUp]
+
         [SetUp]
+        [MbUnit.Framework.SetUp]
         public void SetUp()
         {
             Tokens = new Dictionary<string, string>();
             StartProxy();
         }
 
-        [NUnit.Framework.TearDown]
         [TearDown]
+        [MbUnit.Framework.TearDown]
         public void TearDown()
         {
             QuitProxy();

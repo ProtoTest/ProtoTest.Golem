@@ -1,14 +1,11 @@
-﻿using System;
+﻿using MbUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
-using ProtoTest.Golem.Appium;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
-using MbUnit.Framework;
 
 namespace ProtoTest.Golem.Tests
 {
-    class BrowserStackTest : WebDriverTestBase
+    internal class BrowserStackTest : WebDriverTestBase
     {
         [FixtureInitializer]
         public void Setup()
@@ -24,6 +21,7 @@ namespace ProtoTest.Golem.Tests
                 <add key="HostIp" value="hub.browserstack.com" />
              */
         }
+
         [Test]
         public void Test()
         {

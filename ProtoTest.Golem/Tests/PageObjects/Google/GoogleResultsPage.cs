@@ -5,12 +5,11 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
 {
     public class GoogleResultsPage : BasePageObject
     {
-
-        Element GoogleLogo = new Element("GoogleLogo", By.XPath("//a[@title='Go to Google Home']"));
-        Element SearchField = new Element("SearchField", By.Name("q"));
-        Element SearchButton = new Element("SearchButton", By.Name("btnG"));
-        Element SignInButton = new Element("SignInButton", By.LinkText("Sign in"));
-        Element Gmailbutton = new Element("GmailButton", By.PartialLinkText("Gmail"));
+        private readonly Element Gmailbutton = new Element("GmailButton", By.PartialLinkText("Gmail"));
+        private readonly Element SearchButton = new Element("SearchButton", By.Name("btnG"));
+        private readonly Element SearchField = new Element("SearchField", By.Name("q"));
+        private readonly Element SignInButton = new Element("SignInButton", By.LinkText("Sign in"));
+        private Element GoogleLogo = new Element("GoogleLogo", By.XPath("//a[@title='Go to Google Home']"));
         private Element searchResult;
 
         public Element SearchResult(string text)
@@ -43,8 +42,6 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
             Gmailbutton.Click();
             return new GmailPage();
         }
-
-
 
         public override void WaitForElements()
         {

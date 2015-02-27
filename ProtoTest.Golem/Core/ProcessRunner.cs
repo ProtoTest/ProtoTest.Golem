@@ -6,12 +6,10 @@ namespace ProtoTest.Golem.Core
 {
     public class ProcessRunner
     {
+        private static bool isStarted;
+        private readonly string command;
         private Process process;
-        private static bool isStarted = false;
-        private string command;
-        private static string batchDir = Directory.GetCurrentDirectory();
-        private static string batchName = "batch.bat";
-        private static string batchPath = batchDir + "\\" + batchName;
+
         public ProcessRunner(string command)
         {
             this.command = command;
@@ -20,7 +18,7 @@ namespace ProtoTest.Golem.Core
 
         private void CreateBatchFile()
         {
-            using (StreamWriter sw = File.CreateText(batchPath))
+            using (var sw = File.CreateText(batchPath))
             {
                 sw.WriteLine(command);
             }
@@ -36,10 +34,9 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception)
             {
-  
             }
-            
         }
+
         public void StartProcess()
         {
             if (!isStarted)
@@ -54,5 +51,9 @@ namespace ProtoTest.Golem.Core
                 isStarted = true;
             }
         }
+
+        private static readonly string batchDir = Directory.GetCurrentDirectory();
+        private static readonly string batchName = "batch.bat";
+        private static readonly string batchPath = batchDir + "\\" + batchName;
     }
 }

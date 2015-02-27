@@ -1,23 +1,23 @@
 ﻿using MbUnit.Framework;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Safari;
 using ProtoTest.Golem.Core;
-using ProtoTest.Golem.WebDriver;
 using ProtoTest.Golem.Tests.PageObjects.Google;
+using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests
 {
-    class BrowserTests : WebDriverTestBase
+    internal class BrowserTests : WebDriverTestBase
     {
         [FixtureInitializer]
         public void Init()
         {
             Config.Settings.runTimeSettings.LaunchBrowser = false;
-
         }
+
         [Test]
         public void TestIE()
         {
@@ -25,6 +25,7 @@ namespace ProtoTest.Golem.Tests
             OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }
+
         [Test]
         public void TestFF()
         {
@@ -32,6 +33,7 @@ namespace ProtoTest.Golem.Tests
             OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }
+
         [Test]
         public void TestChrome()
         {
@@ -39,6 +41,7 @@ namespace ProtoTest.Golem.Tests
             OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }
+
         [Test]
         public void TestPhantomJS()
         {
@@ -46,6 +49,7 @@ namespace ProtoTest.Golem.Tests
             OpenPage<GoogleHomePage>("http://www.google.com/");
             driver.Quit();
         }
+
         [Test]
         public void TestSafari()
         {

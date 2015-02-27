@@ -5,7 +5,7 @@ using RestSharp;
 namespace ProtoTest.Golem.Rest
 {
     /// <summary>
-    /// When contains operation execution methods, such as commands to actually fire off a Rest request.
+    ///     When contains operation execution methods, such as commands to actually fire off a Rest request.
     /// </summary>
     public class When
     {

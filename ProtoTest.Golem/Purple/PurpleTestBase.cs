@@ -4,17 +4,16 @@ using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.PurpleElements;
 
-
 namespace ProtoTest.Golem.Purple
 {
     public class PurpleTestBase : TestBase
     {
+        public static List<string> TestOutcomes = new List<string>();
+        private string ProjectFile;
+        private string TestFileLoc;
         //Used for logging how long it takes elements to appear.
         //Has to be set in the constructor for the testclass
         public static bool PerfLogging { get; set; }
-        public static List<string> TestOutcomes = new List<string>();
-        private string TestFileLoc;
-        private string ProjectFile;
 
         public string TestFileLocation
         {
@@ -27,6 +26,7 @@ namespace ProtoTest.Golem.Purple
                 return TestFileLoc;
             }
         }
+
         public string ProjectFileName
         {
             get
@@ -66,34 +66,29 @@ namespace ProtoTest.Golem.Purple
                 ProjectFile = Config.Settings.purpleSettings.ProjectName4;
             }
         }
-        
+
         public void TestSettings()
         {
-            
         }
 
-        [NUnit.Framework.SetUp]
+        [SetUp]
         [MbUnit.Framework.SetUp]
         public void SetUp()
         {
             PurpleWindow.FindRunningProcess();
         }
 
-
-        [NUnit.Framework.TearDown]
+        [TearDown]
         [MbUnit.Framework.TearDown]
         public override void TearDownTestBase()
         {
             LogEvent(Common.GetCurrentTestName() + " " + TestContext.CurrentContext.Result.Status);
             PurpleWindow.EndProcess();
-
         }
 
-       
-        [NUnit.Framework.TestFixtureTearDown]
+        [TestFixtureTearDown]
         public void FixtureTearDown()
         {
-            
         }
 
         public void LogScreenshotIfTestFailed()

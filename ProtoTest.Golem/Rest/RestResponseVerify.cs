@@ -7,7 +7,7 @@ using RestSharp;
 namespace ProtoTest.Golem.Rest
 {
     /// <summary>
-    /// Contains methods to validate rest responses
+    ///     Contains methods to validate rest responses
     /// </summary>
     public class RestResponseVerify
     {

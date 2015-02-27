@@ -11,9 +11,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public PurpleButton(string name, AutomationElement element) : base(name, element)
         {
-            
         }
-
-        
     }
 }

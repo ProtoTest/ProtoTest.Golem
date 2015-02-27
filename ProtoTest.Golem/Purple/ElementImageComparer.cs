@@ -6,7 +6,6 @@ using Gallio.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.Elements;
 using ProtoTest.Golem.WebDriver.Elements.Images;
-using Image = System.Drawing.Image;
 
 namespace ProtoTest.Golem.Purple
 {
@@ -32,7 +31,8 @@ namespace ProtoTest.Golem.Purple
         {
             get
             {
-                return Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") + "\\ElementImages\\" + element.ElementName.Replace(" ", "") + ".bmp";
+                return Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
+                       "\\ElementImages\\" + element.ElementName.Replace(" ", "") + ".bmp";
             }
         }
 
@@ -51,23 +51,23 @@ namespace ProtoTest.Golem.Purple
             }
             difference = ImageComparer.ImageComparePercentage(storedImage, liveImage,
                 Config.Settings.imageCompareSettings.fuzziness);
-            differenceString = (difference * 100).ToString("0.##\\%");
+            differenceString = (difference*100).ToString("0.##\\%");
             return difference < Config.Settings.imageCompareSettings.accuracy;
         }
 
         public Image GetMergedImage()
         {
-            Image overlayImage = OverlayImages(liveImage, GetDifferenceImage());
-            Image mergedImage = CombineImages(storedImage, liveImage, overlayImage);
+            var overlayImage = OverlayImages(liveImage, GetDifferenceImage());
+            var mergedImage = CombineImages(storedImage, liveImage, overlayImage);
             return mergedImage;
         }
 
         private Image CombineImages(Image image1, Image image2, Image image3)
         {
-            int newWidth = image1.Width + image2.Width + image3.Width;
-            int newHeight = image1.Height;
+            var newWidth = image1.Width + image2.Width + image3.Width;
+            var newHeight = image1.Height;
             var bmp = new Bitmap(newWidth, newHeight);
-            using (Graphics gr = Graphics.FromImage(bmp))
+            using (var gr = Graphics.FromImage(bmp))
             {
                 gr.DrawImage(image1, new Point(0, 0));
                 gr.DrawImage(image2, new Point(image1.Width, 0));
@@ -92,7 +92,7 @@ namespace ProtoTest.Golem.Purple
         {
             imageOverlay = imageOverlay.Resize(imageBackground.Width, imageBackground.Height);
             Image img = new Bitmap(imageBackground.Width, imageBackground.Height);
-            using (Graphics gr = Graphics.FromImage(img))
+            using (var gr = Graphics.FromImage(img))
             {
                 gr.DrawImage(imageBackground, new Point(0, 0));
                 gr.DrawImage(imageOverlay, new Point(0, 0));
@@ -114,7 +114,7 @@ namespace ProtoTest.Golem.Purple
 
         public void UpdateImage()
         {
-            using (Image image = GetLiveImage())
+            using (var image = GetLiveImage())
             {
                 SaveImage(image);
             }
@@ -124,7 +124,6 @@ namespace ProtoTest.Golem.Purple
         {
             try
             {
-
                 DeleteOldImage();
                 using (var tempImage = new Bitmap(image))
                 {
@@ -140,13 +139,12 @@ namespace ProtoTest.Golem.Purple
         private Image cropImage(Image img, Rectangle cropArea)
         {
             var bmpImage = new Bitmap(img);
-            Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+            var bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
             return bmpCrop;
         }
 
         public void VerifyImage()
         {
-
             if (ImagesMatch())
             {
                 TestContext.CurrentContext.IncrementAssertCount();

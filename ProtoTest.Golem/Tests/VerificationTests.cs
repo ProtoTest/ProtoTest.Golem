@@ -6,12 +6,12 @@ using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests
 {
-    class VerificationTests : TestBase
+    internal class VerificationTests : TestBase
     {
         [Test]
         public void TestVerificationCount()
         {
-            Assert.AreEqual(testData.VerificationErrors.Count,0);
+            Assert.AreEqual(testData.VerificationErrors.Count, 0);
             AddVerificationError("Test error");
             Assert.AreEqual(testData.VerificationErrors.Count, 1);
             testData.VerificationErrors = new List<VerificationError>();
@@ -20,11 +20,10 @@ namespace ProtoTest.Golem.Tests
         [Test]
         public void TestAssertionCount()
         {
-            Assert.AreEqual(TestContext.CurrentContext.AssertCount,0);
+            Assert.AreEqual(TestContext.CurrentContext.AssertCount, 0);
             AddVerificationError("Test Error");
             Assert.AreEqual(TestContext.CurrentContext.AssertCount, 2);
             testData.VerificationErrors = new List<VerificationError>();
         }
-
     }
 }

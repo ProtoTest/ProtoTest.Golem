@@ -6,7 +6,6 @@ namespace ProtoTest.Golem.Tests
 {
     public class TestBasePageObject : WebDriverTestBase
     {
-
         [Test]
         public void TestWaitForElements()
         {

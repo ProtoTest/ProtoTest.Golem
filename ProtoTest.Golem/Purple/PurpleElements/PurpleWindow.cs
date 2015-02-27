@@ -9,40 +9,40 @@ using ProtoTest.Golem.Purple.PurpleCore;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {
-
     public static class PurpleWindow
     {
-        
-        private static AutomationElement window;
-        public static AutomationElement purpleWindow { get { return window; } }
-         [DllImport("user32.dll")]
+        private static IntPtr handle;
+        private static Locator _locator;
+        public static AutomationElement purpleWindow { get; private set; }
+
+        [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         [DllImport("user32.dll")]
         private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy,
             uint uFlags);
-        private static IntPtr handle;
-        private static Locator _locator;
 
-        
         public static bool FindRunningProcess()
         {
-            bool processRunning = false;
-            Process[] processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
+            var processRunning = false;
+            var processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
             if (processes.Length == 0)
             {
-                TestBase.Log(string.Format("Could not find process {0}. Attempting to start process...", Config.Settings.purpleSettings.ProcessName));
+                TestBase.Log(string.Format("Could not find process {0}. Attempting to start process...",
+                    Config.Settings.purpleSettings.ProcessName));
                 var startProcess = new ProcessStartInfo(Config.Settings.purpleSettings.appPath);
-                Process app = Process.Start(startProcess);
+                var app = Process.Start(startProcess);
                 waitForWindow();
-                
+
                 //SetWindowPos(app.MainWindowHandle, new IntPtr(-1), 0, 0, 0, 0, 3); //This should bring the application to the front once it starts
                 //Thread.Sleep(2000);
                 //SetForegroundWindow(handle);  //this didn't bring the app to the front
             }
             else
             {
-                TestBase.Log(string.Format("Process Length is: {0}. Attempting to kill existing process and start it up again.", processes.Length));
+                TestBase.Log(
+                    string.Format("Process Length is: {0}. Attempting to kill existing process and start it up again.",
+                        processes.Length));
                 EndProcess();
                 FindRunningProcess();
             }
@@ -52,15 +52,18 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         private static void waitForWindow()
         {
-           _locator = new Locator();
-           window = _locator.WaitForElementAvailable(Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle, Config.Settings.purpleSettings.Purple_windowTitle);
+            _locator = new Locator();
+            purpleWindow =
+                _locator.WaitForElementAvailable(
+                    Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle,
+                    Config.Settings.purpleSettings.Purple_windowTitle);
         }
 
         public static void EndProcess(String DontsaveProjectPath = "notused")
         {
-            window = null;
-            Process[] processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
-            foreach (Process process in processes)
+            purpleWindow = null;
+            var processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
+            foreach (var process in processes)
             {
                 process.Kill();
                 Thread.Sleep(2000);
@@ -95,8 +98,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
         public static void SetVisualState(Window_VisualStyle visualState)
         {
-            WindowPattern windowPattern = GetWindowPattern(window);
-            
+            var windowPattern = GetWindowPattern(purpleWindow);
+
             try
             {
                 if (windowPattern.Current.WindowInteractionState == WindowInteractionState.ReadyForUserInteraction)
@@ -112,7 +115,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                             break;
                         case Window_VisualStyle.Minimized:
                             // Confirm that the element can be minimized 
-                            if ((windowPattern.Current.CanMinimize) &&!(windowPattern.Current.IsModal))
+                            if ((windowPattern.Current.CanMinimize) && !(windowPattern.Current.IsModal))
                             {
                                 windowPattern.SetWindowVisualState(WindowVisualState.Minimized);
                             }
@@ -129,7 +132,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             catch (InvalidOperationException)
             {
                 // object is not able to perform the requested action 
-                return;
             }
         }
 
@@ -138,14 +140,15 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         {
             InputSimulator.SimulateKeyDown(key);
         }
+
         public static void ReleaseKey(VirtualKeyCode key)
         {
             InputSimulator.SimulateKeyUp(key);
         }
+
         public static void PressKey(VirtualKeyCode key)
         {
             InputSimulator.SimulateKeyPress(key);
         }
-
     }
 }

@@ -9,7 +9,7 @@ namespace ProtoTest.Golem.Rest
     public class DynamicXml
     {
         /// <summary>
-        /// Provides a mechanism to get a dynamic object from an xml document
+        ///     Provides a mechanism to get a dynamic object from an xml document
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="node"></param>
@@ -21,7 +21,7 @@ namespace ProtoTest.Golem.Rest
                 {
                     var item = new ExpandoObject();
                     var list = new List<dynamic>();
-                    foreach (XElement element in node.Elements())
+                    foreach (var element in node.Elements())
                     {
                         Parse(list, element);
                     }
@@ -33,13 +33,13 @@ namespace ProtoTest.Golem.Rest
                 {
                     var item = new ExpandoObject();
 
-                    foreach (XAttribute attribute in node.Attributes())
+                    foreach (var attribute in node.Attributes())
                     {
                         AddProperty(item, attribute.Name.ToString(), attribute.Value.Trim());
                     }
 
                     //element
-                    foreach (XElement element in node.Elements())
+                    foreach (var element in node.Elements())
                     {
                         Parse(item, element);
                     }

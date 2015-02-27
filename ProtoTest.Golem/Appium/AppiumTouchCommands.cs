@@ -7,8 +7,9 @@ namespace ProtoTest.Golem.Appium
 {
     public class AppiumTouchCommands
     {
+        private readonly IWebDriver driver;
         public Dictionary<String, Double> coords;
-        private IWebDriver driver;
+
         public AppiumTouchCommands(IWebDriver driver)
         {
             this.driver = driver;
@@ -21,16 +22,15 @@ namespace ProtoTest.Golem.Appium
 
         public void AddCoordinate(string key, double value)
         {
-            coords.Add(key,value);
+            coords.Add(key, value);
         }
 
         public void Execute(string command)
         {
             driver.ExecuteJavaScript("mobile: " + command, coords);
-
         }
 
-        public void Tap(double X, double Y, int count=1, double duration=.1)
+        public void Tap(double X, double Y, int count = 1, double duration = .1)
         {
             coords = new Dictionary<string, double>();
             coords.Add("x", X);
@@ -44,8 +44,9 @@ namespace ProtoTest.Golem.Appium
         {
             var elementObject = new Dictionary<string, string>();
             elementObject.Add("element", id);
-            driver.ExecuteJavaScript("mobile: scrollTo", elementObject); 
+            driver.ExecuteJavaScript("mobile: scrollTo", elementObject);
         }
+
         public void Swipe(double startX, double startY, double endX, double endY)
         {
             coords = new Dictionary<string, double>();
@@ -54,8 +55,8 @@ namespace ProtoTest.Golem.Appium
             coords.Add("endX", endX);
             coords.Add("endY", endY);
             driver.ExecuteJavaScript("mobile: swipe", coords);
-
         }
+
         public void SwipeDown()
         {
             coords = new Dictionary<string, double>();
@@ -65,6 +66,7 @@ namespace ProtoTest.Golem.Appium
             coords.Add("endY", 0.05);
             driver.ExecuteJavaScript("mobile: swipe", coords);
         }
+
         public void SwipeUp()
         {
             coords = new Dictionary<string, double>();
@@ -74,6 +76,7 @@ namespace ProtoTest.Golem.Appium
             coords.Add("endY", 0.95);
             driver.ExecuteJavaScript("mobile: swipe", coords);
         }
+
         public void SwipeRight()
         {
             coords = new Dictionary<string, double>();
@@ -83,6 +86,7 @@ namespace ProtoTest.Golem.Appium
             coords.Add("endY", 0.5);
             driver.ExecuteJavaScript("mobile: swipe", coords);
         }
+
         public void SwipeLeft()
         {
             coords = new Dictionary<string, double>();

@@ -4,21 +4,22 @@ using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests
 {
-    class ElementTests : WebDriverTestBase
+    internal class ElementTests : WebDriverTestBase
     {
-
         [Test]
         public void TestNoName()
         {
             var element = new Element(By.Id("Id"));
             Assert.AreEqual(element.name, "Element");
         }
+
         [Test]
         public void TestWithName()
         {
-            var element = new Element("NameOfElement",By.Id("Id"));
+            var element = new Element("NameOfElement", By.Id("Id"));
             Assert.AreEqual(element.name, "NameOfElement");
         }
+
         [Test]
         public void TestDSL()
         {
@@ -29,6 +30,7 @@ namespace ProtoTest.Golem.Tests
             element.WaitUntil(20).Visible().Text = "Golem";
             element.Verify(20).Value("Golem");
         }
+
         [Test]
         public void TestNotPresent()
         {

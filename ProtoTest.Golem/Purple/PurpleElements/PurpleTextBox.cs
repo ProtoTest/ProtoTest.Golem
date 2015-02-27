@@ -1,5 +1,6 @@
 ﻿using System.Windows.Automation;
 using System.Windows.Forms;
+using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.Purple.PurpleElements
 {
@@ -7,11 +8,19 @@ namespace ProtoTest.Golem.Purple.PurpleElements
     {
         private string _textToEnter;
 
+        public PurpleTextBox(string name, string locatorPath) : base(name, locatorPath)
+        {
+        }
+
+        public PurpleTextBox(string name, AutomationElement element) : base(name, element)
+        {
+        }
+
         public string Text
         {
             get
             {
-                string enteredText = "ELEMENT NOT FOUND";
+                var enteredText = "ELEMENT NOT FOUND";
                 if (PurpleElement != null)
                 {
                     enteredText = GetText();
@@ -27,32 +36,23 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             }
         }
 
-        public PurpleTextBox(string name, string locatorPath) : base(name, locatorPath)
-        {
-        }
-
-        public PurpleTextBox(string name, AutomationElement element) : base(name, element)
-        {
-            
-        }
-
         private string GetText()
         {
-            string textValue = "THERE IS NO TEXT";
+            var textValue = "THERE IS NO TEXT";
             if (_UIAElement.Current.IsPassword)
             {
-                PurpleTestBase.LogEvent(string.Format("Field is {0} is a Password field, cannot get value", ElementName));
+                TestBase.LogEvent(string.Format("Field is {0} is a Password field, cannot get value", ElementName));
                 textValue = "PASSWORD FIELD CANNOT BE READ";
             }
             object basePattern;
             if (_UIAElement.TryGetCurrentPattern(ValuePattern.Pattern, out basePattern))
             {
-                ValuePattern valuePattern = (BasePattern)basePattern as ValuePattern;
+                var valuePattern = (BasePattern) basePattern as ValuePattern;
                 if (valuePattern != null)
                 {
                     textValue = valuePattern.Current.Value;
                 }
-                TextPattern textPattern = (BasePattern)basePattern as TextPattern;
+                var textPattern = (BasePattern) basePattern as TextPattern;
                 if (textPattern != null)
                 {
                     textValue = textPattern.DocumentRange.GetText(int.MaxValue);
@@ -68,8 +68,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                 _UIAElement.SetFocus();
                 SendKeys.SendWait(val);
             }
-            
         }
-
     }
 }

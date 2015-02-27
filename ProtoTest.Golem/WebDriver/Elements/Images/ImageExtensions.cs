@@ -17,10 +17,8 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
     {
         //the font to use for the DifferenceImages
         private static readonly Font DefaultFont = new Font("Arial", 8);
-
         //the brushes to use for the DifferenceImages
         private static readonly Brush[] brushes = new Brush[256];
-
         //the colormatrix needed to grayscale an image
         //http://www.switchonthecode.com/tutorials/csharp-tutorial-convert-a-color-image-to-grayscale
         private static readonly ColorMatrix ColorMatrix = new ColorMatrix(new[]
@@ -35,7 +33,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         //Create the brushes in varying intensities
         static ImageTool()
         {
-            for (int i = 0; i < 256; i++)
+            for (var i = 0; i < 256; i++)
             {
                 brushes[i] = new SolidBrush(Color.FromArgb(i/2, 255, 2, 2));
             }
@@ -50,9 +48,9 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         /// <returns>The difference between the two images as a percentage</returns>
         public static float PercentageDifference(this Image img1, Image img2, byte threshold = 3)
         {
-            byte[,] differences = img1.GetDifferences(img2);
+            var differences = img1.GetDifferences(img2);
 
-            int diffPixels = 0;
+            var diffPixels = 0;
 
             foreach (byte b in differences)
             {
@@ -84,11 +82,11 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             bool adjustColorSchemeToMaxDifferenceFound = false, bool absoluteText = false)
         {
             //create a 16x16 tiles image with information about how much the two images differ
-            int cellsize = 16; //each tile is 16 pixels wide and high
+            var cellsize = 16; //each tile is 16 pixels wide and high
             var bmp = new Bitmap(16*cellsize + 1, 16*cellsize + 1);
-                //16 blocks * 16 pixels + a borderpixel at left/bottom
+            //16 blocks * 16 pixels + a borderpixel at left/bottom
 
-            Graphics g = Graphics.FromImage(bmp);
+            var g = Graphics.FromImage(bmp);
             //g.FillRectangle(Brushes, 0, 0, bmp.Width, bmp.Height);
             byte[,] differences = img1.GetDifferences(img2);
             byte maxDifference = 255;
@@ -97,7 +95,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             if (adjustColorSchemeToMaxDifferenceFound)
             {
                 maxDifference = 0;
-                foreach (byte b in differences)
+                foreach (var b in differences)
                 {
                     if (b > maxDifference)
                     {
@@ -111,11 +109,11 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                 }
             }
 
-            for (int y = 0; y < differences.GetLength(1); y++)
+            for (var y = 0; y < differences.GetLength(1); y++)
             {
-                for (int x = 0; x < differences.GetLength(0); x++)
+                for (var x = 0; x < differences.GetLength(0); x++)
                 {
-                    byte cellValue = differences[x, y];
+                    var cellValue = differences[x, y];
                     string cellText = null;
 
                     if (absoluteText)
@@ -127,12 +125,12 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                         cellText = string.Format("{0}%", (int) cellValue);
                     }
 
-                    float percentageDifference = (float) differences[x, y]/maxDifference;
+                    var percentageDifference = (float) differences[x, y]/maxDifference;
                     var colorIndex = (int) (255*percentageDifference);
 
                     g.FillRectangle(brushes[colorIndex], x*cellsize, y*cellsize, cellsize, cellsize);
                     g.DrawRectangle(Pens.Blue, x*cellsize, y*cellsize, cellsize, cellsize);
-                    SizeF size = g.MeasureString(cellText, DefaultFont);
+                    var size = g.MeasureString(cellText, DefaultFont);
                     g.DrawString(cellText, DefaultFont, Brushes.Black, x*cellsize + cellsize/2 - size.Width/2 + 1,
                         y*cellsize + cellsize/2 - size.Height/2 + 1);
                     g.DrawString(cellText, DefaultFont, Brushes.White, x*cellsize + cellsize/2 - size.Width/2,
@@ -161,19 +159,19 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         public static Bitmap GetDifferenceOverlayImage(this Image img1, Image img2)
         {
             var bmp = new Bitmap(16*16 + 1, 16*16 + 1);
-            Graphics g = Graphics.FromImage(bmp);
+            var g = Graphics.FromImage(bmp);
             byte[,] differences = img1.GetDifferences(img2);
             byte maxDifference = 1;
-            foreach (byte b in differences)
+            foreach (var b in differences)
             {
                 if (b > maxDifference)
-                    maxDifference = b;                    
+                    maxDifference = b;
             }
-            for (int y = 0; y < differences.GetLength(1); y++)
+            for (var y = 0; y < differences.GetLength(1); y++)
             {
-                for (int x = 0; x < differences.GetLength(0); x++)
+                for (var x = 0; x < differences.GetLength(0); x++)
                 {
-                    float percentageDifference = (float) differences[x, y]/maxDifference;
+                    var percentageDifference = (float) differences[x, y]/maxDifference;
                     var colorIndex = (int) (255*percentageDifference);
                     g.FillRectangle(new SolidBrush(Color.FromArgb(colorIndex, 255, 2, 2)), x*16, y*16, 16, 16);
                 }
@@ -191,12 +189,12 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             var thisOne = (Bitmap) img1.Resize(16, 16).GetGrayScaleVersion();
             var theOtherOne = (Bitmap) img2.Resize(16, 16).GetGrayScaleVersion();
-            var differencesRed = new byte[16, 16]; 
+            var differencesRed = new byte[16, 16];
             Console.WriteLine();
 
-            for (int y = 0; y < 16; y++)
+            for (var y = 0; y < 16; y++)
             {
-                for (int x = 0; x < 16; x++)
+                for (var x = 0; x < 16; x++)
                 {
                     differencesRed[x, y] = (byte) Math.Abs(thisOne.GetPixel(x, y).R - theOtherOne.GetPixel(x, y).R);
                 }
@@ -216,7 +214,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             var newBitmap = new Bitmap(original.Width, original.Height);
 
             //get a graphics object from the new image
-            Graphics g = Graphics.FromImage(newBitmap);
+            var g = Graphics.FromImage(newBitmap);
 
             //create some image attributes
             var attributes = new ImageAttributes();
@@ -252,7 +250,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         public static Image Resize(this Image originalImage, int newWidth, int newHeight)
         {
             Image smallVersion = new Bitmap(newWidth, newHeight);
-            using (Graphics g = Graphics.FromImage(smallVersion))
+            using (var g = Graphics.FromImage(smallVersion))
             {
                 g.SmoothingMode = SmoothingMode.HighQuality;
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -270,10 +268,10 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         /// <param name="doubleArray">The doublearray to print</param>
         public static void ToConsole<T>(this T[,] doubleArray)
         {
-            for (int y = 0; y < doubleArray.GetLength(0); y++)
+            for (var y = 0; y < doubleArray.GetLength(0); y++)
             {
                 Console.Write("[");
-                for (int x = 0; x < doubleArray.GetLength(1); x++)
+                for (var x = 0; x < doubleArray.GetLength(1); x++)
                 {
                     Console.Write("{0,3},", doubleArray[x, y]);
                 }
@@ -301,7 +299,6 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             return new Histogram(bmp);
         }
 
-
         /// <summary>
         ///     Gets the difference between two images as a percentage
         /// </summary>
@@ -314,8 +311,8 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             if (CheckFile(image1Path) && CheckFile(image2Path))
             {
-                Image img1 = Image.FromFile(image1Path);
-                Image img2 = Image.FromFile(image2Path);
+                var img1 = Image.FromFile(image1Path);
+                var img2 = Image.FromFile(image2Path);
 
                 return img1.PercentageDifference(img2, threshold);
             }

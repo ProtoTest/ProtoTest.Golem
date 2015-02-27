@@ -14,10 +14,10 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             var ms2 = new MemoryStream();
 
             firstImage.Save(ms1, ImageFormat.Bmp);
-            String firstBitmap = Convert.ToBase64String(ms1.ToArray());
+            var firstBitmap = Convert.ToBase64String(ms1.ToArray());
 
             secondImage.Save(ms2, ImageFormat.Bmp);
-            String secondBitmap = Convert.ToBase64String(ms2.ToArray());
+            var secondBitmap = Convert.ToBase64String(ms2.ToArray());
 
             ms1.Dispose();
             ms2.Dispose();
@@ -30,13 +30,13 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                     total++;
                 }
             }
-            float failure = (float)total/(float)firstBitmap.Length;
+            var failure = total/(float) firstBitmap.Length;
             return failure < failurePercent;
         }
 
         public static bool ImageCompareArray(Image firstImage, Image secondImage)
         {
-            bool images_match = false;
+            var images_match = false;
             string firstPixel;
             string secondPixel;
             firstImage = Common.ScaleImage(firstImage);
@@ -57,9 +57,9 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             if (firstBmp.Width == secondBmp.Width
                 && firstBmp.Height == secondBmp.Height)
             {
-                for (int i = 0; i < firstBmp.Width; i++)
+                for (var i = 0; i < firstBmp.Width; i++)
                 {
-                    for (int j = 0; j < firstBmp.Height; j++)
+                    for (var j = 0; j < firstBmp.Height; j++)
                     {
                         firstPixel = firstBmp.GetPixel(i, j).ToString();
                         secondPixel = secondBmp.GetPixel(i, j).ToString();
@@ -85,10 +85,10 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public static float ImageCompareAverageHash(Image firstImage, Image secondImage)
         {
-            int diff = 0;
-            char[] first = GetHash(firstImage).ToCharArray();
-            char[] second = GetHash(secondImage).ToCharArray();
-            for (int i = 0; i < first.Length; i++)
+            var diff = 0;
+            var first = GetHash(firstImage).ToCharArray();
+            var second = GetHash(secondImage).ToCharArray();
+            for (var i = 0; i < first.Length; i++)
             {
                 if (first[i] != second[i])
                 {
@@ -103,13 +103,13 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public static string GetHash(Image image)
         {
-            string hashString = "";
+            var hashString = "";
             var newImage = new Bitmap(image.Resize(8, 8).GetGrayScaleVersion());
 
-            int average = GetAverageColor(newImage).ToArgb();
-            for (int x = 0; x < newImage.Width; x++)
+            var average = GetAverageColor(newImage).ToArgb();
+            for (var x = 0; x < newImage.Width; x++)
             {
-                for (int y = 0; y < newImage.Height; y++)
+                for (var y = 0; y < newImage.Height; y++)
                 {
                     if (newImage.GetPixel(x, y).ToArgb() < average)
                     {
@@ -129,11 +129,11 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             var newImage = new Bitmap(image.Resize(8, 8).GetGrayScaleVersion());
 
-            int average = GetAverageColor(newImage).ToArgb();
+            var average = GetAverageColor(newImage).ToArgb();
             var bmp = new Bitmap(8, 8);
-            for (int x = 0; x < bmp.Width; x++)
+            for (var x = 0; x < bmp.Width; x++)
             {
-                for (int y = 0; y < bmp.Height; y++)
+                for (var y = 0; y < bmp.Height; y++)
                 {
                     if (newImage.GetPixel(x, y).ToArgb() < average)
                     {
@@ -151,10 +151,10 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public static long GetHashCodeInt64(string input)
         {
-            string s1 = input.Substring(0, input.Length/2);
-            string s2 = input.Substring(input.Length/2);
+            var s1 = input.Substring(0, input.Length/2);
+            var s2 = input.Substring(input.Length/2);
 
-            long x = ((long) s1.GetHashCode()) << 0x20 | s2.GetHashCode();
+            var x = ((long) s1.GetHashCode()) << 0x20 | s2.GetHashCode();
 
             return x;
         }
@@ -162,17 +162,17 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         public static Color GetAverageColor(Bitmap bmp)
         {
             //Used for tally
-            int r = 0;
-            int g = 0;
-            int b = 0;
+            var r = 0;
+            var g = 0;
+            var b = 0;
 
-            int total = 0;
+            var total = 0;
 
-            for (int x = 0; x < bmp.Width; x++)
+            for (var x = 0; x < bmp.Width; x++)
             {
-                for (int y = 0; y < bmp.Height; y++)
+                for (var y = 0; y < bmp.Height; y++)
                 {
-                    Color clr = bmp.GetPixel(x, y);
+                    var clr = bmp.GetPixel(x, y);
 
                     r += clr.R;
                     g += clr.G;

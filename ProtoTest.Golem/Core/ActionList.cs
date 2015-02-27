@@ -6,7 +6,7 @@ using Gallio.Framework;
 namespace ProtoTest.Golem.Core
 {
     /// <summary>
-    /// Holds a list of Actions, with some functions to help print
+    ///     Holds a list of Actions, with some functions to help print
     /// </summary>
     public class ActionList
     {
@@ -22,17 +22,16 @@ namespace ProtoTest.Golem.Core
             actions.Add(new Action(name, time));
         }
 
-
         public void addAction(string name)
         {
-            DateTime time = DateTime.Now;
+            var time = DateTime.Now;
             actions.Add(new Action(name, time));
         }
 
         public void PrintActions()
         {
             TestLog.BeginSection("Actions");
-            foreach (Action a in actions)
+            foreach (var a in actions)
             {
                 TestLog.WriteLine(a.name + " : " + a._time.ToString("HH:mm:ss.ffff"));
             }
@@ -45,7 +44,7 @@ namespace ProtoTest.Golem.Core
             DateTime start;
             DateTime end;
             TimeSpan difference;
-            for (int i = 1; i < actions.Count; i++)
+            for (var i = 1; i < actions.Count; i++)
             {
                 while (actions[i].name == actions[i - 1].name)
                 {
@@ -63,6 +62,12 @@ namespace ProtoTest.Golem.Core
             TestLog.End();
         }
 
+        public void RemoveDuplicateEntries()
+        {
+            var distinctItems = actions.GroupBy(x => x.name).Select(y => y.Last());
+            actions = distinctItems.ToList();
+        }
+
         public class Action
         {
             public DateTime _time;
@@ -73,12 +78,6 @@ namespace ProtoTest.Golem.Core
                 this.name = name;
                 _time = time;
             }
-        }
-
-        public void RemoveDuplicateEntries()
-        {
-            IEnumerable<Action> distinctItems = actions.GroupBy(x => x.name).Select(y => y.Last());
-            actions = distinctItems.ToList();
         }
     }
 }

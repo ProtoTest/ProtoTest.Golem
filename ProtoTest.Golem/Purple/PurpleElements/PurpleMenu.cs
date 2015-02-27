@@ -17,23 +17,21 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         public new void Click()
         {
             //This is not used since we can invoke menu directly
-            int menuNums = _pathtoMenuSelection.Count();
+            var menuNums = _pathtoMenuSelection.Count();
             AutomationElement menu = null;
-            for(int x = 0; x < menuNums - 1; x++)
+            for (var x = 0; x < menuNums - 1; x++)
             {
                 menu = PurpleElement.FindFirst(TreeScope.Descendants,
                     new PropertyCondition(AutomationElement.NameProperty, _pathtoMenuSelection[x]));
-                ((ExpandCollapsePattern)menu.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Expand();
+                ((ExpandCollapsePattern) menu.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Expand();
                 Thread.Sleep(50);
             }
             if (menu != null)
             {
-                AutomationElement MenuItem = menu.FindFirst(TreeScope.Descendants,
+                var MenuItem = menu.FindFirst(TreeScope.Descendants,
                     new PropertyCondition(AutomationElement.NameProperty, _pathtoMenuSelection[menuNums - 1]));
-                ((InvokePattern)MenuItem.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
+                ((InvokePattern) MenuItem.GetCurrentPattern(InvokePattern.Pattern)).Invoke();
             }
         }
-
-
     }
 }

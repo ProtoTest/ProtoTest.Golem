@@ -6,6 +6,8 @@ namespace ProtoTest.Golem.Purple.PurpleCore
     //Teststack.White available at http://docs.teststack.net/White/GettingStarted.html
     public static class RectX
     {
+        public static readonly Point UnlikelyWindowPosition = new Point(-10000, -10000);
+
         public static bool IsZeroSize(this Rect rect)
         {
             return rect.Height == 0 && rect.Width == 0;
@@ -13,14 +15,14 @@ namespace ProtoTest.Golem.Purple.PurpleCore
 
         public static Point Center(this Rect rect)
         {
-            double topLeftX = rect.Left;
-            double topRightX = rect.Right;
+            var topLeftX = rect.Left;
+            var topRightX = rect.Right;
             return new Point((int) (topLeftX + (topRightX - topLeftX)/2), (int) (rect.Top + (rect.Bottom - rect.Top)/2));
         }
 
         public static Point East(this Rect rectangle, int by)
         {
-            return new Point((int)(rectangle.Right + by), rectangle.Center().Y);
+            return new Point((int) (rectangle.Right + by), rectangle.Center().Y);
         }
 
         public static Point ImmediateExteriorEast(this Rect rectangle)
@@ -47,7 +49,5 @@ namespace ProtoTest.Golem.Purple.PurpleCore
         {
             return new Point(rectangle.Center().X, rectangle.Bottom - 1);
         }
-
-        public static readonly Point UnlikelyWindowPosition = new Point(-10000, -10000);
     }
 }

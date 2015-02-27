@@ -15,8 +15,9 @@ using RestSharp;
 namespace ProtoTest.Golem.Proxy
 {
     /// <summary>
-    /// This class acts as a wrapper around a BrowserMobProxy jar.  
-    /// It contains methods to launch and stop the server, as well as to issue REST commands to start/stop/configure an individual proxy.  
+    ///     This class acts as a wrapper around a BrowserMobProxy jar.
+    ///     It contains methods to launch and stop the server, as well as to issue REST commands to start/stop/configure an
+    ///     individual proxy.
     /// </summary>
     public class BrowserMobProxy
     {
@@ -24,25 +25,14 @@ namespace ProtoTest.Golem.Proxy
                                                  @"\Proxy\browsermob-proxy-2.0-beta-9-bin.zip";
 
         private static readonly string batchPath = @"C:\BMP\browsermob-proxy-2.0-beta-9\bin\browsermob-proxy";
-
         private static readonly string extractPath = @"C:\BMP";
         public static string Indent = "    ";
-
         private readonly IRestClient client;
         private readonly IDictionary<string, int> proxyPortsByTest;
         private readonly IRestRequest request;
         private readonly int serverPort;
         private IRestResponse response;
         private Process serverProcess;
-        public HarResult har
-        {
-            get
-            {
-                if (!Config.Settings.httpProxy.useProxy)
-                    throw new Exception("Could not get Proxy Har as proxy has been turned off.  Please enabled it by updating your App.Config with the following keys : StartProxy=true, UseProxy=true");
-                    return GetHar();
-            }
-        }
 
         public BrowserMobProxy()
         {
@@ -52,6 +42,17 @@ namespace ProtoTest.Golem.Proxy
             request = new RestRequest();
             response = new RestResponse();
             UnzipProxy();
+        }
+
+        public HarResult har
+        {
+            get
+            {
+                if (!Config.Settings.httpProxy.useProxy)
+                    throw new Exception(
+                        "Could not get Proxy Har as proxy has been turned off.  Please enabled it by updating your App.Config with the following keys : StartProxy=true, UseProxy=true");
+                return GetHar();
+            }
         }
 
         public int proxyPort
@@ -83,7 +84,6 @@ namespace ProtoTest.Golem.Proxy
             }
         }
 
-
         public void StartServer()
         {
             try
@@ -110,8 +110,8 @@ namespace ProtoTest.Golem.Proxy
         {
             if (Config.Settings.httpProxy.killOldProxy)
             {
-                Process[] runningProcesses = Process.GetProcesses();
-                foreach (Process process in runningProcesses)
+                var runningProcesses = Process.GetProcesses();
+                foreach (var process in runningProcesses)
                 {
                     try
                     {
@@ -126,7 +126,6 @@ namespace ProtoTest.Golem.Proxy
                     }
                 }
             }
-           
         }
 
         public void QuitServer()
@@ -137,12 +136,14 @@ namespace ProtoTest.Golem.Proxy
                 serverProcess.CloseMainWindow();
                 serverProcess.Kill();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         public bool WaitForServerToStart(int timeout = 30)
         {
-            for (int i = 0; i < timeout; i++)
+            for (var i = 0; i < timeout; i++)
             {
                 request.Method = Method.GET;
                 request.Resource = "/";
@@ -161,10 +162,9 @@ namespace ProtoTest.Golem.Proxy
             if (File.Exists(batchPath) == false)
             {
                 Common.Log("BrowserMobProxy not found, unzipping");
-                using (ZipFile zf = ZipFile.Read(zipPath))
+                using (var zf = ZipFile.Read(zipPath))
                 {
                     zf.ExtractAll(extractPath);
-                    
                 }
             }
         }
@@ -252,7 +252,7 @@ namespace ProtoTest.Golem.Proxy
             request.RequestFormat = DataFormat.Json;
             request.Method = Method.GET;
             request.Resource = string.Format("/proxy/{0}/har ", proxyPort);
-            IRestResponse<HarResult> responseHar = client.Execute<HarResult>(request);
+            var responseHar = client.Execute<HarResult>(request);
             if (responseHar.StatusCode != HttpStatusCode.OK)
             {
                 throw new Exception("Could not get har for proxy at port " + proxyPort + " : " +
@@ -307,7 +307,7 @@ namespace ProtoTest.Golem.Proxy
             }
 
             string message;
-            string value = GetValueForQueryStringWithName(queryString.Name, entry);
+            var value = GetValueForQueryStringWithName(queryString.Name, entry);
             if (value != null)
             {
                 message = string.Format("Expected {0}={1}. Actual {2}={3}", queryString.Name, queryString.Value,
@@ -323,7 +323,7 @@ namespace ProtoTest.Golem.Proxy
 
         public void VerifyRequestMade(string url)
         {
-            List<Entry> entries = FilterEntries(url);
+            var entries = FilterEntries(url);
             if (entries.Count == 0)
             {
                 TestBase.AddVerificationError("Did not find request with url " + url);
@@ -340,7 +340,7 @@ namespace ProtoTest.Golem.Proxy
             }
 
             string message;
-            string value = GetValueForQueryStringWithName(queryString.Name, GetLastEntryForUrl(url));
+            var value = GetValueForQueryStringWithName(queryString.Name, GetLastEntryForUrl(url));
             if (value != null)
             {
                 message = string.Format("Expected {0}={1}. Actual {2}={3}", queryString.Name, queryString.Value,
@@ -404,12 +404,11 @@ namespace ProtoTest.Golem.Proxy
             }
         }
 
-
         public string GetHarFilePath()
         {
             return Directory.GetCurrentDirectory()
-                          + Path.DirectorySeparatorChar
-                          + "HTTP_Traffic_" + Common.GetShortTestName(80) + ".har";
+                   + Path.DirectorySeparatorChar
+                   + "HTTP_Traffic_" + Common.GetShortTestName(80) + ".har";
         }
 
         public void VerifyNoErrorsCodes()
@@ -419,8 +418,9 @@ namespace ProtoTest.Golem.Proxy
                 har.Log.Entries.Where(entry => entry.Response.Status > 400 && entry.Response.Status < 599).ToList();
             foreach (var error in errors)
             {
-                TestBase.AddVerificationError(string.Format("Request to {0} returned an error code of {1} ({2}) : {3}",error.Request.Url,error.Response.Status, error.Response.StatusText,error.Response.Content.Text));
+                TestBase.AddVerificationError(string.Format("Request to {0} returned an error code of {1} ({2}) : {3}",
+                    error.Request.Url, error.Response.Status, error.Response.StatusText, error.Response.Content.Text));
             }
-    }
+        }
     }
 }

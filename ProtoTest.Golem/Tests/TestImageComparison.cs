@@ -11,7 +11,6 @@ namespace ProtoTest.Golem.Tests
         public static void TestImages()
         {
             OpenPage<GoogleHomePage>("http://www.google.com/").VerifyImages();
-
         }
     }
 }

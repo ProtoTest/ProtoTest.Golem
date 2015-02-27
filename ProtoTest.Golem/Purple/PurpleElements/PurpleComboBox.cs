@@ -9,7 +9,6 @@
         //TODO: Impliment PurpleComboBox
         public void Select(string option)
         {
-            
         }
     }
 }

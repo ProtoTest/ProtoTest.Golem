@@ -15,16 +15,16 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         //change to get selected item
         public string GetSelected()
         {
-            string nameofSelected = "";
+            var nameofSelected = "";
             if (_UIAElement != null)
             {
                 object basePattern;
                 if (_UIAElement.TryGetCurrentPattern(SelectionPattern.Pattern, out basePattern))
                 {
-                    SelectionPattern selection = (BasePattern) basePattern as SelectionPattern;
+                    var selection = (BasePattern) basePattern as SelectionPattern;
                     if (selection != null)
                     {
-                        AutomationElement[] automationElements = selection.Current.GetSelection();
+                        var automationElements = selection.Current.GetSelection();
                         foreach (var automationElement in automationElements)
                         {
                             nameofSelected = automationElement.Current.Name;
@@ -47,21 +47,22 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             if (_UIAElement != null)
             {
                 //Now we need to find the right one
-                int matchingIndex = -1;
+                var matchingIndex = -1;
                 AutomationElement itemToSelect = null;
 
                 object basePattern;
                 if (_UIAElement.TryGetCurrentPattern(ExpandCollapsePattern.Pattern, out basePattern))
                 {
-                    ExpandCollapsePattern expand = (BasePattern) basePattern as ExpandCollapsePattern;
+                    var expand = (BasePattern) basePattern as ExpandCollapsePattern;
                     if (expand != null)
                     {
                         if (expand.Current.ExpandCollapseState == ExpandCollapseState.Collapsed)
                         {
                             expand.Expand();
 
-                            availableOptions = _UIAElement.FindAll(TreeScope.Subtree, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem));
-                            for (int x = 0; x < availableOptions.Count; x++)
+                            availableOptions = _UIAElement.FindAll(TreeScope.Subtree,
+                                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem));
+                            for (var x = 0; x < availableOptions.Count; x++)
                             {
                                 if (item == availableOptions[x].Current.Name)
                                 {
@@ -70,7 +71,8 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                             }
                             if (itemToSelect != null)
                             {
-                                SelectionItemPattern selectPattern = (SelectionItemPattern) itemToSelect.GetCurrentPattern(SelectionItemPattern.Pattern);
+                                var selectPattern =
+                                    (SelectionItemPattern) itemToSelect.GetCurrentPattern(SelectionItemPattern.Pattern);
                                 try
                                 {
                                     selectPattern.Select();
@@ -79,7 +81,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                                 {
                                     TestBase.Log("An exception was handled by PurpleDropDown Class: " + e.Message);
                                 }
-                                
                             }
                         }
                     }
@@ -94,7 +95,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             }
         }
 
-        
         public void SelectItemByPosition(int item)
         {
             if (_UIAElement != null)
@@ -105,7 +105,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                 object basePattern;
                 if (_UIAElement.TryGetCurrentPattern(ExpandCollapsePattern.Pattern, out basePattern))
                 {
-                    ExpandCollapsePattern expand = (BasePattern)basePattern as ExpandCollapsePattern;
+                    var expand = (BasePattern) basePattern as ExpandCollapsePattern;
                     if (expand != null)
                     {
                         if (expand.Current.ExpandCollapseState == ExpandCollapseState.Collapsed)
@@ -117,8 +117,9 @@ namespace ProtoTest.Golem.Purple.PurpleElements
 
                             if (item < availableOptions.Count && availableOptions[item - 1] != null)
                             {
-                                SelectionItemPattern selectPattern =
-                                    (SelectionItemPattern) availableOptions[item - 1].GetCurrentPattern(SelectionItemPattern.Pattern);
+                                var selectPattern =
+                                    (SelectionItemPattern)
+                                        availableOptions[item - 1].GetCurrentPattern(SelectionItemPattern.Pattern);
                                 try
                                 {
                                     selectPattern.Select();
@@ -128,8 +129,6 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                                     //There is a timeout exception on the filter data panel
                                     TestBase.Log("An exception was handled by PurpleDropDown Class: " + e.Message);
                                 }
-                                
-                                
                             }
                         }
                     }
@@ -143,8 +142,5 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                 }
             }
         }
-        
-
     }
 }
-

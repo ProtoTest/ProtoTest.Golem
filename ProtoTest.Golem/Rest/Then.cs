@@ -10,7 +10,7 @@ using RestSharp;
 namespace ProtoTest.Golem.Rest
 {
     /// <summary>
-    /// Then contains post-operation commands such as validations and return statements;
+    ///     Then contains post-operation commands such as validations and return statements;
     /// </summary>
     public class Then
     {
@@ -56,7 +56,7 @@ namespace ProtoTest.Golem.Rest
             }
             else
             {
-                XDocument xDoc = XDocument.Load(new StringReader(response.Content));
+                var xDoc = XDocument.Load(new StringReader(response.Content));
 
                 dynamic root = new ExpandoObject();
 
@@ -66,12 +66,10 @@ namespace ProtoTest.Golem.Rest
             return content;
         }
 
-
         public string GetBodyAsString()
         {
             return response.Content;
         }
-
 
         public string GetStringFromBody(string xpath)
         {
@@ -82,7 +80,7 @@ namespace ProtoTest.Golem.Rest
             else
                 doc.LoadXml(response.Content);
 
-            XmlNode node = doc.SelectSingleNode(xpath);
+            var node = doc.SelectSingleNode(xpath);
             return node.InnerText;
         }
     }

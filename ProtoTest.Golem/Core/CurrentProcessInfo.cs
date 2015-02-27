@@ -6,13 +6,13 @@ namespace ProtoTest.Golem.Core
 {
     public class CurrentProcessInfo
     {
-        private string formatString = "{0}.{1}()_{2}.{3}() : ";
+        private readonly Type commandInterface;
+        private readonly string formatString = "{0}.{1}()_{2}.{3}() : ";
+        private readonly Type pageObjectType;
         public string className = "";
-        public string methodName = "";
         public string commandName = "";
         public string elementName = "";
-        private Type pageObjectType;
-        private Type commandInterface;
+        public string methodName = "";
 
         public CurrentProcessInfo(Type pageObjectType, Type commandInterface)
         {
@@ -26,12 +26,11 @@ namespace ProtoTest.Golem.Core
             return string.Format(formatString, className, methodName, elementName, commandName);
         }
 
-
         private void Init()
         {
-            var stackTrace = new StackTrace(); 
-            StackFrame[] stackFrames = stackTrace.GetFrames(); 
-            foreach (StackFrame stackFrame in stackFrames)
+            var stackTrace = new StackTrace();
+            var stackFrames = stackTrace.GetFrames();
+            foreach (var stackFrame in stackFrames)
             {
                 var method = stackFrame.GetMethod();
                 var type = stackFrame.GetMethod().ReflectedType;

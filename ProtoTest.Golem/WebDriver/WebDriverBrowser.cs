@@ -13,7 +13,7 @@ using ProtoTest.Golem.Core;
 namespace ProtoTest.Golem.WebDriver
 {
     /// <summary>
-    /// Contains all functionality relating to launching the webdriver browsers.
+    ///     Contains all functionality relating to launching the webdriver browsers.
     /// </summary>
     public class WebDriverBrowser
     {
@@ -67,7 +67,7 @@ namespace ProtoTest.Golem.WebDriver
 
         private void SetBrowserSize()
         {
-            string resolution = Config.Settings.runTimeSettings.BrowserResolution;
+            var resolution = Config.Settings.runTimeSettings.BrowserResolution;
             if (resolution.Contains("Default"))
             {
                 driver.Manage().Window.Maximize();
@@ -86,7 +86,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 capabilities.SetCapability("proxy", proxy);
             }
 
@@ -96,14 +96,14 @@ namespace ProtoTest.Golem.WebDriver
         public IWebDriver StartChromeBrowser()
         {
             var options = new ChromeOptions();
-            
+
             // Add the WebDriver proxy capability.
             if (Config.Settings.httpProxy.useProxy)
             {
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.Proxy = proxy;
             }
 
@@ -120,7 +120,7 @@ namespace ProtoTest.Golem.WebDriver
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.Proxy = proxy;
                 options.UsePerProcessProxy = true;
             }
@@ -137,10 +137,10 @@ namespace ProtoTest.Golem.WebDriver
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.AddAdditionalCapability("proxy", proxy);
             }
-            
+
             return new PhantomJSDriver(options);
         }
 
@@ -154,7 +154,7 @@ namespace ProtoTest.Golem.WebDriver
                 var proxy = new OpenQA.Selenium.Proxy();
                 proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort; 
+                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.AddAdditionalCapability("proxy", proxy);
             }
 
@@ -194,13 +194,13 @@ namespace ProtoTest.Golem.WebDriver
 
             if (Config.Settings.sauceLabsSettings.UseSauceLabs)
             {
-                DesiredCapabilities caps = GetCapabilitiesForBrowser(browser);
-                caps.SetCapability("platform",Config.Settings.runTimeSettings.Platform);
-                caps.SetCapability("version",Config.Settings.runTimeSettings.Version);
+                var caps = GetCapabilitiesForBrowser(browser);
+                caps.SetCapability("platform", Config.Settings.runTimeSettings.Platform);
+                caps.SetCapability("version", Config.Settings.runTimeSettings.Version);
                 caps.SetCapability("username", Config.Settings.sauceLabsSettings.SauceLabsUsername);
                 caps.SetCapability("accessKey", Config.Settings.sauceLabsSettings.SauceLabsAPIKey);
                 caps.SetCapability("name", TestContext.CurrentContext.TestStep.FullName);
-                caps.SetCapability("screen-resolution",Config.Settings.sauceLabsSettings.ScreenResolution);
+                caps.SetCapability("screen-resolution", Config.Settings.sauceLabsSettings.ScreenResolution);
                 //caps.SetCapability("device",Config.Settings.runTimeSettings.de);
                 Common.Log(string.Format("Starting {0}:{1}:{2} browser on SauceLabs : {3}", browser,
                     Config.Settings.runTimeSettings.Version, Config.Settings.runTimeSettings.Platform,
@@ -210,23 +210,38 @@ namespace ProtoTest.Golem.WebDriver
             }
 
 
-
-            DesiredCapabilities desiredCapabilities = GetCapabilitiesForBrowser(browser);
-            desiredCapabilities.SetCapability(CapabilityType.Platform,Config.Settings.runTimeSettings.Platform);
+            var desiredCapabilities = GetCapabilitiesForBrowser(browser);
+            desiredCapabilities.SetCapability(CapabilityType.Platform, Config.Settings.runTimeSettings.Platform);
             desiredCapabilities.SetCapability(CapabilityType.Version, Config.Settings.runTimeSettings.Version);
-            
-            
+
+
             if (host.Equals(Config.Settings.browserStackSettings.BrowserStackRemoteURL))
             {
-                String user = Config.Settings.browserStackSettings.BrowserStack_User;
-                String key = Config.Settings.browserStackSettings.BrowserStack_Key;
-                String os = Config.Settings.browserStackSettings.BrowserStack_OS;
-                String os_version = Config.Settings.browserStackSettings.BrowserStack_OS_Version;
+                var user = Config.Settings.browserStackSettings.BrowserStack_User;
+                var key = Config.Settings.browserStackSettings.BrowserStack_Key;
+                var os = Config.Settings.browserStackSettings.BrowserStack_OS;
+                var os_version = Config.Settings.browserStackSettings.BrowserStack_OS_Version;
 
-                if (user == null) { throw new ConfigurationErrorsException("Framework configured to use BrowserStack, however 'BrowserStack_User' is not defined in App.config"); }
-                if (key == null) { throw new ConfigurationErrorsException("Framework configured to use BrowserStack, however 'BrowserStack_Key' is not defined in App.config"); }
-                if (os == null) { throw new ConfigurationErrorsException("Framework configured to use BrowserStack, however 'BrowserStack_OS' is not defined in App.config"); }
-                if (os_version == null) { throw new ConfigurationErrorsException("Framework configured to use BrowserStack, however 'BrowserStack_OS_Version' is not defined in App.config"); }
+                if (user == null)
+                {
+                    throw new ConfigurationErrorsException(
+                        "Framework configured to use BrowserStack, however 'BrowserStack_User' is not defined in App.config");
+                }
+                if (key == null)
+                {
+                    throw new ConfigurationErrorsException(
+                        "Framework configured to use BrowserStack, however 'BrowserStack_Key' is not defined in App.config");
+                }
+                if (os == null)
+                {
+                    throw new ConfigurationErrorsException(
+                        "Framework configured to use BrowserStack, however 'BrowserStack_OS' is not defined in App.config");
+                }
+                if (os_version == null)
+                {
+                    throw new ConfigurationErrorsException(
+                        "Framework configured to use BrowserStack, however 'BrowserStack_OS_Version' is not defined in App.config");
+                }
 
                 // Browser stack does not require a remote host port
                 desiredCapabilities.SetCapability("browserstack.user", user);
@@ -240,9 +255,10 @@ namespace ProtoTest.Golem.WebDriver
             else
             {
                 URIStr = string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.runTimeSettings.RemoteHostPort);
-                Common.Log(string.Format("Starting {0} browser on host : {1}:{2}", browser, host, Config.Settings.runTimeSettings.RemoteHostPort));
+                Common.Log(string.Format("Starting {0} browser on host : {1}:{2}", browser, host,
+                    Config.Settings.runTimeSettings.RemoteHostPort));
             }
-           
+
             var remoteAddress = new Uri(URIStr);
             return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
         }

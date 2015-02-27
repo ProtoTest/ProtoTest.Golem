@@ -9,43 +9,32 @@ namespace ProtoTest.Golem.Core
 {
     public class TestDataContainer
     {
-        private delegate void ActionEvent(string name, EventArgs e);
-
-
-#pragma warning disable 67
-        private static event ActionEvent BeforeTestEvent;
-        private static event ActionEvent AfterTestEvent;
-        private static event ActionEvent PageObjectActionEvent;
-        private static event ActionEvent BeforeCommandEvent;
-        private static event ActionEvent AfterCommandEvent;
-        private static event ActionEvent BeforeSuiteEvent;
-        private static event ActionEvent AfterSuiteEvent;
-        private static event ActionEvent GenericEvent;
-#pragma warning restore 67
-
-        public List<VerificationError> VerificationErrors;
+        private readonly object eventLocker = new object();
         public ActionList actions;
+        public BrowserInfo browserInfo;
+        public ConfigSettings configSettings;
+        private bool eventsRegistered;
         public Element lastElement;
         public ScreenRecorder recorder;
         public string testName;
-        public BrowserInfo browserInfo;
-        public ConfigSettings configSettings;
+        public List<VerificationError> VerificationErrors;
 
         public TestDataContainer(string name)
         {
             testName = name;
             actions = new ActionList();
             VerificationErrors = new List<VerificationError>();
-            SetupEvents();
             configSettings = new ConfigSettings();
+            browserInfo = new BrowserInfo();
+            SetupEvents();
         }
 
+        public IWebDriver driver { get; set; }
 
         public void LogEvent(string name)
         {
-            WriteActionToLog(name,null);
+            WriteActionToLog(name, null);
         }
-
 
         private void WriteActionToLog(string name, EventArgs e)
         {
@@ -61,19 +50,16 @@ namespace ProtoTest.Golem.Core
             TestBase.testData.actions.addAction(name);
         }
 
-        private object eventLocker = new object();
-        private bool eventsRegistered = false;
         private void SetupEvents()
         {
             lock (eventLocker)
             {
-                    PageObjectActionEvent += AddAction;
-                    BeforeTestEvent += WriteActionToLog;
-                    AfterTestEvent += WriteActionToLog;
-                    GenericEvent += WriteActionToLog;
-                    eventsRegistered = true;
+                PageObjectActionEvent += AddAction;
+                BeforeTestEvent += WriteActionToLog;
+                AfterTestEvent += WriteActionToLog;
+                GenericEvent += WriteActionToLog;
+                eventsRegistered = true;
             }
-
         }
 
         private void RemoveEvents()
@@ -88,11 +74,19 @@ namespace ProtoTest.Golem.Core
                     GenericEvent -= WriteActionToLog;
                     eventsRegistered = false;
                 }
-
             }
-
         }
 
-        public IWebDriver driver { get; set; }
+        private delegate void ActionEvent(string name, EventArgs e);
+#pragma warning disable 67
+        private static event ActionEvent BeforeTestEvent;
+        private static event ActionEvent AfterTestEvent;
+        private static event ActionEvent PageObjectActionEvent;
+        private static event ActionEvent BeforeCommandEvent;
+        private static event ActionEvent AfterCommandEvent;
+        private static event ActionEvent BeforeSuiteEvent;
+        private static event ActionEvent AfterSuiteEvent;
+        private static event ActionEvent GenericEvent;
+#pragma warning restore 67
     }
 }

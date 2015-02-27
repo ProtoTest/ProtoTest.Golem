@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -15,40 +14,39 @@ using ProtoTest.Golem.Core;
 namespace ProtoTest.Golem.WebDriver
 {
     /// <summary>
-    /// Extension methods added to the IWebDriver and IWebElement API's
+    ///     Extension methods added to the IWebDriver and IWebElement API's
     /// </summary>
     public static class WebDriverExtensions
     {
-        public static ElementVerification Verify(this IWebElement element, int timeout=-1)
+        public static ElementVerification Verify(this IWebElement element, int timeout = -1)
         {
             try
             {
                 if (timeout == -1)
                     timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
                 var GolemElement = (Element) element;
-                return new ElementVerification(GolemElement, timeout,false);
+                return new ElementVerification(GolemElement, timeout, false);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return new ElementVerification(new Element(element), Config.Settings.runTimeSettings.ElementTimeoutSec,
-                false);
+                    false);
             }
-            
         }
 
-        public static ElementVerification WaitUntil(this IWebElement element, int timeout=-1)
+        public static ElementVerification WaitUntil(this IWebElement element, int timeout = -1)
         {
             try
             {
                 if (timeout == -1)
                     timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-                var GolemElement = (Element)element;
+                var GolemElement = (Element) element;
                 return new ElementVerification(GolemElement, timeout, true);
             }
             catch (Exception)
             {
                 return new ElementVerification(new Element(element), Config.Settings.runTimeSettings.ElementTimeoutSec,
-                false);
+                    false);
             }
         }
 
@@ -79,8 +77,8 @@ namespace ProtoTest.Golem.WebDriver
 
         public static IWebElement GetParent(this IWebElement element)
         {
-            IWebDriver driver = WebDriverTestBase.driver;
-            return (IWebElement) element.FindElement(By.XPath(".."));
+            var driver = WebDriverTestBase.driver;
+            return element.FindElement(By.XPath(".."));
         }
 
         public static string GetHtml(this IWebElement element)
@@ -92,19 +90,18 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
-                string html = element.GetAttribute("innerHTML").Replace("\r\n","");
+                var html = element.GetAttribute("innerHTML").Replace("\r\n", "");
                 if (html.Length <= length)
                     return html;
-                int halfLength = length/2;
-                string start = html.Substring(0, halfLength);
-                string end = html.Substring((html.Length - halfLength), halfLength);
+                var halfLength = length/2;
+                var start = html.Substring(0, halfLength);
+                var end = html.Substring((html.Length - halfLength), halfLength);
                 return string.Format("{0}...{1}", start, end);
             }
             catch (Exception e)
             {
                 return "HTML Not found " + e.Message;
             }
-            
         }
 
         public static bool IsStale(this IWebElement element)
@@ -113,7 +110,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 if (element == null)
                     return true;
-                bool enabled = element.Enabled;
+                var enabled = element.Enabled;
                 return false;
             }
             catch (Exception e)
@@ -122,17 +119,16 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-        public static void Highlight(this IWebElement element, int ms=30)
+        public static void Highlight(this IWebElement element, int ms = 30)
         {
             try
             {
-                var jsDriver = ((IJavaScriptExecutor)((IWrapsDriver)element).WrappedDriver);
-                var originalElementBorder = (string)jsDriver.ExecuteScript("return arguments[0].style.border", element);
+                var jsDriver = ((IJavaScriptExecutor) ((IWrapsDriver) element).WrappedDriver);
+                var originalElementBorder = (string) jsDriver.ExecuteScript("return arguments[0].style.border", element);
                 jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
-                BackgroundWorker bw = new BackgroundWorker();
+                var bw = new BackgroundWorker();
                 bw.DoWork += (obj, e) => Unhighlight(element, originalElementBorder, ms);
                 bw.RunWorkerAsync();
-                
             }
             catch (Exception e)
             {
@@ -144,13 +140,12 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
-                var jsDriver = ((IJavaScriptExecutor)((IWrapsDriver)element).WrappedDriver);
+                var jsDriver = ((IJavaScriptExecutor) ((IWrapsDriver) element).WrappedDriver);
                 Thread.Sleep(timeMs);
                 jsDriver.ExecuteScript("arguments[0].style.border='" + border + "'; return;", element);
             }
             catch (Exception e)
             {
-
             }
         }
 
@@ -160,13 +155,13 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="element"></param>
         public static void ClearChecked(this IWebElement element)
         {
-            var jsDriver = ((IJavaScriptExecutor)((IWrapsDriver)element));
+            var jsDriver = ((IJavaScriptExecutor) ((IWrapsDriver) element));
             jsDriver.ExecuteScript("arguments[0].checked=false;", element);
         }
 
         public static void MouseOver(this IWebElement element)
         {
-            IWebDriver driver = WebDriverTestBase.driver;
+            var driver = WebDriverTestBase.driver;
             var action = new Actions(driver).MoveToElement(element);
             Thread.Sleep(2000);
             action.Build().Perform();
@@ -174,7 +169,6 @@ namespace ProtoTest.Golem.WebDriver
 
         public static IWebElement WaitForPresent(this IWebElement element, By by, int timeout = 0)
         {
-            
             if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
@@ -185,7 +179,7 @@ namespace ProtoTest.Golem.WebDriver
                 Common.Delay(1000);
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
-                by.ToString(), timeout));
+                @by, timeout));
         }
 
         public static IWebElement WaitForPresent(this IWebDriver driver, By by, int timeout = 0)
@@ -200,7 +194,7 @@ namespace ProtoTest.Golem.WebDriver
                 Common.Delay(1000);
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
-                by.ToString(), timeout));
+                @by, timeout));
         }
 
         public static void WaitForNotPresent(this IWebDriver driver, By by, int timeout = 0)
@@ -215,7 +209,7 @@ namespace ProtoTest.Golem.WebDriver
                 Common.Delay(1000);
             }
             throw new InvalidElementStateException(string.Format("Element ({0}) was still present after {1} seconds",
-                by.ToString(), timeout));
+                @by, timeout));
         }
 
         public static IWebElement WaitForVisible(this IWebDriver driver, By by, int timeout = 0)
@@ -225,12 +219,12 @@ namespace ProtoTest.Golem.WebDriver
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 var eles = driver.FindElements(by).Where(x => x.Displayed).ToList();
-                if (eles.Count>0)
+                if (eles.Count > 0)
                     return eles.FirstOrDefault(x => x.Displayed);
                 Common.Delay(1000);
             }
             throw new ElementNotVisibleException(string.Format("Element ({0}) was not visible after {1} seconds",
-                by.ToString(), timeout));
+                @by, timeout));
         }
 
         public static void WaitForNotVisible(this IWebDriver driver, By by, int timeout = 0)
@@ -245,7 +239,7 @@ namespace ProtoTest.Golem.WebDriver
                 Common.Delay(1000);
             }
             throw new ElementNotVisibleException(string.Format("Element ({0}) was still visible after {1} seconds",
-                by.ToString(), timeout));
+                @by, timeout));
         }
 
         public static IWebElement FindElementWithText(this IWebDriver driver, string text)
@@ -261,7 +255,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public static void VerifyElementPresent(this IWebDriver driver, By by, bool isPresent = true)
         {
-            int count = driver.FindElements(by).Count;
+            var count = driver.FindElements(by).Count;
             Verify(isPresent && count == 0, "VerifyElementPresent Failed : Element : " + @by +
                                             (isPresent ? " found" : " not found"));
         }
@@ -288,7 +282,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             var s_element = new SelectElement(element);
 
-            foreach (IWebElement option in s_element.Options.Where(option => option.Text.Contains(text)))
+            foreach (var option in s_element.Options.Where(option => option.Text.Contains(text)))
             {
                 option.Click();
                 break;
@@ -299,8 +293,8 @@ namespace ProtoTest.Golem.WebDriver
 
         public static IWebElement FindVisibleElement(this IWebDriver driver, By by)
         {
-            ReadOnlyCollection<IWebElement> elements = driver.FindElements(by);
-            foreach (IWebElement ele in elements.Where(ele => (ele.Displayed) && (ele.Enabled)))
+            var elements = driver.FindElements(by);
+            foreach (var ele in elements.Where(ele => (ele.Displayed) && (ele.Enabled)))
             {
                 return ele;
             }
@@ -309,12 +303,12 @@ namespace ProtoTest.Golem.WebDriver
 
         public static void VerifyElementVisible(this IWebDriver driver, By by, bool isVisible = true)
         {
-            ReadOnlyCollection<IWebElement> elements = driver.FindElements(by);
-            int count = elements.Count;
-            bool visible = false;
+            var elements = driver.FindElements(by);
+            var count = elements.Count;
+            var visible = false;
             if (isVisible && count != 0)
             {
-                foreach (IWebElement element in elements)
+                foreach (var element in elements)
                 {
                     if (element.Displayed)
                     {
@@ -329,7 +323,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public static void VerifyElementText(this IWebDriver driver, By by, string expectedText)
         {
-            string actualText = driver.FindElement(by).Text;
+            var actualText = driver.FindElement(by).Text;
             Verify(actualText != expectedText,
                 "VerifyElementText Failed : Expected : " + @by + " Expected text : '" + expectedText +
                 "' + Actual '" + actualText);
@@ -356,11 +350,10 @@ namespace ProtoTest.Golem.WebDriver
             try
             {
                 if (driver == null) return screen_shot;
-                Screenshot ss = ((ITakesScreenshot) driver).GetScreenshot();
-                    var ms = new MemoryStream(ss.AsByteArray);
-                    screen_shot = Image.FromStream(ms); 
-                    ms.Dispose();
-   
+                var ss = ((ITakesScreenshot) driver).GetScreenshot();
+                var ms = new MemoryStream(ss.AsByteArray);
+                screen_shot = Image.FromStream(ms);
+                ms.Dispose();
             }
             catch (Exception e)
             {
@@ -419,11 +412,11 @@ namespace ProtoTest.Golem.WebDriver
 
             try
             {
-                string currentHandle = driver.CurrentWindowHandle;
+                var currentHandle = driver.CurrentWindowHandle;
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
                 wait.Until(d => (driver.WindowHandles.Count() > 1));
 
-                foreach (string handle in (driver.WindowHandles))
+                foreach (var handle in (driver.WindowHandles))
                 {
                     if (handle != currentHandle)
                     {
@@ -461,23 +454,21 @@ namespace ProtoTest.Golem.WebDriver
         public static Image GetImage(this IWebElement element)
         {
             var size = new Size(element.Size.Width, element.Size.Height);
-            if (element.Displayed == false || element.Location.X<0 || element.Location.Y <0)
+            if (element.Displayed == false || element.Location.X < 0 || element.Location.Y < 0)
             {
                 throw new BadImageFormatException(string.Format(
                     "Could not create image for element as it is hidden"));
             }
             var cropRect = new Rectangle(element.Location, size);
-            using (Image screenShot = TestBase.testData.driver.GetScreenshot())
+            using (var screenShot = TestBase.testData.driver.GetScreenshot())
             {
                 if (cropRect.X < 0)
                 {
                     cropRect.X = 0;
-
                 }
                 if (cropRect.Y < 0)
                 {
                     cropRect.Y = 0;
-
                 }
                 if (cropRect.X + cropRect.Width > screenShot.Width)
                 {
@@ -491,17 +482,14 @@ namespace ProtoTest.Golem.WebDriver
                 try
                 {
                     var bmpImage = new Bitmap(screenShot);
-                    Bitmap bmpCrop = bmpImage.Clone(cropRect, bmpImage.PixelFormat);
+                    var bmpCrop = bmpImage.Clone(cropRect, bmpImage.PixelFormat);
                     return bmpCrop;
-
                 }
                 catch (Exception e)
                 {
                     return null;
                 }
-                
             }
-
         }
 
         public static IWebElement ClickWithOffset(this IWebElement element, int x, int y)

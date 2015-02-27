@@ -3,7 +3,7 @@
 namespace ProtoTest.Golem.WebDriver
 {
     /// <summary>
-    /// Contains By Extensions for the OpenQA.Selenium.By class
+    ///     Contains By Extensions for the OpenQA.Selenium.By class
     /// </summary>
     public class ByE
     {
@@ -22,7 +22,7 @@ namespace ProtoTest.Golem.WebDriver
             string attr;
 
             // put a '@' in front of the attribute if the user did not
-            if(!attribute.StartsWith("@"))
+            if (!attribute.StartsWith("@"))
             {
                 attr = string.Format("@{0}", attribute);
             }

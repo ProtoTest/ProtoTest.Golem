@@ -1,28 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Net;
 using Gallio.Framework;
 using Gallio.Model;
 using MbUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Rest;
-using RestSharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ProtoTest.Golem.WebDriver
 {
     /// <summary>
-    /// This class should be inherited by all webdriver tests.  It will automatically launch a browser and include the Driver object in each test.  
+    ///     This class should be inherited by all webdriver tests.  It will automatically launch a browser and include the
+    ///     Driver object in each test.
     /// </summary>
     public class WebDriverTestBase : TestBase
     {
-        [Factory("GetBrowsers")] protected BrowserInfo browserInfo = new BrowserInfo(WebDriverBrowser.Browser.Chrome,"","");
-        protected static IEnumerable<BrowserInfo> GetBrowsers()
-        {
-            return Config.Settings.runTimeSettings.Browsers;
-        }
+        protected static Object browserLocker = new object();
+
+        [Factory("GetBrowsers")] protected BrowserInfo browserInfo = new BrowserInfo(WebDriverBrowser.Browser.Chrome, "", "");
 
         public static IWebDriver driver
         {
@@ -42,13 +36,16 @@ namespace ProtoTest.Golem.WebDriver
             set { browserInfo.version = value; }
         }
 
-        public string platform    
+        public string platform
         {
             get { return browserInfo.platform; }
             set { browserInfo.platform = value; }
         }
 
-
+        protected static IEnumerable<BrowserInfo> GetBrowsers()
+        {
+            return Config.Settings.runTimeSettings.Browsers;
+        }
 
         public static T OpenPage<T>(string url)
         {
@@ -60,12 +57,12 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        /// Take a screenshot and embed it within the TestLog.
+        ///     Take a screenshot and embed it within the TestLog.
         /// </summary>
         /// <param name="message">Associate a message with the screenshot (optional)</param>
-        public static void LogScreenShot(string message=null)
+        public static void LogScreenShot(string message = null)
         {
-            Image screenshot = testData.driver.GetScreenshot();
+            var screenshot = testData.driver.GetScreenshot();
             if (screenshot != null)
             {
                 if (message != null) TestLog.Default.WriteLine("!------- " + message + " --------!");
@@ -77,9 +74,9 @@ namespace ProtoTest.Golem.WebDriver
         private void LogScreenshotIfTestFailed()
         {
             if ((Config.Settings.reportSettings.screenshotOnError) &&
-                (Gallio.Framework.TestContext.CurrentContext.Outcome != TestOutcome.Passed))
+                (TestContext.CurrentContext.Outcome != TestOutcome.Passed))
             {
-                Image screenshot = testData.driver.GetScreenshot();
+                var screenshot = testData.driver.GetScreenshot();
                 if (screenshot != null)
                 {
                     TestLog.Failures.EmbedImage(null, screenshot);
@@ -94,7 +91,7 @@ namespace ProtoTest.Golem.WebDriver
                 if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
                 {
                     var source = driver.PageSource;
-                    TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95),source );
+                    TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95), source);
                 }
             }
             catch (Exception e)
@@ -107,13 +104,14 @@ namespace ProtoTest.Golem.WebDriver
         {
             if (Config.Settings.runTimeSettings.LaunchBrowser)
             {
-                driver.Quit();
-                driver = null;
-                LogEvent(browser + " Browser Closed");
+                if (driver != null)
+                {
+                    driver.Quit();
+                    driver = null;
+                    LogEvent(browser + " Browser Closed");
+                }
             }
         }
-
-        protected static Object browserLocker = new object();
 
         public void LaunchBrowser()
         {
@@ -124,7 +122,8 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     if (Config.Settings.runTimeSettings.RunOnRemoteHost)
                     {
-                        driver = new WebDriverBrowser().LaunchRemoteBrowser(browser, Config.Settings.runTimeSettings.HostIp);
+                        driver = new WebDriverBrowser().LaunchRemoteBrowser(browser,
+                            Config.Settings.runTimeSettings.HostIp);
                     }
                     else
                     {
@@ -135,9 +134,8 @@ namespace ProtoTest.Golem.WebDriver
                     testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser + " Browser Launched");
                 }
             }
-           
         }
-        [TestInitialize]
+
         [NUnit.Framework.SetUp]
         [SetUp]
         public void SetUp()
@@ -145,7 +143,7 @@ namespace ProtoTest.Golem.WebDriver
             testData.browserInfo = browserInfo;
             LaunchBrowser();
         }
-        [TestCleanup]
+
         [NUnit.Framework.TearDown]
         [TearDown]
         public override void TearDownTestBase()
@@ -161,10 +159,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             if (Config.Settings.sauceLabsSettings.UseSauceLabs)
             {
-                bool passed = Gallio.Framework.TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
+                var passed = TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
                 driver.ExecuteJavaScript("sauce:job-result=" + (passed ? "passed" : "failed"));
-
-               
             }
         }
     }

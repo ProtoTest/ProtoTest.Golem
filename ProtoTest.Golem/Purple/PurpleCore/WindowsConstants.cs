@@ -1,7 +1,7 @@
 namespace Purple.Core
 {
     /// <summary>
-    /// Constants defined in winuser.h in C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\Include\WinUser.h
+    ///     Constants defined in winuser.h in C:\Program Files\Microsoft Visual Studio 8\VC\PlatformSDK\Include\WinUser.h
     /// </summary>
     public class WindowsConstants
     {
@@ -20,7 +20,6 @@ namespace Purple.Core
         public const uint SW_SHOWDEFAULT = 10;
         public const uint SW_FORCEMINIMIZE = 11;
         public const uint SW_MAX = 11;
-
         public const long WS_CAPTION = 0x00C00000L;
         public const long WS_DISABLED = 0x08000000L;
         public const long WS_VSCROLL = 0x00200000L;
@@ -31,12 +30,8 @@ namespace Purple.Core
         public const long WS_SYSMENU = 0x00080000L;
         public const long WS_TABSTOP = 0x00010000L;
         public const long WS_VISIBLE = 0x10000000L;
-
-        public static uint WPF_RESTORETOMAXIMIZED = 2;
-
         public const int INPUT_MOUSE = 0;
         public const int INPUT_KEYBOARD = 1;
-
         public const int MOUSEEVENTF_MOVE = 0x0001;
         public const int MOUSEEVENTF_LEFTDOWN = 0x0002;
         public const int MOUSEEVENTF_LEFTUP = 0x0004;
@@ -49,7 +44,7 @@ namespace Purple.Core
         public const int MOUSEEVENTF_WHEEL = 0x0800;
         public const int MOUSEEVENTF_VIRTUALDESK = 0x4000;
         public const int MOUSEEVENTF_ABSOLUTE = 0x8000;
-
         public const int HourGlassValue = 65557;
+        public static uint WPF_RESTORETOMAXIMIZED = 2;
     }
 }
