@@ -111,7 +111,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             if (param != "") param = "'" + param + "'";
 
-            if (TestBase.testData.lastElement.name != "Element")
+            if (TestBase.testData.lastElement!=null && TestBase.testData.lastElement.name != "Element")
             {
                 return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
                     TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);

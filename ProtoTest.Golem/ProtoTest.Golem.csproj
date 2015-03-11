@@ -92,8 +92,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Appium\AppiumTestBase.cs" />
-    <Compile Include="Appium\AppiumTouchCommands.cs" />
     <Compile Include="Core\CurrentProcessInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,9 +125,9 @@
     <Compile Include="Purple\PurpleElements\PurpleTable.cs" />
     <Compile Include="Rest\OAuth\OAuth_Token_Keeper.cs" />
     <Compile Include="Rest\OAuth\simpleTwitterHandler.cs" />
-    <Compile Include="Tests\AppiumTest.cs" />
     <Compile Include="Tests\BrowserStackTest.cs" />
     <Compile Include="Tests\BrowserTests.cs" />
+    <Compile Include="Tests\DesiredCapibilitiesTests.cs" />
     <Compile Include="Tests\SauceLabsTests.cs" />
     <Compile Include="Tests\TestElements.cs" />
     <Compile Include="Tests\TestDriver.cs" />
@@ -263,6 +261,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Appium\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

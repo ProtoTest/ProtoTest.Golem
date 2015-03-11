@@ -343,7 +343,7 @@ namespace ProtoTest.Golem.Core
         public void LogVideoIfTestFailed()
         {
             if ((Config.Settings.reportSettings.videoRecordingOnError) &&
-                (Common.GetTestOutcome() != TestOutcome.Passed))
+                (Common.GetTestOutcome() != TestOutcome.Passed) && testData.recorder.Video !=null)
             {
                 TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
             }

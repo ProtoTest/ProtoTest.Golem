@@ -24,8 +24,8 @@ namespace ProtoTest.Golem.Core
             testName = name;
             actions = new ActionList();
             VerificationErrors = new List<VerificationError>();
-            configSettings = new ConfigSettings();
-            browserInfo = new BrowserInfo();
+            configSettings = Config.GetDefaultConfig();
+            browserInfo = new BrowserInfo(WebDriverBrowser.Browser.Chrome);
             SetupEvents();
         }
 

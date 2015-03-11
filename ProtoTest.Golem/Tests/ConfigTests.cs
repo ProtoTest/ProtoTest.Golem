@@ -5,6 +5,11 @@ namespace ProtoTest.Golem.Tests
 {
     public class ConfigTests : TestBase
     {
+        [FixtureInitializer]
+        public void init()
+        {
+            Config.Settings.runTimeSettings.ElementTimeoutSec = 27;
+        }
         [Test]
         public void TestCustomConfigSettings()
         {
@@ -26,6 +31,12 @@ namespace ProtoTest.Golem.Tests
         {
             var value = Config.GetConfigValue("Testsdflksjdflsdkj", "-1");
             Assert.AreEqual(value, "-1");
+        }
+
+        [Test]
+        public void TestInit()
+        {
+            Assert.AreEqual(Config.Settings.runTimeSettings.ElementTimeoutSec, 27);
         }
     }
 }

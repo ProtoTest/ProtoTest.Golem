@@ -194,26 +194,16 @@ namespace ProtoTest.Golem.WebDriver
 
             if (Config.Settings.sauceLabsSettings.UseSauceLabs)
             {
-                var caps = GetCapabilitiesForBrowser(browser);
-                caps.SetCapability("platform", Config.Settings.runTimeSettings.Platform);
-                caps.SetCapability("version", Config.Settings.runTimeSettings.Version);
-                caps.SetCapability("username", Config.Settings.sauceLabsSettings.SauceLabsUsername);
-                caps.SetCapability("accessKey", Config.Settings.sauceLabsSettings.SauceLabsAPIKey);
-                caps.SetCapability("name", TestContext.CurrentContext.TestStep.FullName);
-                caps.SetCapability("screen-resolution", Config.Settings.sauceLabsSettings.ScreenResolution);
-                //caps.SetCapability("device",Config.Settings.runTimeSettings.de);
-                Common.Log(string.Format("Starting {0}:{1}:{2} browser on SauceLabs : {3}", browser,
-                    Config.Settings.runTimeSettings.Version, Config.Settings.runTimeSettings.Platform,
+                
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("username", Config.Settings.sauceLabsSettings.SauceLabsUsername);
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("accessKey", Config.Settings.sauceLabsSettings.SauceLabsAPIKey);
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("name", TestContext.CurrentContext.TestStep.FullName);
+                Common.Log(string.Format("Starting {0}:{1} browser on SauceLabs : {2}", browser,
+                    WebDriverTestBase.testData.browserInfo.capabilities,
                     Config.Settings.sauceLabsSettings.SauceLabsUrl));
                 var sauceLabs = new Uri(Config.Settings.sauceLabsSettings.SauceLabsUrl);
-                return new EventedWebDriver(new RemoteWebDriver(sauceLabs, caps)).driver;
+                return new EventedWebDriver(new RemoteWebDriver(sauceLabs, WebDriverTestBase.testData.browserInfo.capabilities)).driver;
             }
-
-
-            var desiredCapabilities = GetCapabilitiesForBrowser(browser);
-            desiredCapabilities.SetCapability(CapabilityType.Platform, Config.Settings.runTimeSettings.Platform);
-            desiredCapabilities.SetCapability(CapabilityType.Version, Config.Settings.runTimeSettings.Version);
-
 
             if (host.Equals(Config.Settings.browserStackSettings.BrowserStackRemoteURL))
             {
@@ -244,10 +234,10 @@ namespace ProtoTest.Golem.WebDriver
                 }
 
                 // Browser stack does not require a remote host port
-                desiredCapabilities.SetCapability("browserstack.user", user);
-                desiredCapabilities.SetCapability("browserstack.key", key);
-                desiredCapabilities.SetCapability("os", os);
-                desiredCapabilities.SetCapability("os_version", os_version);
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("browserstack.user", user);
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("browserstack.key", key);
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("os", os);
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("os_version", os_version);
 
                 URIStr = string.Format("http://{0}/wd/hub", host);
                 Common.Log(string.Format("Starting {0} browser on host : {1}", browser, host));
@@ -260,21 +250,7 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             var remoteAddress = new Uri(URIStr);
-            return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, desiredCapabilities)).driver;
-        }
-
-        public IWebDriver LaunchAppDriver(string appPath, string package, string activity)
-        {
-            var capabilities = new DesiredCapabilities();
-            capabilities.SetCapability(CapabilityType.BrowserName, "");
-            capabilities.SetCapability("device", "Android");
-            capabilities.SetCapability("app", appPath);
-            capabilities.SetCapability("appPackage", package);
-            capabilities.SetCapability("appActivity", activity);
-
-            var eDriver = new EventedWebDriver(driver);
-
-            return eDriver.driver;
+            return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, WebDriverTestBase.testData.browserInfo.capabilities)).driver;
         }
     }
 }

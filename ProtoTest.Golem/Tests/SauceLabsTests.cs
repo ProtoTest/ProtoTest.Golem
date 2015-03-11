@@ -8,18 +8,15 @@ namespace ProtoTest.Golem.Tests
     [Parallelizable]
     internal class SauceLabsTests : WebDriverTestBase
     {
-        [FixtureSetUp]
-        public void Setup()
+        [SetUp]
+        public override void SetUp()
         {
             Config.Settings.sauceLabsSettings.SauceLabsUsername = "bkitchener";
             Config.Settings.sauceLabsSettings.SauceLabsAPIKey = "998969ff-ad37-4b2e-9ad7-edacd982bc59";
             Config.Settings.sauceLabsSettings.UseSauceLabs = true;
             Config.Settings.runTimeSettings.RunOnRemoteHost = true;
-            Config.Settings.runTimeSettings.Platform = "Windows 8";
-            Config.Settings.runTimeSettings.Version = "";
             Config.Settings.runTimeSettings.HighlightFoundElements = false;
-            testData.browserInfo = browserInfo;
-            LaunchBrowser();
+           base.SetUp();
         }
 
         [Test]

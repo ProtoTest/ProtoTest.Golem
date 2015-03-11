@@ -16,7 +16,7 @@ namespace ProtoTest.Golem.WebDriver
     {
         protected static Object browserLocker = new object();
 
-        [Factory("GetBrowsers")] protected BrowserInfo browserInfo = new BrowserInfo(WebDriverBrowser.Browser.Chrome, "", "");
+        [Factory("GetBrowsers")] protected BrowserInfo browserInfo;
 
         public static IWebDriver driver
         {
@@ -30,20 +30,9 @@ namespace ProtoTest.Golem.WebDriver
             set { browserInfo.browser = value; }
         }
 
-        public string version
-        {
-            get { return browserInfo.version; }
-            set { browserInfo.version = value; }
-        }
-
-        public string platform
-        {
-            get { return browserInfo.platform; }
-            set { browserInfo.platform = value; }
-        }
-
         protected static IEnumerable<BrowserInfo> GetBrowsers()
         {
+
             return Config.Settings.runTimeSettings.Browsers;
         }
 
@@ -138,7 +127,7 @@ namespace ProtoTest.Golem.WebDriver
 
         [NUnit.Framework.SetUp]
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             testData.browserInfo = browserInfo;
             LaunchBrowser();

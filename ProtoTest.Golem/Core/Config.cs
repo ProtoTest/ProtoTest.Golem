@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Xml;
 using Gallio.Framework;
@@ -36,6 +37,18 @@ namespace ProtoTest.Golem.Core
             }
 
             return setting;
+        }
+
+        public static ConfigSettings GetDefaultConfig()
+        {
+            if (TestBase.testDataCollection.Count == 0)
+            {
+                return new ConfigSettings();
+            }
+            else
+            {
+                return TestBase.testDataCollection.FirstOrDefault(x=>x.Value.configSettings!=null).Value.configSettings;
+            }
         }
 
         /// <summary>
@@ -128,7 +141,6 @@ namespace ProtoTest.Golem.Core
     /// </summary>
     public class ConfigSettings
     {
-        public AppiumSettings appiumSettings;
         public BrowserStackSettings browserStackSettings;
         public HttpProxy httpProxy;
         public ImageCompareSettings imageCompareSettings;
@@ -142,47 +154,12 @@ namespace ProtoTest.Golem.Core
             runTimeSettings = new RuntimeSettings();
             reportSettings = new ReportSettings();
             httpProxy = new HttpProxy();
-            appiumSettings = new AppiumSettings();
             imageCompareSettings = new ImageCompareSettings();
             purpleSettings = new PurpleSettings();
             browserStackSettings = new BrowserStackSettings();
             sauceLabsSettings = new SauceLabsSettings();
         }
 
-        /// <summary>
-        ///     Contains all settings related to appium support.
-        /// </summary>
-        public class AppiumSettings
-        {
-            public string activity;
-            public string appiumPort;
-            public string appiumServerPath;
-            public string appiumVersion;
-            public string appPath;
-            public string bundleId;
-            public string device;
-            public bool launchApp;
-            public string package;
-            public string platformVersion;
-            public bool resetApp;
-            public bool useIpa;
-
-            public AppiumSettings()
-            {
-                launchApp = Config.GetConfigValueAsBool("LaunchApp", "False");
-                appPath = Config.GetConfigValue("AppPath", "");
-                package = Config.GetConfigValue("AppPackage", "");
-                activity = Config.GetConfigValue("AppActivity", "");
-                device = Config.GetConfigValue("Device", "");
-                appiumPort = Config.GetConfigValue("AppiumPort", "4723");
-                useIpa = Config.GetConfigValueAsBool("UseIpa", "False");
-                appiumServerPath = Config.GetConfigValue("AppiumServerPath", "");
-                resetApp = Config.GetConfigValueAsBool("ResetApp", "False");
-                bundleId = Config.GetConfigValue("BundleId", "");
-                appiumVersion = Config.GetConfigValue("AppiumVersion", "1.2");
-                platformVersion = Config.GetConfigValue("PlatformVersion", "4.3");
-            }
-        }
 
         /// <summary>
         ///     Contains all settings related to the BrowserMobProxy
@@ -295,18 +272,6 @@ namespace ProtoTest.Golem.Core
                 FindHiddenElements = Config.GetConfigValueAsBool("FindHiddenElements", "True");
             }
 
-            public string Version
-            {
-                get { return TestBase.testData.browserInfo.version; }
-                set { TestBase.testData.browserInfo.version = value; }
-            }
-
-            public string Platform
-            {
-                get { return TestBase.testData.browserInfo.platform; }
-                set { TestBase.testData.browserInfo.platform = value; }
-            }
-
             public WebDriverBrowser.Browser Browser
             {
                 get { return TestBase.testData.browserInfo.browser; }
@@ -317,28 +282,28 @@ namespace ProtoTest.Golem.Core
             {
                 var hosts = new List<BrowserInfo>();
                 var browser = Config.GetConfigValue("Browser", "null");
-                var version = Config.GetConfigValue("Version", "");
-                var platform = Config.GetConfigValue("Platform", "");
+                var caps = Config.GetConfigValue("BrowserCapabilities", "null");
                 if (browser != "null")
                 {
-                    hosts.Add(new BrowserInfo(WebDriverBrowser.getBrowserFromString(browser), version, platform));
+                    hosts.Add(new BrowserInfo(WebDriverBrowser.getBrowserFromString(browser), caps));
                 }
                 for (var i = 1; i < 10; i++)
                 {
                     browser = Config.GetConfigValue("Browser" + i, "null");
-                    version = Config.GetConfigValue("Version" + i, "");
-                    platform = Config.GetConfigValue("Platform" + i, "");
                     if (browser != "null")
                     {
-                        hosts.Add(new BrowserInfo(WebDriverBrowser.getBrowserFromString(browser), version, platform));
+                        caps = Config.GetConfigValue("Browser" + i + "Capabilities", "null");
+                        hosts.Add(new BrowserInfo(WebDriverBrowser.getBrowserFromString(browser), caps));
                     }
                 }
                 if (hosts.Count == 0)
                 {
-                    hosts.Add(new BrowserInfo(WebDriverBrowser.Browser.Chrome, "", ""));
+                    hosts.Add(new BrowserInfo(WebDriverBrowser.Browser.Chrome));
                 }
                 return hosts;
             }
+
+
         }
 
         /// <summary>
