@@ -16,6 +16,7 @@ namespace ProtoTest.Golem.Tests
             Config.Settings.sauceLabsSettings.UseSauceLabs = true;
             Config.Settings.runTimeSettings.RunOnRemoteHost = true;
             Config.Settings.runTimeSettings.HighlightFoundElements = false;
+            this.browser = WebDriverBrowser.Browser.IE;
            base.SetUp();
         }
 
