@@ -114,7 +114,7 @@ namespace ProtoTest.Golem.Core
                 }
                 catch (Exception e)
                 {
-                    TestName = "Test_" + GetRandomString();
+                    TestName = "Test";
                 }
             }
             return TestName;
