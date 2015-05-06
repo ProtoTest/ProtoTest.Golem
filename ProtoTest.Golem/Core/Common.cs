@@ -105,17 +105,18 @@ namespace ProtoTest.Golem.Core
 
         public static string GetCurrentTestName()
         {
-            var TestName = TestContext.CurrentContext.TestStep.FullName;
-            if (string.IsNullOrEmpty(TestName))
+            string TestName = "Test";
+            try
             {
-                try
+                 TestName = TestContext.CurrentContext.TestStep.FullName;
+                if (string.IsNullOrEmpty(TestName))
                 {
                     TestName = NUnit.Framework.TestContext.CurrentContext.Test.Name;
                 }
-                catch (Exception e)
-                {
-                    TestName = "Test";
-                }
+            }
+            catch (Exception e)
+            {
+                TestName = "Test";
             }
             return TestName;
         }
