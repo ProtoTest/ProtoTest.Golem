@@ -67,7 +67,6 @@ namespace ProtoTest.Golem.Core
         [MbUnit.Framework.SetUp]
         public virtual void SetUpTestBase()
         {
-            StartVideoRecording();
             LogEvent(Common.GetCurrentTestName() + " started");
             StartNewProxy();
         }
@@ -81,7 +80,7 @@ namespace ProtoTest.Golem.Core
             GetHarFile();
 
             QuitProxy();
-            StopVideoRecording();
+            
             LogVideoIfTestFailed();
             AssertNoVerificationErrors();
             DeleteTestData();
@@ -99,6 +98,7 @@ namespace ProtoTest.Golem.Core
         [FixtureSetUp]
         public virtual void SuiteSetUp()
         {
+            StartVideoRecording();
             SetTestExecutionSettings();
             StartProxyServer();
         }
@@ -107,6 +107,7 @@ namespace ProtoTest.Golem.Core
         [FixtureTearDown]
         public virtual void SuiteTearDown()
         {
+            StopVideoRecording();
             QuitProxyServer();
             Config.Settings = new ConfigSettings();
         }
@@ -343,7 +344,7 @@ namespace ProtoTest.Golem.Core
         public void LogVideoIfTestFailed()
         {
             if ((Config.Settings.reportSettings.videoRecordingOnError) &&
-                (Common.GetTestOutcome() != TestOutcome.Passed) && testData.recorder.Video !=null)
+                (Common.GetTestOutcome() != TestOutcome.Passed) && testData.recorder != null && testData.recorder.Video != null)
             {
                 TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
             }
@@ -351,7 +352,7 @@ namespace ProtoTest.Golem.Core
 
         public void StartVideoRecording()
         {
-            if (Config.Settings.reportSettings.videoRecordingOnError)
+            if (Config.Settings.reportSettings.videoRecordingOnError && Config.Settings.runTimeSettings.RunOnRemoteHost == false && Config.Settings.runTimeSettings.DegreeOfParallelism == 1)
             {
                 testData.recorder = Capture.StartRecording(new CaptureParameters {Zoom = .25}, 5);
                 testData.recorder.OverlayManager.AddOverlay(overlay);
@@ -362,7 +363,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                if (Config.Settings.reportSettings.videoRecordingOnError)
+                if (Config.Settings.reportSettings.videoRecordingOnError && Config.Settings.runTimeSettings.DegreeOfParallelism == 1 && Config.Settings.runTimeSettings.RunOnRemoteHost == false)
                 {
                     testData.recorder.Stop();
                 }

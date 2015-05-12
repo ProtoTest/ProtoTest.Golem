@@ -41,7 +41,7 @@ namespace ProtoTest.Golem.Proxy
             client = new RestClient();
             request = new RestRequest();
             response = new RestResponse();
-            UnzipProxy();
+           
         }
 
         public HarResult har
@@ -88,6 +88,7 @@ namespace ProtoTest.Golem.Proxy
         {
             try
             {
+                UnzipProxy();
                 Common.Log("Starting BrowserMob server on port " + serverPort);
                 serverProcess = new Process();
                 var StartInfo = new ProcessStartInfo();
@@ -183,6 +184,7 @@ namespace ProtoTest.Golem.Proxy
 
         public void CreateProxy()
         {
+            UnzipProxy();
             Common.Log("Creating Proxy on Port " + proxyPort);
 
             request.Method = Method.POST;

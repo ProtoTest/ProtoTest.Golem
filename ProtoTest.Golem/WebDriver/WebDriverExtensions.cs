@@ -83,7 +83,14 @@ namespace ProtoTest.Golem.WebDriver
 
         public static string GetHtml(this IWebElement element)
         {
-            return element.GetAttribute("outerHTML");
+            try
+            {
+                return element.GetAttribute("outerHTML");
+            }
+            catch
+            {
+                return "";
+            }
         }
 
         public static string GetHtml(this IWebElement element, int length)
@@ -481,9 +488,15 @@ namespace ProtoTest.Golem.WebDriver
 
                 try
                 {
-                    var bmpImage = new Bitmap(screenShot);
-                    var bmpCrop = bmpImage.Clone(cropRect, bmpImage.PixelFormat);
-                    return bmpCrop;
+                    using (var bmpImage = new Bitmap(screenShot))
+                    {
+                        using (var bmpCrop = bmpImage.Clone(cropRect, bmpImage.PixelFormat))
+                        {
+                            return bmpCrop;
+                        }
+                        
+                    }
+                    
                 }
                 catch (Exception e)
                 {
