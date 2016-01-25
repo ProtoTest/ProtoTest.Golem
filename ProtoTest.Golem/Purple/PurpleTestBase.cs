@@ -82,11 +82,12 @@ namespace ProtoTest.Golem.Purple
         [MbUnit.Framework.TearDown]
         public override void TearDownTestBase()
         {
-            LogEvent(Common.GetCurrentTestName() + " " + TestContext.CurrentContext.Result.Status);
+            //LogEvent(Common.GetCurrentTestName() + " " + TestContext.CurrentContext.Result.Status);
+            LogEvent(Common.GetCurrentTestName() + " " + TestContext.CurrentContext.Result.Outcome);
             PurpleWindow.EndProcess();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void FixtureTearDown()
         {
         }
