@@ -8,7 +8,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
         private readonly Element feelingLuckyButton = new Element("ImFeelingLuckyButton", By.Name("btnI"));
         private readonly Element gmailbutton = new Element("GmailButton", By.ClassName("gbts"));
         private readonly Element googleLogo = new Element("GoogleLogo", By.Id("hplogo"));
-        private readonly Element searchButton = new Element("SearchButton", By.Id("gbqfba"));
+        private readonly Element searchButton = new Element("SearchButton", By.Name("btnG"));
         private readonly Element searchField = new Element("SearchField", By.Name("q"));
         private readonly Element signInButton = new Element("SignInButon", By.LinkText("Sign in"));
 

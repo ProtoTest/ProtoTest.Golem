@@ -10,6 +10,7 @@ namespace ProtoTest.Golem.Tests
         {
             Config.Settings.runTimeSettings.ElementTimeoutSec = 27;
         }
+
         [Test]
         public void TestCustomConfigSettings()
         {
