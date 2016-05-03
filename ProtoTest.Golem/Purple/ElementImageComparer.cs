@@ -148,7 +148,7 @@ namespace ProtoTest.Golem.Purple
             if (ImagesMatch())
             {
                 TestContext.CurrentContext.IncrementAssertCount();
-                TestBase.LogEvent("Images match!");
+                Log.Message("Images match!");
             }
 
             else

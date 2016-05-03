@@ -44,7 +44,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             AutomationElement elementAvailable = null;
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            TestBase.Log(string.Format("Locating Element: {0} ", name));
+            Log.Message(string.Format("Locating Element: {0} ", name));
             while (elementAvailable == null)
             {
                 try
@@ -70,7 +70,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             if (!notfound)
             {
                 var time = stopWatch.Elapsed;
-                TestBase.Log(string.Format("Element: {2} found in {0}.{1} seconds.", time.Seconds, time.Milliseconds,
+                Log.Message(string.Format("Element: {2} found in {0}.{1} seconds.", time.Seconds, time.Milliseconds,
                     name));
                 if (PurpleTestBase.PerfLogging)
                 {
@@ -86,7 +86,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
 
         private void elementTimeout(object source, ElapsedEventArgs args)
         {
-            TestBase.Log("Element took longer than " + Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds +
+            Log.Message("Element took longer than " + Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds +
                          " Seconds to respond.");
             notfound = true;
         }

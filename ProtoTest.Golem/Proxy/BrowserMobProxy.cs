@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Windows.Forms;
 using Gallio.Framework;
 using Ionic.Zip;
 using Newtonsoft.Json;
@@ -21,7 +22,7 @@ namespace ProtoTest.Golem.Proxy
     /// </summary>
     public class BrowserMobProxy
     {
-        private static readonly string zipPath = Directory.GetCurrentDirectory() +
+        private static readonly string zipPath = AppDomain.CurrentDomain.BaseDirectory + 
                                                  @"\Proxy\browsermob-proxy-2.0-beta-9-bin.zip";
 
         private static readonly string batchPath = @"C:\BMP\browsermob-proxy-2.0-beta-9\bin\browsermob-proxy";
@@ -38,7 +39,7 @@ namespace ProtoTest.Golem.Proxy
         {
             serverPort = Config.Settings.httpProxy.proxyServerPort;
             proxyPortsByTest = new Dictionary<string, int>();
-            client = new RestClient();
+            client = new RestClient(new Uri("http://localhost:" + serverPort));
             request = new RestRequest();
             response = new RestResponse();
            
@@ -195,7 +196,7 @@ namespace ProtoTest.Golem.Proxy
                 response = client.Execute(request);
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    throw new Exception("Could not start Proxy at port : " + proxyPort + " : " + response.StatusCode);
+                    throw new Exception("Could not start Proxy at port : " + proxyPort + " : " + response.ErrorMessage);
                 }
             }
         }

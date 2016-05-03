@@ -5,7 +5,9 @@ using System.IO;
 using System.Threading;
 using System.Xml;
 using Gallio.Framework;
-using Gallio.Model;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using TestContext = NUnit.Framework.TestContext;
 
 namespace ProtoTest.Golem.Core
 {
@@ -46,7 +48,7 @@ namespace ProtoTest.Golem.Core
         {
             if (!File.Exists(filePath))
             {
-                throw new SilentTestException(TestOutcome.Failed, "Could not find batch file : " + filePath);
+                Assert.Fail("Could not find batch file : " + filePath);
             }
 
             return Process.Start(filePath);
@@ -54,7 +56,7 @@ namespace ProtoTest.Golem.Core
 
         public static Process ExecuteDosCommand(string command, bool waitToFinish = true)
         {
-            DiagnosticLog.WriteLine("Executing DOS Command: " + command);
+            Log("Executing DOS Command: " + command);
             var CMDprocess = new Process();
             var StartInfo = new ProcessStartInfo();
             StartInfo.FileName = "cmd"; //starts cmd window
@@ -74,7 +76,7 @@ namespace ProtoTest.Golem.Core
             while ((line != null) && (waitToFinish))
             {
                 line = SR.ReadLine();
-                DiagnosticLog.WriteLine(line);
+                Log(line);
             }
 
             SW.Close();
@@ -84,7 +86,7 @@ namespace ProtoTest.Golem.Core
 
         public static void Log(string msg)
         {
-            TestBase.LogEvent(msg);
+            Core.Log.Message(msg);
         }
 
         public static bool IsTruthy(string truth)
@@ -108,7 +110,7 @@ namespace ProtoTest.Golem.Core
             string TestName = "Test";
             try
             {
-                 TestName = TestContext.CurrentContext.TestStep.FullName;
+                TestName = TestContext.CurrentContext.Test.FullName;
                 if (string.IsNullOrEmpty(TestName))
                 {
                     TestName = NUnit.Framework.TestContext.CurrentContext.Test.Name;
@@ -151,14 +153,14 @@ namespace ProtoTest.Golem.Core
             return configFile.SelectSingleNode(xpath).Value ?? "";
         }
 
-        public static TestOutcome GetTestOutcome()
+        public static TestStatus GetTestOutcome()
         {
             if (TestBase.testData.VerificationErrors.Count != 0)
             {
-                return TestOutcome.Failed;
+                return TestStatus.Failed;
             }
 
-            return TestContext.CurrentContext.Outcome;
+            return TestContext.CurrentContext.Result.Outcome.Status;
         }
 
         public static Image ScaleImage(Image image, double scale = .5)

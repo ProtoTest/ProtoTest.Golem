@@ -28,7 +28,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             var processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
             if (processes.Length == 0)
             {
-                TestBase.Log(string.Format("Could not find process {0}. Attempting to start process...",
+                Log.Message(string.Format("Could not find process {0}. Attempting to start process...",
                     Config.Settings.purpleSettings.ProcessName));
                 var startProcess = new ProcessStartInfo(Config.Settings.purpleSettings.appPath);
                 var app = Process.Start(startProcess);
@@ -40,7 +40,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             }
             else
             {
-                TestBase.Log(
+                Log.Message(
                     string.Format("Process Length is: {0}. Attempting to kill existing process and start it up again.",
                         processes.Length));
                 EndProcess();

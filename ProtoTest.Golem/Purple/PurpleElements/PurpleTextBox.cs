@@ -41,7 +41,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             var textValue = "THERE IS NO TEXT";
             if (_UIAElement.Current.IsPassword)
             {
-                TestBase.LogEvent(string.Format("Field is {0} is a Password field, cannot get value", ElementName));
+                Log.Message(string.Format("Field is {0} is a Password field, cannot get value", ElementName));
                 textValue = "PASSWORD FIELD CANNOT BE READ";
             }
             object basePattern;

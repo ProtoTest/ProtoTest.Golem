@@ -872,6 +872,11 @@ namespace ProtoTest.Golem.WebDriver
         {
             private readonly IOptions wrappedOptions;
 
+            public ILogs Logs
+            {
+                get { return wrappedOptions.Logs; }
+            }
+
             /// <summary>
             ///     Initializes a new instance of the EventFiringOptions class
             /// </summary>

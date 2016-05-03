@@ -1,23 +1,41 @@
-﻿using MbUnit.Framework;
+﻿using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Tests.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests
 {
+    [Parallelizable]
     internal class TestMultiThreading : WebDriverTestBase
     {
-        [FixtureInitializer]
-        public void setup()
-        {
-            Config.Settings.runTimeSettings.DegreeOfParallelism = 5;
-        }
-
-        [Test, Parallelizable, ThreadedRepeat(5)]
-        public void TestThreadedRepeat()
+        [Test, Parallelizable]
+        public void TestThreadedRepeat1()
         {
             OpenPage<GoogleHomePage>("http://www.google.com");
-            //    Assert.AreEqual(testDataCollection.Count,5);
+        }
+
+        [Test, Parallelizable]
+        public void TestThreadedRepeat2()
+        {
+            OpenPage<GoogleHomePage>("http://www.google.com");
+        }
+
+        [Test, Parallelizable]
+        public void TestThreadedRepeat3()
+        {
+            OpenPage<GoogleHomePage>("http://www.google.com");
+        }
+
+        [Test, Parallelizable]
+        public void TestThreadedRepea4t()
+        {
+            OpenPage<GoogleHomePage>("http://www.google.com");
+        }
+
+        [Test, Parallelizable]
+        public void TestThreadedRepeat5()
+        {
+            OpenPage<GoogleHomePage>("http://www.google.com");
         }
     }
 }

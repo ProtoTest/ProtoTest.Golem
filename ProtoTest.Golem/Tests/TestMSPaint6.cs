@@ -1,4 +1,4 @@
-﻿using MbUnit.Framework;
+﻿using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple;
 using ProtoTest.Golem.Tests.PageObjects.MSPaint;
@@ -7,7 +7,7 @@ namespace ProtoTest.Golem.Tests
 {
     public class TestMSPaint6 : PurpleTestBase
     {
-        [FixtureInitializer]
+        [OneTimeSetUp]
         public void setup()
         {
             Config.Settings.purpleSettings.Purple_windowTitle = "Untitled - Paint";

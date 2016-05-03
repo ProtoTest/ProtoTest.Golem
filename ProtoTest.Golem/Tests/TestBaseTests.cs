@@ -1,4 +1,4 @@
-﻿using MbUnit.Framework;
+﻿using NUnit.Framework;
 using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.Tests

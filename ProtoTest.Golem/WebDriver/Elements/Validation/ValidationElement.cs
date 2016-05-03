@@ -1,5 +1,4 @@
-﻿using Gallio.Framework;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver.Elements.Validation
@@ -43,7 +42,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Validation
                 {
                     if (driver.FindElement(locatorValidation).Text.Contains(text))
                     {
-                        TestContext.CurrentContext.IncrementAssertCount();
+//                        TestContext.CurrentContext.IncrementAssertCount();
                         return this;
                     }
                 }

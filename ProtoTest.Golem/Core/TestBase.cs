@@ -6,14 +6,11 @@ using System.IO;
 using Gallio.Common.Markup;
 using Gallio.Common.Media;
 using Gallio.Framework;
-using Gallio.Framework.Pattern;
-using Gallio.Model;
-using MbUnit.Framework;
 using NUnit.Framework;
 using ProtoTest.Golem.Proxy;
 using ProtoTest.Golem.WebDriver;
-using Assert = MbUnit.Framework.Assert;
-using TestContext = Gallio.Framework.TestContext;
+using TestContext = NUnit.Framework.TestContext;
+using TestStatus = NUnit.Framework.Interfaces.TestStatus;
 
 namespace ProtoTest.Golem.Core
 {
@@ -54,33 +51,21 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        #region Events
-
-        public static void LogEvent(string name)
-        {
-            testData.LogEvent(name);
-        }
-
-        #endregion
-
-        [NUnit.Framework.SetUp]
-        [MbUnit.Framework.SetUp]
+        [SetUp]
         public virtual void SetUpTestBase()
         {
-            LogEvent(Common.GetCurrentTestName() + " started");
+            Log.Message(Common.GetCurrentTestName() + " started");
             StartNewProxy();
+            StartVideoRecording();
         }
 
-        [NUnit.Framework.TearDown]
-        [MbUnit.Framework.TearDown]
+        [TearDown]
         public virtual void TearDownTestBase()
         {
-            LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
+            Log.Message(Common.GetCurrentTestName() + " " + Common.GetTestOutcome());
             VerifyHttpTraffic();
             GetHarFile();
-
-            QuitProxy();
-            
+            QuitProxy();           
             LogVideoIfTestFailed();
             AssertNoVerificationErrors();
             DeleteTestData();
@@ -95,16 +80,21 @@ namespace ProtoTest.Golem.Core
         }
 
         [TestFixtureSetUp]
-        [FixtureSetUp]
         public virtual void SuiteSetUp()
         {
-            StartVideoRecording();
+            CreateReportDirectory();
             SetTestExecutionSettings();
             StartProxyServer();
         }
 
+        private void CreateReportDirectory()
+        {
+            string filePath = Path.GetFullPath(Config.Settings.reportSettings.reportPath);
+            Directory.CreateDirectory(filePath);
+            bool exists = Directory.Exists(filePath);
+        }
+
         [TestFixtureTearDown]
-        [FixtureTearDown]
         public virtual void SuiteTearDown()
         {
             StopVideoRecording();
@@ -120,34 +110,25 @@ namespace ProtoTest.Golem.Core
                 testDataCollection.Remove(testName);
             }
         }
-
-        public static void Log(string message)
-        {
-            var msg = "(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + message;
-            DiagnosticLog.WriteLine(msg);
-            TestLog.WriteLine(msg);
-            overlay.Text = msg;
-        }
-
         public static void LogVerificationPassed(string successText)
         {
-            LogEvent("--> VerificationError Passed: " + successText);
-            TestContext.CurrentContext.IncrementAssertCount();
+            Log.Message("--> VerificationError Passed: " + successText);
+//            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         public static void AddVerificationError(string errorText)
         {
-            LogEvent("--> VerificationError Found: " + errorText);
+            Log.Message("--> VerificationError Found: " + errorText);
             testData.VerificationErrors.Add(new VerificationError(errorText,
                 Config.Settings.reportSettings.screenshotOnError));
-            TestContext.CurrentContext.IncrementAssertCount();
+//            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         public static void AddVerificationError(string errorText, Image image)
         {
-            LogEvent("--> VerificationError Found: " + errorText);
+            Log.Message("--> VerificationError Found: " + errorText);
             testData.VerificationErrors.Add(new VerificationError(errorText, image));
-            TestContext.CurrentContext.IncrementAssertCount();
+//            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         private void AssertNoVerificationErrors()
@@ -158,27 +139,25 @@ namespace ProtoTest.Golem.Core
             }
 
             var i = 1;
-            TestLog.BeginMarker(Marker.AssertionFailure);
+//            TestLog.BeginMarker(Marker.AssertionFailure);
             foreach (var error in testData.VerificationErrors)
             {
-                TestLog.Failures.BeginSection("ElementVerification Error " + i);
-                TestLog.Failures.WriteLine(error.errorText);
+//                TestLog.Failures.BeginSection("ElementVerification Error " + i);
+                Common.Log(error.errorText);
                 if (Config.Settings.reportSettings.screenshotOnError && (error.screenshot != null))
                 {
-                    TestLog.Failures.EmbedImage(null, error.screenshot);
+                    Log.Image(error.screenshot);
                 }
-                TestLog.Failures.End();
                 i++;
             }
-            TestLog.End();
-            Assert.TerminateSilently(TestOutcome.Failed);
+            Assert.Fail("The test failed due to verification errors");
         }
 
         public void SetTestExecutionSettings()
         {
-            TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.DegreeOfParallelism;
-            TestAssemblyExecutionParameters.DefaultTestCaseTimeout =
-                TimeSpan.FromMinutes(Config.Settings.runTimeSettings.TestTimeoutMin);
+//            TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.DegreeOfParallelism;
+//            TestAssemblyExecutionParameters.DefaultTestCaseTimeout =
+//                TimeSpan.FromMinutes(Config.Settings.runTimeSettings.TestTimeoutMin);
         }
 
         //commented out Proxy stuff because browserMobProxy is not implimented
@@ -190,8 +169,7 @@ namespace ProtoTest.Golem.Core
                 {
                     var name = Common.GetShortTestName(80);
                     proxy.SaveHarToFile();
-                    TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".har",
-                        "application/json", File.ReadAllBytes(proxy.GetHarFilePath())));
+                    Log.FilePath(proxy.GetHarFilePath());
                     proxy.CreateHar();
                 }
             }
@@ -213,7 +191,7 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception e)
             {
-                Log("Failed to setup proxy: " + e.Message + ": Trying again...");
+                Log.Failure("Failed to setup proxy: " + e.Message + ": Trying again...");
                 proxy.CreateProxy();
                 proxy.CreateHar();
             }
@@ -344,15 +322,15 @@ namespace ProtoTest.Golem.Core
         public void LogVideoIfTestFailed()
         {
             if ((Config.Settings.reportSettings.videoRecordingOnError) &&
-                (Common.GetTestOutcome() != TestOutcome.Passed) && testData.recorder != null && testData.recorder.Video != null)
+                (Common.GetTestOutcome() != TestStatus.Passed) && testData.recorder != null && testData.recorder.Video != null)
             {
-                TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
+                Log.Video(testData.recorder.Video);
             }
         }
 
         public void StartVideoRecording()
         {
-            if (Config.Settings.reportSettings.videoRecordingOnError && Config.Settings.runTimeSettings.RunOnRemoteHost == false && Config.Settings.runTimeSettings.DegreeOfParallelism == 1)
+            if (Config.Settings.reportSettings.videoRecordingOnError)
             {
                 testData.recorder = Capture.StartRecording(new CaptureParameters {Zoom = .25}, 5);
                 testData.recorder.OverlayManager.AddOverlay(overlay);
@@ -370,7 +348,7 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception e)
             {
-                TestLog.Failures.WriteLine(e.Message);
+                Log.Failure(e.Message);
             }
         }
     }

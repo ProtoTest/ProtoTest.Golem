@@ -48,7 +48,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 if (Config.Settings.reportSettings.commandLogging)
                 {
-                    TestBase.LogEvent(GetLogMessage("Typing", e, e.Element.GetAttribute("value")));
+                    Log.Message(GetLogMessage("Typing", e, e.Element.GetAttribute("value")));
                 }
             }
             catch (Exception)
@@ -61,7 +61,7 @@ namespace ProtoTest.Golem.WebDriver
             Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
             if (Config.Settings.reportSettings.commandLogging)
             {
-                TestBase.LogEvent(string.Format("Navigating to url {0}", e.Url));
+                Log.Message(string.Format("Navigating to url {0}", e.Url));
             }
         }
 
@@ -74,7 +74,7 @@ namespace ProtoTest.Golem.WebDriver
             Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
             if (Config.Settings.reportSettings.commandLogging)
             {
-                TestBase.LogEvent(GetLogMessage("Finding", e));
+                Log.Message(GetLogMessage("Finding", e));
             }
         }
 
@@ -83,7 +83,7 @@ namespace ProtoTest.Golem.WebDriver
             Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
             if (Config.Settings.reportSettings.commandLogging)
             {
-                TestBase.LogEvent(GetLogMessage("Click", e));
+                Log.Message(GetLogMessage("Click", e));
             }
 
             if (e.Element == null)

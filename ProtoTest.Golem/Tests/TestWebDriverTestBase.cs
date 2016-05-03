@@ -1,4 +1,4 @@
-﻿using MbUnit.Framework;
+﻿using NUnit.Framework;
 using ProtoTest.Golem.Tests.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;
 //using Castle.Core.Logging;
@@ -11,7 +11,7 @@ namespace ProtoTest.Golem.Tests
         public void TestPageObjectCreater()
         {
             var page = OpenPage<GoogleHomePage>("http://www.google.com");
-            Assert.IsInstanceOfType<GoogleHomePage>(page);
+            Assert.IsInstanceOf<GoogleHomePage>(page);
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace ProtoTest.Golem.Tests
         [Test]
         public void TestEventFiringDriverLaunches()
         {
-            Assert.IsInstanceOfType<EventFiringWebDriver>(driver);
+            Assert.IsInstanceOf<EventFiringWebDriver>(driver);
         }
     }
 }

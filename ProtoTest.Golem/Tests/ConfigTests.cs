@@ -1,11 +1,11 @@
-﻿using MbUnit.Framework;
+﻿using NUnit.Framework;
 using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.Tests
 {
     public class ConfigTests : TestBase
     {
-        [FixtureInitializer]
+        [OneTimeSetUp]
         public void init()
         {
             Config.Settings.runTimeSettings.ElementTimeoutSec = 27;

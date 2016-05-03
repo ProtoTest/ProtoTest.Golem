@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using MbUnit.Framework;
+using NUnit.Framework;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Rest

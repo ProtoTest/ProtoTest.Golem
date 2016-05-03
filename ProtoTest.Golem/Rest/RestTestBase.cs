@@ -33,10 +33,10 @@ namespace ProtoTest.Golem.Rest
             //{
             //    TestBase.proxy.GetSessionMetrics();
             //    TestLog.BeginSection("HTTP Metrics");
-            //    TestLog.WriteLine("Number of Requests : " + TestBase.proxy.numSessions);
-            //    TestLog.WriteLine("Min Response Time : " + TestBase.proxy.minResponseTime);
-            //    TestLog.WriteLine("Max Response Time : " + TestBase.proxy.maxResponseTime);
-            //    TestLog.WriteLine("Avg Response Time : " + TestBase.proxy.avgResponseTime);
+            //    Log.Message("Number of Requests : " + TestBase.proxy.numSessions);
+            //    Log.Message("Min Response Time : " + TestBase.proxy.minResponseTime);
+            //    Log.Message("Max Response Time : " + TestBase.proxy.maxResponseTime);
+            //    Log.Message("Avg Response Time : " + TestBase.proxy.avgResponseTime);
             //    TestLog.End();
             //}
         }

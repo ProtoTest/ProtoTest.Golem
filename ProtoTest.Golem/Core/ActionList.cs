@@ -33,7 +33,7 @@ namespace ProtoTest.Golem.Core
             TestLog.BeginSection("Actions");
             foreach (var a in actions)
             {
-                TestLog.WriteLine(a.name + " : " + a._time.ToString("HH:mm:ss.ffff"));
+                Log.Message(a.name + " : " + a._time.ToString("HH:mm:ss.ffff"));
             }
             TestLog.End();
         }
@@ -53,12 +53,12 @@ namespace ProtoTest.Golem.Core
                 start = actions[i - 1]._time;
                 end = actions[i]._time;
                 difference = end.Subtract(start);
-                TestLog.WriteLine(actions[i].name + " : " + difference);
+                Log.Message(actions[i].name + " : " + difference);
             }
             start = actions[0]._time;
             end = actions[actions.Count - 1]._time;
             difference = end.Subtract(start);
-            TestLog.WriteLine("All Actions : " + difference);
+            Log.Message("All Actions : " + difference);
             TestLog.End();
         }
 

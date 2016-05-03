@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Gallio.Framework;
-using MbUnit.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 
@@ -88,7 +88,7 @@ namespace ProtoTest.Golem.WebDriver
                 condition = element.FindElements(bylocator).Count > 0;
                 if (condition == isTrue)
                 {
-                    TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
                     return element;
                 }
                 Common.Delay(1000);
@@ -108,7 +108,7 @@ namespace ProtoTest.Golem.WebDriver
                 condition = element.Present;
                 if (condition == isTrue)
                 {
-                    TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
                     return element;
                 }
                 Common.Delay(1000);
@@ -127,7 +127,7 @@ namespace ProtoTest.Golem.WebDriver
                 condition = element.Displayed;
                 if (condition == isTrue)
                 {
-                    TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
                     return element;
                 }
                 Common.Delay(1000);
@@ -146,7 +146,7 @@ namespace ProtoTest.Golem.WebDriver
                 condition = (element.Present) && (element.Text.Contains(text));
                 if (condition == isTrue)
                 {
-                    TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
                     return element;
                 }
                 Common.Delay(1000);
@@ -166,7 +166,7 @@ namespace ProtoTest.Golem.WebDriver
                 condition = (element.Present) && (element.GetAttribute("value").Contains(text));
                 if (condition == isTrue)
                 {
-                    TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
                     return element;
                 }
                 Common.Delay(1000);
@@ -186,7 +186,7 @@ namespace ProtoTest.Golem.WebDriver
                 condition = (element.Present) && (element.GetAttribute(attribute).Contains(value));
                 if (condition == isTrue)
                 {
-                    TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
                     return element;
                 }
                 Common.Delay(1000);
@@ -206,7 +206,7 @@ namespace ProtoTest.Golem.WebDriver
                 condition = (element.Present) && (element.GetAttribute(attribute).Contains(value));
                 if (condition == isTrue)
                 {
-                    TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
                     return element;
                 }
                 Common.Delay(1000);
@@ -226,7 +226,7 @@ namespace ProtoTest.Golem.WebDriver
                 condition = (element.Present) && (element.Selected);
                 if (condition == isTrue)
                 {
-                    TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
                     return element;
                 }
                 Common.Delay(1000);
@@ -245,8 +245,8 @@ namespace ProtoTest.Golem.WebDriver
                 condition = (element.Present) && (element.Images.ImagesMatch());
                 if (condition == isTrue)
                 {
-                    TestContext.CurrentContext.IncrementAssertCount();
-                    TestBase.LogEvent(GetSuccessMessage());
+//                    TestContext.CurrentContext.IncrementAssertCount();
+                    Log.Message(GetSuccessMessage());
                     return element;
                 }
                 Common.Delay(1000);

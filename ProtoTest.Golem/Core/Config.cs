@@ -208,6 +208,7 @@ namespace ProtoTest.Golem.Core
         /// </summary>
         public class ReportSettings
         {
+            public string reportPath;
             public bool actionLogging;
             public bool commandLogging;
             public bool diagnosticLog;
@@ -227,6 +228,14 @@ namespace ProtoTest.Golem.Core
                 spellChecking = Config.GetConfigValueAsBool("SpellChecking", "False");
                 diagnosticLog = Config.GetConfigValueAsBool("DiagnosticLog", "True");
                 testLog = Config.GetConfigValueAsBool("TestLog", "True");
+                reportPath = GetReportPath();
+            }
+
+            private string GetReportPath()
+            {
+                reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "reports");
+                reportPath = Path.Combine(reportPath, DateTime.Now.ToString("yyMMdd_HHMMss"));
+                return reportPath;
             }
         }
 

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using MbUnit.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.WebDriver;
 
@@ -29,7 +29,7 @@ namespace ProtoTest.Golem.Tests
             driver.Navigate().GoToUrl("http://www.google.com");
             var elements = new ElementCollection(driver.FindElements(By.Name("q")));
             driver.Navigate().GoToUrl("http://www.google.com");
-            Assert.Count(1, elements.Where(x => x.IsStale()));
+            Assert.AreEqual(1, elements.Where(x => x.IsStale()).Count());
         }
 
         [Test]

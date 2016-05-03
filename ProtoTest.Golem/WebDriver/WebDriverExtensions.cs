@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -8,6 +9,7 @@ using Gallio.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
 using ProtoTest.Golem.Core;
 
@@ -348,6 +350,12 @@ namespace ProtoTest.Golem.WebDriver
             {
                 return new Rectangle();
             }
+        }
+
+        public static string GetScreenshot(this IWebDriver driver, string path)
+        {
+            driver.TakeScreenshot().SaveAsFile(path, ImageFormat.Png);
+            return path;
         }
 
         public static Image GetScreenshot(this IWebDriver driver)

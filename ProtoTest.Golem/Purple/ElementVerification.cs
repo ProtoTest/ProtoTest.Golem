@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using Gallio.Framework;
-using MbUnit.Framework;
+using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.Elements;
 
@@ -81,7 +81,7 @@ namespace ProtoTest.Golem.Purple
         //    //    condition = element.UIAElement.Current.IsEnabled && element.getItem().GetMultiple(PurplePath).Length > 0;
         //    //    if (condition == isTrue)
         //    //    {
-        //    //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+        //    //        Log.Message("!--Verification Passed " + GetSuccessMessage());
         //    //        return element;
         //    //    }
         //    //    Common.Delay(1000);
@@ -101,7 +101,7 @@ namespace ProtoTest.Golem.Purple
         //    //    condition = element.getItem().Present();
         //    //    if (condition == isTrue)
         //    //    {
-        //    //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+        //    //        Log.Message("!--Verification Passed " + GetSuccessMessage());
         //    //        return element;
         //    //    }
         //    //    Common.Delay(1000);
@@ -120,7 +120,7 @@ namespace ProtoTest.Golem.Purple
         //    //    condition = element.getItem().Present() && element.getItem().Visible;
         //    //    if (condition == isTrue)
         //    //    {
-        //    //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+        //    //        Log.Message("!--Verification Passed " + GetSuccessMessage());
         //    //        return element;
         //    //    }
         //    //    Common.Delay(1000);
@@ -139,7 +139,7 @@ namespace ProtoTest.Golem.Purple
         //    //    condition = element.getItem().Present() && (element.getItem().Name.Contains(value));
         //    //    if (condition == isTrue)
         //    //    {
-        //    //        TestBase.LogEvent("!--Verification Passed " + GetSuccessMessage());
+        //    //        Log.Message("!--Verification Passed " + GetSuccessMessage());
         //    //        return element;
         //    //    }
         //    //    Common.Delay(1000);
@@ -156,8 +156,8 @@ namespace ProtoTest.Golem.Purple
             condition = element.UIAElement.Current.IsEnabled && comparer.ImagesMatch();
             if (condition == isTrue)
             {
-                TestContext.CurrentContext.IncrementAssertCount();
-                TestBase.LogEvent(GetSuccessMessage());
+//                TestContext.CurrentContext.IncrementAssertCount();
+                Log.Message(GetSuccessMessage());
             }
 
             else

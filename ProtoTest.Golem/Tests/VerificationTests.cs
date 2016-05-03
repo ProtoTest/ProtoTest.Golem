@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Gallio.Framework;
-using MbUnit.Framework;
+using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 
@@ -20,9 +19,11 @@ namespace ProtoTest.Golem.Tests
         [Test]
         public void TestAssertionCount()
         {
-            Assert.AreEqual(TestContext.CurrentContext.AssertCount, 0);
+            Assert.True(true == true);
+            var result = TestContext.CurrentContext.Result;
+//            Assert.AreEqual(TestContext.CurrentContext.Result.PassCount, 0);
             AddVerificationError("Test Error");
-            Assert.AreEqual(TestContext.CurrentContext.AssertCount, 2);
+//            Assert.AreEqual(TestContext.CurrentContext.Test., 2);
             testData.VerificationErrors = new List<VerificationError>();
         }
     }

@@ -39,10 +39,10 @@ namespace ProtoTest.Golem.Core
         private void WriteActionToLog(string name, EventArgs e)
         {
             TestBase.overlay.Text = name;
-            if (Config.Settings.reportSettings.diagnosticLog)
-                DiagnosticLog.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), name));
+//            if (Config.Settings.reportSettings.diagnosticLog)
+//                Log.Message(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), name));
             if (Config.Settings.reportSettings.testLog)
-                TestLog.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), name));
+                Log.Message(name);
         }
 
         private void AddAction(string name, EventArgs e)

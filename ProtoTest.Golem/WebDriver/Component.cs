@@ -6,7 +6,7 @@ namespace ProtoTest.Golem.WebDriver
 {
     public class Component : Element
     {
-        public By by;
+   
         public Element RootElement;
 
         public Component(Element RootElement, By by) : base(by)

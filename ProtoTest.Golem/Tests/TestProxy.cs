@@ -1,4 +1,4 @@
-﻿using MbUnit.Framework;
+﻿using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Tests.PageObjects.Google;
 using ProtoTest.Golem.WebDriver;
@@ -7,7 +7,7 @@ namespace ProtoTest.Golem.Tests
 {
     internal class TestProxy : WebDriverTestBase
     {
-        [FixtureInitializer]
+        [TestFixtureSetUp]
         public void setup()
         {
             Config.Settings.httpProxy.startProxy = true;

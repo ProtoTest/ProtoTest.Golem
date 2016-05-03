@@ -1,4 +1,4 @@
-﻿using MbUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
@@ -12,7 +12,7 @@ namespace ProtoTest.Golem.Tests
 {
     internal class BrowserTests : WebDriverTestBase
     {
-        [FixtureInitializer]
+        [OneTimeSetUp]
         public void Init()
         {
             Config.Settings.runTimeSettings.LaunchBrowser = false;
