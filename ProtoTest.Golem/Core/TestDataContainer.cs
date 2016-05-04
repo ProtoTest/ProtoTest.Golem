@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gallio.Common.Media;
-using Gallio.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.WebDriver;
 

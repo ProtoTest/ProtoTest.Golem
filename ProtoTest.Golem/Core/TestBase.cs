@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using Gallio.Common.Markup;
 using Gallio.Common.Media;
 using Gallio.Framework;
 using NUnit.Framework;
@@ -55,6 +54,8 @@ namespace ProtoTest.Golem.Core
         public virtual void SetUpTestBase()
         {
             Log.Message(Common.GetCurrentTestName() + " started");
+            Config.Settings = new ConfigSettings();
+            Config.Settings.reportSettings.reportPath = reportPath;
             StartNewProxy();
             StartVideoRecording();
         }
@@ -79,7 +80,7 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public virtual void SuiteSetUp()
         {
             CreateReportDirectory();
@@ -87,14 +88,15 @@ namespace ProtoTest.Golem.Core
             StartProxyServer();
         }
 
+        private string reportPath;
         private void CreateReportDirectory()
         {
             string filePath = Path.GetFullPath(Config.Settings.reportSettings.reportPath);
-            Directory.CreateDirectory(filePath);
-            bool exists = Directory.Exists(filePath);
+            reportPath = Path.Combine(filePath, DateTime.Now.ToString("yyMMdd_HHMM"));
+            Directory.CreateDirectory(reportPath);
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public virtual void SuiteTearDown()
         {
             StopVideoRecording();
@@ -118,39 +120,31 @@ namespace ProtoTest.Golem.Core
 
         public static void AddVerificationError(string errorText)
         {
-            Log.Message("--> VerificationError Found: " + errorText);
-            testData.VerificationErrors.Add(new VerificationError(errorText,
-                Config.Settings.reportSettings.screenshotOnError));
+            Log.Error("--> VerificationError Found: " + errorText);
+            var error = new VerificationError(errorText,
+                Config.Settings.reportSettings.screenshotOnError);
+            testData.VerificationErrors.Add(error);
+            if (error.screenshot != null)
+            {
+               Log.Image(error.screenshot);
+            }
+           
 //            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         public static void AddVerificationError(string errorText, Image image)
         {
-            Log.Message("--> VerificationError Found: " + errorText);
+            Log.Error("--> VerificationError Found: " + errorText, image);
             testData.VerificationErrors.Add(new VerificationError(errorText, image));
 //            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         private void AssertNoVerificationErrors()
         {
-            if (testData.VerificationErrors.Count == 0)
+            if (testData.VerificationErrors.Count >= 1)
             {
-                return;
+                Assert.Fail("The test failed due to verification errors");
             }
-
-            var i = 1;
-//            TestLog.BeginMarker(Marker.AssertionFailure);
-            foreach (var error in testData.VerificationErrors)
-            {
-//                TestLog.Failures.BeginSection("ElementVerification Error " + i);
-                Common.Log(error.errorText);
-                if (Config.Settings.reportSettings.screenshotOnError && (error.screenshot != null))
-                {
-                    Log.Image(error.screenshot);
-                }
-                i++;
-            }
-            Assert.Fail("The test failed due to verification errors");
         }
 
         public void SetTestExecutionSettings()
@@ -160,7 +154,6 @@ namespace ProtoTest.Golem.Core
 //                TimeSpan.FromMinutes(Config.Settings.runTimeSettings.TestTimeoutMin);
         }
 
-        //commented out Proxy stuff because browserMobProxy is not implimented
         private void GetHarFile()
         {
             try
@@ -179,7 +172,7 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        private void StartNewProxy()
+        internal void StartNewProxy()
         {
             try
             {
@@ -197,7 +190,7 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        private void StartProxyServer()
+        internal void StartProxyServer()
         {
             try
             {

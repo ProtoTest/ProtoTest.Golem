@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using Gallio.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -197,8 +197,8 @@ namespace ProtoTest.Golem.WebDriver
                 
                 WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("username", Config.Settings.sauceLabsSettings.SauceLabsUsername);
                 WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("accessKey", Config.Settings.sauceLabsSettings.SauceLabsAPIKey);
-                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("name", TestContext.CurrentContext.TestStep.FullName);
-                Common.Log(string.Format("Starting {0}:{1} browser on SauceLabs : {2}", browser,
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("name", TestContext.CurrentContext.Test.FullName);
+                Log.Message(string.Format("Starting {0}:{1} browser on SauceLabs : {2}", browser,
                     WebDriverTestBase.testData.browserInfo.capabilities,
                     Config.Settings.sauceLabsSettings.SauceLabsUrl));
                 var sauceLabs = new Uri(Config.Settings.sauceLabsSettings.SauceLabsUrl);
@@ -240,12 +240,12 @@ namespace ProtoTest.Golem.WebDriver
                 WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("os_version", os_version);
 
                 URIStr = string.Format("http://{0}/wd/hub", host);
-                Common.Log(string.Format("Starting {0} browser on host : {1}", browser, host));
+                Log.Message(string.Format("Starting {0} browser on host : {1}", browser, host));
             }
             else
             {
                 URIStr = string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.runTimeSettings.RemoteHostPort);
-                Common.Log(string.Format("Starting {0} browser on host : {1}:{2}", browser, host,
+                Log.Message(string.Format("Starting {0} browser on host : {1}:{2}", browser, host,
                     Config.Settings.runTimeSettings.RemoteHostPort));
             }
 

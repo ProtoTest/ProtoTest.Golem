@@ -5,7 +5,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Gallio.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Internal;
@@ -141,7 +140,7 @@ namespace ProtoTest.Golem.WebDriver
             }
             catch (Exception e)
             {
-                TestLog.Warnings.WriteLine(e.Message);
+                Log.Warning(e.Message);
             }
         }
 
@@ -277,7 +276,7 @@ namespace ProtoTest.Golem.WebDriver
             }
             else
             {
-                TestContext.CurrentContext.IncrementAssertCount();
+//                TestContext.CurrentContext.IncrementAssertCount();
             }
         }
 
@@ -372,7 +371,7 @@ namespace ProtoTest.Golem.WebDriver
             }
             catch (Exception e)
             {
-                TestLog.Failures.WriteLine("Failed to take screenshot: " + e.Message);
+                Log.Error("Failed to take screenshot: " + e.Message);
             }
 
             return screen_shot;

@@ -95,8 +95,8 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                     diff++;
                 }
             }
-            Common.Log("The Hamming Distance is " + diff);
-            Common.Log("The Hamming Difference is " + ((float) diff/first.Length));
+            Log.Message("The Hamming Distance is " + diff);
+            Log.Message("The Hamming Difference is " + ((float) diff/first.Length));
 
             return ((float) diff/first.Length);
         }

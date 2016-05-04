@@ -132,7 +132,7 @@ namespace ProtoTest.Golem.Purple
             }
             catch (Exception e)
             {
-                Common.Log("Exception saving image : " + e.Message);
+                Log.Message("Exception saving image : " + e.Message);
             }
         }
 

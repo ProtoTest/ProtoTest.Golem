@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using Gallio.Framework;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;

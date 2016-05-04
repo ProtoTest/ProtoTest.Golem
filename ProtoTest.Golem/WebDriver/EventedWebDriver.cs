@@ -1,5 +1,4 @@
 ﻿using System;
-using Gallio.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Events;
 using ProtoTest.Golem.Core;
@@ -39,7 +38,7 @@ namespace ProtoTest.Golem.WebDriver
 
         private void driver_FindElementCompleted(object sender, FindElementEventArgs e)
         {
-            TestContext.CurrentContext.IncrementAssertCount();
+//            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         private void driver_ElementValueChanged(object sender, WebElementEventArgs e)

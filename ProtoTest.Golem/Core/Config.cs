@@ -5,9 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
-using Gallio.Framework;
 using ProtoTest.Golem.WebDriver;
-//using Castle.Core.Logging;
 
 namespace ProtoTest.Golem.Core
 {
@@ -67,9 +65,9 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception e)
             {
-                TestLog.Warnings.WriteLine(
+                Log.Warning(string.Format(
                     "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
-                    key, setting, e.Message);
+                    key, setting, e.Message));
                 return 1;
             }
         }
@@ -90,9 +88,9 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception e)
             {
-                TestLog.Warnings.WriteLine(
+                Log.Warning(string.Format(
                     "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
-                    key, setting, e.Message);
+                    key, setting, e.Message));
                 return 1;
             }
         }
@@ -127,7 +125,7 @@ namespace ProtoTest.Golem.Core
             doc.SelectSingleNode("//add[@key='" + key + "']").Attributes["value"].Value = value;
             doc.Save(path);
 
-            path = Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
+            path = AppDomain.CurrentDomain.BaseDirectory.Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
                    "\\App.config";
             doc.Load(path);
             doc.SelectSingleNode("//add[@key='" + key + "']").Attributes["value"].Value = value;
@@ -220,7 +218,7 @@ namespace ProtoTest.Golem.Core
 
             public ReportSettings()
             {
-                htmlOnError = Config.GetConfigValueAsBool("HtmlOnError", "True");
+                htmlOnError = Config.GetConfigValueAsBool("HtmlOnError", "False");
                 screenshotOnError = Config.GetConfigValueAsBool("ScreenshotOnError", "True");
                 videoRecordingOnError = Config.GetConfigValueAsBool("VideoRecordingOnError", "True");
                 commandLogging = Config.GetConfigValueAsBool("CommandLogging", "True");
@@ -228,14 +226,7 @@ namespace ProtoTest.Golem.Core
                 spellChecking = Config.GetConfigValueAsBool("SpellChecking", "False");
                 diagnosticLog = Config.GetConfigValueAsBool("DiagnosticLog", "True");
                 testLog = Config.GetConfigValueAsBool("TestLog", "True");
-                reportPath = GetReportPath();
-            }
-
-            private string GetReportPath()
-            {
-                reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "reports");
-                reportPath = Path.Combine(reportPath, DateTime.Now.ToString("yyMMdd_HHMMss"));
-                return reportPath;
+                reportPath = Config.GetConfigValue("ReportPath", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "reports"));
             }
         }
 

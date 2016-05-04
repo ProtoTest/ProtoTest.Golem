@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Xml;
-using Gallio.Framework;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using TestContext = NUnit.Framework.TestContext;
@@ -149,7 +148,7 @@ namespace ProtoTest.Golem.Core
         public string GetConfigValue(string fileName, string xpath)
         {
             var configFile = new XmlDocument();
-            configFile.Load(Directory.GetCurrentDirectory() + fileName);
+            configFile.Load(AppDomain.CurrentDomain.BaseDirectory + fileName);
             return configFile.SelectSingleNode(xpath).Value ?? "";
         }
 
@@ -210,12 +209,12 @@ namespace ProtoTest.Golem.Core
 
         public static string GetCodeDirectory()
         {
-            return Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "");
+            return AppDomain.CurrentDomain.BaseDirectory.Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "");
         }
 
         public static void LogImage(Image image)
         {
-            TestLog.EmbedImage(null, image);
+           
         }
 
         public static Size GetSizeFromResolution(string resolution)

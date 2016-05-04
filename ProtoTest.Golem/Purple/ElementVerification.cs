@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using Gallio.Framework;
 using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.Purple.Elements;

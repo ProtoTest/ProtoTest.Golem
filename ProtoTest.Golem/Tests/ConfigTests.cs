@@ -5,7 +5,7 @@ namespace ProtoTest.Golem.Tests
 {
     public class ConfigTests : TestBase
     {
-        [OneTimeSetUp]
+        [SetUp]
         public void init()
         {
             Config.Settings.runTimeSettings.ElementTimeoutSec = 27;

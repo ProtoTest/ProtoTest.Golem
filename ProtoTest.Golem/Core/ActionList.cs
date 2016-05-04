@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gallio.Framework;
+using NUnit.Framework;
 
 namespace ProtoTest.Golem.Core
 {
@@ -30,17 +30,14 @@ namespace ProtoTest.Golem.Core
 
         public void PrintActions()
         {
-            TestLog.BeginSection("Actions");
             foreach (var a in actions)
             {
                 Log.Message(a.name + " : " + a._time.ToString("HH:mm:ss.ffff"));
             }
-            TestLog.End();
         }
 
         public void PrintActionTimings()
         {
-            TestLog.BeginSection("Test Action Timings:");
             DateTime start;
             DateTime end;
             TimeSpan difference;
@@ -59,7 +56,6 @@ namespace ProtoTest.Golem.Core
             end = actions[actions.Count - 1]._time;
             difference = end.Subtract(start);
             Log.Message("All Actions : " + difference);
-            TestLog.End();
         }
 
         public void RemoveDuplicateEntries()

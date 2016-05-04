@@ -32,7 +32,7 @@ namespace ProtoTest.Golem.Tests
             driver.Navigate().GoToUrl("http://www.espn.com");
             var element = new Element("ESPN Element", By.XPath("//*[@class='espn-logo']//*[text()='ESPN']"));
             element.WaitUntil(10).Visible();
-            Common.Log("Successfully navigated to " + driver.Title);
+            Log.Message("Successfully navigated to " + driver.Title);
         }
     }
 }

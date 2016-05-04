@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using Gallio.Framework;
 using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver.Elements.Images
@@ -28,7 +27,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             get
             {
-                return Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
+                return AppDomain.CurrentDomain.BaseDirectory.Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
                        "\\ElementImages\\" + element.pageObjectName + "_" +
                        element.name.Replace(" ", "") + ".bmp";
             }
@@ -137,7 +136,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             }
             catch (Exception e)
             {
-                Common.Log("Exception saving image : " + e.Message);
+                Log.Message("Exception saving image : " + e.Message);
             }
         }
 
@@ -183,7 +182,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public void AttachImage()
         {
-            TestLog.AttachImage(element.name, GetImage());
+            Log.Image(GetImage());
         }
     }
 }

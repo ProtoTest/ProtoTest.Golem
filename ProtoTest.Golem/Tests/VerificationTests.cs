@@ -19,10 +19,9 @@ namespace ProtoTest.Golem.Tests
         [Test]
         public void TestAssertionCount()
         {
-            Assert.True(true == true);
             var result = TestContext.CurrentContext.Result;
 //            Assert.AreEqual(TestContext.CurrentContext.Result.PassCount, 0);
-            AddVerificationError("Test Error");
+//            AddVerificationError("Test Error");
 //            Assert.AreEqual(TestContext.CurrentContext.Test., 2);
             testData.VerificationErrors = new List<VerificationError>();
         }

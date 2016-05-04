@@ -8,7 +8,7 @@ namespace ProtoTest.Golem.Tests
     [Parallelizable]
     internal class TestMultiThreading : WebDriverTestBase
     {
-        [Test, Parallelizable]
+        [Test]
         public void TestThreadedRepeat1()
         {
             OpenPage<GoogleHomePage>("http://www.google.com");

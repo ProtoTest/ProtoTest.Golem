@@ -32,7 +32,7 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             frameDelayMs = 1000/fps;
-            //Common.Log("The current dimensions are : " + screensize.Width + " x " + screensize.Height);
+            //Log.Message("The current dimensions are : " + screensize.Width + " x " + screensize.Height);
             video = new FlashScreenVideo(new FlashScreenVideoParameters(screensize.Width, screensize.Height, fps));
 
             screenshotGetter = new BackgroundWorker();

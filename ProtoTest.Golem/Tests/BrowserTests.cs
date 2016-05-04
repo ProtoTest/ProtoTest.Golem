@@ -18,6 +18,12 @@ namespace ProtoTest.Golem.Tests
             Config.Settings.runTimeSettings.LaunchBrowser = false;
         }
 
+        [OneTimeTearDown]
+        public void Teardown()
+        {
+            Config.Settings.runTimeSettings.LaunchBrowser = true;
+        }
+
         [Test]
         public void TestIE()
         {

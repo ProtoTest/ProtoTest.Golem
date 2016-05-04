@@ -8,33 +8,31 @@ using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests
 {
-    class TestInstance : TestSource
-    {
 
-        [Test]
-        public void test()
-        {
-            Log.Message(this.browserInfo.browser.ToString());
-        }
-    }
-    
-    [TestFixture, TestFixtureSource("GetBrowsers")]
+    [TestFixtureSource("GetName")]
     class TestSource
     {
-        protected BrowserInfo browserInfo;
+        private string name;
+
+        public TestSource(string name)
+        {
+            this.name = name;
+        }
+
         public TestSource()
         {
-            Log.Message("BASE");
         }
 
-        public TestSource(BrowserInfo browser)
+        public static IEnumerable<string> GetName()
         {
-            this.browserInfo = browser;
+            yield return "one";
+            yield return "two";
         }
 
-        protected static IEnumerable<BrowserInfo> GetBrowsers()
+        [Test]
+        public void testone()
         {
-            return Config.Settings.runTimeSettings.Browsers;
+            TestContext.WriteLine("Pass");
         }
     }
 }

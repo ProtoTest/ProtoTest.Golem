@@ -12,12 +12,19 @@ namespace ProtoTest.Golem.WebDriver
     ///     This class should be inherited by all webdriver tests.  It will automatically launch a browser and include the
     ///     Driver object in each test.
     /// </summary>
-    [TestFixture]
     public class WebDriverTestBase : TestBase
     {
+        public WebDriverTestBase(BrowserInfo browser)
+        {
+            this.browserInfo = browser;
+        }
+
+        public WebDriverTestBase()
+        {
+            Log.Message("Constructor");
+        }
 
         protected static Object browserLocker = new object();
-
         protected BrowserInfo browserInfo = new BrowserInfo(Config.Settings.runTimeSettings.Browser);
 
         public static IWebDriver driver
@@ -106,7 +113,6 @@ namespace ProtoTest.Golem.WebDriver
 
         public void LaunchBrowser()
         {
-            Log.Message("Browser is : " + browser);
             lock (browserLocker)
             {
                 if (Config.Settings.runTimeSettings.LaunchBrowser)
@@ -144,7 +150,7 @@ namespace ProtoTest.Golem.WebDriver
             base.TearDownTestBase();
         }
 
-        private void UpdateSAuceLabsWithTestStatus()
+       private void UpdateSAuceLabsWithTestStatus()
         {
             if (Config.Settings.sauceLabsSettings.UseSauceLabs)
             {
