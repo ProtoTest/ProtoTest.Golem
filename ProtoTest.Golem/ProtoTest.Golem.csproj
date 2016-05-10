@@ -173,8 +173,6 @@
     <Compile Include="WebDriver\By.cs" />
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\BaseComponent.cs" />
-    <Compile Include="WebDriver\Component.cs" />
-    <Compile Include="WebDriver\SubElement.cs" />
     <Compile Include="WebDriver\Components.cs" />
     <Compile Include="WebDriver\ElementCollection.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
@@ -191,7 +189,6 @@
     <Compile Include="WebDriver\EventFiringWebDriver.cs" />
     <Compile Include="WebDriver\FoundElementEventArgs.cs" />
     <Compile Include="WebDriver\ScreenshotRemoteDriver.cs" />
-    <Compile Include="WebDriver\Section.cs" />
     <Compile Include="WebDriver\WebDriverHost.cs" />
     <Compile Include="WebDriver\WebDriverRecorder.cs" />
     <Compile Include="WebDriver\WebDriverTestBase.cs" />

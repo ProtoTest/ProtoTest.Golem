@@ -35,8 +35,8 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
         private Element GoogleLogo = new Element("GoogleLogo", By.XPath("//a[@title='Go to Google Home']"));
         private Element searchResult;
 
-        private Components<SearchResultItem> SearchItem = new Components<SearchResultItem>(By.CssSelector("div.g"));
-        private GoogleResultsHeader Header = new GoogleResultsHeader(By.Id("tsf"));
+        public Components<SearchResultItem> SearchItem = new Components<SearchResultItem>(By.CssSelector("div.g"));
+        public GoogleResultsHeader Header = new GoogleResultsHeader(By.Id("tsf"));
 
         public void clicktest(string text)
          {
