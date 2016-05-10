@@ -11,9 +11,21 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
     {
         public class SearchResultItem : BaseComponent
         {
-            public Component Link = new Component(By.CssSelector("h3.r>a"));
-            public Component Url = new Component(By.CssSelector("cite"));
-            public Component Description = new Component(By.CssSelector("span"));
+            public Element Link => new Element(this, By.CssSelector("h3.r>a"));
+
+            public Element Url => new Element(this, By.CssSelector("cite"));
+
+            public Element Description => new Element(this, By.CssSelector("span.st"));
+        }
+
+        public class GoogleResultsHeader : BaseComponent
+        {
+            public Element Logo => new Element(this, By.Id("logo"));
+            public Element Search => new Element(this, By.CssSelector("input"));
+
+            public GoogleResultsHeader(OpenQA.Selenium.By by) : base(by)
+            {
+            }
         }
 
         private readonly Element Gmailbutton = new Element("GmailButton", By.PartialLinkText("Gmail"));
@@ -24,14 +36,19 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
         private Element searchResult;
 
         private Components<SearchResultItem> SearchItem = new Components<SearchResultItem>(By.CssSelector("div.g"));
+        private GoogleResultsHeader Header = new GoogleResultsHeader(By.Id("tsf"));
 
         public void clicktest(string text)
          {
             var component = SearchItem.First(x => x.Text.Contains(text));
-            component.Highlight(-1, "grey");
             component.Description.Verify()
             .Text("Selenium is a portable software testing framework for web applications");
-        }
+
+            var second = SearchItem.First(x => x.Text.Contains("GitHub"));
+            second.Description.Verify().Not().Text("wikipedia");
+
+            Header.Search.Verify().Visible();
+         }
         
         public Element SearchResult(string text)
         {

@@ -53,6 +53,7 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\DotNetZip.1.9.8\lib\net20\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -173,6 +174,7 @@
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\BaseComponent.cs" />
     <Compile Include="WebDriver\Component.cs" />
+    <Compile Include="WebDriver\SubElement.cs" />
     <Compile Include="WebDriver\Components.cs" />
     <Compile Include="WebDriver\ElementCollection.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />

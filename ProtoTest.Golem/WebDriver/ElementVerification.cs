@@ -142,6 +142,7 @@ namespace ProtoTest.Golem.WebDriver
             var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
+                var newText = element.Text;
                 condition = (element.Present) && (element.Text.Contains(text));
                 if (condition == isTrue)
                 {

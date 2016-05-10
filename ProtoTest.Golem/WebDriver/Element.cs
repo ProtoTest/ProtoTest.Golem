@@ -17,6 +17,7 @@ namespace ProtoTest.Golem.WebDriver
     public class Element : IWebElement, IWrapsDriver, IWrapsElement
     {
         protected IWebElement _element;
+        protected Element _root;
         protected Element _frame;
         protected ElementImages _images;
         public OpenQA.Selenium.By by;
@@ -108,6 +109,16 @@ namespace ProtoTest.Golem.WebDriver
             timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
+        public Element(BaseComponent root, OpenQA.Selenium.By locator, Element frame=null)
+        {
+            _root = root;
+            _frame = frame;
+            name = "Element";
+            by = locator;
+            pageObjectName = TestBase.GetCurrentClassName();
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
+        }
+
         protected IWebDriver driver
         {
             get { return TestBase.testData.driver; }
@@ -123,10 +134,10 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                _element = GetElement();
+                _element = _root != null ? _root.WaitForPresent(this.@by, this.timeoutSec) : GetElement();
+                
                 if (_element.GetType() == typeof(Element))
                 {
-                    Log.Message("FOund");
                     _element = GetElement();
                 }
                 return _element;
@@ -277,9 +288,9 @@ namespace ProtoTest.Golem.WebDriver
         public ReadOnlyCollection<IWebElement> FindElements(OpenQA.Selenium.By by)
         {
             var elements = new List<IWebElement>();
-            foreach (var element in driver.FindElements(by))
+            foreach (var ele in element.FindElements(by))
             {
-                elements.Add(new Element(element, by));
+                elements.Add(new Element(ele, by));
             }
             return new ReadOnlyCollection<IWebElement>(elements);
         }
