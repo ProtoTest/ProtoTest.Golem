@@ -19,7 +19,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="driver">The WebDriver instance used in finding elements.</param>
         /// <param name="element">The element that was found</param>
         /// <param name="method">The <see cref="T:OpenQA.Selenium.By" /> object containing the method used to find elements.</param>
-        public FoundElementEventArgs(IWebDriver driver, IWebElement element, By method)
+        public FoundElementEventArgs(IWebDriver driver, IWebElement element, OpenQA.Selenium.By method)
         {
             Driver = driver;
             Element = element;
@@ -39,6 +39,6 @@ namespace ProtoTest.Golem.WebDriver
         /// <summary>
         ///     Gets the <see cref="T:OpenQA.Selenium.By" /> object containing the method used to find elements.
         /// </summary>
-        public By FindMethod { get; private set; }
+        public OpenQA.Selenium.By FindMethod { get; private set; }
     }
 }

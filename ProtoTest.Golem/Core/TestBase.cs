@@ -54,8 +54,8 @@ namespace ProtoTest.Golem.Core
         public virtual void SetUpTestBase()
         {
             Log.Message(Common.GetCurrentTestName() + " started");
-            Config.Settings = new ConfigSettings();
-            Config.Settings.reportSettings.reportPath = reportPath;
+            Config.settings = new ConfigSettings();
+            Config.settings.reportSettings.reportPath = reportPath;
             StartNewProxy();
             StartVideoRecording();
         }
@@ -74,7 +74,7 @@ namespace ProtoTest.Golem.Core
 
         private void VerifyHttpTraffic()
         {
-            if (Config.Settings.httpProxy.useProxy && Config.Settings.httpProxy.validateTraffic)
+            if (Config.settings.httpProxy.useProxy && Config.settings.httpProxy.validateTraffic)
             {
                 proxy.VerifyNoErrorsCodes();
             }
@@ -91,7 +91,7 @@ namespace ProtoTest.Golem.Core
         private string reportPath;
         private void CreateReportDirectory()
         {
-            string filePath = Path.GetFullPath(Config.Settings.reportSettings.reportPath);
+            string filePath = Path.GetFullPath(Config.settings.reportSettings.reportPath);
             reportPath = Path.Combine(filePath, DateTime.Now.ToString("yyMMdd_HHMM"));
             Directory.CreateDirectory(reportPath);
         }
@@ -101,7 +101,7 @@ namespace ProtoTest.Golem.Core
         {
             StopVideoRecording();
             QuitProxyServer();
-            Config.Settings = new ConfigSettings();
+            Config.settings = new ConfigSettings();
         }
 
         private void DeleteTestData()
@@ -122,7 +122,7 @@ namespace ProtoTest.Golem.Core
         {
             Log.Error("--> VerificationError Found: " + errorText);
             var error = new VerificationError(errorText,
-                Config.Settings.reportSettings.screenshotOnError);
+                Config.settings.reportSettings.screenshotOnError);
             testData.VerificationErrors.Add(error);
             if (error.screenshot != null)
             {
@@ -149,16 +149,16 @@ namespace ProtoTest.Golem.Core
 
         public void SetTestExecutionSettings()
         {
-//            TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.DegreeOfParallelism;
+//            TestAssemblyExecutionParameters.DegreeOfParallelism = Config.settings.runTimeSettings.DegreeOfParallelism;
 //            TestAssemblyExecutionParameters.DefaultTestCaseTimeout =
-//                TimeSpan.FromMinutes(Config.Settings.runTimeSettings.TestTimeoutMin);
+//                TimeSpan.FromMinutes(Config.settings.runTimeSettings.TestTimeoutMin);
         }
 
         private void GetHarFile()
         {
             try
             {
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     var name = Common.GetShortTestName(80);
                     proxy.SaveHarToFile();
@@ -176,7 +176,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy.CreateProxy();
                     proxy.CreateHar();
@@ -195,7 +195,7 @@ namespace ProtoTest.Golem.Core
             try
             {
                 proxy = new BrowserMobProxy();
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy.KillOldProxy();
                     proxy.StartServer();
@@ -211,7 +211,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy.QuitServer();
                 }
@@ -225,7 +225,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy.QuitProxy();
                 }
@@ -314,7 +314,7 @@ namespace ProtoTest.Golem.Core
 
         public void LogVideoIfTestFailed()
         {
-            if ((Config.Settings.reportSettings.videoRecordingOnError) &&
+            if ((Config.settings.reportSettings.videoRecordingOnError) &&
                 (Common.GetTestOutcome() != TestStatus.Passed) && testData.recorder != null && testData.recorder.Video != null)
             {
                 Log.Video(testData.recorder.Video);
@@ -323,7 +323,7 @@ namespace ProtoTest.Golem.Core
 
         public void StartVideoRecording()
         {
-            if (Config.Settings.reportSettings.videoRecordingOnError)
+            if (Config.settings.reportSettings.videoRecordingOnError)
             {
                 testData.recorder = Capture.StartRecording(new CaptureParameters {Zoom = .25}, 5);
                 testData.recorder.OverlayManager.AddOverlay(overlay);
@@ -334,7 +334,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                if (Config.Settings.reportSettings.videoRecordingOnError && Config.Settings.runTimeSettings.DegreeOfParallelism == 1 && Config.Settings.runTimeSettings.RunOnRemoteHost == false)
+                if (Config.settings.reportSettings.videoRecordingOnError && Config.settings.runTimeSettings.DegreeOfParallelism == 1 && Config.settings.runTimeSettings.RunOnRemoteHost == false)
                 {
                     testData.recorder.Stop();
                 }

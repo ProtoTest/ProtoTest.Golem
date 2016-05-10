@@ -25,7 +25,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         protected static Object browserLocker = new object();
-        protected BrowserInfo browserInfo = new BrowserInfo(Config.Settings.runTimeSettings.Browser);
+        protected BrowserInfo browserInfo = new BrowserInfo(Config.settings.runTimeSettings.Browser);
 
         public static IWebDriver driver
         {
@@ -42,14 +42,14 @@ namespace ProtoTest.Golem.WebDriver
         protected static IEnumerable<BrowserInfo> GetBrowsers()
         {
 
-            return Config.Settings.runTimeSettings.Browsers;
+            return Config.settings.runTimeSettings.Browsers;
         }
 
         public static T OpenPage<T>(string url)
         {
             driver.Navigate().GoToUrl(url);
             //navigate twice due to IE bug
-            if (Config.Settings.runTimeSettings.Browser == WebDriverBrowser.Browser.IE)
+            if (Config.settings.runTimeSettings.Browser == WebDriverBrowser.Browser.IE)
                 driver.Navigate().GoToUrl(url);
             return (T) Activator.CreateInstance(typeof (T));
         }
@@ -71,7 +71,7 @@ namespace ProtoTest.Golem.WebDriver
 
         private void LogScreenshotIfTestFailed()
         {
-            if ((Config.Settings.reportSettings.screenshotOnError) &&
+            if ((Config.settings.reportSettings.screenshotOnError) &&
                 (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed))
             {
                 var screenshot = testData.driver.GetScreenshot();
@@ -86,7 +86,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
-                if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestStatus.Passed))
+                if ((Config.settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestStatus.Passed))
                 {
                     var source = driver.PageSource;
                     Log.Html("HTML_" + Common.GetShortTestName(95), source);
@@ -100,7 +100,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public void QuitBrowser()
         {
-            if (Config.Settings.runTimeSettings.LaunchBrowser)
+            if (Config.settings.runTimeSettings.LaunchBrowser)
             {
                 if (driver != null)
                 {
@@ -115,12 +115,12 @@ namespace ProtoTest.Golem.WebDriver
         {
             lock (browserLocker)
             {
-                if (Config.Settings.runTimeSettings.LaunchBrowser)
+                if (Config.settings.runTimeSettings.LaunchBrowser)
                 {
-                    if (Config.Settings.runTimeSettings.RunOnRemoteHost)
+                    if (Config.settings.runTimeSettings.RunOnRemoteHost)
                     {
                         driver = new WebDriverBrowser().LaunchRemoteBrowser(browser,
-                            Config.Settings.runTimeSettings.HostIp);
+                            Config.settings.runTimeSettings.HostIp);
                     }
                     else
                     {
@@ -152,7 +152,7 @@ namespace ProtoTest.Golem.WebDriver
 
        private void UpdateSAuceLabsWithTestStatus()
         {
-            if (Config.Settings.sauceLabsSettings.UseSauceLabs)
+            if (Config.settings.sauceLabsSettings.UseSauceLabs)
             {
                 var passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
                 driver.ExecuteJavaScript("sauce:job-result=" + (passed ? "passed" : "failed"));

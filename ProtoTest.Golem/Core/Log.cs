@@ -37,7 +37,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                String path = Path.GetFullPath(Path.Combine(Config.Settings.reportSettings.reportPath, "screenshot_" + DateTime.Now.ToString("HHms") + ".png"));
+                String path = Path.GetFullPath(Path.Combine(Config.settings.reportSettings.reportPath, "screenshot_" + DateTime.Now.ToString("HHms") + ".png"));
                 image.Save(path, ImageFormat.Png);
                 Message("file:///" + path);
             }
@@ -51,7 +51,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                String path = Path.GetFullPath(Path.Combine(Config.Settings.reportSettings.reportPath, "Video_" + Common.GetShortTestName(90) + DateTime.Now.ToString("HHms") + ".flv"));
+                String path = Path.GetFullPath(Path.Combine(Config.settings.reportSettings.reportPath, "Video_" + Common.GetShortTestName(90) + DateTime.Now.ToString("HHms") + ".flv"));
                 FileStream fs = new FileStream(path, FileMode.Create);
                 video.Save(fs);
                 Message("file:///" + path);
@@ -71,7 +71,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                String path = Path.GetFullPath(Path.Combine(Config.Settings.reportSettings.reportPath, "html" + DateTime.Now.ToString("HHms") + ".html"));
+                String path = Path.GetFullPath(Path.Combine(Config.settings.reportSettings.reportPath, "html" + DateTime.Now.ToString("HHms") + ".html"));
                 if (!File.Exists(path))
                 {
                     File.WriteAllText(path, html);

@@ -19,7 +19,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             driver = WebDriverTestBase.driver;
             className = GetType().Name;
-            if (Config.Settings.runTimeSettings.AutoWaitForElements)
+            if (Config.settings.runTimeSettings.AutoWaitForElements)
             {
                 try
                 {
@@ -37,7 +37,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             this.driver = driver;
             className = GetType().Name;
-            if (Config.Settings.runTimeSettings.AutoWaitForElements)
+            if (Config.settings.runTimeSettings.AutoWaitForElements)
             {
                 WaitForElements();
             }

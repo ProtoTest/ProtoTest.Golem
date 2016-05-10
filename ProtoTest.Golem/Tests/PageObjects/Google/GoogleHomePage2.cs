@@ -1,16 +1,15 @@
-﻿using OpenQA.Selenium;
-using ProtoTest.Golem.WebDriver;
+﻿using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests.PageObjects.Google
 {
     public class GoogleHomePage2 : BasePageObject
     {
-        private readonly By feelingLuckyButton = By.Name("btnI");
-        private readonly By gmailbutton = By.ClassName("gbts");
-        private readonly By googleLogo = By.Id("hplogo");
-        private readonly By searchButton = By.Name("btnK");
-        private readonly By searchField = By.Name("q");
-        private readonly By signInButton = By.ClassName("gbit");
+        private readonly OpenQA.Selenium.By feelingLuckyButton = By.Name("btnI");
+        private readonly OpenQA.Selenium.By gmailbutton = By.ClassName("gbts");
+        private readonly OpenQA.Selenium.By googleLogo = By.Id("hplogo");
+        private readonly OpenQA.Selenium.By searchButton = By.Name("btnK");
+        private readonly OpenQA.Selenium.By searchField = By.Name("q");
+        private readonly OpenQA.Selenium.By signInButton = By.ClassName("gbit");
 
         public GmailPage GoToGmail()
         {

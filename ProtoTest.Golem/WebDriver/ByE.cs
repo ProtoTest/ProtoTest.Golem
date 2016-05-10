@@ -7,17 +7,17 @@ namespace ProtoTest.Golem.WebDriver
     /// </summary>
     public class ByE
     {
-        public static By Text(string text)
+        public static OpenQA.Selenium.By Text(string text)
         {
-            return By.XPath("//*[text()='" + text + "']");
+            return OpenQA.Selenium.By.XPath("//*[text()='" + text + "']");
         }
 
-        public static By PartialText(string text)
+        public static OpenQA.Selenium.By PartialText(string text)
         {
-            return By.XPath("//*[contains(text(),'" + text + "')]");
+            return OpenQA.Selenium.By.XPath("//*[contains(text(),'" + text + "')]");
         }
 
-        public static By PartialAttribute(string tag, string attribute, string value)
+        public static OpenQA.Selenium.By PartialAttribute(string tag, string attribute, string value)
         {
             string attr;
 
@@ -31,7 +31,7 @@ namespace ProtoTest.Golem.WebDriver
                 attr = attribute;
             }
 
-            return By.XPath(string.Format("//{0}[contains({1},'{2}')]", tag, attr, value));
+            return OpenQA.Selenium.By.XPath(string.Format("//{0}[contains({1},'{2}')]", tag, attr, value));
         }
     }
 }

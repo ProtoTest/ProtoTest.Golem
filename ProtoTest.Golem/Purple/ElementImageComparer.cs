@@ -12,7 +12,7 @@ namespace ProtoTest.Golem.Purple
     //TODO: this class is going to need to be re-factored!
     public class ElementImageComparer
     {
-        public static bool UpdateImages = Config.Settings.imageCompareSettings.updateImages;
+        public static bool UpdateImages = Config.settings.imageCompareSettings.updateImages;
         private readonly Image liveImage;
         private readonly Image storedImage;
         public float difference;
@@ -50,9 +50,9 @@ namespace ProtoTest.Golem.Purple
                 UpdateImage();
             }
             difference = ImageComparer.ImageComparePercentage(storedImage, liveImage,
-                Config.Settings.imageCompareSettings.fuzziness);
+                Config.settings.imageCompareSettings.fuzziness);
             differenceString = (difference*100).ToString("0.##\\%");
-            return difference < Config.Settings.imageCompareSettings.accuracy;
+            return difference < Config.settings.imageCompareSettings.accuracy;
         }
 
         public Image GetMergedImage()

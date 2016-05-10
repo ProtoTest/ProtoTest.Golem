@@ -12,7 +12,7 @@ namespace ProtoTest.Golem.Tests
 //        [Test]
 //        public void TestXml([Bind("@term")] string search, [Bind("@result")] string result)
 //        {
-//            Config.Settings.runTimeSettings.FindHiddenElements = true;
+//            Config.settings.runTimeSettings.FindHiddenElements = true;
 //            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(search).VerifyResult(result);
 //        }
 //

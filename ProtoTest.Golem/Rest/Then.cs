@@ -37,7 +37,7 @@ namespace ProtoTest.Golem.Rest
 
         public RestResponseVerify Verify(int timeoutSec = -1)
         {
-            if (timeoutSec == -1) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeoutSec == -1) timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
             return new RestResponseVerify(response);
         }
 

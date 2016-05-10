@@ -19,7 +19,7 @@ namespace ProtoTest.Golem.Rest
             get
             {
                 WebProxy proxy = null;
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy = new WebProxy("localhost:" + TestBase.proxy.proxyPort);
                 }
@@ -29,7 +29,7 @@ namespace ProtoTest.Golem.Rest
 
         private void LogHttpTrafficMetrics()
         {
-            //if (Config.Settings.httpProxy.startProxy)
+            //if (Config.settings.httpProxy.startProxy)
             //{
             //    TestBase.proxy.GetSessionMetrics();
             //    TestLog.BeginSection("HTTP Metrics");
@@ -43,7 +43,7 @@ namespace ProtoTest.Golem.Rest
 
         private void GetHTTPTrafficInfo()
         {
-            //if (Config.Settings.httpProxy.startProxy)
+            //if (Config.settings.httpProxy.startProxy)
             //{
             //    string name = Common.GetShortTestName(80);
             //    TestBase.proxy.SaveSessionsToFile();
@@ -60,7 +60,7 @@ namespace ProtoTest.Golem.Rest
         {
             try
             {
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy = new BrowserMobProxy();
                     proxy.StartServer();
@@ -75,14 +75,13 @@ namespace ProtoTest.Golem.Rest
 
         private void QuitProxy()
         {
-            if (Config.Settings.httpProxy.startProxy)
+            if (Config.settings.httpProxy.startProxy)
             {
                 proxy.QuitServer();
             }
         }
 
         [SetUp]
-        [MbUnit.Framework.SetUp]
         public void SetUp()
         {
             Tokens = new Dictionary<string, string>();
@@ -90,7 +89,6 @@ namespace ProtoTest.Golem.Rest
         }
 
         [TearDown]
-        [MbUnit.Framework.TearDown]
         public void TearDown()
         {
             QuitProxy();

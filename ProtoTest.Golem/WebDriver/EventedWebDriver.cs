@@ -30,7 +30,7 @@ namespace ProtoTest.Golem.WebDriver
 
         private void driver_FoundElement(object sender, FoundElementEventArgs e)
         {
-            if (Config.Settings.runTimeSettings.HighlightFoundElements)
+            if (Config.settings.runTimeSettings.HighlightFoundElements)
             {
                 e.Element.Highlight();
             }
@@ -45,10 +45,11 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
-                if (Config.Settings.reportSettings.commandLogging)
+                if (Config.settings.reportSettings.commandLogging)
                 {
                     Log.Message(GetLogMessage("Typing", e, e.Element.GetAttribute("value")));
                 }
+                e.Element.Highlight(30, "red");
             }
             catch (Exception)
             {
@@ -57,8 +58,8 @@ namespace ProtoTest.Golem.WebDriver
 
         private void driver_Navigating(object sender, WebDriverNavigationEventArgs e)
         {
-            Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
-            if (Config.Settings.reportSettings.commandLogging)
+            Common.Delay(Config.settings.runTimeSettings.CommandDelayMs);
+            if (Config.settings.reportSettings.commandLogging)
             {
                 Log.Message(string.Format("Navigating to url {0}", e.Url));
             }
@@ -70,8 +71,8 @@ namespace ProtoTest.Golem.WebDriver
 
         private void driver_FindingElement(object sender, FindElementEventArgs e)
         {
-            Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
-            if (Config.Settings.reportSettings.commandLogging)
+            Common.Delay(Config.settings.runTimeSettings.CommandDelayMs);
+            if (Config.settings.reportSettings.commandLogging)
             {
                 Log.Message(GetLogMessage("Finding", e));
             }
@@ -79,17 +80,18 @@ namespace ProtoTest.Golem.WebDriver
 
         private void driver_ElementClicking(object sender, WebElementEventArgs e)
         {
-            Common.Delay(Config.Settings.runTimeSettings.CommandDelayMs);
-            if (Config.Settings.reportSettings.commandLogging)
+            Common.Delay(Config.settings.runTimeSettings.CommandDelayMs);
+            if (Config.settings.reportSettings.commandLogging)
             {
                 Log.Message(GetLogMessage("Click", e));
             }
-
+            
             if (e.Element == null)
             {
                 throw new NoSuchElementException(string.Format("Element '{0}' not present, cannot click on it",
                     e.Element));
             }
+            e.Element.Highlight(30, "red");
         }
 
         private string GetLogMessage(string command, WebElementEventArgs e = null, string param = "")

@@ -16,17 +16,17 @@ namespace ProtoTest.Golem.Purple.PurpleCore
         private static readonly PurplePath _purplePath = new PurplePath();
 
         private readonly Timer elementTimeoutTimer =
-            new Timer(Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds*1000);
+            new Timer(Config.settings.purpleSettings.Purple_ElementTimeoutWaitSeconds*1000);
 
         private bool notfound;
 
         public Locator()
         {
-            _purplePath.Delimiter = Config.Settings.purpleSettings.Purple_Delimiter;
-            _purplePath.BlankValue = Config.Settings.purpleSettings.Purple_blankValue;
-            _purplePath.DefaultWindowName = Config.Settings.purpleSettings.Purple_windowTitle;
-            _purplePath.ValueDelimiterStart = Config.Settings.purpleSettings.Purple_ValueDelimiterStart;
-            _purplePath.ValueDelimiterEnd = Config.Settings.purpleSettings.Purple_ValueDelimiterEnd;
+            _purplePath.Delimiter = Config.settings.purpleSettings.Purple_Delimiter;
+            _purplePath.BlankValue = Config.settings.purpleSettings.Purple_blankValue;
+            _purplePath.DefaultWindowName = Config.settings.purpleSettings.Purple_windowTitle;
+            _purplePath.ValueDelimiterStart = Config.settings.purpleSettings.Purple_ValueDelimiterStart;
+            _purplePath.ValueDelimiterEnd = Config.settings.purpleSettings.Purple_ValueDelimiterEnd;
 
             elementTimeoutTimer.Elapsed += elementTimeout;
         }
@@ -60,7 +60,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                     if (PurpleTestBase.PerfLogging)
                     {
                         PurplePerformanceLogger.AddEntry(name, purplePath,
-                            Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds, 0);
+                            Config.settings.purpleSettings.Purple_ElementTimeoutWaitSeconds, 0);
                     }
                     break;
                 }
@@ -86,7 +86,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
 
         private void elementTimeout(object source, ElapsedEventArgs args)
         {
-            Log.Message("Element took longer than " + Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds +
+            Log.Message("Element took longer than " + Config.settings.purpleSettings.Purple_ElementTimeoutWaitSeconds +
                          " Seconds to respond.");
             notfound = true;
         }

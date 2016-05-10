@@ -19,7 +19,7 @@ namespace ProtoTest.Golem.WebDriver
         protected IWebElement _element;
         protected Element _frame;
         protected ElementImages _images;
-        public By by;
+        public OpenQA.Selenium.By by;
         public string name = "Element";
         public string pageObjectName = "";
         public int timeoutSec;
@@ -27,7 +27,7 @@ namespace ProtoTest.Golem.WebDriver
         public Element()
         {
             pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
@@ -39,19 +39,19 @@ namespace ProtoTest.Golem.WebDriver
             this.element = element;
 
             pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
         ///     Construct an element using an existing element
         /// </summary>
         /// <param name="element"></param>
-        public Element(IWebElement element, By by)
+        public Element(IWebElement element, OpenQA.Selenium.By by)
         {
             this.element = element;
             this.by = by;
             pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
@@ -59,24 +59,24 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="name">Human readable name of the element</param>
         /// <param name="locator">By locator</param>
-        public Element(string name, By locator)
+        public Element(string name, OpenQA.Selenium.By locator)
         {
             this.name = name;
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
         ///     Construct an element
         /// </summary>
         /// <param name="locator">By locator</param>
-        public Element(By locator)
+        public Element(OpenQA.Selenium.By locator)
         {
             name = "Element";
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
@@ -84,26 +84,28 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="name">Human readable name of the element</param>
         /// <param name="locator">By locator</param>
-        public Element(string name, By locator, Element frame)
+        public Element(string name, OpenQA.Selenium.By locator, Element frame)
         {
             _frame = frame;
             this.name = name;
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
+
+
 
         /// <summary>
         ///     Construct an element
         /// </summary>
         /// <param name="locator">By locator</param>
-        public Element(By locator, Element frame)
+        public Element(OpenQA.Selenium.By locator, Element frame)
         {
             _frame = frame;
             name = "Element";
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         protected IWebDriver driver
@@ -122,6 +124,11 @@ namespace ProtoTest.Golem.WebDriver
             get
             {
                 _element = GetElement();
+                if (_element.GetType() == typeof(Element))
+                {
+                    Log.Message("FOund");
+                    _element = GetElement();
+                }
                 return _element;
             }
             set { _element = value; }
@@ -225,7 +232,11 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         public string Text
         {
-            get { return element.Text; }
+            get
+            {
+                var text = element.Text;
+                return text;
+            }
             set
             {
                 element.Clear();
@@ -238,7 +249,7 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="by">The locator to use.</param>
         /// <returns>The IWebElement found.</returns>
-        public IWebElement FindElement(By by)
+        public IWebElement FindElement(OpenQA.Selenium.By by)
         {
             var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
@@ -263,7 +274,7 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="by">The locator to use.</param>
         /// <returns>Collection of IWebElements found.</returns>
-        public ReadOnlyCollection<IWebElement> FindElements(By by)
+        public ReadOnlyCollection<IWebElement> FindElements(OpenQA.Selenium.By by)
         {
             var elements = new List<IWebElement>();
             foreach (var element in driver.FindElements(by))
@@ -423,7 +434,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>A new ElementVerification for the element</returns>
         public ElementVerification Verify()
         {
-            timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
             return new ElementVerification(this, timeoutSec, false);
         }
 
@@ -461,22 +472,17 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>A new ElementVerification for the element</returns>
         public ElementVerification WaitUntil()
         {
-            timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
             return new ElementVerification(this, timeoutSec, true);
         }
 
-        protected virtual IWebElement GetElement()
+        public virtual IWebElement GetElement()
         {
             try
             {
                 TestBase.testData.lastElement = this;
                 if (_element.IsStale())
                 {
-                    //if (WebDriverTestBase.defaultFrame != null)
-                    //{
-                    //    driver.SwitchTo().Frame(WebDriverTestBase.defaultFrame.WrappedElement);
-                    //    TestBase.testData.lastElement = this;
-                    //}
                     if (_frame != null)
                     {
                         driver.SwitchTo().Frame(_frame.WrappedElement);
@@ -486,7 +492,7 @@ namespace ProtoTest.Golem.WebDriver
                     {
                         driver.SwitchTo().DefaultContent();
                     }
-                    return driver.WaitForPresent(@by, timeoutSec);
+                    _element = driver.WaitForPresent(@by, timeoutSec);
                 }
                 return _element;
             }
@@ -509,9 +515,9 @@ namespace ProtoTest.Golem.WebDriver
         /// <summary>
         ///     Highlight the element on the page
         /// </summary>
-        public void Highlight()
+        public void Highlight(int ms = 30, string color = "yellow")
         {
-            element.Highlight();
+            element.Highlight(ms, color);
         }
 
         /// <summary>

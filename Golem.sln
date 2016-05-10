@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B48787D4-70A4-4226-9FE8-7AD27E1BBC1B}"
 EndProject
@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BAAF8D
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{1CE855EA-12FA-4158-9C80-79B077AD18B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE855EA-12FA-4158-9C80-79B077AD18B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE855EA-12FA-4158-9C80-79B077AD18B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE855EA-12FA-4158-9C80-79B077AD18B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE855EA-12FA-4158-9C80-79B077AD18B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

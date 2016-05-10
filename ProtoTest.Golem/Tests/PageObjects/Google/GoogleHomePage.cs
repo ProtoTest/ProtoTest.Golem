@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using ProtoTest.Golem.WebDriver;
+﻿using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests.PageObjects.Google
 {
@@ -29,7 +28,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
         {
             searchField.Verify().Present();
             googleLogo.Verify().Present();
-            // searchButton.Verify().Present();
+            searchButton.Verify().Present();
             feelingLuckyButton.Verify().Present();
             signInButton.Verify().Present();
         }

@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 
@@ -6,38 +10,46 @@ namespace ProtoTest.Golem.WebDriver
 {
     public class Component : Element
     {
-   
-        public Element RootElement;
+        private Element _root;
 
-        public Component(Element RootElement, By by) : base(by)
+        public Component() : base()
         {
-            this.RootElement = RootElement;
         }
 
-        public Component(Element RootElement, string name, By by) : base(name, by)
+        public Component(OpenQA.Selenium.By by) : base(by)  
         {
-            this.RootElement = RootElement;
+            this._root = new Element(by);
+            this.@by = by;
         }
 
-        protected override IWebElement GetElement()
+        public Component(Element root, OpenQA.Selenium.By by) : base(root, by)
+        {
+            this._root = root;
+            this.@by = by;
+        }
+
+        public Component(Element element) : base(element)
+        {
+            this._root = element;
+        }
+
+        public void SetRoot(Element element)
+        {
+            _root = element;
+        }
+
+        public override IWebElement GetElement()
         {
             try
             {
-                TestBase.testData.lastElement = this;
-                if (_element.IsStale())
+                var text = _root.Text;
+                var ele = _root.WaitForPresent(@by, timeoutSec);
+                if (ele.GetType() == typeof(Element))
                 {
-                    if (_frame != null)
-                    {
-                        driver.SwitchTo().Frame(_frame.WrappedElement);
-                        TestBase.testData.lastElement = this;
-                    }
-                    else
-                    {
-                        driver.SwitchTo().DefaultContent();
-                    }
-                    return RootElement.WaitForPresent(@by, timeoutSec);
+                    Element element = (Element) ele;
+                    ele = element.GetElement();
                 }
-                return _element;
+                return ele;
             }
             catch (Exception e)
             {
@@ -46,5 +58,6 @@ namespace ProtoTest.Golem.WebDriver
                 throw new NoSuchElementException(message);
             }
         }
+
     }
 }

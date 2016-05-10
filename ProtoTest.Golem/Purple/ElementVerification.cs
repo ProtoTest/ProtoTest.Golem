@@ -113,7 +113,7 @@ namespace ProtoTest.Golem.Purple
         //{
         //    //message = "is visible";
         //    //notMessage = "not visible";
-        //    //if (timeoutSec == 0) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+        //    //if (timeoutSec == 0) timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         //    //for (int i = 0; i <= timeoutSec; i++)
         //    //{
         //    //    condition = element.getItem().Present() && element.getItem().Visible;

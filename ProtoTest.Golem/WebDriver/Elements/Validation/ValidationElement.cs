@@ -35,7 +35,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Validation
         /// <returns>this</returns>
         public ValidationElement VerifyTextValidation(string text, int timeoutSec = 0)
         {
-            if (timeoutSec == 0) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeoutSec == 0) timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
             for (var i = 0; i <= timeoutSec; i++)
             {
                 if (driver.FindElements(locatorValidation).Count != 0)

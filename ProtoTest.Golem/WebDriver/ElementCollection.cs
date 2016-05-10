@@ -10,8 +10,12 @@ namespace ProtoTest.Golem.WebDriver
 {
     public class ElementCollection : IEnumerable<Element>
     {
-        private readonly By locator;
+        private readonly OpenQA.Selenium.By locator;
         private IEnumerable<Element> _elements;
+
+        public ElementCollection()
+        {
+        }
 
         public ElementCollection(IEnumerable<Element> elements)
         {
@@ -23,7 +27,7 @@ namespace ProtoTest.Golem.WebDriver
             this.elements = elements;
         }
 
-        public ElementCollection(By locator)
+        public ElementCollection(OpenQA.Selenium.By locator)
         {
             this.locator = locator;
             elements = new List<Element>();
@@ -111,7 +115,7 @@ namespace ProtoTest.Golem.WebDriver
             return this;
         }
 
-        private IEnumerable<Element> elements
+        protected IEnumerable<Element> elements
         {
             get
             {

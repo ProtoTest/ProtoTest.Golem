@@ -10,12 +10,12 @@ namespace ProtoTest.Golem.Tests
         [OneTimeSetUp]
         public void setup()
         {
-            Config.Settings.purpleSettings.Purple_windowTitle = "Untitled - Paint";
-            Config.Settings.purpleSettings.ProcessName = "Paint";
-            Config.Settings.purpleSettings.Purple_blankValue = "!BLANK!";
-            Config.Settings.purpleSettings.Purple_Delimiter = "/";
-            Config.Settings.purpleSettings.appPath = "%windir%\\system32\\mspaint.exe";
-            Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds = 30;
+            Config.settings.purpleSettings.Purple_windowTitle = "Untitled - Paint";
+            Config.settings.purpleSettings.ProcessName = "Paint";
+            Config.settings.purpleSettings.Purple_blankValue = "!BLANK!";
+            Config.settings.purpleSettings.Purple_Delimiter = "/";
+            Config.settings.purpleSettings.appPath = "%windir%\\system32\\mspaint.exe";
+            Config.settings.purpleSettings.Purple_ElementTimeoutWaitSeconds = 30;
         }
 
         [Test]

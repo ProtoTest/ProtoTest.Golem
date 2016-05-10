@@ -15,13 +15,13 @@ namespace ProtoTest.Golem.Tests
         [OneTimeSetUp]
         public void Init()
         {
-            Config.Settings.runTimeSettings.LaunchBrowser = false;
+            Config.settings.runTimeSettings.LaunchBrowser = false;
         }
 
         [OneTimeTearDown]
         public void Teardown()
         {
-            Config.Settings.runTimeSettings.LaunchBrowser = true;
+            Config.settings.runTimeSettings.LaunchBrowser = true;
         }
 
         [Test]

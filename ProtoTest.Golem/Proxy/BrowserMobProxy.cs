@@ -38,7 +38,7 @@ namespace ProtoTest.Golem.Proxy
 
         public BrowserMobProxy()
         {
-            serverPort = Config.Settings.httpProxy.proxyServerPort;
+            serverPort = Config.settings.httpProxy.proxyServerPort;
             proxyPortsByTest = new Dictionary<string, int>();
             client = new RestClient(new Uri("http://localhost:" + serverPort));
             request = new RestRequest();
@@ -50,7 +50,7 @@ namespace ProtoTest.Golem.Proxy
         {
             get
             {
-                if (!Config.Settings.httpProxy.useProxy)
+                if (!Config.settings.httpProxy.useProxy)
                     throw new Exception(
                         "Could not get Proxy Har as proxy has been turned off.  Please enabled it by updating your App.Config with the following keys : StartProxy=true, UseProxy=true");
                 return GetHar();
@@ -61,26 +61,26 @@ namespace ProtoTest.Golem.Proxy
         {
             get
             {
-                if (!Config.Settings.httpProxy.startProxy)
-                    return Config.Settings.httpProxy.proxyPort;
+                if (!Config.settings.httpProxy.startProxy)
+                    return Config.settings.httpProxy.proxyPort;
                 if (!proxyPortsByTest.ContainsKey(TestContext.CurrentContext.Test.FullName))
                 {
                     proxyPortsByTest.Add(TestContext.CurrentContext.Test.FullName,
-                        Config.Settings.httpProxy.proxyPort);
-                    Config.Settings.httpProxy.proxyPort++;
+                        Config.settings.httpProxy.proxyPort);
+                    Config.settings.httpProxy.proxyPort++;
                 }
 
                 return proxyPortsByTest[TestContext.CurrentContext.Test.FullName];
             }
             set
             {
-                if (!Config.Settings.httpProxy.startProxy)
-                    Config.Settings.httpProxy.proxyPort = value;
+                if (!Config.settings.httpProxy.startProxy)
+                    Config.settings.httpProxy.proxyPort = value;
                 if (!proxyPortsByTest.ContainsKey(TestContext.CurrentContext.Test.FullName))
                 {
                     proxyPortsByTest.Add(TestContext.CurrentContext.Test.FullName,
-                        Config.Settings.httpProxy.proxyPort);
-                    Config.Settings.httpProxy.proxyPort++;
+                        Config.settings.httpProxy.proxyPort);
+                    Config.settings.httpProxy.proxyPort++;
                 }
                 proxyPortsByTest[TestContext.CurrentContext.Test.FullName] = value;
             }
@@ -105,7 +105,7 @@ namespace ProtoTest.Golem.Proxy
 
         public void KillOldProxy()
         {
-            if (Config.Settings.httpProxy.killOldProxy)
+            if (Config.settings.httpProxy.killOldProxy)
             {
                 var runningProcesses = Process.GetProcesses();
                 foreach (var process in runningProcesses)

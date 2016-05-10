@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 
@@ -11,11 +10,11 @@ namespace ProtoTest.Golem.Tests
         [SetUp]
         public override void SetUp()
         {
-            Config.Settings.sauceLabsSettings.SauceLabsUsername = "bkitchener";
-            Config.Settings.sauceLabsSettings.SauceLabsAPIKey = "998969ff-ad37-4b2e-9ad7-edacd982bc59";
-            Config.Settings.sauceLabsSettings.UseSauceLabs = true;
-            Config.Settings.runTimeSettings.RunOnRemoteHost = true;
-            Config.Settings.runTimeSettings.HighlightFoundElements = false;
+            Config.settings.sauceLabsSettings.SauceLabsUsername = "bkitchener";
+            Config.settings.sauceLabsSettings.SauceLabsAPIKey = "998969ff-ad37-4b2e-9ad7-edacd982bc59";
+            Config.settings.sauceLabsSettings.UseSauceLabs = true;
+            Config.settings.runTimeSettings.RunOnRemoteHost = true;
+            Config.settings.runTimeSettings.HighlightFoundElements = false;
             this.browser = WebDriverBrowser.Browser.IE;
            base.SetUp();
         }

@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
-    <id>ProtoTest.Golem</id>
+    <id>Golem-2-Beta</id>
     <version>2.0.0.0</version>
-    <title>ProtoTest.Golem</title>
+    <title>Golem</title>
     <authors>Brian Kitchener</authors>
     <owners>Brian Kitchener</owners>
     <projectUrl>http://www.github.com/prototest/prototest.golem</projectUrl>
-    <description>Windows Test Automation Framework</description>
+    <description>Selenium+ Test Automation Framework</description>
     <releaseNotes>
       Removing MbUnit and porting all functionality to nUnit.  
     </releaseNotes>
@@ -15,7 +15,6 @@
     <language />
     <tags>Selenium WebDriver Framework Golem ProtoTest Gallio MbUnit Rest White TestStack Test Testing</tags>
     <dependencies>
-      <dependency id="Gallio_MbUnit" version="3.4.14.0" />
       <dependency id="Selenium.Support" version="2.45.0" />
       <dependency id="Selenium.WebDriver" version="2.45.0" />
       <dependency id="Castle.Core" version="3.2.2" />

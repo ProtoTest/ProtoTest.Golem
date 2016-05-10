@@ -14,7 +14,7 @@ namespace ProtoTest.Golem.Core
     /// </summary>
     public class Config
     {
-        public static ConfigSettings Settings
+        public static ConfigSettings settings
         {
             get { return TestBase.testData.configSettings; }
             set { TestBase.testData.configSettings = value; }
@@ -149,16 +149,14 @@ namespace ProtoTest.Golem.Core
 
         public ConfigSettings()
         {
-            runTimeSettings = new RuntimeSettings();
-            reportSettings = new ReportSettings();
+            browserStackSettings = new BrowserStackSettings();
             httpProxy = new HttpProxy();
             imageCompareSettings = new ImageCompareSettings();
             purpleSettings = new PurpleSettings();
-            browserStackSettings = new BrowserStackSettings();
+            reportSettings = new ReportSettings();
+            runTimeSettings = new RuntimeSettings();
             sauceLabsSettings = new SauceLabsSettings();
         }
-
-
         /// <summary>
         ///     Contains all settings related to the BrowserMobProxy
         /// </summary>
@@ -226,7 +224,8 @@ namespace ProtoTest.Golem.Core
                 spellChecking = Config.GetConfigValueAsBool("SpellChecking", "False");
                 diagnosticLog = Config.GetConfigValueAsBool("DiagnosticLog", "True");
                 testLog = Config.GetConfigValueAsBool("TestLog", "True");
-                reportPath = Config.GetConfigValue("ReportPath", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "reports"));
+                reportPath = Config.GetConfigValue("ReportPath", Path.Combine(Common.GetCodeDirectory(), "reports"));
+
             }
         }
 
@@ -307,7 +306,7 @@ namespace ProtoTest.Golem.Core
         }
 
         /// <summary>
-        ///     Settings for TestStack.White module
+        ///     settings for TestStack.White module
         /// </summary>
         public class PurpleSettings
         {

@@ -53,14 +53,6 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\DotNetZip.1.9.8\lib\net20\Ionic.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="MbUnit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Gallio_MbUnit.3.4.14.0\lib\net40\MbUnit.dll</HintPath>
-    </Reference>
-    <Reference Include="MbUnit40, Version=3.4.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Gallio_MbUnit.3.4.14.0\lib\net40\MbUnit40.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -134,6 +126,7 @@
     <Compile Include="Tests\DesiredCapibilitiesTests.cs" />
     <Compile Include="Tests\NewTests.cs" />
     <Compile Include="Tests\SauceLabsTests.cs" />
+    <Compile Include="Tests\TestComponent.cs" />
     <Compile Include="Tests\TestDDT.cs" />
     <Compile Include="Tests\TestLog.cs" />
     <Compile Include="Tests\TestElements.cs" />
@@ -176,9 +169,11 @@
     <Compile Include="Purple\PurpleElements\PurpleTextBox.cs" />
     <Compile Include="Purple\PurpleElements\PurpleWindow.cs" />
     <Compile Include="Purple\PurpleTestBase.cs" />
+    <Compile Include="WebDriver\By.cs" />
     <Compile Include="WebDriver\ByE.cs" />
+    <Compile Include="WebDriver\BaseComponent.cs" />
     <Compile Include="WebDriver\Component.cs" />
-    <Compile Include="WebDriver\ConsoleErrorGrabber.cs" />
+    <Compile Include="WebDriver\Components.cs" />
     <Compile Include="WebDriver\ElementCollection.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
     <Compile Include="WebDriver\Elements\Images\Histogram.cs" />
@@ -194,6 +189,7 @@
     <Compile Include="WebDriver\EventFiringWebDriver.cs" />
     <Compile Include="WebDriver\FoundElementEventArgs.cs" />
     <Compile Include="WebDriver\ScreenshotRemoteDriver.cs" />
+    <Compile Include="WebDriver\Section.cs" />
     <Compile Include="WebDriver\WebDriverHost.cs" />
     <Compile Include="WebDriver\WebDriverRecorder.cs" />
     <Compile Include="WebDriver\WebDriverTestBase.cs" />

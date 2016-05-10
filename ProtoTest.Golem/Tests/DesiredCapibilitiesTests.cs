@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
-using System.Text;
-using OpenQA.Selenium;
+﻿using NUnit.Framework;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 
@@ -15,11 +10,11 @@ namespace ProtoTest.Golem.Tests
         public override void SetUp()
         {
             var data = testData;
-            Config.Settings.sauceLabsSettings.SauceLabsUsername = "bkitchener";
-            Config.Settings.sauceLabsSettings.SauceLabsAPIKey = "998969ff-ad37-4b2e-9ad7-edacd982bc59";
-            Config.Settings.sauceLabsSettings.UseSauceLabs = true;
-            Config.Settings.runTimeSettings.RunOnRemoteHost = true;
-            Config.Settings.runTimeSettings.HighlightFoundElements = false;
+            Config.settings.sauceLabsSettings.SauceLabsUsername = "bkitchener";
+            Config.settings.sauceLabsSettings.SauceLabsAPIKey = "998969ff-ad37-4b2e-9ad7-edacd982bc59";
+            Config.settings.sauceLabsSettings.UseSauceLabs = true;
+            Config.settings.runTimeSettings.RunOnRemoteHost = true;
+            Config.settings.runTimeSettings.HighlightFoundElements = false;
             browserInfo = new BrowserInfo(WebDriverBrowser.Browser.Firefox);
             base.SetUp();
         }
