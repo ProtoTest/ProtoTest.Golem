@@ -20,7 +20,7 @@ namespace ProtoTest.Golem.WebDriver
         protected Element _root;
         protected Element _frame;
         protected ElementImages _images;
-        public OpenQA.Selenium.By by;
+        public By by;
         public string name = "Element";
         public string pageObjectName = "";
         public int timeoutSec;
@@ -47,7 +47,7 @@ namespace ProtoTest.Golem.WebDriver
         ///     Construct an element using an existing element
         /// </summary>
         /// <param name="element"></param>
-        public Element(IWebElement element, OpenQA.Selenium.By by)
+        public Element(IWebElement element, By by)
         {
             this.element = element;
             this.by = by;
@@ -60,7 +60,7 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="name">Human readable name of the element</param>
         /// <param name="locator">By locator</param>
-        public Element(string name, OpenQA.Selenium.By locator)
+        public Element(string name, By locator)
         {
             this.name = name;
             by = locator;
@@ -72,7 +72,7 @@ namespace ProtoTest.Golem.WebDriver
         ///     Construct an element
         /// </summary>
         /// <param name="locator">By locator</param>
-        public Element(OpenQA.Selenium.By locator)
+        public Element(By locator)
         {
             name = "Element";
             by = locator;
@@ -85,7 +85,7 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="name">Human readable name of the element</param>
         /// <param name="locator">By locator</param>
-        public Element(string name, OpenQA.Selenium.By locator, Element frame)
+        public Element(string name, By locator, Element frame)
         {
             _frame = frame;
             this.name = name;
@@ -100,7 +100,7 @@ namespace ProtoTest.Golem.WebDriver
         ///     Construct an element
         /// </summary>
         /// <param name="locator">By locator</param>
-        public Element(OpenQA.Selenium.By locator, Element frame)
+        public Element(By locator, Element frame)
         {
             _frame = frame;
             name = "Element";
@@ -109,7 +109,7 @@ namespace ProtoTest.Golem.WebDriver
             timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
-        public Element(BaseComponent root, OpenQA.Selenium.By locator, Element frame=null)
+        public Element(BaseComponent root, By locator, Element frame=null)
         {
             _root = root;
             _frame = frame;
@@ -260,7 +260,7 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="by">The locator to use.</param>
         /// <returns>The IWebElement found.</returns>
-        public IWebElement FindElement(OpenQA.Selenium.By by)
+        public IWebElement FindElement(By by)
         {
             var then = DateTime.Now.AddSeconds(timeoutSec);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
@@ -285,7 +285,7 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="by">The locator to use.</param>
         /// <returns>Collection of IWebElements found.</returns>
-        public ReadOnlyCollection<IWebElement> FindElements(OpenQA.Selenium.By by)
+        public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             var elements = new List<IWebElement>();
             foreach (var ele in element.FindElements(by))

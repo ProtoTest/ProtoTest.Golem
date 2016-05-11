@@ -7,12 +7,13 @@ using NUnit.Framework;
 
 namespace ProtoTest.Golem.Core
 {
-    class Log
+    public class Log
     {
         public static void Message(string text)
         {
             try
             {
+                Console.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
                 TestContext.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
             }
             catch (Exception e)

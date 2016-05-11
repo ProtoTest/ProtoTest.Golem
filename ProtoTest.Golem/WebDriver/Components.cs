@@ -16,11 +16,11 @@ namespace ProtoTest.Golem.WebDriver
         {
         }
 
-        public Components(OpenQA.Selenium.By by) 
+        public Components(By by) 
         {
             this.RootElements = new ElementCollection(by);
-
         }
+
        public IEnumerator<T> GetEnumerator()
         {
             foreach (var ele in RootElements)

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests

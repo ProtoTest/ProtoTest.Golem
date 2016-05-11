@@ -10,27 +10,37 @@ namespace ProtoTest.Golem.WebDriver
 {
     public abstract class BaseComponent : Element
     {
+        private By by1;
+        private Element frame;
+
         public Element root { get; set; }
 
-        public BaseComponent()
+        public BaseComponent() : base()
         {
         }
 
-        public BaseComponent(OpenQA.Selenium.By by)
+        public BaseComponent(By by) : base(by)
         {
             this.root = new Element(by);
             this.@by = by;
         }
 
-        public BaseComponent(Element element)
+        public BaseComponent(Element element) : base(element)
         {
             this.root = element;
         }
-  
+
+        public BaseComponent(By by, Element frame) : base(by, frame)
+        {
+            this.root = new Element(by, frame);
+            this.@by = by;
+        }
 
         public override IWebElement GetElement()
         {
-            return this.root.GetElement();
+            var element2 = this.root.GetElement();
+            return element2;
+          
         }
     }
 }

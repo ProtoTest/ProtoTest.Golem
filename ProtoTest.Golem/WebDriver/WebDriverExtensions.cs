@@ -312,34 +312,6 @@ namespace ProtoTest.Golem.WebDriver
             throw new ElementNotVisibleException("No element visible for : " + @by);
         }
 
-        public static void VerifyElementVisible(this IWebDriver driver, OpenQA.Selenium.By by, bool isVisible = true)
-        {
-            var elements = driver.FindElements(by);
-            var count = elements.Count;
-            var visible = false;
-            if (isVisible && count != 0)
-            {
-                foreach (var element in elements)
-                {
-                    if (element.Displayed)
-                    {
-                        visible = true;
-                    }
-                }
-            }
-            Verify(isVisible != visible,
-                "VerifyElementVisible Failed : Element : " + @by +
-                (isVisible ? " visible" : " not visible"));
-        }
-
-        public static void VerifyElementText(this IWebDriver driver, OpenQA.Selenium.By by, string expectedText)
-        {
-            var actualText = driver.FindElement(by).Text;
-            Verify(actualText != expectedText,
-                "VerifyElementText Failed : Expected : " + @by + " Expected text : '" + expectedText +
-                "' + Actual '" + actualText);
-        }
-
         public static Rectangle GetRect(this IWebElement element)
         {
             try

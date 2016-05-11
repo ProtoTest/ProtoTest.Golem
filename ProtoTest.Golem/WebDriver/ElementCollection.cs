@@ -10,8 +10,9 @@ namespace ProtoTest.Golem.WebDriver
 {
     public class ElementCollection : IEnumerable<Element>
     {
-        private readonly OpenQA.Selenium.By locator;
+        private readonly By locator;
         private IEnumerable<Element> _elements;
+        private Element _frame;
 
         public ElementCollection()
         {
@@ -27,9 +28,16 @@ namespace ProtoTest.Golem.WebDriver
             this.elements = elements;
         }
 
-        public ElementCollection(OpenQA.Selenium.By locator)
+        public ElementCollection(By locator)
         {
             this.locator = locator;
+            elements = new List<Element>();
+        }
+
+        public ElementCollection(By locator, Element frame)
+        {
+            this.locator = locator;
+            this._frame = frame;
             elements = new List<Element>();
         }
 
@@ -121,6 +129,15 @@ namespace ProtoTest.Golem.WebDriver
             {
                 if (locator != null)
                 {
+                    if (_frame != null)
+                    {
+                        WebDriverTestBase.driver.SwitchTo().Frame(_frame.WrappedElement);
+                    }
+                    else
+                    {
+                        WebDriverTestBase.driver.SwitchTo().DefaultContent();
+                    }
+
                     var newList = new List<Element>();
                     var eles = WebDriverTestBase.driver.FindElements(locator);
                     foreach (var ele in eles)

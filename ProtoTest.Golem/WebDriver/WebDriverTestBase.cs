@@ -19,9 +19,9 @@ namespace ProtoTest.Golem.WebDriver
             this.browserInfo = browser;
         }
 
-        public WebDriverTestBase()
+        public WebDriverTestBase() : base()
         {
-            Log.Message("Constructor");
+            
         }
 
         protected static Object browserLocker = new object();

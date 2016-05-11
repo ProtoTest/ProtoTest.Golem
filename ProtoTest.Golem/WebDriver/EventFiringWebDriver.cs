@@ -366,7 +366,7 @@ namespace ProtoTest.Golem.WebDriver
         ///     The first matching <see cref="T:OpenQA.Selenium.IWebElement" /> on the current context.
         /// </returns>
         /// <exception cref="T:OpenQA.Selenium.NoSuchElementException">If no element matches the criteria.</exception>
-        public IWebElement FindElement(OpenQA.Selenium.By by)
+        public IWebElement FindElement(By by)
         {
             try
             {
@@ -395,7 +395,7 @@ namespace ProtoTest.Golem.WebDriver
         ///     <see cref="T:OpenQA.Selenium.IWebElement">WebElements</see>
         ///     matching the current criteria, or an empty list if nothing matches.
         /// </returns>
-        public ReadOnlyCollection<IWebElement> FindElements(OpenQA.Selenium.By by)
+        public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             var list = new List<IWebElement>();
             try
@@ -1441,13 +1441,13 @@ namespace ProtoTest.Golem.WebDriver
             /// <returns>
             ///     IWebElement object so that you can interaction that object
             /// </returns>
-            public IWebElement FindElement(OpenQA.Selenium.By by)
+            public IWebElement FindElement(By by)
             {
                 try
                 {
                     var e = new FindElementEventArgs(ParentDriver.WrappedDriver, WrappedElement, by);
                     ParentDriver.OnFindingElement(e);
-                    WrappedElement.Highlight(5000,"green");
+                    WrappedElement.Highlight(500,"green");
                     var element = WrappedElement.FindElement(by);
                     ParentDriver.OnFindElementCompleted(e);
                     var f = new FoundElementEventArgs(ParentDriver.WrappedDriver, element, by);
@@ -1469,14 +1469,14 @@ namespace ProtoTest.Golem.WebDriver
             /// <returns>
             ///     ReadOnlyCollection of IWebElement
             /// </returns>
-            public ReadOnlyCollection<IWebElement> FindElements(OpenQA.Selenium.By by)
+            public ReadOnlyCollection<IWebElement> FindElements(By by)
             {
                 var list = new List<IWebElement>();
                 try
                 {
                     var e = new FindElementEventArgs(ParentDriver.WrappedDriver, WrappedElement, by);
                     ParentDriver.OnFindingElement(e);
-                    WrappedElement.Highlight(5000, "green");
+                    WrappedElement.Highlight(500, "green");
                     var elements = WrappedElement.FindElements(by);
                     ParentDriver.OnFindElementCompleted(e);
                     foreach (var underlyingElement in elements)

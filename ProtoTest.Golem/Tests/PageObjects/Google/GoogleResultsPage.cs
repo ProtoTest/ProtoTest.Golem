@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver;
 
@@ -23,7 +24,7 @@ namespace ProtoTest.Golem.Tests.PageObjects.Google
             public Element Logo => new Element(this, By.Id("logo"));
             public Element Search => new Element(this, By.CssSelector("input"));
 
-            public GoogleResultsHeader(OpenQA.Selenium.By by) : base(by)
+            public GoogleResultsHeader(By by) : base(by)
             {
             }
         }

@@ -1,4 +1,5 @@
-﻿using ProtoTest.Golem.WebDriver;
+﻿using OpenQA.Selenium;
+using ProtoTest.Golem.WebDriver;
 
 namespace ProtoTest.Golem.Tests.PageObjects.Google
 {

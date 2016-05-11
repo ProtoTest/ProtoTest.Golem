@@ -158,7 +158,8 @@ namespace ProtoTest.Golem.Core
             {
                 return TestStatus.Failed;
             }
-
+            Core.Log.Error(TestContext.CurrentContext.Result.Message);
+            Core.Log.Error(TestContext.CurrentContext.Result.StackTrace);
             return TestContext.CurrentContext.Result.Outcome.Status;
         }
 

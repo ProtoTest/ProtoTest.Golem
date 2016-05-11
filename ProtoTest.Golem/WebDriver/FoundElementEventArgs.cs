@@ -39,6 +39,6 @@ namespace ProtoTest.Golem.WebDriver
         /// <summary>
         ///     Gets the <see cref="T:OpenQA.Selenium.By" /> object containing the method used to find elements.
         /// </summary>
-        public OpenQA.Selenium.By FindMethod { get; private set; }
+        public By FindMethod { get; private set; }
     }
 }

@@ -63,13 +63,19 @@ namespace ProtoTest.Golem.Core
         [TearDown]
         public virtual void TearDownTestBase()
         {
-            Log.Message(Common.GetCurrentTestName() + " " + Common.GetTestOutcome());
+            LogTestOutcome();
             VerifyHttpTraffic();
             GetHarFile();
             QuitProxy();           
             LogVideoIfTestFailed();
             AssertNoVerificationErrors();
             DeleteTestData();
+        }
+
+        private void LogTestOutcome()
+        {
+            Log.Message(Common.GetCurrentTestName() + " " + Common.GetTestOutcome());
+
         }
 
         private void VerifyHttpTraffic()
