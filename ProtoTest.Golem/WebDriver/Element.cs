@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
@@ -14,11 +15,12 @@ namespace ProtoTest.Golem.WebDriver
     ///     Provides a simplified API to the IWebELement.  Can be instantiated in a class header.
     ///     Will automatically find the IWebElement each time it is used, not when it is instantiated.
     /// </summary>
-    public class Element : IWebElement, IWrapsDriver, IWrapsElement
+    public class Element : IWebElement, IWrapsDriver, IWrapsElement, IEnumerable<Element>
     {
         protected IWebElement _element;
-        protected Element _root;
-        protected Element _frame;
+        protected IEnumerable<Element> _elements;
+        protected Element root;
+        protected Element frame;
         protected ElementImages _images;
         public By by;
         public string name = "Element";
@@ -29,6 +31,16 @@ namespace ProtoTest.Golem.WebDriver
         {
             pageObjectName = TestBase.GetCurrentClassName();
             timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
+        }
+
+        public Element(ReadOnlyCollection<IWebElement> elements)
+        {
+            var eles = new List<Element>();
+            foreach (var ele in elements)
+            {
+                eles.Add(new Element(ele));
+            }
+            this.elements = eles;
         }
 
         /// <summary>
@@ -87,7 +99,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(string name, By locator, Element frame)
         {
-            _frame = frame;
+            this.frame = frame;
             this.name = name;
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
@@ -102,7 +114,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(By locator, Element frame)
         {
-            _frame = frame;
+            this.frame = frame;
             name = "Element";
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
@@ -111,13 +123,62 @@ namespace ProtoTest.Golem.WebDriver
 
         public Element(BaseComponent root, By locator, Element frame=null)
         {
-            _root = root;
-            _frame = frame;
+            this.root = root;
+            this.frame = frame;
             name = "Element";
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
             timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
+
+
+        protected IEnumerable<Element> elements
+        {
+            get
+            {
+                if (@by != null)
+                {
+                    if (frame != null)
+                    {
+                        WebDriverTestBase.driver.SwitchTo().Frame(frame.WrappedElement);
+                    }
+                    else
+                    {
+                        WebDriverTestBase.driver.SwitchTo().DefaultContent();
+                    }
+
+                    var newList = new List<Element>();
+                    var eles = WebDriverTestBase.driver.FindElements(by);
+                    foreach (var ele in eles)
+                    {
+                        newList.Add(new Element(ele));
+                    }
+                    _elements = newList;
+                }
+
+                return _elements;
+            }
+            set { _elements = value; }
+        }
+
+        public IEnumerator<Element> GetEnumerator()
+        {
+            foreach (var ele in elements)
+            {
+                yield return ele;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void ForEach(Action<Element> action)
+        {
+            this.ToList().ForEach(action);
+        }
+
 
         protected IWebDriver driver
         {
@@ -134,7 +195,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                _element = _root != null ? _root.WaitForPresent(this.@by, this.timeoutSec) : GetElement();
+                _element = root != null ? root.WaitForPresent(this.@by, this.timeoutSec) : GetElement();
                 
                 if (_element.GetType() == typeof(Element))
                 {
@@ -494,9 +555,9 @@ namespace ProtoTest.Golem.WebDriver
                 TestBase.testData.lastElement = this;
                 if (_element.IsStale())
                 {
-                    if (_frame != null)
+                    if (frame != null)
                     {
-                        driver.SwitchTo().Frame(_frame.WrappedElement);
+                        driver.SwitchTo().Frame(frame.WrappedElement);
                         TestBase.testData.lastElement = this;
                     }
                     else
@@ -509,10 +570,19 @@ namespace ProtoTest.Golem.WebDriver
             }
             catch (NoSuchElementException e)
             {
-                var message = string.Format("Could not find element '{0}' ({1}) after {2} seconds", name, @by,
-                    timeoutSec);
+                var message = string.Format("Could not find element '{0}' ({1}) after {2} seconds {3}", name, @by,
+                    timeoutSec, GetFrameMessage());
                 throw new NoSuchElementException(message);
             }
+        }
+
+        private string GetFrameMessage()
+        {
+            if (frame != null)
+            {
+                return " In frame " + frame.name;
+            }
+            return "";
         }
 
         /// <summary>

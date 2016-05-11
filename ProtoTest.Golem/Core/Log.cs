@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -13,7 +14,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                Console.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
+                Debug.WriteLine(string.Format("DEBUG : ({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
                 TestContext.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
             }
             catch (Exception e)

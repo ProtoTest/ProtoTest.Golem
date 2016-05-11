@@ -10,9 +10,6 @@ namespace ProtoTest.Golem.WebDriver
 {
     public abstract class BaseComponent : Element
     {
-        private By by1;
-        private Element frame;
-
         public Element root { get; set; }
 
         public BaseComponent() : base()
@@ -33,6 +30,7 @@ namespace ProtoTest.Golem.WebDriver
         public BaseComponent(By by, Element frame) : base(by, frame)
         {
             this.root = new Element(by, frame);
+            this.frame = frame;
             this.@by = by;
         }
 

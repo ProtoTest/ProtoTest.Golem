@@ -10,7 +10,7 @@ namespace ProtoTest.Golem.WebDriver
 {
     public class Components<T> : IEnumerable<T> where T : BaseComponent, new()
     {
-       private ElementCollection RootElements;
+       private Element RootElements;
 
         public Components()
         {
@@ -18,7 +18,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public Components(By by) 
         {
-            this.RootElements = new ElementCollection(by);
+            this.RootElements = new Element(by);
         }
 
        public IEnumerator<T> GetEnumerator()

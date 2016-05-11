@@ -31,7 +31,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        ///     Executes JavaScript in the context of the currently selected _frame or window.
+        ///     Executes JavaScript in the context of the currently selected frame or window.
         /// </summary>
         /// <param name="script">The JavaScript code to execute.</param>
         /// <param name="args">The arguments to the script.</param>
@@ -43,7 +43,7 @@ namespace ProtoTest.Golem.WebDriver
         ///         The
         ///         <see cref="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ExecuteScript(System.String,System.Object[])" />
         ///         method executes JavaScript in the context of
-        ///         the currently selected _frame or window. This means that "document" will refer
+        ///         the currently selected frame or window. This means that "document" will refer
         ///         to the current document. If the script has a return value, then the following
         ///         steps will be taken:
         ///     </para>
@@ -111,7 +111,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        ///     Executes JavaScript asynchronously in the context of the currently selected _frame or window.
+        ///     Executes JavaScript asynchronously in the context of the currently selected frame or window.
         /// </summary>
         /// <param name="script">The JavaScript code to execute.</param>
         /// <param name="args">The arguments to the script.</param>
@@ -347,11 +347,11 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        ///     Instructs the driver to send future commands to a different _frame or window.
+        ///     Instructs the driver to send future commands to a different frame or window.
         /// </summary>
         /// <returns>
         ///     An <see cref="T:OpenQA.Selenium.ITargetLocator" /> object which can be used to select
-        ///     a _frame or window.
+        ///     a frame or window.
         /// </returns>
         public ITargetLocator SwitchTo()
         {
@@ -937,7 +937,7 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             /// <summary>
-            ///     Move to a different _frame using its index
+            ///     Move to a different frame using its index
             /// </summary>
             /// <param name="frameIndex">The index of the </param>
             /// <returns>
@@ -957,9 +957,9 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             /// <summary>
-            ///     Move to different _frame using its name
+            ///     Move to different frame using its name
             /// </summary>
-            /// <param name="frameName">name of the _frame</param>
+            /// <param name="frameName">name of the frame</param>
             /// <returns>
             ///     A WebDriver instance that is currently in use
             /// </returns>
@@ -977,7 +977,7 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             /// <summary>
-            ///     Move to a _frame element.
+            ///     Move to a frame element.
             /// </summary>
             /// <param name="frameElement">a previously found FRAME or IFRAME element.</param>
             /// <returns>
@@ -1017,7 +1017,7 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             /// <summary>
-            ///     Change the active _frame to the default
+            ///     Change the active frame to the default
             /// </summary>
             /// <returns>
             ///     Element of the default

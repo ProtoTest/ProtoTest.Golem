@@ -188,7 +188,6 @@
     <Compile Include="WebDriver\ByE.cs" />
     <Compile Include="WebDriver\BaseComponent.cs" />
     <Compile Include="WebDriver\Components.cs" />
-    <Compile Include="WebDriver\ElementCollection.cs" />
     <Compile Include="WebDriver\Elements\Images\ElementImages.cs" />
     <Compile Include="WebDriver\Elements\Images\Histogram.cs" />
     <Compile Include="WebDriver\Elements\Images\ImageComparer.cs" />

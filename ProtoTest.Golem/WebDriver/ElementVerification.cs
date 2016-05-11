@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
@@ -131,6 +132,27 @@ namespace ProtoTest.Golem.WebDriver
                 }
                 Common.Delay(1000);
             }
+            VerificationFailed();
+            return element;
+        }
+
+        public Element Count(int value)
+        {
+            message = "count not '" + value + "'";
+            notMessage = "count was not '" + value + "'";
+            var then = DateTime.Now.AddSeconds(timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var newText = element.Text;
+                condition = (element.Present) && (element.Count() == value);
+                if (condition == isTrue)
+                {
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
+                    return element;
+                }
+                Common.Delay(1000);
+            }
+            notMessage += ". It was : '" + element.Count() + "'";
             VerificationFailed();
             return element;
         }
