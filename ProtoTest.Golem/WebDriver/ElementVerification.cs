@@ -157,6 +157,48 @@ namespace ProtoTest.Golem.WebDriver
             return element;
         }
 
+        public Element CountGreaterThan(int value)
+        {
+            message = "count not greater than '" + value + "'";
+            notMessage = "count was not less than '" + value + "'";
+            var then = DateTime.Now.AddSeconds(timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var newText = element.Text;
+                condition = (element.Present) && (element.Count() > value);
+                if (condition == isTrue)
+                {
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
+                    return element;
+                }
+                Common.Delay(1000);
+            }
+            notMessage += ". It was : '" + element.Count() + "'";
+            VerificationFailed();
+            return element;
+        }
+
+        public Element CountLessThan(int value)
+        {
+            message = "count not less than '" + value + "'";
+            notMessage = "count was not greater than '" + value + "'";
+            var then = DateTime.Now.AddSeconds(timeoutSec);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var newText = element.Text;
+                condition = (element.Present) && (element.Count() < value);
+                if (condition == isTrue)
+                {
+                    Log.Message("!--Verification Passed " + GetSuccessMessage());
+                    return element;
+                }
+                Common.Delay(1000);
+            }
+            notMessage += ". It was : '" + element.Count() + "'";
+            VerificationFailed();
+            return element;
+        }
+
         public Element Text(string text)
         {
             message = "contains text '" + text + "'";

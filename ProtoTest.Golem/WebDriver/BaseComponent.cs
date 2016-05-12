@@ -12,30 +12,35 @@ namespace ProtoTest.Golem.WebDriver
     {
         public Element root { get; set; }
 
-        public BaseComponent() : base()
+        public BaseComponent()
         {
+            this.name = TestBase.GetCurrentClassName();
         }
 
-        public BaseComponent(By by) : base(by)
+        public BaseComponent(By by) 
         {
             this.root = new Element(by);
             this.@by = by;
+            this.name = TestBase.GetCurrentClassName();
         }
 
-        public BaseComponent(Element element) : base(element)
+        public BaseComponent(Element element) 
         {
             this.root = element;
+            this.name = TestBase.GetCurrentClassName();
         }
 
-        public BaseComponent(By by, Element frame) : base(by, frame)
+        public BaseComponent(By by, Element frame) 
         {
             this.root = new Element(by, frame);
             this.frame = frame;
             this.@by = by;
+            this.name = TestBase.GetCurrentClassName();
         }
 
         public override IWebElement GetElement()
         {
+            TestBase.testData.lastElement = this;
             var element2 = this.root.GetElement();
             return element2;
           

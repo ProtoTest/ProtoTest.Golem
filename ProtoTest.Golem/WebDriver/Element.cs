@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using OpenQA.Selenium;
@@ -23,18 +24,42 @@ namespace ProtoTest.Golem.WebDriver
         protected Element frame;
         protected ElementImages _images;
         public By by;
-        public string name = "Element";
+        public string name;
         public string pageObjectName = "";
         public int timeoutSec;
 
+        public void getName()
+        {
+            var stackTrace = new StackTrace(); // get call stack
+            var stackFrames = stackTrace.GetFrames(); // get method calls (frames)
+            var t = this.GetType();
+            var d = t.DeclaringType;
+          
+            foreach (var stackFrame in stackFrames)
+            {
+                var method = stackFrame.GetMethod();
+                var type = method.ReflectedType;
+                if ((type.IsSubclassOf(typeof(Element)) &&
+                     (!stackFrame.GetMethod().IsConstructor)))
+                {
+                    this.name = stackFrame.GetMethod().Name.Replace("get_", "").Replace("()", "");
+                    return;
+                }
+            }
+
+            this.name = t.Name;
+        }
+
         public Element()
         {
+            getName();
             pageObjectName = TestBase.GetCurrentClassName();
             timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         public Element(ReadOnlyCollection<IWebElement> elements)
         {
+            getName();
             var eles = new List<Element>();
             foreach (var ele in elements)
             {
@@ -49,6 +74,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="element"></param>
         public Element(IWebElement element)
         {
+            getName();
             this.element = element;
 
             pageObjectName = TestBase.GetCurrentClassName();
@@ -61,6 +87,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="element"></param>
         public Element(IWebElement element, By by)
         {
+            getName();
             this.element = element;
             this.by = by;
             pageObjectName = TestBase.GetCurrentClassName();
@@ -74,6 +101,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(string name, By locator)
         {
+            getName();
             this.name = name;
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
@@ -86,7 +114,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(By locator)
         {
-            name = "Element";
+            getName();
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
             timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
@@ -114,8 +142,8 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(By locator, Element frame)
         {
+            getName();
             this.frame = frame;
-            name = "Element";
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
             timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
@@ -123,9 +151,9 @@ namespace ProtoTest.Golem.WebDriver
 
         public Element(BaseComponent root, By locator, Element frame=null)
         {
+            getName();
             this.root = root;
             this.frame = frame;
-            name = "Element";
             by = locator;
             pageObjectName = TestBase.GetCurrentClassName();
             timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;

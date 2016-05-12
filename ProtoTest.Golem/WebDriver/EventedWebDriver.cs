@@ -101,7 +101,7 @@ namespace ProtoTest.Golem.WebDriver
             if (TestBase.testData.lastElement.name != "Element")
             {
                 return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
-                    TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);
+                    TestBase.testData.lastElement.name, TestBase.testData.lastElement.GetHtml(), param);
             }
 
             return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element",
@@ -115,7 +115,7 @@ namespace ProtoTest.Golem.WebDriver
             if (TestBase.testData.lastElement!=null && TestBase.testData.lastElement.name != "Element")
             {
                 return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
-                    TestBase.testData.lastElement.name, TestBase.testData.lastElement.by, param);
+                    TestBase.testData.lastElement.name, e.FindMethod, param);
             }
 
             return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element", e.FindMethod,

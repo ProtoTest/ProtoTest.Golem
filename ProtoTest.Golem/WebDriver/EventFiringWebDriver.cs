@@ -1447,7 +1447,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     var e = new FindElementEventArgs(ParentDriver.WrappedDriver, WrappedElement, by);
                     ParentDriver.OnFindingElement(e);
-                    WrappedElement.Highlight(500,"green");
+                    WrappedElement.Highlight(100,"green");
                     var element = WrappedElement.FindElement(by);
                     ParentDriver.OnFindElementCompleted(e);
                     var f = new FoundElementEventArgs(ParentDriver.WrappedDriver, element, by);
@@ -1476,7 +1476,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     var e = new FindElementEventArgs(ParentDriver.WrappedDriver, WrappedElement, by);
                     ParentDriver.OnFindingElement(e);
-                    WrappedElement.Highlight(500, "green");
+                    WrappedElement.Highlight(100, "green");
                     var elements = WrappedElement.FindElements(by);
                     ParentDriver.OnFindElementCompleted(e);
                     foreach (var underlyingElement in elements)

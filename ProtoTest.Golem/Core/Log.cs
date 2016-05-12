@@ -14,6 +14,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
+                TestBase.overlay.Text = text;
                 Debug.WriteLine(string.Format("DEBUG : ({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
                 TestContext.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
             }
@@ -27,7 +28,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                TestContext.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
+                Message("FAILURE: " + text);
             }
             catch (Exception e)
             {
@@ -90,7 +91,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                TestContext.WriteLine(string.Format("WARNING: ({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), message));
+                Message("WARNING: " + message);
             }
             catch (Exception e)
             {
@@ -102,7 +103,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                TestContext.WriteLine(string.Format("ERROR: ({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), message));
+                Message("ERROR: " + message);
             }
             catch (Exception e)
             {

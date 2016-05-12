@@ -245,10 +245,9 @@ namespace ProtoTest.Golem.Core
         {
             var stackTrace = new StackTrace(); // get call stack
             var stackFrames = stackTrace.GetFrames(); // get method calls (frames)
-
             foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof (BasePageObject)) &&
+                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof (BasePageObject) || stackFrame.GetMethod().ReflectedType.BaseType == typeof(BaseComponent)) &&
                     (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name;
@@ -274,7 +273,7 @@ namespace ProtoTest.Golem.Core
             // write call stack method names
             foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof (BasePageObject))) &&
+                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof (BasePageObject)) || stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof(BaseComponent))) &&
                     (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().Name;
@@ -299,7 +298,8 @@ namespace ProtoTest.Golem.Core
 
             foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof (BasePageObject)) &&
+                var type = stackFrame.GetMethod().ReflectedType;
+                if (((type.IsSubclassOf(typeof (BasePageObject)) || type.IsSubclassOf(typeof(BaseComponent))) &&
                      (!stackFrame.GetMethod().IsConstructor)))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;

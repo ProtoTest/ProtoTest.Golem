@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using OpenQA.Selenium;
 using ProtoTest.Golem.Core;
 
@@ -41,8 +42,48 @@ namespace ProtoTest.Golem.WebDriver
             {
                 WaitForElements();
             }
-
             TestBase.testData.actions.addAction(TestBase.GetCurrentClassAndMethodName());
+        }
+
+        private void GetElementNAmes()
+        {
+//            var props = this.GetType().GetProperties();
+//            foreach (var prop in props)
+//            {
+//                if(prop.PropertyType.Name=="Element")
+//                {
+//                    var value = prop.GetValue(this, null) as Element;
+//                    value.Set_Name(prop.Name);
+////                    prop.SetValue(this, value, null);
+//                    Log.Message("Set name to " + value.name);
+//                }
+//
+//            }
+//            props = this.GetType().GetProperties();
+//            foreach (var prop in props)
+//            {
+//                if (prop.PropertyType.Name == "Element")
+//                {
+//                    var value = prop.GetValue(this, null) as Element;
+//                    Log.Message("Set name to " + value.name);
+//                }
+
+//            }
+            //            // Get the type of FieldsClass.
+            //            Type fieldsType = this.GetType();
+            //
+            //            // Get an array of FieldInfo objects.
+            //            FieldInfo[] fields = fieldsType.GetFields(BindingFlags.Public
+            //                | BindingFlags.Instance);
+            //            // Display the values of the fields.
+            //            Console.WriteLine("Displaying the values of the fields of {0}:",
+            //                fieldsType);
+            //            for (int i = 0; i < fields.Length; i++)
+            //            {
+            //                var text = string.Format("   {0}:\t'{1}'",
+            //                    fields[i].Name, fields[i].GetValue(this));
+            //
+            //            }
         }
 
         public IWebDriver driver { get; set; }
