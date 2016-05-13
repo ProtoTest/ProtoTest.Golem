@@ -256,7 +256,7 @@ namespace ProtoTest.Golem.Core
                 Browsers = GetBrowserInfo();
                 LaunchBrowser = Config.GetConfigValueAsBool("LaunchBrowser", "True");
                 TestTimeoutMin = Config.GetConfigValueAsInt("TestTimeoutMin", "5");
-                ElementTimeoutSec = Config.GetConfigValueAsInt("ElementTimeoutSec", "5");
+                ElementTimeoutSec = Config.GetConfigValueAsInt("ElementTimeoutSec", "10");
                 OpenWindowTimeoutSec = Config.GetConfigValueAsInt("WindowOpenTimeoutSec", "10");
                 PageTimeoutSec = Config.GetConfigValueAsInt("PageTimeoutSec", "30");
                 EnvironmentUrl = Config.GetConfigValue("EnvironmentUrl", "");

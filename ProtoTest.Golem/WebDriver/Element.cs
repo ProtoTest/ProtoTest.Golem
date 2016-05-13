@@ -223,12 +223,8 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                _element = root != null ? root.WaitForPresent(this.@by, this.timeoutSec) : GetElement();
-                
-                if (_element.GetType() == typeof(Element))
-                {
-                    _element = GetElement();
-                }
+                _element = GetElement();
+               
                 return _element;
             }
             set { _element = value; }
@@ -585,6 +581,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     if (frame != null)
                     {
+                        Log.Message($"Looking in frame : {frame.@by}:  {frame.GetHtml()}");
                         driver.SwitchTo().Frame(frame.WrappedElement);
                         TestBase.testData.lastElement = this;
                     }
@@ -592,7 +589,7 @@ namespace ProtoTest.Golem.WebDriver
                     {
                         driver.SwitchTo().DefaultContent();
                     }
-                    _element = driver.WaitForPresent(@by, timeoutSec);
+                   _element = root != null ? root.WaitForPresent(@by, timeoutSec) : driver.WaitForPresent(@by, timeoutSec);
                 }
                 return _element;
             }

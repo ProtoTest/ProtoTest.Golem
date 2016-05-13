@@ -14,6 +14,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public BaseComponent()
         {
+            this.@by = By.TagName("html");
             this.name = TestBase.GetCurrentClassName();
         }
 
@@ -38,10 +39,34 @@ namespace ProtoTest.Golem.WebDriver
             this.name = TestBase.GetCurrentClassName();
         }
 
+        public BaseComponent(BaseComponent component, By by, Element frame)
+        {
+            this.root = new Element(component, by, frame);
+            this.frame = frame;
+            this.@by = by;
+            this.name = TestBase.GetCurrentClassName();
+        }
+
+        public BaseComponent(BaseComponent component, By by)
+        {
+            this.root = new Element(component, by);
+            this.@by = by;
+            this.name = TestBase.GetCurrentClassName();
+        }
+
         public override IWebElement GetElement()
         {
+            IWebElement element2;
             TestBase.testData.lastElement = this;
-            var element2 = this.root.GetElement();
+            if (this.root == null)
+            {
+                element2 = base.GetElement();
+            }
+            else
+            {
+                element2 = this.root.GetElement();
+            }
+            
             return element2;
           
         }

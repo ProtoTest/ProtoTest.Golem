@@ -178,7 +178,7 @@ namespace ProtoTest.Golem.WebDriver
             action.Build().Perform();
         }
 
-        public static IWebElement WaitForPresent(this IWebElement element, OpenQA.Selenium.By by, int timeout = 0)
+        public static IWebElement WaitForPresent(this IWebElement element, By by, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
@@ -193,7 +193,7 @@ namespace ProtoTest.Golem.WebDriver
                 @by, timeout));
         }
 
-        public static IWebElement WaitForPresent(this IWebDriver driver, OpenQA.Selenium.By by, int timeout = 0)
+        public static IWebElement WaitForPresent(this IWebDriver driver, By by, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
