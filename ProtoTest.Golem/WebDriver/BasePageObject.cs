@@ -87,6 +87,9 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         public IWebDriver driver { get; set; }
-        public abstract void WaitForElements();
+
+        public virtual void WaitForElements()
+        {
+        }
     }
 }

@@ -14,8 +14,8 @@ namespace ProtoTest.Golem.WebDriver
 
         public BaseComponent()
         {
-            this.@by = By.TagName("html");
             this.name = TestBase.GetCurrentClassName();
+            this.WaitForElements();
         }
 
         public BaseComponent(By by) 
@@ -23,12 +23,14 @@ namespace ProtoTest.Golem.WebDriver
             this.root = new Element(by);
             this.@by = by;
             this.name = TestBase.GetCurrentClassName();
+            this.WaitForElements();
         }
 
         public BaseComponent(Element element) 
         {
             this.root = element;
             this.name = TestBase.GetCurrentClassName();
+            this.WaitForElements();
         }
 
         public BaseComponent(By by, Element frame) 
@@ -37,6 +39,7 @@ namespace ProtoTest.Golem.WebDriver
             this.frame = frame;
             this.@by = by;
             this.name = TestBase.GetCurrentClassName();
+            this.WaitForElements();
         }
 
         public BaseComponent(BaseComponent component, By by, Element frame)
@@ -45,6 +48,7 @@ namespace ProtoTest.Golem.WebDriver
             this.frame = frame;
             this.@by = by;
             this.name = TestBase.GetCurrentClassName();
+            this.WaitForElements();
         }
 
         public BaseComponent(BaseComponent component, By by)
@@ -52,6 +56,7 @@ namespace ProtoTest.Golem.WebDriver
             this.root = new Element(component, by);
             this.@by = by;
             this.name = TestBase.GetCurrentClassName();
+            this.WaitForElements();
         }
 
         public override IWebElement GetElement()
@@ -70,5 +75,31 @@ namespace ProtoTest.Golem.WebDriver
             return element2;
           
         }
+
+        /// <summary>
+        ///     Create an element verification for some condition.
+        /// </summary>
+        /// <returns>A new ElementVerification for the element</returns>
+        public ElementVerification Verify()
+        {
+            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
+            return new ElementVerification(this, timeoutSec, false);
+        }
+
+        /// <summary>
+        ///     Wait for some condition on the element
+        /// </summary>
+        /// <returns>A new ElementVerification for the element</returns>
+        public ElementVerification WaitUntil(int timeoutSec)
+        {
+            this.timeoutSec = timeoutSec;
+            return new ElementVerification(this, this.timeoutSec, true);
+        }
+
+        public virtual void WaitForElements()
+        {
+            
+        }
+
     }
 }
