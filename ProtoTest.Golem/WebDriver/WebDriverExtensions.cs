@@ -134,11 +134,18 @@ namespace ProtoTest.Golem.WebDriver
                 var jsDriver = ((IJavaScriptExecutor) ((IWrapsDriver) element).WrappedDriver);
                 var originalElementBorder = (string) jsDriver.ExecuteScript("return arguments[0].style.background", element);
                 jsDriver.ExecuteScript(string.Format("arguments[0].style.background='{0}'; return;", color), element);
-                var bw = new BackgroundWorker();
                 if (ms >= 0)
                 {
-                    bw.DoWork += (obj, e) => Unhighlight(element, originalElementBorder, ms);
-                    bw.RunWorkerAsync();  
+                    if (ms > 1000)
+                    {
+                        var bw = new BackgroundWorker();
+                        bw.DoWork += (obj, e) => Unhighlight(element, originalElementBorder, ms);
+                        bw.RunWorkerAsync();
+                    }
+                    else
+                    {
+                        Unhighlight(element, originalElementBorder, ms);
+                    }
                 }
             }
             catch (Exception e)
