@@ -11,27 +11,17 @@ namespace ProtoTest.Golem.WebDriver
     public class Components<T> : IEnumerable<T> where T : Element, new()
     {
        private Element RootElements;
-        private By by;
-        private Element frame;
 
         public Components()
         {
         }
 
-        public Components(By by)
+        public Components(By by) 
         {
-            this.@by = by;
             this.RootElements = new Element(by);
         }
 
-        public Components(By by, Element frame)
-        {
-            this.RootElements = new Element(by, frame);
-            this.by = by;
-            this.frame = frame;
-        }
-
-        public IEnumerator<T> GetEnumerator()
+       public IEnumerator<T> GetEnumerator()
         {
             foreach (var ele in RootElements)
             {

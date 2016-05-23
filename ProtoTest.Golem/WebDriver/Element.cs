@@ -20,7 +20,7 @@ namespace ProtoTest.Golem.WebDriver
     {
         protected IWebElement _element;
         protected IEnumerable<Element> _elements;
-        protected internal Element root;
+        protected Element root;
         protected Element frame;
         protected ElementImages _images;
         public By by;

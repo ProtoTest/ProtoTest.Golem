@@ -6,7 +6,6 @@ using System.Threading;
 using System.Xml;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using ProtoTest.Golem.WebDriver;
 using TestContext = NUnit.Framework.TestContext;
 
 namespace ProtoTest.Golem.Core
@@ -151,24 +150,6 @@ namespace ProtoTest.Golem.Core
             var configFile = new XmlDocument();
             configFile.Load(AppDomain.CurrentDomain.BaseDirectory + fileName);
             return configFile.SelectSingleNode(xpath).Value ?? "";
-        }
-
-        public static string GetCurrentElementName()
-        {
-            var stackTrace = new StackTrace(); // get call stack
-            var stackFrames = stackTrace.GetFrames(); // get method calls (frames)
-            foreach (var stackFrame in stackFrames)
-            {
-                var method = stackFrame.GetMethod();
-                var type = method.ReflectedType;
-                if ((type.IsSubclassOf(typeof(Element)) &&
-                     (!stackFrame.GetMethod().IsConstructor)))
-                {
-                    var name = stackFrame.GetMethod().Name.Replace("get_", "").Replace("()", "");
-                    return name;
-                }
-            }
-            return "";
         }
 
         public static TestStatus GetTestOutcome()

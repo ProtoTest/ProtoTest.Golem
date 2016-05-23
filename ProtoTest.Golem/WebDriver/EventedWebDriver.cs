@@ -111,8 +111,7 @@ namespace ProtoTest.Golem.WebDriver
         private string GetLogMessage(string command, FindElementEventArgs e = null, string param = "")
         {
             if (param != "") param = "'" + param + "'";
-            var name = Common.GetCurrentElementName();
-            Log.Message(name);
+
             if (TestBase.testData.lastElement!=null && TestBase.testData.lastElement.name != "Element")
             {
                 return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
