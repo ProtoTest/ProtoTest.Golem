@@ -11,6 +11,8 @@ namespace ProtoTest.Golem.WebDriver
     public class Components<T> : IEnumerable<T> where T : Element, new()
     {
        private Element RootElements;
+        private By by;
+        private Element frame;
 
         public Components()
         {
@@ -21,7 +23,13 @@ namespace ProtoTest.Golem.WebDriver
             this.RootElements = new Element(by);
         }
 
-       public IEnumerator<T> GetEnumerator()
+        public Components(By by, Element frame)
+        {
+            this.by = by;
+            this.frame = frame;
+        }
+
+        public IEnumerator<T> GetEnumerator()
         {
             foreach (var ele in RootElements)
             {

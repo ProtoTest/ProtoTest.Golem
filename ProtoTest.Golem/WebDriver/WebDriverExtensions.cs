@@ -185,7 +185,7 @@ namespace ProtoTest.Golem.WebDriver
             action.Build().Perform();
         }
 
-        public static IWebElement WaitForPresent(this IWebElement element, By by, int timeout = 0)
+        public static IWebElement WaitForPresent(this IWebElement element, By by, int timeout = 0, string elementName = "Element")
         {
             if (timeout == 0) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);

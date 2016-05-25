@@ -13,7 +13,6 @@ namespace ProtoTest.Golem.Core
         public BrowserInfo browserInfo;
         public ConfigSettings configSettings;
         private bool eventsRegistered;
-        public Element lastElement;
         public ScreenRecorder recorder;
         public string testName;
         public List<VerificationError> VerificationErrors;

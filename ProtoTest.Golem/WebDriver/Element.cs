@@ -20,46 +20,77 @@ namespace ProtoTest.Golem.WebDriver
     {
         protected IWebElement _element;
         protected IEnumerable<Element> _elements;
-        protected Element root;
+        protected internal Element root;
         protected Element frame;
         protected ElementImages _images;
         public By by;
         public string name;
         public string pageObjectName = "";
         public int timeoutSec;
-
-        public void getName()
+        private StackFrame[] stackFrames;
+        public void GetName()
         {
+            this.pageObjectName = TestBase.GetCurrentClassName();
             var stackTrace = new StackTrace(); // get call stack
-            var stackFrames = stackTrace.GetFrames(); // get method calls (frames)
+            stackFrames = stackTrace.GetFrames(); // get method calls (frames)
             var t = this.GetType();
-            var d = t.DeclaringType;
-          
+
             foreach (var stackFrame in stackFrames)
             {
                 var method = stackFrame.GetMethod();
-                var type = method.ReflectedType;
-                if ((type.IsSubclassOf(typeof(Element)) &&
-                     (!stackFrame.GetMethod().IsConstructor)))
+                Type type = method.ReflectedType;
+                if (method.Name.Contains("get_"))
                 {
-                    this.name = stackFrame.GetMethod().Name.Replace("get_", "").Replace("()", "");
+                    this.name = $"{ this.pageObjectName}." + method.Name.Replace("get_", "").Replace("()", "");
+                    if (name.Contains("ClickOrdersLick"))
+                    {
+                        foreach(var stack in stackFrames)
+                        {
+                            Log.Message(stack.GetMethod().Name);
+                        }
+                    }
+                    return;
+                }
+
+                if ((type.IsSubclassOf(typeof(Element)) &&
+                     (!method.IsConstructor)))
+                {
+                    this.name = $"{ this.pageObjectName}." + method.Name;
+                    if (name.Contains("ClickOrdersLick"))
+                    {
+                        foreach (var stack in stackFrames)
+                        {
+                            Log.Message(stack.GetMethod().Name);
+                        }
+                    }
+                    return;
+                }
+
+                if ((type.IsSubclassOf(typeof(BaseComponent))))
+                {
+                    this.name = $"{ this.pageObjectName}." + type.Name;
+                    if (name.Contains("ClickOrdersLick"))
+                    {
+                        foreach (var stack in stackFrames)
+                        {
+                            Log.Message(stack.GetMethod().Name);
+                        }
+                    }
                     return;
                 }
             }
-
-            this.name = t.Name;
         }
 
         public Element()
         {
-            getName();
+            GetName();
             pageObjectName = TestBase.GetCurrentClassName();
             timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         public Element(ReadOnlyCollection<IWebElement> elements)
         {
-            getName();
+            GetName();
             var eles = new List<Element>();
             foreach (var ele in elements)
             {
@@ -74,7 +105,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="element"></param>
         public Element(IWebElement element)
         {
-            getName();
+            GetName();
             this.element = element;
 
             pageObjectName = TestBase.GetCurrentClassName();
@@ -87,11 +118,11 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="element"></param>
         public Element(IWebElement element, By by)
         {
-            getName();
+            GetName();
             this.element = element;
             this.by = by;
-            pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
@@ -101,11 +132,11 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(string name, By locator)
         {
-            getName();
+            GetName();
             this.name = name;
-            by = locator;
-            pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
+            this.by = locator;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
@@ -114,10 +145,10 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(By locator)
         {
-            getName();
-            by = locator;
-            pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
+            GetName();
+            this.by = locator;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         /// <summary>
@@ -129,9 +160,9 @@ namespace ProtoTest.Golem.WebDriver
         {
             this.frame = frame;
             this.name = name;
-            by = locator;
-            pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
+            this.by = locator;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
 
@@ -142,21 +173,21 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="locator">By locator</param>
         public Element(By locator, Element frame)
         {
-            getName();
+            GetName();
             this.frame = frame;
-            by = locator;
-            pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
+            this.by = locator;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
         public Element(BaseComponent root, By locator, Element frame=null)
         {
-            getName();
+            GetName();
             this.root = root;
             this.frame = frame;
-            by = locator;
-            pageObjectName = TestBase.GetCurrentClassName();
-            timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
+            this.by = locator;
+            this.pageObjectName = TestBase.GetCurrentClassName();
+            this.timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
 
@@ -176,6 +207,7 @@ namespace ProtoTest.Golem.WebDriver
                     }
 
                     var newList = new List<Element>();
+                    Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Elements {this.pageObjectName}.{this.name} ({this.@by})");
                     var eles = WebDriverTestBase.driver.FindElements(by);
                     foreach (var ele in eles)
                     {
@@ -352,6 +384,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 try
                 {
+                    Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Child ({by}) of Element {this.name} ({this.@by})");
                     var eles = element.FindElements(by);
                     if (eles.Count > 0)
                         return new Element(eles[0], by);
@@ -361,8 +394,8 @@ namespace ProtoTest.Golem.WebDriver
                 {
                 }
             }
-            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
-                @by, timeoutSec));
+            throw new NoSuchElementException(
+                $"Child ({by}) of Element {this.name} ({this.@by}) was not present after {timeoutSec} seconds");
         }
 
         /// <summary>
@@ -372,12 +405,10 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>Collection of IWebElements found.</returns>
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
-            var elements = new List<IWebElement>();
-            foreach (var ele in element.FindElements(by))
-            {
-                elements.Add(new Element(ele, by));
-            }
-            return new ReadOnlyCollection<IWebElement>(elements);
+
+            Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Children ({by}) of Element {this.name} ({this.@by})");
+            var childelements = element.FindElements(by);
+            return childelements;
         }
 
         /// <summary>
@@ -506,6 +537,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 try
                 {
+                    Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Child {childElement.name} ({childElement.@by}) of Element {this.name} ({this.@by})");
                     var eles = element.FindElements(childElement.by);
                     if (eles.Count > 0)
                         return new Element(eles[0], by);
@@ -515,8 +547,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                 }
             }
-            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
-                childElement.@by, timeoutSec));
+            throw new NoSuchElementException($"Child Element {childElement.name} ({childElement.@by}) of {this.name} ({this.@by}) was not present after {timeoutSec} seconds");
         }
 
         public ReadOnlyCollection<IWebElement> FindElements(Element element)
@@ -576,27 +607,25 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
-                TestBase.testData.lastElement = this;
                 if (_element.IsStale())
                 {
                     if (frame != null)
                     {
-                        Log.Message($"Looking in frame : {frame.@by}:  {frame.GetHtml()}");
+                        Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking in frame : {frame.@by}:  {frame.GetHtml()}");
                         driver.SwitchTo().Frame(frame.WrappedElement);
-                        TestBase.testData.lastElement = this;
                     }
                     else
                     {
                         driver.SwitchTo().DefaultContent();
                     }
+                    Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Element {this.name} {this.@by}");
                    _element = root != null ? root.WaitForPresent(@by, timeoutSec) : driver.WaitForPresent(@by, timeoutSec);
                 }
                 return _element;
             }
             catch (NoSuchElementException e)
             {
-                var message = string.Format("Could not find element '{0}' ({1}) after {2} seconds {3}", name, @by,
-                    timeoutSec, GetFrameMessage());
+                var message = $"Could not find element '{name}' ({@by}) after {timeoutSec} seconds {GetFrameMessage()}";
                 throw new NoSuchElementException(message);
             }
         }

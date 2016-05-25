@@ -7,7 +7,7 @@ namespace ProtoTest.Golem.WebDriver
 {
     public class EventedWebDriver
     {
-        private const string errorMessage = "{0}: {1} '{2}' ({3}) {4}";
+        private const string errorMessage = "{0}: {1} ({2}) {3}";
         public EventFiringWebDriver driver;
 
         public EventedWebDriver(IWebDriver driver)
@@ -97,28 +97,13 @@ namespace ProtoTest.Golem.WebDriver
         private string GetLogMessage(string command, WebElementEventArgs e = null, string param = "")
         {
             if (param != "") param = "'" + param + "'";
-
-            if (TestBase.testData.lastElement.name != "Element")
-            {
-                return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
-                    TestBase.testData.lastElement.name, TestBase.testData.lastElement.GetHtml(), param);
-            }
-
-            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element",
-                TestBase.testData.lastElement.by, param);
+            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, e.Element.GetHtml(), param);
         }
 
         private string GetLogMessage(string command, FindElementEventArgs e = null, string param = "")
         {
             if (param != "") param = "'" + param + "'";
-
-            if (TestBase.testData.lastElement!=null && TestBase.testData.lastElement.name != "Element")
-            {
-                return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command,
-                    TestBase.testData.lastElement.name, e.FindMethod, param);
-            }
-
-            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, "Element", e.FindMethod,
+            return string.Format(errorMessage, TestBase.GetCurrentClassAndMethodName(), command, e.FindMethod,
                 param);
         }
     }

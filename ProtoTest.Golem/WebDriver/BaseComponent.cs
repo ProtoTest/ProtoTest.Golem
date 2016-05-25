@@ -62,7 +62,6 @@ namespace ProtoTest.Golem.WebDriver
         public override IWebElement GetElement()
         {
             IWebElement element2;
-            TestBase.testData.lastElement = this;
             if (this.root == null)
             {
                 element2 = base.GetElement();
