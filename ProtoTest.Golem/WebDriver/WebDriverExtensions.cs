@@ -193,7 +193,17 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var eles = element.FindElements(by);
                 if (eles.Count > 0)
-                    return eles.FirstOrDefault(x => x.Displayed);
+                {
+                    var ele = eles.FirstOrDefault(x => x.Displayed);
+                    if (ele == null)
+                    {
+                        return eles[0];
+                    }
+                    else
+                    {
+                        return ele;
+                    }
+                }
                 Common.Delay(1000);
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
@@ -208,7 +218,19 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var eles = driver.FindElements(by);
                 if (eles.Count > 0)
-                    return eles.FirstOrDefault(x => x.Displayed);
+                {
+                    var ele = eles.FirstOrDefault(x => x.Displayed);
+                    if (ele == null)
+                    {
+                        return eles[0];
+                    }
+                    else
+                    {
+                        return ele;
+                    }
+                }
+                    
+                    
                 Common.Delay(1000);
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",

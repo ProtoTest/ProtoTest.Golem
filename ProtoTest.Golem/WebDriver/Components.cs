@@ -8,11 +8,9 @@ using ProtoTest.Golem.Core;
 
 namespace ProtoTest.Golem.WebDriver
 {
-    public class Components<T> : IEnumerable<T> where T : Element, new()
+    public class Components<T> : IEnumerable<T> where T : BaseComponent, new()
     {
-       private Element RootElements;
-        private By by;
-        private Element frame;
+       private Element root;
 
         public Components()
         {
@@ -20,18 +18,17 @@ namespace ProtoTest.Golem.WebDriver
 
         public Components(By by) 
         {
-            this.RootElements = new Element(by);
+            this.root = new Element(by);
         }
 
         public Components(By by, Element frame)
         {
-            this.by = by;
-            this.frame = frame;
+            this.root = new Element(by, frame);
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (var ele in RootElements)
+            foreach (var ele in this.root)
             {
                 var el = new T();
                 el.root = ele;
@@ -51,7 +48,7 @@ namespace ProtoTest.Golem.WebDriver
         public ElementVerification Verify()
         {
            var  timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
-            return new ElementVerification(this.RootElements, timeoutSec, false);
+            return new ElementVerification(this.root, timeoutSec, false);
         }
 
         /// <summary>
@@ -61,7 +58,7 @@ namespace ProtoTest.Golem.WebDriver
         public ElementVerification WaitUntil()
         {
             var timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
-            return new ElementVerification(this.RootElements, timeoutSec, true);
+            return new ElementVerification(this.root, timeoutSec, true);
         }
 
         /// <summary>
@@ -70,7 +67,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>A new ElementVerification for the element</returns>
         public ElementVerification Verify(int timeoutSec)
         {
-            return new ElementVerification(this.RootElements, timeoutSec, false);
+            return new ElementVerification(this.root, timeoutSec, false);
         }
 
         /// <summary>
@@ -79,7 +76,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <returns>A new ElementVerification for the element</returns>
         public ElementVerification WaitUntil(int timeoutSec)
         {
-            return new ElementVerification(this.RootElements, timeoutSec, true);
+            return new ElementVerification(this.root, timeoutSec, true);
         }
     }
 }

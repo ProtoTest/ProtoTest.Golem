@@ -208,10 +208,11 @@ namespace ProtoTest.Golem.WebDriver
 
                     var newList = new List<Element>();
                     Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Elements {this.pageObjectName}.{this.name} ({this.@by})");
-                    var eles = WebDriverTestBase.driver.FindElements(by);
+                    var eles = root != null ? root.FindElements(@by) : driver.FindElements(@by);
                     foreach (var ele in eles)
                     {
-                        newList.Add(new Element(ele));
+                        var nele = new Element(ele);
+                        newList.Add(nele);
                     }
                     _elements = newList;
                 }
@@ -255,8 +256,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                _element = GetElement();
-               
+                _element = GetElement();              
                 return _element;
             }
             set { _element = value; }
@@ -362,7 +362,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             get
             {
-                var text = element.Text;
+                  var text = element.Text;
                 return text;
             }
             set
@@ -407,6 +407,7 @@ namespace ProtoTest.Golem.WebDriver
         {
 
             Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Children ({by}) of Element {this.name} ({this.@by})");
+            
             var childelements = element.FindElements(by);
             return childelements;
         }
@@ -416,7 +417,15 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         public void Clear()
         {
-            element.Clear();
+            try
+            {
+                element.Clear();
+            }
+            catch (Exception e)
+            {
+                Log.Warning("Could not clear " + e.Message);
+            }
+            
         }
 
         /// <summary>
@@ -609,17 +618,34 @@ namespace ProtoTest.Golem.WebDriver
             {
                 if (_element.IsStale())
                 {
-                    if (frame != null)
+                    
+                    Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Element {this.name} {this.@by}");
+                    if (root != null)
                     {
-                        Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking in frame : {frame.@by}:  {frame.GetHtml()}");
-                        driver.SwitchTo().Frame(frame.WrappedElement);
+                        var root_ele = root.GetElement();
+                        if (frame != null)
+                        {
+                            Log.Message(
+                                $"{TestBase.GetCurrentClassAndMethodName()}: Looking in frame : {frame.@by}:  {frame.GetHtml()}");
+                            driver.SwitchTo().Frame(frame.GetElement());
+                        }
+                        _element = root_ele.WaitForPresent(@by, timeoutSec);
                     }
                     else
                     {
-                        driver.SwitchTo().DefaultContent();
+                        if (frame != null)
+                        {
+                            Log.Message(
+                                $"{TestBase.GetCurrentClassAndMethodName()}: Looking in frame : {frame.@by}:  {frame.GetHtml()}");
+                            driver.SwitchTo().Frame(frame.GetElement());
+                        }
+                        else
+                        {
+                            Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking in default frame");
+                            driver.SwitchTo().DefaultContent();
+                        }
+                        _element = driver.WaitForPresent(@by, timeoutSec);
                     }
-                    Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Element {this.name} {this.@by}");
-                   _element = root != null ? root.WaitForPresent(@by, timeoutSec) : driver.WaitForPresent(@by, timeoutSec);
                 }
                 return _element;
             }
@@ -686,6 +712,11 @@ namespace ProtoTest.Golem.WebDriver
         public void MouseOver()
         {
             element.MouseOver();
+        }
+
+        public void ScrollIntoView()
+        {
+            element.ScrollIntoView();
         }
 
         /// <summary>
