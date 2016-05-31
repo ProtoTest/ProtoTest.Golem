@@ -32,7 +32,7 @@ namespace ProtoTest.Golem.Tests
         }
 
         [Test]
-        public void TestComponentt()
+        public void TestHeader()
         {
             var item =
                 OpenPage<GoogleResultsPage>("https://www.google.com/#q=selenium").Header.Search.Verify().Visible();
