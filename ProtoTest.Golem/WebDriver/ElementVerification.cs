@@ -32,11 +32,28 @@ namespace ProtoTest.Golem.WebDriver
         public ElementVerification Not()
         {
             element.timeoutSec = 1;
+            if (element.root != null)
+            {
+                element.root.timeoutSec = 1;
+            }
+            if (element.frame != null)
+            {
+                element.frame.timeoutSec = 1;
+            }
             return new ElementVerification(element, timeoutSec, failTest, false);
         }
 
         public ElementVerification Not(int timeoutSec)
         {
+            element.timeoutSec = 1;
+            if (element.root != null)
+            {
+                element.root.timeoutSec = 1;
+            }
+            if (element.frame != null)
+            {
+                element.frame.timeoutSec = 1;
+            }
             this.timeoutSec = timeoutSec;
             return new ElementVerification(element, timeoutSec, failTest, false);
         }

@@ -21,7 +21,7 @@ namespace ProtoTest.Golem.WebDriver
         protected IWebElement _element;
         protected IEnumerable<Element> _elements;
         protected internal Element root;
-        protected Element frame;
+        protected internal Element frame;
         protected ElementImages _images;
         public By by;
         public string name;
@@ -714,9 +714,10 @@ namespace ProtoTest.Golem.WebDriver
             element.MouseOver();
         }
 
-        public void ScrollIntoView()
+        public Element ScrollIntoView()
         {
             element.ScrollIntoView();
+            return this;
         }
 
         /// <summary>

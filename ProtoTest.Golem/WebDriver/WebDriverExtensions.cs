@@ -424,6 +424,20 @@ namespace ProtoTest.Golem.WebDriver
             return element;
         }
 
+        public static IWebElement JS_Click(this IWebElement element)
+        {
+            var js = (IJavaScriptExecutor)WebDriverTestBase.driver;
+            js.ExecuteScript("arguments[0].click(); return;", element);
+            return element;
+        }
+
+        public static IWebElement ClickAt(this IWebElement element)
+        {
+            var js = (IJavaScriptExecutor)WebDriverTestBase.driver;
+            js.ExecuteScript($"document.elementFromPoint({element.Location.X}, {element.Location.Y}).click(); return;", element);
+            return element;
+        }
+
         public static void SelectNewWindow(this IWebDriver driver, int timeout = 0)
         {
             if (timeout == 0) timeout = Config.settings.runTimeSettings.OpenWindowTimeoutSec;
