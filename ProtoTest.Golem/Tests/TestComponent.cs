@@ -17,7 +17,9 @@ namespace ProtoTest.Golem.Tests
                 OpenPage<GoogleResultsPage>("https://www.google.com/#q=selenium")
                     .SearchItem.First(x => x.Text.Contains("wikipedia"));
             item.Highlight(-1, "grey");
-            item.Verify().Visible();
+            item.Link.Verify().Visible();
+            item.Description.Verify().Visible();
+            item.Url.Verify().Visible();
         }
 
         [Test]
