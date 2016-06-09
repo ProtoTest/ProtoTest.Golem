@@ -154,6 +154,28 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
+        public static void WaitForJQuery(this IWebDriver driver, int timeout=-1)
+        {
+            if (timeout == -1) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
+            var then = DateTime.Now.AddSeconds(timeout);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var value = driver.ExecuteJavaScript("(typeof jQuery === \"undefined\" || jQuery.active==0);");
+                bool condition = (bool) value;
+                if (condition == true)
+                {
+                    return;
+                }
+                else
+                {
+                    Log.Message("Waiting for JQuery");
+                    Common.Delay(1000);
+                }
+                
+            }
+            
+        }
+
         private static void Unhighlight(IWebElement element, string border, int timeMs)
         {
             try
@@ -391,6 +413,7 @@ namespace ProtoTest.Golem.WebDriver
                 element.SendKeys(text);
             }
         }
+
 
         public static object ExecuteJavaScript(this IWebDriver driver, string script)
         {

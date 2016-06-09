@@ -33,7 +33,7 @@ namespace ProtoTest.Golem.WebDriver
             this.WaitForElements();
         }
 
-        public BaseComponent(By by, Element frame) 
+        public BaseComponent(By by, Frame frame) 
         {
             this.root = new Element(by, frame);
             this.frame = frame;
@@ -42,7 +42,7 @@ namespace ProtoTest.Golem.WebDriver
             this.WaitForElements();
         }
 
-        public BaseComponent(BaseComponent component, By by, Element frame)
+        public BaseComponent(BaseComponent component, By by, Frame frame)
         {
             this.root = new Element(component, by, frame);
             this.frame = frame;

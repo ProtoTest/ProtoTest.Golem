@@ -201,6 +201,7 @@
     <Compile Include="WebDriver\Elements\Images\ImageExtensions.cs" />
     <Compile Include="WebDriver\EventFiringWebDriver.cs" />
     <Compile Include="WebDriver\FoundElementEventArgs.cs" />
+    <Compile Include="WebDriver\Frame.cs" />
     <Compile Include="WebDriver\ScreenshotRemoteDriver.cs" />
     <Compile Include="WebDriver\WebDriverHost.cs" />
     <Compile Include="WebDriver\WebDriverRecorder.cs" />

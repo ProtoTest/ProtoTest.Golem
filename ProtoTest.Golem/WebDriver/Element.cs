@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Support.UI;
 using ProtoTest.Golem.Core;
 using ProtoTest.Golem.WebDriver.Elements.Images;
 
@@ -16,12 +17,12 @@ namespace ProtoTest.Golem.WebDriver
     ///     Provides a simplified API to the IWebELement.  Can be instantiated in a class header.
     ///     Will automatically find the IWebElement each time it is used, not when it is instantiated.
     /// </summary>
-    public class Element : IWebElement, IWrapsDriver, IWrapsElement, IEnumerable<Element>
+    public class Element : IWrapsDriver, IWrapsElement, IEnumerable<Element>
     {
         protected IWebElement _element;
         protected IEnumerable<Element> _elements;
         protected internal Element root;
-        protected internal Element frame;
+        protected internal Frame frame;
         protected ElementImages _images;
         public By by;
         public string name;
@@ -42,7 +43,7 @@ namespace ProtoTest.Golem.WebDriver
                 if (method.Name.Contains("get_"))
                 {
                     this.name = $"{ this.pageObjectName}." + method.Name.Replace("get_", "").Replace("()", "");
-                    if (name.Contains("ClickOrdersLick"))
+                    if (name.Contains("ClickOrdersLink"))
                     {
                         foreach(var stack in stackFrames)
                         {
@@ -69,7 +70,7 @@ namespace ProtoTest.Golem.WebDriver
                 if ((type.IsSubclassOf(typeof(BaseComponent))))
                 {
                     this.name = $"{ this.pageObjectName}." + type.Name;
-                    if (name.Contains("ClickOrdersLick"))
+                    if (name.Contains("ClickOrdersLink"))
                     {
                         foreach (var stack in stackFrames)
                         {
@@ -156,7 +157,7 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         /// <param name="name">Human readable name of the element</param>
         /// <param name="locator">By locator</param>
-        public Element(string name, By locator, Element frame)
+        public Element(string name, By locator, Frame frame)
         {
             this.frame = frame;
             this.name = name;
@@ -171,7 +172,7 @@ namespace ProtoTest.Golem.WebDriver
         ///     Construct an element
         /// </summary>
         /// <param name="locator">By locator</param>
-        public Element(By locator, Element frame)
+        public Element(By locator, Frame frame)
         {
             GetName();
             this.frame = frame;
@@ -180,7 +181,7 @@ namespace ProtoTest.Golem.WebDriver
             this.timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
         }
 
-        public Element(BaseComponent root, By locator, Element frame=null)
+        public Element(BaseComponent root, By locator, Frame frame=null)
         {
             GetName();
             this.root = root;
@@ -199,10 +200,12 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     if (frame != null)
                     {
+                        Log.Message($"Looking in frame {frame.name} {frame.GetHtml()}");
                         WebDriverTestBase.driver.SwitchTo().Frame(frame.WrappedElement);
                     }
                     else
                     {
+                        Log.Message("Looking in default frame");
                         WebDriverTestBase.driver.SwitchTo().DefaultContent();
                     }
 
@@ -278,6 +281,10 @@ namespace ProtoTest.Golem.WebDriver
                     return false;
                 }
                 catch (StaleElementReferenceException e)
+                {
+                    return false;
+                }
+                catch (InvalidOperationException e)
                 {
                     return false;
                 }
@@ -387,7 +394,7 @@ namespace ProtoTest.Golem.WebDriver
                     Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Child ({by}) of Element {this.name} ({this.@by})");
                     var eles = element.FindElements(by);
                     if (eles.Count > 0)
-                        return new Element(eles[0], by);
+                        return eles[0];
                     Common.Delay(1000);
                 }
                 catch (StaleElementReferenceException e)
@@ -415,15 +422,17 @@ namespace ProtoTest.Golem.WebDriver
         /// <summary>
         ///     Clears the contents of the element\\.
         /// </summary>
-        public void Clear()
+        public Element Clear()
         {
             try
             {
                 element.Clear();
+                return this;
             }
             catch (Exception e)
             {
                 Log.Warning("Could not clear " + e.Message);
+                return this;
             }
             
         }
@@ -431,18 +440,20 @@ namespace ProtoTest.Golem.WebDriver
         /// <summary>
         ///     Click the element and optionally highlights the element if set in the application configuration settings.
         /// </summary>
-        public void Click()
+        public Element Click()
         {
             element.Click();
+            return this;
         }
 
         /// <summary>
         ///     Submit this element to the web server and optionally highlights the element if set in the application configuration
         ///     settings.
         /// </summary>
-        public void Submit()
+        public Element Submit()
         {
             element.Submit();
+            return this;
         }
 
         /// <summary>
@@ -450,9 +461,18 @@ namespace ProtoTest.Golem.WebDriver
         ///     configuration settings.
         /// </summary>
         /// <param name="text">Text to send</param>
-        public void SendKeys(string text)
+        public Element SendKeys(string text)
         {
-            element.SendKeys(text);
+            try
+            {
+                element.SendKeys(text);
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new InvalidOperationException("Cannot sendKeys that element, please verify it is an input or text field" + e.Message);
+            }
+            
+            return this;
         }
 
         /// <summary>
@@ -530,9 +550,33 @@ namespace ProtoTest.Golem.WebDriver
                 catch (StaleElementReferenceException e)
                 {
                 }
+                catch (InvalidOperationException e)
+                {
+                    
+                }
             }
             return false;
         }
+
+        public Element SelectOption(string option)
+        {
+            new SelectElement(this.GetElement()).SelectByText(option);
+            return this;
+        }
+
+        public Element SelectOptionByPartialText(string text)
+        {
+            var s_element = new SelectElement(this.GetElement());
+
+            foreach (var option in s_element.Options.Where(option => option.Text.Contains(text)))
+            {
+                option.Click();
+                break;
+            }
+
+            return this;
+        }
+
 
         /// <summary>
         ///     Returns the first element found by the locator.
@@ -549,7 +593,7 @@ namespace ProtoTest.Golem.WebDriver
                     Log.Message($"{TestBase.GetCurrentClassAndMethodName()}: Looking for Child {childElement.name} ({childElement.@by}) of Element {this.name} ({this.@by})");
                     var eles = element.FindElements(childElement.by);
                     if (eles.Count > 0)
-                        return new Element(eles[0], by);
+                        return eles[0];
                     Common.Delay(1000);
                 }
                 catch (StaleElementReferenceException e)
@@ -668,17 +712,19 @@ namespace ProtoTest.Golem.WebDriver
         /// <summary>
         ///     Clear a checked element (radio or checkbox)
         /// </summary>
-        public void ClearChecked()
+        public Element ClearChecked()
         {
             element.ClearChecked();
+            return this;
         }
 
         /// <summary>
         ///     Highlight the element on the page
         /// </summary>
-        public void Highlight(int ms = 30, string color = "yellow")
+        public Element Highlight(int ms = 30, string color = "yellow")
         {
             element.Highlight(ms, color);
+            return this;
         }
 
         /// <summary>
@@ -693,6 +739,23 @@ namespace ProtoTest.Golem.WebDriver
                 element.Click();
             }
             return this;
+        }
+
+        public bool IsStale()
+        {
+            return element.IsStale();
+        }
+
+        public Element SetText(string value)
+        {
+            Clear();
+            SendKeys(value);
+            return this;
+        }
+
+        public string GetHtml()
+        {
+            return element.GetHtml();
         }
 
         /// <summary>

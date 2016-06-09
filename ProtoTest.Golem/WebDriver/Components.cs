@@ -21,7 +21,7 @@ namespace ProtoTest.Golem.WebDriver
             this.root = new Element(by);
         }
 
-        public Components(By by, Element frame)
+        public Components(By by, Frame frame)
         {
             this.root = new Element(by, frame);
         }
