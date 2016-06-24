@@ -81,6 +81,11 @@ namespace ProtoTest.Golem.Core
                 DeleteTestData();
                 throw e;
             }
+            finally 
+            {
+                CreateHtmlReport();
+                DeleteTestData();
+            }
             
         }
 
@@ -120,9 +125,12 @@ namespace ProtoTest.Golem.Core
         private void CreateReportDirectory()
         {
             string filePath = Path.GetFullPath(Config.settings.reportSettings.reportPath);
-            reportPath = Path.Combine(filePath, DateTime.Now.ToString("yyMMdd_HHMM"));
+            reportPath = Path.Combine(filePath, DateTime.Now.ToString("MMdd_HHmm"));
             Config.settings.reportSettings.reportPath = reportPath;
             Directory.CreateDirectory(reportPath);
+            var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html";
+            TestContext.WriteLine(path);
+            Debug.WriteLine(path);
         }
         
         
