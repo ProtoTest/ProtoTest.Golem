@@ -157,13 +157,7 @@ namespace ProtoTest.Golem.Core
             if (TestBase.testData.VerificationErrors.Count != 0)
             {
                 return TestStatus.Failed;
-            }
-            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
-            {
-                Core.Log.Error(TestContext.CurrentContext.Result.Message);
-                Core.Log.Error(TestContext.CurrentContext.Result.StackTrace);
-            }
-       
+            }    
             return TestContext.CurrentContext.Result.Outcome.Status;
         }
 

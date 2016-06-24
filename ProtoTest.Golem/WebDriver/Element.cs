@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
@@ -442,7 +443,14 @@ namespace ProtoTest.Golem.WebDriver
         /// </summary>
         public Element Click()
         {
-            element.Click();
+            try
+            {
+                element.Click();
+            }
+            catch (InvalidOperationException e)
+            {
+                element.ScrollIntoView().Click();
+            }
             return this;
         }
 
@@ -750,6 +758,13 @@ namespace ProtoTest.Golem.WebDriver
         {
             Clear();
             SendKeys(value);
+            var element_value = this.GetAttribute("value");
+            if (value != element_value)
+            {
+                Clear();
+                Thread.Sleep(1000);
+                SendKeys(value);
+            }
             return this;
         }
 
@@ -772,9 +787,10 @@ namespace ProtoTest.Golem.WebDriver
         /// <summary>
         ///     Move the mouse over the element
         /// </summary>
-        public void MouseOver()
+        public Element MouseOver()
         {
             element.MouseOver();
+            return this;
         }
 
         public Element ScrollIntoView()

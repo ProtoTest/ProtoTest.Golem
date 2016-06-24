@@ -8,6 +8,8 @@ $CopyChromeDriver = "`nxcopy /y `"`$(ProjectDir)chromedriver.exe`" `"`$(TargetDi
 $CopyIEDriver = "`nxcopy /y `"`$(ProjectDir)IEDriverServer.exe`" `"`$(TargetDir)`""
 $CopyPhantomJSDriver = "`nxcopy /y `"`$(ProjectDir)phantomjs.exe`" `"`$(TargetDir)`""
 
+$CopyCSS = "`nxcopy /y `"`$(ProjectDir)dashboard.css`" `"`$(TargetDir)`""
+
 # Get the current Post Build Event cmd
 $currentPostBuildCmd = $project.Properties.Item("PostBuildEvent").Value
 
@@ -21,6 +23,8 @@ if (!$currentPostBuildCmd.Contains($CopyPhantomJSDriver)) {
 if (!$currentPostBuildCmd.Contains($CopyIEDriver)) {
     $project.Properties.Item("PostBuildEvent").Value += $CopyIEDriver
 }
-
-$mobFile = $project.ProjectItems.Item("Proxy").ProjectItems.Item("browsermob-proxy-2.0-beta-9-bin.zip")
+if (!$currentPostBuildCmd.Contains($CopyCSS)) {
+    $project.Properties.Item("PostBuildEvent").Value += $CopyCSS
+}
+$mobFile = $project.ProjectItems.Item("Proxy").ProjectItems.Item("browsermob-proxy-2.1.0-beta-6-bin.zip")
 $mobFile.Properties.Item("CopyToOutputDirectory").Value = 2

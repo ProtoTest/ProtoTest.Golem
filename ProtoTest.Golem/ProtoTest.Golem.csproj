@@ -88,6 +88,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -109,6 +110,7 @@
     <Compile Include="Core\CurrentProcessInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\HtmlReportGenerator.cs" />
     <Compile Include="Core\Log.cs" />
     <Compile Include="Core\ProcessRunner.cs" />
     <Compile Include="Proxy\BrowserMobProxy.cs" />
@@ -238,6 +240,9 @@
   <ItemGroup>
     <Content Include="chromedriver.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dashboard.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="IEDriverServer.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

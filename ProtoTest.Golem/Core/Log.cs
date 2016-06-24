@@ -10,13 +10,14 @@ namespace ProtoTest.Golem.Core
 {
     public class Log
     {
-        public static void Message(string text)
+        public static void Message(string text, ActionList.Action.ActionType type=ActionList.Action.ActionType.Other)
         {
             try
             {
                 TestBase.overlay.Text = text;
                 Debug.WriteLine(string.Format("DEBUG : ({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
-                TestContext.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
+//              TestContext.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), text));
+                TestBase.testData.LogEvent(text, type);
             }
             catch (Exception e)
             {
@@ -28,7 +29,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                Message("FAILURE: " + text);
+                Message("FAILURE: " + text, ActionList.Action.ActionType.Error);
             }
             catch (Exception e)
             {
@@ -36,38 +37,42 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        public static void Image(Image image)
+        public static string Image(Image image)
         {
             try
             {
                 String path = Path.GetFullPath(Path.Combine(Config.settings.reportSettings.reportPath, "screenshot_" + DateTime.Now.ToString("HHms") + ".png"));
                 image.Save(path, ImageFormat.Png);
-                Message("file:///" + path);
+                Message("file:///" + path, ActionList.Action.ActionType.Image);
+                return path;
             }
             catch (Exception e)
             {
                 TestContext.WriteLine(e.Message);
+                return "";
             }
         }
 
-        public static void Video(Video video)
+        public static string Video(Video video)
         {
             try
             {
                 String path = Path.GetFullPath(Path.Combine(Config.settings.reportSettings.reportPath, "Video_" + Common.GetShortTestName(90) + DateTime.Now.ToString("HHms") + ".flv"));
                 FileStream fs = new FileStream(path, FileMode.Create);
                 video.Save(fs);
-                Message("file:///" + path);
+                Message("file:///" + path, ActionList.Action.ActionType.Video);
+                return path;
             }
             catch (Exception e)
             {
                 TestContext.WriteLine(e.Message);
+                return "";
             }
         }
 
         public static void FilePath(string file)
         {
-            Message("file:///" + file);
+            Message("file:///" + file, ActionList.Action.ActionType.Link);
         }
 
         public static void Html(string name, string html)
@@ -79,7 +84,7 @@ namespace ProtoTest.Golem.Core
                 {
                     File.WriteAllText(path, html);
                 }
-                Message("file:///" + path);
+                Message("file:///" + path, ActionList.Action.ActionType.Link);
             }
             catch (Exception e)
             {
@@ -91,7 +96,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                Message("WARNING: " + message);
+                Message("WARNING: " + message, ActionList.Action.ActionType.Warning);
             }
             catch (Exception e)
             {
@@ -103,7 +108,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                Message("ERROR: " + message);
+                Message("ERROR: " + message, ActionList.Action.ActionType.Error);
             }
             catch (Exception e)
             {

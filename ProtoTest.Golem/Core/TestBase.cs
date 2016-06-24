@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Web.UI;
 using Gallio.Common.Media;
 using Gallio.Framework;
 using NUnit.Framework;
@@ -54,6 +55,8 @@ namespace ProtoTest.Golem.Core
         public virtual void SetUpTestBase()
         {
             Log.Message(Common.GetCurrentTestName() + " started");
+            testData.ClassName = TestContext.CurrentContext.Test.ClassName;
+            testData.MethodName = TestContext.CurrentContext.Test.MethodName;
             Config.settings = new ConfigSettings();
             Config.settings.reportSettings.reportPath = reportPath;
             StartNewProxy();
@@ -63,19 +66,37 @@ namespace ProtoTest.Golem.Core
         [TearDown]
         public virtual void TearDownTestBase()
         {
-            LogTestOutcome();
-            VerifyHttpTraffic();
-            GetHarFile();
-            QuitProxy();           
-            LogVideoIfTestFailed();
-            AssertNoVerificationErrors();
-            DeleteTestData();
+            try
+            {
+                LogTestOutcome();
+                VerifyHttpTraffic();
+                GetHarFile();
+                QuitProxy();
+                LogVideo();
+                AssertNoVerificationErrors();
+            }
+            catch (Exception e)
+            {
+                CreateHtmlReport();
+                DeleteTestData();
+                throw e;
+            }
+            
         }
 
         private void LogTestOutcome()
         {
             Log.Message(Common.GetCurrentTestName() + " " + Common.GetTestOutcome());
-
+            
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            {
+                Core.Log.Error(TestContext.CurrentContext.Result.Message);
+                Core.Log.Error(TestContext.CurrentContext.Result.StackTrace);
+                testData.ExceptionMessage = TestContext.CurrentContext.Result.Message;
+                
+            }
+            testData.Status = TestContext.CurrentContext.Result.Outcome.Status.ToString();
+            testData.Result = TestContext.CurrentContext.Result;
         }
 
         private void VerifyHttpTraffic()
@@ -89,6 +110,7 @@ namespace ProtoTest.Golem.Core
         [OneTimeSetUp]
         public virtual void SuiteSetUp()
         {
+            var context = TestContext.CurrentContext;
             CreateReportDirectory();
             SetTestExecutionSettings();
             StartProxyServer();
@@ -99,15 +121,80 @@ namespace ProtoTest.Golem.Core
         {
             string filePath = Path.GetFullPath(Config.settings.reportSettings.reportPath);
             reportPath = Path.Combine(filePath, DateTime.Now.ToString("yyMMdd_HHMM"));
+            Config.settings.reportSettings.reportPath = reportPath;
             Directory.CreateDirectory(reportPath);
         }
-
+        
+        
         [OneTimeTearDown]
         public virtual void SuiteTearDown()
         {
             StopVideoRecording();
             QuitProxyServer();
+            CreateHtmlIndex();
             Config.settings = new ConfigSettings();
+        }
+
+        private void CreateHtmlIndex()
+        {
+            HtmlReportGenerator gen = new HtmlReportGenerator();
+            gen.GenerateStartTags();
+            gen.GenerateIndexHead();
+            foreach (var item in testDataCollection)
+            {
+                if (item.Value.MethodName != null)
+                {
+                    gen.GenerateIndexRow(item.Key, item.Value.ReportPath, item.Value.Status);
+                }
+               
+            }
+            gen.GenerateLogEnd();
+            gen.GenerateEndTags();
+            gen.WriteToIndexFile();
+        }
+
+        private void CreateHtmlReport()
+        {
+    
+            HtmlReportGenerator gen = new HtmlReportGenerator();
+            gen.GenerateStartTags();
+            gen.GenerateLogHeader();
+            gen.GenerateLogStatus(testData.Result.Outcome.Status.ToString(),testData.Result.Message,testData.Result.StackTrace, testData.ScreenshotPath,testData.VideoPath);
+            foreach (var item in testData.actions.actions)
+            {
+                switch (item.type)
+                {
+                    case ActionList.Action.ActionType.Link:
+                        gen.GenerateLogLink(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Video:
+                        gen.GenerateLogVideo(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Image:
+                        gen.GenerateLogImage(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Error:
+                        gen.GenerateLogError(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Warning:
+                        gen.GenerateLogWarning(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Message:
+                        gen.GenerateLogMessage(item.time.ToLongTimeString(), item.name);
+                        break;
+
+                    default:
+                        gen.GenerateLogRow(item.time.ToLongTimeString(), item.name);
+                        break;
+                }
+               
+            }
+            gen.GenerateLogEnd();
+            gen.GenerateEndTags();
+            gen.WriteToFile();
+
+           
+         
         }
 
         private void DeleteTestData()
@@ -318,12 +405,13 @@ namespace ProtoTest.Golem.Core
             return "";
         }
 
-        public void LogVideoIfTestFailed()
+        public void LogVideo()
         {
             if ((Config.settings.reportSettings.videoRecordingOnError) &&
-                (Common.GetTestOutcome() != TestStatus.Passed) && testData.recorder != null && testData.recorder.Video != null)
+                testData.recorder != null && testData.recorder.Video != null)
             {
-                Log.Video(testData.recorder.Video);
+                var path = Log.Video(testData.recorder.Video);
+                TestBase.testData.VideoPath = path;
             }
         }
 

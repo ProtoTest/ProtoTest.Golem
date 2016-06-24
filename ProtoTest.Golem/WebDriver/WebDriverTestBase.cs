@@ -77,7 +77,8 @@ namespace ProtoTest.Golem.WebDriver
                 var screenshot = testData.driver.GetScreenshot();
                 if (screenshot != null)
                 {
-                    Log.Image(screenshot);
+                    var path = Log.Image(screenshot);
+                    testData.ScreenshotPath = path;
                 }
             }
         }
