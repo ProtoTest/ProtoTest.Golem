@@ -335,6 +335,15 @@ namespace ProtoTest.Golem.WebDriver
             get { return element.Location; }
         }
 
+        public Frame Frame
+        {
+            get
+            {
+                return this.frame;
+            }
+            set { this.frame = value; }
+        }
+
         /// <summary>
         ///     Checks if the element is selected on the page.
         /// </summary>

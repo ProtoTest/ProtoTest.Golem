@@ -191,7 +191,15 @@ namespace ProtoTest.Golem.Core
 
         public string escape_text(string text)
         {
-            return text.Replace("<", "&lt;").Replace(">", "&gt;");
+            try
+            {
+                return text.Replace("<", "&lt;").Replace(">", "&gt;");
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+            
         }
 
         public void GenerateLogMessage(string timestamp, string value)
