@@ -213,6 +213,7 @@ namespace ProtoTest.Golem.Core
             public bool spellChecking;
             public bool testLog;
             public bool videoRecordingOnError;
+            public int numReports;
 
             public ReportSettings()
             {
@@ -225,7 +226,7 @@ namespace ProtoTest.Golem.Core
                 diagnosticLog = Config.GetConfigValueAsBool("DiagnosticLog", "True");
                 testLog = Config.GetConfigValueAsBool("TestLog", "True");
                 reportPath = Config.GetConfigValue("ReportPath", Path.Combine(Common.GetCodeDirectory(), "reports"));
-
+                numReports = Config.GetConfigValueAsInt("NumReports", "10");
             }
         }
 

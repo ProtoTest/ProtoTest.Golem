@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Web.UI;
 using Gallio.Common.Media;
+using NUnit.Core;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using ResultState = NUnit.Framework.Interfaces.ResultState;
 
 namespace ProtoTest.Golem.Core
 {
@@ -57,6 +59,16 @@ namespace ProtoTest.Golem.Core
         //    this.htmlTextWriter.WriteLine("<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/ie-emulation-modes-warning.js\"></script>");
             this.htmlTextWriter.WriteLine("</head>");
             this.htmlTextWriter.WriteBeginTag("body");
+        }
+
+        public void GenerateSuiteHeader(string name)
+        {
+            this.htmlTextWriter.WriteLine("<div border='1'>");
+        }
+
+        public void GenerateSuiteFooter()
+        {
+            this.htmlTextWriter.WriteLine("</div>");
         }
 
         public void GenerateLogHeader()
@@ -120,6 +132,7 @@ namespace ProtoTest.Golem.Core
 
         public void GenerateIndexRow(string name, string url, string status)
         {
+            this.htmlTextWriter.AddAttribute("class", status);
             this.htmlTextWriter.RenderBeginTag("tr");
 
             this.htmlTextWriter.RenderBeginTag("td");
@@ -377,6 +390,34 @@ namespace ProtoTest.Golem.Core
             TestContext.WriteLine(@"file:\\\" + path);
             File.WriteAllText(path, this.stringWriter.ToString());
            
+        }
+
+        public void GenerateIndexSummary()
+        {
+            int totalTests = TestBase.testDataCollection.Count(X => X.Value.Result != null);
+            int totalPassed = TestBase.testDataCollection.Where(x => x.Value.Result != null && x.Value.Result.Outcome == ResultState.Success).Count();
+            int totalFailed = TestBase.testDataCollection.Where(x => x.Value.Result != null && x.Value.Result.Outcome == ResultState.Failure).Count();
+            int totalSkipped = TestBase.testDataCollection.Where(x => x.Value.Result != null && x.Value.Result.Outcome == ResultState.Skipped).Count();
+            this.htmlTextWriter.RenderBeginTag("div");
+            if (totalPassed == totalTests)
+            {
+                this.htmlTextWriter.AddAttribute("class","success");
+                this.htmlTextWriter.RenderBeginTag("h2");
+                this.htmlTextWriter.Write($"SUCCESS!  All tests passed");
+                this.htmlTextWriter.RenderEndTag();
+            }
+            else
+            {
+                this.htmlTextWriter.AddAttribute("class", "failure");
+                this.htmlTextWriter.RenderBeginTag("h2");
+                this.htmlTextWriter.Write($"FAILURE!  {totalPassed}/{totalTests} tests passed ({totalSkipped} Skipped)");
+                this.htmlTextWriter.RenderEndTag();
+            }
+            this.htmlTextWriter.RenderEndTag();
+            
+            // number of tests pass / skip / total
+            // graph and % pass
+            //
         }
     }
 }

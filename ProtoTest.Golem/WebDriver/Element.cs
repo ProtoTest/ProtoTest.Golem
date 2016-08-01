@@ -673,6 +673,12 @@ namespace ProtoTest.Golem.WebDriver
             return new ElementVerification(this, timeoutSec, true);
         }
 
+        public Element Delay(int ms)
+        {
+            Common.Delay(ms);
+            return this;
+        }
+
         public virtual IWebElement GetElement()
         {
             try

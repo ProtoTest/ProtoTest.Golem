@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Web.UI;
 using Gallio.Common.Media;
 using Gallio.Framework;
@@ -112,6 +113,21 @@ namespace ProtoTest.Golem.Core
             }
         }
 
+        private void DeleteOldReports(string filePath)
+        {
+            lock (locker)
+            {
+                var dirs = Directory.GetDirectories(filePath);
+                int count = dirs.Length;
+                for (int i = Config.settings.reportSettings.numReports; i < count; i++)
+                {
+                    string dir = dirs[i - Config.settings.reportSettings.numReports];
+                    Directory.Delete(dir, true);
+                }
+            }
+     
+        }
+
         [OneTimeSetUp]
         public virtual void SuiteSetUp()
         {
@@ -125,6 +141,7 @@ namespace ProtoTest.Golem.Core
         private void CreateReportDirectory()
         {
             string filePath = Path.GetFullPath(Config.settings.reportSettings.reportPath);
+            DeleteOldReports(filePath);
             reportPath = Path.Combine(filePath, DateTime.Now.ToString("MMdd_HHmm"));
             Config.settings.reportSettings.reportPath = reportPath;
             Directory.CreateDirectory(reportPath);
@@ -148,13 +165,30 @@ namespace ProtoTest.Golem.Core
             HtmlReportGenerator gen = new HtmlReportGenerator();
             gen.GenerateStartTags();
             gen.GenerateIndexHead();
-            foreach (var item in testDataCollection)
+            gen.GenerateIndexSummary();
+            var results = testDataCollection.OrderBy(x => x.Key).ToList();
+            string classname = "";
+            bool first = true;
+            foreach (var item in results)
             {
+                if (item.Value.ClassName != classname)
+                {
+                    if (first == true)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        gen.GenerateSuiteFooter();
+                    }
+                    gen.GenerateSuiteHeader(item.Value.ClassName);
+                    classname = item.Value.ClassName;
+                }
+                
                 if (item.Value.MethodName != null)
                 {
                     gen.GenerateIndexRow(item.Key, item.Value.ReportPath, item.Value.Status);
                 }
-               
             }
             gen.GenerateLogEnd();
             gen.GenerateEndTags();

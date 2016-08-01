@@ -143,6 +143,9 @@
     <Compile Include="Rest\OAuth\simpleTwitterHandler.cs" />
     <Compile Include="Tests\BrowserTests.cs" />
     <Compile Include="Tests\DesiredCapibilitiesTests.cs" />
+    <Compile Include="Tests\Parallel\TestThree.cs" />
+    <Compile Include="Tests\Parallel\TestTwo.cs" />
+    <Compile Include="Tests\Parallel\TestOne.cs" />
     <Compile Include="Tests\SauceLabsTests.cs" />
     <Compile Include="Tests\TestComponent.cs" />
     <Compile Include="Tests\TestDDT.cs" />

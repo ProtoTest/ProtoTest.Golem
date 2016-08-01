@@ -110,6 +110,9 @@ body {
 .log-error {
     background-color: red;
 }
+.Failed {
+    background-color: red;
+}
 .screenshot {
     width: 50%;
 }
