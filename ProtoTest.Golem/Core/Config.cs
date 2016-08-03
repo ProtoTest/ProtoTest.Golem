@@ -204,6 +204,7 @@ namespace ProtoTest.Golem.Core
         /// </summary>
         public class ReportSettings
         {
+            public string reportRoot;
             public string reportPath;
             public bool actionLogging;
             public bool commandLogging;
@@ -225,7 +226,8 @@ namespace ProtoTest.Golem.Core
                 spellChecking = Config.GetConfigValueAsBool("SpellChecking", "False");
                 diagnosticLog = Config.GetConfigValueAsBool("DiagnosticLog", "True");
                 testLog = Config.GetConfigValueAsBool("TestLog", "True");
-                reportPath = Config.GetConfigValue("ReportPath", Path.Combine(Common.GetCodeDirectory(), "reports"));
+                reportRoot = Config.GetConfigValue("ReportPath", Path.Combine(Common.GetCodeDirectory(), "reports"));
+                reportPath = TestBase.reportPath;
                 numReports = Config.GetConfigValueAsInt("NumReports", "10");
             }
         }

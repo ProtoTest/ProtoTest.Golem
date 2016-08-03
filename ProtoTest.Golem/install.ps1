@@ -7,7 +7,6 @@ Write-Host "Project: $project"
 $CopyChromeDriver = "`nxcopy /y `"`$(ProjectDir)chromedriver.exe`" `"`$(TargetDir)`""
 $CopyIEDriver = "`nxcopy /y `"`$(ProjectDir)IEDriverServer.exe`" `"`$(TargetDir)`""
 $CopyPhantomJSDriver = "`nxcopy /y `"`$(ProjectDir)phantomjs.exe`" `"`$(TargetDir)`""
-
 $CopyCSS = "`nxcopy /y `"`$(ProjectDir)dashboard.css`" `"`$(TargetDir)`""
 
 # Get the current Post Build Event cmd

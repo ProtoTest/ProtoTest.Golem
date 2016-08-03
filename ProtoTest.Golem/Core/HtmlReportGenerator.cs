@@ -38,7 +38,7 @@ namespace ProtoTest.Golem.Core
             var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html";
             var css_path = $"{Common.GetCodeDirectory()}\\dashboard.css";
             var final_path = $"{Config.settings.reportSettings.reportPath}\\dashboard.css";
-            if(!File.Exists(final_path)) File.Copy(css_path, final_path);
+            if(!File.Exists(Path.GetFullPath(final_path))) File.Copy(css_path, Path.GetFullPath(final_path));
             TestContext.WriteLine(@"file:\\\" + path);
             File.WriteAllText(path, this.stringWriter.ToString());
             TestBase.testData.ReportPath = path;
@@ -130,9 +130,8 @@ namespace ProtoTest.Golem.Core
 
         }
 
-        public void GenerateIndexRow(string name, string url, string status)
+        public void GenerateIndexRow(string name, string url, string status, string message)
         {
-            this.htmlTextWriter.AddAttribute("class", status);
             this.htmlTextWriter.RenderBeginTag("tr");
 
             this.htmlTextWriter.RenderBeginTag("td");
@@ -145,6 +144,10 @@ namespace ProtoTest.Golem.Core
 
             this.htmlTextWriter.RenderBeginTag("td");
             this.htmlTextWriter.Write(status);
+            this.htmlTextWriter.RenderEndTag(); //td
+
+            this.htmlTextWriter.RenderBeginTag("td");
+            this.htmlTextWriter.Write(message);
             this.htmlTextWriter.RenderEndTag(); //td
 
             this.htmlTextWriter.RenderEndTag(); //tr
@@ -410,7 +413,7 @@ namespace ProtoTest.Golem.Core
             {
                 this.htmlTextWriter.AddAttribute("class", "failure");
                 this.htmlTextWriter.RenderBeginTag("h2");
-                this.htmlTextWriter.Write($"FAILURE!  {totalPassed}/{totalTests} tests passed ({totalSkipped} Skipped)");
+                this.htmlTextWriter.Write($"FAILURE! {(float)totalPassed/(float)totalTests}% {totalPassed}/{totalTests} tests passed ({totalSkipped} Skipped)");
                 this.htmlTextWriter.RenderEndTag();
             }
             this.htmlTextWriter.RenderEndTag();

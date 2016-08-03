@@ -23,7 +23,7 @@ namespace ProtoTest.Golem.Core
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Bottom
         };
-
+        public static string reportPath;
         protected static Object locker = new object();
         public static BrowserMobProxy proxy;
         private static IDictionary<string, TestDataContainer> _testDataCollection;
@@ -59,7 +59,6 @@ namespace ProtoTest.Golem.Core
             testData.ClassName = TestContext.CurrentContext.Test.ClassName;
             testData.MethodName = TestContext.CurrentContext.Test.MethodName;
             Config.settings = new ConfigSettings();
-            Config.settings.reportSettings.reportPath = reportPath;
             StartNewProxy();
             StartVideoRecording();
         }
@@ -113,19 +112,25 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        private void DeleteOldReports(string filePath)
+        private void DeleteOldReports()
         {
-            lock (locker)
+            try
             {
-                var dirs = Directory.GetDirectories(filePath);
+                var dirs = Directory.GetDirectories(Config.settings.reportSettings.reportRoot);
                 int count = dirs.Length;
                 for (int i = Config.settings.reportSettings.numReports; i < count; i++)
                 {
                     string dir = dirs[i - Config.settings.reportSettings.numReports];
                     Directory.Delete(dir, true);
                 }
+
             }
-     
+            catch (Exception e)
+            {
+                Log.Warning(e.Message);
+            }
+
+
         }
 
         [OneTimeSetUp]
@@ -137,17 +142,23 @@ namespace ProtoTest.Golem.Core
             StartProxyServer();
         }
 
-        private string reportPath;
+       
         private void CreateReportDirectory()
         {
-            string filePath = Path.GetFullPath(Config.settings.reportSettings.reportPath);
-            DeleteOldReports(filePath);
-            reportPath = Path.Combine(filePath, DateTime.Now.ToString("MMdd_HHmm"));
-            Config.settings.reportSettings.reportPath = reportPath;
-            Directory.CreateDirectory(reportPath);
-            var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html";
-            TestContext.WriteLine(path);
-            Debug.WriteLine(path);
+            lock (locker)
+            {
+                Directory.CreateDirectory(Config.settings.reportSettings.reportRoot);
+                if (Config.settings.reportSettings.reportPath == null)
+                {
+                    DeleteOldReports();
+                    reportPath = Path.Combine(Config.settings.reportSettings.reportRoot, DateTime.Now.ToString("MMdd_HHmm"));
+                    Config.settings.reportSettings.reportPath = reportPath;
+                    Directory.CreateDirectory(reportPath);
+                }
+                var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html";
+                TestContext.WriteLine(path);
+                Debug.WriteLine(path);
+            }
         }
         
         
@@ -187,7 +198,7 @@ namespace ProtoTest.Golem.Core
                 
                 if (item.Value.MethodName != null)
                 {
-                    gen.GenerateIndexRow(item.Key, item.Value.ReportPath, item.Value.Status);
+                    gen.GenerateIndexRow(item.Key, item.Value.ReportPath, item.Value.Status, item.Value.ExceptionMessage);
                 }
             }
             gen.GenerateLogEnd();
@@ -197,7 +208,10 @@ namespace ProtoTest.Golem.Core
 
         private void CreateHtmlReport()
         {
-    
+            lock (locker)
+            {
+                
+            }
             HtmlReportGenerator gen = new HtmlReportGenerator();
             gen.GenerateStartTags();
             gen.GenerateLogHeader();
