@@ -262,7 +262,7 @@ namespace ProtoTest.Golem.Core
             
             this.htmlTextWriter.RenderBeginTag("td");
             this.htmlTextWriter.AddAttribute(HtmlTextWriterAttribute.Class, "log-image");
-            this.htmlTextWriter.AddAttribute(HtmlTextWriterAttribute.Width, "50%");
+            this.htmlTextWriter.AddAttribute(HtmlTextWriterAttribute.Width, "75%");
             this.htmlTextWriter.AddAttribute(HtmlTextWriterAttribute.Src, path);
             this.htmlTextWriter.RenderBeginTag(HtmlTextWriterTag.Img);
             this.htmlTextWriter.RenderEndTag();

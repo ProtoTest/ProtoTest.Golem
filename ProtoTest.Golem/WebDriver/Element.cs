@@ -681,8 +681,8 @@ namespace ProtoTest.Golem.WebDriver
 
         public virtual IWebElement GetElement()
         {
-            try
-            {
+//            try
+//            {
                 if (_element.IsStale())
                 {
                     
@@ -692,7 +692,8 @@ namespace ProtoTest.Golem.WebDriver
                         var root_ele = root.GetElement();
                         if (frame != null)
                         {
-                            Log.Message(
+                        frame.GetElement();
+                        Log.Message(
                                 $"{TestBase.GetCurrentClassAndMethodName()}: Looking in frame : {frame.@by}:  {frame.GetHtml()}");
                             driver.SwitchTo().Frame(frame.GetElement());
                         }
@@ -702,6 +703,7 @@ namespace ProtoTest.Golem.WebDriver
                     {
                         if (frame != null)
                         {
+                            frame.GetElement();
                             Log.Message(
                                 $"{TestBase.GetCurrentClassAndMethodName()}: Looking in frame : {frame.@by}:  {frame.GetHtml()}");
                             driver.SwitchTo().Frame(frame.GetElement());
@@ -715,12 +717,12 @@ namespace ProtoTest.Golem.WebDriver
                     }
                 }
                 return _element;
-            }
-            catch (NoSuchElementException e)
-            {
-                var message = $"Could not find element '{name}' ({@by}) after {timeoutSec} seconds {GetFrameMessage()}";
-                throw new NoSuchElementException(message);
-            }
+//            }
+//            catch (NoSuchElementException e)
+//            {
+//                var message = $"Could not find element '{name}' ({@by}) after {timeoutSec} seconds {GetFrameMessage()}";
+//                throw new NoSuchElementException(message);
+//            }
         }
 
         private string GetFrameMessage()

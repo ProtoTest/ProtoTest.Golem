@@ -23,7 +23,7 @@ namespace ProtoTest.Golem.Core
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Bottom
         };
-        public static string reportPath;
+//        public static string reportPath;
         protected static Object locker = new object();
         public static BrowserMobProxy proxy;
         private static IDictionary<string, TestDataContainer> _testDataCollection;
@@ -147,14 +147,9 @@ namespace ProtoTest.Golem.Core
         {
             lock (locker)
             {
-                Directory.CreateDirectory(Config.settings.reportSettings.reportRoot);
-                if (Config.settings.reportSettings.reportPath == null)
-                {
-                    DeleteOldReports();
-                    reportPath = Path.Combine(Config.settings.reportSettings.reportRoot, DateTime.Now.ToString("MMdd_HHmm"));
-                    Config.settings.reportSettings.reportPath = reportPath;
-                    Directory.CreateDirectory(reportPath);
-                }
+                
+                 DeleteOldReports();
+                Directory.CreateDirectory(Config.settings.reportSettings.reportPath);
                 var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html";
                 TestContext.WriteLine(path);
                 Debug.WriteLine(path);

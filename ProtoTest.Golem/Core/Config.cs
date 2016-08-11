@@ -204,6 +204,7 @@ namespace ProtoTest.Golem.Core
         /// </summary>
         public class ReportSettings
         {
+            private static string timestamp = DateTime.Now.ToString("MMdd_HHmm");
             public string reportRoot;
             public string reportPath;
             public bool actionLogging;
@@ -227,7 +228,7 @@ namespace ProtoTest.Golem.Core
                 diagnosticLog = Config.GetConfigValueAsBool("DiagnosticLog", "True");
                 testLog = Config.GetConfigValueAsBool("TestLog", "True");
                 reportRoot = Config.GetConfigValue("ReportPath", Path.Combine(Common.GetCodeDirectory(), "reports"));
-                reportPath = TestBase.reportPath;
+                reportPath = Path.Combine(reportRoot, timestamp);
                 numReports = Config.GetConfigValueAsInt("NumReports", "10");
             }
         }
