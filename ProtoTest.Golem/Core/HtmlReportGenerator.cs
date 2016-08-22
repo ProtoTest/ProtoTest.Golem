@@ -39,7 +39,16 @@ namespace ProtoTest.Golem.Core
             var css_path = $"{Common.GetCodeDirectory()}\\dashboard.css";
             var final_path = $"{Config.settings.reportSettings.reportPath}\\dashboard.css";
             if(!File.Exists(Path.GetFullPath(final_path))) File.Copy(css_path, Path.GetFullPath(final_path));
-            TestContext.WriteLine(@"file:\\\" + path);
+            var teamcity = Environment.GetEnvironmentVariable("TEAMCITY_VERSION");
+            if (teamcity != null)
+            {
+                TestContext.WriteLine($"log({path})");
+            }
+            else
+            {
+                TestContext.WriteLine(@"file:\\\" + path);
+            }
+            
             File.WriteAllText(path, this.stringWriter.ToString());
             TestBase.testData.ReportPath = path;
         }

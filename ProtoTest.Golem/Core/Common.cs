@@ -21,7 +21,7 @@ namespace ProtoTest.Golem.Core
         /// <returns></returns>
         public static string GetRandomString()
         {
-            return DateTime.Now.ToString("ddHHmmss");
+            return DateTime.Now.ToString("ddHHmmssZ");
         }
 
         public static void KillProcess(string name)

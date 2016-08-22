@@ -203,10 +203,6 @@ namespace ProtoTest.Golem.Core
 
         private void CreateHtmlReport()
         {
-            lock (locker)
-            {
-                
-            }
             HtmlReportGenerator gen = new HtmlReportGenerator();
             gen.GenerateStartTags();
             gen.GenerateLogHeader();
@@ -242,10 +238,7 @@ namespace ProtoTest.Golem.Core
             }
             gen.GenerateLogEnd();
             gen.GenerateEndTags();
-            gen.WriteToFile();
-
-           
-         
+            gen.WriteToFile(); 
         }
 
         private void DeleteTestData()
@@ -468,11 +461,19 @@ namespace ProtoTest.Golem.Core
 
         public void StartVideoRecording()
         {
-            if (Config.settings.reportSettings.videoRecordingOnError)
+            try
             {
-                testData.recorder = Capture.StartRecording(new CaptureParameters {Zoom = .25}, 5);
-                testData.recorder.OverlayManager.AddOverlay(overlay);
+                if (Config.settings.reportSettings.videoRecordingOnError)
+                {
+                    testData.recorder = Capture.StartRecording(new CaptureParameters { Zoom = .25 }, 5);
+                    testData.recorder.OverlayManager.AddOverlay(overlay);
+                }
             }
+            catch (Exception e)
+            {
+                Log.Failure("Exception caught while trying to start video recording : " + e.Message);
+            }
+            
         }
 
         public void StopVideoRecording()
@@ -486,7 +487,7 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception e)
             {
-                Log.Failure(e.Message);
+                Log.Failure("Exception caught while trying to stop video recording : " + e.Message);
             }
         }
     }
