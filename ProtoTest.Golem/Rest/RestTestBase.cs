@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Net;
 using NUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Proxy;
+using Golem.Core;
+using Golem.Proxy;
 
-namespace ProtoTest.Golem.Rest
+namespace Golem.Rest
 {
     /// <summary>
     ///     Test Base class to be inherited by all test fixtures.  Will automatically instantiate an object named Given

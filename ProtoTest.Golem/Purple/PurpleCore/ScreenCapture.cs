@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace ProtoTest.Golem.Purple.PurpleCore
+namespace Golem.Purple.PurpleCore
 {
     /// <summary>
     ///     Provides functions to capture the entire screen, or a particular window, and save it to a file.

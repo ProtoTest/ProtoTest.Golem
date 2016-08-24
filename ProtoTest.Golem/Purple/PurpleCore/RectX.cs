@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace ProtoTest.Golem.Purple.PurpleCore
+namespace Golem.Purple.PurpleCore
 {
     //This was copied from TestStack.White source code
     //Teststack.White available at http://docs.teststack.net/White/GettingStarted.html

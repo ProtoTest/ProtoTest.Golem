@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
-using ProtoTest.Golem.Core;
+using OpenQA.Selenium.Chrome;
+using Golem.Core;
+using Golem.WebDriver;
 using TestContext = NUnit.Framework.TestContext;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem
 {
+
     /// <summary>
     ///     This class should be inherited by all webdriver tests.  It will automatically launch a browser and include the
     ///     Driver object in each test.
     /// </summary>
     public class WebDriverTestBase : TestBase
     {
+       
         public WebDriverTestBase(BrowserInfo browser)
         {
             this.browserInfo = browser;

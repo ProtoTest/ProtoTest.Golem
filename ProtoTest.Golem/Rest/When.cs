@@ -1,8 +1,8 @@
 ﻿using System;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 using RestSharp;
 
-namespace ProtoTest.Golem.Rest
+namespace Golem.Rest
 {
     /// <summary>
     ///     When contains operation execution methods, such as commands to actually fire off a Rest request.

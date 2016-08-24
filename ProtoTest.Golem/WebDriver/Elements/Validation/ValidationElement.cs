@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver.Elements.Validation
+namespace Golem.WebDriver.Elements.Validation
 {
     /// <summary>
     ///     Validation Element class. Provides the functionality of an Element with the

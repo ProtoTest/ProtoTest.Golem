@@ -9,10 +9,10 @@ using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.WebDriver.Elements.Images;
+using Golem.Core;
+using Golem.WebDriver.Elements.Images;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     Provides a simplified API to the IWebELement.  Can be instantiated in a class header.

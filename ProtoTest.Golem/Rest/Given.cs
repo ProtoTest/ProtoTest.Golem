@@ -2,7 +2,7 @@
 using System.Net;
 using RestSharp;
 
-namespace ProtoTest.Golem.Rest
+namespace Golem.Rest
 {
     //given.Domain("http://www.google.com").Header("key","value").Authentication(username,password).when.post("/resource/id").then.responseBody.Verify().Text("text in body").header.Verify().Text("Header text");
     /// <summary>

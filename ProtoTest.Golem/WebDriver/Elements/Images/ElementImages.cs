@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver.Elements.Images
+namespace Golem.WebDriver.Elements.Images
 {
     public class ElementImages
     {

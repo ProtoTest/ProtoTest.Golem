@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
-using ProtoTest.Golem.WebDriver;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     /// <summary>
     ///     The Config class holds instantiates the ConfigSettings class, and any Config-related functions

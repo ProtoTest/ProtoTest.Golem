@@ -8,12 +8,12 @@ using System.Threading;
 using NUnit.Framework;
 using Ionic.Zip;
 using Newtonsoft.Json;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Proxy.HAR;
+using Golem.Core;
+using Golem.Proxy.HAR;
 using RestSharp;
-using Log = ProtoTest.Golem.Core.Log;
+using Log = Golem.Core.Log;
 
-namespace ProtoTest.Golem.Proxy
+namespace Golem.Proxy
 {
     /// <summary>
     ///     This class acts as a wrapper around a BrowserMobProxy jar.

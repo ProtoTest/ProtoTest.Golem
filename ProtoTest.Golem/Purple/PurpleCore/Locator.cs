@@ -5,11 +5,11 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Automation;
 using NUnit.Framework;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 using PurpleLib;
 using Timer = System.Timers.Timer;
 
-namespace ProtoTest.Golem.Purple.PurpleCore
+namespace Golem.Purple.PurpleCore
 {
     public class Locator
     {

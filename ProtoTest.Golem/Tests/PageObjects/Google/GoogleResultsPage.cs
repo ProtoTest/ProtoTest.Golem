@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using OpenQA.Selenium;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.WebDriver;
+using Golem.Core;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests.PageObjects.Google
+namespace Golem.Tests.PageObjects.Google
 {
     public class GoogleResultsPage : BasePageObject
     {

@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     Methods for performing non-terminating validations, and Wait commands.

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using ProtoTest.Golem.Tests.PageObjects.Google;
-using ProtoTest.Golem.WebDriver;
+using Golem.Tests.PageObjects.Google;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     class TestComponent : WebDriverTestBase
     {

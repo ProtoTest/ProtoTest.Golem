@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.WebDriver;
+using Golem.Core;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class VerificationTests : TestBase
     {

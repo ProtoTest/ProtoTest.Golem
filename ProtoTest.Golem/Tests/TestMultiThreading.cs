@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Tests.PageObjects.Google;
-using ProtoTest.Golem.WebDriver;
+using Golem.Core;
+using Golem.Tests.PageObjects.Google;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     [Parallelizable]
     internal class TestMultiThreading : WebDriverTestBase

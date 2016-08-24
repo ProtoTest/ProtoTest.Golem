@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using ProtoTest.Golem.Tests.PageObjects.Google;
-using ProtoTest.Golem.WebDriver;
+using Golem.Tests.PageObjects.Google;
+using Golem.WebDriver;
 //using Castle.Core.Logging;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestWebDriverTestBase : WebDriverTestBase
     {

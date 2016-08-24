@@ -12,7 +12,7 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using ResultState = NUnit.Framework.Interfaces.ResultState;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     public class HtmlReportGenerator
     {

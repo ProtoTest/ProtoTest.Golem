@@ -3,10 +3,10 @@ using System.IO;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.WebDriver;
+using Golem.Core;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestLog : WebDriverTestBase
     {

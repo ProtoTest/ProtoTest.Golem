@@ -3,11 +3,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using Gallio.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple.Elements;
-using ProtoTest.Golem.WebDriver.Elements.Images;
+using Golem.Core;
+using Golem.Purple.Elements;
+using Golem.WebDriver.Elements.Images;
 
-namespace ProtoTest.Golem.Purple
+namespace Golem.Purple
 {
     //TODO: this class is going to need to be re-factored!
     public class ElementImageComparer

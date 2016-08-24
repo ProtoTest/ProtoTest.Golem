@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using OpenQA.Selenium;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     BasePageObject should be inherited by all page objects used in the framework.  It represents either a base

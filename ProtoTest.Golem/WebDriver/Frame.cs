@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     public class Frame : Element
     {

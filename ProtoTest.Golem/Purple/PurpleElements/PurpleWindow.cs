@@ -4,10 +4,10 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Automation;
 using WindowsInput;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple.PurpleCore;
+using Golem.Core;
+using Golem.Purple.PurpleCore;
 
-namespace ProtoTest.Golem.Purple.PurpleElements
+namespace Golem.Purple.PurpleElements
 {
     public static class PurpleWindow
     {

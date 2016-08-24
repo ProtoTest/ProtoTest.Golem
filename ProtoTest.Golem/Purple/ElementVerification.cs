@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using NUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple.Elements;
+using Golem.Core;
+using Golem.Purple.Elements;
 
-namespace ProtoTest.Golem.Purple
+namespace Golem.Purple
 {
     /// <summary>
     ///     Methods for performing non-terminating validations, and Wait commands.

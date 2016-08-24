@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using NUnit.Framework.Internal.Commands;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Tests.PageObjects.Google;
-using ProtoTest.Golem.WebDriver;
+using Golem.Core;
+using Golem.Tests.PageObjects.Google;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestProxy : WebDriverTestBase
     {

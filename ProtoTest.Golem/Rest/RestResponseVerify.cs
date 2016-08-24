@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using HtmlAgilityPack;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 using RestSharp;
 
-namespace ProtoTest.Golem.Rest
+namespace Golem.Rest
 {
     /// <summary>
     ///     Contains methods to validate rest responses

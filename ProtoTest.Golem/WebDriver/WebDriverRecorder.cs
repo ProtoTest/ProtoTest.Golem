@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Threading;
 using Gallio.Common.Media;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 using Timer = System.Timers.Timer;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     public class WebDriverRecorder
     {

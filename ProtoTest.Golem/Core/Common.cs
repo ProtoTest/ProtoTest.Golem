@@ -8,7 +8,7 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using TestContext = NUnit.Framework.TestContext;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     /// <summary>
     ///     Random methods that don't belong anywhere else

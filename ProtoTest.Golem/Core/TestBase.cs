@@ -8,12 +8,12 @@ using System.Web.UI;
 using Gallio.Common.Media;
 using Gallio.Framework;
 using NUnit.Framework;
-using ProtoTest.Golem.Proxy;
-using ProtoTest.Golem.WebDriver;
+using Golem.Proxy;
+using Golem.WebDriver;
 using TestContext = NUnit.Framework.TestContext;
 using TestStatus = NUnit.Framework.Interfaces.TestStatus;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     public abstract class TestBase
     {

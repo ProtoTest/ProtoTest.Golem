@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ProtoTest.Golem.Rest.OAuth
+namespace Golem.Rest.OAuth
 {
     public static class REST_VERB
     {

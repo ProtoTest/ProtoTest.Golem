@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple;
-using ProtoTest.Golem.Tests.PageObjects.MSPaint;
+using Golem.Core;
+using Golem.Purple;
+using Golem.Tests.PageObjects.MSPaint;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     public class TestMSPaint6 : PurpleTestBase
     {

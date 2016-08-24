@@ -1,4 +1,4 @@
-﻿namespace ProtoTest.Golem.Proxy.HAR
+﻿namespace Golem.Proxy.HAR
 {
     public class Content
     {

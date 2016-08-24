@@ -5,7 +5,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("ProtoTest.Golem.Core")]
+[assembly: AssemblyTitle("Golem.Core")]
 [assembly: AssemblyDescription("EventDriven WebDriver Automation Framework")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ProtoTest")]

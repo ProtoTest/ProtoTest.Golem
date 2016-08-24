@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Automation;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.Purple.PurpleElements
+namespace Golem.Purple.PurpleElements
 {
     public class PurpleDropDown : PurpleElementBase
     {

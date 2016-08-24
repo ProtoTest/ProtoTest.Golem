@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Gallio.Common.Media;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using ProtoTest.Golem.WebDriver;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     public class TestDataContainer
     {

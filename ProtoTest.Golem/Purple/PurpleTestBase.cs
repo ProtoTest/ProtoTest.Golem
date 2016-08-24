@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple.PurpleElements;
+using Golem.Core;
+using Golem.Purple.PurpleElements;
 
-namespace ProtoTest.Golem.Purple
+namespace Golem.Purple
 {
     public class PurpleTestBase : TestBase
     {

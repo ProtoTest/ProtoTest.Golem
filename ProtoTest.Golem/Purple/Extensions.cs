@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Windows;
 using System.Windows.Automation;
-using ProtoTest.Golem.Purple.PurpleCore;
-using ProtoTest.Golem.Purple.PurpleElements;
+using Golem.Purple.PurpleCore;
+using Golem.Purple.PurpleElements;
 
-namespace ProtoTest.Golem.Purple
+namespace Golem.Purple
 {
     public static class Extensions
     {

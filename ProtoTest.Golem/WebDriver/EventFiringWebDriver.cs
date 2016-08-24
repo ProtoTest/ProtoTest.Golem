@@ -1,7 +1,7 @@
 ﻿// Type: OpenQA.Selenium.Support.Events.EventFiringWebDriver
 // Assembly: WebDriver.Support, Version=2.40.0.0, Culture=neutral
 // MVID: 9FAA975A-389C-466A-AE2E-96ABC7996728
-// Assembly location: C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\packages\Selenium.Support.2.40.0\lib\net40\WebDriver.Support.dll
+// Assembly location: C:\Users\Brian\Documents\GitHub\Golem\Golem\packages\Selenium.Support.2.40.0\lib\net40\WebDriver.Support.dll
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.Events;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     A wrapper around an arbitrary WebDriver instance which supports registering for

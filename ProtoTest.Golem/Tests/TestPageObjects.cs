@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using ProtoTest.Golem.Tests.PageObjects.Google;
-using ProtoTest.Golem.WebDriver;
+using Golem.Tests.PageObjects.Google;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     [TestFixture]
     internal class TestPageObjects : WebDriverTestBase

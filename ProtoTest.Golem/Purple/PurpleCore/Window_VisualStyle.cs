@@ -1,4 +1,4 @@
-﻿namespace ProtoTest.Golem.Purple.PurpleCore
+﻿namespace Golem.Purple.PurpleCore
 {
     public enum Window_VisualStyle
     {

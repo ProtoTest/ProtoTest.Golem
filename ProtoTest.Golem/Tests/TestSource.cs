@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.WebDriver;
+using Golem.Core;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
 
     [TestFixtureSource("GetName")]

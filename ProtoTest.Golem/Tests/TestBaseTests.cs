@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestBaseTests : TestBase
     {

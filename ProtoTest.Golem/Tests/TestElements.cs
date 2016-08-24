@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using ProtoTest.Golem.WebDriver;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestElements : WebDriverTestBase
     {

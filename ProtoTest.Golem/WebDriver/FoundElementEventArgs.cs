@@ -1,12 +1,12 @@
 ﻿// Type: OpenQA.Selenium.Support.Events.FindElementEventArgs
 // Assembly: WebDriver.Support, Version=2.40.0.0, Culture=neutral
 // MVID: 9FAA975A-389C-466A-AE2E-96ABC7996728
-// Assembly location: C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\packages\Selenium.Support.2.40.0\lib\net40\WebDriver.Support.dll
+// Assembly location: C:\Users\Brian\Documents\GitHub\Golem\Golem\packages\Selenium.Support.2.40.0\lib\net40\WebDriver.Support.dll
 
 using System;
 using OpenQA.Selenium;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     Provides data for events related to finding elements.

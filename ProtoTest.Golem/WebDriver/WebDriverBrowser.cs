@@ -8,9 +8,9 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     Contains all functionality relating to launching the webdriver browsers.
@@ -106,7 +106,6 @@ namespace ProtoTest.Golem.WebDriver
                 proxy.FtpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.Proxy = proxy;
             }
-
             return new ChromeDriver(options);
         }
 

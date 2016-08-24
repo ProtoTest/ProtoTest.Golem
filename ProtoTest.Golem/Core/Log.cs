@@ -6,7 +6,7 @@ using System.IO;
 using Gallio.Common.Media;
 using NUnit.Framework;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     public class Log
     {

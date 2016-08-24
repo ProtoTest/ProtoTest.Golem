@@ -1,4 +1,4 @@
-﻿namespace ProtoTest.Golem.Purple
+﻿namespace Golem.Purple
 {
     public class BaseScreenObject
     {

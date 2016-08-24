@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     public class ProcessRunner
     {

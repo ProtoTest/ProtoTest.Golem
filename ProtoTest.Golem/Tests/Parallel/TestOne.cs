@@ -5,11 +5,11 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Safari;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Tests.PageObjects.Google;
-using ProtoTest.Golem.WebDriver;
+using Golem.Core;
+using Golem.Tests.PageObjects.Google;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     [Parallelizable]
     internal class ParallelTestOne : WebDriverTestBase
@@ -19,7 +19,7 @@ namespace ProtoTest.Golem.Tests
         public void TestOne()
         {
             driver.Navigate().GoToUrl("http://www.google.com");
-            Assert.Fail("Failing");
+            //Assert.Fail("Failing");
         }
 
         [Test]

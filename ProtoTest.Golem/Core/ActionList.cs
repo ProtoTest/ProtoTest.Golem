@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     /// <summary>
     ///     Holds a list of Actions, with some functions to help print

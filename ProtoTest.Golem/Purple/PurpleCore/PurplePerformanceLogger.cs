@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ProtoTest.Golem.Purple.PurpleCore
+namespace Golem.Purple.PurpleCore
 {
     public static class PurplePerformanceLogger
     {

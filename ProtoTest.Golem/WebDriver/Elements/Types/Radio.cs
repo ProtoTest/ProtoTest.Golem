@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace ProtoTest.Golem.WebDriver.Elements.Types
+namespace Golem.WebDriver.Elements.Types
 {
     public class Radio : Element
     {

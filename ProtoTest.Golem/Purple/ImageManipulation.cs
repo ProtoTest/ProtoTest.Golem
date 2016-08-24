@@ -3,12 +3,12 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple.Elements;
-using ProtoTest.Golem.Purple.PurpleElements;
-using ProtoTest.Golem.WebDriver.Elements.Images;
+using Golem.Core;
+using Golem.Purple.Elements;
+using Golem.Purple.PurpleElements;
+using Golem.WebDriver.Elements.Images;
 
-namespace ProtoTest.Golem.Purple
+namespace Golem.Purple
 {
     public class ImageManipulation
     {
