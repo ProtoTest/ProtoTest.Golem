@@ -6,8 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
-using Gallio.Common.Media;
-using NUnit.Core;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using ResultState = NUnit.Framework.Interfaces.ResultState;
@@ -35,22 +33,25 @@ namespace Golem.Core
 
         public void WriteToFile()
         {
-            var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html";
+            var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html".Replace(" ",
+                "_");
+            var fullPath = Path.GetFullPath(path);
+            fullPath = fullPath.Replace("\\", "/");
             var css_path = $"{Common.GetCodeDirectory()}\\dashboard.css";
             var final_path = $"{Config.settings.reportSettings.reportPath}\\dashboard.css";
             if(!File.Exists(Path.GetFullPath(final_path))) File.Copy(css_path, Path.GetFullPath(final_path));
             var teamcity = Environment.GetEnvironmentVariable("TEAMCITY_VERSION");
             if (teamcity != null)
             {
-                TestContext.WriteLine($"log({path})");
+                TestContext.WriteLine("url(file:///" + fullPath + ")");
             }
             else
             {
-                TestContext.WriteLine(@"file:\\\" + path);
+                TestContext.WriteLine(@"file:///" + fullPath);
             }
             
-            File.WriteAllText(path, this.stringWriter.ToString());
-            TestBase.testData.ReportPath = path;
+            File.WriteAllText(fullPath, this.stringWriter.ToString());
+            TestBase.testData.ReportPath = fullPath;
         }
 
         public void GenerateStartTags()

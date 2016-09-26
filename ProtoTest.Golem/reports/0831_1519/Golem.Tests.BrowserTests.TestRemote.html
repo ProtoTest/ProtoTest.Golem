@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name = "viewport" content = "width=device-width, initial-scale=1" > 
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Test Dashboard</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="dashboard.css" rel="stylesheet">
+</head>
+<body<div class="table-responsive">
+	<table class="table table-striped log-table">
+		<thead>
+			<tr>
+				<th class="log-timestamp">Timestamp</th><th class="log-text">Text</th>
+			</tr>
+		</thead><tbody>
+			<div class="log-status">
+				<div class="status">
+					<h2>
+						Golem.Tests.BrowserTests TestRemote Failed
+					</h2>
+				</div><div class="exception-message">
+					OpenQA.Selenium.WebDriverException : Unexpected error. System.Net.WebException: The remote name could not be resolved: 'http'
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+				</div><div class="exception-stacktrace">
+					   at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
+   at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
+   at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(Uri remoteAddress, ICapabilities desiredCapabilities)
+   at Golem.WebDriver.ScreenshotRemoteWebDriver..ctor(Uri remoteAddress, ICapabilities desiredCapabilities) in C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\WebDriver\ScreenshotRemoteDriver.cs:line 23
+   at Golem.WebDriver.WebDriverBrowser.LaunchRemoteBrowser(Browser browser, String host) in C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\WebDriver\WebDriverBrowser.cs:line 255
+   at Golem.Tests.BrowserTests.TestRemote() in C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\Tests\BrowserTests.cs:line 71
+				</div><div>
+					<img class="screenshot" src="C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\reports\0831_1519\screenshot_15205.png" />
+				</div><a href="C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\reports\0831_1519\Video_Golem.Tests.BrowserTests.TestRemote15205.flv" class="log-video">Video.flv
+				</a>
+			</div><tr class="log-message">
+				<td><div>
+					3:19:50 PM
+				</div></td><td>Golem.Tests.BrowserTests.TestRemote started</td>
+			</tr><tr class="log-message">
+				<td><div>
+					3:19:55 PM
+				</div></td><td>Chrome Browser Launched</td>
+			</tr><tr class="log-message">
+				<td><div>
+					3:19:55 PM
+				</div></td><td>Golem.Tests.BrowserTests.TestRemote : Chrome Browser Launched</td>
+			</tr><tr class="log-message">
+				<td><div>
+					3:19:55 PM
+				</div></td><td>Starting Chrome browser on host : http://127.0.0.1:4444/wd/hub:8080</td>
+			</tr><tr>
+				<td>3:20:05 PM</td><td><img class="log-image" width="75%" src="file:///C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\reports\0831_1519\screenshot_15205.png" /></td>
+			</tr><tr class="log-message">
+				<td><div>
+					3:20:05 PM
+				</div></td><td>Chrome Browser Closed</td>
+			</tr><tr class="log-message">
+				<td><div>
+					3:20:05 PM
+				</div></td><td>Golem.Tests.BrowserTests.TestRemote Failed</td>
+			</tr><tr class="log-error">
+				<td><div>
+					3:20:05 PM
+				</div></td><td>ERROR: OpenQA.Selenium.WebDriverException : Unexpected error. System.Net.WebException: The remote name could not be resolved: 'http'
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)</td>
+			</tr><tr class="log-error">
+				<td><div>
+					3:20:05 PM
+				</div></td><td>ERROR:    at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.StartSession(ICapabilities desiredCapabilities)
+   at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(ICommandExecutor commandExecutor, ICapabilities desiredCapabilities)
+   at OpenQA.Selenium.Remote.RemoteWebDriver..ctor(Uri remoteAddress, ICapabilities desiredCapabilities)
+   at Golem.WebDriver.ScreenshotRemoteWebDriver..ctor(Uri remoteAddress, ICapabilities desiredCapabilities) in C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\WebDriver\ScreenshotRemoteDriver.cs:line 23
+   at Golem.WebDriver.WebDriverBrowser.LaunchRemoteBrowser(Browser browser, String host) in C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\WebDriver\WebDriverBrowser.cs:line 255
+   at Golem.Tests.BrowserTests.TestRemote() in C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\Tests\BrowserTests.cs:line 71</td>
+			</tr><tr>
+				<td>3:20:05 PM</td><td><a href="file:///C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\reports\0831_1519\Video_Golem.Tests.BrowserTests.TestRemote15205.flv" class="log-video">Video.flv
+				</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>

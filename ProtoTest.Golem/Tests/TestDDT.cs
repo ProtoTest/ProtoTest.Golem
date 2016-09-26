@@ -8,25 +8,31 @@ namespace Golem.Tests
 {
     internal class TestDDT : WebDriverTestBase
     {
-//        [XmlData("//Search", FilePath = ".\\Tests\\Data\\SearchData.xml")]
-//        [Test]
-//        public void TestXml([Bind("@term")] string search, [Bind("@result")] string result)
-//        {
-//            Config.settings.runTimeSettings.FindHiddenElements = true;
-//            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(search).VerifyResult(result);
-//        }
-//
-//        [CsvData(FilePath = ".\\Tests\\Data\\Data.csv", HasHeader = true)]
-//        [Test]
-//        public void TestCSV(string term, string result)
-//        {
-//            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(term).VerifyResult(result);
-//        }
+        //        [XmlData("//Search", FilePath = ".\\Tests\\Data\\SearchData.xml")]
+        //        [Test]
+        //        public void TestXml([Bind("@term")] string search, [Bind("@result")] string result)
+        //        {
+        //            Config.settings.runTimeSettings.FindHiddenElements = true;
+        //            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(search).VerifyResult(result);
+        //        }
+        //
+        //        [CsvData(FilePath = ".\\Tests\\Data\\Data.csv", HasHeader = true)]
+        //        [Test]
+        //        public void TestCSV(string term, string result)
+        //        {
+        //            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(term).VerifyResult(result);
+        //        }
+        [TestCase("Selenium", "Selenium - Web Browser Automation")]
+        [TestCase("Selenium", "Selenium (software) - Wikipedia, the free encyclopedia")]
+        public void TestCase(string term, string result)
+        {
+            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(term).VerifyResult(result);
+        }
 
         [Test]
         public void TestValues(
         [Values("Selenium")] string term,
-        [Values("Selenium - Web Browser Automation", "Selenium (software) - Wikipedia, the free encyclopedia")] string result)
+        [Values("zSelenium - Web Browser Automation", "Selenium (software) - Wikipedia, the free encyclopedia")] string result)
         {
             OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(term).VerifyResult(result);
         }

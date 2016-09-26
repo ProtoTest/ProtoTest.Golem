@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name = "viewport" content = "width=device-width, initial-scale=1" > 
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Test Dashboard</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="dashboard.css" rel="stylesheet">
+</head>
+<body<h2 class="sub-header">
+	Index
+</h2><div class="table-responsive">
+	<table class="table table-striped log-table">
+		<thead>
+			<tr>
+				<td>Name</td><td>Status</td>
+			</tr>
+		</thead><tbody>
+			<div>
+				<h2 class="failure">
+					FAILURE! 0% 0/1 tests passed (0 Skipped)
+				</h2>
+			</div><div border='1'>
+			<tr>
+				<td><a href="C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\reports\0831_1529\Golem.Tests.BrowserTests.TestRemote.html">Golem.Tests.BrowserTests.TestRemote</a></td><td>Failed</td><td>OpenQA.Selenium.WebDriverException : Unexpected error. System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at OpenQA.Selenium.Remote.HttpCommandExecutor.Execute(Command commandToExecute)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)</td>
+			</tr>
+		</tbody>
+	</table>
+</div><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>

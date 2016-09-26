@@ -267,7 +267,7 @@ namespace Golem.Core
                 DegreeOfParallelism = Config.GetConfigValueAsInt("DegreeOfParallelism", "5");
                 CommandDelayMs = Config.GetConfigValueAsInt("CommandDelayMs", "0");
                 RunOnRemoteHost = Config.GetConfigValueAsBool("RunOnRemoteHost", "False");
-                RemoteHostPort = Config.GetConfigValue("RemoteHostPort", "8080");
+                RemoteHostPort = Config.GetConfigValue("RemoteHostPort", "4444");
                 HostIp = Config.GetConfigValue("HostIp", "localhost");
                 AutoWaitForElements = Config.GetConfigValueAsBool("AutoWaitForElements", "True");
                 HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "True");

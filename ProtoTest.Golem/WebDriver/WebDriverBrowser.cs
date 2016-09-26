@@ -70,10 +70,12 @@ namespace Golem.WebDriver
             var resolution = Config.settings.runTimeSettings.BrowserResolution;
             if (resolution.Contains("Default"))
             {
+                Log.Message("Maximizing Browser");
                 driver.Manage().Window.Maximize();
             }
             else
             {
+                Log.Message($"Setting Browser Size to {resolution}");
                 driver.Manage().Window.Size = Common.GetSizeFromResolution(resolution);
             }
         }
@@ -201,7 +203,10 @@ namespace Golem.WebDriver
                     WebDriverTestBase.testData.browserInfo.capabilities,
                     Config.settings.sauceLabsSettings.SauceLabsUrl));
                 var sauceLabs = new Uri(Config.settings.sauceLabsSettings.SauceLabsUrl);
-                return new EventedWebDriver(new RemoteWebDriver(sauceLabs, WebDriverTestBase.testData.browserInfo.capabilities)).driver;
+                driver = new RemoteWebDriver(sauceLabs, WebDriverTestBase.testData.browserInfo.capabilities);
+                 driver.Manage().Cookies.DeleteAllCookies();
+                SetBrowserSize();
+                return new EventedWebDriver(driver).driver;
             }
 
             if (host.Equals(Config.settings.browserStackSettings.BrowserStackRemoteURL))
@@ -249,7 +254,11 @@ namespace Golem.WebDriver
             }
 
             var remoteAddress = new Uri(URIStr);
-            return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, WebDriverTestBase.testData.browserInfo.capabilities)).driver;
+            driver = new ScreenshotRemoteWebDriver(remoteAddress,
+                WebDriverTestBase.testData.browserInfo.capabilities);
+            driver.Manage().Cookies.DeleteAllCookies();
+            SetBrowserSize();
+            return new EventedWebDriver(driver).driver;
         }
     }
 }
