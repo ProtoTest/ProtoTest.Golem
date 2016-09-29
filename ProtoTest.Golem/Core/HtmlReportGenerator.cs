@@ -24,6 +24,13 @@ namespace Golem.Core
 
         }
 
+        public string ConvertPathToRelative(string path)
+        {
+            var reportpath = Config.settings.reportSettings.reportPath;
+            var relative_path = path.Replace(reportpath, "");
+            return "." + relative_path;
+        }
+
         public void GenerateHtml()
         {
             GenerateStartTags();
@@ -165,6 +172,8 @@ namespace Golem.Core
 
         public void GenerateLogStatus(string statusMessage, string exceptionMessage, string stackTrace, string screenshotPath, string videoPath)
         {
+            screenshotPath = ConvertPathToRelative(screenshotPath);
+            videoPath = ConvertPathToRelative(videoPath);
             this.htmlTextWriter.AddAttribute(HtmlTextWriterAttribute.Class, "log-status");
             this.htmlTextWriter.RenderBeginTag("div");
 
@@ -198,7 +207,7 @@ namespace Golem.Core
             }
            
 
-            this.htmlTextWriter.AddAttribute(HtmlTextWriterAttribute.Href, TestBase.testData.VideoPath);
+            this.htmlTextWriter.AddAttribute(HtmlTextWriterAttribute.Href, videoPath);
             this.htmlTextWriter.AddAttribute(HtmlTextWriterAttribute.Class, "log-video");
             this.htmlTextWriter.RenderBeginTag("a");
             this.htmlTextWriter.WriteLine("Video.flv");
@@ -264,6 +273,7 @@ namespace Golem.Core
 
         public void GenerateLogImage(string timestamp, string path)
         {
+            path = ConvertPathToRelative(path);
             this.htmlTextWriter.RenderBeginTag("tr");
 
             this.htmlTextWriter.RenderBeginTag("td");
@@ -283,6 +293,7 @@ namespace Golem.Core
 
         public void GenerateLogVideo(string timestamp, string path)
         {
+            path = ConvertPathToRelative(path);
             this.htmlTextWriter.RenderBeginTag("tr");
 
             this.htmlTextWriter.RenderBeginTag("td");
@@ -302,6 +313,7 @@ namespace Golem.Core
 
         public void GenerateLogLink(string timestamp, string path)
         {
+            path = ConvertPathToRelative(path);
             this.htmlTextWriter.RenderBeginTag("tr");
 
             this.htmlTextWriter.RenderBeginTag("td");

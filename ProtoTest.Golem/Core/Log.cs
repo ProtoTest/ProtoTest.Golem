@@ -60,7 +60,7 @@ namespace Golem.Core
                 String path = Path.GetFullPath(Path.Combine(Config.settings.reportSettings.reportPath, "Video_" + Common.GetShortTestName(90) + DateTime.Now.ToString("HHms") + ".flv"));
                 FileStream fs = new FileStream(path, FileMode.Create);
                 video.Save(fs);
-                Message("file:///" + path, ActionList.Action.ActionType.Video);
+                Message(path, ActionList.Action.ActionType.Video);
                 return path;
             }
             catch (Exception e)

@@ -255,7 +255,7 @@ namespace Golem.WebDriver
                     
                 Common.Delay(1000);
             }
-            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
+          throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
                 @by, timeout));
         }
 

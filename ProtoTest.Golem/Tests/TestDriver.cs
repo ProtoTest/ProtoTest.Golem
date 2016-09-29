@@ -18,7 +18,7 @@ namespace Golem.Tests
         public void TestWebDriverExtensions()
         {
             driver.Navigate().GoToUrl("http://google.com");
-            driver.WaitForElementWithText("Advertising").Highlight();
+            driver.WaitForElementWithText("Advertisingz").Highlight();
             driver.FindElementWithText("Advertising").Highlight();
         }
     }

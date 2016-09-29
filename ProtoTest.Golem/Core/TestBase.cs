@@ -95,8 +95,8 @@ namespace Golem.Core
             
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
-                Core.Log.Error(TestContext.CurrentContext.Result.Message);
-                Core.Log.Error(TestContext.CurrentContext.Result.StackTrace);
+                Log.Error(TestContext.CurrentContext.Result.Message);
+                Log.Error(TestContext.CurrentContext.Result.StackTrace);
                 testData.ExceptionMessage = TestContext.CurrentContext.Result.Message;
                 
             }
@@ -480,7 +480,7 @@ namespace Golem.Core
         {
             try
             {
-                if (Config.settings.reportSettings.videoRecordingOnError && Config.settings.runTimeSettings.DegreeOfParallelism == 1 && Config.settings.runTimeSettings.RunOnRemoteHost == false)
+                if (Config.settings.reportSettings.videoRecordingOnError && Config.settings.runTimeSettings.RunOnRemoteHost == false)
                 {
                     testData.recorder.Stop();
                 }
