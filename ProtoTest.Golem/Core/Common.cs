@@ -120,7 +120,7 @@ namespace Golem.Core
             {
                 TestName = "Test";
             }
-            TestName = Regex.Replace(TestName, "[^a-zA-Z0-9% ._]", string.Empty);
+            TestName = Regex.Replace(TestName, "[^a-zA-Z0-9%._]", string.Empty);
             return TestName;
         }
 

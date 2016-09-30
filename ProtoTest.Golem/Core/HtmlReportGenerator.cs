@@ -40,8 +40,7 @@ namespace Golem.Core
 
         public void WriteToFile()
         {
-            var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html".Replace(" ",
-                "_");
+            var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html";
             var fullPath = Path.GetFullPath(path);
             fullPath = fullPath.Replace("\\", "/");
             var css_path = $"{Common.GetCodeDirectory()}\\dashboard.css";
