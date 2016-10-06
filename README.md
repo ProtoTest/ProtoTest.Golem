@@ -1,4 +1,17 @@
-﻿Golem Overview
+Golem V2:
+====================
+As MbUnit and Gallio have become deprecated, Golem has needed to migrate to another unit testing framework.  Golem V2 is now live, and currently supports nUnit v3 fixtures.  MsTest support will be added next.  
+
+This means that all tests must be marked with the NUnit.Framework [Test] fixture, and no longer can use the MbUnit Fixtures.
+
+For the most part, the NUnit Fixtures act virtually identical to the MbUnit ones, and simply replacing the MbUnit.Framework namespace with the NUnit.Framework namespace will fix most issues.  
+
+To Execute: You may execute tests from the command line using the nunit-console.exe.  To execute tests within Visual Studio either the nunit3 plugin or resharper Visual Studio plugin must be installed.  
+
+Parallel execution is supported at a class/fixture level, not a Test/Function level.  
+Multiple browsers are not currently supported.  Only a single browser may be defined per config file.  
+ 
+ Golem Overview
 ====================
 
 ##Object Oriented C# Automated Testing Framework
