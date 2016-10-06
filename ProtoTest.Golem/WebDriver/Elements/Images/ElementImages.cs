@@ -2,14 +2,13 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using Gallio.Framework;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver.Elements.Images
+namespace Golem.WebDriver.Elements.Images
 {
     public class ElementImages
     {
-        public static bool UpdateImages = Config.Settings.imageCompareSettings.updateImages;
+        public static bool UpdateImages = Config.settings.imageCompareSettings.updateImages;
         private readonly Image liveImage;
         private readonly Image storedImage;
         public float difference;
@@ -28,7 +27,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
         {
             get
             {
-                return Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
+                return AppDomain.CurrentDomain.BaseDirectory.Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
                        "\\ElementImages\\" + element.pageObjectName + "_" +
                        element.name.Replace(" ", "") + ".bmp";
             }
@@ -49,10 +48,10 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                 UpdateImage();
             }
             difference = ImageComparer.ImageComparePercentage(storedImage, liveImage,
-                Config.Settings.imageCompareSettings.fuzziness);
+                Config.settings.imageCompareSettings.fuzziness);
             differenceString = (difference*100).ToString("0.##\\%");
 
-            return difference < Config.Settings.imageCompareSettings.accuracy;
+            return difference < Config.settings.imageCompareSettings.accuracy;
         }
 
         public Image GetMergedImage()
@@ -137,7 +136,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
             }
             catch (Exception e)
             {
-                Common.Log("Exception saving image : " + e.Message);
+                Log.Message("Exception saving image : " + e.Message);
             }
         }
 
@@ -183,7 +182,7 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
 
         public void AttachImage()
         {
-            TestLog.AttachImage(element.name, GetImage());
+            Log.Image(GetImage());
         }
     }
 }

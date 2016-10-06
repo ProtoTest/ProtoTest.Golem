@@ -1,43 +1,50 @@
 ﻿using System.Collections.Generic;
-using MbUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Tests.PageObjects.Google;
-using ProtoTest.Golem.WebDriver;
+using NUnit.Framework;
+using Golem.Core;
+using Golem.Tests.PageObjects.Google;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestDDT : WebDriverTestBase
     {
-        [XmlData("//Search", FilePath = ".\\Tests\\Data\\SearchData.xml")]
-        [Test]
-        public void TestXml([Bind("@term")] string search, [Bind("@result")] string result)
-        {
-            Config.Settings.runTimeSettings.FindHiddenElements = true;
-            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(search).VerifyResult(result);
-        }
-
-        [CsvData(FilePath = ".\\Tests\\Data\\Data.csv", HasHeader = true)]
-        [Test]
-        public void TestCSV(string term, string result)
-        {
-            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(term).VerifyResult(result);
-        }
-
-        [Row("Selenium", "Selenium - Web Browser Automation")]
-        [Row("ProtoTest", "ProtoTest")]
-        [Test]
-        public void TestRowData(string term, string result)
+        //        [XmlData("//Search", FilePath = ".\\Tests\\Data\\SearchData.xml")]
+        //        [Test]
+        //        public void TestXml([Bind("@term")] string search, [Bind("@result")] string result)
+        //        {
+        //            Config.settings.runTimeSettings.FindHiddenElements = true;
+        //            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(search).VerifyResult(result);
+        //        }
+        //
+        //        [CsvData(FilePath = ".\\Tests\\Data\\Data.csv", HasHeader = true)]
+        //        [Test]
+        //        public void TestCSV(string term, string result)
+        //        {
+        //            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(term).VerifyResult(result);
+        //        }
+        [TestCase("Selenium", "Selenium - Web Browser Automation")]
+        [TestCase("Selenium", "Selenium (software) - Wikipedia, the free encyclopedia")]
+        public void TestCase(string term, string result)
         {
             OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(term).VerifyResult(result);
         }
 
-        public IEnumerable<Search> GetDataEnumerable()
+        [Test]
+        public void TestValues(
+        [Values("Selenium")] string term,
+        [Values("zSelenium - Web Browser Automation", "Selenium (software) - Wikipedia, the free encyclopedia")] string result)
         {
-            yield return new Search {term = "Selenium", result = "Selenium - Web Browser Automation"};
-            yield return new Search {term = "ProtoTest", result = "ProtoTest"};
+            OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(term).VerifyResult(result);
         }
 
-        public List<Search> GetDataList()
+
+//        public IEnumerable<Search> GetDataEnumerable()
+//        {
+//            yield return new Search {term = "Selenium", result = "Selenium - Web Browser Automation"};
+//            yield return new Search {term = "ProtoTest", result = "ProtoTest"};
+//        }
+//
+        public static List<Search> GetDataList()
         {
             var searches = new List<Search>();
             searches.Add(new Search {term = "WebDriver", result = "Selenium WebDriver"});
@@ -45,8 +52,8 @@ namespace ProtoTest.Golem.Tests
             return searches;
         }
 
-        [Test, Factory("GetDataEnumerable"), Factory("GetDataList")]
-        public void TestFactory(Search search)
+        [Test, TestCaseSource("GetDataList")]
+        public void TestSource(Search search)
         {
             OpenPage<GoogleHomePage>("http://www.google.com/").SearchFor(search.term).VerifyResult(search.result);
         }

@@ -1,10 +1,9 @@
 ﻿using System.Net;
-using Gallio.Framework;
 using HtmlAgilityPack;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 using RestSharp;
 
-namespace ProtoTest.Golem.Rest
+namespace Golem.Rest
 {
     /// <summary>
     ///     Contains methods to validate rest responses
@@ -22,7 +21,7 @@ namespace ProtoTest.Golem.Rest
         {
             if (response.Content.Contains(text))
             {
-                TestContext.CurrentContext.IncrementAssertCount();
+//                TestContext.CurrentContext.IncrementAssertCount();
             }
             else
             {
@@ -42,7 +41,9 @@ namespace ProtoTest.Golem.Rest
                     response.Content));
             }
             else
-                TestContext.CurrentContext.IncrementAssertCount();
+            {
+            }
+//                TestContext.CurrentContext.IncrementAssertCount();
             return this;
         }
 
@@ -50,7 +51,7 @@ namespace ProtoTest.Golem.Rest
         {
             if (response.Headers.ToString().Contains(text))
             {
-                TestContext.CurrentContext.IncrementAssertCount();
+//                TestContext.CurrentContext.IncrementAssertCount();
             }
             else
             {
@@ -64,7 +65,7 @@ namespace ProtoTest.Golem.Rest
         {
             if (response.StatusCode == code)
             {
-                TestContext.CurrentContext.IncrementAssertCount();
+//                TestContext.CurrentContext.IncrementAssertCount();
             }
             else
             {

@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using Gallio.Common.Markup;
+using System.Linq;
+using System.Web.UI;
 using Gallio.Common.Media;
 using Gallio.Framework;
-using Gallio.Framework.Pattern;
-using Gallio.Model;
-using MbUnit.Framework;
 using NUnit.Framework;
-using ProtoTest.Golem.Proxy;
-using ProtoTest.Golem.WebDriver;
-using Assert = MbUnit.Framework.Assert;
-using TestContext = Gallio.Framework.TestContext;
+using Golem.Proxy;
+using Golem.WebDriver;
+using TestContext = NUnit.Framework.TestContext;
+using TestStatus = NUnit.Framework.Interfaces.TestStatus;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     public abstract class TestBase
     {
@@ -25,7 +23,7 @@ namespace ProtoTest.Golem.Core
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Bottom
         };
-
+//        public static string reportPath;
         protected static Object locker = new object();
         public static BrowserMobProxy proxy;
         private static IDictionary<string, TestDataContainer> _testDataCollection;
@@ -54,62 +52,193 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        #region Events
-
-        public static void LogEvent(string name)
-        {
-            testData.LogEvent(name);
-        }
-
-        #endregion
-
-        [NUnit.Framework.SetUp]
-        [MbUnit.Framework.SetUp]
+        [SetUp]
         public virtual void SetUpTestBase()
         {
-            LogEvent(Common.GetCurrentTestName() + " started");
+            Log.Message(Common.GetCurrentTestName() + " started");
+            testData.ClassName = TestContext.CurrentContext.Test.ClassName;
+            testData.MethodName = TestContext.CurrentContext.Test.MethodName;
+            Config.settings = new ConfigSettings();
             StartNewProxy();
+            StartVideoRecording();
         }
 
-        [NUnit.Framework.TearDown]
-        [MbUnit.Framework.TearDown]
+        [TearDown]
         public virtual void TearDownTestBase()
         {
-            LogEvent(Common.GetCurrentTestName() + " " + Common.GetTestOutcome().DisplayName);
-            VerifyHttpTraffic();
-            GetHarFile();
-
-            QuitProxy();
+            try
+            {
+                LogTestOutcome();
+                VerifyHttpTraffic();
+                GetHarFile();
+                QuitProxy();
+                LogVideo();
+                AssertNoVerificationErrors();
+            }
+            catch (Exception e)
+            {
+                CreateHtmlReport();
+                DeleteTestData();
+                throw e;
+            }
+            finally 
+            {
+                CreateHtmlReport();
+                DeleteTestData();
+            }
             
-            LogVideoIfTestFailed();
-            AssertNoVerificationErrors();
-            DeleteTestData();
+        }
+
+        private void LogTestOutcome()
+        {
+            Log.Message(Common.GetCurrentTestName() + " " + Common.GetTestOutcome());
+            
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            {
+                Log.Error(TestContext.CurrentContext.Result.Message);
+                Log.Error(TestContext.CurrentContext.Result.StackTrace);
+                testData.ExceptionMessage = TestContext.CurrentContext.Result.Message;
+                
+            }
+            testData.Status = TestContext.CurrentContext.Result.Outcome.Status.ToString();
+            testData.Result = TestContext.CurrentContext.Result;
         }
 
         private void VerifyHttpTraffic()
         {
-            if (Config.Settings.httpProxy.useProxy && Config.Settings.httpProxy.validateTraffic)
+            if (Config.settings.httpProxy.useProxy && Config.settings.httpProxy.validateTraffic)
             {
                 proxy.VerifyNoErrorsCodes();
             }
         }
 
-        [TestFixtureSetUp]
-        [FixtureSetUp]
+        private void DeleteOldReports()
+        {
+            try
+            {
+                var dirs = Directory.GetDirectories(Config.settings.reportSettings.reportRoot);
+                int count = dirs.Length;
+                for (int i = Config.settings.reportSettings.numReports; i < count; i++)
+                {
+                    string dir = dirs[i - Config.settings.reportSettings.numReports];
+                    Directory.Delete(dir, true);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Log.Warning(e.Message);
+            }
+
+
+        }
+
+        [OneTimeSetUp]
         public virtual void SuiteSetUp()
         {
-            StartVideoRecording();
+            var context = TestContext.CurrentContext;
+            CreateReportDirectory();
             SetTestExecutionSettings();
             StartProxyServer();
         }
 
-        [TestFixtureTearDown]
-        [FixtureTearDown]
+       
+        private void CreateReportDirectory()
+        {
+            lock (locker)
+            {
+                
+                 DeleteOldReports();
+                Directory.CreateDirectory(Config.settings.reportSettings.reportPath);
+                var path = $"{Config.settings.reportSettings.reportPath}\\{Common.GetCurrentTestName()}.html";
+                TestContext.WriteLine(path);
+                Debug.WriteLine(path);
+            }
+        }
+        
+        
+        [OneTimeTearDown]
         public virtual void SuiteTearDown()
         {
             StopVideoRecording();
             QuitProxyServer();
-            Config.Settings = new ConfigSettings();
+            CreateHtmlIndex();
+            Config.settings = new ConfigSettings();
+        }
+
+        private void CreateHtmlIndex()
+        {
+            HtmlReportGenerator gen = new HtmlReportGenerator();
+            gen.GenerateStartTags();
+            gen.GenerateIndexHead();
+            gen.GenerateIndexSummary();
+            var results = testDataCollection.OrderBy(x => x.Key).ToList();
+            string classname = "";
+            bool first = true;
+            foreach (var item in results)
+            {
+                if (item.Value.ClassName != classname)
+                {
+                    if (first == true)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        gen.GenerateSuiteFooter();
+                    }
+                    gen.GenerateSuiteHeader(item.Value.ClassName);
+                    classname = item.Value.ClassName;
+                }
+                
+                if (item.Value.MethodName != null)
+                {
+                    gen.GenerateIndexRow(item.Key, item.Value.ReportPath, item.Value.Status, item.Value.ExceptionMessage);
+                }
+            }
+            gen.GenerateLogEnd();
+            gen.GenerateEndTags();
+            gen.WriteToIndexFile();
+        }
+
+        private void CreateHtmlReport()
+        {
+            HtmlReportGenerator gen = new HtmlReportGenerator();
+            gen.GenerateStartTags();
+            gen.GenerateLogHeader();
+            gen.GenerateLogStatus(testData.Result.Outcome.Status.ToString(),testData.Result.Message,testData.Result.StackTrace, testData.ScreenshotPath,testData.VideoPath);
+            foreach (var item in testData.actions.actions)
+            {
+                switch (item.type)
+                {
+                    case ActionList.Action.ActionType.Link:
+                        gen.GenerateLogLink(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Video:
+                        gen.GenerateLogVideo(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Image:
+                        gen.GenerateLogImage(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Error:
+                        gen.GenerateLogError(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Warning:
+                        gen.GenerateLogWarning(item.time.ToLongTimeString(), item.name);
+                        break;
+                    case ActionList.Action.ActionType.Message:
+                        gen.GenerateLogMessage(item.time.ToLongTimeString(), item.name);
+                        break;
+
+                    default:
+                        gen.GenerateLogRow(item.time.ToLongTimeString(), item.name);
+                        break;
+                }
+               
+            }
+            gen.GenerateLogEnd();
+            gen.GenerateEndTags();
+            gen.WriteToFile(); 
         }
 
         private void DeleteTestData()
@@ -120,78 +249,57 @@ namespace ProtoTest.Golem.Core
                 testDataCollection.Remove(testName);
             }
         }
-
-        public static void Log(string message)
-        {
-            var msg = "(" + DateTime.Now.ToString("HH:mm:ss::ffff") + ") : " + message;
-            DiagnosticLog.WriteLine(msg);
-            TestLog.WriteLine(msg);
-            overlay.Text = msg;
-        }
-
         public static void LogVerificationPassed(string successText)
         {
-            LogEvent("--> VerificationError Passed: " + successText);
-            TestContext.CurrentContext.IncrementAssertCount();
+            Log.Message("--> VerificationError Passed: " + successText);
+//            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         public static void AddVerificationError(string errorText)
         {
-            LogEvent("--> VerificationError Found: " + errorText);
-            testData.VerificationErrors.Add(new VerificationError(errorText,
-                Config.Settings.reportSettings.screenshotOnError));
-            TestContext.CurrentContext.IncrementAssertCount();
+            Log.Error("--> VerificationError Found: " + errorText);
+            var error = new VerificationError(errorText,
+                Config.settings.reportSettings.screenshotOnError);
+            testData.VerificationErrors.Add(error);
+            if (error.screenshot != null)
+            {
+               Log.Image(error.screenshot);
+            }
+           
+//            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         public static void AddVerificationError(string errorText, Image image)
         {
-            LogEvent("--> VerificationError Found: " + errorText);
+            Log.Error("--> VerificationError Found: " + errorText, image);
             testData.VerificationErrors.Add(new VerificationError(errorText, image));
-            TestContext.CurrentContext.IncrementAssertCount();
+//            TestContext.CurrentContext.IncrementAssertCount();
         }
 
         private void AssertNoVerificationErrors()
         {
-            if (testData.VerificationErrors.Count == 0)
+            if (testData.VerificationErrors.Count >= 1)
             {
-                return;
+                Assert.Fail("The test failed due to verification errors");
             }
-
-            var i = 1;
-            TestLog.BeginMarker(Marker.AssertionFailure);
-            foreach (var error in testData.VerificationErrors)
-            {
-                TestLog.Failures.BeginSection("ElementVerification Error " + i);
-                TestLog.Failures.WriteLine(error.errorText);
-                if (Config.Settings.reportSettings.screenshotOnError && (error.screenshot != null))
-                {
-                    TestLog.Failures.EmbedImage(null, error.screenshot);
-                }
-                TestLog.Failures.End();
-                i++;
-            }
-            TestLog.End();
-            Assert.TerminateSilently(TestOutcome.Failed);
         }
 
         public void SetTestExecutionSettings()
         {
-            TestAssemblyExecutionParameters.DegreeOfParallelism = Config.Settings.runTimeSettings.DegreeOfParallelism;
-            TestAssemblyExecutionParameters.DefaultTestCaseTimeout =
-                TimeSpan.FromMinutes(Config.Settings.runTimeSettings.TestTimeoutMin);
+//            TestAssemblyExecutionParameters.DegreeOfParallelism = Config.settings.runTimeSettings.DegreeOfParallelism;
+//            TestAssemblyExecutionParameters.DefaultTestCaseTimeout =
+//                TimeSpan.FromMinutes(Config.settings.runTimeSettings.TestTimeoutMin);
         }
 
-        //commented out Proxy stuff because browserMobProxy is not implimented
         private void GetHarFile()
         {
             try
             {
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     var name = Common.GetShortTestName(80);
                     proxy.SaveHarToFile();
-                    TestLog.Attach(new BinaryAttachment("HTTP_Traffic_" + name + ".har",
-                        "application/json", File.ReadAllBytes(proxy.GetHarFilePath())));
+                    Log.FilePath(proxy.GetHarFilePath());
                     proxy.CreateHar();
                 }
             }
@@ -201,11 +309,11 @@ namespace ProtoTest.Golem.Core
             }
         }
 
-        private void StartNewProxy()
+        internal void StartNewProxy()
         {
             try
             {
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy.CreateProxy();
                     proxy.CreateHar();
@@ -213,18 +321,18 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception e)
             {
-                Log("Failed to setup proxy: " + e.Message + ": Trying again...");
+                Log.Failure("Failed to setup proxy: " + e.Message + ": Trying again...");
                 proxy.CreateProxy();
                 proxy.CreateHar();
             }
         }
 
-        private void StartProxyServer()
+        internal void StartProxyServer()
         {
             try
             {
                 proxy = new BrowserMobProxy();
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy.KillOldProxy();
                     proxy.StartServer();
@@ -240,7 +348,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy.QuitServer();
                 }
@@ -254,7 +362,7 @@ namespace ProtoTest.Golem.Core
         {
             try
             {
-                if (Config.Settings.httpProxy.startProxy)
+                if (Config.settings.httpProxy.startProxy)
                 {
                     proxy.QuitProxy();
                 }
@@ -268,10 +376,9 @@ namespace ProtoTest.Golem.Core
         {
             var stackTrace = new StackTrace(); // get call stack
             var stackFrames = stackTrace.GetFrames(); // get method calls (frames)
-
             foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof (BasePageObject)) &&
+                if ((stackFrame.GetMethod().ReflectedType.BaseType == typeof (BasePageObject) || stackFrame.GetMethod().ReflectedType.BaseType == typeof(BaseComponent)) &&
                     (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name;
@@ -297,7 +404,7 @@ namespace ProtoTest.Golem.Core
             // write call stack method names
             foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof (BasePageObject))) &&
+                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof (BasePageObject)) || stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof(BaseComponent))) &&
                     (!stackFrame.GetMethod().IsConstructor))
                 {
                     return stackFrame.GetMethod().Name;
@@ -322,7 +429,8 @@ namespace ProtoTest.Golem.Core
 
             foreach (var stackFrame in stackFrames)
             {
-                if ((stackFrame.GetMethod().ReflectedType.IsSubclassOf(typeof (BasePageObject)) &&
+                var type = stackFrame.GetMethod().ReflectedType;
+                if (((type.IsSubclassOf(typeof (BasePageObject)) || type.IsSubclassOf(typeof(BaseComponent))) &&
                      (!stackFrame.GetMethod().IsConstructor)))
                 {
                     return stackFrame.GetMethod().ReflectedType.Name + "." + stackFrame.GetMethod().Name;
@@ -341,36 +449,45 @@ namespace ProtoTest.Golem.Core
             return "";
         }
 
-        public void LogVideoIfTestFailed()
+        public void LogVideo()
         {
-            if ((Config.Settings.reportSettings.videoRecordingOnError) &&
-                (Common.GetTestOutcome() != TestOutcome.Passed) && testData.recorder != null && testData.recorder.Video != null)
+            if ((Config.settings.reportSettings.videoRecordingOnError) &&
+                testData.recorder != null && testData.recorder.Video != null)
             {
-                TestLog.Failures.EmbedVideo("Video_" + Common.GetShortTestName(90), testData.recorder.Video);
+                var path = Log.Video(testData.recorder.Video);
+                TestBase.testData.VideoPath = path;
             }
         }
 
         public void StartVideoRecording()
         {
-            if (Config.Settings.reportSettings.videoRecordingOnError && Config.Settings.runTimeSettings.RunOnRemoteHost == false && Config.Settings.runTimeSettings.DegreeOfParallelism == 1)
+            try
             {
-                testData.recorder = Capture.StartRecording(new CaptureParameters {Zoom = .25}, 5);
-                testData.recorder.OverlayManager.AddOverlay(overlay);
+                if (Config.settings.reportSettings.videoRecordingOnError)
+                {
+                    testData.recorder = Capture.StartRecording(new CaptureParameters { Zoom = .25 }, 5);
+                    testData.recorder.OverlayManager.AddOverlay(overlay);
+                }
             }
+            catch (Exception e)
+            {
+                Log.Failure("Exception caught while trying to start video recording : " + e.Message);
+            }
+            
         }
 
         public void StopVideoRecording()
         {
             try
             {
-                if (Config.Settings.reportSettings.videoRecordingOnError && Config.Settings.runTimeSettings.DegreeOfParallelism == 1 && Config.Settings.runTimeSettings.RunOnRemoteHost == false)
+                if (Config.settings.reportSettings.videoRecordingOnError && Config.settings.runTimeSettings.RunOnRemoteHost == false)
                 {
                     testData.recorder.Stop();
                 }
             }
             catch (Exception e)
             {
-                TestLog.Failures.WriteLine(e.Message);
+                Log.Failure("Exception caught while trying to stop video recording : " + e.Message);
             }
         }
     }

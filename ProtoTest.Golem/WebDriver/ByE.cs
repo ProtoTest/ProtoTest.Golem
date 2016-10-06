@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     Contains By Extensions for the OpenQA.Selenium.By class

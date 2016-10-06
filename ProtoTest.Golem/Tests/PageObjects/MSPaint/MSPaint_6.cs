@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
-using ProtoTest.Golem.Purple;
-using ProtoTest.Golem.Purple.PurpleElements;
+using Golem.Purple;
+using Golem.Purple.PurpleElements;
 
-namespace ProtoTest.Golem.Tests.PageObjects.MSPaint
+namespace Golem.Tests.PageObjects.MSPaint
 {
     public class MSPaint_6 : BaseScreenObject
     {

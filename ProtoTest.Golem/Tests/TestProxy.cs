@@ -1,19 +1,13 @@
-﻿using MbUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Tests.PageObjects.Google;
-using ProtoTest.Golem.WebDriver;
+﻿using NUnit.Framework;
+using NUnit.Framework.Internal.Commands;
+using Golem.Core;
+using Golem.Tests.PageObjects.Google;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestProxy : WebDriverTestBase
     {
-        [FixtureInitializer]
-        public void setup()
-        {
-            Config.Settings.httpProxy.startProxy = true;
-            Config.Settings.httpProxy.useProxy = true;
-        }
-
         [Test]
         public void TestProxyNotNull()
         {

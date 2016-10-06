@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace ProtoTest.Golem.Rest
+namespace Golem.Rest
 {
     public class DynamicXml
     {

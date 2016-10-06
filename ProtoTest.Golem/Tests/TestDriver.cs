@@ -1,8 +1,8 @@
-﻿using MbUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using ProtoTest.Golem.WebDriver;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestDriver : WebDriverTestBase
     {
@@ -18,8 +18,8 @@ namespace ProtoTest.Golem.Tests
         public void TestWebDriverExtensions()
         {
             driver.Navigate().GoToUrl("http://google.com");
-            driver.WaitForElementWithText("Google Search").Highlight();
-            driver.FindElementWithText("Google Search").Highlight();
+            driver.WaitForElementWithText("Advertising").Highlight();
+            driver.FindElementWithText("Advertising").Highlight();
         }
     }
 }

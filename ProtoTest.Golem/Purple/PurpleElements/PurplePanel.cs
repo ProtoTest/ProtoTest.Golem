@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ProtoTest.Golem.Purple.PurpleElements
+namespace Golem.Purple.PurpleElements
 {
     public class PurplePanel : PurpleElementBase
     {

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     public class CurrentProcessInfo
     {

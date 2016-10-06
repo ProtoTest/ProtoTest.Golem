@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Reflection;
 using OpenQA.Selenium;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     BasePageObject should be inherited by all page objects used in the framework.  It represents either a base
@@ -19,7 +20,7 @@ namespace ProtoTest.Golem.WebDriver
         {
             driver = WebDriverTestBase.driver;
             className = GetType().Name;
-            if (Config.Settings.runTimeSettings.AutoWaitForElements)
+            if (Config.settings.runTimeSettings.AutoWaitForElements)
             {
                 try
                 {
@@ -37,15 +38,58 @@ namespace ProtoTest.Golem.WebDriver
         {
             this.driver = driver;
             className = GetType().Name;
-            if (Config.Settings.runTimeSettings.AutoWaitForElements)
+            if (Config.settings.runTimeSettings.AutoWaitForElements)
             {
                 WaitForElements();
             }
-
             TestBase.testData.actions.addAction(TestBase.GetCurrentClassAndMethodName());
         }
 
+        private void GetElementNAmes()
+        {
+//            var props = this.GetType().GetProperties();
+//            foreach (var prop in props)
+//            {
+//                if(prop.PropertyType.Name=="Element")
+//                {
+//                    var value = prop.GetValue(this, null) as Element;
+//                    value.Set_Name(prop.Name);
+////                    prop.SetValue(this, value, null);
+//                    Log.Message("Set name to " + value.name);
+//                }
+//
+//            }
+//            props = this.GetType().GetProperties();
+//            foreach (var prop in props)
+//            {
+//                if (prop.PropertyType.Name == "Element")
+//                {
+//                    var value = prop.GetValue(this, null) as Element;
+//                    Log.Message("Set name to " + value.name);
+//                }
+
+//            }
+            //            // Get the type of FieldsClass.
+            //            Type fieldsType = this.GetType();
+            //
+            //            // Get an array of FieldInfo objects.
+            //            FieldInfo[] fields = fieldsType.GetFields(BindingFlags.Public
+            //                | BindingFlags.Instance);
+            //            // Display the values of the fields.
+            //            Console.WriteLine("Displaying the values of the fields of {0}:",
+            //                fieldsType);
+            //            for (int i = 0; i < fields.Length; i++)
+            //            {
+            //                var text = string.Format("   {0}:\t'{1}'",
+            //                    fields[i].Name, fields[i].GetValue(this));
+            //
+            //            }
+        }
+
         public IWebDriver driver { get; set; }
-        public abstract void WaitForElements();
+
+        public virtual void WaitForElements()
+        {
+        }
     }
 }

@@ -3,16 +3,16 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using Gallio.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple.Elements;
-using ProtoTest.Golem.WebDriver.Elements.Images;
+using Golem.Core;
+using Golem.Purple.Elements;
+using Golem.WebDriver.Elements.Images;
 
-namespace ProtoTest.Golem.Purple
+namespace Golem.Purple
 {
     //TODO: this class is going to need to be re-factored!
     public class ElementImageComparer
     {
-        public static bool UpdateImages = Config.Settings.imageCompareSettings.updateImages;
+        public static bool UpdateImages = Config.settings.imageCompareSettings.updateImages;
         private readonly Image liveImage;
         private readonly Image storedImage;
         public float difference;
@@ -50,9 +50,9 @@ namespace ProtoTest.Golem.Purple
                 UpdateImage();
             }
             difference = ImageComparer.ImageComparePercentage(storedImage, liveImage,
-                Config.Settings.imageCompareSettings.fuzziness);
+                Config.settings.imageCompareSettings.fuzziness);
             differenceString = (difference*100).ToString("0.##\\%");
-            return difference < Config.Settings.imageCompareSettings.accuracy;
+            return difference < Config.settings.imageCompareSettings.accuracy;
         }
 
         public Image GetMergedImage()
@@ -132,7 +132,7 @@ namespace ProtoTest.Golem.Purple
             }
             catch (Exception e)
             {
-                Common.Log("Exception saving image : " + e.Message);
+                Log.Message("Exception saving image : " + e.Message);
             }
         }
 
@@ -148,7 +148,7 @@ namespace ProtoTest.Golem.Purple
             if (ImagesMatch())
             {
                 TestContext.CurrentContext.IncrementAssertCount();
-                TestBase.LogEvent("Images match!");
+                Log.Message("Images match!");
             }
 
             else

@@ -4,10 +4,10 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Automation;
 using WindowsInput;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple.PurpleCore;
+using Golem.Core;
+using Golem.Purple.PurpleCore;
 
-namespace ProtoTest.Golem.Purple.PurpleElements
+namespace Golem.Purple.PurpleElements
 {
     public static class PurpleWindow
     {
@@ -25,12 +25,12 @@ namespace ProtoTest.Golem.Purple.PurpleElements
         public static bool FindRunningProcess()
         {
             var processRunning = false;
-            var processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
+            var processes = Process.GetProcessesByName(Config.settings.purpleSettings.ProcessName);
             if (processes.Length == 0)
             {
-                TestBase.Log(string.Format("Could not find process {0}. Attempting to start process...",
-                    Config.Settings.purpleSettings.ProcessName));
-                var startProcess = new ProcessStartInfo(Config.Settings.purpleSettings.appPath);
+                Log.Message(string.Format("Could not find process {0}. Attempting to start process...",
+                    Config.settings.purpleSettings.ProcessName));
+                var startProcess = new ProcessStartInfo(Config.settings.purpleSettings.appPath);
                 var app = Process.Start(startProcess);
                 waitForWindow();
 
@@ -40,7 +40,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             }
             else
             {
-                TestBase.Log(
+                Log.Message(
                     string.Format("Process Length is: {0}. Attempting to kill existing process and start it up again.",
                         processes.Length));
                 EndProcess();
@@ -55,14 +55,14 @@ namespace ProtoTest.Golem.Purple.PurpleElements
             _locator = new Locator();
             purpleWindow =
                 _locator.WaitForElementAvailable(
-                    Config.Settings.purpleSettings.Purple_Delimiter + Config.Settings.purpleSettings.Purple_windowTitle,
-                    Config.Settings.purpleSettings.Purple_windowTitle);
+                    Config.settings.purpleSettings.Purple_Delimiter + Config.settings.purpleSettings.Purple_windowTitle,
+                    Config.settings.purpleSettings.Purple_windowTitle);
         }
 
         public static void EndProcess(String DontsaveProjectPath = "notused")
         {
             purpleWindow = null;
-            var processes = Process.GetProcessesByName(Config.Settings.purpleSettings.ProcessName);
+            var processes = Process.GetProcessesByName(Config.settings.purpleSettings.ProcessName);
             foreach (var process in processes)
             {
                 process.Kill();

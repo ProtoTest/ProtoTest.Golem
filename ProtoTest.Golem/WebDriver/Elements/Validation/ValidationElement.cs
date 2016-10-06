@@ -1,8 +1,7 @@
-﻿using Gallio.Framework;
-using OpenQA.Selenium;
-using ProtoTest.Golem.Core;
+﻿using OpenQA.Selenium;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver.Elements.Validation
+namespace Golem.WebDriver.Elements.Validation
 {
     /// <summary>
     ///     Validation Element class. Provides the functionality of an Element with the
@@ -36,14 +35,14 @@ namespace ProtoTest.Golem.WebDriver.Elements.Validation
         /// <returns>this</returns>
         public ValidationElement VerifyTextValidation(string text, int timeoutSec = 0)
         {
-            if (timeoutSec == 0) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeoutSec == 0) timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
             for (var i = 0; i <= timeoutSec; i++)
             {
                 if (driver.FindElements(locatorValidation).Count != 0)
                 {
                     if (driver.FindElement(locatorValidation).Text.Contains(text))
                     {
-                        TestContext.CurrentContext.IncrementAssertCount();
+//                        TestContext.CurrentContext.IncrementAssertCount();
                         return this;
                     }
                 }

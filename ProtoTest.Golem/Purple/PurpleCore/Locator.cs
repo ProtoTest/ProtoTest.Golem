@@ -5,28 +5,28 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Automation;
 using NUnit.Framework;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 using PurpleLib;
 using Timer = System.Timers.Timer;
 
-namespace ProtoTest.Golem.Purple.PurpleCore
+namespace Golem.Purple.PurpleCore
 {
     public class Locator
     {
         private static readonly PurplePath _purplePath = new PurplePath();
 
         private readonly Timer elementTimeoutTimer =
-            new Timer(Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds*1000);
+            new Timer(Config.settings.purpleSettings.Purple_ElementTimeoutWaitSeconds*1000);
 
         private bool notfound;
 
         public Locator()
         {
-            _purplePath.Delimiter = Config.Settings.purpleSettings.Purple_Delimiter;
-            _purplePath.BlankValue = Config.Settings.purpleSettings.Purple_blankValue;
-            _purplePath.DefaultWindowName = Config.Settings.purpleSettings.Purple_windowTitle;
-            _purplePath.ValueDelimiterStart = Config.Settings.purpleSettings.Purple_ValueDelimiterStart;
-            _purplePath.ValueDelimiterEnd = Config.Settings.purpleSettings.Purple_ValueDelimiterEnd;
+            _purplePath.Delimiter = Config.settings.purpleSettings.Purple_Delimiter;
+            _purplePath.BlankValue = Config.settings.purpleSettings.Purple_blankValue;
+            _purplePath.DefaultWindowName = Config.settings.purpleSettings.Purple_windowTitle;
+            _purplePath.ValueDelimiterStart = Config.settings.purpleSettings.Purple_ValueDelimiterStart;
+            _purplePath.ValueDelimiterEnd = Config.settings.purpleSettings.Purple_ValueDelimiterEnd;
 
             elementTimeoutTimer.Elapsed += elementTimeout;
         }
@@ -44,7 +44,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             AutomationElement elementAvailable = null;
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            TestBase.Log(string.Format("Locating Element: {0} ", name));
+            Log.Message(string.Format("Locating Element: {0} ", name));
             while (elementAvailable == null)
             {
                 try
@@ -60,7 +60,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
                     if (PurpleTestBase.PerfLogging)
                     {
                         PurplePerformanceLogger.AddEntry(name, purplePath,
-                            Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds, 0);
+                            Config.settings.purpleSettings.Purple_ElementTimeoutWaitSeconds, 0);
                     }
                     break;
                 }
@@ -70,7 +70,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
             if (!notfound)
             {
                 var time = stopWatch.Elapsed;
-                TestBase.Log(string.Format("Element: {2} found in {0}.{1} seconds.", time.Seconds, time.Milliseconds,
+                Log.Message(string.Format("Element: {2} found in {0}.{1} seconds.", time.Seconds, time.Milliseconds,
                     name));
                 if (PurpleTestBase.PerfLogging)
                 {
@@ -86,7 +86,7 @@ namespace ProtoTest.Golem.Purple.PurpleCore
 
         private void elementTimeout(object source, ElapsedEventArgs args)
         {
-            TestBase.Log("Element took longer than " + Config.Settings.purpleSettings.Purple_ElementTimeoutWaitSeconds +
+            Log.Message("Element took longer than " + Config.settings.purpleSettings.Purple_ElementTimeoutWaitSeconds +
                          " Seconds to respond.");
             notfound = true;
         }

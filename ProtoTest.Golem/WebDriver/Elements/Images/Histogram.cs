@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace ProtoTest.Golem.WebDriver.Elements.Images
+namespace Golem.WebDriver.Elements.Images
 {
     /// <summary>
     ///     A class which facilitates working with RGB histograms

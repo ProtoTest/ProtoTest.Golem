@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     Holds an error message and a screenshot.

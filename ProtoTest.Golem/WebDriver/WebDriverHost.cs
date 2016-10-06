@@ -1,9 +1,6 @@
-﻿using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using OpenQA.Selenium.Remote;
-using ProtoTest.Golem.Core;
+﻿using OpenQA.Selenium.Remote;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     public class BrowserInfo
     {

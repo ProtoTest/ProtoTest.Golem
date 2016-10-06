@@ -3,16 +3,16 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple.Elements;
-using ProtoTest.Golem.Purple.PurpleElements;
-using ProtoTest.Golem.WebDriver.Elements.Images;
+using Golem.Core;
+using Golem.Purple.Elements;
+using Golem.Purple.PurpleElements;
+using Golem.WebDriver.Elements.Images;
 
-namespace ProtoTest.Golem.Purple
+namespace Golem.Purple
 {
     public class ImageManipulation
     {
-        public static bool UpdateImages = Config.Settings.imageCompareSettings.updateImages;
+        public static bool UpdateImages = Config.settings.imageCompareSettings.updateImages;
         private readonly Image liveImage;
         private readonly string snapshotIndexFormat = "00";
         //private readonly Image storedImage;
@@ -220,9 +220,9 @@ namespace ProtoTest.Golem.Purple
         public bool ImagesMatch(Image source1, Image source2)
         {
             difference = ImageComparer.ImageComparePercentage(source1, source2,
-                Config.Settings.imageCompareSettings.fuzziness);
+                Config.settings.imageCompareSettings.fuzziness);
             differenceString = (difference*100).ToString("0.##\\%");
-            return difference < Config.Settings.imageCompareSettings.accuracy;
+            return difference < Config.settings.imageCompareSettings.accuracy;
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace ProtoTest.Golem.Purple
         public bool ImagesMatch(Image source1, Image source2, float accuracy)
         {
             difference = ImageComparer.ImageComparePercentage(source1, source2,
-                Config.Settings.imageCompareSettings.fuzziness);
+                Config.settings.imageCompareSettings.fuzziness);
             differenceString = (difference*100).ToString("0.##\\%");
             return difference < accuracy;
         }
@@ -252,7 +252,7 @@ namespace ProtoTest.Golem.Purple
             byte fuz;
             if (fuzzines == -1)
             {
-                fuz = Config.Settings.imageCompareSettings.fuzziness;
+                fuz = Config.settings.imageCompareSettings.fuzziness;
             }
             else
             {

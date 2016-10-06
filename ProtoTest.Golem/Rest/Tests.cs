@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using MbUnit.Framework;
-using ProtoTest.Golem.WebDriver;
+using NUnit.Framework;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Rest
+namespace Golem.Rest
 {
     /// <summary>
     ///     Example tests on how to use the REST Framework

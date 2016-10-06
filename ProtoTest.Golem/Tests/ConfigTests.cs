@@ -1,14 +1,14 @@
-﻿using MbUnit.Framework;
-using ProtoTest.Golem.Core;
+﻿using NUnit.Framework;
+using Golem.Core;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     public class ConfigTests : TestBase
     {
-        [FixtureInitializer]
+        [SetUp]
         public void init()
         {
-            Config.Settings.runTimeSettings.ElementTimeoutSec = 27;
+            Config.settings.runTimeSettings.ElementTimeoutSec = 27;
         }
         [Test]
         public void TestCustomConfigSettings()
@@ -20,10 +20,10 @@ namespace ProtoTest.Golem.Tests
         [Test]
         public void TestConfigSettingsAreModifiyable()
         {
-            var timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
-            Config.Settings.runTimeSettings.ElementTimeoutSec = 1234;
-            Assert.AreEqual(Config.Settings.runTimeSettings.ElementTimeoutSec, 1234);
-            Config.Settings.runTimeSettings.ElementTimeoutSec = timeout;
+            var timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
+            Config.settings.runTimeSettings.ElementTimeoutSec = 1234;
+            Assert.AreEqual(Config.settings.runTimeSettings.ElementTimeoutSec, 1234);
+            Config.settings.runTimeSettings.ElementTimeoutSec = timeout;
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace ProtoTest.Golem.Tests
         [Test]
         public void TestInit()
         {
-            Assert.AreEqual(Config.Settings.runTimeSettings.ElementTimeoutSec, 27);
+            Assert.AreEqual(Config.settings.runTimeSettings.ElementTimeoutSec, 27);
         }
     }
 }

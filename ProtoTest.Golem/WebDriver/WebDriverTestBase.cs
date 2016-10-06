@@ -1,22 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gallio.Framework;
-using Gallio.Model;
-using MbUnit.Framework;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
-using ProtoTest.Golem.Core;
+using OpenQA.Selenium.Chrome;
+using Golem.Core;
+using Golem.WebDriver;
+using TestContext = NUnit.Framework.TestContext;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem
 {
+
     /// <summary>
     ///     This class should be inherited by all webdriver tests.  It will automatically launch a browser and include the
     ///     Driver object in each test.
     /// </summary>
     public class WebDriverTestBase : TestBase
     {
-        protected static Object browserLocker = new object();
+       
+        public WebDriverTestBase(BrowserInfo browser)
+        {
+            this.browserInfo = browser;
+        }
 
-        [Factory("GetBrowsers")] protected BrowserInfo browserInfo;
+        public WebDriverTestBase() : base()
+        {
+            
+        }
+
+        protected static Object browserLocker = new object();
+        protected BrowserInfo browserInfo = new BrowserInfo(Config.settings.runTimeSettings.Browser);
 
         public static IWebDriver driver
         {
@@ -33,14 +46,14 @@ namespace ProtoTest.Golem.WebDriver
         protected static IEnumerable<BrowserInfo> GetBrowsers()
         {
 
-            return Config.Settings.runTimeSettings.Browsers;
+            return Config.settings.runTimeSettings.Browsers;
         }
 
         public static T OpenPage<T>(string url)
         {
             driver.Navigate().GoToUrl(url);
             //navigate twice due to IE bug
-            if (Config.Settings.runTimeSettings.Browser == WebDriverBrowser.Browser.IE)
+            if (Config.settings.runTimeSettings.Browser == WebDriverBrowser.Browser.IE)
                 driver.Navigate().GoToUrl(url);
             return (T) Activator.CreateInstance(typeof (T));
         }
@@ -54,21 +67,22 @@ namespace ProtoTest.Golem.WebDriver
             var screenshot = testData.driver.GetScreenshot();
             if (screenshot != null)
             {
-                if (message != null) TestLog.Default.WriteLine("!------- " + message + " --------!");
+                if (message != null) Log.Message("!------- " + message + " --------!");
 
-                TestLog.Default.EmbedImage(null, screenshot);
+                Log.Image(screenshot);
             }
         }
 
         private void LogScreenshotIfTestFailed()
         {
-            if ((Config.Settings.reportSettings.screenshotOnError) &&
-                (TestContext.CurrentContext.Outcome != TestOutcome.Passed))
+            if ((Config.settings.reportSettings.screenshotOnError) &&
+                (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed))
             {
                 var screenshot = testData.driver.GetScreenshot();
                 if (screenshot != null)
                 {
-                    TestLog.Failures.EmbedImage(null, screenshot);
+                    var path = Log.Image(screenshot);
+                    testData.ScreenshotPath = path;
                 }
             }
         }
@@ -77,55 +91,53 @@ namespace ProtoTest.Golem.WebDriver
         {
             try
             {
-                if ((Config.Settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestOutcome.Passed))
+                if ((Config.settings.reportSettings.htmlOnError) && (Common.GetTestOutcome() != TestStatus.Passed))
                 {
                     var source = driver.PageSource;
-                    TestLog.AttachHtml("HTML_" + Common.GetShortTestName(95), source);
+                    Log.Html("HTML_" + Common.GetShortTestName(95), source);
                 }
             }
             catch (Exception e)
             {
-                TestLog.Warnings.WriteLine("Error caught trying to get page source: " + e.Message);
+                Log.Warning("Error caught trying to get page source: " + e.Message);
             }
         }
 
         public void QuitBrowser()
         {
-            if (Config.Settings.runTimeSettings.LaunchBrowser)
+            if (Config.settings.runTimeSettings.LaunchBrowser)
             {
                 if (driver != null)
                 {
                     driver.Quit();
                     driver = null;
-                    LogEvent(browser + " Browser Closed");
+                    Log.Message(browser + " Browser Closed");
                 }
             }
         }
 
         public void LaunchBrowser()
         {
-            TestLog.WriteLine("Browser is : " + browser);
             lock (browserLocker)
             {
-                if (Config.Settings.runTimeSettings.LaunchBrowser)
+                if (Config.settings.runTimeSettings.LaunchBrowser)
                 {
-                    if (Config.Settings.runTimeSettings.RunOnRemoteHost)
+                    if (Config.settings.runTimeSettings.RunOnRemoteHost)
                     {
                         driver = new WebDriverBrowser().LaunchRemoteBrowser(browser,
-                            Config.Settings.runTimeSettings.HostIp);
+                            Config.settings.runTimeSettings.HostIp);
                     }
                     else
                     {
                         driver = new WebDriverBrowser().LaunchBrowser(browser);
                     }
 
-                    LogEvent(browser + " Browser Launched");
+                    Log.Message(browser + " Browser Launched");
                     testData.actions.addAction(Common.GetCurrentTestName() + " : " + browser + " Browser Launched");
                 }
             }
         }
 
-        [NUnit.Framework.SetUp]
         [SetUp]
         public virtual void SetUp()
         {
@@ -133,7 +145,6 @@ namespace ProtoTest.Golem.WebDriver
             LaunchBrowser();
         }
 
-        [NUnit.Framework.TearDown]
         [TearDown]
         public override void TearDownTestBase()
         {
@@ -144,11 +155,11 @@ namespace ProtoTest.Golem.WebDriver
             base.TearDownTestBase();
         }
 
-        private void UpdateSAuceLabsWithTestStatus()
+       private void UpdateSAuceLabsWithTestStatus()
         {
-            if (Config.Settings.sauceLabsSettings.UseSauceLabs)
+            if (Config.settings.sauceLabsSettings.UseSauceLabs)
             {
-                var passed = TestContext.CurrentContext.Outcome.Status == TestStatus.Passed;
+                var passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
                 driver.ExecuteJavaScript("sauce:job-result=" + (passed ? "passed" : "failed"));
             }
         }

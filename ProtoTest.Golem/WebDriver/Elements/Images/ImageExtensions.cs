@@ -8,7 +8,7 @@ using System.IO;
 // Use, alter and redistribute this code freely,
 // but please leave this comment :)
 
-namespace ProtoTest.Golem.WebDriver.Elements.Images
+namespace Golem.WebDriver.Elements.Images
 {
     /// <summary>
     ///     A class with extensionmethods for comparing images

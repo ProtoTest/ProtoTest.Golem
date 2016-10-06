@@ -1,12 +1,12 @@
 ﻿// Type: OpenQA.Selenium.Support.Events.FindElementEventArgs
 // Assembly: WebDriver.Support, Version=2.40.0.0, Culture=neutral
 // MVID: 9FAA975A-389C-466A-AE2E-96ABC7996728
-// Assembly location: C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\packages\Selenium.Support.2.40.0\lib\net40\WebDriver.Support.dll
+// Assembly location: C:\Users\Brian\Documents\GitHub\Golem\Golem\packages\Selenium.Support.2.40.0\lib\net40\WebDriver.Support.dll
 
 using System;
 using OpenQA.Selenium;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     Provides data for events related to finding elements.
@@ -19,7 +19,7 @@ namespace ProtoTest.Golem.WebDriver
         /// <param name="driver">The WebDriver instance used in finding elements.</param>
         /// <param name="element">The element that was found</param>
         /// <param name="method">The <see cref="T:OpenQA.Selenium.By" /> object containing the method used to find elements.</param>
-        public FoundElementEventArgs(IWebDriver driver, IWebElement element, By method)
+        public FoundElementEventArgs(IWebDriver driver, IWebElement element, OpenQA.Selenium.By method)
         {
             Driver = driver;
             Element = element;

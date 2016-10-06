@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Golem</id>
+    <version>2.1.10</version>
+    <title>Golem</title>
+    <authors>Brian Kitchener</authors>
+    <owners>Brian Kitchener</owners>
+    <projectUrl>http://www.github.com/prototest/prototest.golem</projectUrl>
+    <description>Selenium+ Test Automation Framework</description>
+    <releaseNotes>
+      Removing ProtoTest from namespace.  Removing Gallio and MbUnit and porting all functionality to nUnit.  New with HTML Report.  
+    </releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <language />
+    <tags>Selenium WebDriver Framework Golem ProtoTest Gallio MbUnit Rest White TestStack Test Testing</tags>
+    <dependencies>
+      <dependency id="Gallio_MbUnit" version="3.4.14.0" />
+      <dependency id="Selenium.Support" version="2.53.1" />
+      <dependency id="Selenium.WebDriver" version="2.53.1" />
+      <dependency id="Castle.Core" version="3.3.3" />
+      <dependency id="NUnit" version="3.4.1"/>
+      <dependency id="NUnitTestAdapter" version="2.0.0"/>
+      <dependency id="Newtonsoft.Json" version="8.0.3"/>
+    </dependencies>
+  </metadata>
+<files>
+    <file src="install.ps1" target="tools" /> 
+</files>
+</package>

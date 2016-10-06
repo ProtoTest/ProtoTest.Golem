@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using MbUnit.Framework;
-using System.Text;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.WebDriver;
+using Golem.Core;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class DesiredCapibilitiesTests : WebDriverTestBase
     {
@@ -15,11 +11,11 @@ namespace ProtoTest.Golem.Tests
         public override void SetUp()
         {
             var data = testData;
-            Config.Settings.sauceLabsSettings.SauceLabsUsername = "bkitchener";
-            Config.Settings.sauceLabsSettings.SauceLabsAPIKey = "998969ff-ad37-4b2e-9ad7-edacd982bc59";
-            Config.Settings.sauceLabsSettings.UseSauceLabs = true;
-            Config.Settings.runTimeSettings.RunOnRemoteHost = true;
-            Config.Settings.runTimeSettings.HighlightFoundElements = false;
+            Config.settings.sauceLabsSettings.SauceLabsUsername = "bkitchener";
+            Config.settings.sauceLabsSettings.SauceLabsAPIKey = "998969ff-ad37-4b2e-9ad7-edacd982bc59";
+            Config.settings.sauceLabsSettings.UseSauceLabs = true;
+            Config.settings.runTimeSettings.RunOnRemoteHost = true;
+            Config.settings.runTimeSettings.HighlightFoundElements = false;
             browserInfo = new BrowserInfo(WebDriverBrowser.Browser.Firefox);
             base.SetUp();
         }
@@ -32,7 +28,7 @@ namespace ProtoTest.Golem.Tests
             driver.Navigate().GoToUrl("http://www.espn.com");
             var element = new Element("ESPN Element", By.XPath("//*[@class='espn-logo']//*[text()='ESPN']"));
             element.WaitUntil(10).Visible();
-            Common.Log("Successfully navigated to " + driver.Title);
+            Log.Message("Successfully navigated to " + driver.Title);
         }
     }
 }

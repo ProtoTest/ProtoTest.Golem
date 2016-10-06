@@ -5,18 +5,16 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
-using Gallio.Framework;
-using ProtoTest.Golem.WebDriver;
-//using Castle.Core.Logging;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     /// <summary>
     ///     The Config class holds instantiates the ConfigSettings class, and any Config-related functions
     /// </summary>
     public class Config
     {
-        public static ConfigSettings Settings
+        public static ConfigSettings settings
         {
             get { return TestBase.testData.configSettings; }
             set { TestBase.testData.configSettings = value; }
@@ -67,9 +65,9 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception e)
             {
-                TestLog.Warnings.WriteLine(
+                Log.Warning(string.Format(
                     "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
-                    key, setting, e.Message);
+                    key, setting, e.Message));
                 return 1;
             }
         }
@@ -90,9 +88,9 @@ namespace ProtoTest.Golem.Core
             }
             catch (Exception e)
             {
-                TestLog.Warnings.WriteLine(
+                Log.Warning(string.Format(
                     "Exception Reading App.Config. Using key='{0}', got a result of : '{1}'.   Using 1 as default. {2}",
-                    key, setting, e.Message);
+                    key, setting, e.Message));
                 return 1;
             }
         }
@@ -127,7 +125,7 @@ namespace ProtoTest.Golem.Core
             doc.SelectSingleNode("//add[@key='" + key + "']").Attributes["value"].Value = value;
             doc.Save(path);
 
-            path = Directory.GetCurrentDirectory().Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
+            path = AppDomain.CurrentDomain.BaseDirectory.Replace(@"\bin\Debug", "").Replace(@"\bin\Release", "") +
                    "\\App.config";
             doc.Load(path);
             doc.SelectSingleNode("//add[@key='" + key + "']").Attributes["value"].Value = value;
@@ -151,16 +149,14 @@ namespace ProtoTest.Golem.Core
 
         public ConfigSettings()
         {
-            runTimeSettings = new RuntimeSettings();
-            reportSettings = new ReportSettings();
+            browserStackSettings = new BrowserStackSettings();
             httpProxy = new HttpProxy();
             imageCompareSettings = new ImageCompareSettings();
             purpleSettings = new PurpleSettings();
-            browserStackSettings = new BrowserStackSettings();
+            reportSettings = new ReportSettings();
+            runTimeSettings = new RuntimeSettings();
             sauceLabsSettings = new SauceLabsSettings();
         }
-
-
         /// <summary>
         ///     Contains all settings related to the BrowserMobProxy
         /// </summary>
@@ -208,6 +204,9 @@ namespace ProtoTest.Golem.Core
         /// </summary>
         public class ReportSettings
         {
+            private static string timestamp = DateTime.Now.ToString("MMdd_HHmm");
+            public string reportRoot;
+            public string reportPath;
             public bool actionLogging;
             public bool commandLogging;
             public bool diagnosticLog;
@@ -216,10 +215,11 @@ namespace ProtoTest.Golem.Core
             public bool spellChecking;
             public bool testLog;
             public bool videoRecordingOnError;
+            public int numReports;
 
             public ReportSettings()
             {
-                htmlOnError = Config.GetConfigValueAsBool("HtmlOnError", "True");
+                htmlOnError = Config.GetConfigValueAsBool("HtmlOnError", "False");
                 screenshotOnError = Config.GetConfigValueAsBool("ScreenshotOnError", "True");
                 videoRecordingOnError = Config.GetConfigValueAsBool("VideoRecordingOnError", "True");
                 commandLogging = Config.GetConfigValueAsBool("CommandLogging", "True");
@@ -227,6 +227,9 @@ namespace ProtoTest.Golem.Core
                 spellChecking = Config.GetConfigValueAsBool("SpellChecking", "False");
                 diagnosticLog = Config.GetConfigValueAsBool("DiagnosticLog", "True");
                 testLog = Config.GetConfigValueAsBool("TestLog", "True");
+                reportRoot = Config.GetConfigValue("ReportPath", Path.Combine(Common.GetCodeDirectory(), "reports"));
+                reportPath = Path.Combine(reportRoot, timestamp);
+                numReports = Config.GetConfigValueAsInt("NumReports", "10");
             }
         }
 
@@ -257,14 +260,14 @@ namespace ProtoTest.Golem.Core
                 Browsers = GetBrowserInfo();
                 LaunchBrowser = Config.GetConfigValueAsBool("LaunchBrowser", "True");
                 TestTimeoutMin = Config.GetConfigValueAsInt("TestTimeoutMin", "5");
-                ElementTimeoutSec = Config.GetConfigValueAsInt("ElementTimeoutSec", "5");
+                ElementTimeoutSec = Config.GetConfigValueAsInt("ElementTimeoutSec", "10");
                 OpenWindowTimeoutSec = Config.GetConfigValueAsInt("WindowOpenTimeoutSec", "10");
                 PageTimeoutSec = Config.GetConfigValueAsInt("PageTimeoutSec", "30");
                 EnvironmentUrl = Config.GetConfigValue("EnvironmentUrl", "");
                 DegreeOfParallelism = Config.GetConfigValueAsInt("DegreeOfParallelism", "5");
                 CommandDelayMs = Config.GetConfigValueAsInt("CommandDelayMs", "0");
                 RunOnRemoteHost = Config.GetConfigValueAsBool("RunOnRemoteHost", "False");
-                RemoteHostPort = Config.GetConfigValue("RemoteHostPort", "8080");
+                RemoteHostPort = Config.GetConfigValue("RemoteHostPort", "4444");
                 HostIp = Config.GetConfigValue("HostIp", "localhost");
                 AutoWaitForElements = Config.GetConfigValueAsBool("AutoWaitForElements", "True");
                 HighlightFoundElements = Config.GetConfigValueAsBool("HighlightFoundElements", "True");
@@ -307,7 +310,7 @@ namespace ProtoTest.Golem.Core
         }
 
         /// <summary>
-        ///     Settings for TestStack.White module
+        ///     settings for TestStack.White module
         /// </summary>
         public class PurpleSettings
         {

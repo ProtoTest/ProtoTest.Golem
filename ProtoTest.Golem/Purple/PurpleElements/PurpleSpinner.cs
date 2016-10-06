@@ -1,4 +1,4 @@
-﻿namespace ProtoTest.Golem.Purple.PurpleElements
+﻿namespace Golem.Purple.PurpleElements
 {
     public class PurpleSpinner : PurpleElementBase
     {

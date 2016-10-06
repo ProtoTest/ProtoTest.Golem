@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace ProtoTest.Golem.WebDriver.Elements.Types
+namespace Golem.WebDriver.Elements.Types
 {
     public class Dropdown : Element
     {

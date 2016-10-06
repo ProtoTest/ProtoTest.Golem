@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Automation;
-using ProtoTest.Golem.Purple.Elements;
-using ProtoTest.Golem.Purple.PurpleCore;
+using Golem.Purple.Elements;
+using Golem.Purple.PurpleCore;
 using Purple.Core;
 using PurpleLib;
 
-namespace ProtoTest.Golem.Purple.PurpleElements
+namespace Golem.Purple.PurpleElements
 {
     public class PurpleElementBase : IPurpleElement
     {

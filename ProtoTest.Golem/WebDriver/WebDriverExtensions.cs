@@ -1,17 +1,18 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Gallio.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     Extension methods added to the IWebDriver and IWebElement API's
@@ -23,13 +24,13 @@ namespace ProtoTest.Golem.WebDriver
             try
             {
                 if (timeout == -1)
-                    timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+                    timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
                 var GolemElement = (Element) element;
                 return new ElementVerification(GolemElement, timeout, false);
             }
             catch (Exception)
             {
-                return new ElementVerification(new Element(element), Config.Settings.runTimeSettings.ElementTimeoutSec,
+                return new ElementVerification(new Element(element), Config.settings.runTimeSettings.ElementTimeoutSec,
                     false);
             }
         }
@@ -39,13 +40,13 @@ namespace ProtoTest.Golem.WebDriver
             try
             {
                 if (timeout == -1)
-                    timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+                    timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
                 var GolemElement = (Element) element;
                 return new ElementVerification(GolemElement, timeout, true);
             }
             catch (Exception)
             {
-                return new ElementVerification(new Element(element), Config.Settings.runTimeSettings.ElementTimeoutSec,
+                return new ElementVerification(new Element(element), Config.settings.runTimeSettings.ElementTimeoutSec,
                     false);
             }
         }
@@ -126,21 +127,53 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
-        public static void Highlight(this IWebElement element, int ms = 30)
+        public static void Highlight(this IWebElement element, int ms = 30, string color="yellow")
         {
             try
             {
                 var jsDriver = ((IJavaScriptExecutor) ((IWrapsDriver) element).WrappedDriver);
-                var originalElementBorder = (string) jsDriver.ExecuteScript("return arguments[0].style.border", element);
-                jsDriver.ExecuteScript("arguments[0].style.border='3px solid red'; return;", element);
-                var bw = new BackgroundWorker();
-                bw.DoWork += (obj, e) => Unhighlight(element, originalElementBorder, ms);
-                bw.RunWorkerAsync();
+                var originalElementBorder = (string) jsDriver.ExecuteScript("return arguments[0].style.background", element);
+                jsDriver.ExecuteScript(string.Format("arguments[0].style.background='{0}'; return;", color), element);
+                if (ms >= 0)
+                {
+                    if (ms > 1000)
+                    {
+                        var bw = new BackgroundWorker();
+                        bw.DoWork += (obj, e) => Unhighlight(element, originalElementBorder, ms);
+                        bw.RunWorkerAsync();
+                    }
+                    else
+                    {
+                        Unhighlight(element, originalElementBorder, ms);
+                    }
+                }
             }
             catch (Exception e)
             {
-                TestLog.Warnings.WriteLine(e.Message);
+                Log.Warning(e.Message);
             }
+        }
+
+        public static void WaitForJQuery(this IWebDriver driver, int timeout=-1)
+        {
+            if (timeout == -1) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
+            var then = DateTime.Now.AddSeconds(timeout);
+            for (var now = DateTime.Now; now < then; now = DateTime.Now)
+            {
+                var value = driver.ExecuteJavaScript("(typeof jQuery === \"undefined\" || jQuery.active==0);");
+                bool condition = (bool) value;
+                if (condition == true)
+                {
+                    return;
+                }
+                else
+                {
+                    Log.Message("Waiting for JQuery");
+                    Common.Delay(1000);
+                }
+                
+            }
+            
         }
 
         private static void Unhighlight(IWebElement element, string border, int timeMs)
@@ -149,7 +182,7 @@ namespace ProtoTest.Golem.WebDriver
             {
                 var jsDriver = ((IJavaScriptExecutor) ((IWrapsDriver) element).WrappedDriver);
                 Thread.Sleep(timeMs);
-                jsDriver.ExecuteScript("arguments[0].style.border='" + border + "'; return;", element);
+                jsDriver.ExecuteScript("arguments[0].style.background='" + border + "'; return;", element);
             }
             catch (Exception e)
             {
@@ -174,15 +207,25 @@ namespace ProtoTest.Golem.WebDriver
             action.Build().Perform();
         }
 
-        public static IWebElement WaitForPresent(this IWebElement element, By by, int timeout = 0)
+        public static IWebElement WaitForPresent(this IWebElement element, By by, int timeout = 0, string elementName = "Element")
         {
-            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeout == 0) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 var eles = element.FindElements(by);
                 if (eles.Count > 0)
-                    return eles.FirstOrDefault(x => x.Displayed);
+                {
+                    var ele = eles.FirstOrDefault(x => x.Displayed);
+                    if (ele == null)
+                    {
+                        return eles[0];
+                    }
+                    else
+                    {
+                        return ele;
+                    }
+                }
                 Common.Delay(1000);
             }
             throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
@@ -191,22 +234,34 @@ namespace ProtoTest.Golem.WebDriver
 
         public static IWebElement WaitForPresent(this IWebDriver driver, By by, int timeout = 0)
         {
-            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeout == 0) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
                 var eles = driver.FindElements(by);
                 if (eles.Count > 0)
-                    return eles.FirstOrDefault(x => x.Displayed);
+                {
+                    var ele = eles.FirstOrDefault(x => x.Displayed);
+                    if (ele == null)
+                    {
+                        return eles[0];
+                    }
+                    else
+                    {
+                        return ele;
+                    }
+                }
+                    
+                    
                 Common.Delay(1000);
             }
-            throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
+          throw new NoSuchElementException(string.Format("Element ({0}) was not present after {1} seconds",
                 @by, timeout));
         }
 
         public static void WaitForNotPresent(this IWebDriver driver, By by, int timeout = 0)
         {
-            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeout == 0) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
@@ -221,7 +276,7 @@ namespace ProtoTest.Golem.WebDriver
 
         public static IWebElement WaitForVisible(this IWebDriver driver, By by, int timeout = 0)
         {
-            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeout == 0) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
@@ -234,9 +289,9 @@ namespace ProtoTest.Golem.WebDriver
                 @by, timeout));
         }
 
-        public static void WaitForNotVisible(this IWebDriver driver, By by, int timeout = 0)
+        public static void WaitForNotVisible(this IWebDriver driver, OpenQA.Selenium.By by, int timeout = 0)
         {
-            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeout == 0) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
             var then = DateTime.Now.AddSeconds(timeout);
             for (var now = DateTime.Now; now < then; now = DateTime.Now)
             {
@@ -256,11 +311,11 @@ namespace ProtoTest.Golem.WebDriver
 
         public static IWebElement WaitForElementWithText(this IWebDriver driver, string text, int timeout = 0)
         {
-            if (timeout == 0) timeout = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeout == 0) timeout = Config.settings.runTimeSettings.ElementTimeoutSec;
             return driver.WaitForPresent(By.XPath("//*[text()=\"" + text + "\"]"));
         }
 
-        public static void VerifyElementPresent(this IWebDriver driver, By by, bool isPresent = true)
+        public static void VerifyElementPresent(this IWebDriver driver, OpenQA.Selenium.By by, bool isPresent = true)
         {
             var count = driver.FindElements(by).Count;
             Verify(isPresent && count == 0, "VerifyElementPresent Failed : Element : " + @by +
@@ -275,7 +330,7 @@ namespace ProtoTest.Golem.WebDriver
             }
             else
             {
-                TestContext.CurrentContext.IncrementAssertCount();
+//                TestContext.CurrentContext.IncrementAssertCount();
             }
         }
 
@@ -298,7 +353,7 @@ namespace ProtoTest.Golem.WebDriver
             return element;
         }
 
-        public static IWebElement FindVisibleElement(this IWebDriver driver, By by)
+        public static IWebElement FindVisibleElement(this IWebDriver driver, OpenQA.Selenium.By by)
         {
             var elements = driver.FindElements(by);
             foreach (var ele in elements.Where(ele => (ele.Displayed) && (ele.Enabled)))
@@ -306,34 +361,6 @@ namespace ProtoTest.Golem.WebDriver
                 return ele;
             }
             throw new ElementNotVisibleException("No element visible for : " + @by);
-        }
-
-        public static void VerifyElementVisible(this IWebDriver driver, By by, bool isVisible = true)
-        {
-            var elements = driver.FindElements(by);
-            var count = elements.Count;
-            var visible = false;
-            if (isVisible && count != 0)
-            {
-                foreach (var element in elements)
-                {
-                    if (element.Displayed)
-                    {
-                        visible = true;
-                    }
-                }
-            }
-            Verify(isVisible != visible,
-                "VerifyElementVisible Failed : Element : " + @by +
-                (isVisible ? " visible" : " not visible"));
-        }
-
-        public static void VerifyElementText(this IWebDriver driver, By by, string expectedText)
-        {
-            var actualText = driver.FindElement(by).Text;
-            Verify(actualText != expectedText,
-                "VerifyElementText Failed : Expected : " + @by + " Expected text : '" + expectedText +
-                "' + Actual '" + actualText);
         }
 
         public static Rectangle GetRect(this IWebElement element)
@@ -350,6 +377,12 @@ namespace ProtoTest.Golem.WebDriver
             }
         }
 
+        public static string GetScreenshot(this IWebDriver driver, string path)
+        {
+            driver.TakeScreenshot().SaveAsFile(path, ImageFormat.Png);
+            return path;
+        }
+
         public static Image GetScreenshot(this IWebDriver driver)
         {
             Image screen_shot = null;
@@ -364,7 +397,7 @@ namespace ProtoTest.Golem.WebDriver
             }
             catch (Exception e)
             {
-                TestLog.Failures.WriteLine("Failed to take screenshot: " + e.Message);
+                Log.Error("Failed to take screenshot: " + e.Message);
             }
 
             return screen_shot;
@@ -380,6 +413,7 @@ namespace ProtoTest.Golem.WebDriver
                 element.SendKeys(text);
             }
         }
+
 
         public static object ExecuteJavaScript(this IWebDriver driver, string script)
         {
@@ -413,9 +447,23 @@ namespace ProtoTest.Golem.WebDriver
             return element;
         }
 
+        public static IWebElement JS_Click(this IWebElement element)
+        {
+            var js = (IJavaScriptExecutor)WebDriverTestBase.driver;
+            js.ExecuteScript("arguments[0].click(); return;", element);
+            return element;
+        }
+
+        public static IWebElement ClickAt(this IWebElement element)
+        {
+            var js = (IJavaScriptExecutor)WebDriverTestBase.driver;
+            js.ExecuteScript($"document.elementFromPoint({element.Location.X}, {element.Location.Y}).click(); return;", element);
+            return element;
+        }
+
         public static void SelectNewWindow(this IWebDriver driver, int timeout = 0)
         {
-            if (timeout == 0) timeout = Config.Settings.runTimeSettings.OpenWindowTimeoutSec;
+            if (timeout == 0) timeout = Config.settings.runTimeSettings.OpenWindowTimeoutSec;
 
             try
             {

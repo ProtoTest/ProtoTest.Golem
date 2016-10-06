@@ -1,7 +1,7 @@
 ﻿// Type: OpenQA.Selenium.Support.Events.EventFiringWebDriver
 // Assembly: WebDriver.Support, Version=2.40.0.0, Culture=neutral
 // MVID: 9FAA975A-389C-466A-AE2E-96ABC7996728
-// Assembly location: C:\Users\Brian\Documents\GitHub\ProtoTest.Golem\ProtoTest.Golem\packages\Selenium.Support.2.40.0\lib\net40\WebDriver.Support.dll
+// Assembly location: C:\Users\Brian\Documents\GitHub\Golem\Golem\packages\Selenium.Support.2.40.0\lib\net40\WebDriver.Support.dll
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.Events;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     A wrapper around an arbitrary WebDriver instance which supports registering for
@@ -31,7 +31,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        ///     Executes JavaScript in the context of the currently selected _frame or window.
+        ///     Executes JavaScript in the context of the currently selected frame or window.
         /// </summary>
         /// <param name="script">The JavaScript code to execute.</param>
         /// <param name="args">The arguments to the script.</param>
@@ -43,7 +43,7 @@ namespace ProtoTest.Golem.WebDriver
         ///         The
         ///         <see cref="M:OpenQA.Selenium.Support.Events.EventFiringWebDriver.ExecuteScript(System.String,System.Object[])" />
         ///         method executes JavaScript in the context of
-        ///         the currently selected _frame or window. This means that "document" will refer
+        ///         the currently selected frame or window. This means that "document" will refer
         ///         to the current document. If the script has a return value, then the following
         ///         steps will be taken:
         ///     </para>
@@ -111,7 +111,7 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        ///     Executes JavaScript asynchronously in the context of the currently selected _frame or window.
+        ///     Executes JavaScript asynchronously in the context of the currently selected frame or window.
         /// </summary>
         /// <param name="script">The JavaScript code to execute.</param>
         /// <param name="args">The arguments to the script.</param>
@@ -347,11 +347,11 @@ namespace ProtoTest.Golem.WebDriver
         }
 
         /// <summary>
-        ///     Instructs the driver to send future commands to a different _frame or window.
+        ///     Instructs the driver to send future commands to a different frame or window.
         /// </summary>
         /// <returns>
         ///     An <see cref="T:OpenQA.Selenium.ITargetLocator" /> object which can be used to select
-        ///     a _frame or window.
+        ///     a frame or window.
         /// </returns>
         public ITargetLocator SwitchTo()
         {
@@ -872,6 +872,11 @@ namespace ProtoTest.Golem.WebDriver
         {
             private readonly IOptions wrappedOptions;
 
+            public ILogs Logs
+            {
+                get { return wrappedOptions.Logs; }
+            }
+
             /// <summary>
             ///     Initializes a new instance of the EventFiringOptions class
             /// </summary>
@@ -932,7 +937,7 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             /// <summary>
-            ///     Move to a different _frame using its index
+            ///     Move to a different frame using its index
             /// </summary>
             /// <param name="frameIndex">The index of the </param>
             /// <returns>
@@ -952,9 +957,9 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             /// <summary>
-            ///     Move to different _frame using its name
+            ///     Move to different frame using its name
             /// </summary>
-            /// <param name="frameName">name of the _frame</param>
+            /// <param name="frameName">name of the frame</param>
             /// <returns>
             ///     A WebDriver instance that is currently in use
             /// </returns>
@@ -972,7 +977,7 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             /// <summary>
-            ///     Move to a _frame element.
+            ///     Move to a frame element.
             /// </summary>
             /// <param name="frameElement">a previously found FRAME or IFRAME element.</param>
             /// <returns>
@@ -1012,7 +1017,7 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             /// <summary>
-            ///     Change the active _frame to the default
+            ///     Change the active frame to the default
             /// </summary>
             /// <returns>
             ///     Element of the default
@@ -1442,6 +1447,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     var e = new FindElementEventArgs(ParentDriver.WrappedDriver, WrappedElement, by);
                     ParentDriver.OnFindingElement(e);
+                    WrappedElement.Highlight(100,"green");
                     var element = WrappedElement.FindElement(by);
                     ParentDriver.OnFindElementCompleted(e);
                     var f = new FoundElementEventArgs(ParentDriver.WrappedDriver, element, by);
@@ -1470,6 +1476,7 @@ namespace ProtoTest.Golem.WebDriver
                 {
                     var e = new FindElementEventArgs(ParentDriver.WrappedDriver, WrappedElement, by);
                     ParentDriver.OnFindingElement(e);
+                    WrappedElement.Highlight(100, "green");
                     var elements = WrappedElement.FindElements(by);
                     ParentDriver.OnFindElementCompleted(e);
                     foreach (var underlyingElement in elements)

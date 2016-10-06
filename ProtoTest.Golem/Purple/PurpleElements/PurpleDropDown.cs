@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Automation;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.Purple.PurpleElements
+namespace Golem.Purple.PurpleElements
 {
     public class PurpleDropDown : PurpleElementBase
     {
@@ -79,7 +79,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                                 }
                                 catch (Exception e)
                                 {
-                                    TestBase.Log("An exception was handled by PurpleDropDown Class: " + e.Message);
+                                    Log.Message("An exception was handled by PurpleDropDown Class: " + e.Message);
                                 }
                             }
                         }
@@ -127,7 +127,7 @@ namespace ProtoTest.Golem.Purple.PurpleElements
                                 catch (Exception e)
                                 {
                                     //There is a timeout exception on the filter data panel
-                                    TestBase.Log("An exception was handled by PurpleDropDown Class: " + e.Message);
+                                    Log.Message("An exception was handled by PurpleDropDown Class: " + e.Message);
                                 }
                             }
                         }

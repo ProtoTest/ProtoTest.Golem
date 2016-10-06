@@ -1,8 +1,8 @@
 ﻿using System;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 using RestSharp;
 
-namespace ProtoTest.Golem.Rest
+namespace Golem.Rest
 {
     /// <summary>
     ///     When contains operation execution methods, such as commands to actually fire off a Rest request.
@@ -36,9 +36,9 @@ namespace ProtoTest.Golem.Rest
         {
             request.Method = method;
             if (resource != "") request.Resource = resource;
-            TestBase.LogEvent(string.Format("Executing {0} : {1}{2}", request.Method, client.BaseUrl, request.Resource));
+            Log.Message(string.Format("Executing {0} : {1}{2}", request.Method, client.BaseUrl, request.Resource));
             response = client.Execute(request);
-            TestBase.LogEvent(string.Format("Received Response : {0}", response.StatusCode));
+            Log.Message(string.Format("Received Response : {0}", response.StatusCode));
         }
 
         public When Get(string resource = "")

@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver.Elements.Images
+namespace Golem.WebDriver.Elements.Images
 {
     public class ImageComparer
     {
@@ -95,8 +95,8 @@ namespace ProtoTest.Golem.WebDriver.Elements.Images
                     diff++;
                 }
             }
-            Common.Log("The Hamming Distance is " + diff);
-            Common.Log("The Hamming Difference is " + ((float) diff/first.Length));
+            Log.Message("The Hamming Distance is " + diff);
+            Log.Message("The Hamming Difference is " + ((float) diff/first.Length));
 
             return ((float) diff/first.Length);
         }

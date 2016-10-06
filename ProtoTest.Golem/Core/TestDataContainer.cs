@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gallio.Common.Media;
-using Gallio.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
-using ProtoTest.Golem.WebDriver;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     public class TestDataContainer
     {
@@ -14,10 +14,18 @@ namespace ProtoTest.Golem.Core
         public BrowserInfo browserInfo;
         public ConfigSettings configSettings;
         private bool eventsRegistered;
-        public Element lastElement;
         public ScreenRecorder recorder;
         public string testName;
         public List<VerificationError> VerificationErrors;
+        public string ExceptionMessage = "";
+        public string StackTrace = "";
+        public TestContext.ResultAdapter Result;
+        public string Status = "";
+        public string ReportPath = "";
+        public string ScreenshotPath = "";
+        public string VideoPath = "";
+        public string ClassName = "";
+        public string MethodName = null;
 
         public TestDataContainer(string name)
         {
@@ -27,22 +35,27 @@ namespace ProtoTest.Golem.Core
             configSettings = Config.GetDefaultConfig();
             browserInfo = new BrowserInfo(WebDriverBrowser.Browser.Chrome);
             SetupEvents();
+            
+        }
+
+        public void GetCurrentResult()
+        {
+            Result = TestContext.CurrentContext.Result;
         }
 
         public IWebDriver driver { get; set; }
 
-        public void LogEvent(string name)
+        public void LogEvent(string name, ActionList.Action.ActionType type=ActionList.Action.ActionType.Other)
         {
-            WriteActionToLog(name, null);
+            TestBase.testData.actions.addAction(name, type);
         }
 
         private void WriteActionToLog(string name, EventArgs e)
         {
             TestBase.overlay.Text = name;
-            if (Config.Settings.reportSettings.diagnosticLog)
-                DiagnosticLog.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), name));
-            if (Config.Settings.reportSettings.testLog)
-                TestLog.WriteLine(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), name));
+//            if (Config.settings.Report.diagnosticLog)
+//                Log.Message(string.Format("({0}) : {1}", DateTime.Now.ToString("HH:mm:ss::ffff"), name));
+            AddAction(name, e);
         }
 
         private void AddAction(string name, EventArgs e)

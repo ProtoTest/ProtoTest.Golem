@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using ProtoTest.Golem.Core;
-using ProtoTest.Golem.Purple.PurpleElements;
+using Golem.Core;
+using Golem.Purple.PurpleElements;
 
-namespace ProtoTest.Golem.Purple
+namespace Golem.Purple
 {
     public class PurpleTestBase : TestBase
     {
@@ -45,25 +45,25 @@ namespace ProtoTest.Golem.Purple
             TestFileLoc = @"C:\";
             ProjectFile = "NOT CONFIGURED";
             var machineName = Environment.MachineName;
-            if (machineName == Config.Settings.purpleSettings.Machine1)
+            if (machineName == Config.settings.purpleSettings.Machine1)
             {
-                TestFileLoc = Config.Settings.purpleSettings.DataSetPath1;
-                ProjectFile = Config.Settings.purpleSettings.ProjectName1;
+                TestFileLoc = Config.settings.purpleSettings.DataSetPath1;
+                ProjectFile = Config.settings.purpleSettings.ProjectName1;
             }
-            if (machineName == Config.Settings.purpleSettings.Machine2)
+            if (machineName == Config.settings.purpleSettings.Machine2)
             {
-                TestFileLoc = Config.Settings.purpleSettings.DataSetPath2;
-                ProjectFile = Config.Settings.purpleSettings.ProjectName2;
+                TestFileLoc = Config.settings.purpleSettings.DataSetPath2;
+                ProjectFile = Config.settings.purpleSettings.ProjectName2;
             }
-            if (machineName == Config.Settings.purpleSettings.Machine3)
+            if (machineName == Config.settings.purpleSettings.Machine3)
             {
-                TestFileLoc = Config.Settings.purpleSettings.DataSetPath3;
-                ProjectFile = Config.Settings.purpleSettings.ProjectName3;
+                TestFileLoc = Config.settings.purpleSettings.DataSetPath3;
+                ProjectFile = Config.settings.purpleSettings.ProjectName3;
             }
-            if (machineName == Config.Settings.purpleSettings.Machine4)
+            if (machineName == Config.settings.purpleSettings.Machine4)
             {
-                TestFileLoc = Config.Settings.purpleSettings.DataSetPath4;
-                ProjectFile = Config.Settings.purpleSettings.ProjectName4;
+                TestFileLoc = Config.settings.purpleSettings.DataSetPath4;
+                ProjectFile = Config.settings.purpleSettings.ProjectName4;
             }
         }
 
@@ -72,17 +72,15 @@ namespace ProtoTest.Golem.Purple
         }
 
         [SetUp]
-        [MbUnit.Framework.SetUp]
         public void SetUp()
         {
             PurpleWindow.FindRunningProcess();
         }
 
         [TearDown]
-        [MbUnit.Framework.TearDown]
         public override void TearDownTestBase()
         {
-            LogEvent(Common.GetCurrentTestName() + " " + TestContext.CurrentContext.Result.Status);
+            Log.Message(Common.GetCurrentTestName() + " " + TestContext.CurrentContext.Result.Outcome);
             PurpleWindow.EndProcess();
         }
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gallio.Framework;
+using NUnit.Framework;
 
-namespace ProtoTest.Golem.Core
+namespace Golem.Core
 {
     /// <summary>
     ///     Holds a list of Actions, with some functions to help print
@@ -22,25 +22,22 @@ namespace ProtoTest.Golem.Core
             actions.Add(new Action(name, time));
         }
 
-        public void addAction(string name)
+        public void addAction(string name, Action.ActionType type=Action.ActionType.Other)
         {
             var time = DateTime.Now;
-            actions.Add(new Action(name, time));
+            actions.Add(new Action(name, time, type));
         }
 
         public void PrintActions()
         {
-            TestLog.BeginSection("Actions");
             foreach (var a in actions)
             {
-                TestLog.WriteLine(a.name + " : " + a._time.ToString("HH:mm:ss.ffff"));
+                Log.Message(a.name + " : " + a.time.ToString("HH:mm:ss.ffff"));
             }
-            TestLog.End();
         }
 
         public void PrintActionTimings()
         {
-            TestLog.BeginSection("Test Action Timings:");
             DateTime start;
             DateTime end;
             TimeSpan difference;
@@ -50,16 +47,15 @@ namespace ProtoTest.Golem.Core
                 {
                     i++;
                 }
-                start = actions[i - 1]._time;
-                end = actions[i]._time;
+                start = actions[i - 1].time;
+                end = actions[i].time;
                 difference = end.Subtract(start);
-                TestLog.WriteLine(actions[i].name + " : " + difference);
+                Log.Message(actions[i].name + " : " + difference);
             }
-            start = actions[0]._time;
-            end = actions[actions.Count - 1]._time;
+            start = actions[0].time;
+            end = actions[actions.Count - 1].time;
             difference = end.Subtract(start);
-            TestLog.WriteLine("All Actions : " + difference);
-            TestLog.End();
+            Log.Message("All Actions : " + difference);
         }
 
         public void RemoveDuplicateEntries()
@@ -70,14 +66,29 @@ namespace ProtoTest.Golem.Core
 
         public class Action
         {
-            public DateTime _time;
+            public DateTime time;
             public string name;
+            public ActionType type;
 
-            public Action(string name, DateTime time)
+            public Action(string name, DateTime time, ActionType type=ActionType.Other)
             {
                 this.name = name;
-                _time = time;
+                this.time = time;
+                this.type = type;
+            }
+
+            public enum ActionType
+            {
+                Message = 0,
+                Warning = 1,
+                Error = 2,
+                Video = 3, 
+                Image = 4,
+                Link = 5,
+                Other = 6
             }
         }
     }
+
+  
 }

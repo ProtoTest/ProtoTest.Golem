@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProtoTest.Golem.Proxy.HAR
+namespace Golem.Proxy.HAR
 {
     public class Entry
     {

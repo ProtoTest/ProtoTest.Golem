@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using Gallio.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -8,9 +8,9 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     /// <summary>
     ///     Contains all functionality relating to launching the webdriver browsers.
@@ -67,13 +67,15 @@ namespace ProtoTest.Golem.WebDriver
 
         private void SetBrowserSize()
         {
-            var resolution = Config.Settings.runTimeSettings.BrowserResolution;
+            var resolution = Config.settings.runTimeSettings.BrowserResolution;
             if (resolution.Contains("Default"))
             {
+                Log.Message("Maximizing Browser");
                 driver.Manage().Window.Maximize();
             }
             else
             {
+                Log.Message($"Setting Browser Size to {resolution}");
                 driver.Manage().Window.Size = Common.GetSizeFromResolution(resolution);
             }
         }
@@ -82,11 +84,11 @@ namespace ProtoTest.Golem.WebDriver
         {
             var capabilities = new DesiredCapabilities();
             var proxy = new OpenQA.Selenium.Proxy();
-            if (Config.Settings.httpProxy.useProxy)
+            if (Config.settings.httpProxy.useProxy)
             {
-                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.SslProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 capabilities.SetCapability("proxy", proxy);
             }
 
@@ -98,15 +100,14 @@ namespace ProtoTest.Golem.WebDriver
             var options = new ChromeOptions();
 
             // Add the WebDriver proxy capability.
-            if (Config.Settings.httpProxy.useProxy)
+            if (Config.settings.httpProxy.useProxy)
             {
                 var proxy = new OpenQA.Selenium.Proxy();
-                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.SslProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.Proxy = proxy;
             }
-
             return new ChromeDriver(options);
         }
 
@@ -115,12 +116,12 @@ namespace ProtoTest.Golem.WebDriver
             var options = new InternetExplorerOptions();
             options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
             options.IgnoreZoomLevel = true;
-            if (Config.Settings.httpProxy.useProxy)
+            if (Config.settings.httpProxy.useProxy)
             {
                 var proxy = new OpenQA.Selenium.Proxy();
-                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.SslProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.Proxy = proxy;
                 options.UsePerProcessProxy = true;
             }
@@ -132,12 +133,12 @@ namespace ProtoTest.Golem.WebDriver
         {
             var options = new PhantomJSOptions();
 
-            if (Config.Settings.httpProxy.useProxy)
+            if (Config.settings.httpProxy.useProxy)
             {
                 var proxy = new OpenQA.Selenium.Proxy();
-                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.SslProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.AddAdditionalCapability("proxy", proxy);
             }
 
@@ -149,12 +150,12 @@ namespace ProtoTest.Golem.WebDriver
             var options = new SafariOptions();
 
             // Add the WebDriver proxy capability.
-            if (Config.Settings.httpProxy.useProxy)
+            if (Config.settings.httpProxy.useProxy)
             {
                 var proxy = new OpenQA.Selenium.Proxy();
-                proxy.HttpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.SslProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
-                proxy.FtpProxy = Config.Settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.HttpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.SslProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
+                proxy.FtpProxy = Config.settings.httpProxy.proxyUrl + ":" + TestBase.proxy.proxyPort;
                 options.AddAdditionalCapability("proxy", proxy);
             }
 
@@ -192,25 +193,28 @@ namespace ProtoTest.Golem.WebDriver
         {
             String URIStr = null;
 
-            if (Config.Settings.sauceLabsSettings.UseSauceLabs)
+            if (Config.settings.sauceLabsSettings.UseSauceLabs)
             {
                 
-                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("username", Config.Settings.sauceLabsSettings.SauceLabsUsername);
-                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("accessKey", Config.Settings.sauceLabsSettings.SauceLabsAPIKey);
-                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("name", TestContext.CurrentContext.TestStep.FullName);
-                Common.Log(string.Format("Starting {0}:{1} browser on SauceLabs : {2}", browser,
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("username", Config.settings.sauceLabsSettings.SauceLabsUsername);
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("accessKey", Config.settings.sauceLabsSettings.SauceLabsAPIKey);
+                WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("name", TestContext.CurrentContext.Test.FullName);
+                Log.Message(string.Format("Starting {0}:{1} browser on SauceLabs : {2}", browser,
                     WebDriverTestBase.testData.browserInfo.capabilities,
-                    Config.Settings.sauceLabsSettings.SauceLabsUrl));
-                var sauceLabs = new Uri(Config.Settings.sauceLabsSettings.SauceLabsUrl);
-                return new EventedWebDriver(new RemoteWebDriver(sauceLabs, WebDriverTestBase.testData.browserInfo.capabilities)).driver;
+                    Config.settings.sauceLabsSettings.SauceLabsUrl));
+                var sauceLabs = new Uri(Config.settings.sauceLabsSettings.SauceLabsUrl);
+                driver = new RemoteWebDriver(sauceLabs, WebDriverTestBase.testData.browserInfo.capabilities);
+                 driver.Manage().Cookies.DeleteAllCookies();
+                SetBrowserSize();
+                return new EventedWebDriver(driver).driver;
             }
 
-            if (host.Equals(Config.Settings.browserStackSettings.BrowserStackRemoteURL))
+            if (host.Equals(Config.settings.browserStackSettings.BrowserStackRemoteURL))
             {
-                var user = Config.Settings.browserStackSettings.BrowserStack_User;
-                var key = Config.Settings.browserStackSettings.BrowserStack_Key;
-                var os = Config.Settings.browserStackSettings.BrowserStack_OS;
-                var os_version = Config.Settings.browserStackSettings.BrowserStack_OS_Version;
+                var user = Config.settings.browserStackSettings.BrowserStack_User;
+                var key = Config.settings.browserStackSettings.BrowserStack_Key;
+                var os = Config.settings.browserStackSettings.BrowserStack_OS;
+                var os_version = Config.settings.browserStackSettings.BrowserStack_OS_Version;
 
                 if (user == null)
                 {
@@ -240,17 +244,21 @@ namespace ProtoTest.Golem.WebDriver
                 WebDriverTestBase.testData.browserInfo.capabilities.SetCapability("os_version", os_version);
 
                 URIStr = string.Format("http://{0}/wd/hub", host);
-                Common.Log(string.Format("Starting {0} browser on host : {1}", browser, host));
+                Log.Message(string.Format("Starting {0} browser on host : {1}", browser, host));
             }
             else
             {
-                URIStr = string.Format("http://{0}:{1}/wd/hub", host, Config.Settings.runTimeSettings.RemoteHostPort);
-                Common.Log(string.Format("Starting {0} browser on host : {1}:{2}", browser, host,
-                    Config.Settings.runTimeSettings.RemoteHostPort));
+                URIStr = string.Format("http://{0}:{1}/wd/hub", host, Config.settings.runTimeSettings.RemoteHostPort);
+                Log.Message(string.Format("Starting {0} browser on host : {1}:{2}", browser, host,
+                    Config.settings.runTimeSettings.RemoteHostPort));
             }
 
             var remoteAddress = new Uri(URIStr);
-            return new EventedWebDriver(new ScreenshotRemoteWebDriver(remoteAddress, WebDriverTestBase.testData.browserInfo.capabilities)).driver;
+            driver = new ScreenshotRemoteWebDriver(remoteAddress,
+                WebDriverTestBase.testData.browserInfo.capabilities);
+            driver.Manage().Cookies.DeleteAllCookies();
+            SetBrowserSize();
+            return new EventedWebDriver(driver).driver;
         }
     }
 }

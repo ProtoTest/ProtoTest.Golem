@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using MbUnit.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium;
-using ProtoTest.Golem.WebDriver;
+using Golem.WebDriver;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestElements : WebDriverTestBase
     {
@@ -11,7 +11,7 @@ namespace ProtoTest.Golem.Tests
         public void TestElementAPI()
         {
             driver.Navigate().GoToUrl("http://www.google.com");
-            var elements = new ElementCollection(driver.FindElements(By.Name("q")));
+            var elements = new Element(driver.FindElements(By.Name("q")));
             elements.First().Click();
         }
 
@@ -19,7 +19,7 @@ namespace ProtoTest.Golem.Tests
         public void TestLinq()
         {
             driver.Navigate().GoToUrl("http://www.google.com");
-            var elements = new ElementCollection(driver.FindElements(By.XPath("//*")));
+            var elements = new Element(driver.FindElements(By.XPath("//*")));
             elements.First(x => x.GetAttribute("name") == "q" && x.Displayed).Click();
         }
 
@@ -27,15 +27,15 @@ namespace ProtoTest.Golem.Tests
         public void testCount()
         {
             driver.Navigate().GoToUrl("http://www.google.com");
-            var elements = new ElementCollection(driver.FindElements(By.Name("q")));
+            var elements = new Element(driver.FindElements(By.Name("q")));
             driver.Navigate().GoToUrl("http://www.google.com");
-            Assert.Count(1, elements.Where(x => x.IsStale()));
+            Assert.AreEqual(1, elements.Where(x => x.IsStale()).Count());
         }
 
         [Test]
         public void TestBy()
         {
-            var elements = new ElementCollection(By.Name("q"));
+            var elements = new Element(By.Name("q"));
             driver.Navigate().GoToUrl("http://www.google.com");
             elements.ForEach(x => x.Click());
             driver.Navigate().GoToUrl("http://www.google.com");

@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Threading;
 using Gallio.Common.Media;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 using Timer = System.Timers.Timer;
 
-namespace ProtoTest.Golem.WebDriver
+namespace Golem.WebDriver
 {
     public class WebDriverRecorder
     {
@@ -22,7 +22,7 @@ namespace ProtoTest.Golem.WebDriver
         public WebDriverRecorder(int fps)
         {
             this.fps = fps;
-            if (Config.Settings.runTimeSettings.Browser == WebDriverBrowser.Browser.Android)
+            if (Config.settings.runTimeSettings.Browser == WebDriverBrowser.Browser.Android)
             {
                 screensize = new Size(300, 500);
             }
@@ -32,7 +32,7 @@ namespace ProtoTest.Golem.WebDriver
             }
 
             frameDelayMs = 1000/fps;
-            //Common.Log("The current dimensions are : " + screensize.Width + " x " + screensize.Height);
+            //Log.Message("The current dimensions are : " + screensize.Width + " x " + screensize.Height);
             video = new FlashScreenVideo(new FlashScreenVideoParameters(screensize.Width, screensize.Height, fps));
 
             screenshotGetter = new BackgroundWorker();

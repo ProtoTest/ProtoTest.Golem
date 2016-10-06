@@ -1,7 +1,7 @@
-﻿using MbUnit.Framework;
-using ProtoTest.Golem.Core;
+﻿using NUnit.Framework;
+using Golem.Core;
 
-namespace ProtoTest.Golem.Tests
+namespace Golem.Tests
 {
     internal class TestBaseTests : TestBase
     {

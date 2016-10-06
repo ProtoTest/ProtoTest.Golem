@@ -4,10 +4,10 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
-using ProtoTest.Golem.Core;
+using Golem.Core;
 using RestSharp;
 
-namespace ProtoTest.Golem.Rest
+namespace Golem.Rest
 {
     /// <summary>
     ///     Then contains post-operation commands such as validations and return statements;
@@ -37,7 +37,7 @@ namespace ProtoTest.Golem.Rest
 
         public RestResponseVerify Verify(int timeoutSec = -1)
         {
-            if (timeoutSec == -1) timeoutSec = Config.Settings.runTimeSettings.ElementTimeoutSec;
+            if (timeoutSec == -1) timeoutSec = Config.settings.runTimeSettings.ElementTimeoutSec;
             return new RestResponseVerify(response);
         }
 
