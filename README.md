@@ -10,6 +10,8 @@ For the most part, the NUnit Fixtures act virtually identical to the MbUnit ones
 
 To Execute: You may execute tests from the command line using the nunit-console.exe.  To execute tests within Visual Studio either the nunit3 plugin or resharper Visual Studio plugin must be installed.  
 
+A HTML report will be generated in the reports folder after each execution.  
+
 Parallel execution is supported at a class/fixture level, not a Test/Function level.  
 Multiple browsers are not currently supported.  Only a single browser may be defined per config file.
 
