@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B48787D4-70A4-4226-9FE8-7AD27E1BBC1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoTest.Golem", "ProtoTest.Golem\ProtoTest.Golem.csproj", "{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golem", "Golem.csproj", "{DABFC1CB-7C18-4AC7-AFA2-91C453E9E266}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BAAF8DA6-E48E-4F1C-BE1D-3B3D0D49CF77}"
 	ProjectSection(SolutionItems) = preProject
